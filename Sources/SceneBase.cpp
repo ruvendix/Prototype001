@@ -1,0 +1,48 @@
+/*
+<내용 요약>
+씬 기본형
+*/
+
+#include "Pch.h"
+#include "SceneBase.h"
+
+#include "Actor.h"
+#include "SystemManager.h"
+#include "SceneSystem.h"
+
+void SceneBase::Startup()
+{
+	// 액터가 추가될 때 액터의 Startup()을 호출
+}
+
+bool SceneBase::Update()
+{
+	for (Actor* pActor : m_actors)
+	{
+		assert(pActor != nullptr);
+		pActor->Update();
+	}
+
+	return true;
+}
+
+void SceneBase::Render()
+{
+	for (Actor* pActor : m_actors)
+	{
+		assert(pActor != nullptr);
+		if (pActor->GetActorState() != EActorState::Deactivated)
+		{
+			pActor->Render();
+		}
+	}
+}
+
+void SceneBase::Cleanup()
+{
+	for (Actor* pActor : m_actors)
+	{
+		assert(pActor != nullptr);
+		SAFE_DELETE(pActor);
+	}
+}
