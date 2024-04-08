@@ -131,12 +131,12 @@ void TileMapActor::Render()
 	loopCount.y = renderTileStartIdxes.y + renderTileEndIdxes.y + 1;
 #pragma endregion
 
-	for (uint32 y = renderTileStartIdxes.y; y < loopCount.y; ++y)
-	{
-		for (uint32 x = renderTileStartIdxes.x; x < loopCount.x; ++x)
-		{
-			m_tileMap[y][x]->Render();
-		}
-	}
+	//for (uint32 y = renderTileStartIdxes.y; y < loopCount.y; ++y)
+	//{
+	//	for (uint32 x = renderTileStartIdxes.x; x < loopCount.x; ++x)
+	//	{
+	//		m_tileMap[y][x]->Render();
+	//	}
+	//}
 #pragma endregion
 }

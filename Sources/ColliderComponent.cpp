@@ -34,3 +34,28 @@ bool ColliderComponent::TestIntersect(ColliderComponent::Ptr spTargetColliderCom
 
 	return true;
 }
+
+ECollisionState ColliderComponent::FindCollisonState(ColliderComponent::Ptr spTargetColliderComponent) const
+{
+	auto foundIter = m_coliisionStates.find(spTargetColliderComponent);
+	if (foundIter == m_coliisionStates.cend())
+	{
+		return ECollisionState::None;
+	}
+
+	return foundIter->second;
+}
+
+void ColliderComponent::RegisterCollisionCallback(CollisionCallback collisionCallback, ECollisionState collsionCallbackType)
+{
+	m_collisionCallbacks[ENUM_TO_NUM(collsionCallbackType)] = collisionCallback;
+}
+
+void ColliderComponent::ProcessCollsionCallback(ColliderComponent::Ptr spTargetColliderComponent, ECollisionState collsionCallbackType)
+{
+	CollisionCallback collisionCallback = m_collisionCallbacks[ENUM_TO_NUM(collsionCallbackType)];
+	if (collisionCallback != nullptr)
+	{
+		collisionCallback(spTargetColliderComponent);
+	}
+}

@@ -17,10 +17,13 @@ void SceneBase::Startup()
 
 bool SceneBase::Update()
 {
-	for (Actor* pActor : m_actors)
+	for (auto actors : m_actors)
 	{
-		assert(pActor != nullptr);
-		pActor->Update();
+		for (Actor* pActor : actors)
+		{
+			assert(pActor != nullptr);
+			pActor->Update();
+		}
 	}
 
 	return true;
@@ -28,21 +31,27 @@ bool SceneBase::Update()
 
 void SceneBase::Render()
 {
-	for (Actor* pActor : m_actors)
+	for (auto actors : m_actors)
 	{
-		assert(pActor != nullptr);
-		if (pActor->GetActorState() != EActorState::Deactivated)
+		for (Actor* pActor : actors)
 		{
-			pActor->Render();
+			assert(pActor != nullptr);
+			if (pActor->GetActorState() != EActorState::Deactivated)
+			{
+				pActor->Render();
+			}
 		}
 	}
 }
 
 void SceneBase::Cleanup()
 {
-	for (Actor* pActor : m_actors)
+	for (auto actors : m_actors)
 	{
-		assert(pActor != nullptr);
-		SAFE_DELETE(pActor);
+		for (Actor* pActor : actors)
+		{
+			assert(pActor != nullptr);
+			SAFE_DELETE(pActor);
+		}
 	}
 }

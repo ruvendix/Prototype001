@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PawnActor.h"
+#include "ColliderComponent.h"
 
 enum class EPlayerDirection
 {
@@ -24,6 +25,10 @@ public:
 	virtual bool Update()  override;
 	virtual void Render()  override;
 	virtual void Cleanup() override;
+
+	void OnCollisionEnter(ColliderComponent::Ptr spTargetColliderComponent);
+	void OnCollisionKeep(ColliderComponent::Ptr spTargetColliderComponent);
+	void OnCollisionLeave(ColliderComponent::Ptr spTargetColliderComponent);
 
 private:
 	float            m_speed = 0.0f;

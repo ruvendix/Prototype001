@@ -37,6 +37,17 @@ void PlayerActor::Startup()
 
 	ColliderComponent::Ptr spColliderComponent = ADD_COMPONENT(this, ColliderComponent);
 	spColliderComponent->SetCollider(spBoxCollider);
+	
+#pragma region 컬리전 콜백 등록
+	auto collisionEnterCallback = std::bind(&PlayerActor::OnCollisionEnter, this, std::placeholders::_1);
+	spColliderComponent->RegisterCollisionCallback(collisionEnterCallback, ECollisionState::Enter);
+
+	auto collisionKeepCallback = std::bind(&PlayerActor::OnCollisionKeep, this, std::placeholders::_1);
+	spColliderComponent->RegisterCollisionCallback(collisionKeepCallback, ECollisionState::Keep);
+
+	auto collisionLeaveCallback = std::bind(&PlayerActor::OnCollisionLeave, this, std::placeholders::_1);
+	spColliderComponent->RegisterCollisionCallback(collisionLeaveCallback, ECollisionState::Leave);
+#pragma endregion
 
 	// 플립북 기본 데이터 설정
 	FlipbookData flipbookData;
@@ -168,4 +179,19 @@ void PlayerActor::Cleanup()
 
 	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
 	spCamera->SetTarget(nullptr);
+}
+
+void PlayerActor::OnCollisionEnter(ColliderComponent::Ptr spTargetColliderComponent)
+{
+	::OutputDebugString("Enter\n");
+}
+
+void PlayerActor::OnCollisionKeep(ColliderComponent::Ptr spTargetColliderComponent)
+{
+
+}
+
+void PlayerActor::OnCollisionLeave(ColliderComponent::Ptr spTargetColliderComponent)
+{
+	::OutputDebugString("Leave\n");
 }

@@ -35,6 +35,17 @@ void MonsterActor::Startup()
 
 	ColliderComponent::Ptr spColliderComponent = ADD_COMPONENT(this, ColliderComponent);
 	spColliderComponent->SetCollider(spBoxCollider);
+
+#pragma region 컬리전 콜백 등록
+	auto collisionEnterCallback = std::bind(&MonsterActor::OnCollisionEnter, this, std::placeholders::_1);
+	spColliderComponent->RegisterCollisionCallback(collisionEnterCallback, ECollisionState::Enter);
+
+	auto collisionKeepCallback = std::bind(&MonsterActor::OnCollisionKeep, this, std::placeholders::_1);
+	spColliderComponent->RegisterCollisionCallback(collisionKeepCallback, ECollisionState::Keep);
+
+	auto collisionLeaveCallback = std::bind(&MonsterActor::OnCollisionLeave, this, std::placeholders::_1);
+	spColliderComponent->RegisterCollisionCallback(collisionLeaveCallback, ECollisionState::Leave);
+#pragma endregion
 }
 
 bool MonsterActor::Update()
@@ -59,4 +70,18 @@ void MonsterActor::Render()
 void MonsterActor::Cleanup()
 {
 	PawnActor::Cleanup();
+}
+
+void MonsterActor::OnCollisionEnter(ColliderComponent::Ptr spTargetColliderComponent)
+{
+	::OutputDebugString("monster Enter\n");
+}
+
+void MonsterActor::OnCollisionKeep(ColliderComponent::Ptr spTargetColliderComponent)
+{
+}
+
+void MonsterActor::OnCollisionLeave(ColliderComponent::Ptr spTargetColliderComponent)
+{
+	::OutputDebugString("monster Leave\n");
 }

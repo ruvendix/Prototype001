@@ -20,16 +20,19 @@ CollisionSystem::~CollisionSystem()
 bool CollisionSystem::Update()
 {
 	SceneBase::Ptr spScene = GET_SYSTEM(SceneSystem)->GetCurrentScene();
-	std::vector<Actor*>& refActors = spScene->GetActors();
+	SceneBase::Actors& refActors = spScene->GetActors();
 
 	// 씬에 있는 액터의 모든 콜라이더 컴포넌트 가져오기
 	std::vector<ColliderComponent::Ptr> colliderComponents;
-	for (Actor* pActor : refActors)
+	for (auto actors : refActors)
 	{
-		ColliderComponent::Ptr spColliderComponent = GET_COMPONENT(pActor, ColliderComponent);
-		if (spColliderComponent != nullptr)
+		for (Actor* pActor : actors)
 		{
-			colliderComponents.emplace_back(spColliderComponent);
+			ColliderComponent::Ptr spColliderComponent = GET_COMPONENT(pActor, ColliderComponent);
+			if (spColliderComponent != nullptr)
+			{
+				colliderComponents.emplace_back(spColliderComponent);
+			}
 		}
 	}
 
@@ -39,6 +42,7 @@ bool CollisionSystem::Update()
 	{
 		// 콜라이더의 액터 조사
 		ColliderComponent::Ptr spFirstColliderComponent = colliderComponents[i];
+
 		Actor* pFirstActor = spFirstColliderComponent->GetOwner();
 		if (pFirstActor->GetActorState() == EActorState::Deactivated)
 		{
@@ -48,17 +52,56 @@ bool CollisionSystem::Update()
 		for (uint32 j = i + 1; j < colliderCount; ++j)
 		{
 			ColliderComponent::Ptr spSecondCollideComponent = colliderComponents[j];
-			Actor* pSecondActor = spSecondCollideComponent->GetOwner();
+			//Actor* pSecondActor = spSecondCollideComponent->GetOwner();
+
+			// First가 Second에 관한 정보가 있는지?
+			ECollisionState collisionStateOfFirstCollider = spFirstColliderComponent->FindCollisonState(spSecondCollideComponent);
 
 			if (spFirstColliderComponent->TestIntersect(spSecondCollideComponent) == true) // 충돌
 			{
-				pFirstActor->SetActorState(EActorState::Deactivated);
-				pSecondActor->SetActorState(EActorState::Deactivated);
+				if (collisionStateOfFirstCollider == ECollisionState::None)
+				{
+					spFirstColliderComponent->SetCollisionState(spSecondCollideComponent, ECollisionState::Enter);
+					spFirstColliderComponent->ProcessCollsionCallback(spSecondCollideComponent, ECollisionState::Enter);
 
-				// 이걸 이용하면 콜백 처리도 가능
+					spSecondCollideComponent->SetCollisionState(spFirstColliderComponent, ECollisionState::Enter);
+					spSecondCollideComponent->ProcessCollsionCallback(spFirstColliderComponent, ECollisionState::Enter);
+				}
+				else if ((collisionStateOfFirstCollider == ECollisionState::Enter) ||
+						 (collisionStateOfFirstCollider == ECollisionState::Keep))
+				{
+					spFirstColliderComponent->SetCollisionState(spSecondCollideComponent, ECollisionState::Keep);
+					spFirstColliderComponent->ProcessCollsionCallback(spSecondCollideComponent, ECollisionState::Keep);
 
-				GET_SYSTEM(SceneSystem)->AddRemoveDeactivatedActor(refActors, pFirstActor);
-				GET_SYSTEM(SceneSystem)->AddRemoveDeactivatedActor(refActors, pSecondActor);
+					spSecondCollideComponent->SetCollisionState(spFirstColliderComponent, ECollisionState::Keep);
+					spSecondCollideComponent->ProcessCollsionCallback(spFirstColliderComponent, ECollisionState::Keep);
+				}
+
+				//pFirstActor->SetActorState(EActorState::Deactivated);
+				//pSecondActor->SetActorState(EActorState::Deactivated);
+
+				//GET_SYSTEM(SceneSystem)->AddRemoveDeactivatedActor(refActors, pFirstActor);
+				//GET_SYSTEM(SceneSystem)->AddRemoveDeactivatedActor(refActors, pSecondActor);
+			}
+			else
+			{
+				if ((collisionStateOfFirstCollider == ECollisionState::Enter) ||
+					(collisionStateOfFirstCollider == ECollisionState::Keep))
+				{
+					spFirstColliderComponent->SetCollisionState(spSecondCollideComponent, ECollisionState::Leave);
+					spFirstColliderComponent->ProcessCollsionCallback(spSecondCollideComponent, ECollisionState::Leave);
+
+					spSecondCollideComponent->SetCollisionState(spFirstColliderComponent, ECollisionState::Leave);
+					spSecondCollideComponent->ProcessCollsionCallback(spFirstColliderComponent, ECollisionState::Leave);
+				}
+				else if (collisionStateOfFirstCollider == ECollisionState::Leave)
+				{
+					spFirstColliderComponent->SetCollisionState(spSecondCollideComponent, ECollisionState::None);
+					spFirstColliderComponent->EraseCollsionState(spSecondCollideComponent);
+
+					spSecondCollideComponent->SetCollisionState(spFirstColliderComponent, ECollisionState::None);
+					spSecondCollideComponent->EraseCollsionState(spFirstColliderComponent);
+				}
 			}
 		}
 	}

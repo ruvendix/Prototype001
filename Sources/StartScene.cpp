@@ -23,13 +23,13 @@
 void StartScene::Startup()
 {
 	// 배경을 가진 액터
-	CreateActor<TileMapActor>("TileMapActor");
+	CreateActor<TileMapActor>("TileMapActor", EActorLayer::World);
 
 	// 플립북을 가진 액터
-	CreateActor<PlayerActor>("Player");
+	CreateActor<PlayerActor>("Player", EActorLayer::Character);
 
 	// 테스트 액터
-	CreateActor<MonsterActor>("Monster");
+	CreateActor<MonsterActor>("Monster", EActorLayer::Character);
 
 #pragma region 버튼 테스트
 	//UiButton::Ptr spUiTestButton = GET_SYSTEM(UiSystem)->CreateUi<UiButton>("TestButton");

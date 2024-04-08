@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PawnActor.h"
+#include "ColliderComponent.h"
 
 class MonsterActor : public PawnActor
 {
@@ -15,4 +16,8 @@ public:
 	virtual bool Update()  override;
 	virtual void Render()  override;
 	virtual void Cleanup() override;
+
+	void OnCollisionEnter(ColliderComponent::Ptr spTargetColliderComponent);
+	void OnCollisionKeep(ColliderComponent::Ptr spTargetColliderComponent);
+	void OnCollisionLeave(ColliderComponent::Ptr spTargetColliderComponent);
 };

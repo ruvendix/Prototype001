@@ -6,12 +6,22 @@
 #pragma once
 #include "IDefault.h"
 
+enum class EActorLayer
+{
+	World = 0,
+	Character,
+	Count,
+};
+
 class Actor;
 
 class SceneBase : public IDefault
 {
 public:
 	DEFINE_SMART_PTR(SceneBase);
+
+public:
+	using Actors = std::array<std::vector<Actor*>, ENUM_TO_NUM(EActorLayer::Count)>;
 
 public:
 	virtual void Startup() override;
@@ -21,30 +31,35 @@ public:
 
 public:
 	template <typename TActor>
-	TActor* CreateActor()
+	TActor* CreateActor(EActorLayer actorLayer)
 	{
 		TActor* pNewActor = new TActor("Empty");
-		return CreateActorImpl(pNewActor);
+		return CreateActorImpl(pNewActor, actorLayer);
 	}
 
 	template <typename TActor>
-	TActor* CreateActor(const std::string& strActorTag)
+	TActor* CreateActor(const std::string& strActorTag, EActorLayer actorLayer)
 	{
 		TActor* pNewActor = new TActor(strActorTag);
-		return CreateActorImpl(pNewActor);
+		return CreateActorImpl(pNewActor, actorLayer);
 	}
 
 	template <typename TActor>
-	TActor* CreateActorImpl(TActor* pActor)
+	TActor* CreateActorImpl(TActor* pActor, EActorLayer actorLayer)
 	{
+		if (actorLayer == EActorLayer::Count)
+		{
+			return nullptr;
+		}
+
 		pActor->Startup();
-		m_actors.emplace_back(pActor);
+		m_actors[ENUM_TO_NUM(actorLayer)].emplace_back(pActor);
 		return pActor;
 	}
 
 public:
-	std::vector<Actor*>& GetActors() { return m_actors; }
+	Actors& GetActors() { return m_actors; }
 
 private:
-	std::vector<Actor*> m_actors;
+	Actors m_actors;
 };
