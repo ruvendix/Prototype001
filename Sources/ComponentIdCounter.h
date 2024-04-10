@@ -9,4 +9,4 @@ DEFINE_ID(ComponentIdCounter, TransformComponent);
 DEFINE_ID(ComponentIdCounter, TextureComponent);
 DEFINE_ID(ComponentIdCounter, FlipbookComponent);
 DEFINE_ID(ComponentIdCounter, CameraComponent);
-DEFINE_ID(ComponentIdCounter, ColliderComponent);
+DEFINE_ID(ComponentIdCounter, CollisionComponent);

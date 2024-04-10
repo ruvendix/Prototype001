@@ -18,6 +18,8 @@ public:
 	virtual void Render()  override;
 	virtual void Cleanup() override;
 
+	virtual void PostUpdate();
+
 	Actor* GetOwner() const { return m_pOwner; }
 	void SetOwner(Actor* pOwner) { m_pOwner = pOwner; }
 

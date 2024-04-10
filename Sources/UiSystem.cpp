@@ -5,7 +5,7 @@
 #include "SceneSystem.h"
 #include "SceneBase.h"
 #include "Actor.h"
-#include "ColliderComponent.h"
+#include "CollisionComponent.h"
 
 UiSystem::UiSystem()
 {

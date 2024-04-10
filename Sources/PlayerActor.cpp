@@ -6,12 +6,13 @@
 #include "ResourceSystem.h"
 #include "InputSystem.h"
 #include "FrameSystem.h"
+#include "CollisionSystem.h"
 #include "Actor.h"
 #include "TransformComponent.h"
 #include "TextureComponent.h"
 #include "FlipbookComponent.h"
 #include "CameraComponent.h"
-#include "ColliderComponent.h"
+#include "CollisionComponent.h"
 #include "BoxCollider.h"
 
 PlayerActor::~PlayerActor()
@@ -21,7 +22,7 @@ PlayerActor::~PlayerActor()
 
 void PlayerActor::Startup()
 {
-	PawnActor::Startup();
+	Super::Startup();
 
 	m_speed = 300.0f;
 
@@ -31,22 +32,20 @@ void PlayerActor::Startup()
 
 	// 콜라이더 설정
 	BoxCollider::Ptr spBoxCollider = std::make_shared<BoxCollider>();
-	spBoxCollider->SetPosition(spTransformComponent->GetPosition());
 	Size boxSize = Size(100, 100); // 콜라이더 크기는 따로 설정 가능
 	spBoxCollider->SetExtents(Size(boxSize.width / 2, boxSize.height / 2));
-
-	ColliderComponent::Ptr spColliderComponent = ADD_COMPONENT(this, ColliderComponent);
-	spColliderComponent->SetCollider(spBoxCollider);
 	
-#pragma region 컬리전 콜백 등록
-	auto collisionEnterCallback = std::bind(&PlayerActor::OnCollisionEnter, this, std::placeholders::_1);
-	spColliderComponent->RegisterCollisionCallback(collisionEnterCallback, ECollisionState::Enter);
+#pragma region 컬리전 등록
+	CollisionComponent::Ptr spCollisionComponent = ADD_COMPONENT(this, CollisionComponent);
+	spCollisionComponent->ApplyCollider(spBoxCollider);
+	spCollisionComponent->SetObjectTypeTag("Pawn");
+	spCollisionComponent->AddCollisionResponseInfo("Pawn", ECollisionResponseState::Block);
 
-	auto collisionKeepCallback = std::bind(&PlayerActor::OnCollisionKeep, this, std::placeholders::_1);
-	spColliderComponent->RegisterCollisionCallback(collisionKeepCallback, ECollisionState::Keep);
+	CollisionComponent::CollisionEnableOption& refCollisionEnableOption = spCollisionComponent->GetCollsionEnableOption();
+	refCollisionEnableOption.AddBit(ECollisionEnableOption::Physics);
 
-	auto collisionLeaveCallback = std::bind(&PlayerActor::OnCollisionLeave, this, std::placeholders::_1);
-	spColliderComponent->RegisterCollisionCallback(collisionLeaveCallback, ECollisionState::Leave);
+	auto collisionHitCallback = std::bind(&PlayerActor::OnCollisionHit, this, std::placeholders::_1);
+	spCollisionComponent->SetHitCallback(collisionHitCallback);
 #pragma endregion
 
 	// 플립북 기본 데이터 설정
@@ -108,7 +107,7 @@ void PlayerActor::Startup()
 
 bool PlayerActor::Update()
 {
-	PawnActor::Update();
+	Super::Update();
 
 	std::array<std::string, ENUM_TO_NUM(EPlayerDirection::Count)> idleStrings =
 	{
@@ -132,22 +131,19 @@ bool PlayerActor::Update()
 		strCurrentFlipbook = "PlayerLeftWalk";
 		m_currentDir = EPlayerDirection::Left;
 	}
-
-	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Right))
+	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Right))
 	{
 		deltaPos.x = static_cast<int32>(deltaMove);
 		strCurrentFlipbook = "PlayerRightWalk";
 		m_currentDir = EPlayerDirection::Right;
 	}
-
-	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Up))
+	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Up))
 	{
 		deltaPos.y = static_cast<int32>(deltaMove * -1.0f);
 		strCurrentFlipbook = "PlayerUpWalk";
 		m_currentDir = EPlayerDirection::Up;
 	}
-
-	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Down))
+	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Down))
 	{
 		deltaPos.y = static_cast<int32>(deltaMove);
 		strCurrentFlipbook = "PlayerDownWalk";
@@ -160,38 +156,56 @@ bool PlayerActor::Update()
 	Flipbook::Ptr spPlayerFlipbook = GET_SYSTEM(ResourceSystem)->FindFlipbook(strCurrentFlipbook.c_str());
 	spFlipbookComponent->SetFlipbook(spPlayerFlipbook);
 
-	// 콜라이더 업데이트
-	ColliderComponent::Ptr spColliderComponent = GET_COMPONENT(this, ColliderComponent);
-	BoxCollider::Ptr spBoxCollider = std::dynamic_pointer_cast<BoxCollider>(spColliderComponent->GetCollider());
-	spBoxCollider->SetPosition(spTransformComponent->GetPosition());
-
 	return true;
-}
-
-void PlayerActor::Render()
-{
-	PawnActor::Render();
 }
 
 void PlayerActor::Cleanup()
 {
-	PawnActor::Cleanup();
+	Super::Cleanup();
 
 	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
 	spCamera->SetTarget(nullptr);
 }
 
-void PlayerActor::OnCollisionEnter(ColliderComponent::Ptr spTargetColliderComponent)
+void PlayerActor::OnCollisionHit(CollisionComponent::Ptr spTargetCollisionComponent)
 {
-	::OutputDebugString("Enter\n");
+	BoxCollider::Ptr spBoxCollider = std::dynamic_pointer_cast<BoxCollider>(GET_COMPONENT(this, CollisionComponent)->GetCollider());
+	const RECT& intersectedRect = GET_SYSTEM(CollisionSystem)->GetIntersectedRect(spBoxCollider->GetInstersectedRectIndex());
+
+	// 일단은 right 적용
+	TransformComponent::Ptr spTransformComponent = GET_COMPONENT(this, TransformComponent);
+	Point2d pos = spTransformComponent->GetPosition();
+
+	switch (m_currentDir)
+	{
+	case EPlayerDirection::Left:
+		pos.x += (intersectedRect.right - intersectedRect.left);
+		break;
+
+	case EPlayerDirection::Right:
+		pos.x -= (intersectedRect.right - intersectedRect.left);
+		break;
+
+	case EPlayerDirection::Up:
+		pos.y += (intersectedRect.bottom - intersectedRect.top);
+		break;
+
+	case EPlayerDirection::Down:
+		pos.y -= (intersectedRect.bottom - intersectedRect.top);
+		break;
+	}
+
+	spTransformComponent->SetPosition(pos);
+
+	// 콜라이더 업데이트
+	spBoxCollider->Update();
+
+	std::string strPos = "Player hit " + std::to_string(pos.x) + " " + std::to_string(pos.y);
+	strPos += '\n';
+	::OutputDebugString(strPos.c_str());
 }
 
-void PlayerActor::OnCollisionKeep(ColliderComponent::Ptr spTargetColliderComponent)
+void PlayerActor::OnCollisionOverlap(CollisionComponent::Ptr spTargetCollisionComponent)
 {
-
-}
-
-void PlayerActor::OnCollisionLeave(ColliderComponent::Ptr spTargetColliderComponent)
-{
-	::OutputDebugString("Leave\n");
+	::OutputDebugString("player overlap\n");
 }

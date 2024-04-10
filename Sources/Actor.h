@@ -25,6 +25,8 @@ public:
 	virtual void Render()  override;
 	virtual void Cleanup() override;
 
+	virtual bool PostUpdate();
+
 public:
 	template <typename TComponent, typename TComponentId>
 	TComponent::Ptr AddComponent()

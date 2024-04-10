@@ -32,3 +32,8 @@ void ComponentBase::Cleanup()
 {
 
 }
+
+void ComponentBase::PostUpdate()
+{
+
+}

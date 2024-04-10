@@ -154,13 +154,15 @@
     <ClInclude Include="Sources\Camera.h" />
     <ClInclude Include="Sources\CameraComponent.h" />
     <ClInclude Include="Sources\ColliderBase.h" />
-    <ClInclude Include="Sources\ColliderComponent.h" />
+    <ClInclude Include="Sources\CollisionComponent.h" />
+    <ClInclude Include="Sources\CollisionResponseInfo.h" />
     <ClInclude Include="Sources\CollisionSystem.h" />
     <ClInclude Include="Sources\CompilerCounter.hpp" />
     <ClInclude Include="Sources\ComponentBase.h" />
     <ClInclude Include="Sources\ComponentDefines.h" />
     <ClInclude Include="Sources\ComponentIdCounter.h" />
     <ClInclude Include="Sources\Defines.h" />
+    <ClInclude Include="Sources\EnumBitFlag.h" />
     <ClInclude Include="Sources\Flipbook.h" />
     <ClInclude Include="Sources\FlipbookComponent.h" />
     <ClInclude Include="Sources\FrameSystem.h" />
@@ -200,7 +202,7 @@
     <ClCompile Include="Sources\Camera.cpp" />
     <ClCompile Include="Sources\CameraComponent.cpp" />
     <ClCompile Include="Sources\ColliderBase.cpp" />
-    <ClCompile Include="Sources\ColliderComponent.cpp" />
+    <ClCompile Include="Sources\CollisionComponent.cpp" />
     <ClCompile Include="Sources\CollisionSystem.cpp" />
     <ClCompile Include="Sources\ComponentBase.cpp" />
     <ClCompile Include="Sources\Flipbook.cpp" />

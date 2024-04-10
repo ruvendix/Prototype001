@@ -23,7 +23,6 @@ bool UiButton::Update()
 	{
 		m_spBoxCollider = std::make_shared<BoxCollider>();
 		m_spBoxCollider->SetUseCamera(false);
-		m_spBoxCollider->SetPosition(GetPosition());
 
 		Size halfSize(GetSize().width / 2, GetSize().height / 2);
 		m_spBoxCollider->SetExtents(halfSize);

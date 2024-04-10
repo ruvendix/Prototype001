@@ -111,16 +111,17 @@ void GameApplication::Startup()
 
 bool GameApplication::Update()
 {
-    if (m_spCurrentCamera != nullptr)
-    {
-        m_spCurrentCamera->CalcScreenCenterOffsetPosition();
-    }
-
     bool bRet = SystemManager::I()->Update();
 
     if (GET_SYSTEM(InputSystem)->IsKeyDown(EInputValue::Esc))
     {
         bRet = false;
+    }
+
+    // 모든 업데이트가 반영된 후 카메라 위치 조정
+    if (m_spCurrentCamera != nullptr)
+    {
+        m_spCurrentCamera->CalcScreenCenterOffsetPosition();
     }
 
     return bRet;

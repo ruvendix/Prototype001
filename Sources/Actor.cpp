@@ -51,3 +51,15 @@ void Actor::Cleanup()
 		spComponent->Cleanup();
 	}
 }
+
+bool Actor::PostUpdate()
+{
+	for (auto iter : m_components)
+	{
+		ComponentBase::Ptr spComponent = iter.second;
+		assert(spComponent != nullptr);
+		spComponent->PostUpdate();
+	}
+
+	return false;
+}

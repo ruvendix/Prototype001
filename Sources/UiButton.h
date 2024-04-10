@@ -25,8 +25,8 @@ public:
 	void SetEventListener_OnClicked(std::function<void()> eventListener_onClicked) { m_eventListener_onClicked = eventListener_onClicked; }
 
 private:
+	RECT m_buttonRect;
 	std::function<void()> m_eventListener_onClicked;
-	BoxCollider::Ptr      m_spBoxCollider = nullptr;
-	EButtonState          m_buttonState = EButtonState::None;
-	RECT                  m_buttonRect;
+	BoxCollider::Ptr m_spBoxCollider = nullptr;
+	EButtonState m_buttonState = EButtonState::None;
 };

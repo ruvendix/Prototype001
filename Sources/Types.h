@@ -25,6 +25,16 @@ struct int2d
 {
 	int32 x = 0;
 	int32 y = 0;
+
+	int2d operator+(const int2d& pos)
+	{
+		return int2d(x + pos.x, y + pos.y);
+	}
+
+	void operator+=(const int2d& pos)
+	{
+		*this = (*this + pos);
+	}
 };
 
 struct uint2d

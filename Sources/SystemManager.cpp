@@ -32,16 +32,17 @@ void SystemManager::Startup()
 	AddSystem<PathSystem>();
 	AddSystem<ResourceSystem>();
 	AddSystem<UiSystem>();
-	AddSystem<SceneSystem>();
 	AddSystem<CollisionSystem>();
+	AddSystem<SceneSystem>();
 }
 
 bool SystemManager::Update()
 {
-	for (SystemBase*& pRefSystem : m_systems)
-	{
-		pRefSystem->Update();
-	}
+	GET_SYSTEM(FrameSystem)->Update();
+	GET_SYSTEM(InputSystem)->Update();
+	GET_SYSTEM(SceneSystem)->Update();
+	GET_SYSTEM(CollisionSystem)->Update();
+	GET_SYSTEM(UiSystem)->Update();
 
 	return true;
 }

@@ -175,7 +175,7 @@
     <ClInclude Include="Sources\CollisionSystem.h">
       <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ColliderComponent.h">
+    <ClInclude Include="Sources\CollisionComponent.h">
       <Filter>소스 파일\05 Component</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ColliderBase.h">
@@ -201,6 +201,12 @@
     </ClInclude>
     <ClInclude Include="Sources\TileMapActor.h">
       <Filter>소스 파일\04. Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\EnumBitFlag.h">
+      <Filter>소스 파일\00. Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\CollisionResponseInfo.h">
+      <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +291,7 @@
     <ClCompile Include="Sources\CollisionSystem.cpp">
       <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ColliderComponent.cpp">
+    <ClCompile Include="Sources\CollisionComponent.cpp">
       <Filter>소스 파일\05 Component</Filter>
     </ClCompile>
     <ClCompile Include="Sources\ColliderBase.cpp">

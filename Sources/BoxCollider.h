@@ -11,20 +11,26 @@ public:
 	BoxCollider();
 	virtual ~BoxCollider();
 
-	virtual bool Update() override;
-	virtual void Render() override;
+	virtual void Startup() override;
+	virtual bool Update()  override;
+	virtual void Render()  override;
 
 	virtual bool TestIntersect(ColliderBase::Ptr spTargetCollider) override;
 
-	void SetPosition(const Point2d& pos) { m_pos = pos; }
 	void SetExtents(const Size& extents) { m_extents = extents; }
 
 	const RECT& GetBoxRect() const { return m_boxRect; }
 	void SetUseCamera(bool bUseCamera) { m_bUseCamera = bUseCamera; }
 
+	int32 GetInstersectedRectIndex() const { return m_intersectedRectIdx; }
+
 private:
-	Point2d m_pos;
-	Size    m_extents;
-	RECT    m_boxRect;
-	bool    m_bUseCamera = true;
+	void UpdateBoxRect();
+	bool TestIntersectBox(BoxCollider::Ptr spTargetBoxCollider);
+
+private:
+	Size  m_extents;
+	RECT  m_boxRect;
+	int32 m_intersectedRectIdx = -1;
+	bool  m_bUseCamera = true;
 };

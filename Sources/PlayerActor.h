@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PawnActor.h"
-#include "ColliderComponent.h"
+#include "CollisionComponent.h"
 
 enum class EPlayerDirection
 {
@@ -18,19 +18,19 @@ public:
 	DEFINE_SMART_PTR(PlayerActor);
 	using PawnActor::PawnActor;
 
+	using Super = PawnActor;
+
 public:
 	virtual ~PlayerActor();
 
 	virtual void Startup() override;
 	virtual bool Update()  override;
-	virtual void Render()  override;
 	virtual void Cleanup() override;
 
-	void OnCollisionEnter(ColliderComponent::Ptr spTargetColliderComponent);
-	void OnCollisionKeep(ColliderComponent::Ptr spTargetColliderComponent);
-	void OnCollisionLeave(ColliderComponent::Ptr spTargetColliderComponent);
+	void OnCollisionHit(CollisionComponent::Ptr spTargetCollisionComponent);
+	void OnCollisionOverlap(CollisionComponent::Ptr spTargetCollisionComponent);
 
 private:
-	float            m_speed = 0.0f;
+	float m_speed = 0.0f;
 	EPlayerDirection m_currentDir = EPlayerDirection::Down;
 };
