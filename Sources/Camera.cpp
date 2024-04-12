@@ -24,7 +24,7 @@ const Point2d& Camera::CalcScreenCenterOffsetPosition()
 		return m_offsetPos;
 	}
 
-	TransformComponent::Ptr spTargetTransformComponent = GET_COMPONENT(m_pTarget, TransformComponent);
+	TransformComponentPtr spTargetTransformComponent = GET_COMPONENT(m_pTarget, TransformComponent);
 	const Point2d& targetPos = spTargetTransformComponent->GetPosition();
 
 	// 월드 범위 체크

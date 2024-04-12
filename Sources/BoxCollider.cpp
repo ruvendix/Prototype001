@@ -6,6 +6,7 @@
 #include "TransformComponent.h"
 #include "SystemManager.h"
 #include "CollisionSystem.h"
+#include "Camera.h"
 
 BoxCollider::BoxCollider()
 {
@@ -34,7 +35,7 @@ void BoxCollider::Render()
 	Point2d cameraOffsetPos;
 	if (m_bUseCamera == true)
 	{
-		Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+		CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 		if (spCamera != nullptr)
 		{
 			cameraOffsetPos = spCamera->GetOffsetPosition();
@@ -61,10 +62,10 @@ void BoxCollider::Render()
 #endif
 }
 
-bool BoxCollider::TestIntersect(ColliderBase::Ptr spTargetCollider)
+bool BoxCollider::TestIntersect(ColliderBasePtr spTargetCollider)
 {
 	// 박스인지?
-	BoxCollider::Ptr spTargetBoxCollider = std::dynamic_pointer_cast<BoxCollider>(spTargetCollider);
+	BoxColliderPtr spTargetBoxCollider = std::dynamic_pointer_cast<BoxCollider>(spTargetCollider);
 	if ((spTargetBoxCollider != nullptr) && // 박스 VS 박스
 		(TestIntersectBox(spTargetBoxCollider) == true))
 	{
@@ -77,7 +78,7 @@ bool BoxCollider::TestIntersect(ColliderBase::Ptr spTargetCollider)
 void BoxCollider::UpdateBoxRect()
 {
 	// 액터의 트랜스폼 가져오기
-	TransformComponent::Ptr spTransformComponent = GET_COMPONENT(GetOwner(), TransformComponent);
+	TransformComponentPtr spTransformComponent = GET_COMPONENT(GetActor(), TransformComponent);
 	const Point2d& pos = spTransformComponent->GetPosition();
 
 	m_boxRect.left   = (pos.x - static_cast<int32>(m_extents.width));
@@ -86,7 +87,7 @@ void BoxCollider::UpdateBoxRect()
 	m_boxRect.bottom = (pos.y + static_cast<int32>(m_extents.height));
 }
 
-bool BoxCollider::TestIntersectBox(BoxCollider::Ptr spTargetBoxCollider)
+bool BoxCollider::TestIntersectBox(BoxColliderPtr spTargetBoxCollider)
 {
 	RECT intersectedRect;
 	const RECT& targetBoxRect = spTargetBoxCollider->GetBoxRect();

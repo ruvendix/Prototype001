@@ -1,9 +1,5 @@
-/*
-<내용 요약>
-씬 기본형
-*/
-
 #pragma once
+
 #include "IGameDefault.h"
 
 enum class EActorLayer
@@ -17,9 +13,6 @@ class Actor;
 
 class SceneBase : public IGameDefault
 {
-public:
-	DEFINE_SMART_PTR(SceneBase);
-
 public:
 	using Actors = std::array<std::vector<Actor*>, ENUM_TO_NUM(EActorLayer::Count)>;
 

@@ -1,8 +1,5 @@
-/*
-°æ·Î¸¦ ´Ù·ë
-*/
-
 #pragma once
+
 #include "SystemBase.h"
 
 class PathSystem : public SystemBase

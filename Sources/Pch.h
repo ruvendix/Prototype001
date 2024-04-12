@@ -1,10 +1,4 @@
-﻿/*
-<내용 요약>
-자주 사용하는 헤더 파일들을 미리 컴파일해서 사용.
-헤더 파일에 변화가 생기면 무조건 다시 컴파일됨.
-*/
-
-#pragma once
+﻿#pragma once
 
 #pragma warning(disable: 6031)  // 함수 반환값 무시되었다는 경고
 #pragma warning(disable: 26495) // 멤버 변수를 초기화하지 않았다는 경고
@@ -38,3 +32,4 @@ WinSDKVer.h를 포함하고 _WIN32_WINNT를 지원하려는 플랫폼으로 설�
 // 자주 사용하는 커스텀 헤더 파일입니다.
 #include "Types.h"
 #include "Defines.h"
+#include "SharedPointers.h"

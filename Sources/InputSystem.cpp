@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-사용자의 입력을 관리하는 시스템
-*/
-
 #include "Pch.h"
 #include "InputSystem.h"
 

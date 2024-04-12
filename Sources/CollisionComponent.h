@@ -1,9 +1,7 @@
 #pragma once
 
 #include "functional"
-#include "IGameDefault.h"
 #include "ComponentBase.h"
-#include "ColliderBase.h"
 #include "EnumBitFlag.h"
 #include "CollisionResponseInfo.h"
 
@@ -17,10 +15,8 @@ enum ECollisionEnableOption
 class CollisionComponent : public ComponentBase
 {
 public:
-	DEFINE_SMART_PTR(CollisionComponent);
-
 	using CollisionEnableOption = EnumBitFlag<ECollisionEnableOption>;
-	using CollisionCallback = std::function<void(CollisionComponent::Ptr)>;
+	using CollisionCallback = std::function<void(CollisionComponentPtr)>;
 
 public:
 	CollisionComponent();
@@ -32,14 +28,14 @@ public:
 	void AddCollisionResponse(ECollisionObjectType collisionObjectType, ECollisionResponseState collisionResponseState);
 	ECollisionResponseState TestCollisionResponseBit(ECollisionObjectType collisionObjectType) const;
 
-	bool TestIntersect(CollisionComponent::Ptr spTargetCollisionComponent);
+	bool TestIntersect(CollisionComponentPtr spTargetCollisionComponent);
 
-	void ProcessHitEvent(CollisionComponent::Ptr spTargetCollisionComponent);
-	void ProcessOverlapEvent(CollisionComponent::Ptr spTargetCollisionComponent);
+	void ProcessHitEvent(CollisionComponentPtr spTargetCollisionComponent);
+	void ProcessOverlapEvent(CollisionComponentPtr spTargetCollisionComponent);
 
-	void ApplyCollider(ColliderBase::Ptr spColider);
+	void ApplyCollider(ColliderBasePtr spColider);
 
-	ColliderBase::Ptr GetCollider() const { return m_spCollider; }
+	ColliderBasePtr GetCollider() const { return m_spCollider; }
 
 	ECollisionObjectType GetCollisionObjectType() const { return m_collisionObjectType; }
 	void SetCollisionObjectType(ECollisionObjectType collisionObjectType) { m_collisionObjectType = collisionObjectType; }
@@ -51,7 +47,7 @@ public:
 
 private:
 	ECollisionObjectType m_collisionObjectType = ECollisionObjectType::Count;
-	ColliderBase::Ptr m_spCollider = nullptr;
+	ColliderBasePtr m_spCollider = nullptr;
 	
 	CollisionCallback m_hitCallback; // Block
 	CollisionCallback m_overlapCallback; // Overlap

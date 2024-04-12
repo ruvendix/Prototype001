@@ -1,7 +1,3 @@
-/*
-리소스의 기본 클래스
-*/
-
 #include "Pch.h"
 #include "ResourceBase.h"
 

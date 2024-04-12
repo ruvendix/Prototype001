@@ -1,13 +1,9 @@
 #pragma once
 
 #include "IGameDefault.h"
-#include "Sprite.h"
 
 class UiBase : public IGameDefault
 {
-public:
-	DEFINE_SMART_PTR(UiBase);
-
 public:
 	UiBase();
 	virtual ~UiBase();
@@ -19,7 +15,7 @@ public:
 
 	virtual bool TestMouseHit() = 0;
 
-	void SetSprite(Sprite::Ptr spUiSprite) { m_spUiSprite = spUiSprite; }
+	void SetSprite(SpritePtr spUiSprite) { m_spUiSprite = spUiSprite; }
 
 	const Point2d& GetPosition() const { return m_pos; }
 	void SetPosition(const Point2d& pos) { m_pos = pos; }
@@ -30,8 +26,8 @@ public:
 	void SetUiSpriteIndex(uint32 uiSpriteIdx) { m_uiSpriteIdx = uiSpriteIdx; }
 
 private:
-	Point2d     m_pos;
-	Size        m_size;
-	Sprite::Ptr m_spUiSprite = nullptr;
-	uint32      m_uiSpriteIdx = 0;
+	Point2d m_pos;
+	Size m_size;
+	SpritePtr m_spUiSprite = nullptr;
+	uint32 m_uiSpriteIdx = 0;
 };

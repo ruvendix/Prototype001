@@ -21,16 +21,16 @@ CollisionSystem::~CollisionSystem()
 
 bool CollisionSystem::PostUpdate()
 {
-	SceneBase::Ptr spScene = GET_SYSTEM(SceneSystem)->GetCurrentScene();
+	SceneBasePtr spScene = GET_SYSTEM(SceneSystem)->GetCurrentScene();
 	SceneBase::Actors& refActors = spScene->GetActors();
 
 	// 씬에 있는 액터의 모든 콜라이더 컴포넌트 가져오기
-	std::vector<CollisionComponent::Ptr> collisoinComponents;
+	std::vector<CollisionComponentPtr> collisoinComponents;
 	for (auto actors : refActors)
 	{
 		for (Actor* pActor : actors)
 		{
-			CollisionComponent::Ptr spCollisionComponent = GET_COMPONENT(pActor, CollisionComponent);
+			CollisionComponentPtr spCollisionComponent = GET_COMPONENT(pActor, CollisionComponent);
 			if (spCollisionComponent != nullptr)
 			{
 				collisoinComponents.emplace_back(spCollisionComponent);
@@ -43,7 +43,7 @@ bool CollisionSystem::PostUpdate()
 	for (uint32 i = 0; i < collisionComponentCount; ++i)
 	{
 		// 콜라이더의 액터 조사
-		CollisionComponent::Ptr spLhsCollisionComponent = collisoinComponents[i];
+		CollisionComponentPtr spLhsCollisionComponent = collisoinComponents[i];
 
 		// 비활성된 액터라면 생략
 		Actor* pFirstActor = spLhsCollisionComponent->GetOwner();
@@ -54,7 +54,7 @@ bool CollisionSystem::PostUpdate()
 
 		for (uint32 j = i + 1; j < collisionComponentCount; ++j)
 		{
-			CollisionComponent::Ptr spRhsCollisionComponent = collisoinComponents[j];
+			CollisionComponentPtr spRhsCollisionComponent = collisoinComponents[j];
 			//Actor* pSecondActor = spSecondCollideComponent->GetOwner();
 
 			// Lhs가 Rhs와 컬리전 반응하도록 되어있는지?
@@ -110,7 +110,7 @@ void CollisionSystem::Render()
 	HPEN hPrevPen = static_cast<HPEN>(::SelectObject(hBackbufferDc, hPen));
 
 	Point2d cameraOffsetPos;
-	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	cameraOffsetPos = spCamera->GetOffsetPosition();
 
 	for (RECT& intersectedRect : m_intersectedRects)

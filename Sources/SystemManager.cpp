@@ -1,9 +1,3 @@
-/*
-<내용 요약>
-시스템들의 관리자.
-초기화와 정리의 순서를 편하게 설정할 수 있음.
-*/
-
 #include "Pch.h"
 #include "SystemManager.h"
 

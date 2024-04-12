@@ -7,9 +7,6 @@ class Actor;
 class ComponentBase : IGameDefault
 {
 public:
-	DEFINE_SMART_PTR(ComponentBase);
-
-public:
 	ComponentBase();
 	virtual ~ComponentBase();
 

@@ -1,13 +1,9 @@
 #pragma once
 
-#include "IGameDefault.h"
 #include "ComponentBase.h"
 
 class TransformComponent : public ComponentBase
 {
-public:
-	DEFINE_SMART_PTR(TransformComponent);
-
 public:
 	TransformComponent();
 	virtual ~TransformComponent();
@@ -25,5 +21,5 @@ public:
 
 private:
 	Point2d m_pos;
-	Size    m_size;
+	Size m_size;
 };

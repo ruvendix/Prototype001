@@ -3,6 +3,7 @@
 
 #include "Actor.h"
 #include "TransformComponent.h"
+#include "Camera.h"
 
 CameraComponent::CameraComponent()
 {

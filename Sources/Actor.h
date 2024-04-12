@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IGameDefault.h"
-#include "ComponentBase.h"
 #include "ComponentIdCounter.h"
 #include "ComponentDefines.h"
 
@@ -14,9 +13,6 @@ enum class EActorState
 class Actor : public IGameDefault
 {
 public:
-	DEFINE_SMART_PTR(Actor);
-
-public:
 	Actor(const std::string strTag);
 	virtual ~Actor();
 
@@ -28,17 +24,17 @@ public:
 
 public:
 	template <typename TComponent, typename TComponentId>
-	TComponent::Ptr AddComponent()
+	std::shared_ptr<TComponent> AddComponent()
 	{
 		std::is_convertible_v<TComponent, ComponentBase>;
 
-		typename TComponent::Ptr spExistedComponent = GetComponent<TComponent, TComponentId>();
+		std::shared_ptr<TComponent> spExistedComponent = GetComponent<TComponent, TComponentId>();
 		if (spExistedComponent != nullptr)
 		{
 			return spExistedComponent;
 		}
 
-		typename TComponent::Ptr spNewComponent = std::make_shared<TComponent>();
+		std::shared_ptr<TComponent> spNewComponent = std::make_shared<TComponent>();
 		spNewComponent->SetOwner(this);
 		spNewComponent->Startup();
 
@@ -51,7 +47,7 @@ public:
 	{
 		std::is_convertible_v<TComponent, ComponentBase>;
 
-		typename TComponent::Ptr* spRemoveComponent = GetComponent<TComponent>();
+		std::shared_ptr<TComponent> spRemoveComponent = GetComponent<TComponent, TComponentId>();
 		if (spRemoveComponent == nullptr)
 		{
 			return;
@@ -62,7 +58,7 @@ public:
 	}
 
 	template <typename TComponent, typename TComponentId>
-	typename TComponent::Ptr GetComponent()
+	std::shared_ptr<TComponent> GetComponent()
 	{
 		std::is_convertible_v<TComponent, ComponentBase>;
 
@@ -77,10 +73,10 @@ public:
 
 public:
 	EActorState GetActorState() const { return m_actorState; }
-	void        SetActorState(EActorState actorState) { m_actorState = actorState; }
+	void SetActorState(EActorState actorState) { m_actorState = actorState; }
 
 private:
 	std::string m_strTag;
-	std::unordered_map<uint32, ComponentBase::Ptr> m_components;
+	std::unordered_map<uint32, ComponentBasePtr> m_components;
 	EActorState m_actorState = EActorState::Activated;
 };

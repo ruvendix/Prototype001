@@ -1,6 +1,8 @@
 #include "Pch.h"
 #include "Tile.h"
 
+#include "Sprite.h"
+#include "Texture.h"
 #include "TileMapActor.h"
 #include "GameApplication.h"
 #include "Camera.h"
@@ -35,7 +37,7 @@ void Tile::Render()
 	const Size& tileSize = m_pTileMapInfo->tileSize;
 
 	Point2d destPos;
-	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	destPos.x = m_pos.x - spCamera->GetOffsetPosition().x;
 	destPos.y = m_pos.y - spCamera->GetOffsetPosition().y;
 

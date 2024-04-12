@@ -5,9 +5,6 @@ class Actor;
 class Camera
 {
 public:
-	DEFINE_SMART_PTR(Camera);
-
-public:
 	Camera();
 	~Camera();
 

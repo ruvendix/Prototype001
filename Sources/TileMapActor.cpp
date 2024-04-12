@@ -7,30 +7,32 @@
 #include "InputSystem.h"
 #include "TransformComponent.h"
 #include "TextureComponent.h"
+#include "Tile.h"
 #include "Sprite.h"
 #include "Camera.h"
+#include "Texture.h"
 
 void TileMapActor::Startup()
 {
 	Actor::Startup();
 
 #pragma region 통짜맵 (테스트용으로 넣어보고 굳이 필요한지는 판단함)
-	TextureComponent::Ptr spTexComponent = ADD_COMPONENT(this, TextureComponent);
-	Texture::Ptr spWorldMapTex = spTexComponent->LoadTexture("Sprite/Map/Stage01.bmp");
+	TextureComponentPtr spTexComponent = ADD_COMPONENT(this, TextureComponent);
+	TexturePtr spWorldMapTex = spTexComponent->LoadTexture("Sprite/Map/Stage01.bmp");
 	GameApplication::I()->SetWorldSize(spWorldMapTex->GetSize());
 
 	// 렌더링할 크기
 	const Size& screenSize = GameApplication::I()->GetResolution();
 	const Size& screenHalfSize = GameApplication::I()->GetHalfResolution();
 
-	TransformComponent::Ptr spTransformComponent = GET_COMPONENT(this, TransformComponent);
+	TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
 	spTransformComponent->SetPosition(screenHalfSize.width, screenHalfSize.height);
 	spTransformComponent->SetSize(screenSize);
 #pragma endregion
 
 #pragma region 타일
 	// 타일로 사용할 텍스처 로딩
-	Texture::Ptr spTileTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Map/Tile.bmp");
+	TexturePtr spTileTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Map/Tile.bmp");
 
 	// 타일 하나의 크기
 	Size tileSize;
@@ -39,7 +41,7 @@ void TileMapActor::Startup()
 	m_tileMapInfo.tileSize = tileSize;
 
 	// 타일은 스프라이트로 구성
-	Sprite::Ptr spTileSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("TileSprite");
+	SpritePtr spTileSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("TileSprite");
 
 	// 스프라이트 정보
 	for (uint32 i = 0; i < 4; ++i)
@@ -66,7 +68,7 @@ void TileMapActor::Startup()
 		m_tileMap[y].resize(totalTileCount.x);
 		for (uint32 x = 0; x < totalTileCount.x; ++x)
 		{
-			Tile::Ptr spTile = std::make_shared<Tile>();
+			TilePtr spTile = std::make_shared<Tile>();
 			spTile->SetTileMapInfo(&m_tileMapInfo);
 			spTile->SetTileSprite(spTileSprite);
 
@@ -92,7 +94,7 @@ bool TileMapActor::Update()
 		const Point2d& mousePos = GET_SYSTEM(InputSystem)->GetMousePosition();
 		
 		// 마우스 좌표는 클라이언트 영역 기준이므로 카메라 보정 필요
-		Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+		CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 
 		uint2d selectedTileIdxes;
 		selectedTileIdxes.x = (mousePos.x + spCamera->GetOffsetPosition().x) / m_tileMapInfo.tileSize.width;
@@ -115,7 +117,7 @@ void TileMapActor::Render()
 	totalTileCount.x = m_tileMap[0].size(); // 첫번째 줄로 확인
 
 	const Size& screenSize = GameApplication::I()->GetResolution();
-	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 
 #pragma region 렌더링할 시작 인덱스와 종료 인덱스 및 개수 구하기
 	uint2d renderTileStartIdxes;

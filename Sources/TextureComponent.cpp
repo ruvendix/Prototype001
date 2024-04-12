@@ -6,6 +6,8 @@
 #include "GameApplication.h"
 #include "Actor.h"
 #include "TransformComponent.h"
+#include "Texture.h"
+#include "Camera.h"
 
 TextureComponent::TextureComponent()
 {
@@ -19,11 +21,11 @@ TextureComponent::~TextureComponent()
 
 void TextureComponent::Render()
 {
-	TransformComponent::Ptr spTransformComponent = GET_COMPONENT(GetOwner(), TransformComponent);
+	TransformComponentPtr spTransformComponent = GET_COMPONENT(GetOwner(), TransformComponent);
 	const Size& size = spTransformComponent->GetSize();
 
 	Point2d destPos;
-	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	destPos.x = spTransformComponent->GetPosition().x - (size.width / 2);
 	destPos.x -= spCamera->GetOffsetPosition().x;
 
@@ -46,7 +48,7 @@ void TextureComponent::Render()
 	);
 }
 
-Texture::Ptr TextureComponent::LoadTexture(const std::string& strTexPath)
+TexturePtr TextureComponent::LoadTexture(const std::string& strTexPath)
 {
 	assert(m_spTex == nullptr);
 	m_spTex = GET_SYSTEM(ResourceSystem)->LoadTexture(strTexPath);
@@ -61,4 +63,9 @@ void TextureComponent::ChangeTexture(const std::string& strTexPath)
 		// 없으면 새로 로드
 		m_spTex = GET_SYSTEM(ResourceSystem)->LoadTexture(strTexPath);
 	}
+}
+
+const Size& TextureComponent::BringTextureSize() const
+{
+	return m_spTex->GetSize();
 }

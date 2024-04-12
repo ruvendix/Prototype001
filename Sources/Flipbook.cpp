@@ -8,13 +8,14 @@
 #include "GameApplication.h"
 #include "SystemManager.h"
 #include "ResourceSystem.h"
+#include "Texture.h"
 
 Flipbook::Flipbook()
 {
 
 }
 
-Flipbook::Flipbook(Sprite::Ptr spSprite)
+Flipbook::Flipbook(SpritePtr spSprite)
 {
 	assert(spSprite != nullptr);
 	m_spSprite = spSprite;

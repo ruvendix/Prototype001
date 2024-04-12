@@ -5,9 +5,6 @@
 class BoxCollider : public ColliderBase
 {
 public:
-	DEFINE_SMART_PTR(BoxCollider);
-
-public:
 	BoxCollider();
 	virtual ~BoxCollider();
 
@@ -15,7 +12,7 @@ public:
 	virtual bool PostUpdate() override;
 	virtual void Render() override;
 
-	virtual bool TestIntersect(ColliderBase::Ptr spTargetCollider) override;
+	virtual bool TestIntersect(ColliderBasePtr spTargetCollider) override;
 
 	void SetExtents(const Size& extents) { m_extents = extents; }
 
@@ -26,7 +23,7 @@ public:
 
 private:
 	void UpdateBoxRect();
-	bool TestIntersectBox(BoxCollider::Ptr spTargetBoxCollider);
+	bool TestIntersectBox(BoxColliderPtr spTargetBoxCollider);
 
 private:
 	Size  m_extents;

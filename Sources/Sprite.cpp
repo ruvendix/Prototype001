@@ -1,7 +1,3 @@
-/*
-비트맵 리소스
-*/
-
 #include "Pch.h"
 #include "Sprite.h"
 

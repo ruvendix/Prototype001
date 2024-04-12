@@ -1,7 +1,3 @@
-/*
-경로를 다룸
-*/
-
 #include "Pch.h"
 #include "PathSystem.h"
 
@@ -24,7 +20,7 @@ void PathSystem::Startup()
 	std::filesystem::path tempPath = szAppPath;
 	m_strAppPath = tempPath.generic_string();
 
-	tempPath = tempPath.parent_path().parent_path(); // 2번 올라감
-	tempPath += "\\Assets\\";
+	tempPath = tempPath.parent_path().parent_path() / "Assets"; // 2번 올라감
+	tempPath += "\\";
 	m_strAssetsDirectory = tempPath.generic_string();
 }

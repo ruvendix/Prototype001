@@ -1,8 +1,5 @@
-/*
-리소스의 기본 클래스
-*/
-
 #pragma once
+
 #include "IGameDefault.h"
 
 class ResourceBase : IGameDefault

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SystemBase.h"
-#include "CollisionResponseInfo.h"
 
 class CollisionSystem : public SystemBase
 {

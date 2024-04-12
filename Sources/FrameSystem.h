@@ -1,9 +1,5 @@
-/*
-<내용 요약>
-프레임을 관리하는 시스템
-*/
-
 #pragma once
+
 #include "SystemBase.h"
 
 class FrameSystem : public SystemBase

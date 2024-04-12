@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-씬 기본형
-*/
-
 #include "Pch.h"
 #include "SceneBase.h"
 

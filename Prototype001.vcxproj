@@ -178,6 +178,7 @@
     <ClInclude Include="Sources\ResourceSystem.h" />
     <ClInclude Include="Sources\SceneBase.h" />
     <ClInclude Include="Sources\SceneSystem.h" />
+    <ClInclude Include="Sources\SharedPointers.h" />
     <ClInclude Include="Sources\Sprite.h" />
     <ClInclude Include="Sources\StartScene.h" />
     <ClInclude Include="Sources\PawnActor.h" />

@@ -24,7 +24,7 @@ bool Actor::Update()
 {
 	for (auto iter : m_components)
 	{
-		ComponentBase::Ptr spComponent = iter.second;
+		ComponentBasePtr spComponent = iter.second;
 		assert(spComponent != nullptr);
 		spComponent->Update();
 	}
@@ -36,7 +36,7 @@ bool Actor::PostUpdate()
 {
 	for (auto iter : m_components)
 	{
-		ComponentBase::Ptr spComponent = iter.second;
+		ComponentBasePtr spComponent = iter.second;
 		assert(spComponent != nullptr);
 		spComponent->PostUpdate();
 	}
@@ -48,7 +48,7 @@ void Actor::Render()
 {
 	for (auto iter : m_components)
 	{
-		ComponentBase::Ptr spComponent = iter.second;
+		ComponentBasePtr spComponent = iter.second;
 		assert(spComponent != nullptr);
 		spComponent->Render();
 	}
@@ -58,7 +58,7 @@ void Actor::Cleanup()
 {
 	for (auto iter : m_components)
 	{
-		ComponentBase::Ptr spComponent = iter.second;
+		ComponentBasePtr spComponent = iter.second;
 		assert(spComponent != nullptr);
 		spComponent->Cleanup();
 	}

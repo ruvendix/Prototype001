@@ -7,6 +7,9 @@
 #include "GameApplication.h"
 #include "Actor.h"
 #include "TransformComponent.h"
+#include "Texture.h"
+#include "Camera.h"
+#include "Flipbook.h"
 
 FlipbookComponent::FlipbookComponent()
 {
@@ -44,17 +47,17 @@ void FlipbookComponent::Render()
 		return;
 	}
 
-	const Texture::Ptr spKeyframeTex = m_pCurrentKeyframe->spTex;
+	const TexturePtr spKeyframeTex = m_pCurrentKeyframe->spTex;
 	if (spKeyframeTex == nullptr)
 	{
 		return;
 	}
 
-	TransformComponent::Ptr spTransformComponent = GET_COMPONENT(GetOwner(), TransformComponent);
+	TransformComponentPtr spTransformComponent = GET_COMPONENT(GetOwner(), TransformComponent);
 	const Size& size = spTransformComponent->GetSize();
 
 	Point2d destPos;
-	Camera::Ptr spCamera = GameApplication::I()->GetCurrentCamera();
+	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	destPos.x = spTransformComponent->GetPosition().x - (size.width / 2);
 	destPos.x -= spCamera->GetOffsetPosition().x;
 
@@ -75,4 +78,9 @@ void FlipbookComponent::Render()
 		m_pCurrentKeyframe->size.height,
 		m_pCurrentKeyframe->excludeColor
 	);
+}
+
+float FlipbookComponent::BringFlipbookEndTime() const
+{
+	return m_spFlipbook->GetFlipbookEndTime();
 }

@@ -1,6 +1,7 @@
 #include "Pch.h"
 #include "CollisionComponent.h"
 
+#include "ColliderBase.h"
 #include "Actor.h"
 #include "TransformComponent.h"
 
@@ -24,9 +25,9 @@ bool CollisionComponent::PostUpdate()
 	return (m_spCollider->PostUpdate());
 }
 
-bool CollisionComponent::TestIntersect(CollisionComponent::Ptr spTargetCollisionComponent)
+bool CollisionComponent::TestIntersect(CollisionComponentPtr spTargetCollisionComponent)
 {
-	ColliderBase::Ptr spTargetCollider = spTargetCollisionComponent->GetCollider();
+	ColliderBasePtr spTargetCollider = spTargetCollisionComponent->GetCollider();
 	if (m_spCollider->TestIntersect(spTargetCollider) == false)
 	{
 		return false;
@@ -35,7 +36,7 @@ bool CollisionComponent::TestIntersect(CollisionComponent::Ptr spTargetCollision
 	return true;
 }
 
-void CollisionComponent::ProcessHitEvent(CollisionComponent::Ptr spTargetCollisionComponent)
+void CollisionComponent::ProcessHitEvent(CollisionComponentPtr spTargetCollisionComponent)
 {
 	if (m_hitCallback != nullptr)
 	{
@@ -43,7 +44,7 @@ void CollisionComponent::ProcessHitEvent(CollisionComponent::Ptr spTargetCollisi
 	}
 }
 
-void CollisionComponent::ProcessOverlapEvent(CollisionComponent::Ptr spTargetCollisionComponent)
+void CollisionComponent::ProcessOverlapEvent(CollisionComponentPtr spTargetCollisionComponent)
 {
 	if (m_overlapCallback != nullptr)
 	{
@@ -51,10 +52,10 @@ void CollisionComponent::ProcessOverlapEvent(CollisionComponent::Ptr spTargetCol
 	}
 }
 
-void CollisionComponent::ApplyCollider(ColliderBase::Ptr spColider)
+void CollisionComponent::ApplyCollider(ColliderBasePtr spColider)
 {
 	m_spCollider = spColider;
-	m_spCollider->SetOwner(GetOwner());
+	m_spCollider->SetActor(GetOwner());
 	m_spCollider->Startup();
 }
 

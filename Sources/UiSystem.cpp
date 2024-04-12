@@ -22,7 +22,7 @@ bool UiSystem::Update()
 	bool bRet = true;
 	for (auto iter : m_uiStorage)
 	{
-		UiBase::Ptr spUi = iter.second;
+		UiBasePtr spUi = iter.second;
 		if (spUi == nullptr)
 		{
 			continue;
@@ -38,7 +38,7 @@ void UiSystem::Render()
 {
 	for (auto iter : m_uiStorage)
 	{
-		UiBase::Ptr spUi = iter.second;
+		UiBasePtr spUi = iter.second;
 		if (spUi == nullptr)
 		{
 			continue;
@@ -52,7 +52,7 @@ void UiSystem::Cleanup()
 {
 	for (auto iter : m_uiStorage)
 	{
-		UiBase::Ptr spUi = iter.second;
+		UiBasePtr spUi = iter.second;
 		if (spUi == nullptr)
 		{
 			continue;

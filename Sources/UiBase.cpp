@@ -1,6 +1,8 @@
 #include "Pch.h"
 #include "UiBase.h"
 
+#include "Texture.h"
+#include "Sprite.h"
 #include "GameApplication.h"
 
 UiBase::UiBase()

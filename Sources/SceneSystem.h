@@ -1,9 +1,5 @@
-/*
-<내용 요약>
-씬을 관리하는 시스템
-*/
-
 #pragma once
+
 #include "SystemBase.h"
 #include "SceneBase.h"
 
@@ -21,13 +17,13 @@ public:
 	virtual void Render() override;
 	virtual void Cleanup() override;
 
-	void ChangeScene(SceneBase::Ptr spNewScene);
+	void ChangeScene(SceneBasePtr spNewScene);
 	void AddRemoveDeactivatedActor(std::vector<Actor*>& outActors, Actor* pTargetActor);
 	void RemoveDeactivatedAtors();
 
-	SceneBase::Ptr GetCurrentScene() const { return m_spCurrentScene; }
+	SceneBasePtr GetCurrentScene() const { return m_spCurrentScene; }
 
 private:
-	SceneBase::Ptr m_spCurrentScene;
+	SceneBasePtr m_spCurrentScene;
 	std::vector<Actor*> m_willRemoveDeactivatedActors;
 };

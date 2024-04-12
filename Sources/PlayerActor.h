@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PawnActor.h"
-#include "CollisionComponent.h"
 
 enum class EPlayerDirection
 {
@@ -15,7 +14,6 @@ enum class EPlayerDirection
 class PlayerActor : public PawnActor
 {
 public:
-	DEFINE_SMART_PTR(PlayerActor);
 	using PawnActor::PawnActor;
 
 	using Super = PawnActor;
@@ -27,8 +25,8 @@ public:
 	virtual bool Update()  override;
 	virtual void Cleanup() override;
 
-	void OnCollisionHit(CollisionComponent::Ptr spTargetCollisionComponent);
-	void OnCollisionOverlap(CollisionComponent::Ptr spTargetCollisionComponent);
+	void OnCollisionHit(CollisionComponentPtr spTargetCollisionComponent);
+	void OnCollisionOverlap(CollisionComponentPtr spTargetCollisionComponent);
 
 private:
 	float m_speed = 0.0f;

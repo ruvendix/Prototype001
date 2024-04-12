@@ -15,9 +15,9 @@ public:
 
 public:
 	template <typename TUi>
-	TUi::Ptr CreateUi(const std::string& strUiName)
+	std::shared_ptr<TUi> CreateUi(const std::string& strUiName)
 	{
-		typename TUi::Ptr spNewUi = std::make_shared<TUi>();
+		std::shared_ptr<TUi> spNewUi = std::make_shared<TUi>();
 		spNewUi->Startup();
 
 		m_uiStorage.emplace(strUiName, spNewUi);
@@ -25,5 +25,5 @@ public:
 	}
 
 private:
-	std::unordered_map<std::string, UiBase::Ptr> m_uiStorage;
+	std::unordered_map<std::string, UiBasePtr> m_uiStorage;
 };

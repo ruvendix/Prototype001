@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-입력과 관련된 열거형 모음
-*/
-
 #pragma once
 
 #include "Types.h"

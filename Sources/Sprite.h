@@ -1,24 +1,17 @@
-/*
-이미 로드된 텍스처를 이용해서 스프라이트로 만듬
-*/
-
 #pragma once
+
 #include "ResourceBase.h"
-#include "Texture.h"
 
 struct SpriteInfo
 {
-	Point2d      pos;
-	Size         size;
-	Texture::Ptr spTex = nullptr;
-	uint32       excludeColor = 0;
+	Point2d pos;
+	Size size;
+	TexturePtr spTex = nullptr;
+	uint32 excludeColor = 0;
 };
 
 class Sprite : public ResourceBase
 {
-public:
-	DEFINE_SMART_PTR(Sprite);
-
 public:
 	Sprite();
 	virtual ~Sprite();

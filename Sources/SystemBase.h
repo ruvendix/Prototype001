@@ -1,11 +1,5 @@
-/*
-<내용 요약>
-시스템의 기본형
-*/
-
 #pragma once
-#include "Types.h"
-#include "Defines.h"
+
 #include "IGameDefault.h"
 #include "SystemDefines.h"
 

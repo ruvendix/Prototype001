@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-자주 사용하는 매크로 모음
-*/
-
 #pragma once
 
 #define SAFE_DELETE(ptr)\
@@ -46,6 +41,6 @@
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #endif
 
-#define DEFINE_SMART_PTR(Type) using Ptr = std::shared_ptr<Type>
+#define DEFINE_SMART_PTR(Type) using Type##Ptr = std::shared_ptr<class Type>
 #define ENUM_TO_NUM(enumValue) static_cast<uint32>(enumValue)
 #define NUM_TO_ENUM(value, EnumType) static_cast<EnumType>(value)

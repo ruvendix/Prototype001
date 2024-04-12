@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-프레임을 관리하는 시스템
-*/
-
 #include "Pch.h"
 #include "FrameSystem.h"
 

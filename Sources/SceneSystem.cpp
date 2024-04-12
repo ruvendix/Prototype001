@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-씬을 관리하는 시스템
-*/
-
 #include "Pch.h"
 #include "SceneSystem.h"
 
@@ -60,7 +55,7 @@ void SceneSystem::Cleanup()
 	}
 }
 
-void SceneSystem::ChangeScene(SceneBase::Ptr spNewScene)
+void SceneSystem::ChangeScene(SceneBasePtr spNewScene)
 {
 	Cleanup();
 	spNewScene->Startup();

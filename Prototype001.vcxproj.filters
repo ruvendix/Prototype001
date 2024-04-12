@@ -124,9 +124,6 @@
     <ClInclude Include="Sources\ResourceSystem.h">
       <Filter>소스 파일\02. System\04. ResourceSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Sprite.h">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Flipbook.h">
       <Filter>소스 파일\03. Resources</Filter>
     </ClInclude>
@@ -208,6 +205,12 @@
     <ClInclude Include="Sources\CollisionResponseInfo.h">
       <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\SharedPointers.h">
+      <Filter>소스 파일\00. Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Sprite.h">
+      <Filter>소스 파일\03. Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Main.cpp">
@@ -254,9 +257,6 @@
     </ClCompile>
     <ClCompile Include="Sources\ResourceSystem.cpp">
       <Filter>소스 파일\02. System\04. ResourceSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Sprite.cpp">
-      <Filter>소스 파일\03. Resources</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Flipbook.cpp">
       <Filter>소스 파일\03. Resources</Filter>
@@ -317,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="Sources\TileMapActor.cpp">
       <Filter>소스 파일\04. Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Sprite.cpp">
+      <Filter>소스 파일\03. Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

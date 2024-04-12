@@ -1,15 +1,11 @@
 #pragma once
 
 #include "IGameDefault.h"
-#include "Defines.h"
 
 class Actor;
 
 class ColliderBase : public IGameDefault
 {
-public:
-	DEFINE_SMART_PTR(ColliderBase);
-
 public:
 	ColliderBase();
 	virtual ~ColliderBase();
@@ -20,11 +16,11 @@ public:
 	virtual void Render() override;
 	virtual void Cleanup() override;
 
-	virtual bool TestIntersect(ColliderBase::Ptr spTargetCollider) = 0;
+	virtual bool TestIntersect(ColliderBasePtr spTargetCollider) = 0;
 
-	Actor* GetOwner() const { return m_pOwner; }
-	void SetOwner(Actor* pOwner) { m_pOwner = pOwner; }
+	Actor* GetActor() const { return m_pActor; }
+	void SetActor(Actor* pActor) { m_pActor = pActor; }
 
 private:
-	Actor* m_pOwner = nullptr;
+	Actor* m_pActor = nullptr;
 };

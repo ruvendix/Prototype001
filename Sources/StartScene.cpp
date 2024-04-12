@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-게임이 실행되면 가장 먼저 작동되는 씬
-*/
-
 #include "Pch.h"
 #include "StartScene.h"
 
@@ -32,13 +27,13 @@ void StartScene::Startup()
 	CreateActor<MonsterActor>("Monster", EActorLayer::Character);
 
 #pragma region 버튼 테스트
-	//UiButton::Ptr spUiTestButton = GET_SYSTEM(UiSystem)->CreateUi<UiButton>("TestButton");
+	//UiButtonPtr spUiTestButton = GET_SYSTEM(UiSystem)->CreateUi<UiButton>("TestButton");
 	//spUiTestButton->SetPosition(Point2d(300, 300));
 	//spUiTestButton->SetSize(Size(200, 200));
 
 	//// 버튼 스프라이트
-	//Texture::Ptr spUiButtonTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/UI/Start.bmp");
-	//Sprite::Ptr spUiButtonSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("UiButton");
+	//TexturePtr spUiButtonTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/UI/Start.bmp");
+	//SpritePtr spUiButtonSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("UiButton");
 
 	//SpriteInfo uiButtonSpriteInfo[2];
 	//uiButtonSpriteInfo[0].pos = Point2d(0, 0);

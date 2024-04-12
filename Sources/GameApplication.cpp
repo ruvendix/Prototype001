@@ -1,8 +1,3 @@
-/*
-<내용 요약>
-프로그램의 메인 로직
-*/
-
 #include "Pch.h"
 #include "GameApplication.h"
 
@@ -10,6 +5,7 @@
 #include "SystemManager.h"
 #include "FrameSystem.h"
 #include "InputSystem.h"
+#include "Camera.h"
 
 namespace
 {

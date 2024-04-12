@@ -3,6 +3,7 @@
 
 #include "SystemManager.h"
 #include "InputSystem.h"
+#include "BoxCollider.h"
 
 UiButton::UiButton()
 {
