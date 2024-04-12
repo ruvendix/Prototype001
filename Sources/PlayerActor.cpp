@@ -176,22 +176,27 @@ void PlayerActor::OnCollisionHit(CollisionComponent::Ptr spTargetCollisionCompon
 	TransformComponent::Ptr spTransformComponent = GET_COMPONENT(this, TransformComponent);
 	Point2d pos = spTransformComponent->GetPosition();
 
+	int32 intersectedLength = 0;
 	switch (m_currentDir)
 	{
-	case EPlayerDirection::Left:
-		pos.x += (intersectedRect.right - intersectedRect.left);
+	case EPlayerDirection::Left:		 
+		intersectedLength = (intersectedRect.right - intersectedRect.left);
+		pos.x += intersectedLength;
 		break;
 
 	case EPlayerDirection::Right:
-		pos.x -= (intersectedRect.right - intersectedRect.left);
+		intersectedLength = (intersectedRect.right - intersectedRect.left);
+		pos.x -= intersectedLength;
 		break;
 
 	case EPlayerDirection::Up:
-		pos.y += (intersectedRect.bottom - intersectedRect.top);
+		intersectedLength = (intersectedRect.bottom - intersectedRect.top);
+		pos.y += intersectedLength;
 		break;
 
 	case EPlayerDirection::Down:
-		pos.y -= (intersectedRect.bottom - intersectedRect.top);
+		intersectedLength = (intersectedRect.bottom - intersectedRect.top);
+		pos.y -= intersectedLength;
 		break;
 	}
 
@@ -200,7 +205,7 @@ void PlayerActor::OnCollisionHit(CollisionComponent::Ptr spTargetCollisionCompon
 	// 콜라이더 업데이트
 	spBoxCollider->Update();
 
-	std::string strPos = "Player hit " + std::to_string(pos.x) + " " + std::to_string(pos.y);
+	std::string strPos = "Player hit " + std::to_string(pos.x) + " " + std::to_string(pos.y) + " intersectedLength " + std::to_string(intersectedLength);
 	strPos += '\n';
 	::OutputDebugString(strPos.c_str());
 }

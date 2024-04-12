@@ -41,8 +41,15 @@ bool SystemManager::Update()
 	GET_SYSTEM(FrameSystem)->Update();
 	GET_SYSTEM(InputSystem)->Update();
 	GET_SYSTEM(SceneSystem)->Update();
-	GET_SYSTEM(CollisionSystem)->Update();
 	GET_SYSTEM(UiSystem)->Update();
+
+	return true;
+}
+
+bool SystemManager::PostUpdate()
+{
+	GET_SYSTEM(SceneSystem)->PostUpdate();
+	GET_SYSTEM(CollisionSystem)->PostUpdate();
 
 	return true;
 }

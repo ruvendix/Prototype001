@@ -25,6 +25,11 @@ bool ResourceBase::Update()
 	return true;
 }
 
+bool ResourceBase::PostUpdate()
+{
+	return true;
+}
+
 void ResourceBase::Render()
 {
 

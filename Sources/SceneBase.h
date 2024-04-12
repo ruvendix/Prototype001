@@ -4,7 +4,7 @@
 */
 
 #pragma once
-#include "IDefault.h"
+#include "IGameDefault.h"
 
 enum class EActorLayer
 {
@@ -15,7 +15,7 @@ enum class EActorLayer
 
 class Actor;
 
-class SceneBase : public IDefault
+class SceneBase : public IGameDefault
 {
 public:
 	DEFINE_SMART_PTR(SceneBase);
@@ -25,8 +25,9 @@ public:
 
 public:
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool Update() override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 	virtual void Cleanup() override;
 
 public:

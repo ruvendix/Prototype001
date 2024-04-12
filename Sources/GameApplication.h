@@ -6,10 +6,10 @@
 #pragma once
 #include "Defines.h"
 #include "Types.h"
-#include "IDefault.h"
+#include "IGameDefault.h"
 #include "Camera.h"
 
-class GameApplication : public IDefault
+class GameApplication : public IGameDefault
 {
 public:
 	DEFINE_SINGLETON(GameApplication);
@@ -21,8 +21,9 @@ public:
 	int32 Drive();
 
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool Update() override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 	virtual void Cleanup() override;
 
 	void RenderUi2d();

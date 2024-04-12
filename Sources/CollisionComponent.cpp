@@ -19,9 +19,9 @@ void CollisionComponent::Render()
 	m_spCollider->Render();
 }
 
-void CollisionComponent::PostUpdate()
+bool CollisionComponent::PostUpdate()
 {
-	m_spCollider->Update();
+	return (m_spCollider->PostUpdate());
 }
 
 bool CollisionComponent::TestIntersect(CollisionComponent::Ptr spTargetCollisionComponent)

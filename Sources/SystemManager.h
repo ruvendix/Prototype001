@@ -8,7 +8,7 @@
 #include "SystemBase.h"
 #include "SystemIdCounter.h"
 
-class SystemManager : public IDefault
+class SystemManager : public IGameDefault
 {
 public:
 	DEFINE_SINGLETON(SystemManager);
@@ -19,6 +19,7 @@ public:
 
 	virtual void Startup() override;
 	virtual bool Update()  override;
+	virtual bool PostUpdate() override;
 	virtual void Render()  override;
 	virtual void Cleanup() override;
 

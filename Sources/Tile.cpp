@@ -22,7 +22,11 @@ void Tile::Startup()
 
 bool Tile::Update()
 {
+	return true;
+}
 
+bool Tile::PostUpdate()
+{
 	return true;
 }
 

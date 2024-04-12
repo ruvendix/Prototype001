@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IDefault.h"
+#include "IGameDefault.h"
 #include "Sprite.h"
 
-class UiBase : public IDefault
+class UiBase : public IGameDefault
 {
 public:
 	DEFINE_SMART_PTR(UiBase);

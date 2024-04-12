@@ -20,6 +20,11 @@ bool ColliderBase::Update()
 	return true;
 }
 
+bool ColliderBase::PostUpdate()
+{
+	return true;
+}
+
 void ColliderBase::Render()
 {
 

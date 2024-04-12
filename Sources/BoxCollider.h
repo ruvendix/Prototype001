@@ -12,8 +12,8 @@ public:
 	virtual ~BoxCollider();
 
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 
 	virtual bool TestIntersect(ColliderBase::Ptr spTargetCollider) override;
 

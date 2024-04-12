@@ -24,8 +24,15 @@ bool SceneBase::Update()
 			assert(pActor != nullptr);
 			pActor->Update();
 		}
+	}
 
-		// 모든 액터의 업데이트가 끝난 후 처리
+	return true;
+}
+
+bool SceneBase::PostUpdate()
+{
+	for (auto actors : m_actors)
+	{
 		for (Actor* pActor : actors)
 		{
 			assert(pActor != nullptr);

@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Types.h"
-#include "IDefault.h"
+#include "IGameDefault.h"
 #include "Sprite.h"
 
 struct TileMapInfo;
 
-class Tile : public IDefault
+class Tile : public IGameDefault
 {
 public:
 	DEFINE_SMART_PTR(Tile);
@@ -16,8 +16,9 @@ public:
 	virtual ~Tile();
 
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool Update() override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 	virtual void Cleanup() override;
 
 	void SetTileSprite(Sprite::Ptr spTileSprite) { m_spSprite = spTileSprite; }

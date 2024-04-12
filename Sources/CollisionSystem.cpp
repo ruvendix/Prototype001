@@ -19,7 +19,7 @@ CollisionSystem::~CollisionSystem()
 
 }
 
-bool CollisionSystem::Update()
+bool CollisionSystem::PostUpdate()
 {
 	SceneBase::Ptr spScene = GET_SYSTEM(SceneSystem)->GetCurrentScene();
 	SceneBase::Actors& refActors = spScene->GetActors();
@@ -115,7 +115,11 @@ void CollisionSystem::Render()
 
 	for (RECT& intersectedRect : m_intersectedRects)
 	{
-		//::Rectangle(hBackbufferDc, intersectedRect.left, intersectedRect.top, intersectedRect.right, intersectedRect.bottom);
+		::Rectangle(hBackbufferDc,
+			intersectedRect.left - cameraOffsetPos.x,
+			intersectedRect.top - cameraOffsetPos.y,
+			intersectedRect.right - cameraOffsetPos.x,
+			intersectedRect.bottom - cameraOffsetPos.y);
 	}
 	
 	m_intersectedRects.clear();

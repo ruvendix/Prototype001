@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IDefault.h"
+#include "IGameDefault.h"
 #include "ComponentBase.h"
 #include "ComponentIdCounter.h"
 #include "ComponentDefines.h"
@@ -11,7 +11,7 @@ enum class EActorState
 	Deactivated,
 };
 
-class Actor : public IDefault
+class Actor : public IGameDefault
 {
 public:
 	DEFINE_SMART_PTR(Actor);
@@ -21,11 +21,10 @@ public:
 	virtual ~Actor();
 
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool Update() override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 	virtual void Cleanup() override;
-
-	virtual bool PostUpdate();
 
 public:
 	template <typename TComponent, typename TComponentId>

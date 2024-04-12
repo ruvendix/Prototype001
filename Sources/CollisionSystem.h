@@ -9,7 +9,7 @@ public:
 	CollisionSystem();
 	virtual ~CollisionSystem();
 
-	virtual bool Update() override;
+	virtual bool PostUpdate() override;
 	virtual void Render() override;
 
 	int32 AddIntersectedRect(const RECT& intersectedRect);

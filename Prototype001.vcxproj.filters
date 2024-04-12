@@ -130,7 +130,7 @@
     <ClInclude Include="Sources\Flipbook.h">
       <Filter>소스 파일\03. Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\IDefault.h">
+    <ClInclude Include="Sources\IGameDefault.h">
       <Filter>소스 파일\00. Common\01. Interface</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ComponentBase.h">

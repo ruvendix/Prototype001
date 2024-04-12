@@ -44,7 +44,8 @@ int32 GameApplication::Drive()
         }
         else
         {
-            if (Update() == false)
+            if ((Update() == false) ||
+                (PostUpdate() == false))
             {
                 break;
             }
@@ -117,6 +118,13 @@ bool GameApplication::Update()
     {
         bRet = false;
     }
+
+    return bRet;
+}
+
+bool GameApplication::PostUpdate()
+{
+    bool bRet = SystemManager::I()->PostUpdate();
 
     // 모든 업데이트가 반영된 후 카메라 위치 조정
     if (m_spCurrentCamera != nullptr)

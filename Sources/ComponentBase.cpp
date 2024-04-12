@@ -23,17 +23,17 @@ bool ComponentBase::Update()
 	return true;
 }
 
+bool ComponentBase::PostUpdate()
+{
+	return true;
+}
+
 void ComponentBase::Render()
 {
 
 }
 
 void ComponentBase::Cleanup()
-{
-
-}
-
-void ComponentBase::PostUpdate()
 {
 
 }

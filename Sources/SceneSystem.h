@@ -16,8 +16,9 @@ public:
 	virtual ~SceneSystem();
 
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool Update() override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 	virtual void Cleanup() override;
 
 	void ChangeScene(SceneBase::Ptr spNewScene);

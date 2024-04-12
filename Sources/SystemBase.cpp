@@ -26,6 +26,11 @@ bool SystemBase::Update()
 	return true;
 }
 
+bool SystemBase::PostUpdate()
+{
+	return true;
+}
+
 void SystemBase::Render()
 {
 

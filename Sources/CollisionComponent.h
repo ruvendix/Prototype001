@@ -1,7 +1,7 @@
 #pragma once
 
 #include "functional"
-#include "IDefault.h"
+#include "IGameDefault.h"
 #include "ComponentBase.h"
 #include "ColliderBase.h"
 #include "EnumBitFlag.h"
@@ -27,7 +27,7 @@ public:
 	virtual ~CollisionComponent();
 
 	virtual void Render() override;
-	virtual void PostUpdate() override;
+	virtual bool PostUpdate() override;
 
 	void AddCollisionResponse(ECollisionObjectType collisionObjectType, ECollisionResponseState collisionResponseState);
 	ECollisionResponseState TestCollisionResponseBit(ECollisionObjectType collisionObjectType) const;

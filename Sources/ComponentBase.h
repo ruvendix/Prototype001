@@ -1,10 +1,10 @@
 #pragma once
 
-#include "IDefault.h"
+#include "IGameDefault.h"
 
 class Actor;
 
-class ComponentBase : IDefault
+class ComponentBase : IGameDefault
 {
 public:
 	DEFINE_SMART_PTR(ComponentBase);
@@ -14,11 +14,10 @@ public:
 	virtual ~ComponentBase();
 
 	virtual void Startup() override;
-	virtual bool Update()  override;
-	virtual void Render()  override;
+	virtual bool Update() override;
+	virtual bool PostUpdate() override;
+	virtual void Render() override;
 	virtual void Cleanup() override;
-
-	virtual void PostUpdate();
 
 	Actor* GetOwner() const { return m_pOwner; }
 	void SetOwner(Actor* pOwner) { m_pOwner = pOwner; }

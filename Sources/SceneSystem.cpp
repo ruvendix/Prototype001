@@ -34,6 +34,16 @@ bool SceneSystem::Update()
 	return true;
 }
 
+bool SceneSystem::PostUpdate()
+{
+	if (m_spCurrentScene != nullptr)
+	{
+		m_spCurrentScene->PostUpdate();
+	}
+
+	return true;
+}
+
 void SceneSystem::Render()
 {
 	if (m_spCurrentScene != nullptr)

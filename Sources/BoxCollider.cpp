@@ -22,7 +22,7 @@ void BoxCollider::Startup()
 	UpdateBoxRect();
 }
 
-bool BoxCollider::Update()
+bool BoxCollider::PostUpdate()
 {
 	UpdateBoxRect();
 	return true;
@@ -88,73 +88,8 @@ void BoxCollider::UpdateBoxRect()
 
 bool BoxCollider::TestIntersectBox(BoxCollider::Ptr spTargetBoxCollider)
 {
-	const RECT& targetBoxRect = spTargetBoxCollider->GetBoxRect();
-	//if ((m_boxRect.left > targetBoxRect.right) ||
-	//	(m_boxRect.right < targetBoxRect.left) ||
-	//	(m_boxRect.top > targetBoxRect.bottom) ||
-	//	(m_boxRect.bottom < targetBoxRect.top))
-	//{
-	//	return false;
-	//}
-
 	RECT intersectedRect;
-
-	//// 경우에 따라서 겹쳐진 정도 구하기
-	//bool bRightToLeft = false;
-	//bool bLeftToRight = false;
-
-	//if ((targetBoxRect.left < m_boxRect.left) &&
-	//	(m_boxRect.left < targetBoxRect.right))
-	//{
-	//	bRightToLeft = true;
-
-	//	intersectedRect.left = m_boxRect.left;
-	//	intersectedRect.right = targetBoxRect.right;
-	//}
-
-	//if ((targetBoxRect.left < m_boxRect.right) &&
-	//	(m_boxRect.right < targetBoxRect.right))
-	//{
-	//	bLeftToRight = true;
-
-	//	intersectedRect.left = targetBoxRect.left;
-	//	intersectedRect.right = m_boxRect.right;
-	//}
-
-	//if ((bRightToLeft == true) &&
-	//	(bLeftToRight == true))
-	//{
-	//	intersectedRect.left = m_boxRect.left;
-	//	intersectedRect.right = m_boxRect.right;
-	//}
-	////////////////////////////////////////////////////
-	//bool bTopToBottom = false;
-	//bool bBottomToTop = false;
-
-	//if ((targetBoxRect.top < m_boxRect.top) &&
-	//	(m_boxRect.top < targetBoxRect.bottom))
-	//{
-	//	bTopToBottom = true;
-
-	//	intersectedRect.top = m_boxRect.top;
-	//	intersectedRect.bottom = targetBoxRect.bottom;
-	//}
-
-	//if ((targetBoxRect.top < m_boxRect.bottom) &&
-	//	(m_boxRect.bottom < targetBoxRect.bottom))
-	//{
-	//	bBottomToTop = true;
-
-	//	intersectedRect.top = targetBoxRect.top;
-	//	intersectedRect.bottom = m_boxRect.bottom;
-	//}
-
-	//if ((bTopToBottom == true) &&
-	//	(bBottomToTop == true))
-	//{
-	//	intersectedRect.top = m_boxRect.top;
-	//	intersectedRect.bottom = m_boxRect.bottom;
-	//}
+	const RECT& targetBoxRect = spTargetBoxCollider->GetBoxRect();
 
 	if (::IntersectRect(&intersectedRect, &m_boxRect, &targetBoxRect) == FALSE)
 	{

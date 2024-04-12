@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IDefault.h"
+#include "IGameDefault.h"
 #include "ComponentBase.h"
 
 class TransformComponent : public ComponentBase

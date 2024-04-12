@@ -167,7 +167,7 @@
     <ClInclude Include="Sources\FlipbookComponent.h" />
     <ClInclude Include="Sources\FrameSystem.h" />
     <ClInclude Include="Sources\GameApplication.h" />
-    <ClInclude Include="Sources\IDefault.h" />
+    <ClInclude Include="Sources\IGameDefault.h" />
     <ClInclude Include="Sources\InputEnums.h" />
     <ClInclude Include="Sources\InputSystem.h" />
     <ClInclude Include="Sources\MonsterActor.h" />
