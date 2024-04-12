@@ -19,13 +19,6 @@ CollisionSystem::~CollisionSystem()
 
 }
 
-void CollisionSystem::Startup()
-{
-	// 미리 정한 컬리전 반응 정보
-	m_globalCollisionResponseInfos.emplace_back("WorldStatic", ECollisionResponseState::Ignore);
-	m_globalCollisionResponseInfos.emplace_back("Pawn", ECollisionResponseState::Ignore); // 이게 캐릭터
-}
-
 bool CollisionSystem::Update()
 {
 	SceneBase::Ptr spScene = GET_SYSTEM(SceneSystem)->GetCurrentScene();
@@ -65,30 +58,12 @@ bool CollisionSystem::Update()
 			//Actor* pSecondActor = spSecondCollideComponent->GetOwner();
 
 			// Lhs가 Rhs와 컬리전 반응하도록 되어있는지?
-			const CollisionResponseInfo& toRhsCollisionResponseInfo = spLhsCollisionComponent->FindCollisionResponseInfo(spRhsCollisionComponent->GetObjectTypeTag());
-			const CollisionResponseInfo& toLhsCollisionResponseInfo = spRhsCollisionComponent->FindCollisionResponseInfo(spLhsCollisionComponent->GetObjectTypeTag());
+			ECollisionResponseState toRhsCollisionResponseState = spLhsCollisionComponent->TestCollisionResponseBit(spRhsCollisionComponent->GetCollisionObjectType());
+			ECollisionResponseState toLhsCollisionResponseState = spRhsCollisionComponent->TestCollisionResponseBit(spLhsCollisionComponent->GetCollisionObjectType());
 
-			// Lhs -> Rhs
-			bool bLhsToRhsCollisionResponse = false;
-			if ((toRhsCollisionResponseInfo.strObjectTypeTag != CollisionComponent::s_szNullObjectType) &&
-				(toRhsCollisionResponseInfo.collisionResponseState != ECollisionResponseState::Ignore))
-			{
-				// 여기까지 들어오면 Lhs는 Rhs에 대해 Block이거나 Overlap
-				bLhsToRhsCollisionResponse = true;
-			}
-
-			// Rhs -> Lhs
-			bool bRhsToLhsCollisionResponse = false;
-			if ((toLhsCollisionResponseInfo.strObjectTypeTag != CollisionComponent::s_szNullObjectType) &&
-				(toLhsCollisionResponseInfo.collisionResponseState != ECollisionResponseState::Ignore))
-			{
-				// 여기까지 들어오면 Rhs는 Lhs에 대해 Block이거나 Overlap
-				bRhsToLhsCollisionResponse = true;
-			}
-
-			// 양쪽 전부 컬리전 반응이 없으면 생략
-			if ((bLhsToRhsCollisionResponse == false) &&
-				(bRhsToLhsCollisionResponse == false))
+			// 쌍방 무시면 패스
+			if ((toRhsCollisionResponseState == ECollisionResponseState::Ignore) &&
+				(toLhsCollisionResponseState == ECollisionResponseState::Ignore))
 			{
 				continue;
 			}
@@ -100,21 +75,20 @@ bool CollisionSystem::Update()
 			}
 
 			// 여기까지 진행되면 충돌 및 겹침 확정
-
-			if (toRhsCollisionResponseInfo.collisionResponseState == ECollisionResponseState::Block)
+			if (toRhsCollisionResponseState == ECollisionResponseState::Block)
 			{
 				spLhsCollisionComponent->ProcessHitEvent(spRhsCollisionComponent);
 			}
-			else if (toRhsCollisionResponseInfo.collisionResponseState == ECollisionResponseState::Overlap)
+			else if (toRhsCollisionResponseState == ECollisionResponseState::Overlap)
 			{
 				spLhsCollisionComponent->ProcessOverlapEvent(spRhsCollisionComponent);
 			}
 
-			if (toLhsCollisionResponseInfo.collisionResponseState == ECollisionResponseState::Block)
+			if (toLhsCollisionResponseState == ECollisionResponseState::Block)
 			{
 				spRhsCollisionComponent->ProcessHitEvent(spLhsCollisionComponent);
 			}
-			else if (toLhsCollisionResponseInfo.collisionResponseState == ECollisionResponseState::Overlap)
+			else if (toLhsCollisionResponseState == ECollisionResponseState::Overlap)
 			{
 				spRhsCollisionComponent->ProcessOverlapEvent(spLhsCollisionComponent);
 			}
@@ -151,22 +125,6 @@ void CollisionSystem::Render()
 	::SelectObject(hBackbufferDc, hPrevPen);
 	::DeleteObject(hPen);
 #endif
-}
-
-CollisionResponseInfo CollisionSystem::CreateCollisionResponseInfo(const std::string& strObjectTypeTag)
-{
-	const auto& foundIter = std::find_if(m_globalCollisionResponseInfos.begin(), m_globalCollisionResponseInfos.end(),
-		[strObjectTypeTag] (CollisionResponseInfo& elem)
-		{
-			return (strObjectTypeTag == elem.strObjectTypeTag);
-		});
-
-	if (foundIter == m_globalCollisionResponseInfos.cend())
-	{
-		return CollisionComponent::s_nullCollisionResponseInfo;
-	}
-
-	return (*foundIter);
 }
 
 int32 CollisionSystem::AddIntersectedRect(const RECT& intersectedRect)

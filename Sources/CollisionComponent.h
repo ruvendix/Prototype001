@@ -22,9 +22,6 @@ public:
 	using CollisionEnableOption = EnumBitFlag<ECollisionEnableOption>;
 	using CollisionCallback = std::function<void(CollisionComponent::Ptr)>;
 
-	static const char* s_szNullObjectType;
-	static CollisionResponseInfo s_nullCollisionResponseInfo;
-
 public:
 	CollisionComponent();
 	virtual ~CollisionComponent();
@@ -32,7 +29,9 @@ public:
 	virtual void Render() override;
 	virtual void PostUpdate() override;
 
-	void AddCollisionResponseInfo(const std::string& strObjectTypeTag, ECollisionResponseState collisionResponseState);
+	void AddCollisionResponse(ECollisionObjectType collisionObjectType, ECollisionResponseState collisionResponseState);
+	ECollisionResponseState TestCollisionResponseBit(ECollisionObjectType collisionObjectType) const;
+
 	bool TestIntersect(CollisionComponent::Ptr spTargetCollisionComponent);
 
 	void ProcessHitEvent(CollisionComponent::Ptr spTargetCollisionComponent);
@@ -40,12 +39,10 @@ public:
 
 	void ApplyCollider(ColliderBase::Ptr spColider);
 
-	const CollisionResponseInfo& FindCollisionResponseInfo(const std::string& strObjectTypeTag);
-
 	ColliderBase::Ptr GetCollider() const { return m_spCollider; }
 
-	const std::string& GetObjectTypeTag() const { return m_strObjectTypeTag; }
-	void SetObjectTypeTag(const std::string strObjectTypeTag) { m_strObjectTypeTag = strObjectTypeTag; }
+	ECollisionObjectType GetCollisionObjectType() const { return m_collisionObjectType; }
+	void SetCollisionObjectType(ECollisionObjectType collisionObjectType) { m_collisionObjectType = collisionObjectType; }
 
 	CollisionEnableOption& GetCollsionEnableOption() { return m_collsionEnableOption; }
 
@@ -53,12 +50,12 @@ public:
 	void SetOverlapCallback(CollisionCallback overlapCallback) { m_overlapCallback = overlapCallback; }
 
 private:
-	std::string m_strObjectTypeTag;
+	ECollisionObjectType m_collisionObjectType = ECollisionObjectType::Count;
 	ColliderBase::Ptr m_spCollider = nullptr;
 	
 	CollisionCallback m_hitCallback; // Block
 	CollisionCallback m_overlapCallback; // Overlap
 
-	CollisionEnableOption m_collsionEnableOption;
-	std::vector<CollisionResponseInfo> m_collisionResponseInfos;
+	CollisionEnableOption m_collsionEnableOption; // 이건 컬리전 반응과 별개임
+	uint32 m_collisionResponseFlag = 0; // 컬리전 컴포넌트당 4바이트로 16개
 };

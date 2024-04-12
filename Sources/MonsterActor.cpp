@@ -35,8 +35,8 @@ void MonsterActor::Startup()
 #pragma region 컬리전 등록
 	CollisionComponent::Ptr spCollisionComponent = ADD_COMPONENT(this, CollisionComponent);
 	spCollisionComponent->ApplyCollider(spBoxCollider);
-	spCollisionComponent->SetObjectTypeTag("Pawn");
-	spCollisionComponent->AddCollisionResponseInfo("Pawn", ECollisionResponseState::Block);
+	spCollisionComponent->SetCollisionObjectType(ECollisionObjectType::Pawn);
+	spCollisionComponent->AddCollisionResponse(ECollisionObjectType::Pawn, ECollisionResponseState::Block);
 
 	CollisionComponent::CollisionEnableOption& refCollisionEnableOption = spCollisionComponent->GetCollsionEnableOption();
 	refCollisionEnableOption.AddBit(ECollisionEnableOption::Physics);

@@ -1,13 +1,8 @@
 #include "Pch.h"
 #include "CollisionComponent.h"
 
-#include "SystemManager.h"
-#include "CollisionSystem.h"
 #include "Actor.h"
 #include "TransformComponent.h"
-
-const char* CollisionComponent::s_szNullObjectType = "Null";
-CollisionResponseInfo CollisionComponent::s_nullCollisionResponseInfo(s_szNullObjectType, ECollisionResponseState::Ignore);
 
 CollisionComponent::CollisionComponent()
 {
@@ -27,19 +22,6 @@ void CollisionComponent::Render()
 void CollisionComponent::PostUpdate()
 {
 	m_spCollider->Update();
-}
-
-void CollisionComponent::AddCollisionResponseInfo(const std::string& strObjectTypeTag, ECollisionResponseState collisionResponseState)
-{
-	CollisionResponseInfo newCollisionResponseInfo = GET_SYSTEM(CollisionSystem)->CreateCollisionResponseInfo(strObjectTypeTag);
-	if (newCollisionResponseInfo.strObjectTypeTag == s_szNullObjectType)
-	{
-		return;
-	}
-
-	// 태그는 적용되었으니 상태만 설정
-	newCollisionResponseInfo.collisionResponseState = collisionResponseState;
-	m_collisionResponseInfos.emplace_back(newCollisionResponseInfo);
 }
 
 bool CollisionComponent::TestIntersect(CollisionComponent::Ptr spTargetCollisionComponent)
@@ -76,18 +58,29 @@ void CollisionComponent::ApplyCollider(ColliderBase::Ptr spColider)
 	m_spCollider->Startup();
 }
 
-const CollisionResponseInfo& CollisionComponent::FindCollisionResponseInfo(const std::string& strObjectTypeTag)
+void CollisionComponent::AddCollisionResponse(ECollisionObjectType collisionObjectType, ECollisionResponseState collisionResponseState)
 {
-	const auto& foundIter = std::find_if(m_collisionResponseInfos.begin(), m_collisionResponseInfos.end(),
-		[strObjectTypeTag](CollisionResponseInfo& elem)
-		{
-			return (strObjectTypeTag == elem.strObjectTypeTag);
-		});
+	uint32 leftShiftCount = ENUM_TO_NUM(collisionObjectType) * 2;
+	m_collisionResponseFlag |= (ENUM_TO_NUM(collisionResponseState) << leftShiftCount); // 왼쪽으로 시프트
+}
 
-	if (foundIter == m_collisionResponseInfos.cend())
+ECollisionResponseState CollisionComponent::TestCollisionResponseBit(ECollisionObjectType collisionObjectType) const
+{
+	uint32 leftShiftCount = (ENUM_TO_NUM(collisionObjectType) + 1) * 2;
+	uint32 rightShiftCount = ENUM_TO_NUM(collisionObjectType) * 2;
+
+	uint32 collisionResponseBit = 0;
+
+	// 변수가 시프트 연산될 때 설정한 바이트 수를 넘어가면 무시되는듯?
+	if (collisionObjectType != ECollisionObjectType::LastObjectType)
 	{
-		return s_nullCollisionResponseInfo;
+		collisionResponseBit = (0xFFFFFFFF << leftShiftCount); // 왼쪽으로 시프트
 	}
 
-	return (*foundIter);
+	collisionResponseBit = ~collisionResponseBit; // 비트 반전
+	collisionResponseBit = (m_collisionResponseFlag & collisionResponseBit); // 설정한 값과 And 연산
+	collisionResponseBit = (collisionResponseBit >> rightShiftCount); // 오른쪽으로 시프트
+
+	// collisionResponseBit는 00 01 10 이렇게 3개가 존재
+	return NUM_TO_ENUM(collisionResponseBit, ECollisionResponseState);
 }

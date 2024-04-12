@@ -47,4 +47,5 @@
 #endif
 
 #define DEFINE_SMART_PTR(Type) using Ptr = std::shared_ptr<Type>
-#define ENUM_TO_NUM(EnumValue) static_cast<uint32>(EnumValue)
+#define ENUM_TO_NUM(enumValue) static_cast<uint32>(enumValue)
+#define NUM_TO_ENUM(value, EnumType) static_cast<EnumType>(value)
