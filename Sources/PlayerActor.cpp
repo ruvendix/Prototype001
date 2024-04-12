@@ -50,52 +50,18 @@ void PlayerActor::Startup()
 	spCollisionComponent->SetHitCallback(collisionHitCallback);
 #pragma endregion
 
-	// 플립북 기본 데이터 설정
-	FlipbookData flipbookData;
-	flipbookData.excludeColorKey = RGB(128, 128, 128);
-	flipbookData.tileCount = int2d(24, 12);
-
 #pragma region 플레이어 플립북
 	// Idle
-	flipbookData.tileStartPos = Point2d(0, 0);
-	flipbookData.keyframeCount = 10;
-	flipbookData.keyframeInterval = 0.1f;
-
-	FlipbookPtr spPlayerLeftIdleFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerLeftIdle");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerLeft.bmp");
-	spPlayerLeftIdleFlipbook->CreateKeyframes("PlayerLeftIdle", flipbookData);
-
-	FlipbookPtr spPlayerRightIdleFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerRightIdle");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerRight.bmp");
-	spPlayerRightIdleFlipbook->CreateKeyframes("PlayerRightIdle", flipbookData);
-
-	FlipbookPtr spPlayerUpIdleFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerUpIdle");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerUp.bmp");
-	spPlayerUpIdleFlipbook->CreateKeyframes("PlayerUpIdle", flipbookData);
-
-	FlipbookPtr spPlayerDownIdleFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerDownIdle");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerDown.bmp");
-	spPlayerDownIdleFlipbook->CreateKeyframes("PlayerDownIdle", flipbookData);
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	FlipbookPtr spPlayerDownIdleFlipbook = GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerLeftIdle");
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerRightIdle");
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerUpIdle");
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerDownIdle");
+	
 	// Walk
-	flipbookData.tileStartPos = Point2d(0, 1);
-	flipbookData.keyframeInterval = 0.05f;
-
-	FlipbookPtr spPlayerLeftWalkFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerLeftWalk");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerLeft.bmp");
-	spPlayerLeftWalkFlipbook->CreateKeyframes("PlayerLeftWalk", flipbookData);
-
-	FlipbookPtr spPlayerRightWalkFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerRightWalk");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerRight.bmp");
-	spPlayerRightWalkFlipbook->CreateKeyframes("PlayerRightWalk", flipbookData);
-
-	FlipbookPtr spPlayerUpWalkFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerUpWalk");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerUp.bmp");
-	spPlayerUpWalkFlipbook->CreateKeyframes("PlayerUpWalk", flipbookData);
-
-	FlipbookPtr spPlayerDownWalkFlipbook = GET_SYSTEM(ResourceSystem)->CreateFlipbook("PlayerDownWalk");
-	flipbookData.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Player/PlayerDown.bmp");
-	spPlayerDownWalkFlipbook->CreateKeyframes("PlayerDownWalk", flipbookData);
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerLeftWalk");
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerRightWalk");
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerUpWalk");
+	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerDownWalk");
 #pragma endregion
 
 	FlipbookComponentPtr spFlipbookComponent = ADD_COMPONENT(this, FlipbookComponent);
@@ -113,10 +79,10 @@ bool PlayerActor::Update()
 
 	std::array<std::string, ENUM_TO_NUM(EPlayerDirection::Count)> idleStrings =
 	{
-		"PlayerLeftIdle",
-		"PlayerRightIdle",
-		"PlayerUpIdle",
-		"PlayerDownIdle"
+		"Texture/Player/PlayerLeftIdle",
+		"Texture/Player/PlayerRightIdle",
+		"Texture/Player/PlayerUpIdle",
+		"Texture/Player/PlayerDownIdle"
 	};
 
 	std::string strCurrentFlipbook = idleStrings[ENUM_TO_NUM(m_currentDir)];
@@ -130,25 +96,25 @@ bool PlayerActor::Update()
 	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Left))
 	{
 		deltaPos.x = static_cast<int32>(deltaMove * -1.0f);
-		strCurrentFlipbook = "PlayerLeftWalk";
+		strCurrentFlipbook = "Texture/Player/PlayerLeftWalk";
 		m_currentDir = EPlayerDirection::Left;
 	}
 	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Right))
 	{
 		deltaPos.x = static_cast<int32>(deltaMove);
-		strCurrentFlipbook = "PlayerRightWalk";
+		strCurrentFlipbook = "Texture/Player/PlayerRightWalk";
 		m_currentDir = EPlayerDirection::Right;
 	}
 	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Up))
 	{
 		deltaPos.y = static_cast<int32>(deltaMove * -1.0f);
-		strCurrentFlipbook = "PlayerUpWalk";
+		strCurrentFlipbook = "Texture/Player/PlayerUpWalk";
 		m_currentDir = EPlayerDirection::Up;
 	}
 	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Down))
 	{
 		deltaPos.y = static_cast<int32>(deltaMove);
-		strCurrentFlipbook = "PlayerDownWalk";
+		strCurrentFlipbook = "Texture/Player/PlayerDownWalk";
 		m_currentDir = EPlayerDirection::Down;
 	}
 

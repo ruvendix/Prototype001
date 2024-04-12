@@ -167,6 +167,7 @@
     <ClInclude Include="Sources\FlipbookComponent.h" />
     <ClInclude Include="Sources\FrameSystem.h" />
     <ClInclude Include="Sources\GameApplication.h" />
+    <ClInclude Include="Sources\GlobalHelper.h" />
     <ClInclude Include="Sources\IGameDefault.h" />
     <ClInclude Include="Sources\InputEnums.h" />
     <ClInclude Include="Sources\InputSystem.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="Sources\FlipbookComponent.cpp" />
     <ClCompile Include="Sources\FrameSystem.cpp" />
     <ClCompile Include="Sources\GameApplication.cpp" />
+    <ClCompile Include="Sources\GlobalHelper.cpp" />
     <ClCompile Include="Sources\InputSystem.cpp" />
     <ClCompile Include="Sources\Main.cpp" />
     <ClCompile Include="Sources\MonsterActor.cpp" />

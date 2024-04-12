@@ -1,8 +1,6 @@
 #include "Pch.h"
 #include "ResourceSystem.h"
 
-#include "SystemManager.h"
-#include "PathSystem.h"
 #include "Texture.h"
 #include "Sprite.h"
 #include "Flipbook.h"
@@ -19,27 +17,30 @@ ResourceSystem::~ResourceSystem()
 
 void ResourceSystem::Cleanup()
 {
+	//for (auto& iter : m_sprites)
+	//{
+	//	iter.second->SaveResource();
+	//}
 
+	//for (auto& iter : m_Flipbooks)
+	//{
+	//	iter.second->SaveResource();
+	//}
 }
 
 TexturePtr ResourceSystem::LoadTexture(const std::string& strTexPath)
 {
-	TexturePtr spTex = FindTexture(strTexPath);
-	if (spTex != nullptr)
+	TexturePtr spFoundTex = FindTexture(strTexPath);
+	if (spFoundTex != nullptr)
 	{
-		return spTex;
+		return spFoundTex;
 	}
 
-	// 키는 파일 경로
-	std::filesystem::path texPath = GET_SYSTEM(PathSystem)->GetAssetsDirectory();
-	texPath += strTexPath;
+	TexturePtr spNewTex = std::make_shared<Texture>(strTexPath);
+	spNewTex->LoadResource();
+	m_texes.emplace(strTexPath, spNewTex);
 
-	// 텍스처 객체 생성 및 로드
-	spTex = std::make_shared<Texture>();
-	spTex->LoadResource(texPath.generic_string());
-
-	m_texes.emplace(strTexPath, spTex);
-	return spTex;
+	return spNewTex;
 }
 
 const TexturePtr ResourceSystem::FindTexture(const std::string& strTexPath) const
@@ -53,17 +54,17 @@ const TexturePtr ResourceSystem::FindTexture(const std::string& strTexPath) cons
 	return (foundIter->second);
 }
 
-SpritePtr ResourceSystem::CreateSprite(const std::string& strSpriteKey)
+SpritePtr ResourceSystem::CreateSprite(const std::string& strSpritePath)
 {
 	// 스프라이트 객체 생성 및 로드
-	SpritePtr spNewSprite = std::make_shared<Sprite>();
-	m_sprites.emplace(strSpriteKey, spNewSprite);
+	SpritePtr spNewSprite = std::make_shared<Sprite>(strSpritePath);
+	m_sprites.emplace(strSpritePath, spNewSprite);
 	return spNewSprite;
 }
 
-const SpritePtr ResourceSystem::FindSprite(const std::string& strSpriteKey) const
+const SpritePtr ResourceSystem::FindSprite(const std::string& strSpritePath) const
 {
-	auto foundIter = m_sprites.find(strSpriteKey);
+	auto foundIter = m_sprites.find(strSpritePath);
 	if (foundIter == m_sprites.cend())
 	{
 		return nullptr;
@@ -72,29 +73,49 @@ const SpritePtr ResourceSystem::FindSprite(const std::string& strSpriteKey) cons
 	return (foundIter->second);
 }
 
-FlipbookPtr ResourceSystem::CreateFlipbook(const std::string& strFlipbookKey)
+SpritePtr ResourceSystem::LoadSprite(const std::string& strSpritePath)
+{
+	SpritePtr spFoundSprite = FindSprite(strSpritePath);
+	if (spFoundSprite != nullptr)
+	{
+		return spFoundSprite;
+	}
+
+	SpritePtr spNewSprite = CreateSprite(strSpritePath);
+	spNewSprite->LoadResource();
+
+	return spNewSprite;
+}
+
+FlipbookPtr ResourceSystem::CreateFlipbook(const std::string& strFlipbookPath)
 {
 	// 플립북 객체 생성 및 로드
-	FlipbookPtr spNewFlipbook = std::make_shared<Flipbook>();
-	m_Flipbooks.emplace(strFlipbookKey, spNewFlipbook);
+	FlipbookPtr spNewFlipbook = std::make_shared<Flipbook>(strFlipbookPath);
+	m_Flipbooks.emplace(strFlipbookPath, spNewFlipbook);
 	return spNewFlipbook;
 }
 
-FlipbookPtr ResourceSystem::CreateFlipbook(const std::string& strFlipbookKey, SpritePtr spSprite)
+const FlipbookPtr ResourceSystem::FindFlipbook(const std::string& strFlipbookPath) const
 {
-	// 플립북 객체 생성 및 로드
-	FlipbookPtr spNewFlipbook = std::make_shared<Flipbook>(spSprite);
-	m_Flipbooks.emplace(strFlipbookKey, spNewFlipbook);
-	return spNewFlipbook;
-}
-
-const FlipbookPtr ResourceSystem::FindFlipbook(const std::string& strFlipbookKey) const
-{
-	auto foundIter = m_Flipbooks.find(strFlipbookKey);
+	auto foundIter = m_Flipbooks.find(strFlipbookPath);
 	if (foundIter == m_Flipbooks.cend())
 	{
 		return nullptr;
 	}
 
 	return (foundIter->second);
+}
+
+FlipbookPtr ResourceSystem::LoadFlipbook(const std::string& strFlipbookPath)
+{
+	FlipbookPtr spFoundFlipbook = FindFlipbook(strFlipbookPath);
+	if (spFoundFlipbook != nullptr)
+	{
+		return spFoundFlipbook;
+	}
+
+	FlipbookPtr spNewFlipbook = CreateFlipbook(strFlipbookPath);
+	spNewFlipbook->LoadResource();
+
+	return spNewFlipbook;
 }

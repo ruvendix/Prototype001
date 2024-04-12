@@ -60,6 +60,10 @@ void SystemManager::Cleanup()
 	for (SystemBase*& pRefSystem : m_systems)
 	{
 		pRefSystem->Cleanup();
+	}
+
+	for (SystemBase*& pRefSystem : m_systems)
+	{
 		SAFE_DELETE(pRefSystem);
 	}
 }

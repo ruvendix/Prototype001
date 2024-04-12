@@ -8,20 +8,16 @@
 #include "GameApplication.h"
 #include "SystemManager.h"
 #include "ResourceSystem.h"
+#include "PathSystem.h"
 #include "Texture.h"
 
-Flipbook::Flipbook()
+Flipbook::Flipbook(const std::string& strResPath) :
+	ResourceBase(strResPath)
 {
-
-}
-
-Flipbook::Flipbook(SpritePtr spSprite)
-{
-	assert(spSprite != nullptr);
-	m_spSprite = spSprite;
-
-	uint32 spriteInfoCount = m_spSprite->GetSpriteInfoCount();
-	m_timeTable.resize(spriteInfoCount);
+	if (strResPath.find(".flipbook") == std::string::npos)
+	{
+		AddFileExtension(".flipbook");
+	}
 }
 
 Flipbook::~Flipbook()
@@ -29,39 +25,73 @@ Flipbook::~Flipbook()
 
 }
 
-void Flipbook::LoadResource(const std::string& strPath)
+void Flipbook::CreateTimeTable()
 {
-	UNREFERENCED_PARAMETER(strPath);
+	uint32 keyframeCount = m_spSprite->GetSpriteInfoCount();
+	m_timeTable.resize(keyframeCount);
+
+	for (uint32 i = 0; i < keyframeCount; ++i)
+	{
+		AddKeyframeTime(i, m_keyframeIntervals[i]);
+	}
 }
 
-void Flipbook::CreateKeyframes(const std::string& strSpriteKey, const FlipbookData& flipbookData)
+void Flipbook::CreateKeyframes(const std::string strSprite, float keyframeInterval)
 {
-	const Size& texSize = flipbookData.spTex->GetSize();
+	m_spSprite = GET_SYSTEM(ResourceSystem)->LoadSprite(strSprite);
 
-	// 타일 한칸의 크기를 구함
-	Size tileSize;
-	tileSize.width = texSize.width / flipbookData.tileCount.x;
-	tileSize.height = texSize.height / flipbookData.tileCount.y;
-
-	m_spSprite = GET_SYSTEM(ResourceSystem)->FindSprite(strSpriteKey);
-	if (m_spSprite == nullptr)
+	m_keyframeIntervals.resize(m_spSprite->GetSpriteInfoCount());
+	for (uint32 i = 0; i < m_spSprite->GetSpriteInfoCount(); ++i)
 	{
-		m_spSprite = GET_SYSTEM(ResourceSystem)->CreateSprite(strSpriteKey);
+		m_keyframeIntervals[i] = keyframeInterval;
 	}
 
-	m_timeTable.resize(flipbookData.keyframeCount);
-	for (uint32 i = 0; i < flipbookData.keyframeCount; ++i)
-	{
-		// 키프레임 만들기
-		SpriteInfo keyframeInfo;
-		keyframeInfo.pos = Point2d((i + flipbookData.tileStartPos.x) * tileSize.width, flipbookData.tileStartPos.y * tileSize.height);
-		keyframeInfo.size = tileSize;
-		keyframeInfo.spTex = flipbookData.spTex;
-		keyframeInfo.excludeColor = flipbookData.excludeColorKey;
-		m_spSprite->AddSpriteInfo(keyframeInfo);
+	CreateTimeTable();
+}
 
-		AddKeyframeTime(i, flipbookData.keyframeInterval);
+void Flipbook::SaveResource()
+{
+	std::string strFlipbookFullPath = GET_SYSTEM(PathSystem)->GetAssetsDirectory();
+	strFlipbookFullPath += GetResourcePath();
+
+	// 플립북 파일 열기
+	FILE* pFlipbookFile = nullptr;
+	fopen_s(&pFlipbookFile, strFlipbookFullPath.c_str(), "wb");
+	if ((pFlipbookFile == nullptr) ||
+		(ferror(pFlipbookFile) != 0))
+	{
+		return;
 	}
+
+	global::SaveStringToFile(m_spSprite->GetResourcePath(), pFlipbookFile);
+	fwrite(m_keyframeIntervals.data(), sizeof(float), m_keyframeIntervals.size(), pFlipbookFile);
+
+	fclose(pFlipbookFile);
+}
+
+void Flipbook::LoadResource()
+{
+	std::string strFlipbookFullPath = GET_SYSTEM(PathSystem)->GetAssetsDirectory();
+	strFlipbookFullPath += GetResourcePath();
+
+	// 플립북 파일 열기
+	FILE* pFlipbookFile = nullptr;
+	fopen_s(&pFlipbookFile, strFlipbookFullPath.c_str(), "rb");
+	if ((pFlipbookFile == nullptr) ||
+		(ferror(pFlipbookFile) != 0))
+	{
+		return;
+	}
+
+	std::string strSpritePath = global::LoadStringFromFile(pFlipbookFile);
+	m_spSprite = GET_SYSTEM(ResourceSystem)->LoadSprite(strSpritePath);
+
+	m_keyframeIntervals.resize(m_spSprite->GetSpriteInfoCount());
+	fread(m_keyframeIntervals.data(), sizeof(float), m_keyframeIntervals.size(), pFlipbookFile);
+
+	fclose(pFlipbookFile);
+
+	CreateTimeTable();
 }
 
 void Flipbook::AddKeyframeTime(uint32 keyFrameIdx, float keepTime)

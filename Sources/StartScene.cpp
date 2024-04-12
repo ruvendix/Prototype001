@@ -32,7 +32,7 @@ void StartScene::Startup()
 	//spUiTestButton->SetSize(Size(200, 200));
 
 	//// 버튼 스프라이트
-	//TexturePtr spUiButtonTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/UI/Start.bmp");
+	//TexturePtr spUiButtonTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Texture/UI/Start.bmp");
 	//SpritePtr spUiButtonSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("UiButton");
 
 	//SpriteInfo uiButtonSpriteInfo[2];

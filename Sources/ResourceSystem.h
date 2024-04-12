@@ -13,12 +13,13 @@ public:
 	TexturePtr LoadTexture(const std::string& strTexPath);
 	const TexturePtr FindTexture(const std::string& strTexPath) const;
 
-	SpritePtr CreateSprite(const std::string& strSpriteKey);
-	const SpritePtr FindSprite(const std::string& strSpriteKey) const;
+	SpritePtr CreateSprite(const std::string& strSpritePath);
+	const SpritePtr FindSprite(const std::string& strSpritePath) const;
+	SpritePtr LoadSprite(const std::string& strSpritePath);
 
-	FlipbookPtr CreateFlipbook(const std::string& strFlipbookKey);
-	FlipbookPtr CreateFlipbook(const std::string& strFlipbookKey, SpritePtr spSprite); // 외부에서 스프라이트를 세팅한 경우
-	const FlipbookPtr FindFlipbook(const std::string& strFlipbookKey) const;
+	FlipbookPtr CreateFlipbook(const std::string& strFlipbookPath);
+	const FlipbookPtr FindFlipbook(const std::string& strFlipbookPath) const;
+	FlipbookPtr LoadFlipbook(const std::string& strFlipbookPath);
 
 private:
 	std::unordered_map<std::string, TexturePtr>  m_texes;

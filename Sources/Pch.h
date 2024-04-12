@@ -33,3 +33,4 @@ WinSDKVer.h를 포함하고 _WIN32_WINNT를 지원하려는 플랫폼으로 설�
 #include "Types.h"
 #include "Defines.h"
 #include "SharedPointers.h"
+#include "GlobalHelper.h"

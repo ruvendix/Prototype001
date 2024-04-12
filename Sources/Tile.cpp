@@ -51,8 +51,8 @@ void Tile::Render()
 		tileSize.width,
 		tileSize.height,
 		pSpriteInfo->spTex->GetDc(),
-		pSpriteInfo->pos.x,
-		pSpriteInfo->pos.y,
+		pSpriteInfo->startPos.x,
+		pSpriteInfo->startPos.y,
 		pSpriteInfo->size.width,
 		pSpriteInfo->size.height,
 		pSpriteInfo->excludeColor

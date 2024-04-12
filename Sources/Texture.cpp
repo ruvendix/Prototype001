@@ -2,10 +2,8 @@
 #include "Texture.h"
 
 #include "GameApplication.h"
-
-Texture::Texture()
-{
-}
+#include "SystemManager.h"
+#include "PathSystem.h"
 
 Texture::~Texture()
 {
@@ -13,10 +11,18 @@ Texture::~Texture()
 	::ReleaseDC(nullptr, m_hDc);
 }
 
-void Texture::LoadResource(const std::string& strPath)
+void Texture::SaveResource()
 {
+
+}
+
+void Texture::LoadResource()
+{
+	std::string strTexPath = GET_SYSTEM(PathSystem)->GetAssetsDirectory();
+	strTexPath += GetResourcePath();
+
 	m_hDc = GameApplication::I()->CreateCompatibleDc();
-	m_hBitMap = static_cast<HBITMAP>(::LoadImage(nullptr, strPath.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION));
+	m_hBitMap = static_cast<HBITMAP>(::LoadImage(nullptr, strTexPath.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION));
 	
 	HBITMAP prevBitMap = static_cast<HBITMAP>(::SelectObject(m_hDc, m_hBitMap));
 	::DeleteObject(prevBitMap);

@@ -72,8 +72,8 @@ void FlipbookComponent::Render()
 		size.width,
 		size.height,
 		spKeyframeTex->GetDc(),
-		m_pCurrentKeyframe->pos.x,
-		m_pCurrentKeyframe->pos.y,
+		m_pCurrentKeyframe->startPos.x,
+		m_pCurrentKeyframe->startPos.y,
 		m_pCurrentKeyframe->size.width,
 		m_pCurrentKeyframe->size.height,
 		m_pCurrentKeyframe->excludeColor

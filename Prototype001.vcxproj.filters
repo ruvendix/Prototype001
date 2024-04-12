@@ -211,6 +211,9 @@
     <ClInclude Include="Sources\Sprite.h">
       <Filter>소스 파일\03. Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\GlobalHelper.h">
+      <Filter>소스 파일\00. Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Main.cpp">
@@ -320,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="Sources\Sprite.cpp">
       <Filter>소스 파일\03. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GlobalHelper.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

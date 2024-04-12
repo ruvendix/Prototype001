@@ -5,7 +5,7 @@
 class ResourceBase : IGameDefault
 {
 public:
-	ResourceBase();
+	ResourceBase(const std::string& strResPath);
 	virtual ~ResourceBase();
 
 	virtual void Startup() override;
@@ -14,5 +14,13 @@ public:
 	virtual void Render() override;
 	virtual void Cleanup() override;
 
-	virtual void LoadResource(const std::string& strPath) = 0;
+	virtual void SaveResource() = 0;
+	virtual void LoadResource() = 0;
+
+	void AddFileExtension(const std::string strFileExt);
+
+	const std::string& GetResourcePath() const { return m_strResPath; }
+
+private:
+	std::string m_strResPath;
 };

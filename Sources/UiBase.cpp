@@ -38,8 +38,8 @@ void UiBase::Render()
 		m_size.width,
 		m_size.height,
 		pCurrentUiSpriteInfo->spTex->GetDc(),
-		pCurrentUiSpriteInfo->pos.x,
-		pCurrentUiSpriteInfo->pos.y,
+		pCurrentUiSpriteInfo->startPos.x,
+		pCurrentUiSpriteInfo->startPos.y,
 		pCurrentUiSpriteInfo->size.width,
 		pCurrentUiSpriteInfo->size.height,
 		pCurrentUiSpriteInfo->excludeColor

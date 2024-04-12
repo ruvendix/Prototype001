@@ -4,7 +4,7 @@
 
 struct SpriteInfo
 {
-	Point2d pos;
+	Point2d startPos;
 	Size size;
 	TexturePtr spTex = nullptr;
 	uint32 excludeColor = 0;
@@ -13,11 +13,11 @@ struct SpriteInfo
 class Sprite : public ResourceBase
 {
 public:
-	Sprite();
+	Sprite(const std::string& strResPath);
 	virtual ~Sprite();
 
-	// 스프라이트 정보를 파일에서 읽는 경우
-	virtual void LoadResource(const std::string& strPath) override;
+	virtual void SaveResource() override;
+	virtual void LoadResource() override;
 
 	void AddSpriteInfo(const SpriteInfo& spriteInfo);
 
@@ -26,4 +26,5 @@ public:
 
 private:
 	std::vector<SpriteInfo*> m_spriteInfos;
+	std::vector<std::string> m_texPathTable;
 };

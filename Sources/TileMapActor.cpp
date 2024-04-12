@@ -18,7 +18,7 @@ void TileMapActor::Startup()
 
 #pragma region 통짜맵 (테스트용으로 넣어보고 굳이 필요한지는 판단함)
 	TextureComponentPtr spTexComponent = ADD_COMPONENT(this, TextureComponent);
-	TexturePtr spWorldMapTex = spTexComponent->LoadTexture("Sprite/Map/Stage01.bmp");
+	TexturePtr spWorldMapTex = spTexComponent->LoadTexture("Texture/Map/Stage01.bmp");
 	GameApplication::I()->SetWorldSize(spWorldMapTex->GetSize());
 
 	// 렌더링할 크기
@@ -31,35 +31,49 @@ void TileMapActor::Startup()
 #pragma endregion
 
 #pragma region 타일
-	// 타일로 사용할 텍스처 로딩
-	TexturePtr spTileTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Sprite/Map/Tile.bmp");
+	SpritePtr spTileSprite = nullptr;
 
-	// 타일 하나의 크기
-	Size tileSize;
-	tileSize.width  = spTileTex->GetSize().width / 4;
-	tileSize.height = spTileTex->GetSize().height;
-	m_tileMapInfo.tileSize = tileSize;
-
-	// 타일은 스프라이트로 구성
-	SpritePtr spTileSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("TileSprite");
-
-	// 스프라이트 정보
-	for (uint32 i = 0; i < 4; ++i)
+	if (true)
 	{
-		SpriteInfo tileSpriteInfo;
-		tileSpriteInfo.spTex = spTileTex;
-		tileSpriteInfo.excludeColor = RGB(128, 128, 128);
-		tileSpriteInfo.pos  = Point2d(tileSize.width * i, 0);
-		tileSpriteInfo.size = tileSize;
-		spTileSprite->AddSpriteInfo(tileSpriteInfo);
+		// 스프라이트 파일에서 로딩
+		spTileSprite = GET_SYSTEM(ResourceSystem)->LoadSprite("Texture/Map/Tile");
+
+		// 타일 정보는 타일 스프라이트의 첫번째로 때움
+		const SpriteInfo* pFirstSpriteInfo = spTileSprite->GetSpriteInfo(0);
+		m_tileMapInfo.tileSize = pFirstSpriteInfo->size;
+	}
+	else
+	{
+		// 타일로 사용할 텍스처 로딩
+		TexturePtr spTileTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Texture/Map/Tile.bmp");
+		
+		// 타일 하나의 크기
+		Size tileSize;
+		tileSize.width = spTileTex->GetSize().width / 4;
+		tileSize.height = spTileTex->GetSize().height;
+		m_tileMapInfo.tileSize = tileSize;
+
+		// 타일은 스프라이트로 구성
+		spTileSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("Texture/Map/Tile");
+
+		// 스프라이트 정보
+		for (uint32 i = 0; i < 4; ++i)
+		{
+			SpriteInfo tileSpriteInfo;
+			tileSpriteInfo.spTex = spTileTex;
+			tileSpriteInfo.excludeColor = RGB(128, 128, 128);
+			tileSpriteInfo.startPos  = Point2d(tileSize.width * i, 0);
+			tileSpriteInfo.size = tileSize;
+			spTileSprite->AddSpriteInfo(tileSpriteInfo);
+		}
 	}
 #pragma endregion
 
 #pragma region 타일맵 구성
 	// 타일 개수 구하기
 	uint2d totalTileCount;
-	totalTileCount.x = (spWorldMapTex->GetSize().width / tileSize.width);
-	totalTileCount.y = (spWorldMapTex->GetSize().height / tileSize.height);
+	totalTileCount.x = (spWorldMapTex->GetSize().width / m_tileMapInfo.tileSize.width);
+	totalTileCount.y = (spWorldMapTex->GetSize().height / m_tileMapInfo.tileSize.height);
 	m_tileMapInfo.totalTileCount = totalTileCount;
 	
 	m_tileMap.resize(totalTileCount.y);
@@ -73,8 +87,8 @@ void TileMapActor::Startup()
 			spTile->SetTileSprite(spTileSprite);
 
 			Point2d tilePos;
-			tilePos.x = x * tileSize.width;
-			tilePos.y = y * tileSize.height;
+			tilePos.x = x * m_tileMapInfo.tileSize.width;
+			tilePos.y = y * m_tileMapInfo.tileSize.height;
 
 			spTile->SetPosition(tilePos);
 			m_tileMap[y][x] = spTile;
