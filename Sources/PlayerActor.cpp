@@ -16,6 +16,7 @@
 #include "BoxCollider.h"
 #include "Flipbook.h"
 #include "Camera.h"
+#include "PlayerState.h"
 
 PlayerActor::~PlayerActor()
 {
@@ -62,67 +63,29 @@ void PlayerActor::Startup()
 	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerRightWalk");
 	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerUpWalk");
 	GET_SYSTEM(ResourceSystem)->LoadFlipbook("Texture/Player/PlayerDownWalk");
-#pragma endregion
 
 	FlipbookComponentPtr spFlipbookComponent = ADD_COMPONENT(this, FlipbookComponent);
 	spFlipbookComponent->SetFlipbook(spPlayerDownIdleFlipbook);
 	spFlipbookComponent->SetLoop(true);
+#pragma endregion
 
 	// 플레이어의 카메라가 현재 카메라
 	CameraComponentPtr spCameraComponent = ADD_COMPONENT(this, CameraComponent);
 	GameApplication::I()->SetCurrentCamera(spCameraComponent->GetCamera());
+
+#pragma region 플레이어 상태
+	m_playerStates.resize(PlayerStateEndId::s_id);
+	m_playerStates[PlayerIdleStateId::s_id] = std::make_shared<PlayerIdleState>(this);
+	m_playerStates[PlayerWalkStateId::s_id] = std::make_shared<PlayerWalkState>(this);
+#pragma endregion
 }
 
 bool PlayerActor::Update()
 {
 	Super::Update();
 
-	std::array<std::string, ENUM_TO_NUM(EPlayerDirection::Count)> idleStrings =
-	{
-		"Texture/Player/PlayerLeftIdle",
-		"Texture/Player/PlayerRightIdle",
-		"Texture/Player/PlayerUpIdle",
-		"Texture/Player/PlayerDownIdle"
-	};
-
-	std::string strCurrentFlipbook = idleStrings[ENUM_TO_NUM(m_currentDir)];
-	FlipbookComponentPtr spFlipbookComponent = GET_COMPONENT(this, FlipbookComponent);
-
-	// 프레임당 이동량으로 계산
-	float deltaSeconds = GET_SYSTEM(FrameSystem)->GetDeltaSeconds();
-	float deltaMove = m_speed * deltaSeconds;
-
-	Point2d deltaPos;
-	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Left))
-	{
-		deltaPos.x = static_cast<int32>(deltaMove * -1.0f);
-		strCurrentFlipbook = "Texture/Player/PlayerLeftWalk";
-		m_currentDir = EPlayerDirection::Left;
-	}
-	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Right))
-	{
-		deltaPos.x = static_cast<int32>(deltaMove);
-		strCurrentFlipbook = "Texture/Player/PlayerRightWalk";
-		m_currentDir = EPlayerDirection::Right;
-	}
-	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Up))
-	{
-		deltaPos.y = static_cast<int32>(deltaMove * -1.0f);
-		strCurrentFlipbook = "Texture/Player/PlayerUpWalk";
-		m_currentDir = EPlayerDirection::Up;
-	}
-	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Down))
-	{
-		deltaPos.y = static_cast<int32>(deltaMove);
-		strCurrentFlipbook = "Texture/Player/PlayerDownWalk";
-		m_currentDir = EPlayerDirection::Down;
-	}
-
-	TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
-	spTransformComponent->AddPosition(deltaPos);
-
-	FlipbookPtr spPlayerFlipbook = GET_SYSTEM(ResourceSystem)->FindFlipbook(strCurrentFlipbook.c_str());
-	spFlipbookComponent->SetFlipbook(spPlayerFlipbook);
+	UpdateInput();
+	m_playerStates[m_currentStateIdx]->Update();
 
 	return true;
 }
@@ -133,6 +96,45 @@ void PlayerActor::Cleanup()
 
 	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	spCamera->SetTarget(nullptr);
+}
+
+void PlayerActor::UpdateInput()
+{
+	// 항상 Idle 상태로 시작
+	m_currentStateIdx = PlayerIdleStateId::s_id;
+
+	// 프레임당 이동량으로 계산
+	float deltaSeconds = GET_SYSTEM(FrameSystem)->GetDeltaSeconds();
+	float deltaMove = m_speed * deltaSeconds;
+
+	Point2d deltaPos;
+	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Left))
+	{
+		deltaPos.x = static_cast<int32>(deltaMove * -1.0f);
+		m_currentDir = EPlayerDirection::Left;
+		m_currentStateIdx = PlayerWalkStateId::s_id;
+	}
+	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Right))
+	{
+		deltaPos.x = static_cast<int32>(deltaMove);
+		m_currentDir = EPlayerDirection::Right;
+		m_currentStateIdx = PlayerWalkStateId::s_id;
+	}
+	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Up))
+	{
+		deltaPos.y = static_cast<int32>(deltaMove * -1.0f);
+		m_currentDir = EPlayerDirection::Up;
+		m_currentStateIdx = PlayerWalkStateId::s_id;
+	}
+	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Down))
+	{
+		deltaPos.y = static_cast<int32>(deltaMove);
+		m_currentDir = EPlayerDirection::Down;
+		m_currentStateIdx = PlayerWalkStateId::s_id;
+	}
+
+	TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
+	spTransformComponent->AddPosition(deltaPos);
 }
 
 void PlayerActor::OnCollisionHit(CollisionComponentPtr spTargetCollisionComponent)

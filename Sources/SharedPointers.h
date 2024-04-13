@@ -16,6 +16,8 @@ DEFINE_SMART_PTR(TileMapActor);
 DEFINE_SMART_PTR(PlayerActor);
 DEFINE_SMART_PTR(MonsterActor);
 
+DEFINE_SMART_PTR(PlayerStateBase);
+
 DEFINE_SMART_PTR(ColliderBase);
 DEFINE_SMART_PTR(BoxCollider);
 

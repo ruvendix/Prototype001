@@ -68,6 +68,9 @@
     <Filter Include="소스 파일\09. Tile">
       <UniqueIdentifier>{beac2976-0319-496a-ae50-822dfe773bcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\04. Actor\PlayerActor">
+      <UniqueIdentifier>{6e93026e-44ee-491a-b0f9-5228e81b7f32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Pch.h">
@@ -160,9 +163,6 @@
     <ClInclude Include="Sources\Actor.h">
       <Filter>소스 파일\04. Actor\00. BaseActor</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\PlayerActor.h">
-      <Filter>소스 파일\04. Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Camera.h">
       <Filter>소스 파일\06. Camera</Filter>
     </ClInclude>
@@ -213,6 +213,12 @@
     </ClInclude>
     <ClInclude Include="Sources\GlobalHelper.h">
       <Filter>소스 파일\00. Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlayerActor.h">
+      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlayerState.h">
+      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,9 +288,6 @@
     <ClCompile Include="Sources\PawnActor.cpp">
       <Filter>소스 파일\04. Actor\00. BaseActor</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\PlayerActor.cpp">
-      <Filter>소스 파일\04. Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Camera.cpp">
       <Filter>소스 파일\06. Camera</Filter>
     </ClCompile>
@@ -326,6 +329,12 @@
     </ClCompile>
     <ClCompile Include="Sources\GlobalHelper.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\PlayerActor.cpp">
+      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\PlayerState.cpp">
+      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

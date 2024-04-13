@@ -175,6 +175,7 @@
     <ClInclude Include="Sources\PathSystem.h" />
     <ClInclude Include="Sources\Pch.h" />
     <ClInclude Include="Sources\PlayerActor.h" />
+    <ClInclude Include="Sources\PlayerState.h" />
     <ClInclude Include="Sources\ResourceBase.h" />
     <ClInclude Include="Sources\ResourceSystem.h" />
     <ClInclude Include="Sources\SceneBase.h" />
@@ -221,6 +222,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Sources\PlayerActor.cpp" />
+    <ClCompile Include="Sources\PlayerState.cpp" />
     <ClCompile Include="Sources\ResourceBase.cpp" />
     <ClCompile Include="Sources\ResourceSystem.cpp" />
     <ClCompile Include="Sources\SceneBase.cpp" />
