@@ -74,6 +74,9 @@
     <Filter Include="소스 파일\04. Actor\01. PlayerActor">
       <UniqueIdentifier>{6e93026e-44ee-491a-b0f9-5228e81b7f32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. System\07. DebugSystem">
+      <UniqueIdentifier>{db98a99f-52c1-47ef-84af-e11ea3662391}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Pch.h">
@@ -226,6 +229,9 @@
     <ClInclude Include="Sources\TileMapActor.h">
       <Filter>소스 파일\04. Actor\02. TileMapActor</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\DebugSystem.h">
+      <Filter>소스 파일\02. System\07. DebugSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Main.cpp">
@@ -344,6 +350,9 @@
     </ClCompile>
     <ClCompile Include="Sources\TileMapActor.cpp">
       <Filter>소스 파일\04. Actor\02. TileMapActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\DebugSystem.cpp">
+      <Filter>소스 파일\02. System\07. DebugSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

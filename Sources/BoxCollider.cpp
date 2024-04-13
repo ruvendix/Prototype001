@@ -6,6 +6,7 @@
 #include "TransformComponent.h"
 #include "SystemManager.h"
 #include "CollisionSystem.h"
+#include "DebugSystem.h"
 #include "Camera.h"
 
 BoxCollider::BoxCollider()
@@ -31,7 +32,7 @@ bool BoxCollider::PostUpdate()
 
 void BoxCollider::Render()
 {
-	if (IsDebugRender() == false)
+	if (GET_SYSTEM(DebugSystem)->IsEnableOption(EDebugOption::ShowCollider) == false)
 	{
 		return;
 	}
@@ -61,8 +62,15 @@ void BoxCollider::Render()
 
 	HBRUSH hBursh = static_cast<HBRUSH>(GetStockObject(HOLLOW_BRUSH));
 	HBRUSH hPrevBrush = static_cast<HBRUSH>(::SelectObject(hBackbufferDc, hBursh));
+
+	HPEN hPen = ::CreatePen(PS_SOLID, 4, RGB(255, 255, 255));
+	HPEN hPrevPen = static_cast<HPEN>(::SelectObject(hBackbufferDc, hPen));
+
 	::Rectangle(hBackbufferDc, m_boxRect.left, m_boxRect.top, m_boxRect.right, m_boxRect.bottom);
 	::SelectObject(hBackbufferDc, hPrevBrush);
+	::SelectObject(hBackbufferDc, hPrevPen);
+
+	::DeleteObject(hPen);
 }
 
 bool BoxCollider::TestIntersect(ColliderBasePtr spTargetCollider)

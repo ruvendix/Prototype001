@@ -13,3 +13,4 @@ DEFINE_ID(SystemIdCounter, ResourceSystem);
 DEFINE_ID(SystemIdCounter, UiSystem);
 DEFINE_ID(SystemIdCounter, CollisionSystem);
 DEFINE_ID(SystemIdCounter, SceneSystem);
+DEFINE_ID(SystemIdCounter, DebugSystem);

@@ -5,6 +5,7 @@
 #include "SystemManager.h"
 #include "ResourceSystem.h"
 #include "InputSystem.h"
+#include "DebugSystem.h"
 #include "TransformComponent.h"
 #include "TextureComponent.h"
 #include "CollisionComponent.h"
@@ -115,5 +116,9 @@ bool TileMapActor::Update()
 void TileMapActor::Render()
 {
 	Super::Render();
-	m_spTileMap->Render();
+
+	if (GET_SYSTEM(DebugSystem)->IsEnableOption(EDebugOption::ShowDebugTile))
+	{
+		m_spTileMap->Render();
+	}
 }

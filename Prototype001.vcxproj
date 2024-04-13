@@ -161,6 +161,7 @@
     <ClInclude Include="Sources\ComponentBase.h" />
     <ClInclude Include="Sources\ComponentDefines.h" />
     <ClInclude Include="Sources\ComponentIdCounter.h" />
+    <ClInclude Include="Sources\DebugSystem.h" />
     <ClInclude Include="Sources\Defines.h" />
     <ClInclude Include="Sources\EnumBitFlag.h" />
     <ClInclude Include="Sources\Flipbook.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Sources\CollisionComponent.cpp" />
     <ClCompile Include="Sources\CollisionSystem.cpp" />
     <ClCompile Include="Sources\ComponentBase.cpp" />
+    <ClCompile Include="Sources\DebugSystem.cpp" />
     <ClCompile Include="Sources\Flipbook.cpp" />
     <ClCompile Include="Sources\FlipbookComponent.cpp" />
     <ClCompile Include="Sources\FrameSystem.cpp" />

@@ -8,6 +8,7 @@
 #include "SceneSystem.h"
 #include "CollisionSystem.h"
 #include "UiSystem.h"
+#include "DebugSystem.h"
 
 SystemManager::SystemManager()
 {
@@ -28,6 +29,7 @@ void SystemManager::Startup()
 	AddSystem<UiSystem>();
 	AddSystem<CollisionSystem>();
 	AddSystem<SceneSystem>();
+	AddSystem<DebugSystem>();
 }
 
 bool SystemManager::Update()
@@ -36,6 +38,7 @@ bool SystemManager::Update()
 	GET_SYSTEM(InputSystem)->Update();
 	GET_SYSTEM(SceneSystem)->Update();
 	GET_SYSTEM(UiSystem)->Update();
+	GET_SYSTEM(DebugSystem)->Update();
 
 	return true;
 }

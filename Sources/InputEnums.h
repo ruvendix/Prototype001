@@ -16,7 +16,10 @@ enum class EInputValue
 	Right    = VK_RIGHT,
 	Up       = VK_UP,
 	Down     = VK_DOWN,
+	Q        = 'Q',
+	E        = 'E',
 	Esc      = VK_ESCAPE,
-	LButton = VK_LBUTTON,
-	Count = 256
+	LButton  = VK_LBUTTON,
+	LCtrl    = VK_LCONTROL,
+	Count    = 256
 };

@@ -29,6 +29,11 @@ public:
 		return ((m_flag & ToShiftValue(enumValue)) != 0);
 	}
 
+	void ToggleBit(TEnum enumValue)
+	{
+		(TestBit(enumValue) == true) ? (RemoveBit(enumValue)) : (AddBit(enumValue));
+	}
+
 	bool TestFlag(const EnumBitFlag& enumBitFlag) const { return ((m_flag & enumBitFlag.GetFlag()) != 0); }
 
 	TSize GetFlag() const { return m_flag; }
