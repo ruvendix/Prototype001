@@ -30,11 +30,7 @@ bool CollisionSystem::PostUpdate()
 	{
 		for (Actor* pActor : actors)
 		{
-			CollisionComponentPtr spCollisionComponent = GET_COMPONENT(pActor, CollisionComponent);
-			if (spCollisionComponent != nullptr)
-			{
-				collisoinComponents.emplace_back(spCollisionComponent);
-			}
+			FIND_COMPONENTS(pActor, CollisionComponent, collisoinComponents);
 		}
 	}
 

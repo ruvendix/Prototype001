@@ -2,14 +2,13 @@
 
 #include "Actor.h"
 
-struct TileMapInfo
-{
-	Size tileSize;
-	uint2d totalTileCount;
-};
+class TileMap;
 
 class TileMapActor : public Actor
 {
+public:
+	using Super = Actor;
+
 public:
 	using Actor::Actor;
 	virtual ~TileMapActor() = default;
@@ -19,7 +18,5 @@ public:
 	virtual void Render()  override;
 
 private:
-	using TileMapLine = std::vector<TilePtr>;
-	std::vector<TileMapLine> m_tileMap;
-	TileMapInfo m_tileMapInfo;
+	TileMapPtr m_spTileMap;
 };

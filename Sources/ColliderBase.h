@@ -21,6 +21,10 @@ public:
 	Actor* GetActor() const { return m_pActor; }
 	void SetActor(Actor* pActor) { m_pActor = pActor; }
 
+	void SetDebugRender(bool bDebugRedner) { m_bDebugRender = bDebugRedner; }
+	bool IsDebugRender() const { return (m_bDebugRender == true); }
+
 private:
 	Actor* m_pActor = nullptr;
+	bool m_bDebugRender = false;
 };

@@ -65,10 +65,13 @@
     <Filter Include="소스 파일\02. System\06. UiSystem">
       <UniqueIdentifier>{3028090c-b344-41e6-88ae-1f58fac17a86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\09. Tile">
-      <UniqueIdentifier>{beac2976-0319-496a-ae50-822dfe773bcd}</UniqueIdentifier>
+    <Filter Include="소스 파일\03. Resources\TileMap">
+      <UniqueIdentifier>{c10b3aaf-f423-4505-927c-340460dd653f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04. Actor\PlayerActor">
+    <Filter Include="소스 파일\04. Actor\02. TileMapActor">
+      <UniqueIdentifier>{4010c33a-2079-449b-b1c6-d0ba88a95f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04. Actor\01. PlayerActor">
       <UniqueIdentifier>{6e93026e-44ee-491a-b0f9-5228e81b7f32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -193,12 +196,6 @@
     <ClInclude Include="Sources\UiSystem.h">
       <Filter>소스 파일\02. System\06. UiSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Tile.h">
-      <Filter>소스 파일\09. Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\TileMapActor.h">
-      <Filter>소스 파일\04. Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\EnumBitFlag.h">
       <Filter>소스 파일\00. Common</Filter>
     </ClInclude>
@@ -215,10 +212,19 @@
       <Filter>소스 파일\00. Common</Filter>
     </ClInclude>
     <ClInclude Include="Sources\PlayerActor.h">
-      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
+      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
     </ClInclude>
     <ClInclude Include="Sources\PlayerState.h">
-      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
+      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\TileMap.h">
+      <Filter>소스 파일\03. Resources\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Tile.h">
+      <Filter>소스 파일\03. Resources\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\TileMapActor.h">
+      <Filter>소스 파일\04. Actor\02. TileMapActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,23 +324,26 @@
     <ClCompile Include="Sources\UiSystem.cpp">
       <Filter>소스 파일\02. System\06. UiSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Tile.cpp">
-      <Filter>소스 파일\09. Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\TileMapActor.cpp">
-      <Filter>소스 파일\04. Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Sprite.cpp">
       <Filter>소스 파일\03. Resources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\GlobalHelper.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\PlayerActor.cpp">
-      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
+      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
     </ClCompile>
     <ClCompile Include="Sources\PlayerState.cpp">
-      <Filter>소스 파일\04. Actor\PlayerActor</Filter>
+      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\TileMap.cpp">
+      <Filter>소스 파일\03. Resources\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Tile.cpp">
+      <Filter>소스 파일\03. Resources\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GlobalHelper.cpp">
+      <Filter>소스 파일\00. Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\TileMapActor.cpp">
+      <Filter>소스 파일\04. Actor\02. TileMapActor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

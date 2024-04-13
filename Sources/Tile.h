@@ -2,12 +2,12 @@
 
 #include "IGameDefault.h"
 
-struct TileMapInfo;
+class TileMap;
 
 class Tile : public IGameDefault
 {
 public:
-	Tile();
+	Tile(const TileMap* pOwner);
 	virtual ~Tile();
 
 	virtual void Startup() override;
@@ -16,19 +16,22 @@ public:
 	virtual void Render() override;
 	virtual void Cleanup() override;
 
+	SpritePtr GetTileSprite() const { return m_spSprite; }
 	void SetTileSprite(SpritePtr spTileSprite) { m_spSprite = spTileSprite; }
-	void SetTileMapInfo(const TileMapInfo* pTileMapInfo) { m_pTileMapInfo = pTileMapInfo; }
-	void SetSpriteIndex(uint32 spriteIdx) { m_spriteIdx = spriteIdx; }
+
+	uint32 GetTileSpriteIndex() const { return m_tileSpriteIdx; }
+	void SetTileSpriteIndex(uint32 tileSpriteIdx) { m_tileSpriteIdx = tileSpriteIdx; }
 
 	const Point2d& GetPosition() const { return m_pos; }
 	void SetPosition(const Point2d& pos) { m_pos = pos; }
 
 private:
 	// 타일맵을 참고용으로 가짐
-	const TileMapInfo* m_pTileMapInfo = nullptr;
+	const TileMap* m_pOwner = nullptr;
 
-	Point2d   m_pos;
 	SpritePtr m_spSprite = nullptr;
-	uint32    m_spriteIdx = 0;
-	bool      m_bDebugOn = true;
+	uint32    m_tileSpriteIdx = 0;
+
+	Point2d m_pos;
+	bool m_bDebugOn = true;
 };

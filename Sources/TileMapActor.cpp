@@ -7,14 +7,17 @@
 #include "InputSystem.h"
 #include "TransformComponent.h"
 #include "TextureComponent.h"
+#include "CollisionComponent.h"
 #include "Tile.h"
 #include "Sprite.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "TileMap.h"
+#include "BoxCollider.h"
 
 void TileMapActor::Startup()
 {
-	Actor::Startup();
+	Super::Startup();
 
 #pragma region 통짜맵 (테스트용으로 넣어보고 굳이 필요한지는 판단함)
 	TextureComponentPtr spTexComponent = ADD_COMPONENT(this, TextureComponent);
@@ -30,129 +33,87 @@ void TileMapActor::Startup()
 	spTransformComponent->SetSize(screenSize);
 #pragma endregion
 
-#pragma region 타일
-	SpritePtr spTileSprite = nullptr;
+	m_spTileMap = GET_SYSTEM(ResourceSystem)->LoadTileMap("Texture/Map/TileMap");
+	m_spTileMap->Startup();
 
-	if (true)
+	// X 표시가 된 것들만 액터로 도입
+	const TileMap::Tiles& tiles = m_spTileMap->GetTiles();
+	for (uint32 y = 0; y < tiles.size(); ++y)
 	{
-		// 스프라이트 파일에서 로딩
-		spTileSprite = GET_SYSTEM(ResourceSystem)->LoadSprite("Texture/Map/Tile");
-
-		// 타일 정보는 타일 스프라이트의 첫번째로 때움
-		const SpriteInfo* pFirstSpriteInfo = spTileSprite->GetSpriteInfo(0);
-		m_tileMapInfo.tileSize = pFirstSpriteInfo->size;
-	}
-	else
-	{
-		// 타일로 사용할 텍스처 로딩
-		TexturePtr spTileTex = GET_SYSTEM(ResourceSystem)->LoadTexture("Texture/Map/Tile.bmp");
-		
-		// 타일 하나의 크기
-		Size tileSize;
-		tileSize.width = spTileTex->GetSize().width / 4;
-		tileSize.height = spTileTex->GetSize().height;
-		m_tileMapInfo.tileSize = tileSize;
-
-		// 타일은 스프라이트로 구성
-		spTileSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("Texture/Map/Tile");
-
-		// 스프라이트 정보
-		for (uint32 i = 0; i < 4; ++i)
+		for (uint32 x = 0; x < tiles[0].size(); ++x)
 		{
-			SpriteInfo tileSpriteInfo;
-			tileSpriteInfo.spTex = spTileTex;
-			tileSpriteInfo.excludeColor = RGB(128, 128, 128);
-			tileSpriteInfo.startPos  = Point2d(tileSize.width * i, 0);
-			tileSpriteInfo.size = tileSize;
-			spTileSprite->AddSpriteInfo(tileSpriteInfo);
+			TilePtr spTile = tiles[y][x];
+			if (spTile->GetTileSpriteIndex() != 1)
+			{
+				continue;
+			}
+
+			// 기본 액터에 컴포넌트로 구성
+			Actor* pTileActor = new Actor;
+			pTileActor->Startup();
+			pTileActor->SetActorState(EActorState::Deactivated);
+
+			// 트랜스폼은 중점과 사이즈로 구분됨
+			TransformComponentPtr spTileTransformComponent = GET_COMPONENT(pTileActor, TransformComponent);
+			const Size& tileHalfSize = m_spTileMap->GetTileSize() / 2;
+			Point2d tileCenterPos = spTile->GetPosition() + tileHalfSize;
+			spTileTransformComponent->SetPosition(tileCenterPos);
+
+			// 콜라이더 설정
+			BoxColliderPtr spBoxCollider = std::make_shared<BoxCollider>();
+			spBoxCollider->SetExtents(tileHalfSize);
+
+			CollisionComponentPtr spCollisionComponent = ADD_COMPONENT(pTileActor, CollisionComponent);
+			spCollisionComponent->ApplyCollider(spBoxCollider);
+			spCollisionComponent->SetCollisionObjectType(ECollisionObjectType::WorldStatic);
+
+			AddChild(pTileActor);
 		}
 	}
-#pragma endregion
-
-#pragma region 타일맵 구성
-	// 타일 개수 구하기
-	uint2d totalTileCount;
-	totalTileCount.x = (spWorldMapTex->GetSize().width / m_tileMapInfo.tileSize.width);
-	totalTileCount.y = (spWorldMapTex->GetSize().height / m_tileMapInfo.tileSize.height);
-	m_tileMapInfo.totalTileCount = totalTileCount;
-	
-	m_tileMap.resize(totalTileCount.y);
-	for (uint32 y = 0; y < totalTileCount.y; ++y)
-	{
-		m_tileMap[y].resize(totalTileCount.x);
-		for (uint32 x = 0; x < totalTileCount.x; ++x)
-		{
-			TilePtr spTile = std::make_shared<Tile>();
-			spTile->SetTileMapInfo(&m_tileMapInfo);
-			spTile->SetTileSprite(spTileSprite);
-
-			Point2d tilePos;
-			tilePos.x = x * m_tileMapInfo.tileSize.width;
-			tilePos.y = y * m_tileMapInfo.tileSize.height;
-
-			spTile->SetPosition(tilePos);
-			m_tileMap[y][x] = spTile;
-		}
-	}
-#pragma endregion
 }
 
 bool TileMapActor::Update()
 {
-	bool bRet = Actor::Update();
-
-#pragma region 타일 클릭한 경우
-	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::LButton))
+	if (Super::Update() == false)
 	{
-		// 클릭한 좌표에서의 인덱스 구하기
-		const Point2d& mousePos = GET_SYSTEM(InputSystem)->GetMousePosition();
-		
-		// 마우스 좌표는 클라이언트 영역 기준이므로 카메라 보정 필요
-		CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
+		return false;
+	}
 
-		uint2d selectedTileIdxes;
-		selectedTileIdxes.x = (mousePos.x + spCamera->GetOffsetPosition().x) / m_tileMapInfo.tileSize.width;
-		selectedTileIdxes.y = (mousePos.y + spCamera->GetOffsetPosition().y) / m_tileMapInfo.tileSize.height;
+	if (m_spTileMap->Update() == false)
+	{
+		return false;
+	}
 
-		m_tileMap[selectedTileIdxes.y][selectedTileIdxes.x]->SetSpriteIndex(2);
+	// 전부 끄고 시작
+	const std::vector<Actor*> tileActors = GetChilds();
+	uint32 tileActorCount = tileActors.size();
+	for (uint32 i = 0; i < tileActorCount; ++i)
+	{
+		tileActors[i]->SetActorState(EActorState::Deactivated);
+	}
+
+#pragma region 눈에 보이는 타일만 활성화
+	const Size& screenSize = GameApplication::I()->GetResolution();
+	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
+
+	for (uint32 i = 0; i < tileActorCount; ++i)
+	{
+		TransformComponentPtr spTileTransformComponent = GET_COMPONENT(tileActors[i], TransformComponent);
+
+		Point2d tileOffsetCenterPos = spTileTransformComponent->GetPosition() - spCamera->GetOffsetPosition();
+		if (((0 <= tileOffsetCenterPos.x) && (tileOffsetCenterPos.x <= static_cast<int32>(screenSize.width))) &&
+			((0 <= tileOffsetCenterPos.y) && (tileOffsetCenterPos.y <= static_cast<int32>(screenSize.height))))
+		{
+			tileActors[i]->SetActorState(EActorState::Activated);
+		}
 	}
 #pragma endregion
 
-	return bRet;
+	return true;
 }
 
 void TileMapActor::Render()
 {
-	Actor::Render();
-
-#pragma region 타일 렌더링
-	uint2d totalTileCount;
-	totalTileCount.y = m_tileMap.size();
-	totalTileCount.x = m_tileMap[0].size(); // 첫번째 줄로 확인
-
-	const Size& screenSize = GameApplication::I()->GetResolution();
-	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
-
-#pragma region 렌더링할 시작 인덱스와 종료 인덱스 및 개수 구하기
-	uint2d renderTileStartIdxes;
-	renderTileStartIdxes.x = spCamera->GetOffsetPosition().x / m_tileMapInfo.tileSize.width;
-	renderTileStartIdxes.y = spCamera->GetOffsetPosition().y / m_tileMapInfo.tileSize.height;
-
-	uint2d renderTileEndIdxes;
-	renderTileEndIdxes.x = screenSize.width / m_tileMapInfo.tileSize.width;
-	renderTileEndIdxes.y = screenSize.height / m_tileMapInfo.tileSize.height;
-
-	uint2d loopCount;
-	loopCount.x = renderTileStartIdxes.x + renderTileEndIdxes.x + 1;
-	loopCount.y = renderTileStartIdxes.y + renderTileEndIdxes.y + 1;
-#pragma endregion
-
-	//for (uint32 y = renderTileStartIdxes.y; y < loopCount.y; ++y)
-	//{
-	//	for (uint32 x = renderTileStartIdxes.x; x < loopCount.x; ++x)
-	//	{
-	//		m_tileMap[y][x]->Render();
-	//	}
-	//}
-#pragma endregion
+	Super::Render();
+	m_spTileMap->Render();
 }

@@ -31,7 +31,11 @@ bool BoxCollider::PostUpdate()
 
 void BoxCollider::Render()
 {
-#ifdef _DEBUG
+	if (IsDebugRender() == false)
+	{
+		return;
+	}
+
 	Point2d cameraOffsetPos;
 	if (m_bUseCamera == true)
 	{
@@ -59,7 +63,6 @@ void BoxCollider::Render()
 	HBRUSH hPrevBrush = static_cast<HBRUSH>(::SelectObject(hBackbufferDc, hBursh));
 	::Rectangle(hBackbufferDc, m_boxRect.left, m_boxRect.top, m_boxRect.right, m_boxRect.bottom);
 	::SelectObject(hBackbufferDc, hPrevBrush);
-#endif
 }
 
 bool BoxCollider::TestIntersect(ColliderBasePtr spTargetCollider)
@@ -98,5 +101,7 @@ bool BoxCollider::TestIntersectBox(BoxColliderPtr spTargetBoxCollider)
 	}
 
 	m_intersectedRectIdx = GET_SYSTEM(CollisionSystem)->AddIntersectedRect(intersectedRect);
+	spTargetBoxCollider->SetInstersectedRectIndex(m_intersectedRectIdx);
+
 	return true;
 }

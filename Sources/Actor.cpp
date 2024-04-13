@@ -4,6 +4,11 @@
 #include "ComponentBase.h"
 #include "TransformComponent.h"
 
+Actor::Actor()
+{
+	
+}
+
 Actor::Actor(const std::string strTag)
 {
 	m_strTag = strTag;
@@ -18,6 +23,11 @@ void Actor::Startup()
 {
 	// 모든 액터는 트랜스폼이 있음
 	ADD_COMPONENT(this, TransformComponent);
+
+	for (Actor* pChild : m_childs)
+	{
+		pChild->Startup();
+	}
 }
 
 bool Actor::Update()
@@ -27,6 +37,11 @@ bool Actor::Update()
 		ComponentBasePtr spComponent = iter.second;
 		assert(spComponent != nullptr);
 		spComponent->Update();
+	}
+
+	for (Actor* pChild : m_childs)
+	{
+		pChild->Update();
 	}
 
 	return true;
@@ -41,6 +56,11 @@ bool Actor::PostUpdate()
 		spComponent->PostUpdate();
 	}
 
+	for (Actor* pChild : m_childs)
+	{
+		pChild->PostUpdate();
+	}
+
 	return true;
 }
 
@@ -52,6 +72,11 @@ void Actor::Render()
 		assert(spComponent != nullptr);
 		spComponent->Render();
 	}
+
+	for (Actor* pChild : m_childs)
+	{
+		pChild->Render();
+	}
 }
 
 void Actor::Cleanup()
@@ -62,4 +87,15 @@ void Actor::Cleanup()
 		assert(spComponent != nullptr);
 		spComponent->Cleanup();
 	}
+
+	for (Actor* pChild : m_childs)
+	{
+		pChild->Cleanup();
+		SAFE_DELETE(pChild);
+	}
+}
+
+void Actor::AddChild(Actor* pActor)
+{
+	m_childs.emplace_back(pActor);
 }

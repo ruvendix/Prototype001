@@ -24,7 +24,7 @@ void StartScene::Startup()
 	CreateActor<PlayerActor>("Player", EActorLayer::Character);
 
 	// 테스트 액터
-	CreateActor<MonsterActor>("Monster", EActorLayer::Character);
+	//CreateActor<MonsterActor>("Monster", EActorLayer::Character);
 
 #pragma region 버튼 테스트
 	//UiButtonPtr spUiTestButton = GET_SYSTEM(UiSystem)->CreateUi<UiButton>("TestButton");

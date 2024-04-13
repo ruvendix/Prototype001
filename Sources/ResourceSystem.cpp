@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "Flipbook.h"
+#include "TileMap.h"
 
 ResourceSystem::ResourceSystem()
 {
@@ -26,6 +27,8 @@ void ResourceSystem::Cleanup()
 	//{
 	//	iter.second->SaveResource();
 	//}
+
+	m_spTileMap->SaveResource();
 }
 
 TexturePtr ResourceSystem::LoadTexture(const std::string& strTexPath)
@@ -118,4 +121,14 @@ FlipbookPtr ResourceSystem::LoadFlipbook(const std::string& strFlipbookPath)
 	spNewFlipbook->LoadResource();
 
 	return spNewFlipbook;
+}
+
+TileMapPtr ResourceSystem::LoadTileMap(const std::string& strTileMapPath)
+{
+	m_spTileMap.reset();
+
+	m_spTileMap = std::make_shared<TileMap>(strTileMapPath);
+	m_spTileMap->LoadResource();
+
+	return m_spTileMap;
 }

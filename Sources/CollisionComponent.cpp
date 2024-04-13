@@ -2,8 +2,6 @@
 #include "CollisionComponent.h"
 
 #include "ColliderBase.h"
-#include "Actor.h"
-#include "TransformComponent.h"
 
 CollisionComponent::CollisionComponent()
 {

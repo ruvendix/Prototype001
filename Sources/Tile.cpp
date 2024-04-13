@@ -3,13 +3,14 @@
 
 #include "Sprite.h"
 #include "Texture.h"
-#include "TileMapActor.h"
+#include "TileMap.h"
 #include "GameApplication.h"
 #include "Camera.h"
+#include "BoxCollider.h"
 
-Tile::Tile()
+Tile::Tile(const TileMap* pOwner)
 {
-
+	m_pOwner = pOwner;
 }
 
 Tile::~Tile()
@@ -34,14 +35,14 @@ bool Tile::PostUpdate()
 
 void Tile::Render()
 {
-	const Size& tileSize = m_pTileMapInfo->tileSize;
+	const Size& tileSize = m_pOwner->GetTileSize();
 
 	Point2d destPos;
 	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	destPos.x = m_pos.x - spCamera->GetOffsetPosition().x;
 	destPos.y = m_pos.y - spCamera->GetOffsetPosition().y;
 
-	const SpriteInfo* pSpriteInfo = m_spSprite->GetSpriteInfo(m_spriteIdx);
+	const SpriteInfo* pSpriteInfo = m_spSprite->GetSpriteInfo(m_tileSpriteIdx);
 
 	::TransparentBlt
 	(

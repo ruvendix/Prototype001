@@ -26,5 +26,4 @@ public:
 
 private:
 	std::vector<SpriteInfo*> m_spriteInfos;
-	std::vector<std::string> m_texPathTable;
 };

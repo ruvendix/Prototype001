@@ -36,6 +36,8 @@ void Sprite::SaveResource()
 	}
 
 	// 스프라이트 정보들로 텍스처 스트링 테이블 구성
+	std::vector<std::string> texPathTable;
+
 	uint32 spriteInfoCount = m_spriteInfos.size();
 	for (uint32 i = 0; i < spriteInfoCount; ++i)
 	{
@@ -47,17 +49,17 @@ void Sprite::SaveResource()
 
 		// 텍스처 경로부터 저장
 		TexturePtr spTex = pSpriteInfo->spTex;
-		m_texPathTable.emplace_back(spTex->GetResourcePath());
+		texPathTable.emplace_back(spTex->GetResourcePath());
 	}
-	m_texPathTable.erase(std::unique(m_texPathTable.begin(), m_texPathTable.end()), m_texPathTable.end());
+	texPathTable.erase(std::unique(texPathTable.begin(), texPathTable.end()), texPathTable.end());
 
-	uint32 texPathCount = m_texPathTable.size();
+	uint32 texPathCount = texPathTable.size();
 	fwrite(&texPathCount, sizeof(uint32), 1, pSpriteFile);
 
 	// 텍스처 경로부터 저장
 	for (uint32 i = 0; i < texPathCount; ++i)
 	{		
-		global::SaveStringToFile(m_texPathTable[i], pSpriteFile);
+		global::SaveStringToFile(texPathTable[i], pSpriteFile);
 	}
 
 	// 스프라이트 정보 개수 쓰기
@@ -74,10 +76,10 @@ void Sprite::SaveResource()
 
 		// 텍스처 경로 인덱스를 저장
 		TexturePtr spTex = pSpriteInfo->spTex;
-		const auto& foundIter = std::find(m_texPathTable.begin(), m_texPathTable.end(), spTex->GetResourcePath());
-		uint32 texStrPathIdx = std::distance(m_texPathTable.begin(), foundIter);
+		const auto& foundIter = std::find(texPathTable.begin(), texPathTable.end(), spTex->GetResourcePath());
+		uint32 texPathIdx = std::distance(texPathTable.begin(), foundIter);
 
-		fwrite(&texStrPathIdx, sizeof(uint32), 1, pSpriteFile);
+		fwrite(&texPathIdx, sizeof(uint32), 1, pSpriteFile);
 		fwrite(&pSpriteInfo->excludeColor, sizeof(uint32), 1, pSpriteFile);
 		fwrite(&pSpriteInfo->startPos, sizeof(Point2d), 1, pSpriteFile);
 		fwrite(&pSpriteInfo->size, sizeof(Size), 1, pSpriteFile);
@@ -103,10 +105,11 @@ void Sprite::LoadResource()
 	uint32 texPathCount = 0;
 	fread(&texPathCount, sizeof(uint32), 1, pSpriteFile);
 
-	// 스프라이트 정보들로 텍스처 스트링 테이블 구성
+	// 텍스처 스트링 테이블 읽기
+	std::vector<std::string> texPathTable;
 	for (uint32 i = 0; i < 1; ++i)
 	{
-		m_texPathTable.push_back(global::LoadStringFromFile(pSpriteFile));
+		texPathTable.push_back(global::LoadStringFromFile(pSpriteFile));
 	}
 
 	// 스프라이트 정보 개수 읽기
@@ -121,7 +124,7 @@ void Sprite::LoadResource()
 		// 일단은 텍스처부터 로딩
 		uint32 texStrPathIdx = 0;
 		fread(&texStrPathIdx, sizeof(uint32), 1, pSpriteFile);
-		spriteInfo.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture(m_texPathTable[texStrPathIdx]);
+		spriteInfo.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture(texPathTable[texStrPathIdx]);
 
 		fread(&spriteInfo.excludeColor, sizeof(uint32), 1, pSpriteFile);
 		fread(&spriteInfo.startPos, sizeof(Point2d), 1, pSpriteFile);

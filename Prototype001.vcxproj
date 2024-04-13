@@ -198,6 +198,7 @@
     <ClInclude Include="Sources\UiSystem.h" />
     <ClInclude Include="Sources\WindowProcedure.h" />
     <ClInclude Include="Sources\Tile.h" />
+    <ClInclude Include="Sources\TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Actor.cpp" />
@@ -241,6 +242,7 @@
     <ClCompile Include="Sources\UiButton.cpp" />
     <ClCompile Include="Sources\UiSystem.cpp" />
     <ClCompile Include="Sources\WindowProcedure.cpp" />
+    <ClCompile Include="Sources\TileMap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

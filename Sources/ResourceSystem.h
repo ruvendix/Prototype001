@@ -21,8 +21,14 @@ public:
 	const FlipbookPtr FindFlipbook(const std::string& strFlipbookPath) const;
 	FlipbookPtr LoadFlipbook(const std::string& strFlipbookPath);
 
+	TileMapPtr LoadTileMap(const std::string& strTileMapPath);
+	TileMapPtr GetTileMap() const { return m_spTileMap; }
+
 private:
 	std::unordered_map<std::string, TexturePtr>  m_texes;
 	std::unordered_map<std::string, SpritePtr>   m_sprites;
 	std::unordered_map<std::string, FlipbookPtr> m_Flipbooks;
+
+	// 타일맵은 일단 하나로 퉁침
+	TileMapPtr m_spTileMap = nullptr;
 };

@@ -17,6 +17,7 @@
 #include "Flipbook.h"
 #include "Camera.h"
 #include "PlayerState.h"
+#include "TileMap.h"
 
 PlayerActor::~PlayerActor()
 {
@@ -35,13 +36,15 @@ void PlayerActor::Startup()
 
 	// 콜라이더 설정
 	BoxColliderPtr spBoxCollider = std::make_shared<BoxCollider>();
-	Size boxSize = Size(100, 100); // 콜라이더 크기는 따로 설정 가능
-	spBoxCollider->SetExtents(Size(boxSize.width / 2, boxSize.height / 2));
+
+	TileMapPtr spTileMap = GET_SYSTEM(ResourceSystem)->GetTileMap();
+	spBoxCollider->SetExtents(spTileMap->GetTileSize() / 3); // 콜라이더 크기는 따로 설정 가능(타일 크기와 맞춤)
 	
 #pragma region 컬리전 등록
 	CollisionComponentPtr spCollisionComponent = ADD_COMPONENT(this, CollisionComponent);
 	spCollisionComponent->ApplyCollider(spBoxCollider);
 	spCollisionComponent->SetCollisionObjectType(ECollisionObjectType::Pawn);
+	spCollisionComponent->AddCollisionResponse(ECollisionObjectType::WorldStatic, ECollisionResponseState::Block);
 	spCollisionComponent->AddCollisionResponse(ECollisionObjectType::Pawn, ECollisionResponseState::Block);
 
 	CollisionComponent::CollisionEnableOption& refCollisionEnableOption = spCollisionComponent->GetCollsionEnableOption();
@@ -173,9 +176,10 @@ void PlayerActor::OnCollisionHit(CollisionComponentPtr spTargetCollisionComponen
 	spTransformComponent->SetPosition(pos);
 
 	// 콜라이더 업데이트
-	spBoxCollider->Update();
+	spBoxCollider->UpdateBoxRect();
 
-	std::string strPos = "Player hit " + std::to_string(pos.x) + " " + std::to_string(pos.y) + " intersectedLength " + std::to_string(intersectedLength);
+	std::string strPos = "Player hit " + std::to_string(pos.x) + " " + std::to_string(pos.y)
+		+ " intersectedLength " + std::to_string(intersectedLength) + " idx " + std::to_string(spBoxCollider->GetInstersectedRectIndex());
 	strPos += '\n';
 	::OutputDebugString(strPos.c_str());
 }

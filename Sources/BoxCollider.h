@@ -14,15 +14,17 @@ public:
 
 	virtual bool TestIntersect(ColliderBasePtr spTargetCollider) override;
 
+	void UpdateBoxRect();
+
 	void SetExtents(const Size& extents) { m_extents = extents; }
 
 	const RECT& GetBoxRect() const { return m_boxRect; }
 	void SetUseCamera(bool bUseCamera) { m_bUseCamera = bUseCamera; }
 
 	int32 GetInstersectedRectIndex() const { return m_intersectedRectIdx; }
+	void SetInstersectedRectIndex(int32 intersectedRectIdx) { m_intersectedRectIdx = intersectedRectIdx; }
 
 private:
-	void UpdateBoxRect();
 	bool TestIntersectBox(BoxColliderPtr spTargetBoxCollider);
 
 private:

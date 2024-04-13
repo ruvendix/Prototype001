@@ -14,6 +14,11 @@ struct Size
 {
 	uint32 width  = 0;
 	uint32 height = 0;
+
+	Size operator/(uint32 value) const
+	{
+		return Size(width / value, height / value);
+	}
 };
 
 struct int2d
@@ -21,7 +26,7 @@ struct int2d
 	int32 x = 0;
 	int32 y = 0;
 
-	int2d operator+(const int2d& pos)
+	int2d operator+(const int2d& pos) const
 	{
 		return int2d(x + pos.x, y + pos.y);
 	}
@@ -29,6 +34,21 @@ struct int2d
 	void operator+=(const int2d& pos)
 	{
 		*this = (*this + pos);
+	}
+
+	int2d operator+(const Size& size) const
+	{
+		return int2d(x + size.width, y + size.height);
+	}
+
+	int2d operator-(const int2d& pos) const
+	{
+		return int2d(x - pos.x, y - pos.y);
+	}
+
+	void operator-=(const int2d& pos)
+	{
+		*this = (*this - pos);
 	}
 };
 
