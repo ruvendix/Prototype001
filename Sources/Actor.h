@@ -61,6 +61,7 @@ public:
 		m_components.erase(TComponentId::s_id);
 	}
 
+	// 반환은 Raw 포인터 써도 됨
 	template <typename TComponent, typename TComponentId>
 	std::shared_ptr<TComponent> GetComponent()
 	{

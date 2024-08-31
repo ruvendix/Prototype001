@@ -22,8 +22,8 @@ public:
 	uint32 GetTileSpriteIndex() const { return m_tileSpriteIdx; }
 	void SetTileSpriteIndex(uint32 tileSpriteIdx) { m_tileSpriteIdx = tileSpriteIdx; }
 
-	const Point2d& GetPosition() const { return m_pos; }
-	void SetPosition(const Point2d& pos) { m_pos = pos; }
+	const Int2d& GetPosition() const { return m_pos; }
+	void SetPosition(const Int2d& pos) { m_pos = pos; }
 
 private:
 	// 타일맵을 참고용으로 가짐
@@ -32,6 +32,6 @@ private:
 	SpritePtr m_spSprite = nullptr;
 	uint32    m_tileSpriteIdx = 0;
 
-	Point2d m_pos;
+	Int2d m_pos;
 	bool m_bDebugOn = true;
 };

@@ -8,12 +8,12 @@ public:
 	Camera();
 	~Camera();
 
-	const Point2d& CalcScreenCenterOffsetPosition();
+	const Vec2d& CalcScreenCenterOffsetPosition();
 
 	void SetTarget(Actor* pTarget) { m_pTarget = pTarget; }
-	const Point2d& GetOffsetPosition() const { return m_offsetPos; }
+	Vec2d GetOffsetPosition() const { return m_offsetPos; }
 
 private:
-	Actor*  m_pTarget = nullptr;
-	Point2d m_offsetPos;
+	Actor* m_pTarget = nullptr;
+	Vec2d m_offsetPos;
 };

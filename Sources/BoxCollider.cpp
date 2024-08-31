@@ -37,7 +37,7 @@ void BoxCollider::Render()
 		return;
 	}
 
-	Point2d cameraOffsetPos;
+	Vec2d cameraOffsetPos;
 	if (m_bUseCamera == true)
 	{
 		CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
@@ -48,10 +48,10 @@ void BoxCollider::Render()
 	}
 
 	// 렌더링 되기 직전에 카메라 오프셋 적용
-	m_boxRect.left   -= cameraOffsetPos.x;
-	m_boxRect.top    -= cameraOffsetPos.y;
-	m_boxRect.right  -= cameraOffsetPos.x;
-	m_boxRect.bottom -= cameraOffsetPos.y;
+	m_boxRect.left -= static_cast<LONG>(cameraOffsetPos.x);
+	m_boxRect.top -= static_cast<LONG>(cameraOffsetPos.y);
+	m_boxRect.right -= static_cast<LONG>(cameraOffsetPos.x);
+	m_boxRect.bottom -= static_cast<LONG>(cameraOffsetPos.y);
 
 	HDC hBackbufferDc = GameApplication::I()->GetBackBufferDc();
 	//::MoveToEx(hBackbufferDc, debugRect.left, debugRect.top, nullptr);
@@ -90,12 +90,12 @@ void BoxCollider::UpdateBoxRect()
 {
 	// 액터의 트랜스폼 가져오기
 	TransformComponentPtr spTransformComponent = GET_COMPONENT(GetActor(), TransformComponent);
-	const Point2d& pos = spTransformComponent->GetPosition();
+	const Vec2d& pos = spTransformComponent->GetPosition();
 
-	m_boxRect.left   = (pos.x - static_cast<int32>(m_extents.width));
-	m_boxRect.top    = (pos.y - static_cast<int32>(m_extents.height));
-	m_boxRect.right  = (pos.x + static_cast<int32>(m_extents.width));
-	m_boxRect.bottom = (pos.y + static_cast<int32>(m_extents.height));
+	m_boxRect.left = (static_cast<LONG>(pos.x) - static_cast<int32>(m_extents.width));
+	m_boxRect.top = (static_cast<LONG>(pos.y) - static_cast<int32>(m_extents.height));
+	m_boxRect.right = (static_cast<LONG>(pos.x) + static_cast<int32>(m_extents.width));
+	m_boxRect.bottom = (static_cast<LONG>(pos.y) + static_cast<int32>(m_extents.height));
 }
 
 bool BoxCollider::TestIntersectBox(BoxColliderPtr spTargetBoxCollider)

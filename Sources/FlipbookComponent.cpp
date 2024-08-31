@@ -56,7 +56,7 @@ void FlipbookComponent::Render()
 	TransformComponentPtr spTransformComponent = GET_COMPONENT(GetOwner(), TransformComponent);
 	const Size& size = spTransformComponent->GetSize();
 
-	Point2d destPos;
+	Int2d destPos;
 	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	destPos.x = spTransformComponent->GetPosition().x - (size.width / 2);
 	destPos.x -= spCamera->GetOffsetPosition().x;

@@ -37,7 +37,7 @@ void Tile::Render()
 {
 	const Size& tileSize = m_pOwner->GetTileSize();
 
-	Point2d destPos;
+	Int2d destPos;
 	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 	destPos.x = m_pos.x - spCamera->GetOffsetPosition().x;
 	destPos.y = m_pos.y - spCamera->GetOffsetPosition().y;

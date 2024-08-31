@@ -197,6 +197,7 @@
     <ClInclude Include="Sources\UiBase.h" />
     <ClInclude Include="Sources\UiButton.h" />
     <ClInclude Include="Sources\UiSystem.h" />
+    <ClInclude Include="Sources\Vec2d.h" />
     <ClInclude Include="Sources\WindowProcedure.h" />
     <ClInclude Include="Sources\Tile.h" />
     <ClInclude Include="Sources\TileMap.h" />

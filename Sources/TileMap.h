@@ -18,12 +18,16 @@ public:
 	void SaveResource() override;
 	void LoadResource() override;
 
-	const Size&   GetTileSize() const { return m_tileSize; }
-	const uint2d& GetTotalTileCount() const { return m_totalTileCount; }
-	const Tiles&  GetTiles() const { return m_tiles; };
+	TilePtr FindTile(const Int2d& cellPos) const;
+	Vec2d ConvertCellPositionToWorldPosition(const Int2d& cellPos) const;
+
+	const Size& GetTileSize() const { return m_tileSize; }
+	const Tiles& GetTiles() const { return m_tiles; };
 
 private:
-	Tiles  m_tiles;
-	Size   m_tileSize;
-	uint2d m_totalTileCount;
+	Tiles m_tiles;
+	Size m_tileSize;
+
+	// 타일 개수는 (가로 끝 인덱스 + 1) * (세로 끝 인덱스 + 1)
+	Int2d m_tileEnd2dIdx;	
 };

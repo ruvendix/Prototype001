@@ -155,7 +155,7 @@ void GameApplication::RenderUi2d()
     std::string strFrame = GET_SYSTEM(FrameSystem)->GetFrameGuide();
     ::TextOut(m_hBackBufferDc, 0, 0, strFrame.c_str(), strFrame.length());
 
-    const Point2d& mousePos = GET_SYSTEM(InputSystem)->GetMousePosition();
+    const Int2d& mousePos = GET_SYSTEM(InputSystem)->GetMousePosition();
     std::string strMousePos = std::format("[{0}, {1}]", mousePos.x, mousePos.y);
     ::TextOut(m_hBackBufferDc, 0, 20, strMousePos.c_str(), strMousePos.length());
 }

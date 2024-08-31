@@ -57,8 +57,8 @@ void TileMapActor::Startup()
 			// 트랜스폼은 중점과 사이즈로 구분됨
 			TransformComponentPtr spTileTransformComponent = GET_COMPONENT(pTileActor, TransformComponent);
 			const Size& tileHalfSize = m_spTileMap->GetTileSize() / 2;
-			Point2d tileCenterPos = spTile->GetPosition() + tileHalfSize;
-			spTileTransformComponent->SetPosition(tileCenterPos);
+			Int2d tileCenterPos = spTile->GetPosition() + tileHalfSize;
+			spTileTransformComponent->SetPosition(tileCenterPos.x, tileCenterPos.y);
 
 			// 콜라이더 설정
 			BoxColliderPtr spBoxCollider = std::make_shared<BoxCollider>();
@@ -101,7 +101,7 @@ bool TileMapActor::Update()
 	{
 		TransformComponentPtr spTileTransformComponent = GET_COMPONENT(tileActors[i], TransformComponent);
 
-		Point2d tileOffsetCenterPos = spTileTransformComponent->GetPosition() - spCamera->GetOffsetPosition();
+		Vec2d tileOffsetCenterPos = spTileTransformComponent->GetPosition() - spCamera->GetOffsetPosition();
 		if (((0 <= tileOffsetCenterPos.x) && (tileOffsetCenterPos.x <= static_cast<int32>(screenSize.width))) &&
 			((0 <= tileOffsetCenterPos.y) && (tileOffsetCenterPos.y <= static_cast<int32>(screenSize.height))))
 		{

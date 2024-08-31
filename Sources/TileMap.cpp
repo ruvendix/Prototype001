@@ -28,12 +28,12 @@ bool TileMap::Update()
 	if (GET_SYSTEM(InputSystem)->IsKeyDown(EInputValue::LButton))
 	{
 		// 클릭한 좌표에서의 인덱스 구하기
-		const Point2d& mousePos = GET_SYSTEM(InputSystem)->GetMousePosition();
+		const Int2d& mousePos = GET_SYSTEM(InputSystem)->GetMousePosition();
 
 		// 마우스 좌표는 클라이언트 영역 기준이므로 카메라 보정 필요
 		CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 
-		uint2d selectedTileIdxes;
+		Int2d selectedTileIdxes;
 		selectedTileIdxes.x = (mousePos.x + spCamera->GetOffsetPosition().x) / m_tileSize.width;
 		selectedTileIdxes.y = (mousePos.y + spCamera->GetOffsetPosition().y) / m_tileSize.height;
 
@@ -50,7 +50,7 @@ bool TileMap::Update()
 void TileMap::Render()
 {
 #pragma region 타일 렌더링
-	uint2d totalTileCount;
+	Int2d totalTileCount;
 	totalTileCount.y = m_tiles.size();
 	totalTileCount.x = m_tiles[0].size(); // 첫번째 줄로 확인
 
@@ -58,22 +58,22 @@ void TileMap::Render()
 	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
 
 #pragma region 렌더링할 시작 인덱스와 종료 인덱스 및 개수 구하기
-	uint2d renderTileStartIdxes;
+	Int2d renderTileStartIdxes;
 	renderTileStartIdxes.x = spCamera->GetOffsetPosition().x / m_tileSize.width;
 	renderTileStartIdxes.y = spCamera->GetOffsetPosition().y / m_tileSize.height;
 
-	uint2d renderTileEndIdxes;
+	Int2d renderTileEndIdxes;
 	renderTileEndIdxes.x = screenSize.width / m_tileSize.width;
 	renderTileEndIdxes.y = screenSize.height / m_tileSize.height;
 
-	uint2d loopCount;
+	Int2d loopCount;
 	loopCount.x = renderTileStartIdxes.x + renderTileEndIdxes.x + 1;
 	loopCount.y = renderTileStartIdxes.y + renderTileEndIdxes.y + 1;
 #pragma endregion
 
-	for (uint32 y = renderTileStartIdxes.y; y < loopCount.y; ++y)
+	for (int32 y = renderTileStartIdxes.y; y < loopCount.y; ++y)
 	{
-		for (uint32 x = renderTileStartIdxes.x; x < loopCount.x; ++x)
+		for (int32 x = renderTileStartIdxes.x; x < loopCount.x; ++x)
 		{
 			m_tiles[y][x]->Render();
 		}
@@ -98,9 +98,9 @@ void TileMap::SaveResource()
 	// 타일 정보들로 텍스처 스트링 테이블 구성
 	std::vector<std::string> spritePathTable;
 
-	for (uint32 y = 0; y < m_totalTileCount.y; ++y)
+	for (int32 y = 0; y <= m_tileEnd2dIdx.y; ++y)
 	{
-		for (uint32 x = 0; x < m_totalTileCount.x; ++x)
+		for (int32 x = 0; x <= m_tileEnd2dIdx.x; ++x)
 		{
 			TilePtr spTile = m_tiles[y][x];
 			SpritePtr spTileSprite = spTile->GetTileSprite();
@@ -119,13 +119,14 @@ void TileMap::SaveResource()
 	}
 
 	// 타일맵 정보 쓰기
-	fwrite(&m_totalTileCount, sizeof(uint2d), 1, pTileMapFile);
+	Int2d tile2dCount = m_tileEnd2dIdx + 1;
+	fwrite(&tile2dCount, sizeof(Int2d), 1, pTileMapFile);
 	fwrite(&m_tileSize, sizeof(Size), 1, pTileMapFile);
 
 	// 타일마다 정보 쓰기
-	for (uint32 y = 0; y < m_totalTileCount.y; ++y)
+	for (int32 y = 0; y < tile2dCount.y; ++y)
 	{
-		for (uint32 x = 0; x < m_totalTileCount.x; ++x)
+		for (int32 x = 0; x < tile2dCount.x; ++x)
 		{
 			TilePtr spTile = m_tiles[y][x];
 
@@ -167,16 +168,20 @@ void TileMap::LoadResource()
 		spritePathTable.emplace_back(global::LoadStringFromFile(pTileMapFile));
 	}
 
-	// 타일맵 정보 읽기
-	fread(&m_totalTileCount, sizeof(uint2d), 1, pTileMapFile);
+	// 타일맵 개수 정보 읽기
+	Int2d tile2dCount; // 1x1이라면 x와 y는 각각 1인데 이거 이름 잘못지음
+	fread(&tile2dCount, sizeof(Int2d), 1, pTileMapFile);
+	m_tileEnd2dIdx = tile2dCount - 1;
+
+	// 타일의 각 사이즈 읽기
 	fread(&m_tileSize, sizeof(Size), 1, pTileMapFile);
 
 	// 타일마다 정보 읽기
-	m_tiles.resize(m_totalTileCount.y);
-	for (uint32 y = 0; y < m_totalTileCount.y; ++y)
+	m_tiles.resize(tile2dCount.y);
+	for (int32 y = 0; y < tile2dCount.y; ++y)
 	{
-		m_tiles[y].resize(m_totalTileCount.x);
-		for (uint32 x = 0; x < m_totalTileCount.x; ++x)
+		m_tiles[y].resize(tile2dCount.x);
+		for (int32 x = 0; x < tile2dCount.x; ++x)
 		{
 			TilePtr spTile = std::make_shared<Tile>(this);
 
@@ -191,7 +196,7 @@ void TileMap::LoadResource()
 			spTile->SetTileSpriteIndex(tileSpriteIdx);
 
 			// 로딩할 때 타일 좌표 설정
-			Point2d tilePos;
+			Int2d tilePos;
 			tilePos.x = x * m_tileSize.width;
 			tilePos.y = y * m_tileSize.height;
 			spTile->SetPosition(tilePos);
@@ -201,4 +206,25 @@ void TileMap::LoadResource()
 	}
 
 	fclose(pTileMapFile);
+}
+
+TilePtr TileMap::FindTile(const Int2d& cellPos) const
+{
+	if ((cellPos.x < 0) ||
+		(cellPos.x > m_tileEnd2dIdx.x) ||
+		(cellPos.y < 0) ||
+		(cellPos.y > m_tileEnd2dIdx.y))
+	{
+		return nullptr;
+	}
+
+	return m_tiles[cellPos.y][cellPos.x];
+}
+
+Vec2d TileMap::ConvertCellPositionToWorldPosition(const Int2d& cellPos) const
+{
+	Vec2d worldPos;
+	worldPos.x = (m_tileSize.width * cellPos.x) + (m_tileSize.width / 2);
+	worldPos.y = (m_tileSize.height * cellPos.y) + (m_tileSize.height / 2);
+	return worldPos;
 }

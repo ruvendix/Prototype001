@@ -77,6 +77,9 @@
     <Filter Include="소스 파일\02. System\07. DebugSystem">
       <UniqueIdentifier>{db98a99f-52c1-47ef-84af-e11ea3662391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\09. Math">
+      <UniqueIdentifier>{f6ce381c-6284-425a-b3e1-ae777a658050}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Pch.h">
@@ -231,6 +234,9 @@
     </ClInclude>
     <ClInclude Include="Sources\DebugSystem.h">
       <Filter>소스 파일\02. System\07. DebugSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Vec2d.h">
+      <Filter>소스 파일\09. Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

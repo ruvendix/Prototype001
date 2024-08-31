@@ -15,7 +15,7 @@ Camera::~Camera()
 
 }
 
-const Point2d& Camera::CalcScreenCenterOffsetPosition()
+const Vec2d& Camera::CalcScreenCenterOffsetPosition()
 {
 	Size screenCenterSize = GameApplication::I()->GetHalfResolution();
 
@@ -25,7 +25,7 @@ const Point2d& Camera::CalcScreenCenterOffsetPosition()
 	}
 
 	TransformComponentPtr spTargetTransformComponent = GET_COMPONENT(m_pTarget, TransformComponent);
-	const Point2d& targetPos = spTargetTransformComponent->GetPosition();
+	const Vec2d& targetPos = spTargetTransformComponent->GetPosition();
 
 	// 월드 범위 체크
 	const Size& worldSize = GameApplication::I()->GetWorldSize();

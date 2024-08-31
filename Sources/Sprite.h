@@ -4,7 +4,7 @@
 
 struct SpriteInfo
 {
-	Point2d startPos;
+	Int2d startPos;
 	Size size;
 	TexturePtr spTex = nullptr;
 	uint32 excludeColor = 0;

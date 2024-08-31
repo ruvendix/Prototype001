@@ -11,7 +11,7 @@ TransformComponent::~TransformComponent()
 
 }
 
-void TransformComponent::AddPosition(const Point2d& pos)
+void TransformComponent::AddPosition(const Vec2d& pos)
 {
 	m_pos.x += pos.x;
 	m_pos.y += pos.y;

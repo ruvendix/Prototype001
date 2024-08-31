@@ -12,7 +12,7 @@ UiButton::UiButton()
 
 UiButton::~UiButton()
 {
-
+	
 }
 
 bool UiButton::Update()
@@ -37,14 +37,14 @@ bool UiButton::Update()
 		//{
 		//	// 범위 안에 들어온거면 이미지 변경
 		//	m_buttonState = EButtonState::OnMouse;
-		//	SetUiSpriteIndex(ENUM_TO_NUM(m_buttonState));
+		//	SetUiSpriteIndex(TO_NUM(m_buttonState));
 		//}
 
 		if (GET_SYSTEM(InputSystem)->IsKeyDown(EInputValue::LButton))
 		{
 			// 범위 안에 들어온거면 이미지 변경
 			m_buttonState = EButtonState::Clicked;
-			SetUiSpriteIndex(ENUM_TO_NUM(m_buttonState));
+			SetUiSpriteIndex(TO_NUM(m_buttonState));
 		}
 
 		if ((m_buttonState == EButtonState::Clicked) &&
@@ -57,7 +57,7 @@ bool UiButton::Update()
 			}
 
 			m_buttonState = EButtonState::None;
-			SetUiSpriteIndex(ENUM_TO_NUM(m_buttonState));
+			SetUiSpriteIndex(TO_NUM(m_buttonState));
 		}
 	}
 	else
@@ -66,7 +66,7 @@ bool UiButton::Update()
 			(GET_SYSTEM(InputSystem)->IsKeyUp(EInputValue::LButton)))
 		{
 			m_buttonState = EButtonState::None;
-			SetUiSpriteIndex(ENUM_TO_NUM(m_buttonState));
+			SetUiSpriteIndex(TO_NUM(m_buttonState));
 		}
 	}
 

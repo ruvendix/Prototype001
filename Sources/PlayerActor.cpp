@@ -30,14 +30,19 @@ void PlayerActor::Startup()
 
 	m_speed = 300.0f;
 
+	// 셀 좌표 설정
+	m_currentCellPos = Int2d(3, 4);
+
+	// 설정한 셀 좌표를 화면 좌표로 변환
+	TileMapPtr spTileMap = GET_SYSTEM(ResourceSystem)->GetTileMap();
+	Vec2d playerWorldPos = spTileMap->ConvertCellPositionToWorldPosition(m_currentCellPos);
+
 	TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
-	spTransformComponent->SetPosition(200, 300);
-	spTransformComponent->SetSize(200, 200);
+	spTransformComponent->SetPosition(playerWorldPos);
+	spTransformComponent->SetSize(200, 200); // 이건 고정
 
 	// 콜라이더 설정
 	BoxColliderPtr spBoxCollider = std::make_shared<BoxCollider>();
-
-	TileMapPtr spTileMap = GET_SYSTEM(ResourceSystem)->GetTileMap();
 	spBoxCollider->SetExtents(spTileMap->GetTileSize() / 3); // 콜라이더 크기는 따로 설정 가능(타일 크기와 맞춤)
 	
 #pragma region 컬리전 등록
@@ -86,8 +91,6 @@ void PlayerActor::Startup()
 bool PlayerActor::Update()
 {
 	Super::Update();
-
-	UpdateInput();
 	m_playerStates[m_currentStateIdx]->Update();
 
 	return true;
@@ -101,43 +104,35 @@ void PlayerActor::Cleanup()
 	spCamera->SetTarget(nullptr);
 }
 
-void PlayerActor::UpdateInput()
+void PlayerActor::ApplyNextCellPosition(const Int2d& nextCellPos, bool bDelay)
 {
-	// 항상 Idle 상태로 시작
-	m_currentStateIdx = PlayerIdleStateId::s_id;
-
-	// 프레임당 이동량으로 계산
-	float deltaSeconds = GET_SYSTEM(FrameSystem)->GetDeltaSeconds();
-	float deltaMove = m_speed * deltaSeconds;
-
-	Point2d deltaPos;
-	if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Left))
+	if (bDelay == false)
 	{
-		deltaPos.x = static_cast<int32>(deltaMove * -1.0f);
-		m_currentDir = EPlayerDirection::Left;
-		m_currentStateIdx = PlayerWalkStateId::s_id;
-	}
-	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Right))
-	{
-		deltaPos.x = static_cast<int32>(deltaMove);
-		m_currentDir = EPlayerDirection::Right;
-		m_currentStateIdx = PlayerWalkStateId::s_id;
-	}
-	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Up))
-	{
-		deltaPos.y = static_cast<int32>(deltaMove * -1.0f);
-		m_currentDir = EPlayerDirection::Up;
-		m_currentStateIdx = PlayerWalkStateId::s_id;
-	}
-	else if (GET_SYSTEM(InputSystem)->IsKeyPress(EInputValue::Down))
-	{
-		deltaPos.y = static_cast<int32>(deltaMove);
-		m_currentDir = EPlayerDirection::Down;
-		m_currentStateIdx = PlayerWalkStateId::s_id;
+		m_currentCellPos = nextCellPos;
+		
+		TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
+		spTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(nextCellPos));
 	}
 
-	TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
-	spTransformComponent->AddPosition(deltaPos);
+	m_destCellPos = nextCellPos;
+}
+
+void PlayerActor::ApplyNextCellPositionToCurrentCellPosition()
+{
+	ApplyNextCellPosition(m_destCellPos, false);
+}
+
+Vec2d PlayerActor::ConvertCellPositionToWorldPosition(const Int2d& cellPos) const
+{
+	// 설정한 셀 좌표를 화면 좌표로 변환
+	TileMapPtr spTileMap = GET_SYSTEM(ResourceSystem)->GetTileMap();
+	Vec2d worldPos = spTileMap->ConvertCellPositionToWorldPosition(cellPos);
+	return worldPos;
+}
+
+Vec2d PlayerActor::CalcDestinationWorldPosition() const
+{
+	return ConvertCellPositionToWorldPosition(m_destCellPos);
 }
 
 void PlayerActor::OnCollisionHit(CollisionComponentPtr spTargetCollisionComponent)
@@ -147,7 +142,7 @@ void PlayerActor::OnCollisionHit(CollisionComponentPtr spTargetCollisionComponen
 
 	// 일단은 right 적용
 	TransformComponentPtr spTransformComponent = GET_COMPONENT(this, TransformComponent);
-	Point2d pos = spTransformComponent->GetPosition();
+	Vec2d pos = spTransformComponent->GetPosition();
 
 	int32 intersectedLength = 0;
 	switch (m_currentDir)

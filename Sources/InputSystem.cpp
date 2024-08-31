@@ -20,7 +20,7 @@ void InputSystem::Startup()
 
 bool InputSystem::Update()
 {
-	const uint32 inputValueCount = ENUM_TO_NUM(EInputValue::Count);
+	const uint32 inputValueCount = TO_NUM(EInputValue::Count);
 	std::array<BYTE, inputValueCount> currentInputStates;
 	if (::GetKeyboardState(currentInputStates.data()) == FALSE)
 	{

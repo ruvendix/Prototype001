@@ -32,5 +32,5 @@ void ColliderBase::Render()
 
 void ColliderBase::Cleanup()
 {
-
+	
 }

@@ -105,9 +105,8 @@ void CollisionSystem::Render()
 	HPEN hPen = ::CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
 	HPEN hPrevPen = static_cast<HPEN>(::SelectObject(hBackbufferDc, hPen));
 
-	Point2d cameraOffsetPos;
 	CameraPtr spCamera = GameApplication::I()->GetCurrentCamera();
-	cameraOffsetPos = spCamera->GetOffsetPosition();
+	const Vec2d& cameraOffsetPos = spCamera->GetOffsetPosition();
 
 	for (RECT& intersectedRect : m_intersectedRects)
 	{

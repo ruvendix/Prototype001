@@ -2,6 +2,7 @@
 
 #pragma warning(disable: 6031)  // 함수 반환값 무시되었다는 경고
 #pragma warning(disable: 26495) // 멤버 변수를 초기화하지 않았다는 경고
+#pragma warning(disable: 28020) // 뭔지 모를 경고
 
 #pragma comment(lib, "Msimg32.lib")
 
@@ -34,3 +35,4 @@ WinSDKVer.h를 포함하고 _WIN32_WINNT를 지원하려는 플랫폼으로 설�
 #include "Defines.h"
 #include "SharedPointers.h"
 #include "GlobalHelper.h"
+#include "Vec2d.h"

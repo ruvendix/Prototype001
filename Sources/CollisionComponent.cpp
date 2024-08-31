@@ -59,14 +59,14 @@ void CollisionComponent::ApplyCollider(ColliderBasePtr spColider)
 
 void CollisionComponent::AddCollisionResponse(ECollisionObjectType collisionObjectType, ECollisionResponseState collisionResponseState)
 {
-	uint32 leftShiftCount = ENUM_TO_NUM(collisionObjectType) * 2;
-	m_collisionResponseFlag |= (ENUM_TO_NUM(collisionResponseState) << leftShiftCount); // 왼쪽으로 시프트
+	uint32 leftShiftCount = TO_NUM(collisionObjectType) * 2;
+	m_collisionResponseFlag |= (TO_NUM(collisionResponseState) << leftShiftCount); // 왼쪽으로 시프트
 }
 
 ECollisionResponseState CollisionComponent::TestCollisionResponseBit(ECollisionObjectType collisionObjectType) const
 {
-	uint32 leftShiftCount = (ENUM_TO_NUM(collisionObjectType) + 1) * 2;
-	uint32 rightShiftCount = ENUM_TO_NUM(collisionObjectType) * 2;
+	uint32 leftShiftCount = (TO_NUM(collisionObjectType) + 1) * 2;
+	uint32 rightShiftCount = TO_NUM(collisionObjectType) * 2;
 
 	uint32 collisionResponseBit = 0;
 
@@ -81,5 +81,5 @@ ECollisionResponseState CollisionComponent::TestCollisionResponseBit(ECollisionO
 	collisionResponseBit = (collisionResponseBit >> rightShiftCount); // 오른쪽으로 시프트
 
 	// collisionResponseBit는 00 01 10 이렇게 3개가 존재
-	return NUM_TO_ENUM(collisionResponseBit, ECollisionResponseState);
+	return TO_ENUM(collisionResponseBit, ECollisionResponseState);
 }

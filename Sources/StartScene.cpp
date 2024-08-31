@@ -28,7 +28,7 @@ void StartScene::Startup()
 
 #pragma region 버튼 테스트
 	//UiButtonPtr spUiTestButton = GET_SYSTEM(UiSystem)->CreateUi<UiButton>("TestButton");
-	//spUiTestButton->SetPosition(Point2d(300, 300));
+	//spUiTestButton->SetPosition(Int2d(300, 300));
 	//spUiTestButton->SetSize(Size(200, 200));
 
 	//// 버튼 스프라이트
@@ -36,13 +36,13 @@ void StartScene::Startup()
 	//SpritePtr spUiButtonSprite = GET_SYSTEM(ResourceSystem)->CreateSprite("UiButton");
 
 	//SpriteInfo uiButtonSpriteInfo[2];
-	//uiButtonSpriteInfo[0].pos = Point2d(0, 0);
+	//uiButtonSpriteInfo[0].pos = Int2d(0, 0);
 	//uiButtonSpriteInfo[0].size = Size(150, 150);
 	//uiButtonSpriteInfo[0].spTex = spUiButtonTex;
 	//uiButtonSpriteInfo[0].excludeColor = RGB(255, 255, 255);
 	//spUiButtonSprite->AddSpriteInfo(uiButtonSpriteInfo[0]);
 
-	//uiButtonSpriteInfo[1].pos = Point2d(150, 0);
+	//uiButtonSpriteInfo[1].pos = Int2d(150, 0);
 	//uiButtonSpriteInfo[1].size = Size(150, 150);
 	//uiButtonSpriteInfo[1].spTex = spUiButtonTex;
 	//uiButtonSpriteInfo[1].excludeColor = RGB(255, 255, 255);

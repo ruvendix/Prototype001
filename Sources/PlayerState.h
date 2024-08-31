@@ -7,7 +7,7 @@
 class PlayerStateBase : public IGameDefault
 {
 public:
-	using PlayerDirectionStrings = std::array<std::string, ENUM_TO_NUM(EPlayerDirection::Count)>;
+	using PlayerDirectionStrings = std::array<std::string, TO_NUM(EPlayerDirection::Count)>;
 
 public:
 	PlayerStateBase(PlayerActor* pOwner);
@@ -34,6 +34,7 @@ public:
 	virtual ~PlayerIdleState();
 
 	virtual bool Update() override;
+	bool ProcessIdleInput();
 };
 
 class PlayerWalkState : public PlayerStateBase
@@ -43,6 +44,7 @@ public:
 	virtual ~PlayerWalkState();
 
 	virtual bool Update() override;
+	bool ProcessWalkState();
 };
 
 class PlayerStateEnd : public PlayerStateBase

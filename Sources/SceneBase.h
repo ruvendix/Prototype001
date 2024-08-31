@@ -14,7 +14,7 @@ class Actor;
 class SceneBase : public IGameDefault
 {
 public:
-	using Actors = std::array<std::vector<Actor*>, ENUM_TO_NUM(EActorLayer::Count)>;
+	using Actors = std::array<std::vector<Actor*>, TO_NUM(EActorLayer::Count)>;
 
 public:
 	virtual void Startup() override;
@@ -47,7 +47,7 @@ public:
 		}
 
 		pActor->Startup();
-		m_actors[ENUM_TO_NUM(actorLayer)].emplace_back(pActor);
+		m_actors[TO_NUM(actorLayer)].emplace_back(pActor);
 		return pActor;
 	}
 

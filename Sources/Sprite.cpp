@@ -81,7 +81,7 @@ void Sprite::SaveResource()
 
 		fwrite(&texPathIdx, sizeof(uint32), 1, pSpriteFile);
 		fwrite(&pSpriteInfo->excludeColor, sizeof(uint32), 1, pSpriteFile);
-		fwrite(&pSpriteInfo->startPos, sizeof(Point2d), 1, pSpriteFile);
+		fwrite(&pSpriteInfo->startPos, sizeof(Int2d), 1, pSpriteFile);
 		fwrite(&pSpriteInfo->size, sizeof(Size), 1, pSpriteFile);
 	}
 
@@ -127,7 +127,7 @@ void Sprite::LoadResource()
 		spriteInfo.spTex = GET_SYSTEM(ResourceSystem)->LoadTexture(texPathTable[texStrPathIdx]);
 
 		fread(&spriteInfo.excludeColor, sizeof(uint32), 1, pSpriteFile);
-		fread(&spriteInfo.startPos, sizeof(Point2d), 1, pSpriteFile);
+		fread(&spriteInfo.startPos, sizeof(Int2d), 1, pSpriteFile);
 		fread(&spriteInfo.size, sizeof(Size), 1, pSpriteFile);
 
 		AddSpriteInfo(spriteInfo);
