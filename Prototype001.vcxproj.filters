@@ -1,364 +1,427 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
+    <Filter Include="Sources">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="소스 파일\00. Common">
-      <UniqueIdentifier>{4bd7017b-b7a3-4619-b36b-5f1e1a5279df}</UniqueIdentifier>
+    <Filter Include="Sources\Client">
+      <UniqueIdentifier>{130b339c-8e32-47d2-bc88-2ead70cfdc13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Application">
-      <UniqueIdentifier>{b17b6d93-dae0-4b35-a62f-97965ead9e68}</UniqueIdentifier>
+    <Filter Include="Sources\Engine">
+      <UniqueIdentifier>{4d6ddc3e-b743-4037-8d0f-fd7705717287}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System">
-      <UniqueIdentifier>{de9c2f6c-a3d9-4187-aae2-9c0948312ed8}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Global">
+      <UniqueIdentifier>{16ccb05a-af76-4315-bb03-feed164b9d5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\00. Common\00. Pch">
-      <UniqueIdentifier>{c0157d5d-71aa-49ff-a7ec-be9cbab957d6}</UniqueIdentifier>
+    <Filter Include="Sources\Client\Global">
+      <UniqueIdentifier>{8cb2426a-1af7-4dd7-b24d-ebf55af20ac1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\03. Resources">
-      <UniqueIdentifier>{ef42300a-ed6d-40a9-8aaf-6a2162851bd3}</UniqueIdentifier>
+    <Filter Include="Sources\Client\GameApplication">
+      <UniqueIdentifier>{8197e689-7313-4eeb-8af7-e095c92748aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\00. InputSystem">
-      <UniqueIdentifier>{7e628dd9-f55c-4eba-b974-623373141f93}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Log">
+      <UniqueIdentifier>{99bc8c6f-f47d-4543-b799-51d8c6e9202b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\01. FrameSystem">
-      <UniqueIdentifier>{dc2b73b0-e872-4426-b86b-6f0a95d251ed}</UniqueIdentifier>
+    <Filter Include="Sources\Pch">
+      <UniqueIdentifier>{6e2c879c-f2b4-47b2-9b9c-574293a12c6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\02. SceneSystem">
-      <UniqueIdentifier>{4a455567-09db-420b-baec-5e1427959443}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Time">
+      <UniqueIdentifier>{dbfed1c8-88c6-4090-82d1-34263eeaa5ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\02. SceneSystem\00. Scene">
-      <UniqueIdentifier>{b4669e83-fbad-44dd-b2fe-fd337e1ec1b3}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Log\Logger">
+      <UniqueIdentifier>{6ae2246b-9c3e-401a-af8e-6c0b159c95a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\03. PathSystem">
-      <UniqueIdentifier>{de751ee3-ab4c-4d54-92c5-75bc9c258359}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\File">
+      <UniqueIdentifier>{bffa6b39-ba82-448b-8444-ae962892af9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\04. ResourceSystem">
-      <UniqueIdentifier>{5931118f-fe97-48d2-bc3e-34d4ab460ddd}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\UtilityClass">
+      <UniqueIdentifier>{b1151907-f4d8-44a8-b230-bee2e1d2ac1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\00. Common\01. Interface">
-      <UniqueIdentifier>{916732d1-8a0b-4acf-8c7d-0fb331d09546}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\ErrorHandler">
+      <UniqueIdentifier>{3b912977-534b-44a7-b98f-05f6ed9d698f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04. Actor">
-      <UniqueIdentifier>{f8e80a37-c44d-427a-9f53-26abd95f51f8}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\String">
+      <UniqueIdentifier>{48a7a7e1-3579-4349-bd88-4b41ead33aad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\05 Component">
-      <UniqueIdentifier>{7c183b75-e754-47ca-9224-a5366d642d5b}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\GameFrame">
+      <UniqueIdentifier>{6b0cd3d5-00a7-4731-8721-985e6c673bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04. Actor\00. BaseActor">
-      <UniqueIdentifier>{065ff36b-3ccb-4c92-9911-13d40e407160}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\UserInput">
+      <UniqueIdentifier>{f850573d-630d-4691-8732-4e113b44b1c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\06. Camera">
-      <UniqueIdentifier>{dd55085b-155a-435d-a947-34cecadb8fbf}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Component">
+      <UniqueIdentifier>{ac26ec12-a99d-4213-a654-eabf28d05fbf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\05. CollisionSystem">
-      <UniqueIdentifier>{cf6dbcb7-0bd8-45b8-88d7-6eceb8d65fb2}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Actor">
+      <UniqueIdentifier>{e186d84d-3ec6-44d6-9f36-2279c06dfd4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\07. Collider">
-      <UniqueIdentifier>{ed5f2067-a82f-4e5c-b8be-e057a354a36d}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Scene">
+      <UniqueIdentifier>{813b741f-1add-4f1a-b4c2-addecfb6eaa3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\08. Ui">
-      <UniqueIdentifier>{4d4d5ce0-29fd-460c-9bd1-e2b40bc8f55e}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Event">
+      <UniqueIdentifier>{aa1cc32e-b10c-485f-9ed3-0722f4a7a87d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\06. UiSystem">
-      <UniqueIdentifier>{3028090c-b344-41e6-88ae-1f58fac17a86}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Resource">
+      <UniqueIdentifier>{5ebe628d-fc5b-4377-bcd9-c2a74c4223da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\03. Resources\TileMap">
-      <UniqueIdentifier>{c10b3aaf-f423-4505-927c-340460dd653f}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Resource\Texture">
+      <UniqueIdentifier>{a5e2bcb7-035d-4897-95d5-12323546a355}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04. Actor\02. TileMapActor">
-      <UniqueIdentifier>{4010c33a-2079-449b-b1c6-d0ba88a95f98}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Resource\Sprite">
+      <UniqueIdentifier>{af95e7f1-3e3e-448c-bd6c-1b18d657ea37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\04. Actor\01. PlayerActor">
-      <UniqueIdentifier>{6e93026e-44ee-491a-b0f9-5228e81b7f32}</UniqueIdentifier>
+    <Filter Include="Sources\Client\Scene">
+      <UniqueIdentifier>{00dbde32-bb6d-4a7b-90ee-6537b6b5ef52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. System\07. DebugSystem">
-      <UniqueIdentifier>{db98a99f-52c1-47ef-84af-e11ea3662391}</UniqueIdentifier>
+    <Filter Include="Sources\Client\Player">
+      <UniqueIdentifier>{77939aea-34c1-4198-8112-ee48230c677b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\09. Math">
-      <UniqueIdentifier>{f6ce381c-6284-425a-b3e1-ae777a658050}</UniqueIdentifier>
+    <Filter Include="Sources\Engine\Math">
+      <UniqueIdentifier>{7f95ae2f-97c2-4f96-8b13-84aa2be20837}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Pch.h">
-      <Filter>소스 파일\00. Common\00. Pch</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\FrameSystem.h">
-      <Filter>소스 파일\02. System\01. FrameSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GameApplication.h">
-      <Filter>소스 파일\01. Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\WindowProcedure.h">
-      <Filter>소스 파일\01. Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\InputEnums.h">
-      <Filter>소스 파일\02. System\00. InputSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\InputSystem.h">
-      <Filter>소스 파일\02. System\00. InputSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SceneSystem.h">
-      <Filter>소스 파일\02. System\02. SceneSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SceneBase.h">
-      <Filter>소스 파일\02. System\02. SceneSystem\00. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\StartScene.h">
-      <Filter>소스 파일\02. System\02. SceneSystem\00. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ResourceBase.h">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Texture.h">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SystemBase.h">
-      <Filter>소스 파일\02. System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SystemDefines.h">
-      <Filter>소스 파일\02. System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SystemManager.h">
-      <Filter>소스 파일\02. System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Defines.h">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Types.h">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\PathSystem.h">
-      <Filter>소스 파일\02. System\03. PathSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ResourceSystem.h">
-      <Filter>소스 파일\02. System\04. ResourceSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Flipbook.h">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\IGameDefault.h">
-      <Filter>소스 파일\00. Common\01. Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ComponentBase.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\TransformComponent.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\TextureComponent.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CompilerCounter.hpp">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SystemIdCounter.h">
-      <Filter>소스 파일\02. System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ComponentIdCounter.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ComponentDefines.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\FlipbookComponent.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\PawnActor.h">
-      <Filter>소스 파일\04. Actor\00. BaseActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Actor.h">
-      <Filter>소스 파일\04. Actor\00. BaseActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Camera.h">
-      <Filter>소스 파일\06. Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CameraComponent.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CollisionSystem.h">
-      <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CollisionComponent.h">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ColliderBase.h">
-      <Filter>소스 파일\07. Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\BoxCollider.h">
-      <Filter>소스 파일\07. Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\MonsterActor.h">
-      <Filter>소스 파일\04. Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\UiBase.h">
-      <Filter>소스 파일\08. Ui</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\UiButton.h">
-      <Filter>소스 파일\08. Ui</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\UiSystem.h">
-      <Filter>소스 파일\02. System\06. UiSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\EnumBitFlag.h">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CollisionResponseInfo.h">
-      <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SharedPointers.h">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Sprite.h">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GlobalHelper.h">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\PlayerActor.h">
-      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\PlayerState.h">
-      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\TileMap.h">
-      <Filter>소스 파일\03. Resources\TileMap</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Tile.h">
-      <Filter>소스 파일\03. Resources\TileMap</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\TileMapActor.h">
-      <Filter>소스 파일\04. Actor\02. TileMapActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\DebugSystem.h">
-      <Filter>소스 파일\02. System\07. DebugSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Vec2d.h">
-      <Filter>소스 파일\09. Math</Filter>
-    </ClInclude>
+    <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
+      <Filter>Sources\Client\GameApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\GameApplication\WindowProcedure.cpp">
+      <Filter>Sources\Client\GameApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\LogCategory.cpp">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\LogSystem.cpp">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GameMain.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Pch\Pch.cpp">
+      <Filter>Sources\Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Time\TimeUtility.cpp">
+      <Filter>Sources\Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\Logger\FileLogger.cpp">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\Logger\PopUpLogger.cpp">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\Logger\TraceLogger.cpp">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\File\FileStream.cpp">
+      <Filter>Sources\Engine\File</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\File\PathManager.cpp">
+      <Filter>Sources\Engine\File</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\ErrorHandler\ErrorHandler.cpp">
+      <Filter>Sources\Engine\ErrorHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Time\Timer.cpp">
+      <Filter>Sources\Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Time\TimerManager.cpp">
+      <Filter>Sources\Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\GameFrame\GameFrameHandler.cpp">
+      <Filter>Sources\Engine\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\UserInput\KeyboardInputHandler.cpp">
+      <Filter>Sources\Engine\UserInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\Component.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\TransformComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\Actor.cpp">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\Scene.cpp">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneTracer.cpp">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneRenderer.cpp">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Event\EventListener.cpp">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Event\EventManager.cpp">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneManager.cpp">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\PersistantResource.cpp">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\ResourceMananger.cpp">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\ResourceStorage.cpp">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Texture\Texture.cpp">
+      <Filter>Sources\Engine\Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Texture\TextureStorage.cpp">
+      <Filter>Sources\Engine\Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\LogCategoryList.cpp">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\StaticSpriteComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSprite.cpp">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSprite.cpp">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.cpp">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\SpriteBase.cpp">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\DynamicSpriteComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Global\UtilityFunctions.cpp">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.cpp">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\SceneActor.cpp">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
+      <Filter>Sources\Client\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\SceneActorMoveComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
+      <Filter>Sources\Client\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
+      <Filter>Sources\Client\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\CameraComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Math\Size.cpp">
+      <Filter>Sources\Engine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Pch.cpp">
-      <Filter>소스 파일\00. Common\00. Pch</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\FrameSystem.cpp">
-      <Filter>소스 파일\02. System\01. FrameSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\GameApplication.cpp">
-      <Filter>소스 파일\01. Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\WindowProcedure.cpp">
-      <Filter>소스 파일\01. Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\InputSystem.cpp">
-      <Filter>소스 파일\02. System\00. InputSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\SceneSystem.cpp">
-      <Filter>소스 파일\02. System\02. SceneSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\SceneBase.cpp">
-      <Filter>소스 파일\02. System\02. SceneSystem\00. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\StartScene.cpp">
-      <Filter>소스 파일\02. System\02. SceneSystem\00. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ResourceBase.cpp">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Texture.cpp">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\SystemBase.cpp">
-      <Filter>소스 파일\02. System</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\SystemManager.cpp">
-      <Filter>소스 파일\02. System</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\PathSystem.cpp">
-      <Filter>소스 파일\02. System\03. PathSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ResourceSystem.cpp">
-      <Filter>소스 파일\02. System\04. ResourceSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Flipbook.cpp">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ComponentBase.cpp">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\TransformComponent.cpp">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\TextureComponent.cpp">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\FlipbookComponent.cpp">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Actor.cpp">
-      <Filter>소스 파일\04. Actor\00. BaseActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\PawnActor.cpp">
-      <Filter>소스 파일\04. Actor\00. BaseActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Camera.cpp">
-      <Filter>소스 파일\06. Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\CameraComponent.cpp">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\CollisionSystem.cpp">
-      <Filter>소스 파일\02. System\05. CollisionSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\CollisionComponent.cpp">
-      <Filter>소스 파일\05 Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ColliderBase.cpp">
-      <Filter>소스 파일\07. Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\BoxCollider.cpp">
-      <Filter>소스 파일\07. Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\MonsterActor.cpp">
-      <Filter>소스 파일\04. Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\UiBase.cpp">
-      <Filter>소스 파일\08. Ui</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\UiButton.cpp">
-      <Filter>소스 파일\08. Ui</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\UiSystem.cpp">
-      <Filter>소스 파일\02. System\06. UiSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Sprite.cpp">
-      <Filter>소스 파일\03. Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\PlayerActor.cpp">
-      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\PlayerState.cpp">
-      <Filter>소스 파일\04. Actor\01. PlayerActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\TileMap.cpp">
-      <Filter>소스 파일\03. Resources\TileMap</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tile.cpp">
-      <Filter>소스 파일\03. Resources\TileMap</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\GlobalHelper.cpp">
-      <Filter>소스 파일\00. Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\TileMapActor.cpp">
-      <Filter>소스 파일\04. Actor\02. TileMapActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\DebugSystem.cpp">
-      <Filter>소스 파일\02. System\07. DebugSystem</Filter>
-    </ClCompile>
+    <ClInclude Include="Sources\Engine\Global\DataTypes.h">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\Inclusion.h">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\Macros.h">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\IGameLoop.h">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\GameApplication\GameApplication.h">
+      <Filter>Sources\Client\GameApplication</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\GameApplication\WindowProcedure.h">
+      <Filter>Sources\Client\GameApplication</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogCategory.h">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogEnum.h">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogInclusion.h">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogMacro.h">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogSystem.h">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Pch\Pch.h">
+      <Filter>Sources\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Time\TimeUtility.h">
+      <Filter>Sources\Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\FileLogger.h">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\PopUpLogger.h">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\TraceLogger.h">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\ILogger.h">
+      <Filter>Sources\Engine\Log\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\File\FileStream.h">
+      <Filter>Sources\Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\File\PathManager.h">
+      <Filter>Sources\Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.h">
+      <Filter>Sources\Engine\UtilityClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnum.h">
+      <Filter>Sources\Engine\ErrorHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorHandler.h">
+      <Filter>Sources\Engine\ErrorHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\String\StringUtility.hpp">
+      <Filter>Sources\Engine\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Time\Timer.h">
+      <Filter>Sources\Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Time\TimerManager.h">
+      <Filter>Sources\Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\GameFrame\GameFrameHandler.h">
+      <Filter>Sources\Engine\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\UserInputStruct.h">
+      <Filter>Sources\Engine\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\KeyboardInputHandler.h">
+      <Filter>Sources\Engine\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\UserInputEnum.h">
+      <Filter>Sources\Engine\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\Component.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\TransformComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\Actor.h">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\Scene.h">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneTracer.h">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\ActorEnum.h">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneRenderer.h">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventId.h">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventListener.h">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventManager.h">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventMacro.h">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneManager.h">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\PersistantResource.h">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\ResourceMananger.h">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\ResourceStorage.h">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Texture\Texture.h">
+      <Filter>Sources\Engine\Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Texture\TextureStorage.h">
+      <Filter>Sources\Engine\Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogCategoryList.h">
+      <Filter>Sources\Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\StaticSpriteComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSprite.h">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSprite.h">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.h">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\SpriteBase.h">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\DynamicSpriteComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\UtilityFunctions.h">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.h">
+      <Filter>Sources\Engine\Resource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\SceneActor.h">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\GameScene.h">
+      <Filter>Sources\Client\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\SceneActorMoveComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Global\DataTypes.h">
+      <Filter>Sources\Client\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerActor.h">
+      <Filter>Sources\Client\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerState.h">
+      <Filter>Sources\Client\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Global\Inclusion.h">
+      <Filter>Sources\Client\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\CameraComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Math\Size.h">
+      <Filter>Sources\Engine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

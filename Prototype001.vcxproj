@@ -18,6 +18,316 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\GameApplication\WindowProcedure.cpp" />
+    <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\Actor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\SceneActor.cpp" />
+    <ClCompile Include="Sources\Engine\Component\CameraComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\Component.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\DynamicSpriteComponent.cpp" />
+    <ClCompile Include="Sources\Engine\Component\RenderComponent.cpp" />
+    <ClCompile Include="Sources\Engine\Component\SceneActorMoveComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\StaticSpriteComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\TransformComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\ErrorHandler\ErrorHandler.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Event\EventListener.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Event\EventManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\File\PathManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\File\FileStream.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\GameFrame\GameFrameHandler.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Global\UtilityFunctions.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\LogCategory.cpp" />
+    <ClCompile Include="Sources\Engine\Log\LogCategoryList.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\Logger\FileLogger.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\Logger\PopUpLogger.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\Logger\TraceLogger.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Log\LogSystem.cpp" />
+    <ClCompile Include="Sources\Engine\Math\Size.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\PersistantResource.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\ResourceMananger.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\ResourceStorage.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSprite.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.cpp" />
+    <ClCompile Include="Sources\Engine\Resource\Sprite\SpriteBase.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSprite.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Texture\Texture.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Texture\TextureStorage.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\Scene.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneRenderer.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneTracer.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Time\Timer.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Time\TimerManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Time\TimeUtility.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\UserInput\KeyboardInputHandler.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\GameMain.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Pch\Pch.cpp">
+      <DeploymentContent>false</DeploymentContent>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\Client\GameApplication\GameApplication.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\GameApplication\WindowProcedure.h" />
+    <ClInclude Include="Sources\Client\Global\DataTypes.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Global\Inclusion.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerState.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\GameScene.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\Actor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\ActorEnum.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\SceneActor.h" />
+    <ClInclude Include="Sources\Engine\Component\CameraComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\Component.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\DynamicSpriteComponent.h" />
+    <ClInclude Include="Sources\Engine\Component\RenderComponent.h" />
+    <ClInclude Include="Sources\Engine\Component\SceneActorMoveComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\StaticSpriteComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\TransformComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnum.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorHandler.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventId.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventListener.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventMacro.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Event\EventManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\File\PathManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\File\FileStream.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\GameFrame\GameFrameHandler.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\DataTypes.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\IGameLoop.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\Inclusion.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\Macros.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\UtilityFunctions.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogCategory.h" />
+    <ClInclude Include="Sources\Engine\Log\LogCategoryList.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogEnum.h" />
+    <ClInclude Include="Sources\Engine\Log\Logger\FileLogger.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\ILogger.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\PopUpLogger.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\Logger\TraceLogger.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Log\LogInclusion.h" />
+    <ClInclude Include="Sources\Engine\Log\LogMacro.h" />
+    <ClInclude Include="Sources\Engine\Log\LogSystem.h" />
+    <ClInclude Include="Sources\Engine\Math\Size.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\PersistantResource.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\ResourceMananger.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\ResourceStorage.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSprite.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.h" />
+    <ClInclude Include="Sources\Engine\Resource\Sprite\SpriteBase.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSprite.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Texture\Texture.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Texture\TextureStorage.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\Scene.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneRenderer.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneTracer.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\String\StringUtility.hpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Time\Timer.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Time\TimerManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Time\TimeUtility.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\KeyboardInputHandler.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\UserInputEnum.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\UserInputStruct.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Pch\Pch.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -81,20 +391,22 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Sources;Sources/Pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <Manifest>
       <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
@@ -148,105 +460,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Sources\Actor.h" />
-    <ClInclude Include="Sources\BoxCollider.h" />
-    <ClInclude Include="Sources\Camera.h" />
-    <ClInclude Include="Sources\CameraComponent.h" />
-    <ClInclude Include="Sources\ColliderBase.h" />
-    <ClInclude Include="Sources\CollisionComponent.h" />
-    <ClInclude Include="Sources\CollisionResponseInfo.h" />
-    <ClInclude Include="Sources\CollisionSystem.h" />
-    <ClInclude Include="Sources\CompilerCounter.hpp" />
-    <ClInclude Include="Sources\ComponentBase.h" />
-    <ClInclude Include="Sources\ComponentDefines.h" />
-    <ClInclude Include="Sources\ComponentIdCounter.h" />
-    <ClInclude Include="Sources\DebugSystem.h" />
-    <ClInclude Include="Sources\Defines.h" />
-    <ClInclude Include="Sources\EnumBitFlag.h" />
-    <ClInclude Include="Sources\Flipbook.h" />
-    <ClInclude Include="Sources\FlipbookComponent.h" />
-    <ClInclude Include="Sources\FrameSystem.h" />
-    <ClInclude Include="Sources\GameApplication.h" />
-    <ClInclude Include="Sources\GlobalHelper.h" />
-    <ClInclude Include="Sources\IGameDefault.h" />
-    <ClInclude Include="Sources\InputEnums.h" />
-    <ClInclude Include="Sources\InputSystem.h" />
-    <ClInclude Include="Sources\MonsterActor.h" />
-    <ClInclude Include="Sources\PathSystem.h" />
-    <ClInclude Include="Sources\Pch.h" />
-    <ClInclude Include="Sources\PlayerActor.h" />
-    <ClInclude Include="Sources\PlayerState.h" />
-    <ClInclude Include="Sources\ResourceBase.h" />
-    <ClInclude Include="Sources\ResourceSystem.h" />
-    <ClInclude Include="Sources\SceneBase.h" />
-    <ClInclude Include="Sources\SceneSystem.h" />
-    <ClInclude Include="Sources\SharedPointers.h" />
-    <ClInclude Include="Sources\Sprite.h" />
-    <ClInclude Include="Sources\StartScene.h" />
-    <ClInclude Include="Sources\PawnActor.h" />
-    <ClInclude Include="Sources\SystemBase.h" />
-    <ClInclude Include="Sources\SystemIdCounter.h" />
-    <ClInclude Include="Sources\SystemDefines.h" />
-    <ClInclude Include="Sources\SystemManager.h" />
-    <ClInclude Include="Sources\Texture.h" />
-    <ClInclude Include="Sources\TextureComponent.h" />
-    <ClInclude Include="Sources\TileMapActor.h" />
-    <ClInclude Include="Sources\TransformComponent.h" />
-    <ClInclude Include="Sources\Types.h" />
-    <ClInclude Include="Sources\UiBase.h" />
-    <ClInclude Include="Sources\UiButton.h" />
-    <ClInclude Include="Sources\UiSystem.h" />
-    <ClInclude Include="Sources\Vec2d.h" />
-    <ClInclude Include="Sources\WindowProcedure.h" />
-    <ClInclude Include="Sources\Tile.h" />
-    <ClInclude Include="Sources\TileMap.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Sources\Actor.cpp" />
-    <ClCompile Include="Sources\BoxCollider.cpp" />
-    <ClCompile Include="Sources\Camera.cpp" />
-    <ClCompile Include="Sources\CameraComponent.cpp" />
-    <ClCompile Include="Sources\ColliderBase.cpp" />
-    <ClCompile Include="Sources\CollisionComponent.cpp" />
-    <ClCompile Include="Sources\CollisionSystem.cpp" />
-    <ClCompile Include="Sources\ComponentBase.cpp" />
-    <ClCompile Include="Sources\DebugSystem.cpp" />
-    <ClCompile Include="Sources\Flipbook.cpp" />
-    <ClCompile Include="Sources\FlipbookComponent.cpp" />
-    <ClCompile Include="Sources\FrameSystem.cpp" />
-    <ClCompile Include="Sources\GameApplication.cpp" />
-    <ClCompile Include="Sources\GlobalHelper.cpp" />
-    <ClCompile Include="Sources\InputSystem.cpp" />
-    <ClCompile Include="Sources\Main.cpp" />
-    <ClCompile Include="Sources\MonsterActor.cpp" />
-    <ClCompile Include="Sources\PathSystem.cpp" />
-    <ClCompile Include="Sources\Pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\PlayerActor.cpp" />
-    <ClCompile Include="Sources\PlayerState.cpp" />
-    <ClCompile Include="Sources\ResourceBase.cpp" />
-    <ClCompile Include="Sources\ResourceSystem.cpp" />
-    <ClCompile Include="Sources\SceneBase.cpp" />
-    <ClCompile Include="Sources\SceneSystem.cpp" />
-    <ClCompile Include="Sources\Sprite.cpp" />
-    <ClCompile Include="Sources\StartScene.cpp" />
-    <ClCompile Include="Sources\PawnActor.cpp" />
-    <ClCompile Include="Sources\SystemBase.cpp" />
-    <ClCompile Include="Sources\SystemManager.cpp" />
-    <ClCompile Include="Sources\Texture.cpp" />
-    <ClCompile Include="Sources\TextureComponent.cpp" />
-    <ClCompile Include="Sources\Tile.cpp" />
-    <ClCompile Include="Sources\TileMapActor.cpp" />
-    <ClCompile Include="Sources\TransformComponent.cpp" />
-    <ClCompile Include="Sources\UiBase.cpp" />
-    <ClCompile Include="Sources\UiButton.cpp" />
-    <ClCompile Include="Sources\UiSystem.cpp" />
-    <ClCompile Include="Sources\WindowProcedure.cpp" />
-    <ClCompile Include="Sources\TileMap.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
