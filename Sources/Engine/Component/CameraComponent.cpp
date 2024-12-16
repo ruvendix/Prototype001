@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "CameraComponent.h"
 
-DEFINE_COMPILETIME_ID(CameraComponent, ComponentCounter)
+DEFINE_COMPILETIME_ID(CameraComponent, ComponentIdCounter)
 
 CameraComponent::CameraComponent()
 {

@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "TransformComponent.h"
 
-DEFINE_COMPILETIME_ID(TransformComponent, ComponentCounter)
+DEFINE_COMPILETIME_ID(TransformComponent, ComponentIdCounter)
 
 TransformComponent::TransformComponent()
 {

@@ -3,7 +3,6 @@
 
 class StaticSpriteComponent : public RenderComponent
 {
-	// 렌더 컴포넌트도 Id는 할당
 	DECLARE_COMPILETIME_ID(StaticSpriteComponent)
 
 public:

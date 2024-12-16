@@ -33,6 +33,7 @@
 #include "Engine/Scene/SceneTracer.h"
 #include "Engine/Scene/SceneRenderer.h"
 
+#include "Engine/Event/Event.h"
 #include "Engine/Event/EventManager.h"
 #include "Engine/Event/EventListener.h"
 

@@ -3,11 +3,10 @@
 #include "SceneManager.h"
 
 DEFINE_SINGLETON(SceneManager);
-DEFINE_EVENT_HANDLER(SceneManager);
 
 void SceneManager::Startup()
 {
-	RegisterEventHandler(EEventId::ChangeScene, &SceneManager::OnChangeScene);
+	RegisterEventHandler<SceneChangeEvent>(&SceneManager::OnChangeScene);
 }
 
 bool SceneManager::Update(float deltaSeconds)

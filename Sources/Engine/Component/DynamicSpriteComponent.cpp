@@ -4,7 +4,7 @@
 
 #include "Engine/Resource/Sprite/DynamicSprite.h"
 
-DEFINE_COMPILETIME_ID(DynamicSpriteComponent, ComponentCounter)
+DEFINE_COMPILETIME_ID(DynamicSpriteComponent, ComponentIdCounter)
 
 DynamicSpriteComponent::DynamicSpriteComponent()
 {

@@ -1,10 +1,12 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class SceneManager : public EventListener
+#include "SceneEvent.h"
+
+class SceneManager : public IGameLoop
 {
 	DECLARE_SINGLETON(SceneManager)
-	DECLARE_EVENT_HANDLER(SceneManager)
+	DEFINE_EVENT_HANDLER;
 
 public:
 	template <typename TScene>
@@ -15,18 +17,12 @@ public:
 		return GetCurrentScene();
 	}
 
-	// 생성과 처리는 미리해도 교체는 지연시킴
+	// 씬을 교체할 때는 안전하게 지연시켜서 처리함
 	template <typename TScene>
-	Scene* ReserveChangeScene()
+	void ReserveChangeScene()
 	{
-		ScenePtr spNextScene = std::make_shared<TScene>();
-		spNextScene->Startup();
-
-		EventArgs eventArgs;
-		eventArgs.push_back(spNextScene);
-
-		EventManager::I()->TriggerEvent(EEventId::ChangeScene, eventArgs, this);
-		return (spNextScene.get());
+		ScenePtr spNextScene = std::make_shared<TScene>(this);
+		ReserveEvent<SceneChangeEvent>(spNextScene);
 	}
 
 	virtual void Startup() override;

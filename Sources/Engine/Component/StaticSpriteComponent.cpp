@@ -4,7 +4,7 @@
 
 #include "Engine/Resource/Sprite/StaticSprite.h"
 
-DEFINE_COMPILETIME_ID(StaticSpriteComponent, ComponentCounter)
+DEFINE_COMPILETIME_ID(StaticSpriteComponent, ComponentIdCounter)
 
 StaticSpriteComponent::StaticSpriteComponent()
 {

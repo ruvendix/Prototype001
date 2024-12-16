@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "SceneActorMoveComponent.h"
 
-DEFINE_COMPILETIME_ID(SceneActorMoveComponent, ComponentCounter)
+DEFINE_COMPILETIME_ID(SceneActorMoveComponent, ComponentIdCounter)
 
 SceneActorMoveComponent::SceneActorMoveComponent()
 {

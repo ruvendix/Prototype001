@@ -1,14 +1,13 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "EventId.h"
+#include "Event.h"
 #include "EventListener.h"
 
 struct EventInfo
 {
-	EEventId eventId = EEventId::Unknown;
+	EventPtr spEvent = nullptr;
 	EventArgs eventArgs;
-	EventListener* pEventListener = nullptr;
 };
 
 class EventManager
@@ -18,11 +17,8 @@ class EventManager
 public:
 	void ProcessEvents();
 
-	void TriggerEvent(EEventId eventId, EventListener* pEventListener);
-	void TriggerEvent(EEventId eventId, EventArgs eventArgs, EventListener* pEventListener);
-
-	void TriggerImmediatelyEvent(EEventId eventId, EventListener* pEventListener);
-	void TriggerImmediatelyEvent(EEventId eventId, EventArgs eventArgs, EventListener* pEventListener);
+	void ReserveEvent(const EventInfo& eventInfo);
+	void TriggerEvent(const EventInfo& eventInfo);
 
 private:
 	std::queue<EventInfo> m_eventQueue;

@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-DEFINE_COMPILETIMER_COUNTER(ComponentCounter)
+DEFINE_COMPILETIMER_COUNTER(ComponentIdCounter)
 
 class Component : public IGameLoop
 {

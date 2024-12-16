@@ -31,7 +31,7 @@ public: \
 private: \
 	TOwner* m_pOwner = nullptr;
 
-#define CREATE_PIMPL m_spPimpl = std::make_shared<Pimpl>(this)
+#define ALLOC_PIMPL m_spPimpl = std::make_shared<Pimpl>(this)
 
 #define DECLARE_SINGLETON(T) \
 FORBID_COPY(T) \

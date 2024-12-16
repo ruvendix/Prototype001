@@ -30,43 +30,14 @@ struct PlayerSpriteStartupInfo
 	int32 spriteLine = 0;
 };
 
-class PlayerActor::Pimpl : public EventListener
+class PlayerActor::Pimpl
 {
 	DEFINE_PIMPL(PlayerActor)
-	DECLARE_EVENT_HANDLER(PlayerActor::Pimpl)
 
 public:
-	virtual void Startup() override;
-
 	void LoadAndStartupPlayerSprite();
 	bool ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir);
-
-	void OnChangeState(const EventArgs& eventArgs);
-
-	template <typename TPlayerState>
-	void ReserveChangePlayerState()
-	{
-		PlayerStatePtr spNextPlayerState = std::make_shared<TPlayerState>(this);
-
-		EventArgs eventArgs;
-		eventArgs.push_back(spNextPlayerState);
-
-		EventManager::I()->TriggerEvent(EEventId::ChangeState, eventArgs, this);
-	}
 };
-
-DEFINE_EVENT_HANDLER(PlayerActor::Pimpl)
-
-void PlayerActor::Pimpl::Startup()
-{
-	RegisterEventHandler(EEventId::ChangeState, &PlayerActor::Pimpl::OnChangeState);
-}
-
-void PlayerActor::Pimpl::OnChangeState(const EventArgs& eventArgs)
-{
-	DEFAULT_TRACE_LOG("체인지 스테이트!");
-	m_pOwner->m_spPlayerState = std::any_cast<PlayerStatePtr>(eventArgs[0]);
-}
 
 void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 {
@@ -197,9 +168,10 @@ PlayerActor::~PlayerActor()
 void PlayerActor::Startup()
 {
 	Super::Startup();
+	ALLOC_PIMPL;
 
-	CREATE_PIMPL;
-	m_spPimpl->Startup();
+	// 이벤트 핸들러 등록
+	RegisterEventHandler<PlayerStateChangeEvent>(&PlayerActor::OnChangeState);
 
 	// 플레이어 스프라이트 로딩 및 초기화
 	m_spPimpl->LoadAndStartupPlayerSprite();
@@ -282,7 +254,7 @@ void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)
 
 void PlayerActor::TriggerChangePlayerState(const EventArgs& eventArgs)
 {
-	m_spPimpl->TriggerEvent(EEventId::ChangeState, eventArgs);
+	//m_spPimpl->TriggerEvent(EEventId::ChangeState, eventArgs);
 }
 
 const std::string& PlayerActor::FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const
@@ -317,4 +289,10 @@ void PlayerActor::OnKeyboardDown_Up()
 {
 	DEFAULT_TRACE_LOG("위쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Up);
+}
+
+void PlayerActor::OnChangeState(const EventArgs& eventArgs)
+{
+	DEFAULT_TRACE_LOG("체인지 스테이트!");
+	m_spPlayerState = std::any_cast<PlayerStatePtr>(eventArgs[0]);
 }

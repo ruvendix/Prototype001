@@ -226,6 +226,15 @@
     <ClCompile Include="Sources\Engine\Math\Size.cpp">
       <Filter>Sources\Engine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Event\Event.cpp">
+      <Filter>Sources\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Player\PlayerEvent.cpp">
+      <Filter>Sources\Client\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Scene\SceneEvent.cpp">
+      <Filter>Sources\Engine\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
@@ -336,7 +345,7 @@
     <ClInclude Include="Sources\Engine\Scene\SceneRenderer.h">
       <Filter>Sources\Engine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventId.h">
+    <ClInclude Include="Sources\Engine\Event\Event.h">
       <Filter>Sources\Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Event\EventListener.h">
@@ -422,6 +431,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Math\Size.h">
       <Filter>Sources\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerEvent.h">
+      <Filter>Sources\Client\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneEvent.h">
+      <Filter>Sources\Engine\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

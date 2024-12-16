@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "RenderComponent.h"
 
-DEFINE_COMPILETIME_ID(RenderComponent, ComponentCounter)
+DEFINE_COMPILETIME_ID(RenderComponent, ComponentIdCounter)
 
 RenderComponent::RenderComponent()
 {

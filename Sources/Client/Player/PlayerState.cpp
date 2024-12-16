@@ -25,10 +25,8 @@ void PlayerIdleState::ProcessPlayerInput()
 	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
 	pMoveComponent->SetMoving(true);
 
-	// 어떤 상태로 교체할지는 템플릿으로 쳐넣음
-	EventArgs eventArgs;
-	pOwner->ReserveChangePlayerState<PlayerWalkState>(eventArgs);
-	pOwner->TriggerChangePlayerState(eventArgs);
+	// Walk 상태로 전환
+	pOwner->ReserveChangePlayerState<PlayerWalkState>();
 }
 
 void PlayerIdleState::UpdateState(float deltaSeconds)
@@ -61,9 +59,7 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 		const std::string& strIdleSpriteName = pOwner->FindPlayerIdleSpriteString(pMoveComponent->GetMoveDirection());
 		pOwner->ChangePlayerSprite(strIdleSpriteName);
 
-		// 상태 전환
-		EventArgs eventArgs;
-		pOwner->ReserveChangePlayerState<PlayerIdleState>(eventArgs);
-		pOwner->TriggerChangePlayerState(eventArgs);
+		// Idle 상태로 전환
+		pOwner->ReserveChangePlayerState<PlayerIdleState>();
 	}
 }

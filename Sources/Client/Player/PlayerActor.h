@@ -1,9 +1,13 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+#include "PlayerEvent.h"
+
 class PlayerActor : public SceneActor
 {
 	DECLARE_PIMPL;
+	DEFINE_EVENT_HANDLER;
+
 	using Super = SceneActor;
 
 public:
@@ -24,14 +28,10 @@ public:
 	const std::string& FindPlayerWalkSpriteString(ESceneActorMoveDirection moveDir) const;
 
 	template <typename TPlayerState>
-	void ReserveChangePlayerState(EventArgs& outEventArgs)
+	void ReserveChangePlayerState()
 	{
 		PlayerStatePtr spNextPlayerState = std::make_shared<TPlayerState>(this);
-
-		EventArgs eventArgs;
-		eventArgs.push_back(spNextPlayerState);
-
-		outEventArgs = eventArgs;
+		ReserveEvent<PlayerStateChangeEvent>(spNextPlayerState);
 	}
 
 private:
@@ -39,6 +39,8 @@ private:
 	void OnKeyboardDown_Right();
 	void OnKeyboardDown_Down();
 	void OnKeyboardDown_Up();
+
+	void OnChangeState(const EventArgs& eventArgs);
 
 private:
 	PlayerStatePtr m_spPlayerState = nullptr;
