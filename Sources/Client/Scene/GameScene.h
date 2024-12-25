@@ -1,6 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+class WorldBackgroundActor;
 class PlayerActor;
 
 class GameScene : public Scene
@@ -18,5 +19,6 @@ public:
 	virtual void Cleanup() override;
 
 private:
+	WorldBackgroundActor* m_pWorldBackgroundActor = nullptr;
 	PlayerActor* m_pPlayerActor = nullptr;
 };

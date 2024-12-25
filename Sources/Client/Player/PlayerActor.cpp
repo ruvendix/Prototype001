@@ -252,11 +252,6 @@ void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)
 	pDynamicSpriteComponent->ApplyDynamicSprite(spNextPlayerSprite);
 }
 
-void PlayerActor::TriggerChangePlayerState(const EventArgs& eventArgs)
-{
-	//m_spPimpl->TriggerEvent(EEventId::ChangeState, eventArgs);
-}
-
 const std::string& PlayerActor::FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const
 {
 	return (g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(moveDir)]);

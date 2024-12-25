@@ -80,6 +80,12 @@
     <Filter Include="Sources\Engine\Math">
       <UniqueIdentifier>{7f95ae2f-97c2-4f96-8b13-84aa2be20837}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Client\World">
+      <UniqueIdentifier>{7a0b3a64-7419-49d7-94a3-effcfb149e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\World">
+      <UniqueIdentifier>{f5c666c8-dcd5-45be-a67b-1efbc75d4ef1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -234,6 +240,12 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Scene\SceneEvent.cpp">
       <Filter>Sources\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\World\WorldBackgroundActor.cpp">
+      <Filter>Sources\Client\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\World\WorldContext.cpp">
+      <Filter>Sources\Engine\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -437,6 +449,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\SceneEvent.h">
       <Filter>Sources\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\World\WorldBackgroundActor.h">
+      <Filter>Sources\Client\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\World\WorldContext.h">
+      <Filter>Sources\Engine\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

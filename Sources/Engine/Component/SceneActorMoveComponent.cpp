@@ -48,25 +48,25 @@ void SceneActorMoveComponent::ApplyMoveDirection(ESceneActorMoveDirection moveDi
 	switch (moveDir)
 	{
 	case ESceneActorMoveDirection::Left:
-		m_moveCellPos.cellPosX -= 1;
+		m_destCellPos.cellPosX -= 1;
 		break;
 
 	case ESceneActorMoveDirection::Right:
-		m_moveCellPos.cellPosX += 1;
+		m_destCellPos.cellPosX += 1;
 		break;
 
 	case ESceneActorMoveDirection::Down:
-		m_moveCellPos.cellPosY += 1;
+		m_destCellPos.cellPosY += 1;
 		break;
 
 	case ESceneActorMoveDirection::Up:
-		m_moveCellPos.cellPosY -= 1;
+		m_destCellPos.cellPosY -= 1;
 		break;
 	}
 
 	// 목표 좌표 계산하기
 	SceneActor* pSceneActor = GetOwner<SceneActor>();
-	m_movePos = pSceneActor->ConvertCellPositionToWorldPosition(m_moveCellPos);
+	m_destPos = pSceneActor->ConvertCellPositionToWorldPosition(m_destCellPos);
 }
 
 bool SceneActorMoveComponent::CheckGoalPosition() const
@@ -75,8 +75,8 @@ bool SceneActorMoveComponent::CheckGoalPosition() const
 	const Vec2d& currentPos = pTransformComponent->GetPosition();
 
 	// 이제 그 둘의 거리 비교
-	const Vec2d& diffPlayerPos = (m_movePos - currentPos);
-	if (diffPlayerPos.CalculateLengthSquare() > 0.01f)
+	const Vec2d& diffPos = (m_destPos - currentPos);
+	if (diffPos.CalculateLengthSquare() > 0.01f)
 	{
 		return false;
 	}

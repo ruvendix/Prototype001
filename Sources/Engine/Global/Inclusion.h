@@ -19,6 +19,8 @@
 #include "Engine/GameFrame/GameFrameHandler.h"
 #include "Engine/UserInput/KeyboardInputHandler.h"
 
+#include "Engine/World/WorldContext.h"
+
 #include "Engine/Component/Component.h"
 #include "Engine/Component/TransformComponent.h"
 #include "Engine/Component/RenderComponent.h"

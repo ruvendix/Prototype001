@@ -22,8 +22,6 @@ public:
 	void ProcessPlayerInput();
 	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
 
-	void TriggerChangePlayerState(const EventArgs& eventArgs);
-
 	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
 	const std::string& FindPlayerWalkSpriteString(ESceneActorMoveDirection moveDir) const;
 
