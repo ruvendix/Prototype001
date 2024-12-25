@@ -19,13 +19,13 @@ public:
 		return spRes;
 	}
 
-	const PersistantResource* SearchResource(const std::string& strResKey) const
+	const PersistantResource* FindPersistantResource(const std::string& strResKey) const
 	{
-		const PersistantResourcePtr& spResource = SearchSharedResource(strResKey);
+		const PersistantResourcePtr& spResource = FindPersistantSharedResource(strResKey);
 		return (spResource.get());
 	}
 
-	const PersistantResourcePtr& SearchSharedResource(const std::string& strResKey) const
+	const PersistantResourcePtr& FindPersistantSharedResource(const std::string& strResKey) const
 	{
 		const auto& foundIter = m_mapRes.find(strResKey);
 		if (foundIter == m_mapRes.cend())
@@ -38,10 +38,10 @@ public:
 
 	PersistantResourcePtr LoadResource(const std::string& strResKey)
 	{
-		if (SearchResource(strResKey) != nullptr)
+		const PersistantResourcePtr& spFoundRes = FindPersistantSharedResource(strResKey);		
+		if (spFoundRes != nullptr)
 		{
-			DETAIL_ERROR_LOG(EErrorCode::ExistedResource);
-			return nullptr;
+			return spFoundRes;
 		}
 
 		PersistantResourcePtr spRes = std::make_shared<TPersistantResource>();

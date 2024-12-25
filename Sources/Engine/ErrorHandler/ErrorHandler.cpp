@@ -8,6 +8,7 @@ void ErrorHandler::Startup()
 {
 	InsertErrorInfo(EErrorCode::Unknown, &g_LogDefault, "알 수 없는 오류!");
 	InsertErrorInfo(EErrorCode::ExistedResource, &g_LogResource, "이미 로딩된 리소스!");
+	InsertErrorInfo(EErrorCode::ExistedComponent, &g_LogResource, "이미 갖고 있는 컴포넌트!");
 	InsertErrorInfo(EErrorCode::NotFoundResource, &g_LogResource, "등록 또는 로딩이 되지 않은 리소스!");
 	InsertErrorInfo(EErrorCode::InvalidIntegerRange, &g_LogDefault, "유효하지 않은 정수 범위!");
 }

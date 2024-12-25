@@ -5,6 +5,7 @@ enum class EErrorCode
 {
 	Unknown = 0,
 	ExistedResource,
+	ExistedComponent,
 	NotFoundResource,
 	InvalidIntegerRange,
 };

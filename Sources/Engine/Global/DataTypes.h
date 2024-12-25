@@ -34,6 +34,12 @@ struct CellPosition
 	int32 cellPosY = 0;
 };
 
+struct Array2dInfo
+{
+	int32 xIdxCount = 0;
+	int32 yIdxCount = 0;
+};
+
 // 이건 분량이 커지면 분리
 struct Vec2d
 {

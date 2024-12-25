@@ -12,5 +12,7 @@ public:
 	RenderComponent();
 	virtual ~RenderComponent();
 
+	Position2d CalculateRenderingStartPosition();
+
 	virtual void Render(HDC hBackBufferDc) = 0;
 };

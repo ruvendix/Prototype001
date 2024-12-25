@@ -3,14 +3,14 @@
 
 #include "Actor.h"
 
-class SceneActor : public Actor
+class CellActor : public Actor
 {
 public:
 	using Super = Actor;
 
 public:
 	using Super::Super;
-	virtual ~SceneActor();
+	virtual ~CellActor();
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;

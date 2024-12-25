@@ -13,13 +13,27 @@ public:
 	virtual void Cleanup() override;
 
 	template <typename TActor>
-	TActor* CreateActor() // Add보다 의미가 큼 (무조건 새로운 액터를 생성)
+	static std::shared_ptr<TActor> CreateActor()
 	{
 		std::shared_ptr<TActor> spActor = std::make_shared<TActor>();
 		spActor->Startup();
-		m_vecActors.push_back(spActor);
+		return (std::dynamic_pointer_cast<TActor>(spActor));
+	}
 
-		return (spActor.get());
+	template <typename TActor>
+	static ActorPtr CreateActorNoDynamicCast()
+	{
+		const ActorPtr& spActor = std::make_shared<TActor>();
+		spActor->Startup();
+		return (spActor);
+	}
+
+	template <typename TActor>
+	std::shared_ptr<TActor> CreateActorToScene() // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
+	{
+		const std::shared_ptr<TActor>& spActor = Scene::CreateActor<TActor>();
+		m_vecActors.push_back(spActor);
+		return spActor;
 	}
 
 	std::vector<ActorPtr>& GetActors() { return m_vecActors; }

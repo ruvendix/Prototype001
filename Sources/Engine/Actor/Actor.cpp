@@ -30,9 +30,15 @@ void Actor::Startup()
 
 bool Actor::Update(float deltaSeconds)
 {
+	// 何葛何磐 贸府!
 	for (auto& iter : m_mapComponent)
 	{
 		(iter.second)->Update(deltaSeconds);
+	}
+
+	for (auto& spChild : m_vecChild)
+	{
+		spChild->Update(deltaSeconds);
 	}
 
 	return true;
@@ -45,17 +51,33 @@ bool Actor::PostUpdate(float deltaSeconds)
 		(iter.second)->PostUpdate(deltaSeconds);
 	}
 
+	for (auto& spChild : m_vecChild)
+	{
+		spChild->PostUpdate(deltaSeconds);
+	}
+
 	return true;
 }
 
 void Actor::Cleanup()
 {
+	// 沥府绰 磊侥何磐 贸府!
+	for (auto& spChild : m_vecChild)
+	{
+		spChild->Cleanup();
+	}
+
 	for (auto& iter : m_mapComponent)
 	{
 		(iter.second)->Cleanup();
 	}
 
 	m_mapComponent.clear();
+}
+
+void Actor::AddChild(const ActorPtr& spChild)
+{
+	m_vecChild.push_back(spChild);
 }
 
 TransformComponent* Actor::BringTransformComponent()
@@ -83,5 +105,13 @@ void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent)
 		RenderComponent* pRenderComponent = dynamic_cast<RenderComponent*>(pComponent);
 		ASSERT_LOG(pRenderComponent != nullptr);
 		outVecRenderComponent.push_back(pRenderComponent);
+	}
+
+	for (auto& spChild : m_vecChild)
+	{
+		if (spChild->IsActorFlagBitOn(EActorFlag::RenderingTarget))
+		{
+			spChild->FindRenderComponents(outVecRenderComponent);
+		}
 	}
 }

@@ -22,6 +22,18 @@ void SpriteBase::LoadResource(const std::string& strResRelativePath)
 
 }
 
+void SpriteBase::LoadAndSetTexture(const std::string& strResRelativePath)
+{
+	const TexturePtr& spWorldTileTex = ResourceMananger::I()->LoadTexture(strResRelativePath);
+	if (spWorldTileTex == nullptr)
+	{
+		DETAIL_ERROR_LOG(EErrorCode::NotFoundResource);
+		return;
+	}
+
+	SetTexture(spWorldTileTex);
+}
+
 void SpriteBase::FindAndSetTexture(const std::string& strResRelativePath)
 {
 	const TexturePtr& spFoundTex = ResourceMananger::I()->FindSharedTexture(strResRelativePath);

@@ -41,19 +41,35 @@
     <ClCompile Include="Sources\Engine\Actor\Actor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\SceneActor.cpp" />
+    <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\CellActor.cpp" />
+    <ClCompile Include="Sources\Engine\Actor\WorldTileActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\WorldTileMapActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Component\CameraComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\Component.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\DynamicSpriteComponent.cpp" />
-    <ClCompile Include="Sources\Engine\Component\RenderComponent.cpp" />
-    <ClCompile Include="Sources\Engine\Component\SceneActorMoveComponent.cpp">
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\StaticSpriteComponent.cpp">
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\RectangleShapeComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\RenderComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\StaticSpriteComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\SceneActorMoveComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\TransformComponent.cpp">
@@ -198,19 +214,35 @@
     <ClInclude Include="Sources\Engine\Actor\ActorEnum.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\SceneActor.h" />
+    <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\CellActor.h" />
+    <ClInclude Include="Sources\Engine\Actor\WorldTileActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\WorldTileMapActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Component\CameraComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\Component.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\DynamicSpriteComponent.h" />
-    <ClInclude Include="Sources\Engine\Component\RenderComponent.h" />
-    <ClInclude Include="Sources\Engine\Component\SceneActorMoveComponent.h">
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\StaticSpriteComponent.h">
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\RectangleShapeComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\RenderComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\StaticSpriteComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\SceneActorMoveComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\TransformComponent.h">
@@ -345,7 +377,7 @@
     <ClInclude Include="Sources\Engine\UserInput\UserInputStruct.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.h">
+    <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\World\WorldContext.h">

@@ -86,6 +86,9 @@
     <Filter Include="Sources\Engine\World">
       <UniqueIdentifier>{f5c666c8-dcd5-45be-a67b-1efbc75d4ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\Component\RenderComponent">
+      <UniqueIdentifier>{f73d2166-93b4-4158-9b04-741112adc0ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -184,12 +187,6 @@
     <ClCompile Include="Sources\Engine\Log\LogCategoryList.cpp">
       <Filter>Sources\Engine\Log</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\RenderComponent.cpp">
-      <Filter>Sources\Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\StaticSpriteComponent.cpp">
-      <Filter>Sources\Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSprite.cpp">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
@@ -202,16 +199,13 @@
     <ClCompile Include="Sources\Engine\Resource\Sprite\SpriteBase.cpp">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\DynamicSpriteComponent.cpp">
-      <Filter>Sources\Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Global\UtilityFunctions.cpp">
       <Filter>Sources\Engine\Global</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.cpp">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\SceneActor.cpp">
+    <ClCompile Include="Sources\Engine\Actor\CellActor.cpp">
       <Filter>Sources\Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
@@ -246,6 +240,27 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\World\WorldContext.cpp">
       <Filter>Sources\Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\WorldTileMapActor.cpp">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\RenderComponent.cpp">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.cpp">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\StaticSpriteComponent.cpp">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\RenderComponent\RectangleShapeComponent.cpp">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\WorldTileActor.cpp">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
+      <Filter>Sources\Engine\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +321,7 @@
     <ClInclude Include="Sources\Engine\File\PathManager.h">
       <Filter>Sources\Engine\File</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.h">
+    <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.hpp">
       <Filter>Sources\Engine\UtilityClass</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnum.h">
@@ -390,12 +405,6 @@
     <ClInclude Include="Sources\Engine\Log\LogCategoryList.h">
       <Filter>Sources\Engine\Log</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\RenderComponent.h">
-      <Filter>Sources\Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\StaticSpriteComponent.h">
-      <Filter>Sources\Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSprite.h">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
@@ -408,16 +417,13 @@
     <ClInclude Include="Sources\Engine\Resource\Sprite\SpriteBase.h">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\DynamicSpriteComponent.h">
-      <Filter>Sources\Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Global\UtilityFunctions.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.h">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\SceneActor.h">
+    <ClInclude Include="Sources\Engine\Actor\CellActor.h">
       <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
@@ -455,6 +461,27 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\World\WorldContext.h">
       <Filter>Sources\Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\WorldTileMapActor.h">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\RenderComponent.h">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.h">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\StaticSpriteComponent.h">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\RenderComponent\RectangleShapeComponent.h">
+      <Filter>Sources\Engine\Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\WorldTileActor.h">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
+      <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,12 +12,16 @@ class SceneRenderer
 	DECLARE_SINGLETON(SceneRenderer)
 
 public:
-	void InitBuffers(const ViewerInfo& viewerInfo);
+	void Initialize(const ViewerInfo& viewerInfo);
 	void Render();
 	void ReleaseBuffers();
 
 	HDC CreateCompatibleDc();
 	Vec2d ConvertWorldPositionToRenderingPosition(const Vec2d& worldPos) const;
+
+	void ApplyTargetActorToMainCamera(const ActorPtr& spTargetActor);
+
+	const Size& GetViewerResolution() const { return m_viewerInfo.resolution; }
 	
 	int32 GetViewerWidth() const { return m_viewerInfo.resolution.width; }
 	int32 GetViewerHeight() const { return m_viewerInfo.resolution.height; }
@@ -27,7 +31,7 @@ public:
 	int32 GetViewerHalfWidth() const { return (m_viewerInfo.resolution.width / 2); }
 	int32 GetViewerHalfHeight() const { return (m_viewerInfo.resolution.height / 2); }
 
-	void SetCameraTargetActor(Actor* pCameraTargetActor) { m_pCameraTargetActor = pCameraTargetActor; }
+	const std::shared_ptr<CameraActor>& GetMainCameraActor() const { return m_spMainCameraActor; } // ¾À¿¡ ¼Ò¼ÓµÈ ¾×ÅÍ°¡ ¾Æ´Ô!
 
 private:
 	ViewerInfo m_viewerInfo;
@@ -36,5 +40,5 @@ private:
 	HDC m_hBackBufferDc = nullptr;
 	HBITMAP m_hBackBuffer = nullptr;
 
-	Actor* m_pCameraTargetActor = nullptr;
+	std::shared_ptr<CameraActor> m_spMainCameraActor = nullptr;
 };

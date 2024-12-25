@@ -91,12 +91,11 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 		// 스프라이트 로딩인데 없으니 생성
 		const DynamicSpritePtr& spPlayerIdleDownDynamicSprite = ResourceMananger::I()->CreateDynamicSprite(playerSpriteStartupInfo.strSpriteName);
 		ASSERT_LOG(spPlayerIdleDownDynamicSprite != nullptr);
-		spPlayerIdleDownDynamicSprite->SetColorKey(RGB(128, 128, 128));
 		spPlayerIdleDownDynamicSprite->FindAndSetTexture(playerSpriteStartupInfo.strUseTexturePath);
 
 		for (int32 i = 0; i < 10; ++i)
 		{
-			spPlayerIdleDownDynamicSprite->AddKeyFrame(i * 200, playerSpriteStartupInfo.spriteLine * 200, 200, 200, 0.1f);
+			spPlayerIdleDownDynamicSprite->AddKeyFrame(i * 200, playerSpriteStartupInfo.spriteLine * 200, 200, 200, 0.1f, RGB(128, 128, 128));
 		}
 	}
 
@@ -203,17 +202,13 @@ void PlayerActor::Startup()
 #pragma endregion
 
 	// 이동 처리
+	AddComponent<SceneActorMoveComponent>();
 	SceneActorMoveComponent* pMoveComponent = FindComponent<SceneActorMoveComponent>();
 	pMoveComponent->SetMoveSpeed(90.0f);
 	pMoveComponent->SetMoveCellPosition(GetCellPosition()); // 초기화니까 똑같음
 
 	// 상태 처리
 	m_spPlayerState = std::make_shared<PlayerIdleState>(this);
-
-	// 카메라 컴포넌트
-	CameraComponent* pCameraComponent = AddComponent<CameraComponent>();
-	pCameraComponent->SetTargetActor(this);
-	SceneRenderer::I()->SetCameraTargetActor(this); // 메인 카메라로 설정
 }
 
 bool PlayerActor::Update(float deltaSeconds)

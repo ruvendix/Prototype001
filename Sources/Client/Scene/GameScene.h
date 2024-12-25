@@ -2,6 +2,7 @@
 #pragma once
 
 class WorldBackgroundActor;
+class WorldTileMapActor;
 class PlayerActor;
 
 class GameScene : public Scene
@@ -19,6 +20,8 @@ public:
 	virtual void Cleanup() override;
 
 private:
-	WorldBackgroundActor* m_pWorldBackgroundActor = nullptr;
-	PlayerActor* m_pPlayerActor = nullptr;
+	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
+	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
+
+	std::shared_ptr<PlayerActor> m_spPlayerActor = nullptr;
 };

@@ -99,8 +99,8 @@ void GameApplication::Startup()
     ShowWindow(viewerInfo.hWndViewer, SW_SHOW);
     UpdateWindow(viewerInfo.hWndViewer);
 
-    // 렌더러를 가장 먼저 설정
-    SceneRenderer::I()->InitBuffers(viewerInfo);
+    // 렌더러에 바로 적용
+    SceneRenderer::I()->Initialize(viewerInfo);
 #pragma endregion
 
 #pragma region 전역 객체 초기화

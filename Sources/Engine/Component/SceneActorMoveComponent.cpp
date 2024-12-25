@@ -65,18 +65,18 @@ void SceneActorMoveComponent::ApplyMoveDirection(ESceneActorMoveDirection moveDi
 	}
 
 	// 목표 좌표 계산하기
-	SceneActor* pSceneActor = GetOwner<SceneActor>();
+	CellActor* pSceneActor = GetOwner<CellActor>();
 	m_destPos = pSceneActor->ConvertCellPositionToWorldPosition(m_destCellPos);
 }
 
-bool SceneActorMoveComponent::CheckGoalPosition() const
+bool SceneActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 {
 	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
 	const Vec2d& currentPos = pTransformComponent->GetPosition();
 
 	// 이제 그 둘의 거리 비교
 	const Vec2d& diffPos = (m_destPos - currentPos);
-	if (diffPos.CalculateLengthSquare() > 0.01f)
+	if (diffPos.CalculateLengthSquare() > (m_moveSpeed * deltaSeconds)) // 숫자가 작을수록 높은 프레임, 낮을수록 낮은 프레임
 	{
 		return false;
 	}

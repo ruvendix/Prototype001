@@ -48,7 +48,7 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
 	pMoveComponent->UpdateMovePosition(deltaSeconds);
 
-	if (pMoveComponent->CheckGoalPosition() == true)
+	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
 	{
 		pMoveComponent->SetMoving(false);
 

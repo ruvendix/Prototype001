@@ -10,7 +10,7 @@ public:
 	DynamicSprite();
 	virtual ~DynamicSprite();
 
-	void AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 drawWidth, int32 drawHeight, float keepTime);
+	void AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 drawWidth, int32 drawHeight, float keepTime, uint32 colorKey);
 
 	FORCEINLINE const SpriteDrawInfo& GetSpriteDrawInfo(int32 spriteDrawInfoIdx) const
 	{
@@ -27,11 +27,7 @@ public:
 	const std::vector<float>& GetTimeTable() const { return m_vecTimeTable; }
 	int32 GetSpriteKeyFrameCount() const { return m_vecSpriteDrawInfo.size(); }
 
-	int32 GetColorKey() const { return m_colorKey; }
-	void SetColorKey(int32 colorKey) { m_colorKey = colorKey; }
-
 private:
-	int32 m_colorKey = 0;
 	std::vector<float> m_vecTimeTable; // 0번 인덱스에 2.0이 있다면 1번 인덱스까지 2초가 필요하다는 것
 	std::vector<SpriteDrawInfo> m_vecSpriteDrawInfo;
 };

@@ -23,7 +23,7 @@ public:
 	void UpdateMovePosition(float deltaSeconds);
 
 	void ApplyMoveDirection(ESceneActorMoveDirection moveDir);
-	bool CheckGoalPosition() const;
+	bool CheckGoalPosition(float deltaSeconds) const;
 
 	void SetMoveCellPosition(const CellPosition& moveCellPos) { m_destCellPos = moveCellPos; }
 

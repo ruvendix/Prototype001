@@ -1,36 +1,35 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #include "Pch.h"
-#include "SceneActor.h"
+#include "CellActor.h"
 
 #include "Engine/Component/SceneActorMoveComponent.h"
 
-SceneActor::~SceneActor()
+CellActor::~CellActor()
 {
 	Cleanup();
 }
 
-void SceneActor::Startup()
+void CellActor::Startup()
 {
 	Super::Startup();
-	AddComponent<SceneActorMoveComponent>();
 }
 
-bool SceneActor::Update(float deltaSeconds)
+bool CellActor::Update(float deltaSeconds)
 {
 	return (Super::Update(deltaSeconds));
 }
 
-bool SceneActor::PostUpdate(float deltaSeconds)
+bool CellActor::PostUpdate(float deltaSeconds)
 {
 	return (Super::PostUpdate(deltaSeconds));
 }
 
-void SceneActor::Cleanup()
+void CellActor::Cleanup()
 {
 	return (Super::Cleanup());
 }
 
-void SceneActor::ApplyCellPosition(int32 cellPosX, int32 cellPosY)
+void CellActor::ApplyCellPosition(int32 cellPosX, int32 cellPosY)
 {
 	m_cellPos = CellPosition{ cellPosX, cellPosY };
 
@@ -39,12 +38,12 @@ void SceneActor::ApplyCellPosition(int32 cellPosX, int32 cellPosY)
 	pTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(cellPosX, cellPosY));
 }
 
-Vec2d SceneActor::ConvertCellPositionToWorldPosition(const CellPosition& cellPos) const
+Vec2d CellActor::ConvertCellPositionToWorldPosition(const CellPosition& cellPos) const
 {
 	return (ConvertCellPositionToWorldPosition(cellPos.cellPosX, cellPos.cellPosY));
 }
 
-Vec2d SceneActor::ConvertCellPositionToWorldPosition(int32 cellPosX, int32 cellPosY) const
+Vec2d CellActor::ConvertCellPositionToWorldPosition(int32 cellPosX, int32 cellPosY) const
 {
 	int32 cellSize = WorldContext::I()->GetCellSize();
 
@@ -55,7 +54,7 @@ Vec2d SceneActor::ConvertCellPositionToWorldPosition(int32 cellPosX, int32 cellP
 	return convertedPos;
 }
 
-CellPosition SceneActor::ConvertWorldPositionToCellPosition(float posX, float posY) const
+CellPosition CellActor::ConvertWorldPositionToCellPosition(float posX, float posY) const
 {
 	int32 cellSize = WorldContext::I()->GetCellSize();
 

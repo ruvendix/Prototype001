@@ -12,11 +12,12 @@ DynamicSprite::~DynamicSprite()
 
 }
 
-void DynamicSprite::AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 drawWidth, int32 drawHeight, float keepTime)
+void DynamicSprite::AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 drawWidth, int32 drawHeight, float keepTime, uint32 colorKey)
 {
 	SpriteDrawInfo spriteDrawInfo;
 	spriteDrawInfo.beginDrawPos = Position2d{ beginDrawPosX, beginDrawPosY };
 	spriteDrawInfo.drawSize = Size{ drawWidth, drawHeight };
+	spriteDrawInfo.colorKey = colorKey;
 	m_vecSpriteDrawInfo.push_back(spriteDrawInfo);
 
 	if (m_vecTimeTable.empty() == true)

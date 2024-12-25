@@ -16,6 +16,11 @@ bool SceneManager::Update(float deltaSeconds)
 
 bool SceneManager::PostUpdate(float deltaSeconds)
 {
+	// 메인 카메라를 항상 첫번째로 업데이트!
+	const std::shared_ptr<CameraActor>& spMainCameraActor = SceneRenderer::I()->GetMainCameraActor();
+	spMainCameraActor->PostUpdate(deltaSeconds);
+
+	// 이후에는 씬에 소속된 액터들을 업데이트!
 	return (m_spScene->PostUpdate(deltaSeconds));
 }
 

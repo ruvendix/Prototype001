@@ -78,15 +78,10 @@ void DynamicSpriteComponent::Render(HDC hBackBufferDc)
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 
 	// 중점 좌표가 피봇
-	Vec2d renderingPos = SceneRenderer::I()->ConvertWorldPositionToRenderingPosition(pTransformComponent->GetPosition());
+	Position2d renderingStartPos = CalculateRenderingStartPosition();
 
 	// 스프라이트 정보 가져오기
 	const SpriteDrawInfo& spriteDrawInfo = m_spDynamicSprite->GetSpriteDrawInfo(m_currentSpriteDrawInfoIdx);
-
-	// 중점 좌표가 피봇
-	Position2d renderingStartPos;
-	renderingStartPos.x = static_cast<int32>(renderingPos.x) - (pTransformComponent->GetWidth() / 2);
-	renderingStartPos.y = static_cast<int32>(renderingPos.y) - (pTransformComponent->GetHeight() / 2);
 
 	::TransparentBlt(hBackBufferDc,
 		renderingStartPos.x, renderingStartPos.y,
@@ -94,7 +89,7 @@ void DynamicSpriteComponent::Render(HDC hBackBufferDc)
 		pTex->GetTextureDc(),
 		spriteDrawInfo.beginDrawPos.x, spriteDrawInfo.beginDrawPos.y,
 		spriteDrawInfo.drawSize.width, spriteDrawInfo.drawSize.height,
-		m_spDynamicSprite->GetColorKey());
+		spriteDrawInfo.colorKey);
 }
 
 void DynamicSpriteComponent::ResetDynamicSprite()

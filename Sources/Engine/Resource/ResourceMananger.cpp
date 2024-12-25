@@ -20,20 +20,20 @@ TexturePtr ResourceMananger::LoadTexture(const std::string& strResKey)
 const Texture* ResourceMananger::FindTexture(const std::string& strResKey) const
 {
 	ASSERT_LOG(m_spTexStorage != nullptr);
-	return (dynamic_cast<const Texture*>(m_spTexStorage->SearchResource(strResKey)));
+	return (dynamic_cast<const Texture*>(m_spTexStorage->FindPersistantResource(strResKey)));
 }
 
 // 캐스팅할 때 임시객체가 생성되므로 참조 반환 불가능
 TexturePtr ResourceMananger::FindSharedTexture(const std::string& strResKey) const
 {
 	ASSERT_LOG(m_spTexStorage != nullptr);
-	return (std::dynamic_pointer_cast<Texture>(m_spTexStorage->SearchSharedResource(strResKey)));
+	return (std::dynamic_pointer_cast<Texture>(m_spTexStorage->FindPersistantSharedResource(strResKey)));
 }
 
 DynamicSpritePtr ResourceMananger::FindDynamicSprite(const std::string& strResKey) const
 {
 	ASSERT_LOG(m_spDynamicSpriteStorage != nullptr);
-	return (std::dynamic_pointer_cast<DynamicSprite>(m_spDynamicSpriteStorage->SearchSharedResource(strResKey)));
+	return (std::dynamic_pointer_cast<DynamicSprite>(m_spDynamicSpriteStorage->FindPersistantSharedResource(strResKey)));
 }
 
 StaticSpritePtr ResourceMananger::CreateStaticSprite(const std::string& strStaticSpriteTag) const

@@ -7,6 +7,7 @@ struct SpriteDrawInfo
 {
 	Position2d beginDrawPos;
 	Size drawSize;
+	uint32 colorKey = 0;
 };
 
 class SpriteBase : public PersistantResource
@@ -18,6 +19,7 @@ public:
 	virtual void SaveResource() override;
 	virtual void LoadResource(const std::string& strResRelativePath) override;
 
+	void LoadAndSetTexture(const std::string& strResRelativePath);
 	void FindAndSetTexture(const std::string& strResRelativePath);
 
 	void SetTexture(const TexturePtr& spTex) { m_spTex = spTex; }

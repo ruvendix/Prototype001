@@ -9,7 +9,7 @@
 #include "Engine/String/StringUtility.hpp"
 #include "Engine/Time/TimeUtility.h"
 
-#include "Engine/UtilityClass/EnumBitset.h"
+#include "Engine/UtilityClass/EnumBitset.hpp"
 #include "Engine/Log/LogInclusion.h"
 
 #include "Engine/Math/Size.h"
@@ -23,14 +23,16 @@
 
 #include "Engine/Component/Component.h"
 #include "Engine/Component/TransformComponent.h"
-#include "Engine/Component/RenderComponent.h"
-#include "Engine/Component/StaticSpriteComponent.h"
-#include "Engine/Component/DynamicSpriteComponent.h"
 #include "Engine/Component/SceneActorMoveComponent.h"
 #include "Engine/Component/CameraComponent.h"
 
+#include "Engine/Component/RenderComponent/RenderComponent.h"
+#include "Engine/Component/RenderComponent/StaticSpriteComponent.h"
+#include "Engine/Component/RenderComponent/DynamicSpriteComponent.h"
+
 #include "Engine/Actor/Actor.h"
-#include "Engine/Actor/SceneActor.h"
+#include "Engine/Actor/CellActor.h"
+#include "Engine/Actor/CameraActor.h"
 #include "Engine/Scene/Scene.h"
 #include "Engine/Scene/SceneTracer.h"
 #include "Engine/Scene/SceneRenderer.h"

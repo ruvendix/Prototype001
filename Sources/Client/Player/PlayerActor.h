@@ -3,12 +3,12 @@
 
 #include "PlayerEvent.h"
 
-class PlayerActor : public SceneActor
+class PlayerActor : public CellActor
 {
 	DECLARE_PIMPL;
 	DEFINE_EVENT_HANDLER;
 
-	using Super = SceneActor;
+	using Super = CellActor;
 
 public:
 	using Super::Super;

@@ -22,8 +22,9 @@ void WorldBackgroundActor::Startup()
 	ASSERT_LOG(spWorldMapSprite != nullptr);
 	spWorldMapSprite->FindAndSetTexture(strWorldMapTexPath);
 
-	// 사이즈 전부 일치!
-	spWorldMapSprite->SetDrawSize(worldSize);
+	SpriteDrawInfo worldMapSpriteDrawInfo;
+	worldMapSpriteDrawInfo.drawSize = worldSize;
+	spWorldMapSprite->SetSpriteDrawInfo(worldMapSpriteDrawInfo);
 
 	TransformComponent* pTransformComponent = BringTransformComponent();
 	pTransformComponent->SetPosition(worldSize.width / 2.0f, worldSize.height / 2.0f);

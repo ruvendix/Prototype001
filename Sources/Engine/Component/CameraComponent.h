@@ -11,10 +11,10 @@ public:
 
 	virtual bool PostUpdate(float deltaSeconds) override;
 
-	void SetTargetActor(Actor* pTargetActor) { m_pTargetActor = pTargetActor; }
+	void SetTargetActor(const ActorPtr& spTargetActor) { m_spTargetActor = spTargetActor; }
 	const Vec2d& GetCameraOffsetPosition() const { return m_cameraOffsetPos; }
 
 private:
-	Actor* m_pTargetActor = nullptr; // 타겟이 없으면 오너를 참조
+	ActorPtr m_spTargetActor = nullptr; // 타겟이 없으면 오너를 참조
 	Vec2d m_cameraOffsetPos;
 };
