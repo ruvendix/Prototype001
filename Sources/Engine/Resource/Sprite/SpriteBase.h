@@ -5,7 +5,7 @@
 
 struct SpriteDrawInfo
 {
-	Position2d beginDrawPos;
+	Position2d drawingStartPos;
 	Size drawSize;
 	uint32 colorKey = 0;
 };

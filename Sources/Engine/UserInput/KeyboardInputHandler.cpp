@@ -2,34 +2,30 @@
 #include "Pch.h"
 #include "KeyboardInputHandler.h"
 
-DEFINE_SINGLETON(KeyboardInputHandler);
+#include "UserInputMacro.h"
 
-/*
-이전 프레임에서는 누르지 않았지만 현재 프레임에서는 누른 경우와
-이전 프레임에서 눌렀는데 현재 프레임에서도 누른 경우일 때
-최상위 비트는 1이 되므로 0x8000으로 확인 가능 */
-#define IS_EXIST_USER_INPUT(virtualKeyCode) ((::GetAsyncKeyState(virtualKeyCode) & 0x8000) != 0)
+DEFINE_SINGLETON(KeyboardInputHandler);
 
 void KeyboardInputHandler::Startup()
 {
 	// 초기화
-	UserInputInfo userInputInfo;
-	m_arrCurrentKeyboardUserInputInfo.fill(userInputInfo);
+	UserInputInfo keyboardInputInfo;
+	m_arrCurrentKeyboardUserInputInfo.fill(keyboardInputInfo);
 
-	userInputInfo.userInputVirtualCode = VK_LEFT;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Left)] = userInputInfo;
+	keyboardInputInfo.userInputVirtualCode = VK_LEFT;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Left)] = keyboardInputInfo;
 
-	userInputInfo.userInputVirtualCode = VK_RIGHT;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Right)] = userInputInfo;
+	keyboardInputInfo.userInputVirtualCode = VK_RIGHT;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Right)] = keyboardInputInfo;
 
-	userInputInfo.userInputVirtualCode = VK_DOWN;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Down)] = userInputInfo;
+	keyboardInputInfo.userInputVirtualCode = VK_DOWN;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Down)] = keyboardInputInfo;
 
-	userInputInfo.userInputVirtualCode = VK_UP;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Up)] = userInputInfo;
+	keyboardInputInfo.userInputVirtualCode = VK_UP;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Up)] = keyboardInputInfo;
 
-	userInputInfo.userInputVirtualCode = 'A';
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::A)] = userInputInfo;
+	keyboardInputInfo.userInputVirtualCode = 'A';
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::A)] = keyboardInputInfo;
 }
 
 bool KeyboardInputHandler::Update(float deltaSeconds)
@@ -40,21 +36,20 @@ bool KeyboardInputHandler::Update(float deltaSeconds)
 	int32 keyboardValueCount = TO_NUM(EKeyboardValue::Count);
 	for (int32 i = 0; i < keyboardValueCount; ++i)
 	{
-		UserInputInfo& refUserInputInfo = m_arrCurrentKeyboardUserInputInfo[i];
-		bool bExistUserInput = IS_EXIST_USER_INPUT(refUserInputInfo.userInputVirtualCode);
+		UserInputInfo& refKeyboardInputInfo = m_arrCurrentKeyboardUserInputInfo[i];
+		bool bExistKeyboardInput = IS_EXIST_USER_INPUT(refKeyboardInputInfo.userInputVirtualCode);
 		
-		// 일단 해보고 상태 패턴으로 전환
-		switch (refUserInputInfo.userInputState)
+		switch (refKeyboardInputInfo.userInputState)
 		{
 		case EUserInputState::Down:
 		{
-			if (bExistUserInput == true)
+			if (bExistKeyboardInput == true)
 			{
-				refUserInputInfo.userInputState = EUserInputState::Pressing;
+				refKeyboardInputInfo.userInputState = EUserInputState::Pressing;
 			}
 			else
 			{
-				refUserInputInfo.userInputState = EUserInputState::Up;
+				refKeyboardInputInfo.userInputState = EUserInputState::Up;
 			}
 
 			break;
@@ -62,9 +57,9 @@ bool KeyboardInputHandler::Update(float deltaSeconds)
 
 		case EUserInputState::Pressing:
 		{
-			if (bExistUserInput == false)
+			if (bExistKeyboardInput == false)
 			{
-				refUserInputInfo.userInputState = EUserInputState::Up;
+				refKeyboardInputInfo.userInputState = EUserInputState::Up;
 			}
 
 			break;
@@ -72,13 +67,13 @@ bool KeyboardInputHandler::Update(float deltaSeconds)
 
 		case EUserInputState::Up:
 		{
-			if (bExistUserInput == true)
+			if (bExistKeyboardInput == true)
 			{
-				refUserInputInfo.userInputState = EUserInputState::Down;
+				refKeyboardInputInfo.userInputState = EUserInputState::Down;
 			}
 			else
 			{
-				refUserInputInfo.userInputState = EUserInputState::Count;
+				refKeyboardInputInfo.userInputState = EUserInputState::Count;
 			}
 
 			break;
@@ -87,9 +82,9 @@ bool KeyboardInputHandler::Update(float deltaSeconds)
 		// Down으로 전환용
 		case EUserInputState::Count:
 		{
-			if (bExistUserInput == true)
+			if (bExistKeyboardInput == true)
 			{
-				refUserInputInfo.userInputState = EUserInputState::Down;
+				refKeyboardInputInfo.userInputState = EUserInputState::Down;
 			}
 
 			break;
@@ -99,39 +94,40 @@ bool KeyboardInputHandler::Update(float deltaSeconds)
 
 	for (const auto& iter : m_mapKeyboardInputBoundInfo)
 	{
-		EUserInputState userInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(iter.first)].userInputState;
-		if (userInputState == EUserInputState::Count)
+		EUserInputState keyboardInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(iter.first)].userInputState;
+		if (keyboardInputState == EUserInputState::Count)
 		{
 			continue;
 		}
 
-		const UserInputCallback& userInputCallback = iter.second.arrCallback[TO_NUM(userInputState)];
-		if (userInputCallback != nullptr)
+		const Callback& keyboardInputCallback = iter.second.arrCallback[TO_NUM(keyboardInputState)];
+		if (keyboardInputCallback != nullptr)
 		{
-			userInputCallback();
+			keyboardInputCallback(iter.second.callbackArgs);
 		}
 	}
 
 	for (auto& refIter : m_mapKeyboardHoldingInputBoundInfo)
 	{
-		EUserInputState userInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(refIter.first)].userInputState;
-		if (userInputState == EUserInputState::Count)
+		EUserInputState keyboardInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(refIter.first)].userInputState;
+		if (keyboardInputState == EUserInputState::Count)
 		{
 			continue;
 		}
 
 		// 홀딩일 때만 타이머 증가
-		if (userInputState == EUserInputState::Pressing)
+		Timer& refKeyboardInputHoldingTimer = refIter.second.timer;
+		if (keyboardInputState == EUserInputState::Pressing)
 		{
-			refIter.second.timer.Update(deltaSeconds);
+			refKeyboardInputHoldingTimer.Update(deltaSeconds);
 		}
-		else if (userInputState == EUserInputState::Up)
+		else if (keyboardInputState == EUserInputState::Up)
 		{
-			refIter.second.timer.SetSwitch(true);
+			refKeyboardInputHoldingTimer.SetSwitch(true);
 		}
 		else
 		{
-			refIter.second.timer.Reset();
+			refKeyboardInputHoldingTimer.Reset();
 		}
 	}
 
@@ -139,7 +135,7 @@ bool KeyboardInputHandler::Update(float deltaSeconds)
 }
 
 void KeyboardInputHandler::BindKeyboardInput(EKeyboardValue keyboardValue,
-	const UserInputCallback& downCallback, const UserInputCallback& pressingCallback, const UserInputCallback& upCallback)
+	const Callback& downCallback, const Callback& pressingCallback, const Callback& upCallback)
 {
 	if (m_mapKeyboardInputBoundInfo.find(keyboardValue) != m_mapKeyboardInputBoundInfo.cend())
 	{
@@ -157,7 +153,7 @@ void KeyboardInputHandler::BindKeyboardInput(EKeyboardValue keyboardValue,
 	ASSERT_LOG(retIter.second == true);
 }
 
-void KeyboardInputHandler::BindKeyboardHoldingInput(EKeyboardValue keyboardValue, float targetTime, const UserInputCallback& holdingEndCallback)
+void KeyboardInputHandler::BindKeyboardHoldingInput(EKeyboardValue keyboardValue, float targetTime, const Callback& holdingEndCallback)
 {
 	if (m_mapKeyboardHoldingInputBoundInfo.find(keyboardValue) != m_mapKeyboardHoldingInputBoundInfo.cend())
 	{

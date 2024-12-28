@@ -33,7 +33,7 @@ public:
 	Scene* GetCurrentScene() const { return (m_spScene.get()); }
 
 private:
-	void OnChangeScene(const EventArgs& eventArgs);
+	void OnChangeScene(const CallbackArgs& eventArgs);
 
 private:
 	ScenePtr m_spScene = nullptr;

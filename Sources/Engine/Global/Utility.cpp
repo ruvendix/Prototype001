@@ -1,5 +1,5 @@
 #include "Pch.h"
-#include "UtilityFunctions.h"
+#include "Utility.h"
 
 namespace global
 {
@@ -18,5 +18,11 @@ namespace global
 	bool ValidateIndexRange(int32 value, int32 size)
 	{
 		return ValidateIntegerRange(value, 0, size - 1);
+	}
+
+	int32 CirculateIndex(int32 idx, int32 idxCount)
+	{
+		++idx;
+		return (idx % idxCount);
 	}
 }

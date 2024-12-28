@@ -12,7 +12,7 @@ Event::~Event()
 
 }
 
-void Event::ProcessEvent(const EventArgs& eventArgs)
+void Event::ProcessEvent(const CallbackArgs& eventArgs)
 {
 	m_eventHandler(eventArgs);
 }

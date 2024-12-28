@@ -21,7 +21,7 @@ void Timer::Update(float deltaSeconds)
         // 콜백이 있는가?
         if (m_timerCallback != nullptr)
         {
-            m_timerCallback();
+            m_timerCallback(m_callbackArgs);
         }
 
         // 로컬 타임은 콜백 처리가 끝난 후에 갱신
@@ -32,4 +32,9 @@ void Timer::Update(float deltaSeconds)
 void Timer::Reset()
 {
     m_localTime = 0.0f;
+}
+
+void Timer::AddTimerCallbackArg(const std::any& timerCallbackArg)
+{
+    m_callbackArgs.push_back(timerCallbackArg);
 }

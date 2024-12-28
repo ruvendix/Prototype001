@@ -108,6 +108,7 @@ void GameApplication::Startup()
     ErrorHandler::I()->Startup();
     GameFrameHandler::I()->Startup();
     KeyboardInputHandler::I()->Startup();
+    MouseInputHandler::I()->Startup();
     ResourceMananger::I()->Startup();    
     SceneManager::I()->Startup();
 #pragma endregion
@@ -118,9 +119,11 @@ void GameApplication::Startup()
 
 bool GameApplication::Update(float deltaSeconds)
 {
+    // 입력 처리
     KeyboardInputHandler::I()->Update(deltaSeconds);
+    MouseInputHandler::I()->Update(deltaSeconds);
 
-    // 키보드 처리 다음
+    // 입력 처리 다음
     EventManager::I()->ProcessEvents();
 
     // 이벤트 처리 다음

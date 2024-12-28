@@ -1,8 +1,6 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-using TimerCallback = std::function<void()>;
-
 class Timer
 {
 public:
@@ -11,10 +9,11 @@ public:
 
     void Update(float deltaSeconds);
     void Reset();
+    void AddTimerCallbackArg(const std::any& timerCallbackArg);
 
     void SetTargetTime(float targetTime) { m_targetTime = targetTime; }
     void SetLoop(bool bLoop) { m_bLoop = bLoop; }
-    void SetTimerCallback(const TimerCallback& timerCallback) { m_timerCallback = timerCallback; }
+    void SetTimerCallback(const Callback& timerCallback) { m_timerCallback = timerCallback; }
     void SetSwitch(bool bOn) { m_bOn = bOn; }
 
     float GetLocalTime() const { return m_localTime; }
@@ -25,6 +24,7 @@ private:
 
     bool m_bOn = true;
     bool m_bLoop = false;
-
-    TimerCallback m_timerCallback = nullptr;
+    
+    CallbackArgs m_callbackArgs;
+    Callback m_timerCallback = nullptr;
 };

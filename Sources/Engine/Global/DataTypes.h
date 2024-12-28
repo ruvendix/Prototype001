@@ -70,5 +70,5 @@ using StaticSpritePtr = std::shared_ptr<class StaticSprite>;
 using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
 using EventPtr = std::shared_ptr<class Event>;
 
-using EventArgs = std::vector<std::any>;
-using EventHandler = std::function<void(const EventArgs&)>;
+using CallbackArgs = std::vector<std::any>;
+using Callback = std::function<void(const CallbackArgs&)>;

@@ -10,5 +10,5 @@ public:
 	EventListener();
 	virtual ~EventListener();
 
-	virtual void ProcessEvent(EEventId eventId, const EventArgs& eventArgs) = 0;
+	virtual void ProcessEvent(EEventId eventId, const CallbackArgs& eventArgs) = 0;
 };

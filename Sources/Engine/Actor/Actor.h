@@ -18,8 +18,6 @@ public:
 	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	void AddChild(const ActorPtr& spChild);
-
 	template <typename TComponent>
 	TComponent* FindComponent()
 	{
@@ -75,6 +73,20 @@ public:
 		m_mapComponent.erase(TComponent::s_id);
 	}
 
+	template <typename TActor>
+	std::shared_ptr<TActor> GetChild(int32 childIdx)
+	{
+		return (std::dynamic_pointer_cast<TActor>(GetChildNoCast(childIdx)));
+	}
+
+	template <typename TActor>
+	std::shared_ptr<TActor> GetChild(int32 childIdx) const
+	{
+		return (std::dynamic_pointer_cast<TActor>(GetChildNoCast(childIdx)));
+	}
+
+	void AddChild(const ActorPtr& spChild);
+
 	// 자주 사용해서 따로 빼놓음
 	TransformComponent* BringTransformComponent();
 	const TransformComponent* BringTransformComponent() const;
@@ -87,6 +99,7 @@ public:
 	bool IsActorFlagBitOn(EActorFlag actorFlag) const { return (m_actorBitsetFlag.IsBitOn(actorFlag)); }
 
 	const BitsetFlag& GetActorBitsetFlag() const { return m_actorBitsetFlag; }
+	const ActorPtr& GetChildNoCast(int32 childIdx) const { return (m_vecChild[childIdx]); }
 
 private:
 	std::string m_strName;

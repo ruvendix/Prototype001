@@ -13,6 +13,13 @@ enum class EKeyboardValue
 	Count,
 };
 
+enum class EMouseValue
+{
+	LeftButton = 0,
+
+	Count,
+};
+
 enum class EUserInputState
 {
 	Down = 0,

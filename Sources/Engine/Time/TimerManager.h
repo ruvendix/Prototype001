@@ -12,8 +12,8 @@ class TimerManager
 
 public:
     Timer CreateTimer(float targetTime, bool bRepetition);
-    Timer CreateTimer(float targetTime, bool bRepetition, const TimerCallback& timerCallback);
-    int32 RegisterTimer(float targetTime, bool bRepetition, const TimerCallback& timerCallback);
+    Timer CreateTimer(float targetTime, bool bRepetition, const Callback& timerCallback);
+    int32 RegisterTimer(float targetTime, bool bRepetition, const Callback& timerCallback);
 
     void UpdateTimers(float deltaSeconds);
     void ModifyTimerRepetition(int32 timerId, bool bRepetition);

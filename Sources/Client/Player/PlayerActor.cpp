@@ -3,6 +3,7 @@
 #include "PlayerActor.h"
 
 #include "PlayerState.h"
+#include "Engine/Actor/WorldTileMapActor.h"
 
 namespace
 {
@@ -36,7 +37,7 @@ class PlayerActor::Pimpl
 
 public:
 	void LoadAndStartupPlayerSprite();
-	bool ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir);
+	void ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir);
 };
 
 void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
@@ -138,25 +139,40 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 //#endif
 }
 
-bool PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir)
+void PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir)
 {
 	SceneActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<SceneActorMoveComponent>();
 	if (pMoveComponent->IsMoving())
 	{
-		return false;
+		return;
 	}
+
+	// 현재 셀 좌표 백업
+	CellPosition currentCellPos = pMoveComponent->GetDestinationCellPosition();
 
 	// 목표 방향 바꾸고
 	pMoveComponent->ApplyMoveDirection(moveDir);
 
-	// 스프라이트 바꾸고
-	const std::string& strPlayerSprite = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetMoveDirection())];
-	m_pOwner->ChangePlayerSprite(strPlayerSprite);
+	// 이동 가능한지?
+	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = m_pOwner->m_spWorldTileMapActor;
+	if (spWorldTileMapActor->CheckMovingAvailableTile(pMoveComponent->GetDestinationCellPosition()) == false)
+	{
+		// Idle 스프라이트로 바꾸고
+		const std::string& strPlayerIdleSprite = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetMoveDirection())];
+		m_pOwner->ChangePlayerSprite(strPlayerIdleSprite);
+
+		pMoveComponent->SetDestinationCellPosition(currentCellPos);
+		DEFAULT_TRACE_LOG("이동 못함!");
+
+		return;
+	}
+
+	// Walk 스프라이트 바꾸고
+	const std::string& strPlayerWalkSprite = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetMoveDirection())];
+	m_pOwner->ChangePlayerSprite(strPlayerWalkSprite);
 
 	// 설정한 방향 정보 반영
 	m_pOwner->ProcessPlayerInput();
-
-	return true;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 PlayerActor::~PlayerActor()
@@ -176,16 +192,16 @@ void PlayerActor::Startup()
 	m_spPimpl->LoadAndStartupPlayerSprite();
 
 #pragma region 입력 처리
-	UserInputCallback leftKeyDownCallback = std::bind(&PlayerActor::OnKeyboardDown_Left, this);
+	Callback leftKeyDownCallback = std::bind(&PlayerActor::OnLeftKeyDown, this);
 	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Left, leftKeyDownCallback, nullptr, nullptr);
 
-	UserInputCallback rightKeyDownCallback = std::bind(&PlayerActor::OnKeyboardDown_Right, this);
+	Callback rightKeyDownCallback = std::bind(&PlayerActor::OnRightKeyDown, this);
 	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Right, rightKeyDownCallback, nullptr, nullptr);
 
-	UserInputCallback downKeyDownCallback = std::bind(&PlayerActor::OnKeyboardDown_Down, this);
+	Callback downKeyDownCallback = std::bind(&PlayerActor::OnDownKeyDown, this);
 	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Down, downKeyDownCallback, nullptr, nullptr);
 
-	UserInputCallback upKeyDownCallback = std::bind(&PlayerActor::OnKeyboardDown_Up, this);
+	Callback upKeyDownCallback = std::bind(&PlayerActor::OnUpKeyDown, this);
 	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Up, upKeyDownCallback, nullptr, nullptr);
 #pragma endregion
 
@@ -205,7 +221,7 @@ void PlayerActor::Startup()
 	AddComponent<SceneActorMoveComponent>();
 	SceneActorMoveComponent* pMoveComponent = FindComponent<SceneActorMoveComponent>();
 	pMoveComponent->SetMoveSpeed(90.0f);
-	pMoveComponent->SetMoveCellPosition(GetCellPosition()); // 초기화니까 똑같음
+	pMoveComponent->SetDestinationCellPosition(GetCellPosition()); // 초기화니까 똑같음
 
 	// 상태 처리
 	m_spPlayerState = std::make_shared<PlayerIdleState>(this);
@@ -257,31 +273,31 @@ const std::string& PlayerActor::FindPlayerWalkSpriteString(ESceneActorMoveDirect
 	return (g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
 }
 
-void PlayerActor::OnKeyboardDown_Left()
+void PlayerActor::OnLeftKeyDown()
 {
 	DEFAULT_TRACE_LOG("왼쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Left);
 }
 
-void PlayerActor::OnKeyboardDown_Right()
+void PlayerActor::OnRightKeyDown()
 {
 	DEFAULT_TRACE_LOG("오른쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Right);
 }
 
-void PlayerActor::OnKeyboardDown_Down()
+void PlayerActor::OnDownKeyDown()
 {
 	DEFAULT_TRACE_LOG("아래쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Down);
 }
 
-void PlayerActor::OnKeyboardDown_Up()
+void PlayerActor::OnUpKeyDown()
 {
 	DEFAULT_TRACE_LOG("위쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Up);
 }
 
-void PlayerActor::OnChangeState(const EventArgs& eventArgs)
+void PlayerActor::OnChangeState(const CallbackArgs& eventArgs)
 {
 	DEFAULT_TRACE_LOG("체인지 스테이트!");
 	m_spPlayerState = std::any_cast<PlayerStatePtr>(eventArgs[0]);

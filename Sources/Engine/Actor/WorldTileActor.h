@@ -14,4 +14,11 @@ public:
 	virtual void Cleanup() override;
 
 	void InitializeWorldTile(int32 cellX, int32 cellY);
+	void ApplyNextShape();
+
+	int32 GetTileShapeIdx() const { return m_tileShapeIdx; }
+
+private:
+	int32 m_tileShapeIdx = 0;
+	StaticSpritePtr m_spTileSprite = nullptr;
 };

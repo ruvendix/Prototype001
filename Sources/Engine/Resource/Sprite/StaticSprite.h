@@ -12,6 +12,8 @@ public:
 	void SetSpriteDrawInfo(const SpriteDrawInfo& spriteDrawInfo) { m_spriteDrawInfo = spriteDrawInfo; }
 	const SpriteDrawInfo& GetSpriteDrawInfo() const { return m_spriteDrawInfo; }
 
+	void SetDrawingStartPos(const Position2d& drawingStartPos) { m_spriteDrawInfo.drawingStartPos = drawingStartPos; }
+
 private:
 	SpriteDrawInfo m_spriteDrawInfo;
 };

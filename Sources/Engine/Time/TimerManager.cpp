@@ -9,7 +9,7 @@ Timer TimerManager::CreateTimer(float targetTime, bool bRepetition)
     return CreateTimer(targetTime, bRepetition, nullptr);
 }
 
-Timer TimerManager::CreateTimer(float targetTime, bool bRepetition, const TimerCallback& timerCallback)
+Timer TimerManager::CreateTimer(float targetTime, bool bRepetition, const Callback& timerCallback)
 {
     Timer timer;
     timer.SetTargetTime(targetTime);
@@ -19,7 +19,7 @@ Timer TimerManager::CreateTimer(float targetTime, bool bRepetition, const TimerC
     return timer;
 }
 
-int32 TimerManager::RegisterTimer(float targetTime, bool bRepetition, const TimerCallback& timerCallback)
+int32 TimerManager::RegisterTimer(float targetTime, bool bRepetition, const Callback& timerCallback)
 {
     Timer timer = CreateTimer(targetTime, bRepetition, timerCallback);
 

@@ -29,9 +29,7 @@ bool CameraActor::CheckInCameraVision(const Actor* pActor) const
 	const Vec2d& targetWorldPos = pTargetTransformComponent->GetPosition();
 
 	// 카메라 시야 안에 있는지 판단하는 방법은? 오프셋임
-	const CameraComponent* pCameraComponent = FindComponent<CameraComponent>();
-	const Vec2d& cameraOffsetPos = pCameraComponent->GetCameraOffsetPosition();
-
+	const Vec2d& cameraOffsetPos = BringCameraOffsetPosition();
 	Vec2d diffCameraOffsetPos = (targetWorldPos - cameraOffsetPos);
 	const Size& viewerResolution = SceneRenderer::I()->GetViewerResolution();
 
@@ -50,4 +48,10 @@ bool CameraActor::CheckInCameraVision(const Actor* pActor) const
 	}
 
 	return true;
+}
+
+const Vec2d& CameraActor::BringCameraOffsetPosition() const
+{
+	const CameraComponent* pCameraComponent = FindComponent<CameraComponent>();
+	return pCameraComponent->GetCameraOffsetPosition();
 }

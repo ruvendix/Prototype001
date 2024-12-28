@@ -4,7 +4,7 @@
 #define DEFINE_EVENT_HANDLER \
 public: \
 	template <typename TEvent> \
-	EventHandler FindEventHandler() \
+	Callback FindEventHandler() \
 	{ \
 		const auto& foundIter = m_mapEventHandler.find(TEvent::s_id); \
 		if (foundIter == m_mapEventHandler.cend()) \
@@ -20,14 +20,14 @@ public: \
 	{ \
 		ASSERT_LOG_RETURN(FindEventHandler<TEvent>() == nullptr); \
 	\
-		EventHandler eventHandlerObj = std::bind(eventHandler, this, std::placeholders::_1); \
+		Callback eventHandlerObj = std::bind(eventHandler, this, std::placeholders::_1); \
 		m_mapEventHandler.insert(std::make_pair(TEvent::s_id, eventHandlerObj)); \
 	} \
 	\
 	template <typename TEvent, typename... TArgs> \
 	void ReserveEvent(TArgs... args) \
 	{ \
-		EventHandler foundEventHandler = FindEventHandler<TEvent>(); \
+		Callback foundEventHandler = FindEventHandler<TEvent>(); \
 		ASSERT_LOG_RETURN(foundEventHandler != nullptr); \
 	\
 		EventPtr spEvent = std::make_shared<TEvent>(); \
@@ -41,4 +41,4 @@ public: \
 	} \
 \
 private: \
-	std::unordered_map<int32, EventHandler> m_mapEventHandler
+	std::unordered_map<int32, Callback> m_mapEventHandler

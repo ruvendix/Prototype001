@@ -7,7 +7,7 @@
 struct EventInfo
 {
 	EventPtr spEvent = nullptr;
-	EventArgs eventArgs;
+	CallbackArgs eventArgs;
 };
 
 class EventManager

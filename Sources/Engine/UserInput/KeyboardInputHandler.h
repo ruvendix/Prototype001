@@ -13,9 +13,9 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 
 	void BindKeyboardInput(EKeyboardValue keyboardValue,
-		const UserInputCallback& downCallback, const UserInputCallback& pressingCallback, const UserInputCallback& upCallback);
+		const Callback& downCallback, const Callback& pressingCallback, const Callback& upCallback);
 
-	void BindKeyboardHoldingInput(EKeyboardValue keyboardValue, float targetTime, const UserInputCallback& holdingEndCallback);
+	void BindKeyboardHoldingInput(EKeyboardValue keyboardValue, float targetTime, const Callback& holdingEndCallback);
 
 	// 유저 입력에 대한 바인딩 정보가 없어도 사용 가능
 	bool CheckKeyboardValueDown(EKeyboardValue keyboardValue) const;

@@ -96,7 +96,7 @@
     <ClCompile Include="Sources\Engine\GameFrame\GameFrameHandler.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Global\UtilityFunctions.cpp">
+    <ClCompile Include="Sources\Engine\Global\Utility.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Log\LogCategory.cpp" />
@@ -171,6 +171,7 @@
     <ClCompile Include="Sources\Engine\UserInput\KeyboardInputHandler.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\UserInput\MouseInputHandler.cpp" />
     <ClCompile Include="Sources\Engine\World\WorldContext.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -287,7 +288,7 @@
     <ClInclude Include="Sources\Engine\Global\Macros.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Global\UtilityFunctions.h">
+    <ClInclude Include="Sources\Engine\Global\Utility.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Log\LogCategory.h" />
@@ -371,9 +372,11 @@
     <ClInclude Include="Sources\Engine\UserInput\KeyboardInputHandler.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\MouseInputHandler.h" />
     <ClInclude Include="Sources\Engine\UserInput\UserInputEnum.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\UserInputMacro.h" />
     <ClInclude Include="Sources\Engine\UserInput\UserInputStruct.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

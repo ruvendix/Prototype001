@@ -16,10 +16,10 @@ public:
 	Event();
 	virtual ~Event();
 
-	virtual void ProcessEvent(const EventArgs& eventArgs);
+	virtual void ProcessEvent(const CallbackArgs& eventArgs);
 
-	void SetEventHandler(const EventHandler& eventHandler) { m_eventHandler = eventHandler; }
+	void SetEventHandler(const Callback& eventHandler) { m_eventHandler = eventHandler; }
 
 protected:
-	EventHandler m_eventHandler = nullptr;
+	Callback m_eventHandler = nullptr;
 };

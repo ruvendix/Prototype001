@@ -199,7 +199,7 @@
     <ClCompile Include="Sources\Engine\Resource\Sprite\SpriteBase.cpp">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Global\UtilityFunctions.cpp">
+    <ClCompile Include="Sources\Engine\Global\Utility.cpp">
       <Filter>Sources\Engine\Global</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.cpp">
@@ -261,6 +261,9 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
       <Filter>Sources\Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\UserInput\MouseInputHandler.cpp">
+      <Filter>Sources\Engine\UserInput</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -417,7 +420,7 @@
     <ClInclude Include="Sources\Engine\Resource\Sprite\SpriteBase.h">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Global\UtilityFunctions.h">
+    <ClInclude Include="Sources\Engine\Global\Utility.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.h">
@@ -482,6 +485,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
       <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\MouseInputHandler.h">
+      <Filter>Sources\Engine\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\UserInput\UserInputMacro.h">
+      <Filter>Sources\Engine\UserInput</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

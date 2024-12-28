@@ -4,7 +4,7 @@
 #include "DataTypes.h"
 #include "Macros.h"
 #include "IGameLoop.h"
-#include "UtilityFunctions.h"
+#include "Utility.h"
 
 #include "Engine/String/StringUtility.hpp"
 #include "Engine/Time/TimeUtility.h"
@@ -18,6 +18,7 @@
 #include "Engine/Time/TimerManager.h"
 #include "Engine/GameFrame/GameFrameHandler.h"
 #include "Engine/UserInput/KeyboardInputHandler.h"
+#include "Engine/UserInput/MouseInputHandler.h"
 
 #include "Engine/World/WorldContext.h"
 

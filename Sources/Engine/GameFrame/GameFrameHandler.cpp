@@ -8,7 +8,7 @@ void GameFrameHandler::Startup()
 {
 	ApplyFrameRate(60);
 
-	TimerCallback frameTimerCallback = std::bind(&GameFrameHandler::OnTimerFps, this);
+	Callback frameTimerCallback = std::bind(&GameFrameHandler::OnTimerFps, this);
 	m_frameTimer = TimerManager::I()->CreateTimer(1.0f, true, frameTimerCallback);
 
 	m_prevFrameTime = MeasureTime();

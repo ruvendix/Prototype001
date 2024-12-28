@@ -3,6 +3,8 @@
 
 #include "PlayerEvent.h"
 
+class WorldTileMapActor;
+
 class PlayerActor : public CellActor
 {
 	DECLARE_PIMPL;
@@ -19,12 +21,6 @@ public:
 	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	void ProcessPlayerInput();
-	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
-
-	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
-	const std::string& FindPlayerWalkSpriteString(ESceneActorMoveDirection moveDir) const;
-
 	template <typename TPlayerState>
 	void ReserveChangePlayerState()
 	{
@@ -32,14 +28,23 @@ public:
 		ReserveEvent<PlayerStateChangeEvent>(spNextPlayerState);
 	}
 
-private:
-	void OnKeyboardDown_Left();
-	void OnKeyboardDown_Right();
-	void OnKeyboardDown_Down();
-	void OnKeyboardDown_Up();
+	void ProcessPlayerInput();
+	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
 
-	void OnChangeState(const EventArgs& eventArgs);
+	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
+	const std::string& FindPlayerWalkSpriteString(ESceneActorMoveDirection moveDir) const;
+
+	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
+
+private:
+	void OnLeftKeyDown();
+	void OnRightKeyDown();
+	void OnDownKeyDown();
+	void OnUpKeyDown();
+
+	void OnChangeState(const CallbackArgs& eventArgs);
 
 private:
 	PlayerStatePtr m_spPlayerState = nullptr;
+	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 };

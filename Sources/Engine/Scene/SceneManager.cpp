@@ -29,7 +29,7 @@ void SceneManager::Cleanup()
 	m_spScene->Cleanup();
 }
 
-void SceneManager::OnChangeScene(const EventArgs& eventArgs)
+void SceneManager::OnChangeScene(const CallbackArgs& eventArgs)
 {
 	Cleanup();
 	m_spScene = std::any_cast<ScenePtr>(eventArgs[0]);

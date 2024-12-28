@@ -36,7 +36,7 @@ void StaticSpriteComponent::Render(HDC hBackBufferDc)
 			renderingStartPos.x, renderingStartPos.y,
 			pTransformComponent->GetWidth(), pTransformComponent->GetHeight(),
 			pTex->GetTextureDc(),
-			spriteDrawInfo.beginDrawPos.x, spriteDrawInfo.beginDrawPos.y,
+			spriteDrawInfo.drawingStartPos.x, spriteDrawInfo.drawingStartPos.y,
 			spriteDrawInfo.drawSize.width, spriteDrawInfo.drawSize.height,
 			spriteDrawInfo.colorKey);
 	}
@@ -46,7 +46,7 @@ void StaticSpriteComponent::Render(HDC hBackBufferDc)
 			renderingStartPos.x, renderingStartPos.y,
 			pTransformComponent->GetWidth(), pTransformComponent->GetHeight(),
 			pTex->GetTextureDc(),
-			spriteDrawInfo.beginDrawPos.x, spriteDrawInfo.beginDrawPos.y,
+			spriteDrawInfo.drawingStartPos.x, spriteDrawInfo.drawingStartPos.y,
 			spriteDrawInfo.drawSize.width, spriteDrawInfo.drawSize.height,
 			SRCCOPY);
 	}

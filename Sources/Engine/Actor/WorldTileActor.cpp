@@ -2,6 +2,11 @@
 #include "Pch.h"
 #include "WorldTileActor.h"
 
+namespace
+{
+	const int32 TILE_SHAPE_COUNT = 4;
+}
+
 WorldTileActor::~WorldTileActor()
 {
 
@@ -50,19 +55,30 @@ void WorldTileActor::InitializeWorldTile(int32 cellX, int32 cellY)
 	pWorldTileTransform->SetSize(cellSize, cellSize);
 
 	// 이미지 넣기
-	const StaticSpritePtr& spWorldTileSprite = ResourceMananger::I()->CreateStaticSprite(strWorldTileTag);
-	ASSERT_LOG(spWorldTileSprite != nullptr);
+	m_spTileSprite = ResourceMananger::I()->CreateStaticSprite(strWorldTileTag);
+	ASSERT_LOG(m_spTileSprite != nullptr);
 
 	const std::string& strWorldTileTexPath = "Assets/Texture/Map/Tile.bmp";
-	spWorldTileSprite->LoadAndSetTexture(strWorldTileTexPath);
+	m_spTileSprite->LoadAndSetTexture(strWorldTileTexPath);
 
 	SpriteDrawInfo worldTileSpriteDrawInfo;
 	worldTileSpriteDrawInfo.drawSize = Size{ cellSize, cellSize };
 	worldTileSpriteDrawInfo.colorKey = RGB(128, 128, 128);
-	spWorldTileSprite->SetSpriteDrawInfo(worldTileSpriteDrawInfo);
+	m_spTileSprite->SetSpriteDrawInfo(worldTileSpriteDrawInfo);
 
 	// 스프라이트 설정
 	StaticSpriteComponent* pStaticSpriteComponent = AddComponent<StaticSpriteComponent>();
 	ASSERT_LOG(pStaticSpriteComponent != nullptr);
-	pStaticSpriteComponent->SetStaticSprite(spWorldTileSprite);
+	pStaticSpriteComponent->SetStaticSprite(m_spTileSprite);
+}
+
+void WorldTileActor::ApplyNextShape()
+{
+	m_tileShapeIdx = global::CirculateIndex(m_tileShapeIdx, TILE_SHAPE_COUNT);
+
+	Position2d tileDrawingStartPos;
+	tileDrawingStartPos.x = (m_tileShapeIdx * WorldContext::I()->GetCellSize());
+	tileDrawingStartPos.y = 0;
+
+	m_spTileSprite->SetDrawingStartPos(tileDrawingStartPos);
 }

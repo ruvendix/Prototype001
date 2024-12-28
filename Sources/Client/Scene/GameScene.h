@@ -20,6 +20,9 @@ public:
 	virtual void Cleanup() override;
 
 private:
+	void OnMouseLeftButtonDown();
+
+private:
 	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 

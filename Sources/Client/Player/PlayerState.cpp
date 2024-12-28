@@ -53,7 +53,7 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 		pMoveComponent->SetMoving(false);
 
 		TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
-		pTransformComponent->SetPosition(pMoveComponent->GetMovePosition());
+		pTransformComponent->SetPosition(pMoveComponent->GetDestinationWorldPosition());
 
 		// 스프라이트 전환
 		const std::string& strIdleSpriteName = pOwner->FindPlayerIdleSpriteString(pMoveComponent->GetMoveDirection());

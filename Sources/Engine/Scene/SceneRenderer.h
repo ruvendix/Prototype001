@@ -31,6 +31,8 @@ public:
 	int32 GetViewerHalfWidth() const { return (m_viewerInfo.resolution.width / 2); }
 	int32 GetViewerHalfHeight() const { return (m_viewerInfo.resolution.height / 2); }
 
+	HWND GetViewerHandle() const { return (m_viewerInfo.hWndViewer); }
+
 	const std::shared_ptr<CameraActor>& GetMainCameraActor() const { return m_spMainCameraActor; } // ¾À¿¡ ¼Ò¼ÓµÈ ¾×ÅÍ°¡ ¾Æ´Ô!
 
 private:
