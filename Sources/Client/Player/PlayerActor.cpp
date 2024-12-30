@@ -225,6 +225,9 @@ void PlayerActor::Startup()
 
 	// 상태 처리
 	m_spPlayerState = std::make_shared<PlayerIdleState>(this);
+
+	// 레이어 처리
+	SetRenderingLayer(ERenderingLayerType::Player);
 }
 
 bool PlayerActor::Update(float deltaSeconds)

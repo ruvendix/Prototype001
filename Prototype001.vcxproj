@@ -279,6 +279,7 @@
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\Enums.h" />
     <ClInclude Include="Sources\Engine\Global\IGameLoop.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

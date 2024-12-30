@@ -8,4 +8,5 @@ enum class EErrorCode
 	ExistedComponent,
 	NotFoundResource,
 	InvalidIntegerRange,
+	InvalidRenderingLayer,
 };

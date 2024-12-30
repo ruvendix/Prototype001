@@ -492,5 +492,8 @@
     <ClInclude Include="Sources\Engine\UserInput\UserInputMacro.h">
       <Filter>Sources\Engine\UserInput</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\Enums.h">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

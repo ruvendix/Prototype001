@@ -11,6 +11,7 @@ void ErrorHandler::Startup()
 	InsertErrorInfo(EErrorCode::ExistedComponent, &g_LogResource, "이미 갖고 있는 컴포넌트!");
 	InsertErrorInfo(EErrorCode::NotFoundResource, &g_LogResource, "등록 또는 로딩이 되지 않은 리소스!");
 	InsertErrorInfo(EErrorCode::InvalidIntegerRange, &g_LogDefault, "유효하지 않은 정수 범위!");
+	InsertErrorInfo(EErrorCode::InvalidRenderingLayer, &g_LogDefault, "유효하지 않은 렌더링 레이어!");
 }
 
 void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLogCategory, const std::string& strFormatError)

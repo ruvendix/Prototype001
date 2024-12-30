@@ -2,6 +2,7 @@
 #pragma once
 
 using RenderComponentVector = std::vector<class RenderComponent*>;
+using RenderComponentVectorArray = std::array<RenderComponentVector, TO_NUM(ERenderingLayerType::Count)>;
 
 class RenderComponent : public Component
 {

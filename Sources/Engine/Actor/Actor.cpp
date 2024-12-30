@@ -90,7 +90,7 @@ const TransformComponent* Actor::BringTransformComponent() const
 	return (FindComponent<TransformComponent>());
 }
 
-void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent)
+void Actor::FindRenderComponents(RenderComponentVectorArray& outArrVecRenderComponent)
 {
 	for (auto& iter : m_mapComponent)
 	{
@@ -104,14 +104,22 @@ void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent)
 		// 렌더 컴포넌트가 맞으면 캐스팅 시도
 		RenderComponent* pRenderComponent = dynamic_cast<RenderComponent*>(pComponent);
 		ASSERT_LOG(pRenderComponent != nullptr);
-		outVecRenderComponent.push_back(pRenderComponent);
+
+		// 설정된 렌더링 레이어에 따라 컨테이너에 넣음
+		int32 renderingLayer = TO_NUM(m_renderingLayer);
+		if (global::ValidateIndexRange(renderingLayer, TO_NUM(ERenderingLayerType::Count)) == false)
+		{
+			DETAIL_ERROR_LOG(EErrorCode::InvalidRenderingLayer);
+		}
+
+		outArrVecRenderComponent[renderingLayer].push_back(pRenderComponent);
 	}
 
 	for (auto& spChild : m_vecChild)
 	{
 		if (spChild->IsActorFlagBitOn(EActorFlag::RenderingTarget))
 		{
-			spChild->FindRenderComponents(outVecRenderComponent);
+			spChild->FindRenderComponents(outArrVecRenderComponent);
 		}
 	}
 }

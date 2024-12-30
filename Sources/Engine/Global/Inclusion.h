@@ -2,6 +2,7 @@
 #pragma once
 
 #include "DataTypes.h"
+#include "Enums.h"
 #include "Macros.h"
 #include "IGameLoop.h"
 #include "Utility.h"
