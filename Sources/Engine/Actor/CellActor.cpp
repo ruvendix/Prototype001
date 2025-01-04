@@ -4,34 +4,34 @@
 
 #include "Engine/Component/SceneActorMoveComponent.h"
 
-Vec2d CellActor::ConvertCellPositionToWorldPosition(const CellPosition& cellPos)
+Vec2d CellActor::ConvertCellPositionToWorldPosition(const Position2d& cellPos)
 {
-	return (ConvertCellPositionToWorldPosition(cellPos.cellPosX, cellPos.cellPosY));
+	return (ConvertCellPositionToWorldPosition(cellPos.x, cellPos.y));
 }
 
-Vec2d CellActor::ConvertCellPositionToWorldPosition(int32 cellPosX, int32 cellPosY)
+Vec2d CellActor::ConvertCellPositionToWorldPosition(int32 x, int32 y)
 {
 	int32 cellSize = WorldContext::I()->GetCellSize();
 
 	Vec2d convertedPos;
-	convertedPos.x = static_cast<float>((cellPosX * cellSize) + (cellSize / 2));
-	convertedPos.y = static_cast<float>((cellPosY * cellSize) + (cellSize / 2));
+	convertedPos.x = static_cast<float>((x * cellSize) + (cellSize / 2));
+	convertedPos.y = static_cast<float>((y * cellSize) + (cellSize / 2));
 
 	return convertedPos;
 }
 
-CellPosition CellActor::ConvertWorldPositionToCellPosition(const Vec2d& worldPos)
+Position2d CellActor::ConvertWorldPositionToCellPosition(const Vec2d& worldPos)
 {
 	return (ConvertWorldPositionToCellPosition(worldPos.x, worldPos.y));
 }
 
-CellPosition CellActor::ConvertWorldPositionToCellPosition(float posX, float posY)
+Position2d CellActor::ConvertWorldPositionToCellPosition(float posX, float posY)
 {
 	int32 cellSize = WorldContext::I()->GetCellSize();
 
-	CellPosition convertedCellPos;
-	convertedCellPos.cellPosX = static_cast<int32>(posX) / cellSize;
-	convertedCellPos.cellPosY = static_cast<int32>(posY) / cellSize;
+	Position2d convertedCellPos;
+	convertedCellPos.x = static_cast<int32>(posX) / cellSize;
+	convertedCellPos.y = static_cast<int32>(posY) / cellSize;
 
 	return convertedCellPos;
 }
@@ -61,11 +61,11 @@ void CellActor::Cleanup()
 	return (Super::Cleanup());
 }
 
-void CellActor::ApplyCellPosition(int32 cellPosX, int32 cellPosY)
+void CellActor::ApplyCellPosition(int32 x, int32 y)
 {
-	m_cellPos = CellPosition{ cellPosX, cellPosY };
+	m_cellPos = Position2d{ x, y };
 
 	TransformComponent* pTransformComponent = BringTransformComponent();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
-	pTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(cellPosX, cellPosY));
+	pTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(x, y));
 }

@@ -13,6 +13,7 @@ public:
 	virtual void LoadResource(const std::string& strResRelativePath) = 0;
 
 	void SetResourceRelativePath(const std::string& strResRelativePath) { m_strResRelativePath = strResRelativePath; }
+	const std::string& GetResourceRelativePath() const { return m_strResRelativePath; }
 	
 	const std::string& GetTag() const { return m_strResTag; }
 	void SetTag(const std::string& strResTag) { m_strResTag = strResTag; }

@@ -35,7 +35,7 @@ void FileLogger::Excute(const std::string& strLog)
 			m_logFileStream.OpenFileStream(strLogFilePath, EFileStreamMode::WriteOnlyText);
 		}
 
-		m_logFileStream.WriteTextToFileStream(strLog);
+		m_logFileStream.WriteSingleLineTextToFileStream(strLog);
 	}
 
 	m_logFileStream.CloseFileStream();

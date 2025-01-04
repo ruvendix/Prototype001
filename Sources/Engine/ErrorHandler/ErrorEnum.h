@@ -9,4 +9,5 @@ enum class EErrorCode
 	NotFoundResource,
 	InvalidIntegerRange,
 	InvalidRenderingLayer,
+	InvalidFileStream,
 };

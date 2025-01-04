@@ -25,8 +25,8 @@ public:
 	void ApplyMoveDirection(ESceneActorMoveDirection moveDir);
 	bool CheckGoalPosition(float deltaSeconds) const;
 
-	void SetDestinationCellPosition(const CellPosition& destCellPos) { m_destCellPos = destCellPos; }
-	const CellPosition& GetDestinationCellPosition() const { return m_destCellPos; }
+	void SetDestinationCellPosition(const Position2d& destCellPos) { m_destCellPos = destCellPos; }
+	const Position2d& GetDestinationCellPosition() const { return m_destCellPos; }
 
 	void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
 	const Vec2d& GetDestinationWorldPosition() const { return m_destPos; }
@@ -41,6 +41,6 @@ private:
 	float m_moveSpeed = 0.0f;
 
 	Vec2d m_destPos;
-	CellPosition m_destCellPos;
+	Position2d m_destCellPos;
 	ESceneActorMoveDirection m_moveDir = ESceneActorMoveDirection::Down;
 };

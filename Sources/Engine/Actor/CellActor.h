@@ -9,10 +9,10 @@ public:
 	using Super = Actor;
 
 public:
-	static Vec2d ConvertCellPositionToWorldPosition(const CellPosition& cellPos);
-	static Vec2d ConvertCellPositionToWorldPosition(int32 cellPosX, int32 cellPosY);
-	static CellPosition ConvertWorldPositionToCellPosition(const Vec2d& worldPos);
-	static CellPosition ConvertWorldPositionToCellPosition(float posX, float posY);
+	static Vec2d ConvertCellPositionToWorldPosition(const Position2d& cellPos);
+	static Vec2d ConvertCellPositionToWorldPosition(int32 x, int32 y);
+	static Position2d ConvertWorldPositionToCellPosition(const Vec2d& worldPos);
+	static Position2d ConvertWorldPositionToCellPosition(float posX, float posY);
 
 public:
 	using Super::Super;
@@ -23,9 +23,9 @@ public:
 	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	void ApplyCellPosition(int32 cellPosX, int32 cellPosY);
-	const CellPosition& GetCellPosition() const { return m_cellPos; }
+	void ApplyCellPosition(int32 x, int32 y);
+	const Position2d& GetCellPosition() const { return m_cellPos; }
 
 private:
-	CellPosition m_cellPos;
+	Position2d m_cellPos;
 };

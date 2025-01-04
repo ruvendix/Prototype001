@@ -12,6 +12,7 @@ void ErrorHandler::Startup()
 	InsertErrorInfo(EErrorCode::NotFoundResource, &g_LogResource, "등록 또는 로딩이 되지 않은 리소스!");
 	InsertErrorInfo(EErrorCode::InvalidIntegerRange, &g_LogDefault, "유효하지 않은 정수 범위!");
 	InsertErrorInfo(EErrorCode::InvalidRenderingLayer, &g_LogDefault, "유효하지 않은 렌더링 레이어!");
+	InsertErrorInfo(EErrorCode::InvalidFileStream, &g_LogResource, "유요하지 않은 파일 스트림!");	
 }
 
 void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLogCategory, const std::string& strFormatError)

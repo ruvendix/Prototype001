@@ -6,7 +6,10 @@
 
 WorldTileMapActor::~WorldTileMapActor()
 {
-
+	// 일단은 꾸준히 세이브
+	FileStream writeWorldTileMapFileStream;
+	writeWorldTileMapFileStream.OpenFileStream("WorldTileMap.wtm", EFileStreamMode::WriteOnlyBinary);
+	SaveToFileStream(writeWorldTileMapFileStream);
 }
 
 void WorldTileMapActor::Startup()
@@ -15,6 +18,7 @@ void WorldTileMapActor::Startup()
 
 	int32 cellSize = WorldContext::I()->GetCellSize();
 
+#if 0
 	// 월드 크기를 셀 길이만큼 나눠서 가로와 세로 개수부터 알아내기
 	m_tileArray2dInfo.xIdxCount = (WorldContext::I()->GetWorldSize().width / cellSize);
 	m_tileArray2dInfo.yIdxCount = (WorldContext::I()->GetWorldSize().height / cellSize);
@@ -30,6 +34,11 @@ void WorldTileMapActor::Startup()
 			AddChild(spWorldTileActor);
 		}
 	}
+#else
+	FileStream readWorldTileMapFileStream;
+	readWorldTileMapFileStream.OpenFileStream("WorldTileMap.wtm", EFileStreamMode::ReadOnlyBinary);
+	LoadFromFileStream(readWorldTileMapFileStream);
+#endif
 }
 
 bool WorldTileMapActor::Update(float deltaSeconds)
@@ -45,6 +54,48 @@ bool WorldTileMapActor::Update(float deltaSeconds)
 void WorldTileMapActor::Cleanup()
 {
 	Super::Cleanup();
+}
+
+void WorldTileMapActor::SaveToFileStream(const FileStream& fileStream) const
+{
+	Super::SaveToFileStream(fileStream);
+
+	fileStream.WriteDataToFileStream<Array2dInfo>(m_tileArray2dInfo);
+
+	const std::string& strTileSpritePath = GetChild<WorldTileActor>(0)->BringTileSpritePath();
+	fileStream.WriteStringToFileStream(strTileSpritePath);
+
+	for (int32 y = 0; y < m_tileArray2dInfo.yIdxCount; ++y)
+	{
+		for (int32 x = 0; x < m_tileArray2dInfo.xIdxCount; ++x)
+		{
+			int32 worldTileIdx = ((y * m_tileArray2dInfo.xIdxCount) + x);
+			GetChildNoCast(worldTileIdx)->SaveToFileStream(fileStream);
+		}
+	}
+}
+
+void WorldTileMapActor::LoadFromFileStream(const FileStream& fileStream)
+{
+	Super::LoadFromFileStream(fileStream);
+
+	fileStream.ReadDataFromFileStream<Array2dInfo>(m_tileArray2dInfo);
+
+	std::string strWorldTileSpritePath;
+	fileStream.ReadStringFromFileStream(strWorldTileSpritePath);
+
+	for (int32 y = 0; y < m_tileArray2dInfo.yIdxCount; ++y)
+	{
+		for (int32 x = 0; x < m_tileArray2dInfo.xIdxCount; ++x)
+		{
+			// 타일은 씬 액터로 만들기! (셀 좌표가 필요함)
+			const std::shared_ptr<WorldTileActor> spWorldTileActor = Scene::CreateActor<WorldTileActor>();
+			spWorldTileActor->LoadFromFileStream(fileStream);
+			spWorldTileActor->InitializeWorldTile(x, y, strWorldTileSpritePath);
+
+			AddChild(spWorldTileActor);
+		}
+	}
 }
 
 void WorldTileMapActor::ApplyCurrentMousePositionToTile()
@@ -64,12 +115,12 @@ void WorldTileMapActor::ApplyCurrentMousePositionToTile()
 	mouseWorldPos.x = static_cast<float>(currentMousePos.x) + mainCameraOffsetPos.x;
 	mouseWorldPos.y = static_cast<float>(currentMousePos.y) + mainCameraOffsetPos.y;
 	
-	const CellPosition& mouseCellPos = CellActor::ConvertWorldPositionToCellPosition(mouseWorldPos);
+	const Position2d& mouseCellPos = CellActor::ConvertWorldPositionToCellPosition(mouseWorldPos);
 	int32 findTileIdx = ConvertCellPositionToTileIndex(mouseCellPos);
-	GetChild<WorldTileActor>(findTileIdx)->ApplyNextShape();
+	GetChild<WorldTileActor>(findTileIdx)->ApplyNextWorldTileShape();
 }
 
-bool WorldTileMapActor::CheckMovingAvailableTile(const CellPosition& cellPos) const
+bool WorldTileMapActor::CheckMovingAvailableTile(const Position2d& cellPos) const
 {
 	int32 findTileIdx = ConvertCellPositionToTileIndex(cellPos);
 	int32 tileShapeIdx = GetChild<WorldTileActor>(findTileIdx)->GetTileShapeIdx();
@@ -82,13 +133,13 @@ bool WorldTileMapActor::CheckMovingAvailableTile(const CellPosition& cellPos) co
 	return true;
 }
 
-int32 WorldTileMapActor::ConvertCellPositionToTileIndex(const CellPosition& cellPos) const
+int32 WorldTileMapActor::ConvertCellPositionToTileIndex(const Position2d& cellPos) const
 {
-	if ((cellPos.cellPosX) < 0 ||
-		(cellPos.cellPosY) < 0)
+	if ((cellPos.x) < 0 ||
+		(cellPos.y) < 0)
 	{
 		return 0;
 	}
 
-	return (m_tileArray2dInfo.xIdxCount * cellPos.cellPosY) + cellPos.cellPosX;
+	return (m_tileArray2dInfo.xIdxCount * cellPos.y) + cellPos.x;
 }

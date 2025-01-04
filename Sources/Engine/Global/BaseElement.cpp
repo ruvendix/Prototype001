@@ -23,12 +23,18 @@ void BaseElement::Cleanup()
 
 }
 
-void BaseElement::SaveToFileStream()
+void BaseElement::SaveToFileStream(const FileStream& fileStream) const
 {
-
+	if (fileStream.IsOpenFileStream() == false)
+	{
+		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
+	}
 }
 
-void BaseElement::LoadFromFileStream()
+void BaseElement::LoadFromFileStream(const FileStream& fileStream)
 {
-
+	if (fileStream.IsOpenFileStream() == false)
+	{
+		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
+	}
 }

@@ -148,7 +148,7 @@ void PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDi
 	}
 
 	// 현재 셀 좌표 백업
-	CellPosition currentCellPos = pMoveComponent->GetDestinationCellPosition();
+	Position2d currentCellPos = pMoveComponent->GetDestinationCellPosition();
 
 	// 목표 방향 바꾸고
 	pMoveComponent->ApplyMoveDirection(moveDir);

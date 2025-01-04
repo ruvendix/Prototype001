@@ -48,19 +48,19 @@ void SceneActorMoveComponent::ApplyMoveDirection(ESceneActorMoveDirection moveDi
 	switch (moveDir)
 	{
 	case ESceneActorMoveDirection::Left:
-		m_destCellPos.cellPosX -= 1;
+		m_destCellPos.x -= 1;
 		break;
 
 	case ESceneActorMoveDirection::Right:
-		m_destCellPos.cellPosX += 1;
+		m_destCellPos.x += 1;
 		break;
 
 	case ESceneActorMoveDirection::Down:
-		m_destCellPos.cellPosY += 1;
+		m_destCellPos.y += 1;
 		break;
 
 	case ESceneActorMoveDirection::Up:
-		m_destCellPos.cellPosY -= 1;
+		m_destCellPos.y -= 1;
 		break;
 	}
 

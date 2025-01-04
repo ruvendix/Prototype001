@@ -1,6 +1,8 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+class FileStream;
+
 class BaseElement
 {
 public:
@@ -12,6 +14,6 @@ public:
 	virtual bool PostUpdate(float deltaSeconds);
 	virtual void Cleanup();
 
-	virtual void SaveToFileStream();
-	virtual void LoadFromFileStream();
+	virtual void SaveToFileStream(const FileStream& fileStream) const;
+	virtual void LoadFromFileStream(const FileStream& fileStream);
 };

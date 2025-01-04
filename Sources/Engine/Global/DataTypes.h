@@ -28,12 +28,6 @@ struct Position2d
 	int32 y = 0;
 };
 
-struct CellPosition
-{
-	int32 cellPosX = 0;
-	int32 cellPosY = 0;
-};
-
 struct Array2dInfo
 {
 	int32 xIdxCount = 0;

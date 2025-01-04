@@ -13,10 +13,13 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	void ApplyCurrentMousePositionToTile();
-	bool CheckMovingAvailableTile(const CellPosition& cellPos) const;
+	virtual void SaveToFileStream(const FileStream& fileStream) const override;
+	virtual void LoadFromFileStream(const FileStream& fileStream) override;
 
-	int32 ConvertCellPositionToTileIndex(const CellPosition& cellPos) const;
+	void ApplyCurrentMousePositionToTile();
+	bool CheckMovingAvailableTile(const Position2d& cellPos) const;
+
+	int32 ConvertCellPositionToTileIndex(const Position2d& cellPos) const;
 
 private:
 	Array2dInfo m_tileArray2dInfo;

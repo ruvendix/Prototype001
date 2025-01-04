@@ -13,8 +13,16 @@ public:
 	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	void InitializeWorldTile(int32 cellX, int32 cellY);
-	void ApplyNextShape();
+	virtual void SaveToFileStream(const FileStream& fileStream) const override;
+	virtual void LoadFromFileStream(const FileStream& fileStream) override;
+
+	void InitializeWorldTile(int32 cellX, int32 cellY, const std::string& strWorldTileSpritePath);
+	void LoadWorldTileFromFileStream(const FileStream& fileStream, int32 cellX, int32 cellY, const std::string& strWorldTileSpritePath);
+
+	void ApplyNextWorldTileShape();
+	void ApplyCurrentWorldTileShape();
+
+	const std::string& BringTileSpritePath() const;
 
 	int32 GetTileShapeIdx() const { return m_tileShapeIdx; }
 
