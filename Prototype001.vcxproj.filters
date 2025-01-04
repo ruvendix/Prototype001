@@ -265,6 +265,9 @@
     <ClCompile Include="Sources\Engine\UserInput\MouseInputHandler.cpp">
       <Filter>Sources\Engine\UserInput</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Global\BaseElement.cpp">
+      <Filter>Sources\Engine\Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
@@ -276,7 +279,7 @@
     <ClInclude Include="Sources\Engine\Global\Macros.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Global\IGameLoop.h">
+    <ClInclude Include="Sources\Engine\Global\BaseElement.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\GameApplication.h">
@@ -494,6 +497,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Enums.h">
       <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\File\FileEnum.h">
+      <Filter>Sources\Engine\File</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 #include "UserInputEnum.h"
 #include "UserInputStruct.h"
 
-class MouseInputHandler : public IGameLoop
+class MouseInputHandler : public BaseElement
 {
 	DECLARE_SINGLETON(MouseInputHandler)
 

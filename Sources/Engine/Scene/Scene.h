@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class Scene : public IGameLoop
+class Scene : public BaseElement
 {
 public:
 	Scene();

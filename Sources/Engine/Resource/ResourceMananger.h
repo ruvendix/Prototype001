@@ -5,7 +5,7 @@
 #include "Sprite/StaticSpriteStorage.h"
 #include "Sprite/DynamicSpriteStorage.h"
 
-class ResourceMananger : public IGameLoop
+class ResourceMananger : public BaseElement
 {
 	DECLARE_SINGLETON(ResourceMananger)
 

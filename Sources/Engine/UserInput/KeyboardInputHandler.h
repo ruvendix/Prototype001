@@ -4,7 +4,7 @@
 #include "UserInputEnum.h"
 #include "UserInputStruct.h"
 
-class KeyboardInputHandler : public IGameLoop
+class KeyboardInputHandler : public BaseElement
 {
 	DECLARE_SINGLETON(KeyboardInputHandler)
 

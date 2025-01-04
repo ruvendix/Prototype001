@@ -5,10 +5,10 @@
 #pragma warning(disable : 26495) // 변수가 초기화되지 않았다는 경고
 #pragma warning(disable : 6011) // nullptr을 역참조했다는 경고
 
-// C 표준 헤더 파일입니다.
+#pragma region 제공되는 헤더 파일입니다.
 #include <crtdbg.h>
+#include <cstdio>
 
-// C++ 표준 헤더 파일입니다.
 #include <cmath>
 #include <memory>
 #include <mutex>
@@ -17,7 +17,6 @@
 #include <string>
 #include <array>
 #include <chrono>
-#include <fstream>
 #include <filesystem>
 #include <functional>
 #include <unordered_map>
@@ -25,6 +24,7 @@
 #include <format>
 #include <queue>
 #include <any>
+#pragma endregion
 
 /*
 SDKDDKVer.h를 포함하면 최고 수준의 가용성을 가진 Windows 플랫폼이 정의됩니다.

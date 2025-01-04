@@ -3,7 +3,7 @@
 
 #include "SceneEvent.h"
 
-class SceneManager : public IGameLoop
+class SceneManager : public BaseElement
 {
 	DECLARE_SINGLETON(SceneManager)
 	DEFINE_EVENT_HANDLER;

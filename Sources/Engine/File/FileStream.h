@@ -1,23 +1,27 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+#include "FileEnum.h"
+
 class FileStream
 {
 public:
 	FileStream();
 	~FileStream();
 
-	bool OpenFileStream(const std::string& strFilePath);
+	bool OpenFileStream(const std::string& strFilePath, EFileStreamMode fileSteamMode);
 	void CloseFileStream();
 
-	bool ReopenFileStream();
+	bool ReopenFileStream(EFileStreamMode fileSteamMode);
 
-	bool WriteToFileStream(const std::string& strContents);
-	bool ReadFromFileStream(std::string& outStrContents);
+	bool WriteTextToFileStream(const std::string& strText);
+	bool ReadTextFromFileStream(std::string& outStrText);
 
-	bool IsOpenFileStream() const { return (m_fileStream.is_open()); }
+	bool IsOpenFileStream() const { return (m_pFileStream != nullptr); }
 
 private:
 	std::string m_strFilePath;
-	std::fstream m_fileStream;
+
+	FILE* m_pFileStream = nullptr;
+	EFileStreamMode m_fileStreamMode = EFileStreamMode::Count;
 };

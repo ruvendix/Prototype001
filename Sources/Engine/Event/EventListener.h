@@ -4,7 +4,7 @@
 #include "Event.h"
 #include "EventMacro.h"
 
-class EventListener : public IGameLoop
+class EventListener : public BaseElement
 {
 public:
 	EventListener();

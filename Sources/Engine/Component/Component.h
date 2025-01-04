@@ -3,7 +3,7 @@
 
 DEFINE_COMPILETIMER_COUNTER(ComponentIdCounter)
 
-class Component : public IGameLoop
+class Component : public BaseElement
 {
 public:
 	Component();

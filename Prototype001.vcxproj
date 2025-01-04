@@ -96,6 +96,9 @@
     <ClCompile Include="Sources\Engine\GameFrame\GameFrameHandler.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Global\BaseElement.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Global\Utility.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -267,6 +270,9 @@
     <ClInclude Include="Sources\Engine\Event\EventManager.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\File\FileEnum.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\File\PathManager.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -280,7 +286,7 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Enums.h" />
-    <ClInclude Include="Sources\Engine\Global\IGameLoop.h">
+    <ClInclude Include="Sources\Engine\Global\BaseElement.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Inclusion.h">

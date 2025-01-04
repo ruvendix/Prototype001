@@ -9,7 +9,7 @@ struct ErrorInfo
 	std::string strFormatError;
 };
 
-class ErrorHandler : public IGameLoop
+class ErrorHandler : public BaseElement
 {
 	DECLARE_SINGLETON(ErrorHandler)
 

@@ -4,7 +4,7 @@
 #include "DataTypes.h"
 #include "Enums.h"
 #include "Macros.h"
-#include "IGameLoop.h"
+#include "BaseElement.h"
 #include "Utility.h"
 
 #include "Engine/String/StringUtility.hpp"

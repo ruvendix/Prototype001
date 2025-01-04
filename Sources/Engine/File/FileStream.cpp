@@ -2,6 +2,14 @@
 #include "Pch.h"
 #include "FileStream.h"
 
+namespace
+{
+	std::array<const char*, TO_NUM(EFileStreamMode::Count)> g_arrFileStreamModeLookupTable =
+	{
+		"w", "r", "a", "wb", "rb"
+	};
+}
+
 FileStream::FileStream()
 {
 
@@ -12,61 +20,69 @@ FileStream::~FileStream()
 	CloseFileStream();
 }
 
-bool FileStream::OpenFileStream(const std::string& strFilePath)
+bool FileStream::OpenFileStream(const std::string& strFilePath, EFileStreamMode fileSteamMode)
 {
 	// 파일 스트림 닫고 시작
 	CloseFileStream();
 
-	// 파일 스트림 열기
-	m_fileStream.open(strFilePath, std::ios::in | std::ios::out | std::ios::app); // app은 append 약자
+	// 파일 스트림 모드 알아내기
+	const char* szFileStreamMode = g_arrFileStreamModeLookupTable[TO_NUM(fileSteamMode)];
 
-	if (IsOpenFileStream())
+	// 파일 스트림 열기
+	fopen_s(&m_pFileStream, strFilePath.c_str(), szFileStreamMode);
+	if (IsOpenFileStream() == false)
 	{
-		m_strFilePath = strFilePath;
-		return true;
+		return false;
 	}
 
-	return false;
+	m_strFilePath = strFilePath;
+	m_fileStreamMode = fileSteamMode;
+
+	return true;
 }
 
 void FileStream::CloseFileStream()
 {
 	if (IsOpenFileStream())
 	{
-		m_fileStream.close();
+		std::fclose(m_pFileStream);
 	}
 }
 
-bool FileStream::ReopenFileStream()
+bool FileStream::ReopenFileStream(EFileStreamMode fileSteamMode)
 {
 	if (m_strFilePath.empty() == true)
 	{
 		return false;
 	}
 
-	// 파일 패스가 있다면 검증도 해야함
-
-	return (OpenFileStream(m_strFilePath));
+	return (OpenFileStream(m_strFilePath, fileSteamMode));
 }
 
-bool FileStream::WriteToFileStream(const std::string& strContents)
+bool FileStream::WriteTextToFileStream(const std::string& strText)
 {
-	if (IsOpenFileStream())
+	if ((IsOpenFileStream()) &&
+		(m_fileStreamMode == EFileStreamMode::WriteOnlyText) ||
+		(m_fileStreamMode == EFileStreamMode::AppendText))
 	{
-		m_fileStream << strContents << std::endl;
+		std::fprintf(m_pFileStream, "%s\n", strText.c_str());
 		return true;
 	}
 
-	return false; // 파일이 열려있지 않은 경우
+	return false;
 }
 
-bool FileStream::ReadFromFileStream(std::string& outStrContents)
+bool FileStream::ReadTextFromFileStream(std::string& outStrText)
 {
-	if (IsOpenFileStream())
+	if ((IsOpenFileStream() == false) ||
+		(m_fileStreamMode != EFileStreamMode::ReadOnlyText))
 	{
-		std::getline(m_fileStream, outStrContents);
-		return true;
+		return false;
 	}
 
-	return false; // 파일이 열려있지 않은 경우
+	char buffer[1024] = { '\0' }; // 한줄에 1024 바이트로 제한
+	fscanf_s(m_pFileStream, "%[^\n]", buffer, ARRAYSIZE(buffer));
+	outStrText = buffer;
+
+	return true;
 }

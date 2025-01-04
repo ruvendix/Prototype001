@@ -25,17 +25,17 @@ void FileLogger::Excute(const std::string& strLog)
 {
 	{ // 크리티컬 섹션
 		std::lock_guard lock(m_logFileMutex);
-		if (m_logFileStream.ReopenFileStream() == false)
+		if (m_logFileStream.ReopenFileStream(EFileStreamMode::AppendText) == false)
 		{
 			std::string strLocalTime;
 			RenewLocalTimeString(strLocalTime);
 
 			std::string strLogFilePath = PathManager::I()->FindPath(g_szLogPathKey).string() + strLocalTime;
 			strLogFilePath += ".log";
-			m_logFileStream.OpenFileStream(strLogFilePath); // 여기는 PathManager 달아야하고
+			m_logFileStream.OpenFileStream(strLogFilePath, EFileStreamMode::WriteOnlyText);
 		}
 
-		m_logFileStream.WriteToFileStream(strLog);
+		m_logFileStream.WriteTextToFileStream(strLog);
 	}
 
 	m_logFileStream.CloseFileStream();

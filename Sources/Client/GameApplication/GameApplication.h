@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class GameApplication : public IGameLoop
+class GameApplication : public BaseElement
 {
 public:
 	DECLARE_SINGLETON(GameApplication)

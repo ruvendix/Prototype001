@@ -6,7 +6,7 @@
 class ILogger;
 class LogCategory;
 
-class LogSystem : public IGameLoop
+class LogSystem : public BaseElement
 {
 	DECLARE_SINGLETON(LogSystem)
 

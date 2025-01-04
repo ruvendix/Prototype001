@@ -3,7 +3,7 @@
 
 #include "ActorEnum.h"
 
-class Actor : public IGameLoop
+class Actor : public BaseElement
 {
 public:
 	using BitsetFlag = EnumBitset<EActorFlag, TO_NUM(EActorFlag::Count)>;
