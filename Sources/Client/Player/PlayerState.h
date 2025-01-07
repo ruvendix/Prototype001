@@ -20,6 +20,7 @@ private:
 
 class PlayerIdleState : public PlayerState
 {
+	DECLARE_COMPILETIME_ID(PlayerIdleState)
 	using Super = PlayerState;
 
 public:
@@ -31,6 +32,7 @@ public:
 
 class PlayerWalkState : public PlayerState
 {
+	DECLARE_COMPILETIME_ID(PlayerWalkState)
 	using Super = PlayerState;
 
 public:

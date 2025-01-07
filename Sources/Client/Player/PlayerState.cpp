@@ -11,6 +11,7 @@ PlayerState::PlayerState(PlayerActor* pOwner)
 
 PlayerState::~PlayerState()
 {
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,9 +22,6 @@ void PlayerIdleState::ProcessPlayerInput()
 
 	PlayerActor* pOwner = GetOwner();
 	ASSERT_LOG(pOwner != nullptr);
-
-	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
-	pMoveComponent->SetMoving(true);
 
 	// Walk 상태로 전환
 	pOwner->ReserveChangePlayerState<PlayerWalkState>();
@@ -50,8 +48,6 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 
 	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
 	{
-		pMoveComponent->SetMoving(false);
-
 		TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
 		pTransformComponent->SetPosition(pMoveComponent->GetDestinationWorldPosition());
 

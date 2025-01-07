@@ -27,10 +27,14 @@ bool CameraActor::CheckInCameraVision(const Actor* pActor) const
 	const TransformComponent* pTargetTransformComponent = pActor->BringTransformComponent();
 	ASSERT_LOG(pTargetTransformComponent != nullptr);
 	const Vec2d& targetWorldPos = pTargetTransformComponent->GetPosition();
+	return (CheckInCameraVision(targetWorldPos));
+}
 
+bool CameraActor::CheckInCameraVision(const Vec2d& worldPos) const
+{
 	// 카메라 시야 안에 있는지 판단하는 방법은? 오프셋임
 	const Vec2d& cameraOffsetPos = BringCameraOffsetPosition();
-	Vec2d diffCameraOffsetPos = (targetWorldPos - cameraOffsetPos);
+	Vec2d diffCameraOffsetPos = (worldPos - cameraOffsetPos);
 	const Size& viewerResolution = SceneRenderer::I()->GetViewerResolution();
 
 	// 카메라 오프셋과의 차이가 항상 0보다 크고 화면 안에 있어야함!

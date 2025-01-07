@@ -108,12 +108,19 @@ void WorldTileMapActor::ApplyCurrentMousePositionToTile()
 	}
 
 	// 메인 카메라 오프셋 좌표
-	const Vec2d& mainCameraOffsetPos = SceneRenderer::I()->GetMainCameraActor()->BringCameraOffsetPosition();
+	const std::shared_ptr<CameraActor>& spMainCameraActor = SceneRenderer::I()->GetMainCameraActor();
+	const Vec2d& mainCameraOffsetPos = spMainCameraActor->BringCameraOffsetPosition();
 
 	// 월드 좌표로 변환
 	Vec2d mouseWorldPos;
 	mouseWorldPos.x = static_cast<float>(currentMousePos.x) + mainCameraOffsetPos.x;
 	mouseWorldPos.y = static_cast<float>(currentMousePos.y) + mainCameraOffsetPos.y;
+
+	// 카메라 영역 안에 있을 때만 가능
+	if (spMainCameraActor->CheckInCameraVision(mouseWorldPos) == false)
+	{
+		return;
+	}
 	
 	const Position2d& mouseCellPos = CellActor::ConvertWorldPositionToCellPosition(mouseWorldPos);
 	int32 findTileIdx = ConvertCellPositionToTileIndex(mouseCellPos);

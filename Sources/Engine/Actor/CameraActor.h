@@ -13,5 +13,7 @@ public:
 	virtual bool PostUpdate(float deltaSeconds) override;
 
 	bool CheckInCameraVision(const Actor* pActor) const;
+	bool CheckInCameraVision(const Vec2d& worldPos) const;
+
 	const Vec2d& BringCameraOffsetPosition() const;
 };

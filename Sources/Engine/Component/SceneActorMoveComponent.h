@@ -31,13 +31,9 @@ public:
 	void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
 	const Vec2d& GetDestinationWorldPosition() const { return m_destPos; }
 
-	void SetMoving(bool bMoving) { m_bMoving = bMoving; }
-	bool IsMoving() const { return (m_bMoving == true); }
-
 	ESceneActorMoveDirection GetMoveDirection() const { return m_moveDir; }
 
 private:
-	bool m_bMoving = false;
 	float m_moveSpeed = 0.0f;
 
 	Vec2d m_destPos;

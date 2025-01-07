@@ -103,6 +103,8 @@ public:
 
 	void SetRenderingLayer(ERenderingLayerType renderingLayer) { m_renderingLayer = renderingLayer; }
 
+	int32 GetChildCount() const { return (static_cast<int32>(m_vecChild.size())); }
+
 private:
 	std::string m_strName;
 	std::unordered_map<int32, ComponentPtr> m_mapComponent;

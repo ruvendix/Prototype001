@@ -141,11 +141,15 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 
 void PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir)
 {
-	SceneActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<SceneActorMoveComponent>();
-	if (pMoveComponent->IsMoving())
+	const PlayerStatePtr& spPlayerState = m_pOwner->m_spPlayerState;
+	if (std::dynamic_pointer_cast<PlayerWalkState>(spPlayerState) != nullptr)
 	{
+		DEFAULT_TRACE_LOG("ÀÌµ¿Áß!");
 		return;
 	}
+
+	SceneActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<SceneActorMoveComponent>();
+	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
 
 	// ÇöÀç ¼¿ ÁÂÇ¥ ¹é¾÷
 	Position2d currentCellPos = pMoveComponent->GetDestinationCellPosition();
