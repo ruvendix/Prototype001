@@ -89,6 +89,9 @@
     <Filter Include="Sources\Engine\Component\RenderComponent">
       <UniqueIdentifier>{f73d2166-93b4-4158-9b04-741112adc0ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\Delegator">
+      <UniqueIdentifier>{82f1cbd7-02b5-400a-a64f-81c6d617503d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -500,6 +503,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\File\FileEnum.h">
       <Filter>Sources\Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Delegator\Delegator.hpp">
+      <Filter>Sources\Engine\Delegator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

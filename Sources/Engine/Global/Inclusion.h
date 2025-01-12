@@ -7,6 +7,7 @@
 #include "BaseElement.h"
 #include "Utility.h"
 
+#include "Engine/Delegator/Delegator.hpp"
 #include "Engine/String/StringUtility.hpp"
 #include "Engine/Time/TimeUtility.h"
 

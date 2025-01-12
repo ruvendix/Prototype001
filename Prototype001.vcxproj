@@ -180,6 +180,7 @@
     </ClCompile>
     <ClCompile Include="Sources\GameMain.cpp">
       <DeploymentContent>false</DeploymentContent>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
     <ClCompile Include="Sources\Pch\Pch.cpp">
       <DeploymentContent>false</DeploymentContent>
@@ -250,6 +251,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\TransformComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Delegator\Delegator.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnum.h">
