@@ -14,8 +14,6 @@ void SceneRenderer::Initialize(const ViewerInfo& viewerInfo)
 
 	HBITMAP hPrevBitMap = static_cast<HBITMAP>(::SelectObject(m_hBackBufferDc, m_hBackBuffer));
 	::DeleteObject(hPrevBitMap);
-
-	m_spMainCameraActor = Scene::CreateActor<CameraActor>();
 }
 
 void SceneRenderer::Render()
@@ -68,19 +66,4 @@ Vec2d SceneRenderer::ConvertWorldPositionToRenderingPosition(const Vec2d& worldP
 
 	Vec2d renderingPos = (worldPos - pCameraComponent->GetCameraOffsetPosition());
 	return renderingPos;
-}
-
-void SceneRenderer::ApplyTargetActorToMainCamera(const ActorPtr& spTargetActor)
-{
-	CameraComponent* pCameraComponent = m_spMainCameraActor->FindComponent<CameraComponent>();
-	ASSERT_LOG_RETURN(pCameraComponent != nullptr);
-
-	// 만약에 타겟 액터가 오너라면 무시
-	if (spTargetActor.get() == pCameraComponent->GetOwner())
-	{
-		TRACE_LOG(LogDefault, "타겟 액터가 메인 카메라의 오너라서 설정 불가능!");
-		return;
-	}
-
-	pCameraComponent->SetTargetActor(spTargetActor);
 }

@@ -244,11 +244,6 @@ bool PlayerActor::Update(float deltaSeconds)
 	return true;
 }
 
-bool PlayerActor::PostUpdate(float deltaSeconds)
-{
-	return (Super::PostUpdate(deltaSeconds));
-}
-
 void PlayerActor::Cleanup()
 {
 	return (Super::Cleanup());

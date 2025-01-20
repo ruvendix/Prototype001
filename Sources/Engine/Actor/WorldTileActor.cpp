@@ -17,7 +17,7 @@ void WorldTileActor::Startup()
 	Super::Startup();
 }
 
-bool WorldTileActor::PostUpdate(float deltaSeconds)
+bool WorldTileActor::Update(float deltaSeconds)
 {
 	if (Super::Update(deltaSeconds) == false)
 	{

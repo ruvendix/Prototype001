@@ -15,7 +15,6 @@ public:
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
 	template <typename TPlayerState>

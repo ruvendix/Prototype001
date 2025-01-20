@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Engine/Log/LogEnum.h"
+#include "Engine/Log/LogEnums.h"
 
 class ILogger
 {

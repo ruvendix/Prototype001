@@ -44,21 +44,6 @@ bool Actor::Update(float deltaSeconds)
 	return true;
 }
 
-bool Actor::PostUpdate(float deltaSeconds)
-{
-	for (auto& iter : m_mapComponent)
-	{
-		(iter.second)->PostUpdate(deltaSeconds);
-	}
-
-	for (auto& spChild : m_vecChild)
-	{
-		spChild->PostUpdate(deltaSeconds);
-	}
-
-	return true;
-}
-
 void Actor::Cleanup()
 {
 	// 정리는 자식부터 처리!
@@ -73,6 +58,22 @@ void Actor::Cleanup()
 	}
 
 	m_mapComponent.clear();
+}
+
+void Actor::SaveToFileStream(const FileStream& fileStream) const
+{
+	if (fileStream.IsOpenFileStream() == false)
+	{
+		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
+	}
+}
+
+void Actor::LoadFromFileStream(const FileStream& fileStream)
+{
+	if (fileStream.IsOpenFileStream() == false)
+	{
+		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
+	}
 }
 
 void Actor::AddChild(const ActorPtr& spChild)

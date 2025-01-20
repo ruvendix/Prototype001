@@ -1,10 +1,10 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "UserInputEnum.h"
+#include "UserInputEnums.h"
 #include "UserInputStruct.h"
 
-class KeyboardInputHandler : public BaseElement
+class KeyboardInputHandler : public ICoreLoop
 {
 	DECLARE_SINGLETON(KeyboardInputHandler)
 

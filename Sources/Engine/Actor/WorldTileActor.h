@@ -10,7 +10,7 @@ public:
 	virtual ~WorldTileActor() override;
 
 	virtual void Startup() override;
-	virtual bool PostUpdate(float deltaSeconds) override;
+	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
 	virtual void SaveToFileStream(const FileStream& fileStream) const override;

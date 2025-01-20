@@ -35,22 +35,17 @@ void GameScene::Startup()
 	m_spPlayerActor = CreateActorToScene<PlayerActor>();
 	m_spPlayerActor->SetWorldTileMapActor(m_spWorldTileMapActor);
 
-	// 씬 렌더러의 메인 카메라 타겟으로 설정
-	SceneRenderer::I()->ApplyTargetActorToMainCamera(m_spPlayerActor);
-
 	// 입력 처리
 	Callback mouseLeftButtonDownCallback = std::bind(&GameScene::OnMouseLeftButtonDown, this);
 	MouseInputHandler::I()->BindMouseInput(EMouseValue::LeftButton, mouseLeftButtonDownCallback, nullptr, nullptr);
+
+	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
+	RegisterMainCameraActorToScene(m_spPlayerActor);
 }
 
 bool GameScene::Update(float deltaSeconds)
 {
 	return (Super::Update(deltaSeconds));
-}
-
-bool GameScene::PostUpdate(float deltaSeconds)
-{
-	return (Super::PostUpdate(deltaSeconds));
 }
 
 void GameScene::Cleanup()

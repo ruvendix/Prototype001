@@ -1,12 +1,12 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "LogEnum.h"
+#include "LogEnums.h"
 
 class ILogger;
 class LogCategory;
 
-class LogSystem : public BaseElement
+class LogSystem : public ICoreLoop
 {
 	DECLARE_SINGLETON(LogSystem)
 

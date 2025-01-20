@@ -253,12 +253,6 @@
     <ClCompile Include="Sources\Engine\UserInput\MouseInputHandler.cpp">
       <Filter>Sources\Engine\UserInput</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Global\BaseElement.cpp">
-      <Filter>Sources\Engine\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Client\Scene\TestScene.cpp">
-      <Filter>Sources\Client\Scene</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
@@ -270,7 +264,7 @@
     <ClInclude Include="Sources\Engine\Global\Macros.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Global\BaseElement.h">
+    <ClInclude Include="Sources\Engine\Global\ICoreLoop.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\GameApplication.h">
@@ -282,7 +276,7 @@
     <ClInclude Include="Sources\Engine\Log\LogCategory.h">
       <Filter>Sources\Engine\Log</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Log\LogEnum.h">
+    <ClInclude Include="Sources\Engine\Log\LogEnums.h">
       <Filter>Sources\Engine\Log</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Log\LogInclusion.h">
@@ -321,7 +315,7 @@
     <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.hpp">
       <Filter>Sources\Engine\UtilityClass</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnum.h">
+    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnums.h">
       <Filter>Sources\Engine\ErrorHandler</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\ErrorHandler\ErrorHandler.h">
@@ -345,7 +339,7 @@
     <ClInclude Include="Sources\Engine\UserInput\KeyboardInputHandler.h">
       <Filter>Sources\Engine\UserInput</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\UserInputEnum.h">
+    <ClInclude Include="Sources\Engine\UserInput\UserInputEnums.h">
       <Filter>Sources\Engine\UserInput</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\Component.h">
@@ -363,7 +357,7 @@
     <ClInclude Include="Sources\Engine\Scene\SceneTracer.h">
       <Filter>Sources\Engine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\ActorEnum.h">
+    <ClInclude Include="Sources\Engine\Actor\ActorEnums.h">
       <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\SceneRenderer.h">
@@ -474,14 +468,14 @@
     <ClInclude Include="Sources\Engine\Global\Enums.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\File\FileEnum.h">
+    <ClInclude Include="Sources\Engine\File\FileEnums.h">
       <Filter>Sources\Engine\File</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Delegator\Delegator.hpp">
       <Filter>Sources\Engine\Delegator</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Scene\TestScene.h">
-      <Filter>Sources\Client\Scene</Filter>
+    <ClInclude Include="Sources\Engine\Scene\SceneEnums.h">
+      <Filter>Sources\Engine\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

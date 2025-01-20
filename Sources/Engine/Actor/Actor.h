@@ -1,9 +1,10 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "ActorEnum.h"
+#include "ActorEnums.h"
+#include "Engine/Scene/SceneEnums.h"
 
-class Actor : public BaseElement
+class Actor : public ICoreLoop
 {
 public:
 	using BitsetFlag = EnumBitset<EActorFlag, TO_NUM(EActorFlag::Count)>;
@@ -15,8 +16,10 @@ public:
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
+
+	virtual void SaveToFileStream(const FileStream& fileStream) const;
+	virtual void LoadFromFileStream(const FileStream& fileStream);
 
 	template <typename TComponent>
 	TComponent* FindComponent()

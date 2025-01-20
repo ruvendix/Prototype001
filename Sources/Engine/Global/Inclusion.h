@@ -4,7 +4,7 @@
 #include "DataTypes.h"
 #include "Enums.h"
 #include "Macros.h"
-#include "BaseElement.h"
+#include "ICoreLoop.h"
 #include "Utility.h"
 
 #include "Engine/UtilityClass/EnumBitset.hpp"
@@ -14,8 +14,9 @@
 #include "Engine/ErrorHandler/ErrorHandler.h"
 
 #include "Engine/Math/Size.h"
-#include "Engine/Delegator/Delegator.hpp"
+#include "Engine/File/FileStream.h"
 
+#include "Engine/Delegator/Delegator.hpp"
 #include "Engine/Event/Event.hpp"
 
 #include "Engine/Time/TimeUtility.h"

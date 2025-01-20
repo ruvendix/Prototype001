@@ -6,7 +6,7 @@
 // 크로노 리터럴을 편하게 사용
 using namespace std::chrono_literals;
 
-class TimerManager
+class TimerManager : public ICoreLoop
 {
     DECLARE_SINGLETON(TimerManager)
 

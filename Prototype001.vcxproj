@@ -32,7 +32,6 @@
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Scene\TestScene.cpp" />
     <ClCompile Include="Sources\Client\World\WorldBackgroundActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -83,9 +82,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\GameFrame\GameFrameHandler.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Global\BaseElement.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Global\Utility.cpp">
@@ -193,14 +189,13 @@
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Scene\TestScene.h" />
     <ClInclude Include="Sources\Client\World\WorldBackgroundActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\Actor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\ActorEnum.h">
+    <ClInclude Include="Sources\Engine\Actor\ActorEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
@@ -240,7 +235,7 @@
     <ClInclude Include="Sources\Engine\Delegator\Delegator.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnum.h">
+    <ClInclude Include="Sources\Engine\ErrorHandler\ErrorEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\ErrorHandler\ErrorHandler.h">
@@ -249,7 +244,7 @@
     <ClInclude Include="Sources\Engine\Event\Event.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\File\FileEnum.h">
+    <ClInclude Include="Sources\Engine\File\FileEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\File\PathManager.h">
@@ -265,7 +260,7 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Enums.h" />
-    <ClInclude Include="Sources\Engine\Global\BaseElement.h">
+    <ClInclude Include="Sources\Engine\Global\ICoreLoop.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Inclusion.h">
@@ -281,7 +276,7 @@
     <ClInclude Include="Sources\Engine\Log\LogCategoryList.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Log\LogEnum.h" />
+    <ClInclude Include="Sources\Engine\Log\LogEnums.h" />
     <ClInclude Include="Sources\Engine\Log\Logger\FileLogger.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -331,6 +326,9 @@
     <ClInclude Include="Sources\Engine\Scene\Scene.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Scene\SceneEnums.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\SceneManager.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -356,7 +354,7 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\UserInput\MouseInputHandler.h" />
-    <ClInclude Include="Sources\Engine\UserInput\UserInputEnum.h">
+    <ClInclude Include="Sources\Engine\UserInput\UserInputEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\UserInput\UserInputMacro.h" />

@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class GameFrameHandler : public BaseElement
+class GameFrameHandler : public ICoreLoop
 {
 	DECLARE_SINGLETON(GameFrameHandler)
 

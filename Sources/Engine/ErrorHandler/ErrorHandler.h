@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "ErrorEnum.h"
+#include "ErrorEnums.h"
 
 struct ErrorInfo
 {
@@ -9,7 +9,7 @@ struct ErrorInfo
 	std::string strFormatError;
 };
 
-class ErrorHandler : public BaseElement
+class ErrorHandler : public ICoreLoop
 {
 	DECLARE_SINGLETON(ErrorHandler)
 

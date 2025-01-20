@@ -119,19 +119,15 @@ void GameApplication::Startup()
 
 bool GameApplication::Update(float deltaSeconds)
 {
-    // 그냥 이것들 전부 틱 그룹으로 묶어야함
-    // 그래야 순서 보장
-
     // 입력 처리
     KeyboardInputHandler::I()->Update(deltaSeconds);
     MouseInputHandler::I()->Update(deltaSeconds);
 
-    // 이것도 틱 그룹?
+    // 타이머 처리
     TimerManager::I()->UpdateTimers(deltaSeconds);
 
-    // 타이머 처리 다음
+    // 씬 처리
     SceneManager::I()->Update(deltaSeconds); // 기본 갱신(입력 처리, 좌표 갱신 등)
-    SceneManager::I()->PostUpdate(deltaSeconds); // 후속 갱신(충돌 처리 등)
 
     /*
     후속 갱신 때 유효한 액터인지 판정됨

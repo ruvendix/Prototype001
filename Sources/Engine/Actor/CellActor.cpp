@@ -51,11 +51,6 @@ bool CellActor::Update(float deltaSeconds)
 	return (Super::Update(deltaSeconds));
 }
 
-bool CellActor::PostUpdate(float deltaSeconds)
-{
-	return (Super::PostUpdate(deltaSeconds));
-}
-
 void CellActor::Cleanup()
 {
 	return (Super::Cleanup());

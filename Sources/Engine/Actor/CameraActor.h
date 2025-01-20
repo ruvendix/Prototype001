@@ -10,7 +10,6 @@ public:
 	virtual ~CameraActor();
 
 	virtual void Startup() override;
-	virtual bool PostUpdate(float deltaSeconds) override;
 
 	bool CheckInCameraVision(const Actor* pActor) const;
 	bool CheckInCameraVision(const Vec2d& worldPos) const;

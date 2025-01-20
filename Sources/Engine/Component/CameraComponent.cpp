@@ -14,7 +14,7 @@ CameraComponent::~CameraComponent()
 
 }
 
-bool CameraComponent::PostUpdate(float deltaSeconds)
+bool CameraComponent::Update(float deltaSeconds)
 {
 	TransformComponent* pTargetTransform = nullptr;
 	if (m_spTargetActor != nullptr)

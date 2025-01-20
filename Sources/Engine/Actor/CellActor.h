@@ -20,7 +20,6 @@ public:
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
 	void ApplyCellPosition(int32 x, int32 y);

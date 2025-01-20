@@ -9,17 +9,10 @@ CameraActor::~CameraActor()
 
 void CameraActor::Startup()
 {
+	Super::Startup();
+
+	SetActorFlagBitOff(EActorFlag::RenderingTarget);
 	AddComponent<CameraComponent>();
-}
-
-bool CameraActor::PostUpdate(float deltaSeconds)
-{
-	if (Super::PostUpdate(deltaSeconds) == false)
-	{
-		return false;
-	}
-
-	return true;
 }
 
 bool CameraActor::CheckInCameraVision(const Actor* pActor) const

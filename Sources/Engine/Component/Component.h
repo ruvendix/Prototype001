@@ -3,7 +3,7 @@
 
 DEFINE_COMPILETIMER_COUNTER(ComponentIdCounter)
 
-class Component : public BaseElement
+class Component : public ICoreLoop
 {
 public:
 	Component();

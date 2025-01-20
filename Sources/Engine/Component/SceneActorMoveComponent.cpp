@@ -76,9 +76,17 @@ bool SceneActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 
 	// 이제 그 둘의 거리 비교
 	const Vec2d& diffPos = (m_destPos - currentPos);
-	if (diffPos.CalculateLengthSquare() > (m_moveSpeed * deltaSeconds)) // 숫자가 작을수록 높은 프레임, 낮을수록 낮은 프레임
+	float diffLengthSquare = diffPos.CalculateLengthSquare();
+	if (diffLengthSquare > (m_moveSpeed * deltaSeconds)) // 숫자가 작을수록 높은 프레임, 낮을수록 낮은 프레임
 	{
-		return false;
+		float cellSize = static_cast<float>(WorldContext::I()->GetCellSize());
+		if (diffLengthSquare < (std::pow(cellSize, 2.0f)))
+		{
+			return false;
+		}
+
+		pTransformComponent->SetPosition(m_destPos);
+		DEFAULT_TRACE_LOG("목표지점까지 너무 멀어서 강제로 세팅!");
 	}
 
 	DEFAULT_TRACE_LOG("도달!");

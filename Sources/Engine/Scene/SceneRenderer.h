@@ -19,8 +19,6 @@ public:
 	HDC CreateCompatibleDc();
 	Vec2d ConvertWorldPositionToRenderingPosition(const Vec2d& worldPos) const;
 
-	void ApplyTargetActorToMainCamera(const ActorPtr& spTargetActor);
-
 	const Size& GetViewerResolution() const { return m_viewerInfo.resolution; }
 	
 	int32 GetViewerWidth() const { return m_viewerInfo.resolution.width; }

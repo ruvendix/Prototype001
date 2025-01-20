@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class SceneManager : public BaseElement
+class SceneManager : public ICoreLoop
 {
 	DECLARE_SINGLETON(SceneManager)
 
@@ -23,8 +23,9 @@ public:
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-	virtual bool PostUpdate(float deltaSeconds) override;
 	virtual void Cleanup() override;
+
+	void RegisterActorUpdateOrderToCurrentScene(const Actor* pActor, EUpdateOrder updateOrder);
 
 	Scene* GetCurrentScene() const { return (m_spScene.get()); }
 
