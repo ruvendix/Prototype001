@@ -7,16 +7,18 @@
 #include "BaseElement.h"
 #include "Utility.h"
 
-#include "Engine/Delegator/Delegator.hpp"
-#include "Engine/String/StringUtility.hpp"
-#include "Engine/Time/TimeUtility.h"
-
 #include "Engine/UtilityClass/EnumBitset.hpp"
+#include "Engine/String/StringUtility.hpp"
+
 #include "Engine/Log/LogInclusion.h"
+#include "Engine/ErrorHandler/ErrorHandler.h"
 
 #include "Engine/Math/Size.h"
+#include "Engine/Delegator/Delegator.hpp"
 
-#include "Engine/ErrorHandler/ErrorHandler.h"
+#include "Engine/Event/Event.hpp"
+
+#include "Engine/Time/TimeUtility.h"
 #include "Engine/Time/TimerManager.h"
 #include "Engine/GameFrame/GameFrameHandler.h"
 #include "Engine/UserInput/KeyboardInputHandler.h"
@@ -39,10 +41,6 @@
 #include "Engine/Scene/Scene.h"
 #include "Engine/Scene/SceneTracer.h"
 #include "Engine/Scene/SceneRenderer.h"
-
-#include "Engine/Event/Event.h"
-#include "Engine/Event/EventManager.h"
-#include "Engine/Event/EventListener.h"
 
 #include "Engine/Resource/ResourceMananger.h"
 #include "Engine/Scene/SceneManager.h"

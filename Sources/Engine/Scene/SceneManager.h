@@ -1,28 +1,24 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "SceneEvent.h"
-
 class SceneManager : public BaseElement
 {
 	DECLARE_SINGLETON(SceneManager)
-	DEFINE_EVENT_HANDLER;
 
 public:
 	template <typename TScene>
-	Scene* CreateScene()
+	Scene* CreateCurrentScene()
 	{
-		m_spScene = std::make_shared<TScene>();
-		m_spScene->Startup();
+		m_spScene = CreateScene<TScene>();
 		return GetCurrentScene();
 	}
 
-	// 씬을 교체할 때는 안전하게 지연시켜서 처리함
 	template <typename TScene>
-	void ReserveChangeScene()
+	ScenePtr CreateScene()
 	{
-		ScenePtr spNextScene = std::make_shared<TScene>(this);
-		ReserveEvent<SceneChangeEvent>(spNextScene);
+		const ScenePtr& spScene = std::make_shared<TScene>();
+		spScene->Startup();
+		return spScene;
 	}
 
 	virtual void Startup() override;
@@ -33,8 +29,9 @@ public:
 	Scene* GetCurrentScene() const { return (m_spScene.get()); }
 
 private:
-	void OnChangeScene(const CallbackArgs& eventArgs);
+	void OnChangeScene(const ScenePtr& spNextScene);
 
 private:
 	ScenePtr m_spScene = nullptr;
+	Event<const ScenePtr& /* spNextScene */> m_sceneChangeEvent;
 };

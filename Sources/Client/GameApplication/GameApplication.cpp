@@ -114,19 +114,19 @@ void GameApplication::Startup()
 #pragma endregion
 
     // 씬 생성해서 테스트
-    SceneManager::I()->CreateScene<GameScene>();
+    SceneManager::I()->CreateCurrentScene<GameScene>();
 }
 
 bool GameApplication::Update(float deltaSeconds)
 {
+    // 그냥 이것들 전부 틱 그룹으로 묶어야함
+    // 그래야 순서 보장
+
     // 입력 처리
     KeyboardInputHandler::I()->Update(deltaSeconds);
     MouseInputHandler::I()->Update(deltaSeconds);
 
-    // 입력 처리 다음
-    EventManager::I()->ProcessEvents();
-
-    // 이벤트 처리 다음
+    // 이것도 틱 그룹?
     TimerManager::I()->UpdateTimers(deltaSeconds);
 
     // 타이머 처리 다음

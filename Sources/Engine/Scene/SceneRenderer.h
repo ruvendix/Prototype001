@@ -33,6 +33,7 @@ public:
 
 	HWND GetViewerHandle() const { return (m_viewerInfo.hWndViewer); }
 
+	void SetMainCameraActor(const std::shared_ptr<CameraActor>& spMainCameraActor) { m_spMainCameraActor = spMainCameraActor; }
 	const std::shared_ptr<CameraActor>& GetMainCameraActor() const { return m_spMainCameraActor; } // ¾À¿¡ ¼Ò¼ÓµÈ ¾×ÅÍ°¡ ¾Æ´Ô!
 
 private:

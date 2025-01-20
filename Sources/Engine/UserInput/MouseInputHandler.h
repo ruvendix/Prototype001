@@ -12,10 +12,11 @@ public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 
-	void BindMouseInput(EMouseValue mouseValue,
-		const Callback& downCallback, const Callback& pressingCallback, const Callback& upCallback);
+	void BindMouseInput(EMouseValue mouseValue, const Callback& downCallback, const Callback& pressingCallback, const Callback& upCallback);
+	void UnbindMouseInput(EMouseValue mouseValue);
 
 	void BindMouseHoldingInput(EMouseValue mouseValue, float targetTime, const Callback& holdingEndCallback);
+	void UnbindMouseHoldingInput(EMouseValue mouseValue);
 
 	// 유저 입력에 대한 바인딩 정보가 없어도 사용 가능
 	bool CheckMouseValueDown(EMouseValue mouseValue) const;

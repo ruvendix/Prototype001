@@ -35,8 +35,8 @@ void PathManager::AddPathAtCurrentWorkingDirectory(const std::string& strRelativ
 
 void PathManager::AddPath(const std::string& strKey, const std::filesystem::path& filePath)
 {
-	const auto& insertRet = m_mapPath.insert(std::make_pair(strKey, filePath));
-	if (insertRet.second == false)
+	const auto& retInsert = m_mapPath.insert(std::make_pair(strKey, filePath));
+	if (retInsert.second == false)
 	{
 		// ¿À·ù
 	}

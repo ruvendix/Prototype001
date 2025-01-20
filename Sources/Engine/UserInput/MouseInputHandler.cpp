@@ -148,8 +148,13 @@ void MouseInputHandler::BindMouseInput(EMouseValue mouseValue,
 	mouseInputBoundInfo.arrCallback[TO_NUM(EUserInputState::Pressing)] = pressingCallback;
 	mouseInputBoundInfo.arrCallback[TO_NUM(EUserInputState::Up)] = upCallback;
 
-	const auto& retIter = m_mapMouseInputBoundInfo.insert(std::make_pair(mouseValue, mouseInputBoundInfo));
-	ASSERT_LOG(retIter.second == true);
+	const auto& retInsert = m_mapMouseInputBoundInfo.insert(std::make_pair(mouseValue, mouseInputBoundInfo));
+	ASSERT_LOG(retInsert.second == true);
+}
+
+void MouseInputHandler::UnbindMouseInput(EMouseValue mouseValue)
+{
+	m_mapMouseInputBoundInfo.erase(mouseValue);
 }
 
 void MouseInputHandler::BindMouseHoldingInput(EMouseValue mouseValue, float targetTime, const Callback& holdingEndCallback)
@@ -164,8 +169,13 @@ void MouseInputHandler::BindMouseHoldingInput(EMouseValue mouseValue, float targ
 	mouseHoldingInputBoundInfo.mouseValue = mouseValue;
 	mouseHoldingInputBoundInfo.timer = TimerManager::I()->CreateTimer(targetTime, false, holdingEndCallback);
 
-	const auto& retIter = m_mapMouseHoldingInputBoundInfo.insert(std::make_pair(mouseValue, mouseHoldingInputBoundInfo));
-	ASSERT_LOG(retIter.second == true);
+	const auto& retInsert = m_mapMouseHoldingInputBoundInfo.insert(std::make_pair(mouseValue, mouseHoldingInputBoundInfo));
+	ASSERT_LOG(retInsert.second == true);
+}
+
+void MouseInputHandler::UnbindMouseHoldingInput(EMouseValue mouseValue)
+{
+	m_mapMouseInputBoundInfo.erase(mouseValue);
 }
 
 bool MouseInputHandler::CheckMouseValueDown(EMouseValue mouseValue) const

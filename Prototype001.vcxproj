@@ -26,15 +26,13 @@
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerEvent.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\TestScene.cpp" />
     <ClCompile Include="Sources\Client\World\WorldBackgroundActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -76,15 +74,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\ErrorHandler\ErrorHandler.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Event\Event.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Event\EventListener.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Event\EventManager.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\File\PathManager.cpp">
@@ -150,9 +139,6 @@
     <ClCompile Include="Sources\Engine\Scene\Scene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Scene\SceneEvent.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Scene\SceneManager.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -201,15 +187,13 @@
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Player\PlayerEvent.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\TestScene.h" />
     <ClInclude Include="Sources\Client\World\WorldBackgroundActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -262,16 +246,7 @@
     <ClInclude Include="Sources\Engine\ErrorHandler\ErrorHandler.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\Event.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventListener.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventMacro.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventManager.h">
+    <ClInclude Include="Sources\Engine\Event\Event.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\File\FileEnum.h">
@@ -354,9 +329,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\Scene.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Scene\SceneEvent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\SceneManager.h">

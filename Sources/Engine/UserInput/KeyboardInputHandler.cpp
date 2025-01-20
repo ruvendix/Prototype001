@@ -149,8 +149,8 @@ void KeyboardInputHandler::BindKeyboardInput(EKeyboardValue keyboardValue,
 	keyboardInputBoundInfo.arrCallback[TO_NUM(EUserInputState::Pressing)] = pressingCallback;
 	keyboardInputBoundInfo.arrCallback[TO_NUM(EUserInputState::Up)] = upCallback;
 
-	const auto& retIter = m_mapKeyboardInputBoundInfo.insert(std::make_pair(keyboardValue, keyboardInputBoundInfo));
-	ASSERT_LOG(retIter.second == true);
+	const auto& retInsert = m_mapKeyboardInputBoundInfo.insert(std::make_pair(keyboardValue, keyboardInputBoundInfo));
+	ASSERT_LOG(retInsert.second == true);
 }
 
 void KeyboardInputHandler::BindKeyboardHoldingInput(EKeyboardValue keyboardValue, float targetTime, const Callback& holdingEndCallback)
@@ -165,8 +165,8 @@ void KeyboardInputHandler::BindKeyboardHoldingInput(EKeyboardValue keyboardValue
 	keyboardHoldingInputBoundInfo.keyboardValue = keyboardValue;
 	keyboardHoldingInputBoundInfo.timer = TimerManager::I()->CreateTimer(targetTime, false, holdingEndCallback);
 
-	const auto& retIter = m_mapKeyboardHoldingInputBoundInfo.insert(std::make_pair(keyboardValue, keyboardHoldingInputBoundInfo));
-	ASSERT_LOG(retIter.second == true);
+	const auto& retInsert = m_mapKeyboardHoldingInputBoundInfo.insert(std::make_pair(keyboardValue, keyboardHoldingInputBoundInfo));
+	ASSERT_LOG(retInsert.second == true);
 }
 
 bool KeyboardInputHandler::CheckKeyboardValueDown(EKeyboardValue keyboardValue) const

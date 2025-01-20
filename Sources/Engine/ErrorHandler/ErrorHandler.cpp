@@ -19,8 +19,8 @@ void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLog
 {
 	ErrorInfo errorInfo{ pLogCategory, strFormatError };
 
-	const auto& retter = m_mapErrorInfo.insert(std::make_pair(errorCode, errorInfo));
-	if (retter.second == false)
+	const auto& retInsert = m_mapErrorInfo.insert(std::make_pair(errorCode, errorInfo));
+	if (retInsert.second == false)
 	{
 		ERROR_LOG(LogDefault, "오류 내용 등록 실패!");
 	}

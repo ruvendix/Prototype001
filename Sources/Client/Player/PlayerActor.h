@@ -1,14 +1,11 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "PlayerEvent.h"
-
 class WorldTileMapActor;
 
 class PlayerActor : public CellActor
 {
 	DECLARE_PIMPL;
-	DEFINE_EVENT_HANDLER;
 
 	using Super = CellActor;
 
@@ -25,7 +22,7 @@ public:
 	void ReserveChangePlayerState()
 	{
 		PlayerStatePtr spNextPlayerState = std::make_shared<TPlayerState>(this);
-		ReserveEvent<PlayerStateChangeEvent>(spNextPlayerState);
+		m_playerStateChangeEvent.RegisterEventHandler(this, &PlayerActor::OnChangePlayerState, spNextPlayerState);
 	}
 
 	void ProcessPlayerInput();
@@ -42,9 +39,11 @@ private:
 	void OnDownKeyDown();
 	void OnUpKeyDown();
 
-	void OnChangeState(const CallbackArgs& eventArgs);
+	void OnChangePlayerState(const PlayerStatePtr& spNextPlayerState);
 
 private:
 	PlayerStatePtr m_spPlayerState = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
+
+	Event<const PlayerStatePtr& /* spNextPlayerState */> m_playerStateChangeEvent;
 };

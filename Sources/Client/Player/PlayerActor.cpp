@@ -189,9 +189,6 @@ void PlayerActor::Startup()
 	Super::Startup();
 	ALLOC_PIMPL;
 
-	// 이벤트 핸들러 등록
-	RegisterEventHandler<PlayerStateChangeEvent>(&PlayerActor::OnChangeState);
-
 	// 플레이어 스프라이트 로딩 및 초기화
 	m_spPimpl->LoadAndStartupPlayerSprite();
 
@@ -240,8 +237,10 @@ bool PlayerActor::Update(float deltaSeconds)
 	{
 		return false;
 	}
-
+	
+	m_playerStateChangeEvent.ExcuteIfBound();
 	m_spPlayerState->UpdateState(deltaSeconds);
+
 	return true;
 }
 
@@ -304,8 +303,8 @@ void PlayerActor::OnUpKeyDown()
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Up);
 }
 
-void PlayerActor::OnChangeState(const CallbackArgs& eventArgs)
+void PlayerActor::OnChangePlayerState(const PlayerStatePtr& spNextPlayerState)
 {
-	DEFAULT_TRACE_LOG("체인지 스테이트!");
-	m_spPlayerState = std::any_cast<PlayerStatePtr>(eventArgs[0]);
+	DEFAULT_TRACE_LOG("플레이어 상태 변경!");
+	m_spPlayerState = spNextPlayerState;
 }

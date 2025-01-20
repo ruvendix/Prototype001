@@ -56,7 +56,12 @@ public:
 		spComponent->Startup();
 		spComponent->SetOwner(this);
 
-		m_mapComponent.insert(std::make_pair(TComponent::s_id, spComponent));
+		const auto& retInsert = m_mapComponent.insert(std::make_pair(TComponent::s_id, spComponent));
+		if (retInsert.second == false)
+		{
+			return nullptr;
+		}
+
 		return (spComponent.get());
 	}
 

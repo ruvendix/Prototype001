@@ -24,8 +24,8 @@ int32 TimerManager::RegisterTimer(float targetTime, bool bRepetition, const Call
     Timer timer = CreateTimer(targetTime, bRepetition, timerCallback);
 
     ++m_timerIdCounter; // 등록할 타이머의 Id
-    const auto& insertRet = m_mapTimer.insert(std::make_pair(m_timerIdCounter, timer));
-    if (insertRet.second == false)
+    const auto& retInsert = m_mapTimer.insert(std::make_pair(m_timerIdCounter, timer));
+    if (retInsert.second == false)
     {
         ERROR_LOG(LogTimer, "타이머 등록 실패!");
     }

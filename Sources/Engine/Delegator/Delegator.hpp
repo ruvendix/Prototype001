@@ -8,51 +8,54 @@ template <typename TReturn, typename... TArgs>
 class DelegatorBase<TReturn(TArgs...)>
 {
 public:
-    virtual TReturn CallFunction(TArgs&&... args) const = 0;
-    virtual TReturn CallFixedArgumentsFunction() const = 0;
+    virtual TReturn CallFunctions(TArgs&&... args) const = 0;
+    virtual TReturn CallFixedArgumentFunctions() const = 0;
 
-    void ConnentStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc)
+    bool IsBoundAnyFunction() const { return (m_vecBoundFunc.empty() == false); }
+    bool IsBoundAnyFixedArgumentsFunction() const { return (m_vecBoundFixedArgsFunc.empty() == false); }
+
+    void ConnectStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc)
     {
         const auto& argsIdxSequence = std::make_index_sequence<sizeof...(TArgs)>();
-        ConnentStaticFunctionImpl(staticFunc, argsIdxSequence);
+        ConnectStaticFunctionImpl(staticFunc, argsIdxSequence);
     }
 
-    void ConnentFixedArgumentsStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc, TArgs&&... args)
+    void ConnectFixedArgumentsStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc, TArgs&&... args)
     {
         const auto& boundFunc = std::bind(staticFunc, std::forward<TArgs>(args)...);
-        m_vecBoundFixedArgsFunction.push_back(boundFunc);
+        m_vecBoundFixedArgsFunc.push_back(boundFunc);
     }
 
     template <typename TClass>
-    void ConnentFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...))
+    void ConnectFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...))
     {
         const auto& argsIdxSequence = std::make_index_sequence<sizeof...(TArgs)>();
-        ConnentFunctionImpl(pObj, memFunc, argsIdxSequence);
+        ConnectFunctionImpl(pObj, memFunc, argsIdxSequence);
     }
 
     template <typename TClass>
-    void ConnentFixedArgumentsFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...), TArgs&&... args)
+    void ConnectFixedArgumentsFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...), TArgs&&... args)
     {
         const auto& boundFunc = std::bind(memFunc, pObj, std::forward<TArgs>(args)...);
-        m_vecBoundFixedArgsFunction.push_back(boundFunc);
+        m_vecBoundFixedArgsFunc.push_back(boundFunc);
     }
 
     void AllDisconnectFunction()
     {
         m_vecBoundFunc.clear();
-        m_vecBoundFixedArgsFunction.clear();
+        m_vecBoundFixedArgsFunc.clear();
     }
 
 private:
     template <typename TClass, std::size_t... Indices>
-    void ConnentFunctionImpl(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...), const std::index_sequence<Indices...>&)
+    void ConnectFunctionImpl(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...), const std::index_sequence<Indices...>&)
     {
         const auto& boundFunc = std::bind(memFunc, pObj, MakePlaceholder<Indices>()...);
         m_vecBoundFunc.push_back(boundFunc);
     }
 
     template <std::size_t... Indices>
-    void ConnentStaticFunctionImpl(std::function<TReturn(TArgs...)> staticFunc, const std::index_sequence<Indices...>&)
+    void ConnectStaticFunctionImpl(std::function<TReturn(TArgs...)> staticFunc, const std::index_sequence<Indices...>&)
     {
         const auto& boundFunc = std::bind(staticFunc, MakePlaceholder<Indices>()...);
         m_vecBoundFunc.push_back(boundFunc);
@@ -71,7 +74,7 @@ private:
     }
 
 protected:
-    std::vector<std::function<TReturn()>> m_vecBoundFixedArgsFunction;
+    std::vector<std::function<TReturn()>> m_vecBoundFixedArgsFunc;
     std::vector<std::function<TReturn(TArgs...)>> m_vecBoundFunc;
 };
 
@@ -82,17 +85,17 @@ template <typename... TArgs>
 class Delegator<void(TArgs...)> : public DelegatorBase<void(TArgs...)>
 {
 public:
-    virtual void CallFunction(TArgs&&... args) const override
+    virtual void CallFunctions(TArgs&&... args) const override
     {
         for (const auto& boundFunc : this->m_vecBoundFunc)
         {
-            boundFunc(std::forward<TArgs>(args)...);
+            boundFunc(std::forward<TArgs&&>(args)...);
         }
     }
 
-    virtual void CallFixedArgumentsFunction() const override
+    virtual void CallFixedArgumentFunctions() const override
     {
-        for (const auto& boundFixedArgsFunction : this->m_vecBoundFixedArgsFunction)
+        for (const auto& boundFixedArgsFunction : this->m_vecBoundFixedArgsFunc)
         {
             boundFixedArgsFunction();
         }
@@ -103,21 +106,21 @@ template <typename TReturn, typename... TArgs>
 class Delegator<TReturn(TArgs...)> : public DelegatorBase<TReturn(TArgs...)>
 {
 public:
-    virtual TReturn CallFunction(TArgs&&... args) const override
+    virtual TReturn CallFunctions(TArgs&&... args) const override
     {
         TReturn retValue = TReturn();
         for (const auto& boundFunc : this->m_vecBoundFunc)
         {
-            retValue = boundFunc(std::forward<TArgs>(args)...);
+            retValue = boundFunc(std::forward<TArgs&&>(args)...);
         }
 
         return retValue;
     }
 
-    virtual TReturn CallFixedArgumentsFunction() const override
+    virtual TReturn CallFixedArgumentFunctions() const override
     {
         TReturn retValue = TReturn();
-        for (const auto& boundFixedArgsFunction : this->m_vecBoundFixedArgsFunction)
+        for (const auto& boundFixedArgsFunction : this->m_vecBoundFixedArgsFunc)
         {
             retValue = boundFixedArgsFunction();
         }

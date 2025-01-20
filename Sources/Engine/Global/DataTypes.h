@@ -62,7 +62,6 @@ using PersistantResourcePtr = std::shared_ptr<class PersistantResource>;
 using TexturePtr = std::shared_ptr<class Texture>;
 using StaticSpritePtr = std::shared_ptr<class StaticSprite>;
 using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
-using EventPtr = std::shared_ptr<class Event>;
 
 using CallbackArgs = std::vector<std::any>;
 using Callback = std::function<void(const CallbackArgs&)>;

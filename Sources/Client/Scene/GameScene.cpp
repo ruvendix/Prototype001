@@ -13,7 +13,7 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	Cleanup();
+
 }
 
 void GameScene::Startup()
@@ -55,7 +55,8 @@ bool GameScene::PostUpdate(float deltaSeconds)
 
 void GameScene::Cleanup()
 {
-	return (Super::Cleanup());
+	Super::Cleanup();
+	MouseInputHandler::I()->UnbindMouseInput(EMouseValue::LeftButton);
 }
 
 void GameScene::OnMouseLeftButtonDown()

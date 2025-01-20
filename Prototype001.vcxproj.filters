@@ -163,12 +163,6 @@
     <ClCompile Include="Sources\Engine\Scene\SceneRenderer.cpp">
       <Filter>Sources\Engine\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Event\EventListener.cpp">
-      <Filter>Sources\Engine\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Event\EventManager.cpp">
-      <Filter>Sources\Engine\Event</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Scene\SceneManager.cpp">
       <Filter>Sources\Engine\Scene</Filter>
     </ClCompile>
@@ -229,15 +223,6 @@
     <ClCompile Include="Sources\Engine\Math\Size.cpp">
       <Filter>Sources\Engine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Event\Event.cpp">
-      <Filter>Sources\Engine\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerEvent.cpp">
-      <Filter>Sources\Client\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Scene\SceneEvent.cpp">
-      <Filter>Sources\Engine\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Client\World\WorldBackgroundActor.cpp">
       <Filter>Sources\Client\World</Filter>
     </ClCompile>
@@ -270,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Global\BaseElement.cpp">
       <Filter>Sources\Engine\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\TestScene.cpp">
+      <Filter>Sources\Client\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -381,16 +369,7 @@
     <ClInclude Include="Sources\Engine\Scene\SceneRenderer.h">
       <Filter>Sources\Engine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\Event.h">
-      <Filter>Sources\Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventListener.h">
-      <Filter>Sources\Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventManager.h">
-      <Filter>Sources\Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Event\EventMacro.h">
+    <ClInclude Include="Sources\Engine\Event\Event.hpp">
       <Filter>Sources\Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\SceneManager.h">
@@ -459,12 +438,6 @@
     <ClInclude Include="Sources\Engine\Math\Size.h">
       <Filter>Sources\Engine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Player\PlayerEvent.h">
-      <Filter>Sources\Client\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Scene\SceneEvent.h">
-      <Filter>Sources\Engine\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Client\World\WorldBackgroundActor.h">
       <Filter>Sources\Client\World</Filter>
     </ClInclude>
@@ -506,6 +479,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Delegator\Delegator.hpp">
       <Filter>Sources\Engine\Delegator</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\TestScene.h">
+      <Filter>Sources\Client\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
