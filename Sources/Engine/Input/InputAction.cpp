@@ -49,6 +49,7 @@ bool InputAction::ProcessInputAction()
 			if (KeyboardInputDevice::I()->CheckActivateInputTrigger(inputMappingInfo) == true)
 			{
 				m_inputActionHandler();
+				bSucced = true;
 			}
 		}
 		// ¸¶¿ì½º

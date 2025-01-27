@@ -26,7 +26,7 @@ public:
 	const Position2d& GetCurrentMousePosition() const { return m_currentMousePos; }
 
 private:
-	std::array<InputInfo, TO_NUM(EMouseValue::Count)> m_arrCurrentMouseUserInputInfo;
+	std::array<InputRawInfo, TO_NUM(EMouseValue::Count)> m_arrCurrentMouseUserInputInfo;
 
 	std::unordered_map<EMouseValue, MouseInputBoundInfo> m_mapMouseInputBoundInfo;
 	std::unordered_map<EMouseValue, MouseHoldingInputBoundInfo> m_mapMouseHoldingInputBoundInfo;

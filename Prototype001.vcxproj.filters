@@ -259,6 +259,12 @@
     <ClCompile Include="Sources\Engine\Input\InputAction.cpp">
       <Filter>Sources\Engine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\InputMappingContext.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Player\PlayerInputSystem.cpp">
+      <Filter>Sources\Client\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
@@ -491,6 +497,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Input\InputDataTypes.h">
       <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputMappingContext.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerInputSystem.h">
+      <Filter>Sources\Client\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,10 +9,10 @@ DEFINE_SINGLETON(MouseInputDevice);
 void MouseInputDevice::Startup()
 {
 	// √ ±‚»≠
-	InputInfo mouseInputInfo;
+	InputRawInfo mouseInputInfo;
 	m_arrCurrentMouseUserInputInfo.fill(mouseInputInfo);
 
-	mouseInputInfo.userInputVirtualCode = VK_LBUTTON;
+	mouseInputInfo.virtualCode = VK_LBUTTON;
 	m_arrCurrentMouseUserInputInfo[TO_NUM(EMouseValue::LeftButton)] = mouseInputInfo;
 }
 
@@ -35,20 +35,20 @@ bool MouseInputDevice::Update(float deltaSeconds)
 	int32 mouseValueCount = TO_NUM(EMouseValue::Count);
 	for (int32 i = 0; i < mouseValueCount; ++i)
 	{
-		InputInfo& refMouseInputInfo = m_arrCurrentMouseUserInputInfo[i];
-		bool bExistMouseInput = IS_EXIST_USER_INPUT(refMouseInputInfo.userInputVirtualCode);
+		InputRawInfo& refMouseInputInfo = m_arrCurrentMouseUserInputInfo[i];
+		bool bExistMouseInput = IS_EXIST_USER_INPUT(refMouseInputInfo.virtualCode);
 		
-		switch (refMouseInputInfo.userInputState)
+		switch (refMouseInputInfo.inputTrigger)
 		{
 		case EInputTrigger::Pressed:
 		{
 			if (bExistMouseInput == true)
 			{
-				refMouseInputInfo.userInputState = EInputTrigger::Holding;
+				refMouseInputInfo.inputTrigger = EInputTrigger::Holding;
 			}
 			else
 			{
-				refMouseInputInfo.userInputState = EInputTrigger::Released;
+				refMouseInputInfo.inputTrigger = EInputTrigger::Released;
 			}
 
 			break;
@@ -58,7 +58,7 @@ bool MouseInputDevice::Update(float deltaSeconds)
 		{
 			if (bExistMouseInput == false)
 			{
-				refMouseInputInfo.userInputState = EInputTrigger::Released;
+				refMouseInputInfo.inputTrigger = EInputTrigger::Released;
 			}
 
 			break;
@@ -68,11 +68,11 @@ bool MouseInputDevice::Update(float deltaSeconds)
 		{
 			if (bExistMouseInput == true)
 			{
-				refMouseInputInfo.userInputState = EInputTrigger::Pressed;
+				refMouseInputInfo.inputTrigger = EInputTrigger::Pressed;
 			}
 			else
 			{
-				refMouseInputInfo.userInputState = EInputTrigger::Count;
+				refMouseInputInfo.inputTrigger = EInputTrigger::Count;
 			}
 
 			break;
@@ -83,7 +83,7 @@ bool MouseInputDevice::Update(float deltaSeconds)
 		{
 			if (bExistMouseInput == true)
 			{
-				refMouseInputInfo.userInputState = EInputTrigger::Pressed;
+				refMouseInputInfo.inputTrigger = EInputTrigger::Pressed;
 			}
 
 			break;
@@ -93,7 +93,7 @@ bool MouseInputDevice::Update(float deltaSeconds)
 
 	for (const auto& iter : m_mapMouseInputBoundInfo)
 	{
-		EInputTrigger mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(iter.first)].userInputState;
+		EInputTrigger mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(iter.first)].inputTrigger;
 		if (mouseInputState == EInputTrigger::Count)
 		{
 			continue;
@@ -108,7 +108,7 @@ bool MouseInputDevice::Update(float deltaSeconds)
 
 	for (auto& refIter : m_mapMouseHoldingInputBoundInfo)
 	{
-		EInputTrigger mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(refIter.first)].userInputState;
+		EInputTrigger mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(refIter.first)].inputTrigger;
 		if (mouseInputState == EInputTrigger::Count)
 		{
 			continue;
@@ -180,15 +180,15 @@ void MouseInputDevice::UnbindMouseHoldingInput(EMouseValue mouseValue)
 
 bool MouseInputDevice::CheckMouseValueDown(EMouseValue mouseValue) const
 {
-	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].userInputState == EInputTrigger::Pressed);
+	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputTrigger == EInputTrigger::Pressed);
 }
 
 bool MouseInputDevice::CheckMouseValuePressing(EMouseValue mouseValue) const
 {
-	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].userInputState == EInputTrigger::Holding);
+	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputTrigger == EInputTrigger::Holding);
 }
 
 bool MouseInputDevice::CheckMouseValueUp(EMouseValue mouseValue) const
 {
-	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].userInputState == EInputTrigger::Released);
+	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputTrigger == EInputTrigger::Released);
 }

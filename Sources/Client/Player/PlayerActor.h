@@ -2,7 +2,9 @@
 #pragma once
 
 class WorldTileMapActor;
+class PlayerInputSystem;
 
+// 일단은 클라이언트에 있는 걸 사용
 class PlayerActor : public CellActor
 {
 	DECLARE_PIMPL;
@@ -17,12 +19,16 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+public:
 	template <typename TPlayerState>
 	void ReserveChangePlayerState()
 	{
 		PlayerStatePtr spNextPlayerState = std::make_shared<TPlayerState>(this);
 		m_playerStateChangeEvent.RegisterEventHandler(this, &PlayerActor::OnChangePlayerState, spNextPlayerState);
 	}
+
+public:
+	void UpdateInput(float deltaSeconds);
 
 	void ProcessInput();
 	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
@@ -40,7 +46,10 @@ private:
 
 	void OnChangePlayerState(const PlayerStatePtr& spNextPlayerState);
 
+	void TestInputHandler(const InputActionValue* pInputAction, float value1, float value2);
+
 private:
+	std::shared_ptr<PlayerInputSystem> m_spPlayerInputSystem = nullptr;
 	PlayerStatePtr m_spPlayerState = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 

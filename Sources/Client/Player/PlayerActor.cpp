@@ -2,8 +2,10 @@
 #include "Pch.h"
 #include "PlayerActor.h"
 
-#include "PlayerState.h"
 #include "Engine/Actor/WorldTileMapActor.h"
+#include "PlayerInputSystem.h"
+#include "PlayerState.h"
+
 
 namespace
 {
@@ -204,6 +206,32 @@ void PlayerActor::Startup()
 
 	Callback upKeyDownCallback = std::bind(&PlayerActor::OnUpKeyPressed, this);
 	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Up, upKeyDownCallback, nullptr, nullptr);
+
+#pragma region 새로운 입력 처리
+	// 입력값 저장용
+	InputActionValue inputActionValue;
+
+	// 입력값 포함하면서 트리거와 핸들러 저장
+	InputActionPtr spInputAction = std::make_unique<InputAction>("Test");
+	spInputAction->SetInputActionValue(inputActionValue);
+
+	// 순서상 여기서 매핑 정보 넣음
+	InputMappingInfo inputMappingInfo;
+	inputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
+	inputMappingInfo.inputTrigger = EInputTrigger::Pressed; // 딱 한번만 누름
+	spInputAction->AddInputMappingInfo(inputMappingInfo);
+
+	// 매핑 컨텍스트 테스트
+	InputMappingContextPtr spInputMappingContext = std::make_shared<InputMappingContext>();
+	spInputMappingContext->AddInputAction(spInputAction);
+
+	// 입력 시스템이 핵심! 입력 디바이스보다 하위임
+	m_spPlayerInputSystem = std::make_shared<PlayerInputSystem>();
+	m_spPlayerInputSystem->AddInputMappingContext(spInputMappingContext, 0);
+
+	// IndirectCallFunction 이것마저도 저장인 거임 => 람다만 가능? ㅇㅇ 캡처 기능 때문임
+	m_spPlayerInputSystem->BindInputActionHandler(spInputAction, this, &PlayerActor::TestInputHandler, 2.0f, 42.0f);
+#pragma endregion
 #pragma endregion
 
 #pragma region 플레이어 기본 정보 초기화
@@ -233,6 +261,9 @@ void PlayerActor::Startup()
 
 bool PlayerActor::Update(float deltaSeconds)
 {
+	// 입력부터 처리
+	UpdateInput(deltaSeconds);
+
 	if (Super::Update(deltaSeconds) == false)
 	{
 		return false;
@@ -247,6 +278,11 @@ bool PlayerActor::Update(float deltaSeconds)
 void PlayerActor::Cleanup()
 {
 	return (Super::Cleanup());
+}
+
+void PlayerActor::UpdateInput(float deltaSeconds)
+{
+	m_spPlayerInputSystem->ProcessPlayerInput();
 }
 
 void PlayerActor::ProcessInput()
@@ -302,4 +338,9 @@ void PlayerActor::OnChangePlayerState(const PlayerStatePtr& spNextPlayerState)
 {
 	DEFAULT_TRACE_LOG("플레이어 상태 변경!");
 	m_spPlayerState = spNextPlayerState;
+}
+
+void PlayerActor::TestInputHandler(const InputActionValue* pInputAction, float value1, float value2)
+{
+	DEFAULT_TRACE_LOG("테스트 입력 핸들러!");
 }

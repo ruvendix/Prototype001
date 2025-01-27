@@ -25,6 +25,7 @@
 
 #include "Engine/Input/InputDataTypes.h"
 #include "Engine/Input/InputActionValue.h"
+#include "Engine/Input/InputMappingContext.h"
 #include "Engine/Input/KeyboardInputDevice.h"
 #include "Engine/Input/MouseInputDevice.h"
 

@@ -25,7 +25,7 @@ public:
 	bool CheckActivateInputTrigger(const InputMappingInfo& inputMappingInfo) const;
 
 private:
-	std::array<InputInfo, TO_NUM(EKeyboardValue::Count)> m_arrCurrentKeyboardUserInputInfo;
+	std::array<InputRawInfo, TO_NUM(EKeyboardValue::Count)> m_arrCurrentKeyboardUserInputInfo;
 
 	std::unordered_map<EKeyboardValue, KeyboardInputBoundInfo> m_mapKeyboardInputBoundInfo;
 	std::unordered_map<EKeyboardValue, KeyboardHoldingInputBoundInfo> m_mapKeyboardHoldingInputBoundInfo;
