@@ -24,7 +24,7 @@ public:
 		m_playerStateChangeEvent.RegisterEventHandler(this, &PlayerActor::OnChangePlayerState, spNextPlayerState);
 	}
 
-	void ProcessPlayerInput();
+	void ProcessInput();
 	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
 
 	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
@@ -33,10 +33,10 @@ public:
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 
 private:
-	void OnLeftKeyDown();
-	void OnRightKeyDown();
-	void OnDownKeyDown();
-	void OnUpKeyDown();
+	void OnLeftKeyPressed();
+	void OnRightKeyPressed();
+	void OnDownKeyPressed();
+	void OnUpKeyPressed();
 
 	void OnChangePlayerState(const PlayerStatePtr& spNextPlayerState);
 

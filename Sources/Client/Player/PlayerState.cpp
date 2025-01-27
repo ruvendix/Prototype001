@@ -15,7 +15,7 @@ PlayerState::~PlayerState()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PlayerIdleState::ProcessPlayerInput()
+void PlayerIdleState::ProcessInput()
 {
 	// Idle이니까 Walk로 교체하는 게 목적!
 	DEFAULT_TRACE_LOG("Idle 테스트");
@@ -32,7 +32,7 @@ void PlayerIdleState::UpdateState(float deltaSeconds)
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PlayerWalkState::ProcessPlayerInput()
+void PlayerWalkState::ProcessInput()
 {
 	DEFAULT_TRACE_LOG("워크로 전환!");
 }

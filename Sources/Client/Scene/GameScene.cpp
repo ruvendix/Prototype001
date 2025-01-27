@@ -37,7 +37,7 @@ void GameScene::Startup()
 
 	// 입력 처리
 	Callback mouseLeftButtonDownCallback = std::bind(&GameScene::OnMouseLeftButtonDown, this);
-	MouseInputHandler::I()->BindMouseInput(EMouseValue::LeftButton, mouseLeftButtonDownCallback, nullptr, nullptr);
+	MouseInputDevice::I()->BindMouseInput(EMouseValue::LeftButton, mouseLeftButtonDownCallback, nullptr, nullptr);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spPlayerActor);
@@ -51,7 +51,7 @@ bool GameScene::Update(float deltaSeconds)
 void GameScene::Cleanup()
 {
 	Super::Cleanup();
-	MouseInputHandler::I()->UnbindMouseInput(EMouseValue::LeftButton);
+	MouseInputDevice::I()->UnbindMouseInput(EMouseValue::LeftButton);
 }
 
 void GameScene::OnMouseLeftButtonDown()

@@ -176,7 +176,7 @@ void PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDi
 	m_pOwner->ChangePlayerSprite(strPlayerWalkSprite);
 
 	// 설정한 방향 정보 반영
-	m_pOwner->ProcessPlayerInput();
+	m_pOwner->ProcessInput();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 PlayerActor::~PlayerActor()
@@ -193,17 +193,17 @@ void PlayerActor::Startup()
 	m_spPimpl->LoadAndStartupPlayerSprite();
 
 #pragma region 입력 처리
-	Callback leftKeyDownCallback = std::bind(&PlayerActor::OnLeftKeyDown, this);
-	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Left, leftKeyDownCallback, nullptr, nullptr);
+	Callback leftKeyDownCallback = std::bind(&PlayerActor::OnLeftKeyPressed, this);
+	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Left, leftKeyDownCallback, nullptr, nullptr);
 
-	Callback rightKeyDownCallback = std::bind(&PlayerActor::OnRightKeyDown, this);
-	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Right, rightKeyDownCallback, nullptr, nullptr);
+	Callback rightKeyDownCallback = std::bind(&PlayerActor::OnRightKeyPressed, this);
+	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Right, rightKeyDownCallback, nullptr, nullptr);
 
-	Callback downKeyDownCallback = std::bind(&PlayerActor::OnDownKeyDown, this);
-	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Down, downKeyDownCallback, nullptr, nullptr);
+	Callback downKeyDownCallback = std::bind(&PlayerActor::OnDownKeyPressed, this);
+	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Down, downKeyDownCallback, nullptr, nullptr);
 
-	Callback upKeyDownCallback = std::bind(&PlayerActor::OnUpKeyDown, this);
-	KeyboardInputHandler::I()->BindKeyboardInput(EKeyboardValue::Up, upKeyDownCallback, nullptr, nullptr);
+	Callback upKeyDownCallback = std::bind(&PlayerActor::OnUpKeyPressed, this);
+	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Up, upKeyDownCallback, nullptr, nullptr);
 #pragma endregion
 
 #pragma region 플레이어 기본 정보 초기화
@@ -249,9 +249,9 @@ void PlayerActor::Cleanup()
 	return (Super::Cleanup());
 }
 
-void PlayerActor::ProcessPlayerInput()
+void PlayerActor::ProcessInput()
 {
-	m_spPlayerState->ProcessPlayerInput();
+	m_spPlayerState->ProcessInput();
 }
 
 void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)
@@ -274,25 +274,25 @@ const std::string& PlayerActor::FindPlayerWalkSpriteString(ESceneActorMoveDirect
 	return (g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
 }
 
-void PlayerActor::OnLeftKeyDown()
+void PlayerActor::OnLeftKeyPressed()
 {
 	DEFAULT_TRACE_LOG("왼쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Left);
 }
 
-void PlayerActor::OnRightKeyDown()
+void PlayerActor::OnRightKeyPressed()
 {
 	DEFAULT_TRACE_LOG("오른쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Right);
 }
 
-void PlayerActor::OnDownKeyDown()
+void PlayerActor::OnDownKeyPressed()
 {
 	DEFAULT_TRACE_LOG("아래쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Down);
 }
 
-void PlayerActor::OnUpKeyDown()
+void PlayerActor::OnUpKeyPressed()
 {
 	DEFAULT_TRACE_LOG("위쪽 키");
 	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Up);

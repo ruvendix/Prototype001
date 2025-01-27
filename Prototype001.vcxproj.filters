@@ -47,9 +47,6 @@
     <Filter Include="Sources\Engine\GameFrame">
       <UniqueIdentifier>{6b0cd3d5-00a7-4731-8721-985e6c673bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Engine\UserInput">
-      <UniqueIdentifier>{f850573d-630d-4691-8732-4e113b44b1c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Engine\Component">
       <UniqueIdentifier>{ac26ec12-a99d-4213-a654-eabf28d05fbf}</UniqueIdentifier>
     </Filter>
@@ -91,6 +88,9 @@
     </Filter>
     <Filter Include="Sources\Engine\Delegator">
       <UniqueIdentifier>{82f1cbd7-02b5-400a-a64f-81c6d617503d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\Input">
+      <UniqueIdentifier>{f850573d-630d-4691-8732-4e113b44b1c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -141,9 +141,6 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\GameFrame\GameFrameHandler.cpp">
       <Filter>Sources\Engine\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\UserInput\KeyboardInputHandler.cpp">
-      <Filter>Sources\Engine\UserInput</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\Component.cpp">
       <Filter>Sources\Engine\Component</Filter>
@@ -250,8 +247,17 @@
     <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
       <Filter>Sources\Engine\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\UserInput\MouseInputHandler.cpp">
-      <Filter>Sources\Engine\UserInput</Filter>
+    <ClCompile Include="Sources\Engine\Input\KeyboardInputDevice.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\MouseInputDevice.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\InputActionValue.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\InputAction.cpp">
+      <Filter>Sources\Engine\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -332,15 +338,6 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\GameFrame\GameFrameHandler.h">
       <Filter>Sources\Engine\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\UserInputStruct.h">
-      <Filter>Sources\Engine\UserInput</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\KeyboardInputHandler.h">
-      <Filter>Sources\Engine\UserInput</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\UserInputEnums.h">
-      <Filter>Sources\Engine\UserInput</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\Component.h">
       <Filter>Sources\Engine\Component</Filter>
@@ -459,12 +456,6 @@
     <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
       <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\MouseInputHandler.h">
-      <Filter>Sources\Engine\UserInput</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\UserInputMacro.h">
-      <Filter>Sources\Engine\UserInput</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Enums.h">
       <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
@@ -476,6 +467,30 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\SceneEnums.h">
       <Filter>Sources\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\KeyboardInputDevice.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\MouseInputDevice.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputEnums.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputMacros.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputStructs.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputActionValue.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputAction.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputDataTypes.h">
+      <Filter>Sources\Engine\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

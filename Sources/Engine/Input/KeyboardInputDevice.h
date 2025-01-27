@@ -1,12 +1,12 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "UserInputEnums.h"
-#include "UserInputStruct.h"
+#include "InputEnums.h"
+#include "InputStructs.h"
 
-class KeyboardInputHandler : public ICoreLoop
+class KeyboardInputDevice : public ICoreLoop
 {
-	DECLARE_SINGLETON(KeyboardInputHandler)
+	DECLARE_SINGLETON(KeyboardInputDevice)
 
 public:
 	virtual void Startup() override;
@@ -22,8 +22,10 @@ public:
 	bool CheckKeyboardValuePressing(EKeyboardValue keyboardValue) const;
 	bool CheckKeyboardValueUp(EKeyboardValue keyboardValue) const;
 
+	bool CheckActivateInputTrigger(const InputMappingInfo& inputMappingInfo) const;
+
 private:
-	std::array<UserInputInfo, TO_NUM(EKeyboardValue::Count)> m_arrCurrentKeyboardUserInputInfo;
+	std::array<InputInfo, TO_NUM(EKeyboardValue::Count)> m_arrCurrentKeyboardUserInputInfo;
 
 	std::unordered_map<EKeyboardValue, KeyboardInputBoundInfo> m_mapKeyboardInputBoundInfo;
 	std::unordered_map<EKeyboardValue, KeyboardHoldingInputBoundInfo> m_mapKeyboardHoldingInputBoundInfo;

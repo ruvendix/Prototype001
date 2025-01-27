@@ -87,6 +87,18 @@
     <ClCompile Include="Sources\Engine\Global\Utility.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\InputAction.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\InputActionValue.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\KeyboardInputDevice.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\MouseInputDevice.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Log\LogCategory.cpp" />
     <ClCompile Include="Sources\Engine\Log\LogCategoryList.cpp">
       <DeploymentContent>false</DeploymentContent>
@@ -153,10 +165,6 @@
     <ClCompile Include="Sources\Engine\Time\TimeUtility.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\UserInput\KeyboardInputHandler.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\UserInput\MouseInputHandler.cpp" />
     <ClCompile Include="Sources\Engine\World\WorldContext.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -272,6 +280,30 @@
     <ClInclude Include="Sources\Engine\Global\Utility.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputAction.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputActionValue.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputDataTypes.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputEnums.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputMacros.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputStructs.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\KeyboardInputDevice.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\MouseInputDevice.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Log\LogCategory.h" />
     <ClInclude Include="Sources\Engine\Log\LogCategoryList.h">
       <DeploymentContent>false</DeploymentContent>
@@ -348,17 +380,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Time\TimeUtility.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\KeyboardInputHandler.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\MouseInputHandler.h" />
-    <ClInclude Include="Sources\Engine\UserInput\UserInputEnums.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\UserInput\UserInputMacro.h" />
-    <ClInclude Include="Sources\Engine\UserInput\UserInputStruct.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\UtilityClass\EnumBitset.hpp">

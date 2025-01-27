@@ -22,8 +22,11 @@
 #include "Engine/Time/TimeUtility.h"
 #include "Engine/Time/TimerManager.h"
 #include "Engine/GameFrame/GameFrameHandler.h"
-#include "Engine/UserInput/KeyboardInputHandler.h"
-#include "Engine/UserInput/MouseInputHandler.h"
+
+#include "Engine/Input/InputDataTypes.h"
+#include "Engine/Input/InputActionValue.h"
+#include "Engine/Input/KeyboardInputDevice.h"
+#include "Engine/Input/MouseInputDevice.h"
 
 #include "Engine/World/WorldContext.h"
 

@@ -1,12 +1,12 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "UserInputEnums.h"
-#include "UserInputStruct.h"
+#include "InputEnums.h"
+#include "InputStructs.h"
 
-class MouseInputHandler : public ICoreLoop
+class MouseInputDevice : public ICoreLoop
 {
-	DECLARE_SINGLETON(MouseInputHandler)
+	DECLARE_SINGLETON(MouseInputDevice)
 
 public:
 	virtual void Startup() override;
@@ -26,7 +26,7 @@ public:
 	const Position2d& GetCurrentMousePosition() const { return m_currentMousePos; }
 
 private:
-	std::array<UserInputInfo, TO_NUM(EMouseValue::Count)> m_arrCurrentMouseUserInputInfo;
+	std::array<InputInfo, TO_NUM(EMouseValue::Count)> m_arrCurrentMouseUserInputInfo;
 
 	std::unordered_map<EMouseValue, MouseInputBoundInfo> m_mapMouseInputBoundInfo;
 	std::unordered_map<EMouseValue, MouseHoldingInputBoundInfo> m_mapMouseHoldingInputBoundInfo;
