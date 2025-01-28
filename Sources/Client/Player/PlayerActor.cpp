@@ -213,12 +213,12 @@ void PlayerActor::Startup()
 
 	// 입력값 포함하면서 트리거와 핸들러 저장
 	InputActionPtr spInputAction = std::make_unique<InputAction>("Test");
-	spInputAction->SetInputActionValue(inputActionValue);
+	spInputAction->ApplyInputActionValue(inputActionValue, EInputActionValueType::Vector1);
 
 	// 순서상 여기서 매핑 정보 넣음
-	InputMappingInfo inputMappingInfo;
+	InputActionMappingInfo inputMappingInfo;
 	inputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
-	inputMappingInfo.inputTrigger = EInputTrigger::Pressed; // 딱 한번만 누름
+	inputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
 	spInputAction->AddInputMappingInfo(inputMappingInfo);
 
 	// 매핑 컨텍스트 테스트
@@ -342,5 +342,15 @@ void PlayerActor::OnChangePlayerState(const PlayerStatePtr& spNextPlayerState)
 
 void PlayerActor::TestInputHandler(const InputActionValue* pInputAction, float value1, float value2)
 {
+	//if (pInputAction->BringValue<bool>() == true)
+	//{
+	//	DEFAULT_TRACE_LOG("true!");
+	//}
+	//else
+	//{
+	//	DEFAULT_TRACE_LOG("false!");
+	//}
+
+	DEFAULT_TRACE_LOG("값 (%f)", pInputAction->BringValue<float>());
 	DEFAULT_TRACE_LOG("테스트 입력 핸들러!");
 }

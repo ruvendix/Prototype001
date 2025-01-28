@@ -7,7 +7,7 @@
 class Actor : public ICoreLoop
 {
 public:
-	using BitsetFlag = EnumBitset<EActorFlag, TO_NUM(EActorFlag::Count)>;
+	using ActorBitset = EnumBitset<EActorFlag, TO_NUM(EActorFlag::Count)>;
 
 public:
 	Actor();
@@ -106,7 +106,7 @@ public:
 
 	bool IsActorFlagBitOn(EActorFlag actorFlag) const { return (m_actorBitsetFlag.IsBitOn(actorFlag)); }
 
-	const BitsetFlag& GetActorBitsetFlag() const { return m_actorBitsetFlag; }
+	const ActorBitset& GetActorBitsetFlag() const { return m_actorBitsetFlag; }
 	const ActorPtr& GetChildNoCast(int32 childIdx) const { return (m_vecChild[childIdx]); }
 
 	void SetRenderingLayer(ERenderingLayerType renderingLayer) { m_renderingLayer = renderingLayer; }
@@ -116,7 +116,7 @@ public:
 private:
 	std::string m_strName;
 	std::unordered_map<int32, ComponentPtr> m_mapComponent;
-	BitsetFlag m_actorBitsetFlag;
+	ActorBitset m_actorBitsetFlag;
 
 	// 자식 액터는 레퍼런스 카운트로 갖고 있어야함!
 	std::vector<ActorPtr> m_vecChild;

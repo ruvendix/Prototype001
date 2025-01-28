@@ -1,16 +1,17 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-struct InputMappingInfo
+struct InputActionMappingInfo
 {
-	EInputValue inputValue = EInputValue::Count;
-	EInputTrigger inputTrigger = EInputTrigger::Count;
+	EInputValue inputValue = EInputValue::Unknown;
+	EInputTrigger inputTrigger = EInputTrigger::OnlyPressed;
+	InputActionValueModifierBitset inputActionValueModifierBitset;
 };
 
 struct InputRawInfo
 {
 	int32 virtualCode = 0;
-	EInputTrigger inputTrigger = EInputTrigger::Count;
+	EInputValueState inputValueState = EInputValueState::Released;
 };
 
 struct InputMappingContextInfo
@@ -28,7 +29,7 @@ struct InputMappingContextInfo
 struct KeyboardInputBoundInfo
 {
 	EKeyboardValue keyboardValue = EKeyboardValue::Count;
-	std::array<Callback, TO_NUM(EInputTrigger::Count)> arrCallback;
+	std::array<Callback, TO_NUM(EInputValueState::Count)> arrCallback;
 	CallbackArgs callbackArgs;
 };
 
@@ -41,7 +42,7 @@ struct KeyboardHoldingInputBoundInfo
 struct MouseInputBoundInfo
 {
 	EMouseValue mouseValue = EMouseValue::Count;
-	std::array<Callback, TO_NUM(EInputTrigger::Count)> arrCallback;
+	std::array<Callback, TO_NUM(EInputValueState::Count)> arrCallback;
 	CallbackArgs callbackArgs;
 };
 

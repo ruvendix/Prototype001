@@ -2,6 +2,7 @@
 #pragma once
 
 #include "InputEnums.h"
+#include "InputStructs.h"
 
 DECLARE_LOG_CATEGORY(LogInput);
 
@@ -38,13 +39,15 @@ public:
 	{
 		if (CheckValidDataType<TData>() == false)
 		{
-			return;
+			return TData();
 		}
 
 		return (std::any_cast<TData>(m_value));
 	}
 
+public:
+	void ProcessInputActionValue(const InputActionMappingInfo& inputActionMappingInfo, EInputActionValueType inputActionValueType);
+
 private:
-	EInputActionValueType m_inputActionValuType = EInputActionValueType::Boolean;
 	std::any m_value = false;
 };

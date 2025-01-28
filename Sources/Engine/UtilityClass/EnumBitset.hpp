@@ -9,17 +9,40 @@ class EnumBitset
     static_assert(std::is_enum_v<TEnum>, "EnumType must be an enum.");
 
 public:
-    void BitOn(TEnum enumValue)
-    {
-        m_bitset.set(TO_NUM(enumValue));
-    }
-
-    void BitsOn(const std::initializer_list<TEnum>& enumValues)
+    template <typename TEnum>
+    void BitsOnImpl(const std::initializer_list<TEnum>& enumValues)
     {
         for (TEnum enumValue : enumValues)
         {
             m_bitset.set(TO_NUM(enumValue));
         }
+    }
+
+    template <typename... TArgs>
+    void BitsOn(TArgs&&... args)
+    {
+        BitsOnImpl({ std::forward<TArgs>(args)... });
+    }
+
+    template <typename TEnum>
+    void BitsOffImpl(const std::initializer_list<TEnum>& enumValues)
+    {
+        for (TEnum enumValue : enumValues)
+        {
+            m_bitset.reset(TO_NUM(enumValue));
+        }
+    }
+
+    template <typename... TArgs>
+    void BitsOff(TArgs&&... args)
+    {
+        BitsOffImpl({ std::forward<TArgs>(args)... });
+    }
+
+public:
+    void BitOn(TEnum enumValue)
+    {
+        m_bitset.set(TO_NUM(enumValue));
     }
 
     void AllBitsOn()
@@ -30,14 +53,6 @@ public:
     void BitOff(TEnum enumValue)
     {
         m_bitset.reset(TO_NUM(enumValue));
-    }
-
-    void BitsOff(const std::initializer_list<TEnum>& enumValues)
-    {
-        for (TEnum enumValue : enumValues)
-        {
-            m_bitset.reset(TO_NUM(enumValue));
-        }
     }
 
     void AllBitsOff()

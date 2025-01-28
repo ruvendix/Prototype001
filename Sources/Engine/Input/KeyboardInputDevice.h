@@ -22,10 +22,10 @@ public:
 	bool CheckKeyboardValuePressing(EKeyboardValue keyboardValue) const;
 	bool CheckKeyboardValueUp(EKeyboardValue keyboardValue) const;
 
-	bool CheckActivateInputTrigger(const InputMappingInfo& inputMappingInfo) const;
+	EInputValueState GetCurrentInputValueState(EInputValue inputValue) const { return m_arrCurrentKeyboardUserInputInfo[TO_NUM(inputValue)].inputValueState; }
 
 private:
-	std::array<InputRawInfo, TO_NUM(EKeyboardValue::Count)> m_arrCurrentKeyboardUserInputInfo;
+	std::array<InputRawInfo, TO_NUM(EInputValue::Count)> m_arrCurrentKeyboardUserInputInfo;
 
 	std::unordered_map<EKeyboardValue, KeyboardInputBoundInfo> m_mapKeyboardInputBoundInfo;
 	std::unordered_map<EKeyboardValue, KeyboardHoldingInputBoundInfo> m_mapKeyboardHoldingInputBoundInfo;

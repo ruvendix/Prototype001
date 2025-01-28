@@ -38,52 +38,52 @@ bool MouseInputDevice::Update(float deltaSeconds)
 		InputRawInfo& refMouseInputInfo = m_arrCurrentMouseUserInputInfo[i];
 		bool bExistMouseInput = IS_EXIST_USER_INPUT(refMouseInputInfo.virtualCode);
 		
-		switch (refMouseInputInfo.inputTrigger)
+		switch (refMouseInputInfo.inputValueState)
 		{
-		case EInputTrigger::Pressed:
+		case EInputValueState::Pressed:
 		{
 			if (bExistMouseInput == true)
 			{
-				refMouseInputInfo.inputTrigger = EInputTrigger::Holding;
+				refMouseInputInfo.inputValueState = EInputValueState::Holding;
 			}
 			else
 			{
-				refMouseInputInfo.inputTrigger = EInputTrigger::Released;
+				refMouseInputInfo.inputValueState = EInputValueState::Released;
 			}
 
 			break;
 		}
 
-		case EInputTrigger::Holding:
+		case EInputValueState::Holding:
 		{
 			if (bExistMouseInput == false)
 			{
-				refMouseInputInfo.inputTrigger = EInputTrigger::Released;
+				refMouseInputInfo.inputValueState = EInputValueState::Released;
 			}
 
 			break;
 		}
 
-		case EInputTrigger::Released:
+		case EInputValueState::Released:
 		{
 			if (bExistMouseInput == true)
 			{
-				refMouseInputInfo.inputTrigger = EInputTrigger::Pressed;
+				refMouseInputInfo.inputValueState = EInputValueState::Pressed;
 			}
 			else
 			{
-				refMouseInputInfo.inputTrigger = EInputTrigger::Count;
+				refMouseInputInfo.inputValueState = EInputValueState::Count;
 			}
 
 			break;
 		}
 
 		// Down으로 전환용
-		case EInputTrigger::Count:
+		case EInputValueState::Count:
 		{
 			if (bExistMouseInput == true)
 			{
-				refMouseInputInfo.inputTrigger = EInputTrigger::Pressed;
+				refMouseInputInfo.inputValueState = EInputValueState::Pressed;
 			}
 
 			break;
@@ -93,8 +93,8 @@ bool MouseInputDevice::Update(float deltaSeconds)
 
 	for (const auto& iter : m_mapMouseInputBoundInfo)
 	{
-		EInputTrigger mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(iter.first)].inputTrigger;
-		if (mouseInputState == EInputTrigger::Count)
+		EInputValueState mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(iter.first)].inputValueState;
+		if (mouseInputState == EInputValueState::Count)
 		{
 			continue;
 		}
@@ -108,19 +108,19 @@ bool MouseInputDevice::Update(float deltaSeconds)
 
 	for (auto& refIter : m_mapMouseHoldingInputBoundInfo)
 	{
-		EInputTrigger mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(refIter.first)].inputTrigger;
-		if (mouseInputState == EInputTrigger::Count)
+		EInputValueState mouseInputState = m_arrCurrentMouseUserInputInfo[TO_NUM(refIter.first)].inputValueState;
+		if (mouseInputState == EInputValueState::Count)
 		{
 			continue;
 		}
 
 		// 홀딩일 때만 타이머 증가
 		Timer& refMouseInputHoldingTimer = refIter.second.timer;
-		if (mouseInputState == EInputTrigger::Holding)
+		if (mouseInputState == EInputValueState::Holding)
 		{
 			refMouseInputHoldingTimer.Update(deltaSeconds);
 		}
-		else if (mouseInputState == EInputTrigger::Released)
+		else if (mouseInputState == EInputValueState::Released)
 		{
 			refMouseInputHoldingTimer.SetSwitch(true);
 		}
@@ -144,9 +144,9 @@ void MouseInputDevice::BindMouseInput(EMouseValue mouseValue,
 
 	MouseInputBoundInfo mouseInputBoundInfo;
 	mouseInputBoundInfo.mouseValue = mouseValue;
-	mouseInputBoundInfo.arrCallback[TO_NUM(EInputTrigger::Pressed)] = downCallback;
-	mouseInputBoundInfo.arrCallback[TO_NUM(EInputTrigger::Holding)] = pressingCallback;
-	mouseInputBoundInfo.arrCallback[TO_NUM(EInputTrigger::Released)] = upCallback;
+	mouseInputBoundInfo.arrCallback[TO_NUM(EInputValueState::Pressed)] = downCallback;
+	mouseInputBoundInfo.arrCallback[TO_NUM(EInputValueState::Holding)] = pressingCallback;
+	mouseInputBoundInfo.arrCallback[TO_NUM(EInputValueState::Released)] = upCallback;
 
 	const auto& retInsert = m_mapMouseInputBoundInfo.insert(std::make_pair(mouseValue, mouseInputBoundInfo));
 	ASSERT_LOG(retInsert.second == true);
@@ -180,15 +180,15 @@ void MouseInputDevice::UnbindMouseHoldingInput(EMouseValue mouseValue)
 
 bool MouseInputDevice::CheckMouseValueDown(EMouseValue mouseValue) const
 {
-	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputTrigger == EInputTrigger::Pressed);
+	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputValueState == EInputValueState::Pressed);
 }
 
 bool MouseInputDevice::CheckMouseValuePressing(EMouseValue mouseValue) const
 {
-	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputTrigger == EInputTrigger::Holding);
+	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputValueState == EInputValueState::Holding);
 }
 
 bool MouseInputDevice::CheckMouseValueUp(EMouseValue mouseValue) const
 {
-	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputTrigger == EInputTrigger::Released);
+	return (m_arrCurrentMouseUserInputInfo[TO_NUM(mouseValue)].inputValueState == EInputValueState::Released);
 }

@@ -13,11 +13,11 @@ DEFINE_SINGLETON(LogSystem);
 void LogSystem::Startup()
 {
 	// 전부 활성화
-	m_bitsetLogAdditionalOption.BitsOn({
+	m_bitsetLogAdditionalOption.BitsOn(
 			ELogAdditionalOption::Time,
 			ELogAdditionalOption::FilePath,
 			ELogAdditionalOption::FileLine,
-			ELogAdditionalOption::Function});
+			ELogAdditionalOption::Function);
 
 	m_vecLogger.push_back(std::make_unique<TraceLogger>());
 	m_vecLogger.push_back(std::make_unique<PopupLogger>());

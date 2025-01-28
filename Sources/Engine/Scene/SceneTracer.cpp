@@ -17,7 +17,7 @@ void SceneTracer::Tracer()
 		ASSERT_LOG(pTransformComponent != nullptr);
 		pTransformComponent->BuildWolrdMatrix();
 
-		const Actor::BitsetFlag& actorBitsetFlag = spActor->GetActorBitsetFlag();
+		const Actor::ActorBitset& actorBitsetFlag = spActor->GetActorBitsetFlag();
 		if (actorBitsetFlag.IsBitOn(EActorFlag::RenderingTarget) == false)
 		{
 			continue;

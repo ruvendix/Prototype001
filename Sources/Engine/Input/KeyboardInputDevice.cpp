@@ -13,19 +13,19 @@ void KeyboardInputDevice::Startup()
 	m_arrCurrentKeyboardUserInputInfo.fill(keyboardInputInfo);
 
 	keyboardInputInfo.virtualCode = VK_LEFT;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Left)] = keyboardInputInfo;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EInputValue::Left)] = keyboardInputInfo;
 
 	keyboardInputInfo.virtualCode = VK_RIGHT;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Right)] = keyboardInputInfo;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EInputValue::Right)] = keyboardInputInfo;
 
 	keyboardInputInfo.virtualCode = VK_DOWN;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Down)] = keyboardInputInfo;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EInputValue::Down)] = keyboardInputInfo;
 
 	keyboardInputInfo.virtualCode = VK_UP;
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::Up)] = keyboardInputInfo;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EInputValue::Up)] = keyboardInputInfo;
 
 	keyboardInputInfo.virtualCode = 'A';
-	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EKeyboardValue::A)] = keyboardInputInfo;
+	m_arrCurrentKeyboardUserInputInfo[TO_NUM(EInputValue::A)] = keyboardInputInfo;
 }
 
 bool KeyboardInputDevice::Update(float deltaSeconds)
@@ -33,58 +33,57 @@ bool KeyboardInputDevice::Update(float deltaSeconds)
 	UNREFERENCED_PARAMETER(deltaSeconds);
 
 	// 유저의 현재 키보드 입력 상태를 확인
-	int32 keyboardValueCount = TO_NUM(EKeyboardValue::Count);
+	int32 keyboardValueCount = TO_NUM(EInputValue::Count);
 	for (int32 i = 0; i < keyboardValueCount; ++i)
 	{
 		InputRawInfo& refKeyboardInputInfo = m_arrCurrentKeyboardUserInputInfo[i];
 		bool bExistKeyboardInput = IS_EXIST_USER_INPUT(refKeyboardInputInfo.virtualCode);
 		
-		switch (refKeyboardInputInfo.inputTrigger)
+		switch (refKeyboardInputInfo.inputValueState)
 		{
-		case EInputTrigger::Pressed:
+		case EInputValueState::Pressed:
 		{
 			if (bExistKeyboardInput == true)
 			{
-				refKeyboardInputInfo.inputTrigger = EInputTrigger::Holding;
+				refKeyboardInputInfo.inputValueState = EInputValueState::Holding;
 			}
 			else
 			{
-				refKeyboardInputInfo.inputTrigger = EInputTrigger::Released;
+				refKeyboardInputInfo.inputValueState = EInputValueState::Released;
 			}
 
 			break;
 		}
 
-		case EInputTrigger::Holding:
+		case EInputValueState::Holding:
 		{
 			if (bExistKeyboardInput == false)
 			{
-				refKeyboardInputInfo.inputTrigger = EInputTrigger::Released;
+				refKeyboardInputInfo.inputValueState = EInputValueState::Released;
 			}
 
 			break;
 		}
 
-		case EInputTrigger::Released:
+		case EInputValueState::Released:
 		{
 			if (bExistKeyboardInput == true)
 			{
-				refKeyboardInputInfo.inputTrigger = EInputTrigger::Pressed;
+				refKeyboardInputInfo.inputValueState = EInputValueState::Pressed;
 			}
 			else
 			{
-				refKeyboardInputInfo.inputTrigger = EInputTrigger::Count;
+				refKeyboardInputInfo.inputValueState = EInputValueState::None;
 			}
 
 			break;
 		}
 
-		// Down으로 전환용
-		case EInputTrigger::Count:
+		case EInputValueState::None:
 		{
 			if (bExistKeyboardInput == true)
 			{
-				refKeyboardInputInfo.inputTrigger = EInputTrigger::Pressed;
+				refKeyboardInputInfo.inputValueState = EInputValueState::Pressed;
 			}
 
 			break;
@@ -94,8 +93,8 @@ bool KeyboardInputDevice::Update(float deltaSeconds)
 
 	//for (const auto& iter : m_mapKeyboardInputBoundInfo)
 	//{
-	//	EInputTrigger keyboardInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(iter.first)].inputTrigger;
-	//	if (keyboardInputState == EInputTrigger::Count)
+	//	EInputState keyboardInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(iter.first)].inputTrigger;
+	//	if (keyboardInputState == EInputState::Count)
 	//	{
 	//		continue;
 	//	}
@@ -109,19 +108,19 @@ bool KeyboardInputDevice::Update(float deltaSeconds)
 
 	//for (auto& refIter : m_mapKeyboardHoldingInputBoundInfo)
 	//{
-	//	EInputTrigger keyboardInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(refIter.first)].inputTrigger;
-	//	if (keyboardInputState == EInputTrigger::Count)
+	//	EInputState keyboardInputState = m_arrCurrentKeyboardUserInputInfo[TO_NUM(refIter.first)].inputTrigger;
+	//	if (keyboardInputState == EInputState::Count)
 	//	{
 	//		continue;
 	//	}
 
 	//	// 홀딩일 때만 타이머 증가
 	//	Timer& refKeyboardInputHoldingTimer = refIter.second.timer;
-	//	if (keyboardInputState == EInputTrigger::Holding)
+	//	if (keyboardInputState == EInputState::Holding)
 	//	{
 	//		refKeyboardInputHoldingTimer.Update(deltaSeconds);
 	//	}
-	//	else if (keyboardInputState == EInputTrigger::Released)
+	//	else if (keyboardInputState == EInputState::Released)
 	//	{
 	//		refKeyboardInputHoldingTimer.SetSwitch(true);
 	//	}
@@ -145,9 +144,9 @@ void KeyboardInputDevice::BindKeyboardInput(EKeyboardValue keyboardValue,
 
 	KeyboardInputBoundInfo keyboardInputBoundInfo;
 	keyboardInputBoundInfo.keyboardValue = keyboardValue;
-	keyboardInputBoundInfo.arrCallback[TO_NUM(EInputTrigger::Pressed)] = downCallback;
-	keyboardInputBoundInfo.arrCallback[TO_NUM(EInputTrigger::Holding)] = pressingCallback;
-	keyboardInputBoundInfo.arrCallback[TO_NUM(EInputTrigger::Released)] = upCallback;
+	keyboardInputBoundInfo.arrCallback[TO_NUM(EInputValueState::Pressed)] = downCallback;
+	keyboardInputBoundInfo.arrCallback[TO_NUM(EInputValueState::Holding)] = pressingCallback;
+	keyboardInputBoundInfo.arrCallback[TO_NUM(EInputValueState::Released)] = upCallback;
 
 	const auto& retInsert = m_mapKeyboardInputBoundInfo.insert(std::make_pair(keyboardValue, keyboardInputBoundInfo));
 	ASSERT_LOG(retInsert.second == true);
@@ -171,21 +170,15 @@ void KeyboardInputDevice::BindKeyboardHoldingInput(EKeyboardValue keyboardValue,
 
 bool KeyboardInputDevice::CheckKeyboardValueDown(EKeyboardValue keyboardValue) const
 {
-	return (m_arrCurrentKeyboardUserInputInfo[TO_NUM(keyboardValue)].inputTrigger == EInputTrigger::Pressed);
+	return (m_arrCurrentKeyboardUserInputInfo[TO_NUM(keyboardValue)].inputValueState == EInputValueState::Pressed);
 }
 
 bool KeyboardInputDevice::CheckKeyboardValuePressing(EKeyboardValue keyboardValue) const
 {
-	return (m_arrCurrentKeyboardUserInputInfo[TO_NUM(keyboardValue)].inputTrigger == EInputTrigger::Holding);
+	return (m_arrCurrentKeyboardUserInputInfo[TO_NUM(keyboardValue)].inputValueState == EInputValueState::Holding);
 }
 
 bool KeyboardInputDevice::CheckKeyboardValueUp(EKeyboardValue keyboardValue) const
 {
-	return (m_arrCurrentKeyboardUserInputInfo[TO_NUM(keyboardValue)].inputTrigger == EInputTrigger::Released);
-}
-
-bool KeyboardInputDevice::CheckActivateInputTrigger(const InputMappingInfo& inputMappingInfo) const
-{
-	EInputTrigger currentInputTrigger = m_arrCurrentKeyboardUserInputInfo[TO_NUM(inputMappingInfo.inputValue)].inputTrigger;
-	return (inputMappingInfo.inputTrigger == currentInputTrigger);
+	return (m_arrCurrentKeyboardUserInputInfo[TO_NUM(keyboardValue)].inputValueState == EInputValueState::Released);
 }

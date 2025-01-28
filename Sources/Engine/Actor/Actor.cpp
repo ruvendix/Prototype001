@@ -20,9 +20,9 @@ Actor::~Actor()
 void Actor::Startup()
 {
 	// 기본 플래그 설정
-	m_actorBitsetFlag.BitsOn({
-			EActorFlag::Activation,
-			EActorFlag::RenderingTarget});
+	m_actorBitsetFlag.BitsOn(
+		EActorFlag::Activation,
+		EActorFlag::RenderingTarget);
 
 	// 트랜스폼 추가
 	AddComponent<TransformComponent>();
