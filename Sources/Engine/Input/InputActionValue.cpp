@@ -28,27 +28,46 @@ void InputActionValue::ProcessInputActionValue(const InputActionMappingInfo& inp
 
 	case EInputActionValueType::Vector1:
 	{
+		float resultValue = 0.0f;
+
 		if (bActivationValue == true)
 		{
+			resultValue = 1.0f;
+
 			if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Negative))
 			{
-				m_value = -1.0f;
-			}
-			else
-			{
-				m_value = 1.0f;
+				resultValue *= (-1.0f);
 			}
 		}
-		else
-		{
-			m_value = 0.0f;
-		}
+
+		m_value = resultValue;
 	}
 	break;
 
 	case EInputActionValueType::Vector2:
+	{
+		Vec2d vAxis2d;
 
-		break;
+		if (bActivationValue == true)
+		{
+			if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Swizzle))
+			{
+				vAxis2d.y = 1.0f;
+			}
+			else
+			{
+				vAxis2d.x = 1.0f;
+			}
+
+			if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Negative))
+			{
+				vAxis2d *= (-1.0f);
+			}
+		}
+
+		m_value = vAxis2d;
+	}
+	break;
 
 	case EInputActionValueType::Vector3:
 

@@ -13,7 +13,9 @@
 #include "Engine/Log/LogInclusion.h"
 #include "Engine/ErrorHandler/ErrorHandler.h"
 
+#include "Engine/Math/MathUtility.h"
 #include "Engine/Math/Size.h"
+
 #include "Engine/File/FileStream.h"
 
 #include "Engine/Delegator/Delegator.hpp"

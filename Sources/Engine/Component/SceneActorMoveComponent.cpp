@@ -38,31 +38,33 @@ void SceneActorMoveComponent::UpdateMovePosition(float deltaSeconds)
 		break;
 	}
 
+	DEFAULT_TRACE_LOG("(%f)", actorPos.y);
 	pTransformComponent->SetPosition(actorPos);
 }
 
-void SceneActorMoveComponent::ApplyMoveDirection(ESceneActorMoveDirection moveDir)
+void SceneActorMoveComponent::ApplyMoveDirectionVector(const Vec2d& vMoveDir)
 {
-	m_moveDir = moveDir;
-
-	switch (moveDir)
+	// 실수니까 정확히 체크
+	if (math::CheckAlikeValue(vMoveDir.x, 1.0f) == true)
 	{
-	case ESceneActorMoveDirection::Left:
-		m_destCellPos.x -= 1;
-		break;
-
-	case ESceneActorMoveDirection::Right:
-		m_destCellPos.x += 1;
-		break;
-
-	case ESceneActorMoveDirection::Down:
-		m_destCellPos.y += 1;
-		break;
-
-	case ESceneActorMoveDirection::Up:
-		m_destCellPos.y -= 1;
-		break;
+		m_moveDir = ESceneActorMoveDirection::Right;
 	}
+	else if (math::CheckAlikeValue(vMoveDir.x, -1.0f) == true)
+	{
+		m_moveDir = ESceneActorMoveDirection::Left;
+	}
+
+	if (math::CheckAlikeValue(vMoveDir.y, 1.0f) == true)
+	{
+		m_moveDir = ESceneActorMoveDirection::Down;
+	}
+	else if (math::CheckAlikeValue(vMoveDir.y, -1.0f) == true)
+	{
+		m_moveDir = ESceneActorMoveDirection::Up;
+	}
+
+	m_destCellPos.x += static_cast<int32>(vMoveDir.x);
+	m_destCellPos.y += static_cast<int32>(vMoveDir.y);
 
 	// 목표 좌표 계산하기
 	CellActor* pSceneActor = GetOwner<CellActor>();

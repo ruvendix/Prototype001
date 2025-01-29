@@ -44,6 +44,13 @@
 	{ \
 		return; \
 	}
+
+#define ASSERT_LOG_RETURN_VALUE(expression, value) \
+	ASSERT_LOG(expression) \
+	if ((expression) == false) \
+	{ \
+		return value; \
+	}
 #else
 #define ASSERT_LOG(expression) __noop
 #define ASSERT_LOG_RETURN(expression) __noop

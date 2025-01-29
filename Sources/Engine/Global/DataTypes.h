@@ -40,13 +40,30 @@ struct Vec2d
 	float x = 0.0f;
 	float y = 0.0f;
 
-	Vec2d operator- (const Vec2d& target) const
+	Vec2d operator - (const Vec2d& other) const
 	{
 		Vec2d ret;
-		ret.x = (x - target.x);
-		ret.y = (y - target.y);
+		ret.x = (x - other.x);
+		ret.y = (y - other.y);
 
 		return ret;
+	}
+
+	Vec2d operator * (const Vec2d& other) const
+	{
+		Vec2d ret;
+		ret.x = (x * other.x);
+		ret.y = (y * other.y);
+
+		return ret;
+	}
+
+	const Vec2d& operator *= (float scalar)
+	{
+		x *= scalar;
+		y *= scalar;
+
+		return (*this);
 	}
 
 	float CalculateLengthSquare() const

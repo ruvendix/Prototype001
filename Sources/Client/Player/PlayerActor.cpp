@@ -39,7 +39,7 @@ class PlayerActor::Pimpl
 
 public:
 	void LoadAndStartupPlayerSprite();
-	void ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir);
+	bool DirectionKeyHandlerImpl(const Vec2d& vMoveDir);
 };
 
 void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
@@ -141,23 +141,23 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 //#endif
 }
 
-void PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDir)
+bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 {
 	const PlayerStatePtr& spPlayerState = m_pOwner->m_spPlayerState;
 	if (std::dynamic_pointer_cast<PlayerWalkState>(spPlayerState) != nullptr)
 	{
 		DEFAULT_TRACE_LOG("이동중!");
-		return;
+		return false;
 	}
 
 	SceneActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<SceneActorMoveComponent>();
-	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
+	ASSERT_LOG_RETURN_VALUE(pMoveComponent != nullptr, false);
 
 	// 현재 셀 좌표 백업
 	Position2d currentCellPos = pMoveComponent->GetDestinationCellPosition();
 
 	// 목표 방향 바꾸고
-	pMoveComponent->ApplyMoveDirection(moveDir);
+	pMoveComponent->ApplyMoveDirectionVector(vMoveDir);
 
 	// 이동 가능한지?
 	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = m_pOwner->m_spWorldTileMapActor;
@@ -170,15 +170,14 @@ void PlayerActor::Pimpl::ProcessKeyboardDownImpl(ESceneActorMoveDirection moveDi
 		pMoveComponent->SetDestinationCellPosition(currentCellPos);
 		DEFAULT_TRACE_LOG("이동 못함!");
 
-		return;
+		return false;
 	}
 
 	// Walk 스프라이트 바꾸고
 	const std::string& strPlayerWalkSprite = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetMoveDirection())];
 	m_pOwner->ChangePlayerSprite(strPlayerWalkSprite);
 
-	// 설정한 방향 정보 반영
-	m_pOwner->ProcessInput();
+	return true;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 PlayerActor::~PlayerActor()
@@ -195,32 +194,39 @@ void PlayerActor::Startup()
 	m_spPimpl->LoadAndStartupPlayerSprite();
 
 #pragma region 입력 처리
-	Callback leftKeyDownCallback = std::bind(&PlayerActor::OnLeftKeyPressed, this);
-	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Left, leftKeyDownCallback, nullptr, nullptr);
+	// 이 경우는 이동이니까 Vector2로 해결
 
-	Callback rightKeyDownCallback = std::bind(&PlayerActor::OnRightKeyPressed, this);
-	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Right, rightKeyDownCallback, nullptr, nullptr);
-
-	Callback downKeyDownCallback = std::bind(&PlayerActor::OnDownKeyPressed, this);
-	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Down, downKeyDownCallback, nullptr, nullptr);
-
-	Callback upKeyDownCallback = std::bind(&PlayerActor::OnUpKeyPressed, this);
-	KeyboardInputDevice::I()->BindKeyboardInput(EKeyboardValue::Up, upKeyDownCallback, nullptr, nullptr);
-
-#pragma region 새로운 입력 처리
 	// 입력값 저장용
 	InputActionValue inputActionValue;
 
 	// 입력값 포함하면서 트리거와 핸들러 저장
-	InputActionPtr spInputAction = std::make_unique<InputAction>("Test");
-	spInputAction->ApplyInputActionValue(inputActionValue, EInputActionValueType::Vector1);
+	InputActionPtr spInputAction = std::make_unique<InputAction>("PlayerWalk");
+	spInputAction->ApplyInputActionValue(inputActionValue, EInputActionValueType::Vector2);
 
 	// 순서상 여기서 매핑 정보 넣음
-	InputActionMappingInfo inputMappingInfo;
-	inputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
-	inputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
-	spInputAction->AddInputMappingInfo(inputMappingInfo);
+#pragma region 방향키에 따른 값 설정
+	InputActionMappingInfo leftKeyInputMappingInfo;
+	leftKeyInputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
+	leftKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
+	leftKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Negative);
+	spInputAction->AddInputMappingInfo(leftKeyInputMappingInfo);
 
+	InputActionMappingInfo rightKeyInputMappingInfo;
+	rightKeyInputMappingInfo.inputValue = EInputValue::Right;
+	rightKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
+	spInputAction->AddInputMappingInfo(rightKeyInputMappingInfo);
+
+	InputActionMappingInfo upKeyInputMappingInfo;
+	upKeyInputMappingInfo.inputValue = EInputValue::Up; // 왼쪽키를 누르면 작동하는 것 테스트
+	upKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
+	upKeyInputMappingInfo.inputActionValueModifierBitset.BitsOn(EInputActionValueModifierType::Swizzle, EInputActionValueModifierType::Negative);
+	spInputAction->AddInputMappingInfo(upKeyInputMappingInfo);
+
+	InputActionMappingInfo downKeyInputMappingInfo;
+	downKeyInputMappingInfo.inputValue = EInputValue::Down;
+	downKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Swizzle);
+	spInputAction->AddInputMappingInfo(downKeyInputMappingInfo);
+#pragma endregion
 	// 매핑 컨텍스트 테스트
 	InputMappingContextPtr spInputMappingContext = std::make_shared<InputMappingContext>();
 	spInputMappingContext->AddInputAction(spInputAction);
@@ -230,7 +236,7 @@ void PlayerActor::Startup()
 	m_spPlayerInputSystem->AddInputMappingContext(spInputMappingContext, 0);
 
 	// IndirectCallFunction 이것마저도 저장인 거임 => 람다만 가능? ㅇㅇ 캡처 기능 때문임
-	m_spPlayerInputSystem->BindInputActionHandler(spInputAction, this, &PlayerActor::TestInputHandler, 2.0f, 42.0f);
+	m_spPlayerInputSystem->BindInputActionHandler(spInputAction, this, &PlayerActor::OnDirectionKeyHandler);
 #pragma endregion
 #pragma endregion
 
@@ -285,11 +291,6 @@ void PlayerActor::UpdateInput(float deltaSeconds)
 	m_spPlayerInputSystem->ProcessPlayerInput();
 }
 
-void PlayerActor::ProcessInput()
-{
-	m_spPlayerState->ProcessInput();
-}
-
 void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)
 {
 	const DynamicSpritePtr& spNextPlayerSprite = ResourceMananger::I()->FindDynamicSprite(strNextPlayerSprite);
@@ -310,47 +311,24 @@ const std::string& PlayerActor::FindPlayerWalkSpriteString(ESceneActorMoveDirect
 	return (g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
 }
 
-void PlayerActor::OnLeftKeyPressed()
-{
-	DEFAULT_TRACE_LOG("왼쪽 키");
-	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Left);
-}
-
-void PlayerActor::OnRightKeyPressed()
-{
-	DEFAULT_TRACE_LOG("오른쪽 키");
-	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Right);
-}
-
-void PlayerActor::OnDownKeyPressed()
-{
-	DEFAULT_TRACE_LOG("아래쪽 키");
-	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Down);
-}
-
-void PlayerActor::OnUpKeyPressed()
-{
-	DEFAULT_TRACE_LOG("위쪽 키");
-	m_spPimpl->ProcessKeyboardDownImpl(ESceneActorMoveDirection::Up);
-}
-
 void PlayerActor::OnChangePlayerState(const PlayerStatePtr& spNextPlayerState)
 {
 	DEFAULT_TRACE_LOG("플레이어 상태 변경!");
 	m_spPlayerState = spNextPlayerState;
 }
 
-void PlayerActor::TestInputHandler(const InputActionValue* pInputAction, float value1, float value2)
+void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
-	//if (pInputAction->BringValue<bool>() == true)
-	//{
-	//	DEFAULT_TRACE_LOG("true!");
-	//}
-	//else
-	//{
-	//	DEFAULT_TRACE_LOG("false!");
-	//}
+	const Vec2d& vMoveDir = pInputAction->BringValue<Vec2d>();
+	if (m_spPimpl->DirectionKeyHandlerImpl(vMoveDir) == false)
+	{
+		return;
+	}
 
-	DEFAULT_TRACE_LOG("값 (%f)", pInputAction->BringValue<float>());
-	DEFAULT_TRACE_LOG("테스트 입력 핸들러!");
+	// 설정된 정보에 따라 상태 전환 (Update보다 빠르니까 즉시 전환해도 됨)
+	PlayerStatePtr spNextPlayerState = m_spPlayerState->ImmediatelyChangePlayerState();
+	if (spNextPlayerState != nullptr)
+	{
+		m_spPlayerState = spNextPlayerState;
+	}
 }

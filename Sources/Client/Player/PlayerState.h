@@ -9,7 +9,7 @@ public:
 	PlayerState(PlayerActor* pOwner);
 	virtual ~PlayerState();
 
-	virtual void ProcessInput() = 0;
+	virtual PlayerStatePtr ImmediatelyChangePlayerState() = 0;
 	virtual void UpdateState(float deltaSeconds) = 0;
 
 	PlayerActor* GetOwner() const { return m_pOwner; }
@@ -26,7 +26,7 @@ class PlayerIdleState : public PlayerState
 public:
 	using Super::Super;
 
-	virtual void ProcessInput() override;
+	virtual PlayerStatePtr ImmediatelyChangePlayerState() override;
 	virtual void UpdateState(float deltaSeconds) override;
 };
 
@@ -38,6 +38,6 @@ class PlayerWalkState : public PlayerState
 public:
 	using Super::Super;
 
-	virtual void ProcessInput() override;
+	virtual PlayerStatePtr ImmediatelyChangePlayerState() override;
 	virtual void UpdateState(float deltaSeconds) override;
 };

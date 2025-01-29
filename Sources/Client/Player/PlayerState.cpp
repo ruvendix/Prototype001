@@ -15,16 +15,11 @@ PlayerState::~PlayerState()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PlayerIdleState::ProcessInput()
+PlayerStatePtr PlayerIdleState::ImmediatelyChangePlayerState()
 {
 	// Idle이니까 Walk로 교체하는 게 목적!
-	DEFAULT_TRACE_LOG("Idle 테스트");
-
-	PlayerActor* pOwner = GetOwner();
-	ASSERT_LOG(pOwner != nullptr);
-
-	// Walk 상태로 전환
-	pOwner->ReserveChangePlayerState<PlayerWalkState>();
+	DEFAULT_TRACE_LOG("걷는 상태로 전환!");
+	return (std::make_shared<PlayerWalkState>(GetOwner()));
 }
 
 void PlayerIdleState::UpdateState(float deltaSeconds)
@@ -32,9 +27,10 @@ void PlayerIdleState::UpdateState(float deltaSeconds)
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PlayerWalkState::ProcessInput()
+PlayerStatePtr PlayerWalkState::ImmediatelyChangePlayerState()
 {
-	DEFAULT_TRACE_LOG("워크로 전환!");
+	DEFAULT_TRACE_LOG("걷는 상태일 때는 즉시 전환하지 않음!");
+	return nullptr;
 }
 
 void PlayerWalkState::UpdateState(float deltaSeconds)
@@ -56,6 +52,6 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 		pOwner->ChangePlayerSprite(strIdleSpriteName);
 
 		// Idle 상태로 전환
-		pOwner->ReserveChangePlayerState<PlayerIdleState>();
+		pOwner->ReserveNextPlayerState<PlayerIdleState>();
 	}
 }

@@ -69,5 +69,6 @@ enum class EInputActionValueType
 enum class EInputActionValueModifierType
 {
 	Negative = 0,
+	Swizzle, // 순서 조정
 	Count,
 };

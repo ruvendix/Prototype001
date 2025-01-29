@@ -21,7 +21,7 @@ public:
 
 public:
 	template <typename TPlayerState>
-	void ReserveChangePlayerState()
+	void ReserveNextPlayerState()
 	{
 		PlayerStatePtr spNextPlayerState = std::make_shared<TPlayerState>(this);
 		m_playerStateChangeEvent.RegisterEventHandler(this, &PlayerActor::OnChangePlayerState, spNextPlayerState);
@@ -29,8 +29,6 @@ public:
 
 public:
 	void UpdateInput(float deltaSeconds);
-
-	void ProcessInput();
 	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
 
 	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
@@ -39,14 +37,8 @@ public:
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 
 private:
-	void OnLeftKeyPressed();
-	void OnRightKeyPressed();
-	void OnDownKeyPressed();
-	void OnUpKeyPressed();
-
 	void OnChangePlayerState(const PlayerStatePtr& spNextPlayerState);
-
-	void TestInputHandler(const InputActionValue* pInputAction, float value1, float value2);
+	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
 
 private:
 	std::shared_ptr<PlayerInputSystem> m_spPlayerInputSystem = nullptr;

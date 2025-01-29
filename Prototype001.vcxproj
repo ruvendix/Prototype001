@@ -336,6 +336,9 @@
     <ClInclude Include="Sources\Engine\Log\LogInclusion.h" />
     <ClInclude Include="Sources\Engine\Log\LogMacro.h" />
     <ClInclude Include="Sources\Engine\Log\LogSystem.h" />
+    <ClInclude Include="Sources\Engine\Math\MathUtility.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Math\Size.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

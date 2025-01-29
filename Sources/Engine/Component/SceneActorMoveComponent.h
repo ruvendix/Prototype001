@@ -22,7 +22,7 @@ public:
 	// 호출 위치 때문에 Update()와 별개로 작동
 	void UpdateMovePosition(float deltaSeconds);
 
-	void ApplyMoveDirection(ESceneActorMoveDirection moveDir);
+	void ApplyMoveDirectionVector(const Vec2d& vMoveDir);
 	bool CheckGoalPosition(float deltaSeconds) const;
 
 	void SetDestinationCellPosition(const Position2d& destCellPos) { m_destCellPos = destCellPos; }

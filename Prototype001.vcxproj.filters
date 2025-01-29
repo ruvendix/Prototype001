@@ -504,5 +504,8 @@
     <ClInclude Include="Sources\Client\Player\PlayerInputSystem.h">
       <Filter>Sources\Client\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Math\MathUtility.h">
+      <Filter>Sources\Engine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
