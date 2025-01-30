@@ -11,6 +11,22 @@ public:
     virtual TReturn CallFunctions(TArgs&&... args) const = 0;
     virtual TReturn CallFixedArgumentFunctions() const = 0;
 
+public:
+    template <typename TClass>
+    void ConnectFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...))
+    {
+        const auto& argsIdxSequence = std::make_index_sequence<sizeof...(TArgs)>();
+        ConnectFunctionImpl(pObj, memFunc, argsIdxSequence);
+    }
+
+    template <typename TClass>
+    void ConnectFixedArgumentsFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...), TArgs&&... args)
+    {
+        const auto& boundFunc = std::bind(memFunc, pObj, std::forward<TArgs>(args)...);
+        m_vecBoundFixedArgsFunc.push_back(boundFunc);
+    }
+
+public:
     bool IsBoundAnyFunction() const { return (m_vecBoundFunc.empty() == false); }
     bool IsBoundAnyFixedArgumentsFunction() const { return (m_vecBoundFixedArgsFunc.empty() == false); }
 
@@ -23,20 +39,6 @@ public:
     void ConnectFixedArgumentsStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc, TArgs&&... args)
     {
         const auto& boundFunc = std::bind(staticFunc, std::forward<TArgs>(args)...);
-        m_vecBoundFixedArgsFunc.push_back(boundFunc);
-    }
-
-    template <typename TClass>
-    void ConnectFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...))
-    {
-        const auto& argsIdxSequence = std::make_index_sequence<sizeof...(TArgs)>();
-        ConnectFunctionImpl(pObj, memFunc, argsIdxSequence);
-    }
-
-    template <typename TClass>
-    void ConnectFixedArgumentsFunction(TClass* pObj, TReturn(TClass::* memFunc)(TArgs...), TArgs&&... args)
-    {
-        const auto& boundFunc = std::bind(memFunc, pObj, std::forward<TArgs>(args)...);
         m_vecBoundFixedArgsFunc.push_back(boundFunc);
     }
 
@@ -128,3 +130,5 @@ public:
         return retValue;
     }
 };
+
+using DefaultDelegator = Delegator<void()>;

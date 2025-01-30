@@ -3,7 +3,6 @@
 
 #include "InputEnums.h"
 
-using InputActionHandler = std::function<void()>;
 using InputActionPtr = std::shared_ptr<class InputAction>;
 using InputMappingContextPtr = std::shared_ptr<class InputMappingContext>;
 

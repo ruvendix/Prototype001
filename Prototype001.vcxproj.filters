@@ -516,8 +516,5 @@
     <ClInclude Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.h">
       <Filter>Sources\Engine\LocalPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Time\TimeDataTypes.h">
-      <Filter>Sources\Engine\Time</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

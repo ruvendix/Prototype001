@@ -91,7 +91,7 @@ bool InputAction::ProcessInputAction()
 		// 현재 입력 상태가 설정한 트리거를 작동시키는지?
 		if (CheckValidInputTriggerOnCurrentInputValueState(inputActionMappingInfo) == true)
 		{
-			m_inputActionHandler();
+			m_inputActionDelegator.CallFixedArgumentFunctions();
 			bSucced = true;
 		}
 	}

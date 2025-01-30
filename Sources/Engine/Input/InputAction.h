@@ -13,12 +13,12 @@ public:
 	void ApplyInputActionValue(const InputActionValue& inputActionValue, EInputActionValueType inputActionValueType);
 
 	const InputActionValue* GetInputActionValue() const { return (&m_inputActionValue); }
-	void SetInputActionHandler(const InputActionHandler& inputActionHandler) { m_inputActionHandler = inputActionHandler; }
+	void SetInputActionDelegator(const DefaultDelegator& inputActionDelegator) { m_inputActionDelegator = inputActionDelegator; }
 
 private:
 	std::string m_strInputActionName;
 	InputActionValue m_inputActionValue;
-	InputActionHandler m_inputActionHandler = nullptr;
+	DefaultDelegator m_inputActionDelegator;
 	EInputActionValueType m_inputActionValueType = EInputActionValueType::Boolean;
 
 	std::vector<InputActionMappingInfo> m_vecInputActionMappingInfo;

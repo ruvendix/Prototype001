@@ -18,10 +18,10 @@ void Timer::Update(float deltaSeconds)
             m_bOn = false;
         }
 
-        // 콜백이 있는가?
-        if (m_timerCallback != nullptr)
+        // 델리게이터가 있는지?
+        if (m_timerDelegator.IsBoundAnyFixedArgumentsFunction())
         {
-            m_timerCallback();
+            m_timerDelegator.CallFixedArgumentFunctions();
         }
 
         // 로컬 타임은 콜백 처리가 끝난 후에 갱신

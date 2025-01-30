@@ -386,9 +386,6 @@
     <ClInclude Include="Sources\Engine\String\StringUtility.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Time\TimeDataTypes.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Time\Timer.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

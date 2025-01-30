@@ -18,8 +18,11 @@ public:
         timer.SetTriggerTime(triggerTime);
         timer.SetLoop(bRepetition);
 
-        TimerCallback timerCallback = std::bind(memFunc, pObj, std::forward<TArgs>(args)...);
-        timer.SetTimerCallback(timerCallback);
+        BoundFunction boundFunc = std::bind(memFunc, pObj, std::forward<TArgs>(args)...);
+
+        DefaultDelegator timerDelegator;
+        timerDelegator.ConnectFixedArgumentsStaticFunction(boundFunc);
+        timer.SetTimerDelegator(timerDelegator);
 
         return timer;
     }

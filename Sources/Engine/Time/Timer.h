@@ -13,7 +13,7 @@ public:
     void SetTriggerTime(float triggerTime) { m_triggerTime = triggerTime; }
     void SetLoop(bool bLoop) { m_bLoop = bLoop; }
     void SetSwitch(bool bOn) { m_bOn = bOn; }
-    void SetTimerCallback(const TimerCallback& timerCallback) { m_timerCallback = timerCallback; }
+    void SetTimerDelegator(const DefaultDelegator& timerDelegator) { m_timerDelegator = timerDelegator; }
 
     float GetLocalTime() const { return m_localTime; }
 
@@ -24,5 +24,5 @@ private:
     bool m_bOn = true;
     bool m_bLoop = false;
 
-    TimerCallback m_timerCallback = nullptr;
+    DefaultDelegator m_timerDelegator;
 };

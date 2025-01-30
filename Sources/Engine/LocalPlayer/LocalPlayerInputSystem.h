@@ -15,14 +15,17 @@ public:
 	{
 		const InputActionValue* pInputActionValue = spInputAction->GetInputActionValue();
 
-		//InputActionHandler boundInputActionHandler =
+		//InputActionDelegator boundInputActionHandler =
 		//	[=]() // BindInputActionHandler가 종료된 후에도 인자들을 유지해야 하므로 복사로 캡처
 		//	{
 		//		(pObj->*memFunc)(pInputActionValue, (args)...);
 		//	};
 
-		InputActionHandler boundInputActionHandler = std::bind(memFunc, pObj, pInputActionValue, std::forward<TArgs>(args)...);
-		spInputAction->SetInputActionHandler(boundInputActionHandler);
+		BoundFunction boundFunc = std::bind(memFunc, pObj, pInputActionValue, std::forward<TArgs>(args)...);
+
+		DefaultDelegator inputActionDelegator;
+		inputActionDelegator.ConnectFixedArgumentsStaticFunction(boundFunc);
+		spInputAction->SetInputActionDelegator(inputActionDelegator);
 	}
 
 public:
