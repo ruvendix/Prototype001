@@ -26,9 +26,6 @@
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerInputSystem.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -96,13 +93,15 @@
     <ClCompile Include="Sources\Engine\Input\InputActionValue.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\InputDeviceManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Input\InputMappingContext.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Input\KeyboardInputDevice.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Input\MouseInputDevice.cpp">
+    <ClCompile Include="Sources\Engine\Input\KeyboardDevice.cpp" />
+    <ClCompile Include="Sources\Engine\Input\MouseDevice.cpp" />
+    <ClCompile Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Log\LogCategory.cpp" />
@@ -195,9 +194,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\Player\PlayerInputSystem.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerState.h">
@@ -298,6 +294,9 @@
     <ClInclude Include="Sources\Engine\Input\InputDataTypes.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputDeviceManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Input\InputEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -310,10 +309,9 @@
     <ClInclude Include="Sources\Engine\Input\InputStructs.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Input\KeyboardInputDevice.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Input\MouseInputDevice.h">
+    <ClInclude Include="Sources\Engine\Input\KeyboardDevice.h" />
+    <ClInclude Include="Sources\Engine\Input\MouseDevice.h" />
+    <ClInclude Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Log\LogCategory.h" />

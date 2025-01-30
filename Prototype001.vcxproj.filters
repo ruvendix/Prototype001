@@ -92,6 +92,9 @@
     <Filter Include="Sources\Engine\Input">
       <UniqueIdentifier>{f850573d-630d-4691-8732-4e113b44b1c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\LocalPlayer">
+      <UniqueIdentifier>{6dbfd939-2431-4519-bab0-e8190a4ff4bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -247,12 +250,6 @@
     <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
       <Filter>Sources\Engine\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Input\KeyboardInputDevice.cpp">
-      <Filter>Sources\Engine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Input\MouseInputDevice.cpp">
-      <Filter>Sources\Engine\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Input\InputActionValue.cpp">
       <Filter>Sources\Engine\Input</Filter>
     </ClCompile>
@@ -262,8 +259,17 @@
     <ClCompile Include="Sources\Engine\Input\InputMappingContext.cpp">
       <Filter>Sources\Engine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerInputSystem.cpp">
-      <Filter>Sources\Client\Player</Filter>
+    <ClCompile Include="Sources\Engine\Input\InputDeviceManager.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\KeyboardDevice.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Input\MouseDevice.cpp">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.cpp">
+      <Filter>Sources\Engine\LocalPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -474,12 +480,6 @@
     <ClInclude Include="Sources\Engine\Scene\SceneEnums.h">
       <Filter>Sources\Engine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Input\KeyboardInputDevice.h">
-      <Filter>Sources\Engine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Input\MouseInputDevice.h">
-      <Filter>Sources\Engine\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Input\InputEnums.h">
       <Filter>Sources\Engine\Input</Filter>
     </ClInclude>
@@ -501,11 +501,20 @@
     <ClInclude Include="Sources\Engine\Input\InputMappingContext.h">
       <Filter>Sources\Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Player\PlayerInputSystem.h">
-      <Filter>Sources\Client\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Math\MathUtility.h">
       <Filter>Sources\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\InputDeviceManager.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\KeyboardDevice.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Input\MouseDevice.h">
+      <Filter>Sources\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.h">
+      <Filter>Sources\Engine\LocalPlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

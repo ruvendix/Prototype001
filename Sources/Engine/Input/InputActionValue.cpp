@@ -9,7 +9,7 @@ DEFINE_LOG_CATEGORY(LogInput);
 void InputActionValue::ProcessInputActionValue(const InputActionMappingInfo& inputActionMappingInfo, EInputActionValueType inputActionValueType)
 {
 	const InputActionValueModifierBitset& inputActionValueModifierBitset = inputActionMappingInfo.inputActionValueModifierBitset;
-	EInputValueState currentInputValueState = KeyboardInputDevice::I()->GetCurrentInputValueState(inputActionMappingInfo.inputValue);
+	EInputValueState currentInputValueState = InputDeviceMananger::I()->GetCurrentInputValueState(inputActionMappingInfo.inputValue);
 	
 	bool bActivationValue = false;
 	if ((currentInputValueState == EInputValueState::Pressed) ||

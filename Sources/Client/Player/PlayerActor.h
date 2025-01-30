@@ -28,7 +28,6 @@ public:
 	}
 
 public:
-	void UpdateInput(float deltaSeconds);
 	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
 
 	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
@@ -41,7 +40,6 @@ private:
 	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
 
 private:
-	std::shared_ptr<PlayerInputSystem> m_spPlayerInputSystem = nullptr;
 	PlayerStatePtr m_spPlayerState = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 

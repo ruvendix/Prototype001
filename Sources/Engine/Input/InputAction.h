@@ -21,5 +21,5 @@ private:
 	InputActionHandler m_inputActionHandler = nullptr;
 	EInputActionValueType m_inputActionValueType = EInputActionValueType::Boolean;
 
-	std::vector<InputActionMappingInfo> m_vecInputMappingInfo;
+	std::vector<InputActionMappingInfo> m_vecInputActionMappingInfo;
 };

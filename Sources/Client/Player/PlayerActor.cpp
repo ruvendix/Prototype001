@@ -3,9 +3,7 @@
 #include "PlayerActor.h"
 
 #include "Engine/Actor/WorldTileMapActor.h"
-#include "PlayerInputSystem.h"
 #include "PlayerState.h"
-
 
 namespace
 {
@@ -232,11 +230,10 @@ void PlayerActor::Startup()
 	spInputMappingContext->AddInputAction(spInputAction);
 
 	// 입력 시스템이 핵심! 입력 디바이스보다 하위임
-	m_spPlayerInputSystem = std::make_shared<PlayerInputSystem>();
-	m_spPlayerInputSystem->AddInputMappingContext(spInputMappingContext, 0);
+	LocalPlayerInputSystem::I()->AddInputMappingContext(spInputMappingContext, 1);
 
-	// IndirectCallFunction 이것마저도 저장인 거임 => 람다만 가능? ㅇㅇ 캡처 기능 때문임
-	m_spPlayerInputSystem->BindInputActionHandler(spInputAction, this, &PlayerActor::OnDirectionKeyHandler);
+	// 람다의 캡처 기능을 이용한 핸들러 등록 방식
+	LocalPlayerInputSystem::I()->BindInputActionHandler(spInputAction, this, &PlayerActor::OnDirectionKeyHandler);
 #pragma endregion
 #pragma endregion
 
@@ -267,9 +264,6 @@ void PlayerActor::Startup()
 
 bool PlayerActor::Update(float deltaSeconds)
 {
-	// 입력부터 처리
-	UpdateInput(deltaSeconds);
-
 	if (Super::Update(deltaSeconds) == false)
 	{
 		return false;
@@ -284,11 +278,6 @@ bool PlayerActor::Update(float deltaSeconds)
 void PlayerActor::Cleanup()
 {
 	return (Super::Cleanup());
-}
-
-void PlayerActor::UpdateInput(float deltaSeconds)
-{
-	m_spPlayerInputSystem->ProcessPlayerInput();
 }
 
 void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)

@@ -100,7 +100,7 @@ void WorldTileMapActor::LoadFromFileStream(const FileStream& fileStream)
 
 void WorldTileMapActor::ApplyCurrentMousePositionToTile()
 {
-	const Position2d& currentMousePos = MouseInputDevice::I()->GetCurrentMousePosition();
+	const Position2d& currentMousePos = InputDeviceMananger::I()->GetMouseDevice()->GetCurrentMousePosition();
 	if ((currentMousePos.x < 0) ||
 		(currentMousePos.y < 0))
 	{

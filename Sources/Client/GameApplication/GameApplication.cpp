@@ -107,8 +107,7 @@ void GameApplication::Startup()
     LogSystem::I()->Startup();
     ErrorHandler::I()->Startup();
     GameFrameHandler::I()->Startup();
-    KeyboardInputDevice::I()->Startup();
-    MouseInputDevice::I()->Startup();
+    InputDeviceMananger::I()->Startup();
     ResourceMananger::I()->Startup();    
     SceneManager::I()->Startup();
 #pragma endregion
@@ -120,8 +119,10 @@ void GameApplication::Startup()
 bool GameApplication::Update(float deltaSeconds)
 {
     // 입력 처리
-    KeyboardInputDevice::I()->Update(deltaSeconds);
-    MouseInputDevice::I()->Update(deltaSeconds);
+    InputDeviceMananger::I()->Update(deltaSeconds);
+
+    // 로컬 플레이어 입력 처리
+    LocalPlayerInputSystem::I()->Update(deltaSeconds);
 
     // 타이머 처리
     TimerManager::I()->UpdateTimers(deltaSeconds);
@@ -141,5 +142,5 @@ bool GameApplication::Update(float deltaSeconds)
 void GameApplication::Cleanup()
 {
     SceneRenderer::I()->ReleaseBuffers();
-    SceneManager::I()->Cleanup(); 
+    SceneManager::I()->Cleanup();
 }

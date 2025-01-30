@@ -7,7 +7,7 @@ namespace
 	bool CheckValidInputTriggerOnCurrentInputValueState(const InputActionMappingInfo& inputMappingInfo)
 	{
 		bool bResult = false;
-		EInputValueState currentInputValueState = KeyboardInputDevice::I()->GetCurrentInputValueState(inputMappingInfo.inputValue);
+		EInputValueState currentInputValueState = InputDeviceMananger::I()->GetCurrentInputValueState(inputMappingInfo.inputValue);
 
 		switch (inputMappingInfo.inputTrigger)
 		{
@@ -63,44 +63,36 @@ InputAction::~InputAction()
 void InputAction::AddInputMappingInfo(const InputActionMappingInfo& inputMappingInfo)
 {
 	// 이미 등록된 키값이면 충돌나니까 패스
-	auto foundIter = std::find_if(m_vecInputMappingInfo.cbegin(), m_vecInputMappingInfo.cend(),
+	auto foundIter = std::find_if(m_vecInputActionMappingInfo.cbegin(), m_vecInputActionMappingInfo.cend(),
 		[&](const InputActionMappingInfo& elem)
 		{
 			return (inputMappingInfo.inputValue == elem.inputValue);
 		});
 
 	// 이미 있는 키값이면 무효
-	if (foundIter != m_vecInputMappingInfo.cend())
+	if (foundIter != m_vecInputActionMappingInfo.cend())
 	{
 		return;
 	}
 
-	m_vecInputMappingInfo.push_back(inputMappingInfo);
+	m_vecInputActionMappingInfo.push_back(inputMappingInfo);
 }
 
 bool InputAction::ProcessInputAction()
 {
 	bool bSucced = false;
 
-	// 매핑된 정보를 확인하면서 키보드인지 마우스인지 구분 => InputDevice의 다형성
-	for (const InputActionMappingInfo& inputMappingInfo : m_vecInputMappingInfo)
+	// 매핑된 정보를 확인하면서 입력 내용 처리
+	for (const InputActionMappingInfo& inputActionMappingInfo : m_vecInputActionMappingInfo)
 	{
-		// 트리거와 별개로 값을 세팅 => 어떤 InputDevice를 사용하는지 분기 필요
-		m_inputActionValue.ProcessInputActionValue(inputMappingInfo, m_inputActionValueType);
+		// 트리거와 별개로 값을 세팅
+		m_inputActionValue.ProcessInputActionValue(inputActionMappingInfo, m_inputActionValueType);
 
-		// 키보드
-		if (TO_NUM(inputMappingInfo.inputValue) < TO_NUM(EInputValue::KeyboardEnd))
+		// 현재 입력 상태가 설정한 트리거를 작동시키는지?
+		if (CheckValidInputTriggerOnCurrentInputValueState(inputActionMappingInfo) == true)
 		{
-			if (CheckValidInputTriggerOnCurrentInputValueState(inputMappingInfo) == true)
-			{
-				m_inputActionHandler();
-				bSucced = true;
-			}
-		}
-		// 마우스
-		else
-		{
-
+			m_inputActionHandler();
+			bSucced = true;
 		}
 	}
 
