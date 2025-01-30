@@ -21,6 +21,7 @@
 #include "Engine/Delegator/Delegator.hpp"
 #include "Engine/Event/Event.hpp"
 
+#include "Engine/Time/TimeDataTypes.h"
 #include "Engine/Time/TimeUtility.h"
 #include "Engine/Time/TimerManager.h"
 #include "Engine/GameFrame/GameFrameHandler.h"

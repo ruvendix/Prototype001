@@ -25,16 +25,3 @@ struct InputMappingContextInfo
 		return (priority < other.priority);
 	}
 };
-
-struct MouseInputBoundInfo
-{
-	EMouseValue mouseValue = EMouseValue::Count;
-	std::array<Callback, TO_NUM(EInputValueState::Count)> arrCallback;
-	CallbackArgs callbackArgs;
-};
-
-struct MouseHoldingInputBoundInfo
-{
-	EMouseValue mouseValue = EMouseValue::Count;
-	Timer timer; // 홀딩은 타이머 필요, 타이머에 콜백이 있음
-};

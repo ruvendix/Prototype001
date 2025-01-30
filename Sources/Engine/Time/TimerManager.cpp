@@ -6,22 +6,16 @@ DEFINE_SINGLETON(TimerManager);
 
 Timer TimerManager::CreateTimer(float targetTime, bool bRepetition)
 {
-    return CreateTimer(targetTime, bRepetition, nullptr);
-}
-
-Timer TimerManager::CreateTimer(float targetTime, bool bRepetition, const Callback& timerCallback)
-{
     Timer timer;
-    timer.SetTargetTime(targetTime);
+    timer.SetTriggerTime(targetTime);
     timer.SetLoop(bRepetition);
-    timer.SetTimerCallback(timerCallback);
 
     return timer;
 }
 
-int32 TimerManager::RegisterTimer(float targetTime, bool bRepetition, const Callback& timerCallback)
+int32 TimerManager::RegisterTimer(float targetTime, bool bRepetition)
 {
-    Timer timer = CreateTimer(targetTime, bRepetition, timerCallback);
+    Timer timer = CreateTimer(targetTime, bRepetition);
 
     ++m_timerIdCounter; // 등록할 타이머의 Id
     const auto& retInsert = m_mapTimer.insert(std::make_pair(m_timerIdCounter, timer));

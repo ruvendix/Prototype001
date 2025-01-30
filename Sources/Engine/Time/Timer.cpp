@@ -10,7 +10,7 @@ void Timer::Update(float deltaSeconds)
     }
 
     m_localTime += deltaSeconds;
-    if (m_localTime > m_targetTime)
+    if (m_localTime > m_triggerTime)
     {
         // 반복인가?
         if (m_bLoop == false)
@@ -21,20 +21,15 @@ void Timer::Update(float deltaSeconds)
         // 콜백이 있는가?
         if (m_timerCallback != nullptr)
         {
-            m_timerCallback(m_callbackArgs);
+            m_timerCallback();
         }
 
         // 로컬 타임은 콜백 처리가 끝난 후에 갱신
-        m_localTime -= m_targetTime;
+        m_localTime -= m_triggerTime;
     }
 }
 
 void Timer::Reset()
 {
     m_localTime = 0.0f;
-}
-
-void Timer::AddTimerCallbackArg(const std::any& timerCallbackArg)
-{
-    m_callbackArgs.push_back(timerCallbackArg);
 }
