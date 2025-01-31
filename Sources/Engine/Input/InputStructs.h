@@ -13,15 +13,3 @@ struct InputRawInfo
 	int32 virtualCode = 0;
 	EInputValueState inputValueState = EInputValueState::Released;
 };
-
-struct InputMappingContextInfo
-{
-	int32 priority = 0;
-	const InputMappingContextPtr spInputMappingContext = nullptr;
-
-	// set에 넣고 사용하므로 연산자 오버로딩이 중요!
-	bool operator<(const InputMappingContextInfo& other) const
-	{
-		return (priority < other.priority);
-	}
-};

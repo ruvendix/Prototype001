@@ -95,6 +95,9 @@
     <Filter Include="Sources\Engine\LocalPlayer">
       <UniqueIdentifier>{6dbfd939-2431-4519-bab0-e8190a4ff4bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\SpecialContainer">
+      <UniqueIdentifier>{136db556-cd78-4713-8476-904d080809c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -515,6 +518,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.h">
       <Filter>Sources\Engine\LocalPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\SpecialContainer\SortVector.hpp">
+      <Filter>Sources\Engine\SpecialContainer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

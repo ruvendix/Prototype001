@@ -13,7 +13,6 @@ void ErrorHandler::Startup()
 	InsertErrorInfo(EErrorCode::InvalidIntegerRange, &g_LogDefault, "유효하지 않은 정수 범위!");
 	InsertErrorInfo(EErrorCode::InvalidRenderingLayer, &g_LogDefault, "유효하지 않은 렌더링 레이어!");
 	InsertErrorInfo(EErrorCode::InvalidFileStream, &g_LogResource, "유효하지 않은 파일 스트림!");	
-	InsertErrorInfo(EErrorCode::OverlapInputMappingContextPriority, &g_LogResource, "중복된 입력 매핑 컨텍스트 우선순위! (Priority: %d)");
 }
 
 void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLogCategory, const std::string& strFormatError)

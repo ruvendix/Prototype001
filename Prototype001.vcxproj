@@ -383,6 +383,9 @@
     <ClInclude Include="Sources\Engine\Scene\SceneTracer.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\SpecialContainer\SortVector.hpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\String\StringUtility.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

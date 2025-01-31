@@ -34,5 +34,8 @@ public:
 	void RemoveInputMappingContext(int32 id);
 
 private:
-	std::set<InputMappingContextInfo> m_setInputMappingContext;
+	int32 FindInputMappingContextPriorityById(int32 id) const;
+
+private:
+	SortVector<InputMappingContextPtr> m_sortVecInputMappingContext;
 };

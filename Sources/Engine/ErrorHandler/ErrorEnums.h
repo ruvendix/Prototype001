@@ -10,5 +10,4 @@ enum class EErrorCode
 	InvalidIntegerRange,
 	InvalidRenderingLayer,
 	InvalidFileStream,
-	OverlapInputMappingContextPriority,
 };

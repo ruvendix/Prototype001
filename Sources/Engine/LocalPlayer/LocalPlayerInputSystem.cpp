@@ -6,16 +6,18 @@ DEFINE_SINGLETON(LocalPlayerInputSystem);
 
 bool LocalPlayerInputSystem::Update(float deltaSeconds)
 {
-	for (const InputMappingContextInfo& inputMappingContextInfo : m_setInputMappingContext)
+	for (auto iter = m_sortVecInputMappingContext.Begin(); iter != m_sortVecInputMappingContext.End(); ++iter)
 	{
+		const InputMappingContextPtr& spInputMappingContext = iter->obj;
+
 		// 키가 입력되었는지를 알아내야함
-		if (inputMappingContextInfo.spInputMappingContext == nullptr)
+		if (spInputMappingContext == nullptr)
 		{
 			continue;
 		}
 
 		// 컨텍스트가 처리되었다면 패스
-		if (inputMappingContextInfo.spInputMappingContext->ProcessInputMappingContext() == true)
+		if (spInputMappingContext->ProcessInputMappingContext() == true)
 		{
 			break;
 		}
@@ -31,50 +33,45 @@ void LocalPlayerInputSystem::AddInputMappingContext(const InputMappingContextPtr
 		return;
 	}
 
-	InputMappingContextInfo inputMappingContextInfo(priority, spInputMappingContext);
-	auto resultIter = m_setInputMappingContext.insert(inputMappingContextInfo);
-	if (resultIter.second == false)
-	{
-		DETAIL_ERROR_LOG(EErrorCode::OverlapInputMappingContextPriority, priority);
-	}
+	m_sortVecInputMappingContext.AddObject(spInputMappingContext, priority);
 }
 
 void LocalPlayerInputSystem::ModifyInputMappingContextPriority(int32 id, int32 priority)
 {
-	// 찾고자 하는 작업을 검색
-	auto foundIter = m_setInputMappingContext.begin();
-	for (/* */; foundIter != m_setInputMappingContext.cend(); ++foundIter)
-	{
-		if ((*foundIter).spInputMappingContext->GetId() == id)
-		{
-			break;
-		}
-	}
-
-	if (foundIter != m_setInputMappingContext.end())
-	{
-		// 기존 요소 삭제
-		InputMappingContextInfo tempSpInputMappingContext = (*foundIter);
-		m_setInputMappingContext.erase(foundIter);
-
-		// 우선순위를 변경한 다음 다시 삽입
-		tempSpInputMappingContext.priority = priority;
-		m_setInputMappingContext.insert(tempSpInputMappingContext);
-	}
-}
-
-void LocalPlayerInputSystem::RemoveInputMappingContext(int32 id)
-{
-	auto foundIter = std::find_if(m_setInputMappingContext.begin(), m_setInputMappingContext.end(),
-		[=] (const InputMappingContextInfo& other)
-		{
-			return (id == other.spInputMappingContext->GetId());
-		});
-
-	if (foundIter == m_setInputMappingContext.cend())
+	int32 foundPriority = FindInputMappingContextPriorityById(id);
+	if (foundPriority == -1)
 	{
 		return;
 	}
 
-	m_setInputMappingContext.erase(foundIter);
+	m_sortVecInputMappingContext.SwapPriority(foundPriority, priority);
+}
+
+void LocalPlayerInputSystem::RemoveInputMappingContext(int32 id)
+{
+	int32 foundPriority = FindInputMappingContextPriorityById(id);
+	if (foundPriority == -1)
+	{
+		return;
+	}
+
+	m_sortVecInputMappingContext.RemovePriority(foundPriority);
+}
+
+int32 LocalPlayerInputSystem::FindInputMappingContextPriorityById(int32 id) const
+{
+	int32 foundPriority = -1;
+
+	// id로 어떤 priority인지 찾아야함
+	for (auto iter = m_sortVecInputMappingContext.Begin(); iter != m_sortVecInputMappingContext.End(); ++iter)
+	{
+		const InputMappingContextPtr& spInputMappingContext = iter->obj;
+		if (spInputMappingContext->GetId() == id)
+		{
+			foundPriority = iter->priority;
+			break;
+		}
+	}
+
+	return foundPriority;
 }

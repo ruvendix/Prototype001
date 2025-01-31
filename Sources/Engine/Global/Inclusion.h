@@ -7,6 +7,8 @@
 #include "ICoreLoop.h"
 #include "Utility.h"
 
+#include "Engine/SpecialContainer/SortVector.hpp"
+
 #include "Engine/UtilityClass/EnumBitset.hpp"
 #include "Engine/String/StringUtility.hpp"
 
