@@ -40,8 +40,6 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 
 	// 이동 컴포넌트
 	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
-	pMoveComponent->UpdateMovePosition(deltaSeconds);
-
 	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
 	{
 		TransformComponent* pTransformComponent = pOwner->BringTransformComponent();

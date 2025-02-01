@@ -2,7 +2,6 @@
 #pragma once
 
 class WorldTileMapActor;
-class PlayerInputSystem;
 
 // 일단은 클라이언트에 있는 걸 사용
 class PlayerActor : public CellActor

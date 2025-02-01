@@ -48,24 +48,35 @@ void InputActionValue::ProcessInputActionValue(const InputActionMappingInfo& inp
 	{
 		Vec2d vAxis2d;
 
+		if (m_value.has_value() == true)
+		{
+			vAxis2d = std::any_cast<Vec2d>(m_value);
+		}
+
 		if (bActivationValue == true)
 		{
 			if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Swizzle))
 			{
-				vAxis2d.y = 1.0f;
+				vAxis2d.y += 1.0f;
+
+				if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Negative))
+				{
+					vAxis2d.y *= (-1.0f);
+				}
 			}
 			else
 			{
-				vAxis2d.x = 1.0f;
-			}
+				vAxis2d.x += 1.0f;
 
-			if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Negative))
-			{
-				vAxis2d *= (-1.0f);
+				if (inputActionValueModifierBitset.IsBitOn(EInputActionValueModifierType::Negative))
+				{
+					vAxis2d.x *= (-1.0f);
+				}
 			}
 		}
 
 		m_value = vAxis2d;
+		//DEFAULT_TRACE_LOG("(%f %f) %d", vAxis2d.x, vAxis2d.y, TO_NUM(inputActionMappingInfo.inputValue));
 	}
 	break;
 
@@ -75,4 +86,9 @@ void InputActionValue::ProcessInputActionValue(const InputActionMappingInfo& inp
 
 	default: break;
 	}
+}
+
+void InputActionValue::ResetInputActionValue()
+{
+	m_value.reset();
 }

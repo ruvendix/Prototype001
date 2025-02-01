@@ -274,6 +274,15 @@
     <ClCompile Include="Sources\Engine\LocalPlayer\LocalPlayerInputSystem.cpp">
       <Filter>Sources\Engine\LocalPlayer</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\EditScene.cpp">
+      <Filter>Sources\Client\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\EditorActor.cpp">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\EditorActorMoveComponent.cpp">
+      <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
@@ -521,6 +530,15 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\SpecialContainer\SortVector.hpp">
       <Filter>Sources\Engine\SpecialContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\EditScene.h">
+      <Filter>Sources\Client\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\EditorActor.h">
+      <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\EditorActorMoveComponent.h">
+      <Filter>Sources\Engine\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

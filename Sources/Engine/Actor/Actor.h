@@ -93,7 +93,9 @@ public:
 		return (std::dynamic_pointer_cast<TActor>(GetChildNoCast(childIdx)));
 	}
 
+public:
 	void AddChild(const ActorPtr& spChild);
+	void ApplyScreenCenterPosition();
 
 	// 자주 사용해서 따로 빼놓음
 	TransformComponent* BringTransformComponent();

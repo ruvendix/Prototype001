@@ -135,6 +135,11 @@ public:
         }
     }
 
+    void Cleanup()
+    {
+        m_vecTask.clear();
+    }
+
 private:
     void SortTasks()
     {

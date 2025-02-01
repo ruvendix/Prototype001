@@ -96,6 +96,7 @@ bool InputAction::ProcessInputAction()
 		}
 	}
 
+	m_inputActionValue.ResetInputActionValue();
 	return bSucced;
 }
 

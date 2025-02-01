@@ -81,6 +81,12 @@ void Actor::AddChild(const ActorPtr& spChild)
 	m_vecChild.push_back(spChild);
 }
 
+void Actor::ApplyScreenCenterPosition()
+{
+	const Size& halfResolution = SceneRenderer::I()->GetViewerHalfResoultion();
+	BringTransformComponent()->SetPosition(static_cast<float>(halfResolution.width), static_cast<float>(halfResolution.height));
+}
+
 TransformComponent* Actor::BringTransformComponent()
 {
 	return (FindComponent<TransformComponent>());

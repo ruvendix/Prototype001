@@ -32,6 +32,7 @@ public:
 	void AddInputMappingContext(const InputMappingContextPtr& spInputMappingContext, int32 priority);
 	void ModifyInputMappingContextPriority(int32 id, int32 priority);
 	void RemoveInputMappingContext(int32 id);
+	void CleanupInputMappingContext();
 
 private:
 	int32 FindInputMappingContextPriorityById(int32 id) const;

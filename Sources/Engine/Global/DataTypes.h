@@ -34,11 +34,28 @@ struct Array2dInfo
 	int32 yIdxCount = 0;
 };
 
+struct FloatRect
+{
+	float left = 0.0f;
+	float right = 0.0f;
+	float top = 0.0f;
+	float bottom = 0.0f;
+};
+
 // 이건 분량이 커지면 분리
 struct Vec2d
 {
 	float x = 0.0f;
 	float y = 0.0f;
+
+	Vec2d operator + (const Vec2d& other) const
+	{
+		Vec2d ret;
+		ret.x = (x + other.x);
+		ret.y = (y + other.y);
+
+		return ret;
+	}
 
 	Vec2d operator - (const Vec2d& other) const
 	{
@@ -56,6 +73,23 @@ struct Vec2d
 		ret.y = (y * other.y);
 
 		return ret;
+	}
+
+	Vec2d operator * (float scalar) const
+	{
+		Vec2d vResult;
+		vResult.x = (x * scalar);
+		vResult.y = (y * scalar);
+
+		return vResult;
+	}
+
+	const Vec2d& operator += (const Vec2d& other)
+	{
+		x += other.x;
+		y += other.y;
+
+		return (*this);
 	}
 
 	const Vec2d& operator *= (float scalar)

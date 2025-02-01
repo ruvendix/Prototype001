@@ -41,6 +41,7 @@
 #include "Engine/Component/Component.h"
 #include "Engine/Component/TransformComponent.h"
 #include "Engine/Component/SceneActorMoveComponent.h"
+#include "Engine/Component/EditorActorMoveComponent.h"
 #include "Engine/Component/CameraComponent.h"
 
 #include "Engine/Component/RenderComponent/RenderComponent.h"
@@ -49,7 +50,9 @@
 
 #include "Engine/Actor/Actor.h"
 #include "Engine/Actor/CellActor.h"
+#include "Engine/Actor/EditorActor.h"
 #include "Engine/Actor/CameraActor.h"
+
 #include "Engine/Scene/Scene.h"
 #include "Engine/Scene/SceneTracer.h"
 #include "Engine/Scene/SceneRenderer.h"

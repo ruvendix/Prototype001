@@ -14,7 +14,7 @@ SceneActorMoveComponent::~SceneActorMoveComponent()
 
 }
 
-void SceneActorMoveComponent::UpdateMovePosition(float deltaSeconds)
+bool SceneActorMoveComponent::Update(float deltaSeconds)
 {
 	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
 	Vec2d actorPos = pTransformComponent->GetPosition();
@@ -38,8 +38,8 @@ void SceneActorMoveComponent::UpdateMovePosition(float deltaSeconds)
 		break;
 	}
 
-	DEFAULT_TRACE_LOG("(%f)", actorPos.y);
 	pTransformComponent->SetPosition(actorPos);
+	return true;
 }
 
 void SceneActorMoveComponent::ApplyMoveDirectionVector(const Vec2d& vMoveDir)

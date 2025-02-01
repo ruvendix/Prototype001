@@ -48,7 +48,8 @@ public:
 
 public:
 	void ProcessInputActionValue(const InputActionMappingInfo& inputActionMappingInfo, EInputActionValueType inputActionValueType);
+	void ResetInputActionValue();
 
 private:
-	std::any m_value = false;
+	std::any m_value;
 };

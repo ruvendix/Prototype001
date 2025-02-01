@@ -19,9 +19,10 @@ public:
 	SceneActorMoveComponent();
 	virtual ~SceneActorMoveComponent();
 
-	// 호출 위치 때문에 Update()와 별개로 작동
-	void UpdateMovePosition(float deltaSeconds);
+public:
+	virtual bool Update(float deltaSeconds) override;
 
+public:
 	void ApplyMoveDirectionVector(const Vec2d& vMoveDir);
 	bool CheckGoalPosition(float deltaSeconds) const;
 

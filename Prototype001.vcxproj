@@ -29,6 +29,9 @@
     <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\EditScene.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -42,6 +45,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CellActor.cpp" />
+    <ClCompile Include="Sources\Engine\Actor\EditorActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\WorldTileActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -52,6 +58,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\Component.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\EditorActorMoveComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.cpp">
@@ -199,6 +208,9 @@
     <ClInclude Include="Sources\Client\Player\PlayerState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\EditScene.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -215,6 +227,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CellActor.h" />
+    <ClInclude Include="Sources\Engine\Actor\EditorActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\WorldTileActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -225,6 +240,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\Component.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\EditorActorMoveComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.h">

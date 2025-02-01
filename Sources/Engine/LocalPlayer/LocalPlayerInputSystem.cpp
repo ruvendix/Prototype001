@@ -58,6 +58,11 @@ void LocalPlayerInputSystem::RemoveInputMappingContext(int32 id)
 	m_sortVecInputMappingContext.RemovePriority(foundPriority);
 }
 
+void LocalPlayerInputSystem::CleanupInputMappingContext()
+{
+	m_sortVecInputMappingContext.Cleanup();
+}
+
 int32 LocalPlayerInputSystem::FindInputMappingContextPriorityById(int32 id) const
 {
 	int32 foundPriority = -1;

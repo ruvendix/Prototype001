@@ -3,7 +3,7 @@
 #include "GameApplication.h"
 
 #include "WindowProcedure.h"
-#include "Client/Scene/GameScene.h"
+#include "Client/Scene/EditScene.h"
 
 namespace
 {
@@ -113,7 +113,7 @@ void GameApplication::Startup()
 #pragma endregion
 
     // 씬 생성해서 테스트
-    SceneManager::I()->CreateCurrentScene<GameScene>();
+    SceneManager::I()->CreateCurrentScene<EditScene>();
 }
 
 bool GameApplication::Update(float deltaSeconds)
