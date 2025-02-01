@@ -6,7 +6,8 @@ class LocalPlayerInputSystem : public ICoreLoop
 	DECLARE_SINGLETON(LocalPlayerInputSystem)
 
 public:
-	virtual bool Update(float deltaSeconds);
+	virtual bool Update(float deltaSeconds) override;
+	virtual void Cleanup() override;
 
 public:
 	// 호출할 함수에 인자를 미리 넣고 나중에 호출하는 방식은 람다만 가능 => 캡처 기능 때문
@@ -32,7 +33,6 @@ public:
 	void AddInputMappingContext(const InputMappingContextPtr& spInputMappingContext, int32 priority);
 	void ModifyInputMappingContextPriority(int32 id, int32 priority);
 	void RemoveInputMappingContext(int32 id);
-	void CleanupInputMappingContext();
 
 private:
 	int32 FindInputMappingContextPriorityById(int32 id) const;

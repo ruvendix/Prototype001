@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -45,9 +48,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CellActor.cpp" />
-    <ClCompile Include="Sources\Engine\Actor\EditorActor.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\WorldTileActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -192,6 +192,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Client\Editor\EditorActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\GameApplication.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -227,9 +230,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CellActor.h" />
-    <ClInclude Include="Sources\Engine\Actor\EditorActor.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\WorldTileActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

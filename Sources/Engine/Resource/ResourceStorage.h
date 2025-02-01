@@ -9,7 +9,13 @@ class ResourceStorage
 public:
 	PersistantResourcePtr CreateResource(const std::string& strResKey)
 	{
-		PersistantResourcePtr spRes = std::make_shared<TPersistantResource>();
+		PersistantResourcePtr spRes = FindPersistantSharedResource(strResKey);
+		if (spRes != nullptr)
+		{
+			return spRes;
+		}
+
+		spRes = std::make_shared<TPersistantResource>();
 		spRes->SetTag(strResKey);
 
 		// 생성하는 순간부터 관리함

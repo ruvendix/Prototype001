@@ -42,11 +42,13 @@ void PlayerWalkState::UpdateState(float deltaSeconds)
 	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
 	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
 	{
+		pMoveComponent->ResetMoveDirection();
+
 		TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
 		pTransformComponent->SetPosition(pMoveComponent->GetDestinationWorldPosition());
 
 		// 스프라이트 전환
-		const std::string& strIdleSpriteName = pOwner->FindPlayerIdleSpriteString(pMoveComponent->GetMoveDirection());
+		const std::string& strIdleSpriteName = pOwner->FindPlayerIdleSpriteString(pMoveComponent->GetLookAtType());
 		pOwner->ChangePlayerSprite(strIdleSpriteName);
 
 		// Idle 상태로 전환

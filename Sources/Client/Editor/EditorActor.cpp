@@ -2,7 +2,13 @@
 #include "Pch.h"
 #include "EditorActor.h"
 
-#include "WorldTileMapActor.h"
+#include "Engine/Actor/WorldTileMapActor.h"
+#include "Client/Scene/GameScene.h"
+
+namespace
+{
+	int32 g_editorActorInputMappingContextId = -1;
+}
 
 EditorActor::~EditorActor()
 {
@@ -15,9 +21,10 @@ void EditorActor::Startup()
 #pragma region 입력 처리
 	// 매핑 컨텍스트 추가
 	InputMappingContextPtr spInputMappingContext = std::make_shared<InputMappingContext>();
+	g_editorActorInputMappingContextId = spInputMappingContext->GetId();
 	LocalPlayerInputSystem::I()->AddInputMappingContext(spInputMappingContext, 0);
 
-#pragma region 마우스 왼쪽 버튼 편집
+#pragma region 마우스 왼쪽 버튼으로 편집
 	// 입력값 저장용
 	InputActionValue editWorldTileInputActionValue;
 
@@ -32,7 +39,25 @@ void EditorActor::Startup()
 	LocalPlayerInputSystem::I()->BindInputActionHandler(spEditWorldTileInputAction, this, &EditorActor::OnMouseLeftButtonHandler);
 
 	// 입력 시스템이 핵심! 입력 디바이스보다 하위임
-	//spInputMappingContext->AddInputAction(spEditWorldTileInputAction);
+	spInputMappingContext->AddInputAction(spEditWorldTileInputAction);
+#pragma endregion
+
+#pragma region 마우스 오른쪽 버튼으로 게임 씬으로 전환
+	// 입력값 저장용
+	InputActionValue reserveGameSceneInputActionValue;
+
+	// 입력값 포함하면서 트리거와 핸들러 저장
+	InputActionPtr spReserveGameSceneInputAction = std::make_unique<InputAction>("ReserveGameScene");
+	spReserveGameSceneInputAction->ApplyInputActionValue(reserveGameSceneInputActionValue, EInputActionValueType::Boolean);
+
+	InputActionMappingInfo rightMouseButtonInputMappingInfo;
+	rightMouseButtonInputMappingInfo.inputValue = EInputValue::MouseRightButton;
+	rightMouseButtonInputMappingInfo.inputTrigger = EInputTrigger::OnlyReleased;
+	spReserveGameSceneInputAction->AddInputMappingInfo(rightMouseButtonInputMappingInfo);
+	LocalPlayerInputSystem::I()->BindInputActionHandler(spReserveGameSceneInputAction, this, &EditorActor::OnMouseRightButtonHandler);
+
+	// 입력 시스템이 핵심! 입력 디바이스보다 하위임
+	spInputMappingContext->AddInputAction(spReserveGameSceneInputAction);
 #pragma endregion
 
 #pragma region 방향키 이동
@@ -91,7 +116,7 @@ bool EditorActor::Update(float deltaSeconds)
 void EditorActor::Cleanup()
 {
 	Super::Cleanup();
-	LocalPlayerInputSystem::I()->Cleanup();
+	LocalPlayerInputSystem::I()->RemoveInputMappingContext(g_editorActorInputMappingContextId);
 }
 
 void EditorActor::OnMouseLeftButtonHandler(const InputActionValue* pInputAction)
@@ -99,6 +124,12 @@ void EditorActor::OnMouseLeftButtonHandler(const InputActionValue* pInputAction)
 	// 현재 마우스 좌표를 타일에 적용
 	m_spWorldTileMapActor->ApplyCurrentMousePositionToTile();
 	DEFAULT_TRACE_LOG("마우스 왼쪽 버튼");
+}
+
+void EditorActor::OnMouseRightButtonHandler(const InputActionValue* pInputAction)
+{
+	SceneManager::I()->ReserveNextScene<GameScene>();
+	DEFAULT_TRACE_LOG("마우스 오른쪽 버튼");
 }
 
 void EditorActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)

@@ -2,9 +2,9 @@
 #include "Pch.h"
 #include "EditScene.h"
 
-#include "Engine/Actor/EditorActor.h"
 #include "Engine/Actor/WorldTileMapActor.h"
 #include "Client/World/WorldBackgroundActor.h"
+#include "Client/Editor/EditorActor.h"
 
 EditScene::EditScene()
 {

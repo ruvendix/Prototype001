@@ -19,9 +19,6 @@ public:
 	virtual void Cleanup() override;
 
 private:
-	void OnMouseLeftButtonHandler(const InputActionValue* pInputAction);
-
-private:
 	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 	std::shared_ptr<PlayerActor> m_spPlayerActor = nullptr;

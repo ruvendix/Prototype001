@@ -6,6 +6,11 @@ class SceneManager : public ICoreLoop
 	DECLARE_SINGLETON(SceneManager)
 
 public:
+	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
+	virtual void Cleanup() override;
+
+public:
 	template <typename TScene>
 	Scene* CreateCurrentScene()
 	{
@@ -21,12 +26,14 @@ public:
 		return spScene;
 	}
 
-	virtual void Startup() override;
-	virtual bool Update(float deltaSeconds) override;
-	virtual void Cleanup() override;
+	template <typename TScene>
+	void ReserveNextScene()
+	{
+		const ScenePtr& spNextScene = CreateScene<TScene>();
+		m_sceneChangeEvent.RegisterEventHandler(this, &SceneManager::OnChangeScene, spNextScene);
+	}
 
-	void RegisterActorUpdateOrderToCurrentScene(const Actor* pActor, EUpdateOrder updateOrder);
-
+public:
 	Scene* GetCurrentScene() const { return (m_spScene.get()); }
 
 private:

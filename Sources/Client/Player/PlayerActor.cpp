@@ -7,7 +7,7 @@
 
 namespace
 {
-	std::array<std::string, TO_NUM(ESceneActorMoveDirection::Count)> g_arrPlayerIdleStateDynamicSpriteStringTable =
+	std::array<std::string, TO_NUM(ESceneActorLookAtType::Count)> g_arrPlayerIdleStateDynamicSpriteStringTable =
 	{
 		"PlayerIdleLeft",
 		"PlayerIdleRight"
@@ -15,7 +15,7 @@ namespace
 		"PlayerIdleUp"
 	};
 
-	std::array<std::string, TO_NUM(ESceneActorMoveDirection::Count)> g_arrPlayerWalkStateDynamicSpriteStringTable =
+	std::array<std::string, TO_NUM(ESceneActorLookAtType::Count)> g_arrPlayerWalkStateDynamicSpriteStringTable =
 	{
 		"PlayerWalkLeft",
 		"PlayerWalkRight",
@@ -42,7 +42,7 @@ public:
 
 void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 {
-	std::array<std::string, TO_NUM(ESceneActorMoveDirection::Count)> arrPlayerTexturePathTable =
+	std::array<std::string, TO_NUM(ESceneActorLookAtType::Count)> arrPlayerTexturePathTable =
 	{
 		"Assets/Texture/Player/PlayerLeft.bmp",
 		"Assets/Texture/Player/PlayerRight.bmp",
@@ -58,32 +58,32 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 
 #pragma region 플레이어 스프라이트 초기화 정보 설정 (일단은 8개)
 	std::array<PlayerSpriteStartupInfo, 8> arrPlayerSpriteStartupInfo;
-	arrPlayerSpriteStartupInfo[0].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Left)];
-	arrPlayerSpriteStartupInfo[0].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Left)];
+	arrPlayerSpriteStartupInfo[0].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Left)];
+	arrPlayerSpriteStartupInfo[0].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Left)];
 
-	arrPlayerSpriteStartupInfo[1].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Right)];
-	arrPlayerSpriteStartupInfo[1].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Right)];
+	arrPlayerSpriteStartupInfo[1].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Right)];
+	arrPlayerSpriteStartupInfo[1].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Right)];
 
-	arrPlayerSpriteStartupInfo[2].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Down)];
-	arrPlayerSpriteStartupInfo[2].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Down)];
+	arrPlayerSpriteStartupInfo[2].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Down)];
+	arrPlayerSpriteStartupInfo[2].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Down)];
 
-	arrPlayerSpriteStartupInfo[3].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Up)];
-	arrPlayerSpriteStartupInfo[3].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Up)];
+	arrPlayerSpriteStartupInfo[3].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Up)];
+	arrPlayerSpriteStartupInfo[3].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Up)];
 
-	arrPlayerSpriteStartupInfo[4].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Left)];
-	arrPlayerSpriteStartupInfo[4].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Left)];
+	arrPlayerSpriteStartupInfo[4].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Left)];
+	arrPlayerSpriteStartupInfo[4].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Left)];
 	arrPlayerSpriteStartupInfo[4].spriteLine = 1;
 
-	arrPlayerSpriteStartupInfo[5].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Right)];
-	arrPlayerSpriteStartupInfo[5].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Right)];
+	arrPlayerSpriteStartupInfo[5].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Right)];
+	arrPlayerSpriteStartupInfo[5].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Right)];
 	arrPlayerSpriteStartupInfo[5].spriteLine = 1;
 
-	arrPlayerSpriteStartupInfo[6].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Down)];
-	arrPlayerSpriteStartupInfo[6].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Down)];
+	arrPlayerSpriteStartupInfo[6].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Down)];
+	arrPlayerSpriteStartupInfo[6].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Down)];
 	arrPlayerSpriteStartupInfo[6].spriteLine = 1;
 
-	arrPlayerSpriteStartupInfo[7].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorMoveDirection::Up)];
-	arrPlayerSpriteStartupInfo[7].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorMoveDirection::Up)];
+	arrPlayerSpriteStartupInfo[7].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Up)];
+	arrPlayerSpriteStartupInfo[7].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Up)];
 	arrPlayerSpriteStartupInfo[7].spriteLine = 1;
 #pragma endregion
 
@@ -162,17 +162,18 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 	if (spWorldTileMapActor->CheckMovingAvailableTile(pMoveComponent->GetDestinationCellPosition()) == false)
 	{
 		// Idle 스프라이트로 바꾸고
-		const std::string& strPlayerIdleSprite = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetMoveDirection())];
+		const std::string& strPlayerIdleSprite = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetLookAtType())];
 		m_pOwner->ChangePlayerSprite(strPlayerIdleSprite);
 
 		pMoveComponent->SetDestinationCellPosition(currentCellPos);
+		pMoveComponent->ResetMoveDirection();
 		DEFAULT_TRACE_LOG("이동 못함!");
 
 		return false;
 	}
 
 	// Walk 스프라이트 바꾸고
-	const std::string& strPlayerWalkSprite = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetMoveDirection())];
+	const std::string& strPlayerWalkSprite = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetLookAtType())];
 	m_pOwner->ChangePlayerSprite(strPlayerWalkSprite);
 
 	return true;
@@ -290,12 +291,12 @@ void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)
 	pDynamicSpriteComponent->ApplyDynamicSprite(spNextPlayerSprite);
 }
 
-const std::string& PlayerActor::FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const
+const std::string& PlayerActor::FindPlayerIdleSpriteString(ESceneActorLookAtType moveDir) const
 {
 	return (g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
 }
 
-const std::string& PlayerActor::FindPlayerWalkSpriteString(ESceneActorMoveDirection moveDir) const
+const std::string& PlayerActor::FindPlayerWalkSpriteString(ESceneActorLookAtType moveDir) const
 {
 	return (g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
 }

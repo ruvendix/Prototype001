@@ -17,28 +17,12 @@ SceneActorMoveComponent::~SceneActorMoveComponent()
 bool SceneActorMoveComponent::Update(float deltaSeconds)
 {
 	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
-	Vec2d actorPos = pTransformComponent->GetPosition();
+	Vec2d vActorNextPos = pTransformComponent->GetPosition();
 
-	switch (m_moveDir)
-	{
-	case ESceneActorMoveDirection::Left:
-		actorPos.x += (m_moveSpeed * deltaSeconds * -1.0f);
-		break;
+	Vec2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
+	vActorNextPos += vMovePos;
 
-	case ESceneActorMoveDirection::Right:
-		actorPos.x += (m_moveSpeed * deltaSeconds * 1.0f);
-		break;
-
-	case ESceneActorMoveDirection::Down:
-		actorPos.y += (m_moveSpeed * deltaSeconds * 1.0f);
-		break;
-
-	case ESceneActorMoveDirection::Up:
-		actorPos.y += (m_moveSpeed * deltaSeconds * -1.0f);
-		break;
-	}
-
-	pTransformComponent->SetPosition(actorPos);
+	pTransformComponent->SetPosition(vActorNextPos);
 	return true;
 }
 
@@ -47,20 +31,20 @@ void SceneActorMoveComponent::ApplyMoveDirectionVector(const Vec2d& vMoveDir)
 	// 실수니까 정확히 체크
 	if (math::CheckAlikeValue(vMoveDir.x, 1.0f) == true)
 	{
-		m_moveDir = ESceneActorMoveDirection::Right;
+		m_lookAtType = ESceneActorLookAtType::Right;
 	}
 	else if (math::CheckAlikeValue(vMoveDir.x, -1.0f) == true)
 	{
-		m_moveDir = ESceneActorMoveDirection::Left;
+		m_lookAtType = ESceneActorLookAtType::Left;
 	}
 
 	if (math::CheckAlikeValue(vMoveDir.y, 1.0f) == true)
 	{
-		m_moveDir = ESceneActorMoveDirection::Down;
+		m_lookAtType = ESceneActorLookAtType::Down;
 	}
 	else if (math::CheckAlikeValue(vMoveDir.y, -1.0f) == true)
 	{
-		m_moveDir = ESceneActorMoveDirection::Up;
+		m_lookAtType = ESceneActorLookAtType::Up;
 	}
 
 	m_destCellPos.x += static_cast<int32>(vMoveDir.x);
@@ -69,6 +53,8 @@ void SceneActorMoveComponent::ApplyMoveDirectionVector(const Vec2d& vMoveDir)
 	// 목표 좌표 계산하기
 	CellActor* pSceneActor = GetOwner<CellActor>();
 	m_destPos = pSceneActor->ConvertCellPositionToWorldPosition(m_destCellPos);
+
+	m_vMoveDir = vMoveDir;
 }
 
 bool SceneActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
@@ -93,4 +79,9 @@ bool SceneActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 
 	DEFAULT_TRACE_LOG("도달!");
 	return true;
+}
+
+void SceneActorMoveComponent::ResetMoveDirection()
+{
+	m_vMoveDir = Vec2d();
 }

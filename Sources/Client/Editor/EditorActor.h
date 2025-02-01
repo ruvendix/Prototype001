@@ -22,6 +22,7 @@ public:
 
 private:
 	void OnMouseLeftButtonHandler(const InputActionValue* pInputAction);
+	void OnMouseRightButtonHandler(const InputActionValue* pInputAction);
 	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
 
 private:

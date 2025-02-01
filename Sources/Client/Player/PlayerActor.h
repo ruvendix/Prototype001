@@ -29,8 +29,8 @@ public:
 public:
 	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
 
-	const std::string& FindPlayerIdleSpriteString(ESceneActorMoveDirection moveDir) const;
-	const std::string& FindPlayerWalkSpriteString(ESceneActorMoveDirection moveDir) const;
+	const std::string& FindPlayerIdleSpriteString(ESceneActorLookAtType moveDir) const;
+	const std::string& FindPlayerWalkSpriteString(ESceneActorLookAtType moveDir) const;
 
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 

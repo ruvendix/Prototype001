@@ -16,17 +16,16 @@ EditorActorMoveComponent::~EditorActorMoveComponent()
 
 bool EditorActorMoveComponent::Update(float deltaSeconds)
 {
-	Vec2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
-	//DEFAULT_TRACE_LOG("(%f %f)", vMovePos.x, vMovePos.y);
-
 	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
-	Vec2d vNextPos = pTransformComponent->GetPosition();
-	vNextPos += vMovePos;
+	Vec2d vActorNextPos = pTransformComponent->GetPosition();
 
-	vNextPos.x = global::Clamp(vNextPos.x, m_movableRangeRect.left, m_movableRangeRect.right);
-	vNextPos.y = global::Clamp(vNextPos.y, m_movableRangeRect.top, m_movableRangeRect.bottom);
+	Vec2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
+	vActorNextPos += vMovePos;
 
-	pTransformComponent->SetPosition(vNextPos);
+	vActorNextPos.x = global::Clamp(vActorNextPos.x, m_movableRangeRect.left, m_movableRangeRect.right);
+	vActorNextPos.y = global::Clamp(vActorNextPos.y, m_movableRangeRect.top, m_movableRangeRect.bottom);
+
+	pTransformComponent->SetPosition(vActorNextPos);
 	return true;
 }
 

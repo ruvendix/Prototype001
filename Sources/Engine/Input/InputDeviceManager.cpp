@@ -26,6 +26,9 @@ void InputDeviceMananger::Startup()
 	tempInputRawInfo.virtualCode = VK_LBUTTON;
 	m_arrInputRawInfo[TO_NUM(EInputValue::MouseLeftButton)] = tempInputRawInfo;
 
+	tempInputRawInfo.virtualCode = VK_RBUTTON;
+	m_arrInputRawInfo[TO_NUM(EInputValue::MouseRightButton)] = tempInputRawInfo;
+
 	m_spKeyboardDevice = std::make_shared<KeyboardDevice>();
 	m_spMouseDevice = std::make_shared<MouseDevice>();
 }

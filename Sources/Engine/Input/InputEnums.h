@@ -21,6 +21,7 @@ enum class EInputValue
 	X,
 
 	MouseLeftButton,
+	MouseRightButton,
 
 	Count,
 };

@@ -98,6 +98,9 @@
     <Filter Include="Sources\Engine\SpecialContainer">
       <UniqueIdentifier>{136db556-cd78-4713-8476-904d080809c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Client\Editor">
+      <UniqueIdentifier>{a9473c3c-7072-447c-8615-deed306b60cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -277,11 +280,11 @@
     <ClCompile Include="Sources\Client\Scene\EditScene.cpp">
       <Filter>Sources\Client\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\EditorActor.cpp">
-      <Filter>Sources\Engine\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Component\EditorActorMoveComponent.cpp">
       <Filter>Sources\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
+      <Filter>Sources\Client\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -534,11 +537,11 @@
     <ClInclude Include="Sources\Client\Scene\EditScene.h">
       <Filter>Sources\Client\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\EditorActor.h">
-      <Filter>Sources\Engine\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Component\EditorActorMoveComponent.h">
       <Filter>Sources\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Editor\EditorActor.h">
+      <Filter>Sources\Client\Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

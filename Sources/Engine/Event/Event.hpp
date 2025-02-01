@@ -12,7 +12,7 @@ public:
 	void RegisterEventHandler(TEventListener* pEventListener, void(TEventListener::* pEventHandler)(TArgs...), TArgs&&... args)
 	{
 		m_delegator.AllDisconnectFunction();
-		m_delegator.ConnectFixedArgumentsFunction(pEventListener, pEventHandler, args...);
+		m_delegator.ConnectFixedArgumentsFunction(pEventListener, pEventHandler, std::forward<TArgs>(args)...);
 	}
 
 	void ExcuteIfBound()

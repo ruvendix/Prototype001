@@ -26,6 +26,11 @@ bool LocalPlayerInputSystem::Update(float deltaSeconds)
 	return true;
 }
 
+void LocalPlayerInputSystem::Cleanup()
+{
+	m_sortVecInputMappingContext.Cleanup();
+}
+
 void LocalPlayerInputSystem::AddInputMappingContext(const InputMappingContextPtr& spInputMappingContext, int32 priority)
 {
 	if (priority < 0)
@@ -56,11 +61,6 @@ void LocalPlayerInputSystem::RemoveInputMappingContext(int32 id)
 	}
 
 	m_sortVecInputMappingContext.RemovePriority(foundPriority);
-}
-
-void LocalPlayerInputSystem::CleanupInputMappingContext()
-{
-	m_sortVecInputMappingContext.Cleanup();
 }
 
 int32 LocalPlayerInputSystem::FindInputMappingContextPriorityById(int32 id) const

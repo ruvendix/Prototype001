@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-enum class ESceneActorMoveDirection
+enum class ESceneActorLookAtType
 {
 	Left = 0,
 	Right,
@@ -26,18 +26,21 @@ public:
 	void ApplyMoveDirectionVector(const Vec2d& vMoveDir);
 	bool CheckGoalPosition(float deltaSeconds) const;
 
+	void ResetMoveDirection();
+
 	void SetDestinationCellPosition(const Position2d& destCellPos) { m_destCellPos = destCellPos; }
 	const Position2d& GetDestinationCellPosition() const { return m_destCellPos; }
 
 	void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
 	const Vec2d& GetDestinationWorldPosition() const { return m_destPos; }
 
-	ESceneActorMoveDirection GetMoveDirection() const { return m_moveDir; }
+	ESceneActorLookAtType GetLookAtType() const { return m_lookAtType; }
 
 private:
 	float m_moveSpeed = 0.0f;
+	Vec2d m_vMoveDir;
 
 	Vec2d m_destPos;
 	Position2d m_destCellPos;
-	ESceneActorMoveDirection m_moveDir = ESceneActorMoveDirection::Down;
+	ESceneActorLookAtType m_lookAtType = ESceneActorLookAtType::Count;
 };
