@@ -4,6 +4,8 @@
 
 #include "PlayerActor.h"
 
+DEFINE_COMPILETIMER_COUNTER(PlayerStateIdCount);
+
 PlayerState::PlayerState(PlayerActor* pOwner)
 {
 	m_pOwner = pOwner;
@@ -15,6 +17,8 @@ PlayerState::~PlayerState()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEFINE_COMPILETIME_ID(PlayerIdleState, PlayerStateIdCount)
+
 PlayerStatePtr PlayerIdleState::ImmediatelyChangePlayerState()
 {
 	// Idle이니까 Walk로 교체하는 게 목적!
@@ -27,6 +31,8 @@ void PlayerIdleState::UpdateState(float deltaSeconds)
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEFINE_COMPILETIME_ID(PlayerWalkState, PlayerStateIdCount)
+
 PlayerStatePtr PlayerWalkState::ImmediatelyChangePlayerState()
 {
 	DEFAULT_TRACE_LOG("걷는 상태일 때는 즉시 전환하지 않음!");

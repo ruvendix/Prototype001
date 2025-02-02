@@ -3,7 +3,7 @@
 
 class TransformComponent : public Component
 {
-	DECLARE_COMPILETIME_ID(TransformComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	TransformComponent();

@@ -29,6 +29,7 @@ void GameScene::Startup()
 
 	// 셀 정보에 따른 타일맵 구성
 	m_spWorldTileMapActor = CreateActorToScene<WorldTileMapActor>();
+	m_spWorldTileMapActor->ShowWorldTileGuideShape(false);
 #pragma endregion
 
 	// 플레이어 액터 추가

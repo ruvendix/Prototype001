@@ -3,7 +3,7 @@
 
 class RectangleShapeComponent : public RenderComponent
 {
-	DECLARE_COMPILETIME_ID(RectangleShapeComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	RectangleShapeComponent();

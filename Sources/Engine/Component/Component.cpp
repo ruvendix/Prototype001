@@ -2,6 +2,8 @@
 #include "Pch.h"
 #include "Component.h"
 
+DEFINE_COMPILETIMER_COUNTER(ComponentIdCounter);
+
 Component::Component()
 {
 

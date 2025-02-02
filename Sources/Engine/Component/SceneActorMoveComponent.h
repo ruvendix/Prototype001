@@ -13,7 +13,7 @@ enum class ESceneActorLookAtType
 
 class SceneActorMoveComponent : public Component
 {
-	DECLARE_COMPILETIME_ID(SceneActorMoveComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	SceneActorMoveComponent();

@@ -3,7 +3,7 @@
 
 class EditorActorMoveComponent : public Component
 {
-	DECLARE_COMPILETIME_ID(EditorActorMoveComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	EditorActorMoveComponent();

@@ -61,6 +61,7 @@ private: \
 #define TO_NUM(enumValue) static_cast<int32>(enumValue)
 #define TO_ENUM(value, EnumType) static_cast<EnumType>(value)
 
-#define DEFINE_COMPILETIMER_COUNTER(TCounter) struct TCounter { };
-#define DECLARE_COMPILETIME_ID(Type) public: static const int32 s_id;
-#define DEFINE_COMPILETIME_ID(Type, TCounter) const int32 Type::s_id = CompiletimeCounter<TCounter>::NextValue();
+#define DECLARE_COMPILETIMER_COUNTER(TCounter) struct TCounter { }
+#define DEFINE_COMPILETIMER_COUNTER(TCounter) int32 CompiletimeCounter<TCounter>::s_num = 0
+#define DECLARE_COMPILETIME_ID public: static int32 s_id
+#define DEFINE_COMPILETIME_ID(Type, TCounter) int32 Type::s_id = CompiletimeCounter<TCounter>::NextValue();

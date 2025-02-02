@@ -5,8 +5,6 @@ class WorldTileMapActor;
 
 class EditorActor : public CellActor
 {
-	DECLARE_PIMPL;
-
 	using Super = CellActor;
 
 public:

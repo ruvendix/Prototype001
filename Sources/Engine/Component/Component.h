@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-DEFINE_COMPILETIMER_COUNTER(ComponentIdCounter)
+DECLARE_COMPILETIMER_COUNTER(ComponentIdCounter);
 
 class Component : public ICoreLoop
 {

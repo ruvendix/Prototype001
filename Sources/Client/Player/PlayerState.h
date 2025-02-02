@@ -1,6 +1,8 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+DECLARE_COMPILETIMER_COUNTER(PlayerStateIdCount);
+
 class PlayerActor;
 
 class PlayerState
@@ -20,7 +22,7 @@ private:
 
 class PlayerIdleState : public PlayerState
 {
-	DECLARE_COMPILETIME_ID(PlayerIdleState)
+	DECLARE_COMPILETIME_ID;
 	using Super = PlayerState;
 
 public:
@@ -32,7 +34,7 @@ public:
 
 class PlayerWalkState : public PlayerState
 {
-	DECLARE_COMPILETIME_ID(PlayerWalkState)
+	DECLARE_COMPILETIME_ID;
 	using Super = PlayerState;
 
 public:

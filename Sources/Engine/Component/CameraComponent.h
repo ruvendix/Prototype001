@@ -3,7 +3,7 @@
 
 class CameraComponent : public Component
 {
-	DECLARE_COMPILETIME_ID(CameraComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	CameraComponent();

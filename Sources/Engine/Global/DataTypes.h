@@ -12,14 +12,14 @@ using uint32 = unsigned __int32;
 using uint64 = unsigned __int64;
 
 // 컴파일 타임 카운터는 타입으로 취급
-template <typename CounterType>
+template <typename TCounter>
 struct CompiletimeCounter
 {
-	static int32 NextValue()
-	{
-		static int32 s_num = 0; // 각 CounterType마다 고유한 카운트 시작값
-		return s_num++;
-	}
+	// 각 TCounter마다 고유한 카운트 시작값
+	static int32 NextValue() { return s_num++; }
+	static int32 GetCount() { return s_num; }
+
+	static int32 s_num;
 };
 
 struct Position2d

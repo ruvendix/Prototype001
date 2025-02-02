@@ -20,6 +20,7 @@ public:
 	bool CheckMovingAvailableTile(const Position2d& cellPos) const;
 
 	int32 ConvertCellPositionToTileIndex(const Position2d& cellPos) const;
+	void ShowWorldTileGuideShape(bool bShow);
 
 private:
 	Array2dInfo m_tileArray2dInfo;

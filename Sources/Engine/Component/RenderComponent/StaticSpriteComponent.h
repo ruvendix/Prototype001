@@ -3,7 +3,7 @@
 
 class StaticSpriteComponent : public RenderComponent
 {
-	DECLARE_COMPILETIME_ID(StaticSpriteComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	StaticSpriteComponent();

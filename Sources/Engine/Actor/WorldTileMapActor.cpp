@@ -150,3 +150,15 @@ int32 WorldTileMapActor::ConvertCellPositionToTileIndex(const Position2d& cellPo
 
 	return (m_tileArray2dInfo.xIdxCount * cellPos.y) + cellPos.x;
 }
+
+void WorldTileMapActor::ShowWorldTileGuideShape(bool bShow)
+{
+	if (bShow == true)
+	{
+		SetActorFlagBitOn(EActorFlag::RenderingTarget);
+	}
+	else
+	{
+		SetActorFlagBitOff(EActorFlag::RenderingTarget);
+	}
+}

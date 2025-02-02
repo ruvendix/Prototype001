@@ -3,7 +3,7 @@
 
 class DynamicSpriteComponent : public RenderComponent
 {
-	DECLARE_COMPILETIME_ID(DynamicSpriteComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	DynamicSpriteComponent();

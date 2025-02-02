@@ -7,7 +7,7 @@ using RenderComponentVectorArray = std::array<RenderComponentVector, TO_NUM(ERen
 class RenderComponent : public Component
 {
 	// ·»´õ ÄÄÆ÷³ÍÆ®µµ Id´Â ÇÒ´ç
-	DECLARE_COMPILETIME_ID(RenderComponent)
+	DECLARE_COMPILETIME_ID;
 
 public:
 	RenderComponent();
