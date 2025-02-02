@@ -8,3 +8,13 @@ enum class EActorFlag
 	
 	Count,
 };
+
+enum class EActorLookAtType
+{
+	Left = 0,
+	Up,
+	Right,
+	Down,
+
+	Count
+};

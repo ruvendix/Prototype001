@@ -4,11 +4,10 @@
 class WorldTileMapActor;
 
 // 일단은 클라이언트에 있는 걸 사용
-class PlayerActor : public CellActor
+class PlayerActor : public AnimationActor
 {
 	DECLARE_PIMPL;
-
-	using Super = CellActor;
+	using Super = AnimationActor;
 
 public:
 	using Super::Super;
@@ -19,28 +18,12 @@ public:
 	virtual void Cleanup() override;
 
 public:
-	template <typename TPlayerState>
-	void ReserveNextPlayerState()
-	{
-		PlayerStatePtr spNextPlayerState = std::make_shared<TPlayerState>(this);
-		m_playerStateChangeEvent.RegisterEventHandler(this, &PlayerActor::OnChangePlayerState, spNextPlayerState);
-	}
-
-public:
-	void ChangePlayerSprite(const std::string& strNextPlayerSprite);
-
-	const std::string& FindPlayerIdleSpriteString(ESceneActorLookAtType moveDir) const;
-	const std::string& FindPlayerWalkSpriteString(ESceneActorLookAtType moveDir) const;
-
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 
 private:
-	void OnChangePlayerState(const PlayerStatePtr& spNextPlayerState);
 	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
+	void OnSpaceBarKeyHandler(const InputActionValue* pInputAction);
 
 private:
-	PlayerStatePtr m_spPlayerState = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
-
-	Event<const PlayerStatePtr& /* spNextPlayerState */> m_playerStateChangeEvent;
 };

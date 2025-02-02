@@ -23,6 +23,9 @@ void InputDeviceMananger::Startup()
 	tempInputRawInfo.virtualCode = VK_UP;
 	m_arrInputRawInfo[TO_NUM(EInputValue::Up)] = tempInputRawInfo;
 
+	tempInputRawInfo.virtualCode = VK_SPACE;
+	m_arrInputRawInfo[TO_NUM(EInputValue::SpaceBar)] = tempInputRawInfo;
+
 	tempInputRawInfo.virtualCode = VK_LBUTTON;
 	m_arrInputRawInfo[TO_NUM(EInputValue::MouseLeftButton)] = tempInputRawInfo;
 

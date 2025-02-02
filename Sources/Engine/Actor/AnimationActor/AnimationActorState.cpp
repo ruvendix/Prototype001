@@ -1,0 +1,83 @@
+// Copyright 2024 Ruvendix, All Rights Reserved.
+#include "Pch.h"
+#include "AnimationActorState.h"
+
+#include "AnimationActor.h"
+
+DEFINE_COMPILETIMER_COUNTER(AnimationActorStateIdCount);
+
+AnimationActorState::AnimationActorState(AnimationActor* pOwner)
+{
+	m_pOwner = pOwner;
+}
+
+AnimationActorState::~AnimationActorState()
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEFINE_COMPILETIME_ID(AnimationActorIdleState, AnimationActorStateIdCount)
+
+AnimationActorIdleState::~AnimationActorIdleState()
+{
+
+}
+
+void AnimationActorIdleState::UpdateState(float deltaSeconds)
+{
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEFINE_COMPILETIME_ID(AnimationActorWalkState, AnimationActorStateIdCount)
+
+AnimationActorWalkState::~AnimationActorWalkState()
+{
+
+}
+
+void AnimationActorWalkState::UpdateState(float deltaSeconds)
+{
+	AnimationActor* pOwner = GetOwner();
+	ASSERT_LOG(pOwner != nullptr);
+
+	// 이동 컴포넌트
+	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
+	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
+	{
+		pMoveComponent->ResetMoveDirection();
+
+		TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
+		pTransformComponent->SetPosition(pMoveComponent->GetDestinationWorldPosition());
+
+		// 스프라이트는 현재 프레임에서 바로 전환
+		pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
+
+		// Idle 상태로 전환
+		pOwner->ReserveNextPlayerState<AnimationActorIdleState>();
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEFINE_COMPILETIME_ID(AnimationActorAttackState, AnimationActorStateIdCount)
+
+AnimationActorAttackState::~AnimationActorAttackState()
+{
+
+}
+
+void AnimationActorAttackState::UpdateState(float deltaSeconds)
+{
+	AnimationActor* pOwner = GetOwner();
+	ASSERT_LOG(pOwner != nullptr);
+
+	DynamicSpriteComponent* pDynamicSpriteComponent = pOwner->FindComponent<DynamicSpriteComponent>();
+	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
+	if (pDynamicSpriteComponent->IsAnimationEnd())
+	{
+		// 스프라이트는 현재 프레임에서 바로 전환
+		pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
+
+		// Idle 상태로 전환
+		pOwner->ReserveNextPlayerState<AnimationActorIdleState>();
+	}
+}

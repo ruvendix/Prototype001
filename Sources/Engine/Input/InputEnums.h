@@ -14,11 +14,10 @@ enum class EInputValue
 	Unknown = 0,
 
 	Left,
+	Up,
 	Right,
 	Down,
-	Up,
-	A,
-	X,
+	SpaceBar,
 
 	MouseLeftButton,
 	MouseRightButton,

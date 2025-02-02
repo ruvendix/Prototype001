@@ -26,27 +26,8 @@ bool SceneActorMoveComponent::Update(float deltaSeconds)
 	return true;
 }
 
-void SceneActorMoveComponent::ApplyMoveDirectionVector(const Vec2d& vMoveDir)
+void SceneActorMoveComponent::ApplyMoveDirection(const Vec2d& vMoveDir)
 {
-	// 실수니까 정확히 체크
-	if (math::CheckAlikeValue(vMoveDir.x, 1.0f) == true)
-	{
-		m_lookAtType = ESceneActorLookAtType::Right;
-	}
-	else if (math::CheckAlikeValue(vMoveDir.x, -1.0f) == true)
-	{
-		m_lookAtType = ESceneActorLookAtType::Left;
-	}
-
-	if (math::CheckAlikeValue(vMoveDir.y, 1.0f) == true)
-	{
-		m_lookAtType = ESceneActorLookAtType::Down;
-	}
-	else if (math::CheckAlikeValue(vMoveDir.y, -1.0f) == true)
-	{
-		m_lookAtType = ESceneActorLookAtType::Up;
-	}
-
 	m_destCellPos.x += static_cast<int32>(vMoveDir.x);
 	m_destCellPos.y += static_cast<int32>(vMoveDir.y);
 

@@ -113,6 +113,7 @@ using PersistantResourcePtr = std::shared_ptr<class PersistantResource>;
 using TexturePtr = std::shared_ptr<class Texture>;
 using StaticSpritePtr = std::shared_ptr<class StaticSprite>;
 using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
+using AnimationActorStatePtr = std::shared_ptr<class AnimationActorState>;
 
 // Bound된 함수는 항상 void() 형식
 using BoundFunction = std::function<void()>;

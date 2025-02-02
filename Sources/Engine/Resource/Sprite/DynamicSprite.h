@@ -10,7 +10,8 @@ public:
 	DynamicSprite();
 	virtual ~DynamicSprite();
 
-	void AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 drawWidth, int32 drawHeight, float keepTime, uint32 colorKey);
+	void AddKeyFrame(const SpriteDrawInfo& spriteDrawInfo, float keepTime);
+	void AddKeyFrames(int32 startIdx, int32 endIdx, int32 spriteLine, const Size& drawSize, uint32 colorKey, float keepTime);
 
 	FORCEINLINE const SpriteDrawInfo& GetSpriteDrawInfo(int32 spriteDrawInfoIdx) const
 	{
@@ -23,11 +24,15 @@ public:
 		VALIDATE_INDEX_RANGE(spriteKeyFrameIdx, m_vecTimeTable.size());
 		return m_vecTimeTable[spriteKeyFrameIdx];
 	}
+
+	void SetLoopDynamicSprite(bool bLoop) { m_bLoop = bLoop; }
+	bool IsLoopDynamicSprite() const { return (m_bLoop == true); }
 	
 	const std::vector<float>& GetTimeTable() const { return m_vecTimeTable; }
 	int32 GetSpriteKeyFrameCount() const { return m_vecSpriteDrawInfo.size(); }
 
 private:
-	std::vector<float> m_vecTimeTable; // 0번 인덱스에 2.0이 있다면 1번 인덱스까지 2초가 필요하다는 것
-	std::vector<SpriteDrawInfo> m_vecSpriteDrawInfo;
+	std::vector<float> m_vecTimeTable; 
+	std::vector<SpriteDrawInfo> m_vecSpriteDrawInfo; // 이거 하나하나가 키프레임
+	bool m_bLoop = false;
 };

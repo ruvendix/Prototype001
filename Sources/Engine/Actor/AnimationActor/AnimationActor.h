@@ -1,0 +1,132 @@
+// Copyright 2025 Ruvendix, All Rights Reserved.
+#pragma once
+
+#include "Engine/Resource/ResourceMananger.h"
+#include "Engine/Resource/Sprite/DynamicSprite.h"
+
+class AnimationActor : public CellActor
+{
+	using Super = CellActor;
+
+public:
+	using ActorLookAtStringTable = std::array<std::string, TO_NUM(EActorLookAtType::Count)>;
+	using ActorLookAtDynamicSpriteTable = std::array<DynamicSpritePtr, TO_NUM(EActorLookAtType::Count)>;
+
+public:
+	AnimationActor();
+	virtual ~AnimationActor();
+
+public:
+	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
+
+public:
+	template <typename TActorState>
+	void CreateActorStateLookAtDynamicSprites(const std::string& strPrefix, bool bLoop)
+	{
+		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
+		if (foundIter != m_mapActorStateDynamicSprite.cend())
+		{
+			return;
+		}
+
+		ActorLookAtDynamicSpriteTable actorLookAtDynamicSpriteTable;
+		for (int32 i = 0; i < TO_NUM(EActorLookAtType::Count); ++i)
+		{
+			std::string strDynamicSpriteName;
+			MakeFormatString(strDynamicSpriteName, "%s%s", strPrefix.c_str(), s_actorLookAtStringTable[i].c_str());
+
+			// 스프라이트 로딩인데 없으니 생성
+			const DynamicSpritePtr& spDynamicSprite = ResourceMananger::I()->CreateDynamicSprite(strDynamicSpriteName);
+			ASSERT_LOG(spDynamicSprite != nullptr);
+			spDynamicSprite->SetLoopDynamicSprite(bLoop);
+			spDynamicSprite->FindAndSetTexture(m_actorLookAtTexturePathTable[i]);
+
+			actorLookAtDynamicSpriteTable[i] = spDynamicSprite;
+		}
+
+		auto resultIter = m_mapActorStateDynamicSprite.insert(std::make_pair(TActorState::s_id, actorLookAtDynamicSpriteTable));
+		ASSERT_LOG(resultIter.second == true);
+	}
+
+	template <typename TActorState>
+	void AddActorStateKeyFrames(int32 startIdx, int32 endIdx, int32 spriteLine, const Size& drawSize, uint32 colorKey, float keepTime)
+	{
+		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
+		if (foundIter == m_mapActorStateDynamicSprite.cend())
+		{
+			return;
+		}
+
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
+		for (int32 i = 0; i < TO_NUM(EActorLookAtType::Count); ++i)
+		{
+			// 해당되는 스프라이트 가져오기
+			const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[i];
+			ASSERT_LOG(spDynamicSprite != nullptr);
+			spDynamicSprite->AddKeyFrames(startIdx, endIdx, spriteLine, drawSize, colorKey, keepTime);
+		}
+	}
+
+	template <typename TActorState>
+	DynamicSpritePtr FindActorStateLookAtDynamicSprite(EActorLookAtType actorLookAtType) const
+	{
+		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
+		if (foundIter == m_mapActorStateDynamicSprite.cend())
+		{
+			return nullptr;
+		}
+
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
+		return (actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtType)]);
+	}
+
+	template <typename TActorState>
+	void ChangeActorStateDynamicSprite()
+	{
+		DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
+		ASSERT_LOG(pDynamicSpriteComponent != nullptr);
+
+		const DynamicSpritePtr& spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TActorState>(m_lookAtType);
+		pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
+	}
+
+	template <typename TAnimationActorState>
+	void ReserveNextPlayerState()
+	{
+		AnimationActorStatePtr spNextAnimationActorState = std::make_shared<TAnimationActorState>(this);
+		m_animationActorStateChangeEvent.RegisterEventHandler(this, &AnimationActor::OnChangeAnimationActorState, spNextAnimationActorState);
+	}
+
+	// Update보다 빠르니까 즉시 전환해도 됨
+	template <typename TAnimationActorState>
+	void ImmediatelyChangePlayerState()
+	{
+		m_spAnimationActorState = std::make_shared<TAnimationActorState>(this);
+	}
+
+	template <typename TAnimationActorState>
+	bool IsSameAnimationActorState()
+	{
+		return (std::dynamic_pointer_cast<TAnimationActorState>(m_spAnimationActorState) != nullptr);
+	}
+
+public:
+	void ApplyMoveDirection(const Vec2d& vMoveDir);
+	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath, EActorLookAtType actorLookAtType);
+
+private:
+	void OnChangeAnimationActorState(const AnimationActorStatePtr& spAnimationActorState);
+
+private:
+	static ActorLookAtStringTable s_actorLookAtStringTable;
+
+private:
+	EActorLookAtType m_lookAtType = EActorLookAtType::Down;
+
+	ActorLookAtStringTable m_actorLookAtTexturePathTable;
+	std::unordered_map<int32, std::array<DynamicSpritePtr, TO_NUM(EActorLookAtType::Count)>> m_mapActorStateDynamicSprite;
+
+	AnimationActorStatePtr m_spAnimationActorState = nullptr;
+	Event<const AnimationActorStatePtr& /* spNextAnimationActorState */> m_animationActorStateChangeEvent;
+};

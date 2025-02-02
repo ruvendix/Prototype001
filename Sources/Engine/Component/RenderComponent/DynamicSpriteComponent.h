@@ -15,9 +15,10 @@ public:
 	void ResetDynamicSprite();
 	void ApplyDynamicSprite(const DynamicSpritePtr& spDynamicSprite);
 
+	bool IsAnimationEnd() const { return (m_currentSpriteDrawInfoIdx == m_spriteKeyFrameCount); }
+
 private:
 	// 타이머를 사용하지 않음
-	bool m_bLoop = true; // 기본적으로 스프라이트 애니메이션은 반복
 	float m_localTime = 0.0f;
 
 	int32 m_spriteKeyFrameCount = 0;

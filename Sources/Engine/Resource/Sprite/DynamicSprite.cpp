@@ -12,12 +12,8 @@ DynamicSprite::~DynamicSprite()
 
 }
 
-void DynamicSprite::AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 drawWidth, int32 drawHeight, float keepTime, uint32 colorKey)
+void DynamicSprite::AddKeyFrame(const SpriteDrawInfo& spriteDrawInfo, float keepTime)
 {
-	SpriteDrawInfo spriteDrawInfo;
-	spriteDrawInfo.drawingStartPos = Position2d{ beginDrawPosX, beginDrawPosY };
-	spriteDrawInfo.drawSize = Size{ drawWidth, drawHeight };
-	spriteDrawInfo.colorKey = colorKey;
 	m_vecSpriteDrawInfo.push_back(spriteDrawInfo);
 
 	if (m_vecTimeTable.empty() == true)
@@ -29,5 +25,18 @@ void DynamicSprite::AddKeyFrame(int32 beginDrawPosX, int32 beginDrawPosY, int32 
 		float endKeyFrameTime = m_vecTimeTable.back();
 		float nextKeyFrameTime = (endKeyFrameTime + keepTime);
 		m_vecTimeTable.push_back(nextKeyFrameTime);
+	}
+}
+
+void DynamicSprite::AddKeyFrames(int32 startIdx, int32 endIdx, int32 spriteLine, const Size& drawSize, uint32 colorKey, float keepTime)
+{
+	for (int32 i = startIdx; i < endIdx; ++i)
+	{
+		SpriteDrawInfo spriteDrawInfo;
+		spriteDrawInfo.drawingStartPos = Position2d(i * drawSize.width, spriteLine * drawSize.height);
+		spriteDrawInfo.drawSize = drawSize;
+		spriteDrawInfo.colorKey = colorKey;
+
+		AddKeyFrame(spriteDrawInfo, keepTime);
 	}
 }

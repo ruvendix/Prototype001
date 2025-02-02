@@ -29,9 +29,6 @@
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Client\Scene\EditScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -42,6 +39,12 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\Actor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
@@ -199,16 +202,10 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\WindowProcedure.h" />
-    <ClInclude Include="Sources\Client\Global\DataTypes.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="Sources\Client\Global\Inclusion.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\Player\PlayerState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Scene\EditScene.h">
@@ -224,6 +221,12 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\ActorEnums.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CameraActor.h">

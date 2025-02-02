@@ -3,33 +3,7 @@
 #include "PlayerActor.h"
 
 #include "Engine/Actor/WorldTileMapActor.h"
-#include "PlayerState.h"
-
-namespace
-{
-	std::array<std::string, TO_NUM(ESceneActorLookAtType::Count)> g_arrPlayerIdleStateDynamicSpriteStringTable =
-	{
-		"PlayerIdleLeft",
-		"PlayerIdleRight"
-		"PlayerIdleDown",
-		"PlayerIdleUp"
-	};
-
-	std::array<std::string, TO_NUM(ESceneActorLookAtType::Count)> g_arrPlayerWalkStateDynamicSpriteStringTable =
-	{
-		"PlayerWalkLeft",
-		"PlayerWalkRight",
-		"PlayerWalkDown",
-		"PlayerWalkUp"
-	};
-}
-
-struct PlayerSpriteStartupInfo
-{
-	std::string strSpriteName;
-	std::string strUseTexturePath;
-	int32 spriteLine = 0;
-};
+#include "Engine/Actor/AnimationActor/AnimationActorState.h"
 
 class PlayerActor::Pimpl
 {
@@ -38,113 +12,40 @@ class PlayerActor::Pimpl
 public:
 	void LoadAndStartupPlayerSprite();
 	bool DirectionKeyHandlerImpl(const Vec2d& vMoveDir);
+	bool SpaceBarKeyHandlerImpl();
 };
 
 void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 {
-	std::array<std::string, TO_NUM(ESceneActorLookAtType::Count)> arrPlayerTexturePathTable =
-	{
-		"Assets/Texture/Player/PlayerLeft.bmp",
-		"Assets/Texture/Player/PlayerRight.bmp",
-		"Assets/Texture/Player/PlayerDown.bmp",
-		"Assets/Texture/Player/PlayerUp.bmp",
-	};
+	// 이걸 확실하게 맞추려면 인덱스마다 넣어야함
+	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerLeft.bmp", EActorLookAtType::Left);
+	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerRight.bmp", EActorLookAtType::Right);
+	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerDown.bmp", EActorLookAtType::Down);
+	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerUp.bmp", EActorLookAtType::Up);
 
-	// 플레이어 텍스처 로딩
-	for (const std::string strPlayerTexturePath : arrPlayerTexturePathTable)
-	{
-		ResourceMananger::I()->LoadTexture(strPlayerTexturePath);
-	}
+	// 상태마다 스프라이트를 미리 만들고
+	m_pOwner->CreateActorStateLookAtDynamicSprites<AnimationActorIdleState>("PlayerIdle", true);
+	m_pOwner->CreateActorStateLookAtDynamicSprites<AnimationActorWalkState>("PlayerWalk", true);
+	m_pOwner->CreateActorStateLookAtDynamicSprites<AnimationActorAttackState>("PlayerAttack", false);
 
-#pragma region 플레이어 스프라이트 초기화 정보 설정 (일단은 8개)
-	std::array<PlayerSpriteStartupInfo, 8> arrPlayerSpriteStartupInfo;
-	arrPlayerSpriteStartupInfo[0].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Left)];
-	arrPlayerSpriteStartupInfo[0].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Left)];
-
-	arrPlayerSpriteStartupInfo[1].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Right)];
-	arrPlayerSpriteStartupInfo[1].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Right)];
-
-	arrPlayerSpriteStartupInfo[2].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Down)];
-	arrPlayerSpriteStartupInfo[2].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Down)];
-
-	arrPlayerSpriteStartupInfo[3].strSpriteName = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Up)];
-	arrPlayerSpriteStartupInfo[3].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Up)];
-
-	arrPlayerSpriteStartupInfo[4].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Left)];
-	arrPlayerSpriteStartupInfo[4].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Left)];
-	arrPlayerSpriteStartupInfo[4].spriteLine = 1;
-
-	arrPlayerSpriteStartupInfo[5].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Right)];
-	arrPlayerSpriteStartupInfo[5].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Right)];
-	arrPlayerSpriteStartupInfo[5].spriteLine = 1;
-
-	arrPlayerSpriteStartupInfo[6].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Down)];
-	arrPlayerSpriteStartupInfo[6].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Down)];
-	arrPlayerSpriteStartupInfo[6].spriteLine = 1;
-
-	arrPlayerSpriteStartupInfo[7].strSpriteName = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(ESceneActorLookAtType::Up)];
-	arrPlayerSpriteStartupInfo[7].strUseTexturePath = arrPlayerTexturePathTable[TO_NUM(ESceneActorLookAtType::Up)];
-	arrPlayerSpriteStartupInfo[7].spriteLine = 1;
-#pragma endregion
-
-	for (const PlayerSpriteStartupInfo& playerSpriteStartupInfo : arrPlayerSpriteStartupInfo)
-	{
-		// 스프라이트 로딩인데 없으니 생성
-		const DynamicSpritePtr& spPlayerIdleDownDynamicSprite = ResourceMananger::I()->CreateDynamicSprite(playerSpriteStartupInfo.strSpriteName);
-		ASSERT_LOG(spPlayerIdleDownDynamicSprite != nullptr);
-		spPlayerIdleDownDynamicSprite->FindAndSetTexture(playerSpriteStartupInfo.strUseTexturePath);
-
-		for (int32 i = 0; i < 10; ++i)
-		{
-			spPlayerIdleDownDynamicSprite->AddKeyFrame(i * 200, playerSpriteStartupInfo.spriteLine * 200, 200, 200, 0.1f, RGB(128, 128, 128));
-		}
-	}
+	// 스프라이트마다 세팅
+	m_pOwner->AddActorStateKeyFrames<AnimationActorIdleState>(0, 9, 0, Size{ 200, 200 }, RGB(128, 128, 128), 0.1f);
+	m_pOwner->AddActorStateKeyFrames<AnimationActorWalkState>(0, 9, 1, Size{ 200, 200 }, RGB(128, 128, 128), 0.1f);
+	m_pOwner->AddActorStateKeyFrames<AnimationActorAttackState>(0, 7, 3, Size{ 200, 200 }, RGB(128, 128, 128), 0.06f);
 
 	// 기본 스프라이트 설정 (PlayerIdleDown)
-	const DynamicSpritePtr& spDefaultPlayerSprite = ResourceMananger::I()->FindDynamicSprite(arrPlayerSpriteStartupInfo[2].strSpriteName);
-	ASSERT_LOG_RETURN(spDefaultPlayerSprite != nullptr);
-
 	DynamicSpriteComponent* pDynamicSpriteComponent = m_pOwner->AddComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
-	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerSprite);
 
-//#if 0 // StaticSprite
-//	// 스프라이트 로딩인데 없으니 생성
-//	const StaticSpritePtr& spPlayerIdleDownStaticSprite = ResourceMananger::I()->CreateStaticSprite("PlayerIdleDown");
-//	ASSERT_LOG(spPlayerIdleDownStaticSprite != nullptr);
-//	spPlayerIdleDownStaticSprite->FindAndSetTexture(strPlayerDownTexPath);
-//	spPlayerIdleDownStaticSprite->SetBeginDrawPos(0, 0); // 이거 조절하면서 테스트
-//	spPlayerIdleDownStaticSprite->SetDrawSize(200, 200);
-//
-//	// 스프라이트 설정
-//	StaticSpriteComponent* pStaticSpriteComponent = m_pOwner->AddComponent<StaticSpriteComponent>();
-//	ASSERT_LOG(pStaticSpriteComponent != nullptr);
-//	pStaticSpriteComponent->SetStaticSprite(spPlayerIdleDownStaticSprite);
-//#else
-//	// 스프라이트 로딩인데 없으니 생성
-//	const DynamicSpritePtr& spPlayerIdleDownDynamicSprite = ResourceMananger::I()->CreateDynamicSprite("PlayerIdleDown");
-//	ASSERT_LOG(spPlayerIdleDownDynamicSprite != nullptr);
-//	spPlayerIdleDownDynamicSprite->SetColorKey(RGB(128, 128, 0));
-//	spPlayerIdleDownDynamicSprite->FindAndSetTexture(strPlayerDownTexPath);
-//
-//	for (int32 i = 0; i < 10; ++i)
-//	{
-//		spPlayerIdleDownDynamicSprite->AddKeyFrame(i * 200, 0, 200, 200, 0.2f);
-//	}
-//
-//	// 스프라이트 설정
-//	DynamicSpriteComponent* pDynamicSpriteComponent = m_pOwner->AddComponent<DynamicSpriteComponent>();
-//	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
-//	pDynamicSpriteComponent->ApplyDynamicSprite(spPlayerIdleDownDynamicSprite);
-//#endif
+	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = m_pOwner->FindActorStateLookAtDynamicSprite<AnimationActorIdleState>(EActorLookAtType::Down);
+	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
 }
 
 bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 {
-	const PlayerStatePtr& spPlayerState = m_pOwner->m_spPlayerState;
-	if (std::dynamic_pointer_cast<PlayerWalkState>(spPlayerState) != nullptr)
+	if (m_pOwner->IsSameAnimationActorState<AnimationActorIdleState>() == false)
 	{
-		DEFAULT_TRACE_LOG("이동중!");
+		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
 		return false;
 	}
 
@@ -154,16 +55,16 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 	// 현재 셀 좌표 백업
 	Position2d currentCellPos = pMoveComponent->GetDestinationCellPosition();
 
-	// 목표 방향 바꾸고
-	pMoveComponent->ApplyMoveDirectionVector(vMoveDir);
+	// 목표 지점 및 방향 바꾸고
+	m_pOwner->ApplyMoveDirection(vMoveDir);
+	pMoveComponent->ApplyMoveDirection(vMoveDir);
 
 	// 이동 가능한지?
 	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = m_pOwner->m_spWorldTileMapActor;
 	if (spWorldTileMapActor->CheckMovingAvailableTile(pMoveComponent->GetDestinationCellPosition()) == false)
 	{
-		// Idle 스프라이트로 바꾸고
-		const std::string& strPlayerIdleSprite = g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetLookAtType())];
-		m_pOwner->ChangePlayerSprite(strPlayerIdleSprite);
+		// Idle 스프라이트로 바꿈
+		m_pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
 
 		pMoveComponent->SetDestinationCellPosition(currentCellPos);
 		pMoveComponent->ResetMoveDirection();
@@ -172,10 +73,21 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 		return false;
 	}
 
-	// Walk 스프라이트 바꾸고
-	const std::string& strPlayerWalkSprite = g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(pMoveComponent->GetLookAtType())];
-	m_pOwner->ChangePlayerSprite(strPlayerWalkSprite);
+	// Walk 스프라이트로 바꿈
+	m_pOwner->ChangeActorStateDynamicSprite<AnimationActorWalkState>();
+	return true;
+}
 
+bool PlayerActor::Pimpl::SpaceBarKeyHandlerImpl()
+{
+	if (m_pOwner->IsSameAnimationActorState<AnimationActorIdleState>() == false)
+	{
+		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
+		return false;
+	}
+
+	// Attack 스프라이트로 바꿈
+	m_pOwner->ChangeActorStateDynamicSprite<AnimationActorAttackState>();
 	return true;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,14 +105,15 @@ void PlayerActor::Startup()
 	m_spPimpl->LoadAndStartupPlayerSprite();
 
 #pragma region 입력 처리
-	// 이 경우는 이동이니까 Vector2로 해결
+	InputMappingContextPtr spPlayerInputMappingContext = std::make_shared<InputMappingContext>();
+	LocalPlayerInputSystem::I()->AddInputMappingContext(spPlayerInputMappingContext, 0);
 
-	// 입력값 저장용
-	InputActionValue inputActionValue;
+#pragma region 플레이어 이동 (Vector2로 해결)
+	InputActionValue playerWalkInputActionValue;
 
 	// 입력값 포함하면서 트리거와 핸들러 저장
-	InputActionPtr spInputAction = std::make_unique<InputAction>("PlayerWalk");
-	spInputAction->ApplyInputActionValue(inputActionValue, EInputActionValueType::Vector2);
+	InputActionPtr spPlayerWalkInputAction = std::make_unique<InputAction>("PlayerWalk");
+	spPlayerWalkInputAction->ApplyInputActionValue(playerWalkInputActionValue, EInputActionValueType::Vector2);
 
 	// 순서상 여기서 매핑 정보 넣음
 #pragma region 방향키에 따른 값 설정
@@ -208,33 +121,43 @@ void PlayerActor::Startup()
 	leftKeyInputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
 	leftKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
 	leftKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Negative);
-	spInputAction->AddInputMappingInfo(leftKeyInputMappingInfo);
+	spPlayerWalkInputAction->AddInputMappingInfo(leftKeyInputMappingInfo);
 
 	InputActionMappingInfo rightKeyInputMappingInfo;
 	rightKeyInputMappingInfo.inputValue = EInputValue::Right;
 	rightKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
-	spInputAction->AddInputMappingInfo(rightKeyInputMappingInfo);
+	spPlayerWalkInputAction->AddInputMappingInfo(rightKeyInputMappingInfo);
 
 	InputActionMappingInfo upKeyInputMappingInfo;
 	upKeyInputMappingInfo.inputValue = EInputValue::Up; // 왼쪽키를 누르면 작동하는 것 테스트
 	upKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
 	upKeyInputMappingInfo.inputActionValueModifierBitset.BitsOn(EInputActionValueModifierType::Swizzle, EInputActionValueModifierType::Negative);
-	spInputAction->AddInputMappingInfo(upKeyInputMappingInfo);
+	spPlayerWalkInputAction->AddInputMappingInfo(upKeyInputMappingInfo);
 
 	InputActionMappingInfo downKeyInputMappingInfo;
 	downKeyInputMappingInfo.inputValue = EInputValue::Down;
 	downKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Swizzle);
-	spInputAction->AddInputMappingInfo(downKeyInputMappingInfo);
+	spPlayerWalkInputAction->AddInputMappingInfo(downKeyInputMappingInfo);
 #pragma endregion
-	// 매핑 컨텍스트 테스트
-	InputMappingContextPtr spInputMappingContext = std::make_shared<InputMappingContext>();
-	spInputMappingContext->AddInputAction(spInputAction);
 
-	// 입력 시스템이 핵심! 입력 디바이스보다 하위임
-	LocalPlayerInputSystem::I()->AddInputMappingContext(spInputMappingContext, 1);
+	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerWalkInputAction, this, &PlayerActor::OnDirectionKeyHandler);
+	spPlayerInputMappingContext->AddInputAction(spPlayerWalkInputAction);
+#pragma endregion
 
-	// 람다의 캡처 기능을 이용한 핸들러 등록 방식
-	LocalPlayerInputSystem::I()->BindInputActionHandler(spInputAction, this, &PlayerActor::OnDirectionKeyHandler);
+#pragma region 플레이어 공격
+	InputActionValue playerAttackInputActionValue;
+
+	// 입력값 포함하면서 트리거와 핸들러 저장
+	InputActionPtr spPlayerAttackInputAction = std::make_unique<InputAction>("PlayerAttack");
+	spPlayerAttackInputAction->ApplyInputActionValue(playerAttackInputActionValue, EInputActionValueType::Boolean);
+
+	InputActionMappingInfo spaceBarKeyInputMappingInfo;
+	spaceBarKeyInputMappingInfo.inputValue = EInputValue::SpaceBar;
+	spaceBarKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
+	spPlayerAttackInputAction->AddInputMappingInfo(spaceBarKeyInputMappingInfo);
+
+	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerAttackInputAction, this, &PlayerActor::OnSpaceBarKeyHandler);
+	spPlayerInputMappingContext->AddInputAction(spPlayerAttackInputAction);
 #pragma endregion
 #pragma endregion
 
@@ -256,9 +179,6 @@ void PlayerActor::Startup()
 	pMoveComponent->SetMoveSpeed(90.0f);
 	pMoveComponent->SetDestinationCellPosition(GetCellPosition()); // 초기화니까 똑같음
 
-	// 상태 처리
-	m_spPlayerState = std::make_shared<PlayerIdleState>(this);
-
 	// 레이어 처리
 	SetRenderingLayer(ERenderingLayerType::Player);
 }
@@ -270,41 +190,12 @@ bool PlayerActor::Update(float deltaSeconds)
 		return false;
 	}
 	
-	m_playerStateChangeEvent.ExcuteIfBound();
-	m_spPlayerState->UpdateState(deltaSeconds);
-
 	return true;
 }
 
 void PlayerActor::Cleanup()
 {
 	return (Super::Cleanup());
-}
-
-void PlayerActor::ChangePlayerSprite(const std::string& strNextPlayerSprite)
-{
-	const DynamicSpritePtr& spNextPlayerSprite = ResourceMananger::I()->FindDynamicSprite(strNextPlayerSprite);
-	ASSERT_LOG_RETURN(spNextPlayerSprite != nullptr);
-
-	DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
-	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
-	pDynamicSpriteComponent->ApplyDynamicSprite(spNextPlayerSprite);
-}
-
-const std::string& PlayerActor::FindPlayerIdleSpriteString(ESceneActorLookAtType moveDir) const
-{
-	return (g_arrPlayerIdleStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
-}
-
-const std::string& PlayerActor::FindPlayerWalkSpriteString(ESceneActorLookAtType moveDir) const
-{
-	return (g_arrPlayerWalkStateDynamicSpriteStringTable[TO_NUM(moveDir)]);
-}
-
-void PlayerActor::OnChangePlayerState(const PlayerStatePtr& spNextPlayerState)
-{
-	DEFAULT_TRACE_LOG("플레이어 상태 변경!");
-	m_spPlayerState = spNextPlayerState;
 }
 
 void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
@@ -315,10 +206,16 @@ void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 		return;
 	}
 
-	// 설정된 정보에 따라 상태 전환 (Update보다 빠르니까 즉시 전환해도 됨)
-	PlayerStatePtr spNextPlayerState = m_spPlayerState->ImmediatelyChangePlayerState();
-	if (spNextPlayerState != nullptr)
+	ImmediatelyChangePlayerState<AnimationActorWalkState>();
+	DEFAULT_TRACE_LOG("걷는 상태로 전환!");
+}
+
+void PlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)
+{
+	if (m_spPimpl->SpaceBarKeyHandlerImpl() == false)
 	{
-		m_spPlayerState = spNextPlayerState;
+		return;
 	}
+	
+	ImmediatelyChangePlayerState<AnimationActorAttackState>();
 }

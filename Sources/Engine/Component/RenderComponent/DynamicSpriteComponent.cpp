@@ -23,7 +23,7 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 		return false;
 	}
 
-	if ((m_bLoop == false) &&
+	if ((m_spDynamicSprite->IsLoopDynamicSprite() == false) &&
 		(m_currentSpriteDrawInfoIdx == m_spriteKeyFrameCount))
 	{
 		return false;
@@ -50,13 +50,13 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 		}
 		else
 		{
-			++m_currentSpriteDrawInfoIdx; // 다음 인덱스
+			++m_currentSpriteDrawInfoIdx;
 		}
 
 		// 인덱스가 증가된 뒤에 처리
 		if (m_currentSpriteDrawInfoIdx == m_spriteKeyFrameCount)
 		{
-			if (m_bLoop == true)
+			if (m_spDynamicSprite->IsLoopDynamicSprite())
 			{
 				m_localTime -= spriteKeyFrameTime;
 				m_currentSpriteDrawInfoIdx = 0;
@@ -80,8 +80,20 @@ void DynamicSpriteComponent::Render(HDC hBackBufferDc)
 	// 중점 좌표가 피봇
 	Position2d renderingStartPos = CalculateRenderingStartPosition();
 
+	// 렌더링할 스프라이트 인덱스 알아내기
+	int32 renderingSpriteDrawInfoIdx = m_currentSpriteDrawInfoIdx;
+
+	// 무한 반복이 아니라면 마지막 인덱스로 고정
+	if (m_spDynamicSprite->IsLoopDynamicSprite() == false)
+	{
+		if (m_currentSpriteDrawInfoIdx == m_spDynamicSprite->GetSpriteKeyFrameCount())
+		{
+			--renderingSpriteDrawInfoIdx;
+		}
+	}
+
 	// 스프라이트 정보 가져오기
-	const SpriteDrawInfo& spriteDrawInfo = m_spDynamicSprite->GetSpriteDrawInfo(m_currentSpriteDrawInfoIdx);
+	const SpriteDrawInfo& spriteDrawInfo = m_spDynamicSprite->GetSpriteDrawInfo(renderingSpriteDrawInfoIdx);
 
 	::TransparentBlt(hBackBufferDc,
 		renderingStartPos.x, renderingStartPos.y,
