@@ -4,6 +4,8 @@
 #include "Engine/Resource/ResourceMananger.h"
 #include "Engine/Resource/Sprite/DynamicSprite.h"
 
+class WorldTileMapActor;
+
 class AnimationActor : public CellActor
 {
 	using Super = CellActor;
@@ -47,6 +49,23 @@ public:
 
 		auto resultIter = m_mapActorStateDynamicSprite.insert(std::make_pair(TActorState::s_id, actorLookAtDynamicSpriteTable));
 		ASSERT_LOG(resultIter.second == true);
+	}
+
+	template <typename TActorState>
+	void AddActorStateKeyFrame(int32 startIdx, int32 endIdx, int32 spriteLine,
+		const Size& drawSize, uint32 colorKey, float keepTime, EActorLookAtType actorLookAtType)
+	{
+		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
+		if (foundIter == m_mapActorStateDynamicSprite.cend())
+		{
+			return;
+		}
+
+		// 해당되는 스프라이트 가져오기
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;		
+		const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtType)];
+		ASSERT_LOG(spDynamicSprite != nullptr);
+		spDynamicSprite->AddKeyFrames(startIdx, endIdx, spriteLine, drawSize, colorKey, keepTime);
 	}
 
 	template <typename TActorState>
@@ -113,7 +132,11 @@ public:
 
 public:
 	void ApplyMoveDirection(const Vec2d& vMoveDir);
+	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath);
 	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath, EActorLookAtType actorLookAtType);
+	
+	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
+	const std::shared_ptr<WorldTileMapActor>& GetWorldTileMapActor() const { return m_spWorldTileMapActor; }
 
 private:
 	void OnChangeAnimationActorState(const AnimationActorStatePtr& spAnimationActorState);
@@ -123,6 +146,7 @@ private:
 
 private:
 	EActorLookAtType m_lookAtType = EActorLookAtType::Down;
+	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 
 	ActorLookAtStringTable m_actorLookAtTexturePathTable;
 	std::unordered_map<int32, std::array<DynamicSpritePtr, TO_NUM(EActorLookAtType::Count)>> m_mapActorStateDynamicSprite;

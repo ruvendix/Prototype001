@@ -60,7 +60,7 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 	pMoveComponent->ApplyMoveDirection(vMoveDir);
 
 	// 이동 가능한지?
-	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = m_pOwner->m_spWorldTileMapActor;
+	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = m_pOwner->GetWorldTileMapActor();
 	if (spWorldTileMapActor->CheckMovingAvailableTile(pMoveComponent->GetDestinationCellPosition()) == false)
 	{
 		// Idle 스프라이트로 바꿈
@@ -180,7 +180,7 @@ void PlayerActor::Startup()
 	pMoveComponent->SetDestinationCellPosition(GetCellPosition()); // 초기화니까 똑같음
 
 	// 레이어 처리
-	SetRenderingLayer(ERenderingLayerType::Player);
+	SetRenderingLayer(ERenderingLayerType::Creature);
 }
 
 bool PlayerActor::Update(float deltaSeconds)

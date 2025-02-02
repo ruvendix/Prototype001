@@ -4,20 +4,16 @@
 class WorldTileMapActor;
 
 // 일단은 클라이언트에 있는 걸 사용
-class PlayerActor : public AnimationActor
+class SnakeActor : public AnimationActor
 {
 	DECLARE_PIMPL;
 	using Super = AnimationActor;
 
 public:
 	using Super::Super;
-	virtual ~PlayerActor();
+	virtual ~SnakeActor();
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
-
-private:
-	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
-	void OnSpaceBarKeyHandler(const InputActionValue* pInputAction);
 };

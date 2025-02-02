@@ -25,4 +25,14 @@ void SceneTracer::Tracer()
 
 		m_vecRenderingTargetActor.push_back(spActor);
 	}
+
+	// Actor를 Y값으로 정렬
+	std::sort(m_vecRenderingTargetActor.begin(), m_vecRenderingTargetActor.end(),
+		[] (const ActorPtr& spLhs, const ActorPtr& spRhs)
+		{
+			const TransformComponent* pLhsTransformComponent = spLhs->BringTransformComponent();
+			const TransformComponent* pRhsTransformComponent = spRhs->BringTransformComponent();
+
+			return (pLhsTransformComponent->GetPositionY() < pRhsTransformComponent->GetPositionY());
+		});
 }

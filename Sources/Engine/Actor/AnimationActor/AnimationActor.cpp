@@ -57,6 +57,17 @@ void AnimationActor::ApplyMoveDirection(const Vec2d& vMoveDir)
 	}
 }
 
+// 방향마다 텍스처 분리되지 않은 경우
+void AnimationActor::LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath)
+{
+	for (int32 i = 0; i < TO_NUM(EActorLookAtType::Count); ++i)
+	{
+		m_actorLookAtTexturePathTable[i] = strActorLookAtTexturePath;
+	}
+
+	ResourceMananger::I()->LoadTexture(strActorLookAtTexturePath);
+}
+
 void AnimationActor::LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath, EActorLookAtType actorLookAtType)
 {
 	m_actorLookAtTexturePathTable[TO_NUM(actorLookAtType)] = strActorLookAtTexturePath;

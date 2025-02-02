@@ -26,6 +26,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\GameApplication\WindowProcedure.cpp" />
+    <ClCompile Include="Sources\Client\Monster\SnakeActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -203,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\WindowProcedure.h" />
     <ClInclude Include="Sources\Client\Global\Inclusion.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Monster\SnakeActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">

@@ -5,6 +5,7 @@
 #include "Engine/Actor/WorldTileMapActor.h"
 #include "Client/World/WorldBackgroundActor.h"
 #include "Client/Player/PlayerActor.h"
+#include "Client/Monster/SnakeActor.h"
 
 GameScene::GameScene()
 {
@@ -35,6 +36,10 @@ void GameScene::Startup()
 	// 플레이어 액터 추가
 	m_spPlayerActor = CreateActorToScene<PlayerActor>();
 	m_spPlayerActor->SetWorldTileMapActor(m_spWorldTileMapActor);
+
+	// 스네이크 액터 추가
+	m_spSnakeActor = CreateActorToScene<SnakeActor>();
+	m_spSnakeActor->SetWorldTileMapActor(m_spWorldTileMapActor);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spPlayerActor);

@@ -4,6 +4,7 @@
 class WorldBackgroundActor;
 class WorldTileMapActor;
 class PlayerActor;
+class SnakeActor;
 
 class GameScene : public Scene
 {
@@ -22,4 +23,5 @@ private:
 	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 	std::shared_ptr<PlayerActor> m_spPlayerActor = nullptr;
+	std::shared_ptr<SnakeActor> m_spSnakeActor = nullptr;
 };

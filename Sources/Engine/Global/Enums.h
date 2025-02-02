@@ -5,7 +5,7 @@ enum class ERenderingLayerType
 {
 	WorldBackground = 0,
 	WorldTile,
-	Player,
+	Creature,
 
 	Count
 };
