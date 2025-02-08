@@ -123,8 +123,9 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 	pMoveComponent->ApplyMoveDirection(vMoveDir);
 
 	// 이동 가능한지?
-	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = m_pOwner->GetWorldTileMapActor();
-	if (spWorldTileMapActor->CheckMovingAvailableTile(pMoveComponent->GetDestinationCellPosition()) == false)
+	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
+	if (pCurrentScene->CheckCanMoveToCellPosition(pMoveComponent->GetDestinationCellPosition()) == false)
 	{
 		// Idle 스프라이트로 바꿈
 		m_pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
@@ -194,13 +195,6 @@ bool PlayerActor::Update(float deltaSeconds)
 	if (Super::Update(deltaSeconds) == false)
 	{
 		return false;
-	}
-
-	// 현재 위치에 뱀이 있는지?
-	const ActorPtr& spActor = SceneManager::I()->GetCurrentScene()->FindAnyCellActor<SnakeActor>(EActorLayerType::Creature, GetCellPosition());
-	if (spActor != nullptr)
-	{
-		DEFAULT_TRACE_LOG("뱀이다!");
 	}
 	
 	return true;

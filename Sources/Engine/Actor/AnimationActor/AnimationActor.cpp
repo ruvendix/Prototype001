@@ -74,6 +74,20 @@ void AnimationActor::LoadActorLookAtTexture(const std::string& strActorLookAtTex
 	ResourceMananger::I()->LoadTexture(strActorLookAtTexturePath);
 }
 
+Position2d AnimationActor::CalculateForwardCellPosition() const
+{
+	std::array<Position2d, TO_NUM(EActorLookAtType::Count)> arrLookAtForwardCellPos =
+	{
+		Position2d(-1, +0),
+		Position2d(+0, -1),
+		Position2d(+1, +0),
+		Position2d(+0, +1),
+	};
+
+	Position2d forwardCellPos = (GetCellPosition() + arrLookAtForwardCellPos[TO_NUM(m_lookAtType)]);
+	return forwardCellPos;
+}
+
 void AnimationActor::OnChangeAnimationActorState(const AnimationActorStatePtr& spAnimationActorState)
 {
 	DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경!");

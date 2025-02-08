@@ -11,6 +11,8 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual bool CheckCanMoveToCellPosition(const Position2d& destCellPos) const;
+
 public:
 	template <typename TActor>
 	static std::shared_ptr<TActor> CreateActor(EActorLayerType actorLayer)
@@ -80,32 +82,18 @@ public:
 	}
 
 	template <typename TActor>
-	std::shared_ptr<TActor> FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
+	std::shared_ptr<TActor> FindAnyExactTypeCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
 	{
 		static_assert(std::is_base_of_v<CellActor, TActor> == true, "TActor isn't derived cellActor");
 
-		std::vector<std::shared_ptr<CellActor>> foundActorPtrs;
-		FindDerivedActors<CellActor>(actorLayer, foundActorPtrs);
-		if (foundActorPtrs.empty() == true)
+		const ActorPtr& spFoundCellActor = FindAnyCellActor(actorLayer, cellPos);
+		const std::shared_ptr<TActor>& spResultActor = std::dynamic_pointer_cast<TActor>(spFoundCellActor);
+		if (spResultActor == nullptr)
 		{
 			return nullptr;
 		}
 
-		for (const std::shared_ptr<CellActor>& spCellActor : foundActorPtrs)
-		{
-			if (spCellActor->CheckEqaulCellPosition(cellPos) == true)
-			{
-				const std::shared_ptr<TActor>& spResultActor = std::dynamic_pointer_cast<TActor>(spCellActor);
-				if (spResultActor == nullptr)
-				{
-					continue;
-				}
-
-				return spResultActor;
-			}
-		}
-
-		return nullptr;
+		return spFoundCellActor;
 	}
 
 public:
@@ -113,13 +101,21 @@ public:
 	
 	Actors& FindActors(EActorLayerType actorLayer);
 	const Actors& FindConstActors(EActorLayerType actorLayer) const;
+	ActorPtr FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const;
+
+	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);
 
 	ActorStorage& GetActorPointersStorage() { return m_mapActorPtrsStorage; }
 	const ActorStorage& GetActorPointersStorage() const { return m_mapActorPtrsStorage; }
+
+private:
+	void EraseReservedActors();
 
 private:
 	std::shared_ptr<CameraActor> m_spMainCameraActor = nullptr;
 	
 	ActorStorage m_mapActorPtrsStorage; // 씬에 있는 모든 액터 (업데이트와 렌더링은 따로 관리)
 	std::array<Actors, TO_NUM(EUpdateOrder::Count)> m_arrUpdateActors; // 업데이트 상황에 따라 분리된 액터
+
+	Actors m_reserveEraseActorsForNextFrame; // 다음 프레임에서 제거될 액터들
 };

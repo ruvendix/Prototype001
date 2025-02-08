@@ -16,4 +16,6 @@ public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
+
+	virtual void ProcessDamaged() override;
 };

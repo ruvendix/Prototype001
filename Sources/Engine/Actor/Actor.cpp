@@ -4,12 +4,12 @@
 
 Actor::Actor()
 {
-	m_strName = "NoName";
+	m_strActorName = "NoName";
 }
 
 Actor::Actor(const std::string& strName)
 {
-	m_strName = strName;
+	m_strActorName = strName;
 }
 
 Actor::~Actor()
@@ -76,6 +76,11 @@ void Actor::LoadFromFileStream(const FileStream& fileStream)
 	}
 }
 
+void Actor::ProcessDamaged()
+{
+
+}
+
 void Actor::AddChild(const ActorPtr& spChild)
 {
 	m_vecChild.push_back(spChild);
@@ -94,7 +99,7 @@ TransformComponent* Actor::BringTransformComponent()
 
 const TransformComponent* Actor::BringTransformComponent() const
 {
-	return (FindComponent<TransformComponent>());
+	return (FindConstComponent<TransformComponent>());
 }
 
 void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent) const

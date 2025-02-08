@@ -39,6 +39,7 @@ void GameScene::Startup()
 
 	// 스네이크 액터 추가
 	m_spSnakeActor = CreateActorToScene<SnakeActor>(EActorLayerType::Creature);
+	m_spSnakeActor->SetActorName("뱀");
 	m_spSnakeActor->SetWorldTileMapActor(m_spWorldTileMapActor);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
@@ -53,4 +54,20 @@ bool GameScene::Update(float deltaSeconds)
 void GameScene::Cleanup()
 {
 	Super::Cleanup();
+}
+
+bool GameScene::CheckCanMoveToCellPosition(const Position2d& destCellPos) const
+{
+	if (m_spWorldTileMapActor->CheckMovingAvailableTile(destCellPos) == false)
+	{
+		return false;
+	}
+
+	const ActorPtr& spFoundActor = FindAnyCellActor(EActorLayerType::Creature, destCellPos);
+	if (spFoundActor != nullptr)
+	{
+		return false;
+	}
+
+	return true;
 }

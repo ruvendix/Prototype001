@@ -489,9 +489,6 @@
     <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
       <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Global\Enums.h">
-      <Filter>Sources\Engine\Global</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\File\FileEnums.h">
       <Filter>Sources\Engine\File</Filter>
     </ClInclude>
@@ -560,6 +557,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\ActorDataTypes.h">
       <Filter>Sources\Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Global\EnableSharedClass.h">
+      <Filter>Sources\Engine\Global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

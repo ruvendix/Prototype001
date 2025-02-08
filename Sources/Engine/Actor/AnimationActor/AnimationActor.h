@@ -135,6 +135,8 @@ public:
 	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath);
 	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath, EActorLookAtType actorLookAtType);
 	
+	Position2d CalculateForwardCellPosition() const;
+
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 	const std::shared_ptr<WorldTileMapActor>& GetWorldTileMapActor() const { return m_spWorldTileMapActor; }
 

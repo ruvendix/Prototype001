@@ -19,6 +19,8 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	bool CheckCanMoveToCellPosition(const Position2d& destCellPos) const override;
+
 private:
 	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;

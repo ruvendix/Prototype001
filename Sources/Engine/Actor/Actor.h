@@ -4,7 +4,7 @@
 #include "ActorEnums.h"
 #include "Engine/Scene/SceneEnums.h"
 
-class Actor : public ICoreLoop
+class Actor : public EnableSharedClass
 {
 public:
 	using ActorBitset = EnumBitset<EActorFlag, TO_NUM(EActorFlag::Count)>;
@@ -21,20 +21,17 @@ public:
 	virtual void SaveToFileStream(const FileStream& fileStream) const;
 	virtual void LoadFromFileStream(const FileStream& fileStream);
 
+	virtual void ProcessDamaged();
+
+public:
 	template <typename TComponent>
 	TComponent* FindComponent()
 	{
-		const auto& foundIter = m_mapComponent.find(TComponent::s_id);
-		if (foundIter == m_mapComponent.cend())
-		{
-			return nullptr;
-		}
-
-		return dynamic_cast<TComponent*>(foundIter->second.get());
+		return const_cast<TComponent*>(FindConstComponent<TComponent>());
 	}
 
 	template <typename TComponent>
-	const TComponent* FindComponent() const
+	const TComponent* FindConstComponent() const
 	{
 		const auto& foundIter = m_mapComponent.find(TComponent::s_id);
 		if (foundIter == m_mapComponent.cend())
@@ -71,7 +68,7 @@ public:
 	template <typename TComponent>
 	void RemoveComponent()
 	{
-		TComponent* pFoundComponent = FindComponent<TComponent>();
+		TComponent* pFoundComponent = FindConstComponent<TComponent>();
 		if (pFoundComponent == nullptr)
 		{
 			// 에러 넣기
@@ -116,8 +113,11 @@ public:
 
 	int32 GetChildCount() const { return (static_cast<int32>(m_vecChild.size())); }
 
+	void SetActorName(const std::string& strActorName) { m_strActorName = strActorName; }
+	const std::string& GetActorName() const { return m_strActorName; }
+
 private:
-	std::string m_strName;
+	std::string m_strActorName;
 	std::unordered_map<int32, ComponentPtr> m_mapComponent;
 
 	ActorBitset m_actorBitsetFlag;

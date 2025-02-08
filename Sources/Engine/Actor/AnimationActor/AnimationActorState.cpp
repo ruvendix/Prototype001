@@ -75,6 +75,18 @@ void AnimationActorAttackState::UpdateState(float deltaSeconds)
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 	if (pDynamicSpriteComponent->IsAnimationEnd())
 	{
+#pragma region 피해받은 액터가 있는지?
+		const Position2d& forwardCellPos = pOwner->CalculateForwardCellPosition();
+
+		const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+		ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+		const ActorPtr& spVictimActor = pCurrentScene->FindAnyCellActor(EActorLayerType::Creature, forwardCellPos);
+		if (spVictimActor != nullptr)
+		{
+			spVictimActor->ProcessDamaged();
+		}
+#pragma endregion
+
 		// 스프라이트는 현재 프레임에서 바로 전환
 		pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
 

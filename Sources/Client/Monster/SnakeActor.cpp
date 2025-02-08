@@ -76,3 +76,18 @@ void SnakeActor::Cleanup()
 {
 	return (Super::Cleanup());
 }
+
+static int g_testCount = 0;
+void SnakeActor::ProcessDamaged()
+{
+	if (g_testCount != 2)
+	{
+		++g_testCount;
+		return;
+	}
+
+	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+	pCurrentScene->ReserveEraseActor(shared_from_this());
+	DEFAULT_TRACE_LOG("¹ì »ç¸Á!");
+}

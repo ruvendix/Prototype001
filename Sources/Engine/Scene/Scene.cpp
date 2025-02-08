@@ -24,6 +24,9 @@ void Scene::Startup()
 
 bool Scene::Update(float deltaSeconds)
 {
+	// 제거할 액터가 있다면 여기서 제거
+	EraseReservedActors();
+
 	for (int32 i = 0; i < TO_NUM(EUpdateOrder::Count); ++i)
 	{
 		Actors& refVecUpdateActor = m_arrUpdateActors[i];
@@ -49,6 +52,11 @@ void Scene::Cleanup()
 	}
 
 	m_mapActorPtrsStorage.clear();
+}
+
+bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos) const
+{
+	return true;
 }
 
 void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetActor)
@@ -83,4 +91,93 @@ const Actors& Scene::FindConstActors(EActorLayerType actorLayer) const
 	}
 
 	return (foundIter->second);
+}
+
+ActorPtr Scene::FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
+{
+	std::vector<std::shared_ptr<CellActor>> foundActorPtrs;
+	FindDerivedActors<CellActor>(actorLayer, foundActorPtrs);
+	if (foundActorPtrs.empty() == true)
+	{
+		return nullptr;
+	}
+
+	for (const std::shared_ptr<CellActor>& spCellActor : foundActorPtrs)
+	{
+		if (spCellActor->CheckEqaulCellPosition(cellPos) == true)
+		{
+			return spCellActor;
+		}
+	}
+
+	return nullptr;
+}
+
+void Scene::EraseReservedActors()
+{
+	if (m_reserveEraseActorsForNextFrame.empty() == true)
+	{
+		return;
+	}
+
+	for (const ActorPtr& spActor : m_reserveEraseActorsForNextFrame)
+	{
+		if (spActor == nullptr)
+		{
+			continue;
+		}
+
+		const std::string& strActorName = spActor->GetActorName();
+
+#pragma region 레이어 액터부터 처리
+		Actors& refLayerActors = FindActors(spActor->GetActorLayer());
+		auto foundLayerActorIter = std::find_if(refLayerActors.begin(), refLayerActors.end(),
+			[&] (const ActorPtr& spOtherActor)
+			{
+				return (spActor == spOtherActor);
+			});
+
+		if (foundLayerActorIter != refLayerActors.cend())
+		{
+			refLayerActors.erase(foundLayerActorIter);
+		}
+#pragma endregion
+
+		for (int32 i = 0; i < TO_NUM(EUpdateOrder::Count); ++i)
+		{
+			Actors& refVecUpdateActor = m_arrUpdateActors[i];
+			auto foundUpdateActorIter = std::find_if(refVecUpdateActor.begin(), refVecUpdateActor.end(),
+				[&](const ActorPtr& spOtherActor)
+				{
+					return (spActor == spOtherActor);
+				});
+
+			if (foundUpdateActorIter != refVecUpdateActor.cend())
+			{
+				refVecUpdateActor.erase(foundUpdateActorIter);
+				break;
+			}
+		}
+
+		DEFAULT_TRACE_LOG("액터 제거! (%s)", strActorName.c_str());
+	}
+
+	m_reserveEraseActorsForNextFrame.clear();
+}
+
+void Scene::ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor)
+{
+	m_reserveEraseActorsForNextFrame.push_back(std::static_pointer_cast<Actor>(spActor));
+
+	auto overlapIter = std::unique(m_reserveEraseActorsForNextFrame.begin(), m_reserveEraseActorsForNextFrame.end(),
+		[](const ActorPtr& spLhsActor, const ActorPtr& spRhsActor)
+		{
+			return (spLhsActor == spRhsActor);
+		});
+
+	// 중복이 있다면 중복 제거
+	if (overlapIter != m_reserveEraseActorsForNextFrame.cend())
+	{
+		m_reserveEraseActorsForNextFrame.erase(overlapIter, m_reserveEraseActorsForNextFrame.end());
+	}
 }

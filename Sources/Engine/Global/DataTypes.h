@@ -26,6 +26,11 @@ struct Position2d
 {
 	int32 x = 0;
 	int32 y = 0;
+
+	Position2d operator + (const Position2d& otherPos) const
+	{
+		return Position2d(x + otherPos.x, y + otherPos.y);
+	}
 	
 	bool operator == (const Position2d& otherPos) const
 	{

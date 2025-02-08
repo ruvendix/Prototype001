@@ -49,6 +49,6 @@ bool CameraActor::CheckInCameraVision(const Vec2d& worldPos) const
 
 const Vec2d& CameraActor::BringCameraOffsetPosition() const
 {
-	const CameraComponent* pCameraComponent = FindComponent<CameraComponent>();
+	const CameraComponent* pCameraComponent = FindConstComponent<CameraComponent>();
 	return pCameraComponent->GetCameraOffsetPosition();
 }

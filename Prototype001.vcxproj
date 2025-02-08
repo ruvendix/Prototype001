@@ -297,7 +297,9 @@
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Global\Enums.h" />
+    <ClInclude Include="Sources\Engine\Global\EnableSharedClass.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Global\ICoreLoop.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

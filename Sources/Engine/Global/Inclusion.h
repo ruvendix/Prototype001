@@ -4,6 +4,7 @@
 #include "DataTypes.h"
 #include "Macros.h"
 #include "ICoreLoop.h"
+#include "EnableSharedClass.h"
 #include "Utility.h"
 
 #include "Engine/SpecialContainer/SortVector.hpp"

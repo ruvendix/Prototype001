@@ -131,7 +131,6 @@ bool WorldTileMapActor::CheckMovingAvailableTile(const Position2d& cellPos) cons
 {
 	int32 findTileIdx = ConvertCellPositionToTileIndex(cellPos);
 	int32 tileShapeIdx = GetChild<WorldTileActor>(findTileIdx)->GetTileShapeIdx();
-
 	if (tileShapeIdx == 1)
 	{
 		return false;
