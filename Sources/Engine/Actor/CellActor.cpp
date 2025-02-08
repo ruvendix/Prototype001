@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "CellActor.h"
 
-#include "Engine/Component/SceneActorMoveComponent.h"
+#include "Engine/Component/CellActorMoveComponent.h"
 
 Vec2d CellActor::ConvertCellPositionToWorldPosition(const Position2d& cellPos)
 {
@@ -63,4 +63,12 @@ void CellActor::ApplyCellPosition(int32 x, int32 y)
 	TransformComponent* pTransformComponent = BringTransformComponent();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(x, y));
+}
+
+bool CellActor::CheckEqaulCellPosition(const Position2d& otherCellPos) const
+{
+	const TransformComponent* pTransformComponent = BringTransformComponent();
+	ASSERT_LOG_RETURN_VALUE(pTransformComponent != nullptr, false);
+	const Position2d& myCellPos = CellActor::ConvertWorldPositionToCellPosition(pTransformComponent->GetPosition());
+	return (myCellPos == otherCellPos);
 }

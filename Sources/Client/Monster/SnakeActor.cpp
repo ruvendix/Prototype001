@@ -60,9 +60,6 @@ void SnakeActor::Startup()
 	// 셀 크기는 48로 고정!
 	ApplyCellPosition(6, 8);
 #pragma endregion
-
-	// 레이어 처리
-	SetRenderingLayer(ERenderingLayerType::Creature);
 }
 
 bool SnakeActor::Update(float deltaSeconds)

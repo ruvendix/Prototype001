@@ -1,20 +1,20 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #include "Pch.h"
-#include "SceneActorMoveComponent.h"
+#include "CellActorMoveComponent.h"
 
-DEFINE_COMPILETIME_ID(SceneActorMoveComponent, ComponentIdCounter)
+DEFINE_COMPILETIME_ID(CellActorMoveComponent, ComponentIdCounter)
 
-SceneActorMoveComponent::SceneActorMoveComponent()
+CellActorMoveComponent::CellActorMoveComponent()
 {
 
 }
 
-SceneActorMoveComponent::~SceneActorMoveComponent()
+CellActorMoveComponent::~CellActorMoveComponent()
 {
 
 }
 
-bool SceneActorMoveComponent::Update(float deltaSeconds)
+bool CellActorMoveComponent::Update(float deltaSeconds)
 {
 	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
 	Vec2d vActorNextPos = pTransformComponent->GetPosition();
@@ -26,7 +26,7 @@ bool SceneActorMoveComponent::Update(float deltaSeconds)
 	return true;
 }
 
-void SceneActorMoveComponent::ApplyMoveDirection(const Vec2d& vMoveDir)
+void CellActorMoveComponent::ApplyMoveDirection(const Vec2d& vMoveDir)
 {
 	m_destCellPos.x += static_cast<int32>(vMoveDir.x);
 	m_destCellPos.y += static_cast<int32>(vMoveDir.y);
@@ -38,7 +38,7 @@ void SceneActorMoveComponent::ApplyMoveDirection(const Vec2d& vMoveDir)
 	m_vMoveDir = vMoveDir;
 }
 
-bool SceneActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
+bool CellActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 {
 	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
 	const Vec2d& currentPos = pTransformComponent->GetPosition();
@@ -57,12 +57,27 @@ bool SceneActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 		pTransformComponent->SetPosition(m_destPos);
 		DEFAULT_TRACE_LOG("목표지점까지 너무 멀어서 강제로 세팅!");
 	}
-
+	
 	DEFAULT_TRACE_LOG("도달!");
 	return true;
 }
 
-void SceneActorMoveComponent::ResetMoveDirection()
+void CellActorMoveComponent::ResetMoveDirection()
 {
 	m_vMoveDir = Vec2d();
+}
+
+void CellActorMoveComponent::ApplyDestinationDataToOwner()
+{
+	CellActor* pOwner = dynamic_cast<CellActor*>(GetOwner());
+	if (pOwner == nullptr)
+	{
+		return;
+	}
+
+	pOwner->SetCellPosition(m_destCellPos);
+
+	TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
+	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
+	pTransformComponent->SetPosition(m_destPos);
 }

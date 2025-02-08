@@ -101,7 +101,7 @@ public:
 	TransformComponent* BringTransformComponent();
 	const TransformComponent* BringTransformComponent() const;
 
-	void FindRenderComponents(RenderComponentVectorArray& outArrVecRenderComponent);
+	void FindRenderComponents(RenderComponentVector& outVecRenderComponent) const;
 
 	void SetActorFlagBitOn(EActorFlag actorFlag) { m_actorBitsetFlag.BitOn(actorFlag); }
 	void SetActorFlagBitOff(EActorFlag actorFlag) { m_actorBitsetFlag.BitOff(actorFlag); }
@@ -111,18 +111,18 @@ public:
 	const ActorBitset& GetActorBitsetFlag() const { return m_actorBitsetFlag; }
 	const ActorPtr& GetChildNoCast(int32 childIdx) const { return (m_vecChild[childIdx]); }
 
-	void SetRenderingLayer(ERenderingLayerType renderingLayer) { m_renderingLayer = renderingLayer; }
+	void SetActorLayer(EActorLayerType actorLayer) { m_actorLayer = actorLayer; }
+	EActorLayerType GetActorLayer() const { return m_actorLayer; }
 
 	int32 GetChildCount() const { return (static_cast<int32>(m_vecChild.size())); }
 
 private:
 	std::string m_strName;
 	std::unordered_map<int32, ComponentPtr> m_mapComponent;
+
 	ActorBitset m_actorBitsetFlag;
+	EActorLayerType m_actorLayer = EActorLayerType::Unknown;
 
 	// 자식 액터는 레퍼런스 카운트로 갖고 있어야함!
-	std::vector<ActorPtr> m_vecChild;
-
-	// 렌더링되는 순서
-	ERenderingLayerType m_renderingLayer = ERenderingLayerType::WorldBackground;
+	Actors m_vecChild;
 };

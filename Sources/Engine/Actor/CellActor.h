@@ -23,7 +23,11 @@ public:
 	virtual void Cleanup() override;
 
 	void ApplyCellPosition(int32 x, int32 y);
+
+	void SetCellPosition(const Position2d& cellPos) { m_cellPos = cellPos; }
 	const Position2d& GetCellPosition() const { return m_cellPos; }
+
+	bool CheckEqaulCellPosition(const Position2d& otherCellPos) const;
 
 private:
 	Position2d m_cellPos;

@@ -8,26 +8,32 @@ DEFINE_SINGLETON(SceneTracer);
 
 void SceneTracer::Tracer()
 {
-	m_vecRenderingTargetActor.clear();
+	CleanupRenderableActors();
 
 	Scene* pScene = SceneManager::I()->GetCurrentScene();
-	for (ActorPtr& spActor : pScene->GetActors())
+	ASSERT_LOG_RETURN(pScene != nullptr);
+	for (auto iter : pScene->GetActorPointersStorage())
 	{
-		TransformComponent* pTransformComponent = spActor->FindComponent<TransformComponent>();
-		ASSERT_LOG(pTransformComponent != nullptr);
-		pTransformComponent->BuildWolrdMatrix();
-
-		const Actor::ActorBitset& actorBitsetFlag = spActor->GetActorBitsetFlag();
-		if (actorBitsetFlag.IsBitOn(EActorFlag::RenderingTarget) == false)
+		const Actors& actorPtrs = (iter.second);
+		for (const ActorPtr& spActor : actorPtrs)
 		{
-			continue;
-		}
+			TransformComponent* pTransformComponent = spActor->FindComponent<TransformComponent>();
+			ASSERT_LOG(pTransformComponent != nullptr);
+			pTransformComponent->BuildWolrdMatrix();
 
-		m_vecRenderingTargetActor.push_back(spActor);
+			const Actor::ActorBitset& actorBitsetFlag = spActor->GetActorBitsetFlag();
+			if (actorBitsetFlag.IsBitOn(EActorFlag::RenderingTarget) == false)
+			{
+				continue;
+			}
+
+			m_arrRenderableActorPtrs[TO_NUM(spActor->GetActorLayer())].push_back(spActor);
+		}
 	}
 
-	// Actor를 Y값으로 정렬
-	std::sort(m_vecRenderingTargetActor.begin(), m_vecRenderingTargetActor.end(),
+	// Actor를 Y값으로 정렬 (일단은 Creature만)
+	std::sort(m_arrRenderableActorPtrs[TO_NUM(EActorLayerType::Creature)].begin(),
+		m_arrRenderableActorPtrs[TO_NUM(EActorLayerType::Creature)].end(),
 		[] (const ActorPtr& spLhs, const ActorPtr& spRhs)
 		{
 			const TransformComponent* pLhsTransformComponent = spLhs->BringTransformComponent();
@@ -35,4 +41,12 @@ void SceneTracer::Tracer()
 
 			return (pLhsTransformComponent->GetPositionY() < pRhsTransformComponent->GetPositionY());
 		});
+}
+
+void SceneTracer::CleanupRenderableActors()
+{
+	for (Actors& actors : m_arrRenderableActorPtrs)
+	{
+		actors.clear();
+	}
 }

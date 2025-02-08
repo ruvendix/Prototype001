@@ -134,9 +134,11 @@ void EditorActor::OnMouseRightButtonHandler(const InputActionValue* pInputAction
 
 void EditorActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
-	const Vec2d& vMoveDir = pInputAction->BringValue<Vec2d>();
-
 	EditorActorMoveComponent* pEditorActorMoveComponent = FindComponent<EditorActorMoveComponent>();
 	pEditorActorMoveComponent->SetMoveDirection(pInputAction->BringValue<Vec2d>());
-	//DEFAULT_TRACE_LOG("(%f %f)", vMoveDir.x, vMoveDir.y);
+
+#if 0
+	const Vec2d& vMoveDir = pInputAction->BringValue<Vec2d>();
+	DEFAULT_TRACE_LOG("(%f %f)", vMoveDir.x, vMoveDir.y);
+#endif
 }

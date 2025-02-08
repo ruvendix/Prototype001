@@ -2,7 +2,6 @@
 #pragma once
 
 #include "DataTypes.h"
-#include "Enums.h"
 #include "Macros.h"
 #include "ICoreLoop.h"
 #include "Utility.h"
@@ -40,7 +39,7 @@
 
 #include "Engine/Component/Component.h"
 #include "Engine/Component/TransformComponent.h"
-#include "Engine/Component/SceneActorMoveComponent.h"
+#include "Engine/Component/CellActorMoveComponent.h"
 #include "Engine/Component/EditorActorMoveComponent.h"
 #include "Engine/Component/CameraComponent.h"
 
@@ -48,6 +47,7 @@
 #include "Engine/Component/RenderComponent/StaticSpriteComponent.h"
 #include "Engine/Component/RenderComponent/DynamicSpriteComponent.h"
 
+#include "Engine/Actor/ActorDataTypes.h"
 #include "Engine/Actor/Actor.h"
 #include "Engine/Actor/CameraActor.h"
 #include "Engine/Actor/CellActor.h"

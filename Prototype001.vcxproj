@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Client\ClientMain.cpp" />
     <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -81,7 +82,7 @@
     <ClCompile Include="Sources\Engine\Component\RenderComponent\StaticSpriteComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\SceneActorMoveComponent.cpp">
+    <ClCompile Include="Sources\Engine\Component\CellActorMoveComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\TransformComponent.cpp">
@@ -188,10 +189,6 @@
     <ClCompile Include="Sources\Engine\World\WorldContext.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\GameMain.cpp">
-      <DeploymentContent>false</DeploymentContent>
-      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
-    </ClCompile>
     <ClCompile Include="Sources\Pch\Pch.cpp">
       <DeploymentContent>false</DeploymentContent>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -226,6 +223,7 @@
     <ClInclude Include="Sources\Engine\Actor\Actor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\ActorDataTypes.h" />
     <ClInclude Include="Sources\Engine\Actor\ActorEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -266,7 +264,7 @@
     <ClInclude Include="Sources\Engine\Component\RenderComponent\StaticSpriteComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\SceneActorMoveComponent.h">
+    <ClInclude Include="Sources\Engine\Component\CellActorMoveComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\TransformComponent.h">

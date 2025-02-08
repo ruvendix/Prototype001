@@ -9,6 +9,18 @@ enum class EActorFlag
 	Count,
 };
 
+// 렌더링도 이 순서대로 적용
+enum class EActorLayerType
+{
+	Unknown = -1,
+
+	WorldBackground,
+	WorldForeground,
+	Creature,
+
+	Count
+};
+
 enum class EActorLookAtType
 {
 	Left = 0,

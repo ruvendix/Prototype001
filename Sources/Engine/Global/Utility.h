@@ -24,4 +24,10 @@ namespace global
 
 		return resultValue;
 	}
+
+	template <typename TEnum>
+	bool ValidateIndexRange(TEnum value, TEnum size)
+	{
+		return ValidateIndexRange(TO_NUM(value), TO_NUM(size));
+	}
 }

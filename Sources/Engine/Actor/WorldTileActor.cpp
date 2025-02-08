@@ -81,9 +81,6 @@ void WorldTileActor::InitializeWorldTile(int32 cellX, int32 cellY, const std::st
 	StaticSpriteComponent* pStaticSpriteComponent = AddComponent<StaticSpriteComponent>();
 	ASSERT_LOG(pStaticSpriteComponent != nullptr);
 	pStaticSpriteComponent->SetStaticSprite(m_spTileSprite);
-
-	// 레이어 처리
-	SetRenderingLayer(ERenderingLayerType::WorldTile);
 }
 
 void WorldTileActor::LoadWorldTileFromFileStream(const FileStream& fileStream, int32 cellX, int32 cellY, const std::string& strWorldTileSpritePath)

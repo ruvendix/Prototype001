@@ -4,6 +4,7 @@
 
 #include "Engine/Actor/WorldTileMapActor.h"
 #include "Engine/Actor/AnimationActor/AnimationActorState.h"
+#include "Client/Monster/SnakeActor.h"
 
 class PlayerActor::Pimpl
 {
@@ -11,6 +12,8 @@ class PlayerActor::Pimpl
 
 public:
 	void LoadAndStartupPlayerSprite();
+	void InitializePlayerInput();
+
 	bool DirectionKeyHandlerImpl(const Vec2d& vMoveDir);
 	bool SpaceBarKeyHandlerImpl();
 };
@@ -41,6 +44,66 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
 }
 
+void PlayerActor::Pimpl::InitializePlayerInput()
+{
+#pragma region 입력 처리
+	InputMappingContextPtr spPlayerInputMappingContext = std::make_shared<InputMappingContext>();
+	LocalPlayerInputSystem::I()->AddInputMappingContext(spPlayerInputMappingContext, 0);
+
+#pragma region 플레이어 이동 (Vector2로 해결)
+	InputActionValue playerWalkInputActionValue;
+
+	// 입력값 포함하면서 트리거와 핸들러 저장
+	InputActionPtr spPlayerWalkInputAction = std::make_unique<InputAction>("PlayerWalk");
+	spPlayerWalkInputAction->ApplyInputActionValue(playerWalkInputActionValue, EInputActionValueType::Vector2);
+
+	// 순서상 여기서 매핑 정보 넣음
+#pragma region 방향키에 따른 값 설정
+	InputActionMappingInfo leftKeyInputMappingInfo;
+	leftKeyInputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
+	leftKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
+	leftKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Negative);
+	spPlayerWalkInputAction->AddInputMappingInfo(leftKeyInputMappingInfo);
+
+	InputActionMappingInfo rightKeyInputMappingInfo;
+	rightKeyInputMappingInfo.inputValue = EInputValue::Right;
+	rightKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
+	spPlayerWalkInputAction->AddInputMappingInfo(rightKeyInputMappingInfo);
+
+	InputActionMappingInfo upKeyInputMappingInfo;
+	upKeyInputMappingInfo.inputValue = EInputValue::Up; // 왼쪽키를 누르면 작동하는 것 테스트
+	upKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
+	upKeyInputMappingInfo.inputActionValueModifierBitset.BitsOn(EInputActionValueModifierType::Swizzle, EInputActionValueModifierType::Negative);
+	spPlayerWalkInputAction->AddInputMappingInfo(upKeyInputMappingInfo);
+
+	InputActionMappingInfo downKeyInputMappingInfo;
+	downKeyInputMappingInfo.inputValue = EInputValue::Down;
+	downKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Swizzle);
+	spPlayerWalkInputAction->AddInputMappingInfo(downKeyInputMappingInfo);
+#pragma endregion
+
+	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerWalkInputAction, m_pOwner, &PlayerActor::OnDirectionKeyHandler);
+	spPlayerInputMappingContext->AddInputAction(spPlayerWalkInputAction);
+#pragma endregion
+
+#pragma region 플레이어 공격
+	InputActionValue playerAttackInputActionValue;
+
+	// 입력값 포함하면서 트리거와 핸들러 저장
+	InputActionPtr spPlayerAttackInputAction = std::make_unique<InputAction>("PlayerAttack");
+	spPlayerAttackInputAction->ApplyInputActionValue(playerAttackInputActionValue, EInputActionValueType::Boolean);
+
+	InputActionMappingInfo spaceBarKeyInputMappingInfo;
+	spaceBarKeyInputMappingInfo.inputValue = EInputValue::SpaceBar;
+	spaceBarKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
+	spPlayerAttackInputAction->AddInputMappingInfo(spaceBarKeyInputMappingInfo);
+
+	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerAttackInputAction, m_pOwner, &PlayerActor::OnSpaceBarKeyHandler);
+	spPlayerInputMappingContext->AddInputAction(spPlayerAttackInputAction);
+#pragma endregion
+#pragma endregion
+}
+
 bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 {
 	if (m_pOwner->IsSameAnimationActorState<AnimationActorIdleState>() == false)
@@ -49,7 +112,7 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 		return false;
 	}
 
-	SceneActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<SceneActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN_VALUE(pMoveComponent != nullptr, false);
 
 	// 현재 셀 좌표 백업
@@ -103,63 +166,9 @@ void PlayerActor::Startup()
 
 	// 플레이어 스프라이트 로딩 및 초기화
 	m_spPimpl->LoadAndStartupPlayerSprite();
-
-#pragma region 입력 처리
-	InputMappingContextPtr spPlayerInputMappingContext = std::make_shared<InputMappingContext>();
-	LocalPlayerInputSystem::I()->AddInputMappingContext(spPlayerInputMappingContext, 0);
-
-#pragma region 플레이어 이동 (Vector2로 해결)
-	InputActionValue playerWalkInputActionValue;
-
-	// 입력값 포함하면서 트리거와 핸들러 저장
-	InputActionPtr spPlayerWalkInputAction = std::make_unique<InputAction>("PlayerWalk");
-	spPlayerWalkInputAction->ApplyInputActionValue(playerWalkInputActionValue, EInputActionValueType::Vector2);
-
-	// 순서상 여기서 매핑 정보 넣음
-#pragma region 방향키에 따른 값 설정
-	InputActionMappingInfo leftKeyInputMappingInfo;
-	leftKeyInputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
-	leftKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
-	leftKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Negative);
-	spPlayerWalkInputAction->AddInputMappingInfo(leftKeyInputMappingInfo);
-
-	InputActionMappingInfo rightKeyInputMappingInfo;
-	rightKeyInputMappingInfo.inputValue = EInputValue::Right;
-	rightKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
-	spPlayerWalkInputAction->AddInputMappingInfo(rightKeyInputMappingInfo);
-
-	InputActionMappingInfo upKeyInputMappingInfo;
-	upKeyInputMappingInfo.inputValue = EInputValue::Up; // 왼쪽키를 누르면 작동하는 것 테스트
-	upKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
-	upKeyInputMappingInfo.inputActionValueModifierBitset.BitsOn(EInputActionValueModifierType::Swizzle, EInputActionValueModifierType::Negative);
-	spPlayerWalkInputAction->AddInputMappingInfo(upKeyInputMappingInfo);
-
-	InputActionMappingInfo downKeyInputMappingInfo;
-	downKeyInputMappingInfo.inputValue = EInputValue::Down;
-	downKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Swizzle);
-	spPlayerWalkInputAction->AddInputMappingInfo(downKeyInputMappingInfo);
-#pragma endregion
-
-	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerWalkInputAction, this, &PlayerActor::OnDirectionKeyHandler);
-	spPlayerInputMappingContext->AddInputAction(spPlayerWalkInputAction);
-#pragma endregion
-
-#pragma region 플레이어 공격
-	InputActionValue playerAttackInputActionValue;
-
-	// 입력값 포함하면서 트리거와 핸들러 저장
-	InputActionPtr spPlayerAttackInputAction = std::make_unique<InputAction>("PlayerAttack");
-	spPlayerAttackInputAction->ApplyInputActionValue(playerAttackInputActionValue, EInputActionValueType::Boolean);
-
-	InputActionMappingInfo spaceBarKeyInputMappingInfo;
-	spaceBarKeyInputMappingInfo.inputValue = EInputValue::SpaceBar;
-	spaceBarKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
-	spPlayerAttackInputAction->AddInputMappingInfo(spaceBarKeyInputMappingInfo);
-
-	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerAttackInputAction, this, &PlayerActor::OnSpaceBarKeyHandler);
-	spPlayerInputMappingContext->AddInputAction(spPlayerAttackInputAction);
-#pragma endregion
-#pragma endregion
+	
+	// 플레이어 입력 관련 초기화
+	m_spPimpl->InitializePlayerInput();
 
 #pragma region 플레이어 기본 정보 초기화
 	TransformComponent* pTransformComponent = BringTransformComponent();
@@ -174,13 +183,10 @@ void PlayerActor::Startup()
 #pragma endregion
 
 	// 이동 처리
-	AddComponent<SceneActorMoveComponent>();
-	SceneActorMoveComponent* pMoveComponent = FindComponent<SceneActorMoveComponent>();
+	AddComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
 	pMoveComponent->SetMoveSpeed(90.0f);
 	pMoveComponent->SetDestinationCellPosition(GetCellPosition()); // 초기화니까 똑같음
-
-	// 레이어 처리
-	SetRenderingLayer(ERenderingLayerType::Creature);
 }
 
 bool PlayerActor::Update(float deltaSeconds)
@@ -188,6 +194,13 @@ bool PlayerActor::Update(float deltaSeconds)
 	if (Super::Update(deltaSeconds) == false)
 	{
 		return false;
+	}
+
+	// 현재 위치에 뱀이 있는지?
+	const ActorPtr& spActor = SceneManager::I()->GetCurrentScene()->FindAnyCellActor<SnakeActor>(EActorLayerType::Creature, GetCellPosition());
+	if (spActor != nullptr)
+	{
+		DEFAULT_TRACE_LOG("뱀이다!");
 	}
 	
 	return true;
@@ -207,7 +220,7 @@ void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 	}
 
 	ImmediatelyChangePlayerState<AnimationActorWalkState>();
-	DEFAULT_TRACE_LOG("걷는 상태로 전환!");
+	DEFAULT_TRACE_LOG("(기본 -> 걷기) 상태로 전환!");
 }
 
 void PlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)
@@ -218,4 +231,5 @@ void PlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)
 	}
 	
 	ImmediatelyChangePlayerState<AnimationActorAttackState>();
+	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
 }

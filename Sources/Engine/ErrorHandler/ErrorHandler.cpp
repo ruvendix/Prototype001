@@ -13,6 +13,7 @@ void ErrorHandler::Startup()
 	InsertErrorInfo(EErrorCode::InvalidIntegerRange, &g_LogDefault, "유효하지 않은 정수 범위!");
 	InsertErrorInfo(EErrorCode::InvalidRenderingLayer, &g_LogDefault, "유효하지 않은 렌더링 레이어!");
 	InsertErrorInfo(EErrorCode::InvalidFileStream, &g_LogResource, "유효하지 않은 파일 스트림!");	
+	InsertErrorInfo(EErrorCode::NoReturnNullObject, &g_LogDefault, "널 객체를 반환할 정도면 이미 망한 상황!");
 }
 
 void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLogCategory, const std::string& strFormatError)

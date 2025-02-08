@@ -8,9 +8,11 @@ class SceneTracer
 public:
 	void Tracer();
 
-	std::vector<ActorPtr>& GetRenderingTargetActors() { return m_vecRenderingTargetActor; }
-	const std::vector<ActorPtr>& GetRenderingTargetActors() const { return m_vecRenderingTargetActor; }
+	RenderableActorsArray& GetRenderableActors() { return m_arrRenderableActorPtrs; }
+	const RenderableActorsArray& GetRenderableActors() const { return m_arrRenderableActorPtrs; }
+
+	void CleanupRenderableActors();
 
 private:
-	std::vector<ActorPtr> m_vecRenderingTargetActor;
+	RenderableActorsArray m_arrRenderableActorPtrs;
 };

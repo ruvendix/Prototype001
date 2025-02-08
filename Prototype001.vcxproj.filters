@@ -101,6 +101,12 @@
     <Filter Include="Sources\Client\Editor">
       <UniqueIdentifier>{a9473c3c-7072-447c-8615-deed306b60cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\Actor\AnimationActor">
+      <UniqueIdentifier>{8c257be7-2e2c-43cd-87c7-2a4168f3a372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\Monster">
+      <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -114,9 +120,6 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Log\LogSystem.cpp">
       <Filter>Sources\Engine\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\GameMain.cpp">
-      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Pch\Pch.cpp">
       <Filter>Sources\Pch</Filter>
@@ -214,13 +217,10 @@
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
       <Filter>Sources\Client\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Component\SceneActorMoveComponent.cpp">
+    <ClCompile Include="Sources\Engine\Component\CellActorMoveComponent.cpp">
       <Filter>Sources\Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
-      <Filter>Sources\Client\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
       <Filter>Sources\Client\Player</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\CameraComponent.cpp">
@@ -285,6 +285,18 @@
     </ClCompile>
     <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
       <Filter>Sources\Client\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActor.cpp">
+      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.cpp">
+      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Monster\SnakeActor.cpp">
+      <Filter>Sources\Client\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\ClientMain.cpp">
+      <Filter>Sources\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -435,16 +447,10 @@
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
       <Filter>Sources\Client\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Component\SceneActorMoveComponent.h">
+    <ClInclude Include="Sources\Engine\Component\CellActorMoveComponent.h">
       <Filter>Sources\Engine\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Global\DataTypes.h">
-      <Filter>Sources\Client\Global</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">
-      <Filter>Sources\Client\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\Player\PlayerState.h">
       <Filter>Sources\Client\Player</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Client\Global\Inclusion.h">
@@ -542,6 +548,18 @@
     </ClInclude>
     <ClInclude Include="Sources\Client\Editor\EditorActor.h">
       <Filter>Sources\Client\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActor.h">
+      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.h">
+      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Monster\SnakeActor.h">
+      <Filter>Sources\Client\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\ActorDataTypes.h">
+      <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

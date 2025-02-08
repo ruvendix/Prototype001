@@ -26,6 +26,17 @@ struct Position2d
 {
 	int32 x = 0;
 	int32 y = 0;
+	
+	bool operator == (const Position2d& otherPos) const
+	{
+		if ((x == otherPos.x) &&
+			(y == otherPos.y))
+		{
+			return true;
+		}
+
+		return false;
+	}
 };
 
 struct Array2dInfo
@@ -114,6 +125,8 @@ using TexturePtr = std::shared_ptr<class Texture>;
 using StaticSpritePtr = std::shared_ptr<class StaticSprite>;
 using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
 using AnimationActorStatePtr = std::shared_ptr<class AnimationActorState>;
+
+using Actors = std::vector<ActorPtr>;
 
 // Bound된 함수는 항상 void() 형식
 using BoundFunction = std::function<void()>;

@@ -23,21 +23,21 @@ void SceneRenderer::Render()
 	// 백버퍼를 흰색으로 덮음
 	::PatBlt(m_hBackBufferDc, 0, 0, viewerResolution.width, viewerResolution.height, WHITENESS);
 
-	RenderComponentVectorArray arrVecRenderComponent;
-	for (ActorPtr& spActor : SceneTracer::I()->GetRenderingTargetActors())
+	RenderComponentVector vecRenderComponent;
+	for (const Actors& actors : SceneTracer::I()->GetRenderableActors())
 	{
-		// 액터마다 렌더 컴포넌트 가져오기
-		spActor->FindRenderComponents(arrVecRenderComponent);
-
-		// 렌더 컴포넌트마다 렌더 처리
-		for (const RenderComponentVector& vecRenderComponent : arrVecRenderComponent)
+		for (const ActorPtr& spActor : actors)
 		{
-			for (RenderComponent* pRenderComponent : vecRenderComponent)
-			{
-				ASSERT_LOG(pRenderComponent != nullptr);
-				pRenderComponent->Render(m_hBackBufferDc); // 트랜스폼 넘기는 건 렌더 컴포넌트마다 다를 수 있음
-			}
+			// 액터마다 렌더 컴포넌트 가져오기
+			spActor->FindRenderComponents(vecRenderComponent);
 		}
+	}
+
+	// 렌더 컴포넌트마다 렌더 처리
+	for (RenderComponent* pRenderComponent : vecRenderComponent)
+	{
+		ASSERT_LOG(pRenderComponent != nullptr);
+		pRenderComponent->Render(m_hBackBufferDc); // 트랜스폼 넘기는 건 렌더 컴포넌트마다 다를 수 있음
 	}
 
 	// 백버퍼에 그린 걸 프론트버퍼로 복사

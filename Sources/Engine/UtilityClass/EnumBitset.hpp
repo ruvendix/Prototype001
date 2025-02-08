@@ -39,6 +39,26 @@ public:
         BitsOffImpl({ std::forward<TArgs>(args)... });
     }
 
+    template <typename TEnum>
+    bool IsBitsOnImpl(const std::initializer_list<TEnum>& enumValues) const
+    {
+        for (TEnum enumValue : enumValues)
+        {
+            if (m_bitset.test(TO_NUM(enumValue)) == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    template <typename... TArgs>
+    bool IsBitsOn(TArgs&&... args) const
+    {
+        return IsBitsOnImpl({ std::forward<TArgs>(args)... });
+    }
+
 public:
     void BitOn(TEnum enumValue)
     {
@@ -63,19 +83,6 @@ public:
     bool IsBitOn(TEnum enumValue) const
     {
         return (m_bitset.test(TO_NUM(enumValue)));
-    }
-
-    bool IsBitsOn(const std::initializer_list<TEnum>& enumValues) const
-    {
-        for (TEnum enumValue : enumValues)
-        {
-            if (m_bitset.test(TO_NUM(enumValue)) == false)
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 
 private:

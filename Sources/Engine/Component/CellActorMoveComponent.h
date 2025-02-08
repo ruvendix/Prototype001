@@ -1,13 +1,13 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class SceneActorMoveComponent : public Component
+class CellActorMoveComponent : public Component
 {
 	DECLARE_COMPILETIME_ID;
 
 public:
-	SceneActorMoveComponent();
-	virtual ~SceneActorMoveComponent();
+	CellActorMoveComponent();
+	virtual ~CellActorMoveComponent();
 
 public:
 	virtual bool Update(float deltaSeconds) override;
@@ -17,6 +17,7 @@ public:
 	bool CheckGoalPosition(float deltaSeconds) const;
 
 	void ResetMoveDirection();
+	void ApplyDestinationDataToOwner();
 
 	void SetDestinationCellPosition(const Position2d& destCellPos) { m_destCellPos = destCellPos; }
 	const Position2d& GetDestinationCellPosition() const { return m_destCellPos; }

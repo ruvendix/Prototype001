@@ -42,19 +42,20 @@ void AnimationActorWalkState::UpdateState(float deltaSeconds)
 	ASSERT_LOG(pOwner != nullptr);
 
 	// 이동 컴포넌트
-	SceneActorMoveComponent* pMoveComponent = pOwner->FindComponent<SceneActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
 	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
 	{
 		pMoveComponent->ResetMoveDirection();
 
-		TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
-		pTransformComponent->SetPosition(pMoveComponent->GetDestinationWorldPosition());
+		// 이동이 완료되었으니 목적지 셀 좌표를 현재 셀 좌표로 적용
+		pMoveComponent->ApplyDestinationDataToOwner();
 
 		// 스프라이트는 현재 프레임에서 바로 전환
 		pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
 
 		// Idle 상태로 전환
 		pOwner->ReserveNextPlayerState<AnimationActorIdleState>();
+		DEFAULT_TRACE_LOG("(걷기 -> 기본) 상태로 전환!");
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,5 +80,6 @@ void AnimationActorAttackState::UpdateState(float deltaSeconds)
 
 		// Idle 상태로 전환
 		pOwner->ReserveNextPlayerState<AnimationActorIdleState>();
+		DEFAULT_TRACE_LOG("(공격 -> 기본) 상태로 전환!");
 	}
 }

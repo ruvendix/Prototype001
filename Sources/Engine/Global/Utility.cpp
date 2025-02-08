@@ -8,7 +8,6 @@ namespace global
 		if ((value < min) ||
 			(value > max))
 		{
-			DETAIL_ERROR_LOG(EErrorCode::NotFoundResource);
 			return false;
 		}
 
