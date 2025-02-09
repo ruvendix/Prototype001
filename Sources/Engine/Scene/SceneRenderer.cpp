@@ -37,7 +37,7 @@ void SceneRenderer::Render()
 	for (RenderComponent* pRenderComponent : vecRenderComponent)
 	{
 		ASSERT_LOG(pRenderComponent != nullptr);
-		pRenderComponent->Render(m_hBackBufferDc); // 트랜스폼 넘기는 건 렌더 컴포넌트마다 다를 수 있음
+		pRenderComponent->Render(m_hBackBufferDc);
 	}
 
 	// 백버퍼에 그린 걸 프론트버퍼로 복사

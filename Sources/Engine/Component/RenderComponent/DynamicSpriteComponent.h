@@ -12,6 +12,9 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Render(HDC hBackBufferDc) override;
 
+	virtual ComponentPtr CreateClone() override;
+
+public:
 	void ResetDynamicSprite();
 	void ApplyDynamicSprite(const DynamicSpritePtr& spDynamicSprite);
 

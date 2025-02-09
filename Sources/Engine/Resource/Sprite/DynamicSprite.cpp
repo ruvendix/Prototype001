@@ -30,7 +30,7 @@ void DynamicSprite::AddKeyFrame(const SpriteDrawInfo& spriteDrawInfo, float keep
 
 void DynamicSprite::AddKeyFrames(int32 startIdx, int32 endIdx, int32 spriteLine, const Size& drawSize, uint32 colorKey, float keepTime)
 {
-	for (int32 i = startIdx; i < endIdx; ++i)
+	for (int32 i = startIdx; i <= endIdx; ++i)
 	{
 		SpriteDrawInfo spriteDrawInfo;
 		spriteDrawInfo.drawingStartPos = Position2d(i * drawSize.width, spriteLine * drawSize.height);

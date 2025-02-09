@@ -28,3 +28,8 @@ void Component::Cleanup()
 {
 
 }
+
+ComponentPtr Component::CreateClone()
+{
+	return std::make_shared<Component>(*this);
+}

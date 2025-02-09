@@ -36,9 +36,23 @@ public:
 	std::shared_ptr<TActor> CreateActorToScene(EActorLayerType actorLayer, EUpdateOrder updateOrder = EUpdateOrder::Default)
 	{
 		const std::shared_ptr<TActor>& spNewActor = Scene::CreateActor<TActor>(actorLayer);
+		return CreateActorToSceneImpl(spNewActor, actorLayer, updateOrder);
+	}
 
-		Actors& refActorPtrs = FindActors(actorLayer);
-		if (refActorPtrs.empty() == true)
+	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
+	std::shared_ptr<TActor> CreateCloneActorToScene(const std::shared_ptr<TActor>& spSrcActor, EUpdateOrder updateOrder = EUpdateOrder::Default)
+	{
+		std::shared_ptr<TActor> spCloneActor = std::dynamic_pointer_cast<TActor>(spSrcActor->CreateClone());
+		ASSERT_LOG(spCloneActor != nullptr);
+		return CreateActorToSceneImpl(spCloneActor, spSrcActor->GetActorLayer(), updateOrder);
+	}
+
+	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
+	std::shared_ptr<TActor> CreateActorToSceneImpl(const std::shared_ptr<TActor>& spNewActor,
+		EActorLayerType actorLayer, EUpdateOrder updateOrder = EUpdateOrder::Default)
+	{
+		auto foundIter = m_mapActorPtrsStorage.find(actorLayer);
+		if (foundIter == m_mapActorPtrsStorage.cend())
 		{
 			Actors newActorPtrs;
 			newActorPtrs.push_back(spNewActor);
@@ -48,7 +62,7 @@ public:
 		}
 		else
 		{
-			refActorPtrs.push_back(spNewActor);
+			(foundIter->second).push_back(spNewActor);
 		}
 
 		m_arrUpdateActors[TO_NUM(updateOrder)].push_back(spNewActor);
@@ -103,6 +117,7 @@ public:
 	const Actors& FindConstActors(EActorLayerType actorLayer) const;
 	ActorPtr FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const;
 
+	void ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
 	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);
 
 	ActorStorage& GetActorPointersStorage() { return m_mapActorPtrsStorage; }
@@ -110,6 +125,7 @@ public:
 
 private:
 	void EraseReservedActors();
+	void OnCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
 
 private:
 	std::shared_ptr<CameraActor> m_spMainCameraActor = nullptr;
@@ -118,4 +134,5 @@ private:
 	std::array<Actors, TO_NUM(EUpdateOrder::Count)> m_arrUpdateActors; // 업데이트 상황에 따라 분리된 액터
 
 	Actors m_reserveEraseActorsForNextFrame; // 다음 프레임에서 제거될 액터들
+	Event<const EffectSpawnInfo& /* spNextScene */> m_sceneCreateEffect;
 };

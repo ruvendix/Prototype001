@@ -104,6 +104,11 @@ void DynamicSpriteComponent::Render(HDC hBackBufferDc)
 		spriteDrawInfo.colorKey);
 }
 
+ComponentPtr DynamicSpriteComponent::CreateClone()
+{
+	return std::make_shared<DynamicSpriteComponent>(*this);
+}
+
 void DynamicSpriteComponent::ResetDynamicSprite()
 {
 	m_localTime = 0.0f;

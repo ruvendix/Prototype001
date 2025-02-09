@@ -13,6 +13,9 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual ComponentPtr CreateClone();
+
+public:
 	template <typename TActor>
 	TActor* GetOwner() const
 	{

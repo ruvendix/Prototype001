@@ -23,6 +23,8 @@ public:
 	virtual void Cleanup() override;
 
 	void ApplyCellPosition(int32 x, int32 y);
+	void ApplyCellPosition(const Position2d& cellPos);
+	void ApplyRandomCellPosition();
 
 	void SetCellPosition(const Position2d& cellPos) { m_cellPos = cellPos; }
 	const Position2d& GetCellPosition() const { return m_cellPos; }

@@ -12,6 +12,8 @@ public:
 	void SetCellSize(int32 cellSize) { m_cellSize = cellSize; }
 	int32 GetCellSize() const { return m_cellSize; }
 
+	Position2d CalculateRandomCellPosition() const;
+
 private:
 	Size m_worldSize;
 	int32 m_cellSize = 0; // 셀은 정사각형임

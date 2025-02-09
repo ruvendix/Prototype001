@@ -129,6 +129,7 @@ using PersistantResourcePtr = std::shared_ptr<class PersistantResource>;
 using TexturePtr = std::shared_ptr<class Texture>;
 using StaticSpritePtr = std::shared_ptr<class StaticSprite>;
 using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
+using EffectPtr = std::shared_ptr<class Effect>;
 using AnimationActorStatePtr = std::shared_ptr<class AnimationActorState>;
 
 using Actors = std::vector<ActorPtr>;

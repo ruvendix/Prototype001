@@ -17,5 +17,6 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual ActorPtr CreateClone() override;
 	virtual void ProcessDamaged() override;
 };

@@ -22,6 +22,7 @@ void Texture::LoadResource(const std::string& strResRelativePath)
 {
 	m_hTexDc = SceneRenderer::I()->CreateCompatibleDc();
 	m_hBitMap = static_cast<HBITMAP>(::LoadImage(nullptr, strResRelativePath.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION));
+	ASSERT_LOG_RETURN(m_hBitMap != nullptr);
 
 	HBITMAP prevBitMap = static_cast<HBITMAP>(::SelectObject(m_hTexDc, m_hBitMap));
 	::DeleteObject(prevBitMap);

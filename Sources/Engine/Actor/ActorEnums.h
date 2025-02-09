@@ -17,6 +17,7 @@ enum class EActorLayerType
 	WorldBackground,
 	WorldForeground,
 	Creature,
+	Effect,
 
 	Count
 };

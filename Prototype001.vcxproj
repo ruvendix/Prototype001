@@ -55,6 +55,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CellActor.cpp" />
+    <ClCompile Include="Sources\Engine\Actor\EffectActor\EffectActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\WorldTileActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -137,6 +140,9 @@
     <ClCompile Include="Sources\Engine\Math\Size.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Effect\Effect.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\PersistantResource.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -149,20 +155,13 @@
     <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSprite.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.cpp" />
     <ClCompile Include="Sources\Engine\Resource\Sprite\SpriteBase.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSprite.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Texture\Texture.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Resource\Texture\TextureStorage.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Scene\Scene.cpp">
@@ -237,6 +236,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CellActor.h" />
+    <ClInclude Include="Sources\Engine\Actor\EffectActor\EffectActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\WorldTileActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -367,6 +369,15 @@
     <ClInclude Include="Sources\Engine\Math\Size.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\DerivedResourceStorage.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Effect\Effect.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Effect\EffectStructs.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\PersistantResource.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -379,20 +390,13 @@
     <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSprite.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.h" />
     <ClInclude Include="Sources\Engine\Resource\Sprite\SpriteBase.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSprite.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Texture\Texture.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Resource\Texture\TextureStorage.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Scene\Scene.h">

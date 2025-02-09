@@ -77,17 +77,23 @@ void SnakeActor::Cleanup()
 	return (Super::Cleanup());
 }
 
-static int g_testCount = 0;
+ActorPtr SnakeActor::CreateClone()
+{
+	return std::make_shared<SnakeActor>(*this);
+}
+
 void SnakeActor::ProcessDamaged()
 {
-	if (g_testCount != 2)
-	{
-		++g_testCount;
-		return;
-	}
-
+	// ÀÌÆåÆ® »ý¼º
 	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
 	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+
+	EffectSpawnInfo effectSpawnInfo;
+	effectSpawnInfo.strEffectName = "OneTime_HitEffect";
+	effectSpawnInfo.spawnCellPos = GetCellPosition();
+	effectSpawnInfo.effectSize = Size(80, 80);
+	pCurrentScene->ReserveCreateEffect(effectSpawnInfo);
+
 	pCurrentScene->ReserveEraseActor(shared_from_this());
 	DEFAULT_TRACE_LOG("¹ì »ç¸Á!");
 }

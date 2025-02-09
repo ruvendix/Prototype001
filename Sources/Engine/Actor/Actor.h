@@ -12,6 +12,8 @@ public:
 public:
 	Actor();
 	Actor(const std::string& strName);
+	Actor(const Actor& srcActor);
+
 	virtual ~Actor();
 
 	virtual void Startup() override;
@@ -21,6 +23,7 @@ public:
 	virtual void SaveToFileStream(const FileStream& fileStream) const;
 	virtual void LoadFromFileStream(const FileStream& fileStream);
 
+	virtual ActorPtr CreateClone();
 	virtual void ProcessDamaged();
 
 public:

@@ -27,12 +27,18 @@ bool Scene::Update(float deltaSeconds)
 	// 제거할 액터가 있다면 여기서 제거
 	EraseReservedActors();
 
+	// 이펙트 생성
+	m_sceneCreateEffect.ExcuteIfBound();
+
 	for (int32 i = 0; i < TO_NUM(EUpdateOrder::Count); ++i)
 	{
 		Actors& refVecUpdateActor = m_arrUpdateActors[i];
 		for (ActorPtr& spActor : refVecUpdateActor)
 		{
-			spActor->Update(deltaSeconds);
+			if (spActor->Update(deltaSeconds) == false)
+			{
+				return false;
+			}
 		}
 	}
 
@@ -163,6 +169,18 @@ void Scene::EraseReservedActors()
 	}
 
 	m_reserveEraseActorsForNextFrame.clear();
+}
+
+void Scene::OnCreateEffect(const EffectSpawnInfo& effectSpawnInfo)
+{
+	const std::shared_ptr<EffectActor>& spEffectActor = CreateActorToScene<EffectActor>(EActorLayerType::Effect, EUpdateOrder::Post);
+	spEffectActor->SpawnEffect(effectSpawnInfo);
+	DEFAULT_TRACE_LOG("이펙트 생성! (%s)", effectSpawnInfo.strEffectName.c_str());
+}
+
+void Scene::ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo)
+{
+	m_sceneCreateEffect.RegisterEventHandler(this, &Scene::OnCreateEffect, effectSpawnInfo);
 }
 
 void Scene::ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor)

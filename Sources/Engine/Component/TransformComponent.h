@@ -13,6 +13,8 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual ComponentPtr CreateClone() override;
+
 public:
 	void AddPosition(const Vec2d& pos) { m_pos += pos; }
 	void BuildWolrdMatrix();

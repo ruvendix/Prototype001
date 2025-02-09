@@ -24,14 +24,14 @@ void SpriteBase::LoadResource(const std::string& strResRelativePath)
 
 void SpriteBase::LoadAndSetTexture(const std::string& strResRelativePath)
 {
-	const TexturePtr& spWorldTileTex = ResourceMananger::I()->LoadTexture(strResRelativePath);
-	if (spWorldTileTex == nullptr)
+	const TexturePtr& spTex = ResourceMananger::I()->LoadTexture(strResRelativePath);
+	if (spTex == nullptr)
 	{
 		DETAIL_ERROR_LOG(EErrorCode::NotFoundResource);
 		return;
 	}
 
-	SetTexture(spWorldTileTex);
+	SetTexture(spTex);
 }
 
 void SpriteBase::FindAndSetTexture(const std::string& strResRelativePath)

@@ -107,6 +107,12 @@
     <Filter Include="Sources\Client\Monster">
       <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\Actor\EffectActor">
+      <UniqueIdentifier>{66038f97-ccd5-4c54-a60d-6329d43da8b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\Resource\Effect">
+      <UniqueIdentifier>{68cd27b8-05ab-479e-8fec-94ed58b13f8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -187,9 +193,6 @@
     <ClCompile Include="Sources\Engine\Resource\Texture\Texture.cpp">
       <Filter>Sources\Engine\Resource\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Resource\Texture\TextureStorage.cpp">
-      <Filter>Sources\Engine\Resource\Texture</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Log\LogCategoryList.cpp">
       <Filter>Sources\Engine\Log</Filter>
     </ClCompile>
@@ -199,17 +202,11 @@
     <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSprite.cpp">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.cpp">
-      <Filter>Sources\Engine\Resource\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Sprite\SpriteBase.cpp">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Global\Utility.cpp">
       <Filter>Sources\Engine\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.cpp">
-      <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CellActor.cpp">
       <Filter>Sources\Engine\Actor</Filter>
@@ -297,6 +294,12 @@
     </ClCompile>
     <ClCompile Include="Sources\Client\ClientMain.cpp">
       <Filter>Sources\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\EffectActor\EffectActor.cpp">
+      <Filter>Sources\Engine\Actor\EffectActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Resource\Effect\Effect.cpp">
+      <Filter>Sources\Engine\Resource\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -417,9 +420,6 @@
     <ClInclude Include="Sources\Engine\Resource\Texture\Texture.h">
       <Filter>Sources\Engine\Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Resource\Texture\TextureStorage.h">
-      <Filter>Sources\Engine\Resource\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Log\LogCategoryList.h">
       <Filter>Sources\Engine\Log</Filter>
     </ClInclude>
@@ -429,17 +429,11 @@
     <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSprite.h">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Resource\Sprite\StaticSpriteStorage.h">
-      <Filter>Sources\Engine\Resource\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Sprite\SpriteBase.h">
       <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\Utility.h">
       <Filter>Sources\Engine\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Resource\Sprite\DynamicSpriteStorage.h">
-      <Filter>Sources\Engine\Resource\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CellActor.h">
       <Filter>Sources\Engine\Actor</Filter>
@@ -560,6 +554,18 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Global\EnableSharedClass.h">
       <Filter>Sources\Engine\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\EffectActor\EffectActor.h">
+      <Filter>Sources\Engine\Actor\EffectActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Effect\Effect.h">
+      <Filter>Sources\Engine\Resource\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\DerivedResourceStorage.h">
+      <Filter>Sources\Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Resource\Effect\EffectStructs.h">
+      <Filter>Sources\Engine\Resource\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

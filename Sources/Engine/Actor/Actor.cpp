@@ -12,6 +12,25 @@ Actor::Actor(const std::string& strName)
 	m_strActorName = strName;
 }
 
+Actor::Actor(const Actor& srcActor)
+{
+	m_strActorName = srcActor.m_strActorName;
+	m_actorBitsetFlag = srcActor.m_actorBitsetFlag;
+	m_actorLayer = srcActor.m_actorLayer;
+
+	for (auto iter : srcActor.m_mapComponent)
+	{
+		const ComponentPtr& spCloneComponent = (iter.second)->CreateClone();
+		spCloneComponent->SetOwner(this);
+		m_mapComponent.insert(std::make_pair(iter.first, spCloneComponent));
+	}
+
+	for (const ActorPtr& spChild : m_vecChild)
+	{
+		m_vecChild.push_back(spChild->CreateClone());
+	}
+}
+
 Actor::~Actor()
 {
 	Cleanup();
@@ -74,6 +93,11 @@ void Actor::LoadFromFileStream(const FileStream& fileStream)
 	{
 		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
 	}
+}
+
+ActorPtr Actor::CreateClone()
+{
+	return std::make_shared<Actor>(*this);
 }
 
 void Actor::ProcessDamaged()

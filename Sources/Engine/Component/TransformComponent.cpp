@@ -28,6 +28,11 @@ void TransformComponent::Cleanup()
 
 }
 
+ComponentPtr TransformComponent::CreateClone()
+{
+	return std::make_shared<TransformComponent>(*this);
+}
+
 void TransformComponent::BuildWolrdMatrix()
 {
 

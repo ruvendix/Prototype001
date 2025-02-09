@@ -52,6 +52,7 @@
 #include "Engine/Actor/Actor.h"
 #include "Engine/Actor/CameraActor.h"
 #include "Engine/Actor/CellActor.h"
+#include "Engine/Actor/EffectActor/EffectActor.h"
 #include "Engine/Actor/AnimationActor/AnimationActor.h"
 
 #include "Engine/Scene/Scene.h"

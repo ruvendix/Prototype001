@@ -9,6 +9,7 @@ void ResourceMananger::Startup()
 	m_spTexStorage = std::make_shared<TextureStorage>();
 	m_spStaticSpriteStorage = std::make_shared<StaticSpriteStorage>();
 	m_spDynamicSpriteStorage = std::make_shared<DynamicSpriteStorage>();
+	m_spEffectStorage = std::make_shared<EffectStorage>();
 }
 
 TexturePtr ResourceMananger::LoadTexture(const std::string& strResKey)
@@ -36,6 +37,12 @@ DynamicSpritePtr ResourceMananger::FindDynamicSprite(const std::string& strResKe
 	return (std::dynamic_pointer_cast<DynamicSprite>(m_spDynamicSpriteStorage->FindPersistantSharedResource(strResKey)));
 }
 
+EffectPtr ResourceMananger::FindEffect(const std::string& strResKey) const
+{
+	ASSERT_LOG(m_spEffectStorage != nullptr);
+	return (std::dynamic_pointer_cast<Effect>(m_spEffectStorage->FindPersistantSharedResource(strResKey)));
+}
+
 StaticSpritePtr ResourceMananger::CreateStaticSprite(const std::string& strStaticSpriteTag) const
 {
 	ASSERT_LOG(m_spStaticSpriteStorage != nullptr);
@@ -48,4 +55,8 @@ DynamicSpritePtr ResourceMananger::CreateDynamicSprite(const std::string& strDyn
 	return (std::dynamic_pointer_cast<DynamicSprite>(m_spDynamicSpriteStorage->CreateResource(strDynamicSpriteTag)));
 }
 
-// 똑같이 Id 적용하면 가능하긴한데?
+EffectPtr ResourceMananger::CreateEffect(const std::string& strEffectTag) const
+{
+	ASSERT_LOG(m_spEffectStorage != nullptr);
+	return (std::dynamic_pointer_cast<Effect>(m_spEffectStorage->CreateResource(strEffectTag)));
+}

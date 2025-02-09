@@ -65,6 +65,27 @@ void CellActor::ApplyCellPosition(int32 x, int32 y)
 	pTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(x, y));
 }
 
+void CellActor::ApplyCellPosition(const Position2d& cellPos)
+{
+	ApplyCellPosition(cellPos.x, cellPos.y);
+}
+
+void CellActor::ApplyRandomCellPosition()
+{
+	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+
+	while (true)
+	{
+		const Position2d& randomCellPos = WorldContext::I()->CalculateRandomCellPosition();
+		if (pCurrentScene->CheckCanMoveToCellPosition(randomCellPos) == true)
+		{
+			ApplyCellPosition(randomCellPos);
+			return;
+		}
+	}
+}
+
 bool CellActor::CheckEqaulCellPosition(const Position2d& otherCellPos) const
 {
 	const TransformComponent* pTransformComponent = BringTransformComponent();
