@@ -31,7 +31,7 @@ void EditScene::Startup()
 	m_spWorldTileMapActor = CreateActorToScene<WorldTileMapActor>(EActorLayerType::WorldForeground);
 #pragma endregion
 
-	m_spEditorActor = CreateActorToScene<EditorActor>(EActorLayerType::Unknown);
+	m_spEditorActor = CreateActorToScene<EditorActor>(EActorLayerType::Default);
 	m_spEditorActor->SetActorFlagBitOff(EActorFlag::RenderingTarget);
 	m_spEditorActor->SetWorldTileMapActor(m_spWorldTileMapActor);
 

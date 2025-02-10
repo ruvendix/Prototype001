@@ -12,14 +12,19 @@ enum class EActorFlag
 // 렌더링도 이 순서대로 적용
 enum class EActorLayerType
 {
-	Unknown = -1,
-
+	Default = 0,
 	WorldBackground,
 	WorldForeground,
 	Creature,
 	Effect,
 
 	Count
+};
+
+enum class EActorUpdateOrder
+{
+	Default,
+	Post,
 };
 
 enum class EActorLookAtType

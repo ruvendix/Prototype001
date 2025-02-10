@@ -15,57 +15,63 @@ public:
 
 public:
 	template <typename TActor>
-	static std::shared_ptr<TActor> CreateActor(EActorLayerType actorLayer)
+	static std::shared_ptr<TActor> CreateActor(EActorLayerType actorLayer, EActorUpdateOrder actorUpdateOrder = EActorUpdateOrder::Default)
 	{
-		std::shared_ptr<TActor> spNewActor = std::make_shared<TActor>();
-		spNewActor->Startup();
-		spNewActor->SetActorLayer(actorLayer);
+		const ActorPtr& spNewActor = CreateActorNoDynamicCast<TActor>(actorLayer, actorUpdateOrder);
 		return (std::dynamic_pointer_cast<TActor>(spNewActor));
 	}
 
 	template <typename TActor>
-	static ActorPtr CreateActorNoDynamicCast(EActorLayerType actorLayer)
+	static ActorPtr CreateActorNoDynamicCast(EActorLayerType actorLayer, EActorUpdateOrder actorUpdateOrder = EActorUpdateOrder::Default)
 	{
-		const ActorPtr& spNewActor = std::make_shared<TActor>();
+		ActorPtr spNewActor = std::make_shared<TActor>();
 		spNewActor->Startup();
 		spNewActor->SetActorLayer(actorLayer);
+		spNewActor->SetActorUpdateOrder(actorUpdateOrder);
 		return (spNewActor);
 	}
 
 	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
-	std::shared_ptr<TActor> CreateActorToScene(EActorLayerType actorLayer, EUpdateOrder updateOrder = EUpdateOrder::Default)
+	std::shared_ptr<TActor> CreateActorToScene(EActorLayerType actorLayer, EActorUpdateOrder actorUpdateOrder = EActorUpdateOrder::Default)
 	{
-		const std::shared_ptr<TActor>& spNewActor = Scene::CreateActor<TActor>(actorLayer);
-		return CreateActorToSceneImpl(spNewActor, actorLayer, updateOrder);
+		const std::shared_ptr<TActor>& spNewActor = Scene::CreateActor<TActor>(actorLayer, actorUpdateOrder);
+		return CreateActorToSceneImpl(spNewActor, actorLayer);
 	}
 
 	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
-	std::shared_ptr<TActor> CreateCloneActorToScene(const std::shared_ptr<TActor>& spSrcActor, EUpdateOrder updateOrder = EUpdateOrder::Default)
+	std::shared_ptr<TActor> CreateCloneActorToScene(const std::shared_ptr<TActor>& spSrcActor)
 	{
 		std::shared_ptr<TActor> spCloneActor = std::dynamic_pointer_cast<TActor>(spSrcActor->CreateClone());
 		ASSERT_LOG(spCloneActor != nullptr);
-		return CreateActorToSceneImpl(spCloneActor, spSrcActor->GetActorLayer(), updateOrder);
+		return CreateActorToSceneImpl(spCloneActor, spSrcActor->GetActorLayer());
 	}
 
 	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
-	std::shared_ptr<TActor> CreateActorToSceneImpl(const std::shared_ptr<TActor>& spNewActor,
-		EActorLayerType actorLayer, EUpdateOrder updateOrder = EUpdateOrder::Default)
+	std::shared_ptr<TActor> CreateActorToSceneImpl(const std::shared_ptr<TActor>& spNewActor, EActorLayerType actorLayer)
 	{
-		auto foundIter = m_mapActorPtrsStorage.find(actorLayer);
-		if (foundIter == m_mapActorPtrsStorage.cend())
-		{
-			Actors newActorPtrs;
-			newActorPtrs.push_back(spNewActor);
+		Actors& refActors = FindActors(actorLayer);
 
-			auto insertedIter = m_mapActorPtrsStorage.insert(std::make_pair(actorLayer, newActorPtrs));
-			ASSERT_LOG_RETURN_VALUE((insertedIter.second == true), nullptr);
-		}
-		else
+		// 중복된 액터인지 확인
+		auto foundIter = std::find_if(refActors.begin(), refActors.end(),
+			[&] (const ActorPtr& spOther)
+			{
+				return (spNewActor == spOther);
+			});
+
+		// 없을 때만 추가
+		if (foundIter == refActors.cend())
 		{
-			(foundIter->second).push_back(spNewActor);
+			refActors.push_back(spNewActor);
+
+			// 업데이트 순서에 따른 액터 목록 처리
+			m_actorsByUpdateOrder.push_back(spNewActor);
+			std::stable_sort(m_actorsByUpdateOrder.begin(), m_actorsByUpdateOrder.end(),
+				[&](const ActorPtr& spLhs, const ActorPtr& spRhs)
+				{
+					return (spLhs->GetActorUpdateOrder() < spRhs->GetActorUpdateOrder());
+				});
 		}
 
-		m_arrUpdateActors[TO_NUM(updateOrder)].push_back(spNewActor);
 		return spNewActor;
 	}
 
@@ -120,8 +126,8 @@ public:
 	void ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
 	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);
 
-	ActorStorage& GetActorPointersStorage() { return m_mapActorPtrsStorage; }
-	const ActorStorage& GetActorPointersStorage() const { return m_mapActorPtrsStorage; }
+	LayerActors& GetLayerActors() { return m_layerActors; }
+	const LayerActors& GetLayerActors() const { return m_layerActors; }
 
 private:
 	void EraseReservedActors();
@@ -129,10 +135,10 @@ private:
 
 private:
 	std::shared_ptr<CameraActor> m_spMainCameraActor = nullptr;
-	
-	ActorStorage m_mapActorPtrsStorage; // 씬에 있는 모든 액터 (업데이트와 렌더링은 따로 관리)
-	std::array<Actors, TO_NUM(EUpdateOrder::Count)> m_arrUpdateActors; // 업데이트 상황에 따라 분리된 액터
+	Event<const EffectSpawnInfo& /* spNextScene */> m_sceneCreateEffect;
+
+	LayerActors m_layerActors; // 씬에 있는 모든 액터 (업데이트와 렌더링은 따로 관리)
+	Actors m_actorsByUpdateOrder; // 업데이트 순서에 따른 씬에 있는 모든 액터
 
 	Actors m_reserveEraseActorsForNextFrame; // 다음 프레임에서 제거될 액터들
-	Event<const EffectSpawnInfo& /* spNextScene */> m_sceneCreateEffect;
 };

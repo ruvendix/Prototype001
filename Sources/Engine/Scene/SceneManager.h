@@ -21,7 +21,7 @@ public:
 	template <typename TScene>
 	ScenePtr CreateScene()
 	{
-		const ScenePtr& spScene = std::make_shared<TScene>();
+		ScenePtr spScene = std::make_shared<TScene>();
 		spScene->Startup();
 		return spScene;
 	}

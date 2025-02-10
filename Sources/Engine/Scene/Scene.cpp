@@ -30,15 +30,13 @@ bool Scene::Update(float deltaSeconds)
 	// 이펙트 생성
 	m_sceneCreateEffect.ExcuteIfBound();
 
-	for (int32 i = 0; i < TO_NUM(EUpdateOrder::Count); ++i)
+	// 업데이트는 따로 관리하는 액터 목록으로 처리
+	for (const ActorPtr& spActorByUpdateOrder : m_actorsByUpdateOrder)
 	{
-		Actors& refVecUpdateActor = m_arrUpdateActors[i];
-		for (ActorPtr& spActor : refVecUpdateActor)
+		if ((spActorByUpdateOrder != nullptr) &&
+			(spActorByUpdateOrder->Update(deltaSeconds) == false))
 		{
-			if (spActor->Update(deltaSeconds) == false)
-			{
-				return false;
-			}
+			return false;
 		}
 	}
 
@@ -48,16 +46,13 @@ bool Scene::Update(float deltaSeconds)
 
 void Scene::Cleanup()
 {
-	for (auto iter : m_mapActorPtrsStorage)
+	for (const Actors& actors : m_layerActors)
 	{
-		Actors& refActorPtrs = (iter.second);
-		for (ActorPtr& refSpActor : refActorPtrs)
+		for (const ActorPtr& spActor : actors)
 		{
-			refSpActor->Cleanup();
+			spActor->Cleanup();
 		}
 	}
-
-	m_mapActorPtrsStorage.clear();
 }
 
 bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos) const
@@ -67,7 +62,7 @@ bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos) const
 
 void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetActor)
 {
-	m_spMainCameraActor = CreateActorToScene<CameraActor>(EActorLayerType::Unknown, EUpdateOrder::Post);
+	m_spMainCameraActor = CreateActorToScene<CameraActor>(EActorLayerType::Default, EActorUpdateOrder::Post);
 	
 	CameraComponent* pCameraComponent = m_spMainCameraActor->FindComponent<CameraComponent>();
 	ASSERT_LOG_RETURN(pCameraComponent != nullptr);
@@ -90,13 +85,7 @@ Actors& Scene::FindActors(EActorLayerType actorLayer)
 
 const Actors& Scene::FindConstActors(EActorLayerType actorLayer) const
 {
-	auto foundIter = m_mapActorPtrsStorage.find(actorLayer);
-	if (foundIter == m_mapActorPtrsStorage.cend())
-	{
-		return g_nullActorPtrs;
-	}
-
-	return (foundIter->second);
+	return (m_layerActors[TO_NUM(actorLayer)]);
 }
 
 ActorPtr Scene::FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
@@ -135,7 +124,7 @@ void Scene::EraseReservedActors()
 
 		const std::string& strActorName = spActor->GetActorName();
 
-#pragma region 레이어 액터부터 처리
+#pragma region 레이어 액터 처리
 		Actors& refLayerActors = FindActors(spActor->GetActorLayer());
 		auto foundLayerActorIter = std::find_if(refLayerActors.begin(), refLayerActors.end(),
 			[&] (const ActorPtr& spOtherActor)
@@ -149,21 +138,18 @@ void Scene::EraseReservedActors()
 		}
 #pragma endregion
 
-		for (int32 i = 0; i < TO_NUM(EUpdateOrder::Count); ++i)
-		{
-			Actors& refVecUpdateActor = m_arrUpdateActors[i];
-			auto foundUpdateActorIter = std::find_if(refVecUpdateActor.begin(), refVecUpdateActor.end(),
-				[&](const ActorPtr& spOtherActor)
-				{
-					return (spActor == spOtherActor);
-				});
-
-			if (foundUpdateActorIter != refVecUpdateActor.cend())
+#pragma region 업데이트 액터 처리
+		auto foundActorByUpdateOrderIter = std::find_if(m_actorsByUpdateOrder.begin(), m_actorsByUpdateOrder.end(),
+			[&](const ActorPtr& spOtherActor)
 			{
-				refVecUpdateActor.erase(foundUpdateActorIter);
-				break;
-			}
+				return (spActor == spOtherActor);
+			});
+
+		if (foundActorByUpdateOrderIter != m_actorsByUpdateOrder.cend())
+		{
+			m_actorsByUpdateOrder.erase(foundActorByUpdateOrderIter);
 		}
+#pragma endregion
 
 		DEFAULT_TRACE_LOG("액터 제거! (%s)", strActorName.c_str());
 	}
@@ -173,7 +159,7 @@ void Scene::EraseReservedActors()
 
 void Scene::OnCreateEffect(const EffectSpawnInfo& effectSpawnInfo)
 {
-	const std::shared_ptr<EffectActor>& spEffectActor = CreateActorToScene<EffectActor>(EActorLayerType::Effect, EUpdateOrder::Post);
+	const std::shared_ptr<EffectActor>& spEffectActor = CreateActorToScene<EffectActor>(EActorLayerType::Effect, EActorUpdateOrder::Post);
 	spEffectActor->SpawnEffect(effectSpawnInfo);
 	DEFAULT_TRACE_LOG("이펙트 생성! (%s)", effectSpawnInfo.strEffectName.c_str());
 }

@@ -3,5 +3,4 @@
 
 #include "ActorEnums.h"
 
-using ActorStorage = std::unordered_map<EActorLayerType, Actors>;
-using RenderableActorsArray = std::array<Actors, TO_NUM(EActorLayerType::Count)>;
+using LayerActors = std::array<Actors, TO_NUM(EActorLayerType::Count)>;

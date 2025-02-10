@@ -8,11 +8,11 @@ class SceneTracer
 public:
 	void Tracer();
 
-	RenderableActorsArray& GetRenderableActors() { return m_arrRenderableActorPtrs; }
-	const RenderableActorsArray& GetRenderableActors() const { return m_arrRenderableActorPtrs; }
+	LayerActors& GetRenderableActors() { return m_arrRenderableActors; }
+	const LayerActors& GetRenderableActors() const { return m_arrRenderableActors; }
 
 	void CleanupRenderableActors();
 
 private:
-	RenderableActorsArray m_arrRenderableActorPtrs;
+	LayerActors m_arrRenderableActors;
 };

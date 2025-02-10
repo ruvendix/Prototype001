@@ -114,6 +114,9 @@ public:
 	void SetActorLayer(EActorLayerType actorLayer) { m_actorLayer = actorLayer; }
 	EActorLayerType GetActorLayer() const { return m_actorLayer; }
 
+	void SetActorUpdateOrder(EActorUpdateOrder actorUpdateOrder) { m_actorUpdateOrder = actorUpdateOrder; }
+	EActorUpdateOrder GetActorUpdateOrder() const { return m_actorUpdateOrder; }
+
 	int32 GetChildCount() const { return (static_cast<int32>(m_vecChild.size())); }
 
 	void SetActorName(const std::string& strActorName) { m_strActorName = strActorName; }
@@ -124,7 +127,8 @@ private:
 	std::unordered_map<int32, ComponentPtr> m_mapComponent;
 
 	ActorBitset m_actorBitsetFlag;
-	EActorLayerType m_actorLayer = EActorLayerType::Unknown;
+	EActorLayerType m_actorLayer = EActorLayerType::Default;
+	EActorUpdateOrder m_actorUpdateOrder = EActorUpdateOrder::Default;
 
 	// 자식 액터는 레퍼런스 카운트로 갖고 있어야함!
 	Actors m_vecChild;
