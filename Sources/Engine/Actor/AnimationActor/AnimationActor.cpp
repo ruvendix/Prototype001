@@ -6,11 +6,6 @@
 
 AnimationActor::ActorLookAtStringTable AnimationActor::s_actorLookAtStringTable = { "Left", "Up", "Right", "Down" };
 
-AnimationActor::AnimationActor()
-{
-
-}
-
 AnimationActor::~AnimationActor()
 {
 

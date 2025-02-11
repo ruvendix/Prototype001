@@ -4,7 +4,7 @@
 
 #include "AnimationActor.h"
 
-DEFINE_COMPILETIMER_COUNTER(AnimationActorStateIdCount);
+DEFINE_COMPILETIMER_COUNTER(AnimationActorStateIdCounter);
 
 AnimationActorState::AnimationActorState(AnimationActor* pOwner)
 {
@@ -17,7 +17,7 @@ AnimationActorState::~AnimationActorState()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEFINE_COMPILETIME_ID(AnimationActorIdleState, AnimationActorStateIdCount)
+DEFINE_COMPILETIME_ID(AnimationActorIdleState, AnimationActorStateIdCounter)
 
 AnimationActorIdleState::~AnimationActorIdleState()
 {
@@ -29,7 +29,7 @@ void AnimationActorIdleState::UpdateState(float deltaSeconds)
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEFINE_COMPILETIME_ID(AnimationActorWalkState, AnimationActorStateIdCount)
+DEFINE_COMPILETIME_ID(AnimationActorWalkState, AnimationActorStateIdCounter)
 
 AnimationActorWalkState::~AnimationActorWalkState()
 {
@@ -59,7 +59,7 @@ void AnimationActorWalkState::UpdateState(float deltaSeconds)
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEFINE_COMPILETIME_ID(AnimationActorAttackState, AnimationActorStateIdCount)
+DEFINE_COMPILETIME_ID(AnimationActorAttackState, AnimationActorStateIdCounter)
 
 AnimationActorAttackState::~AnimationActorAttackState()
 {

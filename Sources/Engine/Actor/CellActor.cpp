@@ -70,20 +70,25 @@ void CellActor::ApplyCellPosition(const Position2d& cellPos)
 	ApplyCellPosition(cellPos.x, cellPos.y);
 }
 
-void CellActor::ApplyRandomCellPosition()
+Position2d CellActor::ApplyRandomCellPosition()
 {
+	Position2d randomCellPos;
+
 	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, randomCellPos);
 
 	while (true)
 	{
-		const Position2d& randomCellPos = WorldContext::I()->CalculateRandomCellPosition();
-		if (pCurrentScene->CheckCanMoveToCellPosition(randomCellPos) == true)
+		const Position2d& tempRandomCellPos = WorldContext::I()->CalculateRandomCellPosition();
+		if (pCurrentScene->CheckCanMoveToCellPosition(tempRandomCellPos) == true)
 		{
-			ApplyCellPosition(randomCellPos);
-			return;
+			ApplyCellPosition(tempRandomCellPos);
+			randomCellPos = std::move(tempRandomCellPos);
+			break;
 		}
 	}
+
+	return randomCellPos;
 }
 
 bool CellActor::CheckEqaulCellPosition(const Position2d& otherCellPos) const

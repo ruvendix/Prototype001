@@ -19,8 +19,8 @@ public:
 		spRes->SetTag(strResKey);
 
 		// 생성하는 순간부터 관리함
-		const auto& retInsert = m_mapRes.insert(std::make_pair(strResKey, spRes));
-		ASSERT_LOG(retInsert.second == true);
+		auto insertedIter = m_mapRes.insert(std::make_pair(strResKey, spRes));
+		ASSERT_LOG(insertedIter.second == true);
 
 		return spRes;
 	}
@@ -33,7 +33,7 @@ public:
 
 	const PersistantResourcePtr& FindPersistantSharedResource(const std::string& strResKey) const
 	{
-		const auto& foundIter = m_mapRes.find(strResKey);
+		auto foundIter = m_mapRes.find(strResKey);
 		if (foundIter == m_mapRes.cend())
 		{
 			return g_spNullResource;
@@ -53,8 +53,9 @@ public:
 		PersistantResourcePtr spRes = std::make_shared<TPersistantResource>();
 		spRes->SetResourceRelativePath(strResKey);
 		spRes->LoadResource(strResKey);
-		const auto& retInsert = m_mapRes.insert(std::make_pair(strResKey, spRes));
-		ASSERT_LOG(retInsert.second == true);
+
+		auto insertedIter = m_mapRes.insert(std::make_pair(strResKey, spRes));
+		ASSERT_LOG(insertedIter.second == true);
 
 		return spRes;
 	}

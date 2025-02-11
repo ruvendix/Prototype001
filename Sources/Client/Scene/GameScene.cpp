@@ -5,7 +5,7 @@
 #include "Engine/Actor/WorldTileMapActor.h"
 #include "Client/World/WorldBackgroundActor.h"
 #include "Client/Player/PlayerActor.h"
-#include "Client/Monster/SnakeActor.h"
+#include "Client/EnemyMonster/SnakeActor.h"
 
 GameScene::GameScene()
 {
@@ -48,19 +48,16 @@ void GameScene::Startup()
 	m_spPlayerActor->SetWorldTileMapActor(m_spWorldTileMapActor);
 
 	// 기본 뱀 액터 추가
-	m_spSnakeActor = CreateActorToScene<SnakeActor>(EActorLayerType::Creature);
+	m_spSnakeActor = CreateActor<SnakeActor>(EActorLayerType::Creature);
 	m_spSnakeActor->SetActorName("뱀");
 	m_spSnakeActor->SetWorldTileMapActor(m_spWorldTileMapActor);
 
-	// 하나는 아무 위치에 쏘기
-	// 랜덤 위치는?
-#pragma region 일단은 뱀 몇마리 띄우고 이걸 씬에다 넣을 거임
-	for (int32 i = 0; i < 100; ++i)
-	{
-		std::shared_ptr<SnakeActor> newSnakeActor = CreateCloneActorToScene(m_spSnakeActor);
-		newSnakeActor->ApplyRandomCellPosition();
-	}
-#pragma endregion
+	// 적군들 자동 생성기
+	m_spEnemyRespawner = std::make_shared<EnemyRespawner>();
+	m_spEnemyRespawner->Startup();
+	m_spEnemyRespawner->SetMaxEnemyCount(10);
+	m_spEnemyRespawner->AddPrototypeEnemyActor(m_spSnakeActor);
+	m_spEnemyRespawner->RespawnEnemies(this);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
  	RegisterMainCameraActorToScene(m_spPlayerActor);
@@ -68,7 +65,14 @@ void GameScene::Startup()
 
 bool GameScene::Update(float deltaSeconds)
 {
-	return (Super::Update(deltaSeconds));
+	if (Super::Update(deltaSeconds) == false)
+	{
+		return false;
+	}
+
+	// 리스폰된 적군은 다음 프레임부터 활동함 (렌더링은 바로 개시)
+	m_spEnemyRespawner->Update(deltaSeconds);
+	return true;
 }
 
 void GameScene::Cleanup()

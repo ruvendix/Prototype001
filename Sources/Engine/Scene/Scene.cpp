@@ -2,11 +2,6 @@
 #include "Pch.h"
 #include "Scene.h"
 
-namespace
-{
-	Actors g_nullActorPtrs;
-}
-
 Scene::Scene()
 {
 
@@ -30,25 +25,24 @@ bool Scene::Update(float deltaSeconds)
 	// 이펙트 생성
 	m_sceneCreateEffect.ExcuteIfBound();
 
-	// 업데이트는 따로 관리하는 액터 목록으로 처리
-	for (const ActorPtr& spActorByUpdateOrder : m_actorsByUpdateOrder)
+	// 업데이트 순서대로 이미 정렬된 상태
+	for (const ActorPtr& spActor : m_actors)
 	{
-		if ((spActorByUpdateOrder != nullptr) &&
-			(spActorByUpdateOrder->Update(deltaSeconds) == false))
+		if ((spActor != nullptr) &&
+			(spActor->Update(deltaSeconds) == false))
 		{
 			return false;
 		}
 	}
 
-	// 씬은 업데이트가 2종류 또는 여러 종류
 	return true;
 }
 
 void Scene::Cleanup()
 {
-	for (const Actors& actors : m_layerActors)
+	for (const ActorPtr& spActor : m_actors)
 	{
-		for (const ActorPtr& spActor : actors)
+		if (spActor != nullptr)
 		{
 			spActor->Cleanup();
 		}
@@ -78,26 +72,16 @@ void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetAct
 	SceneRenderer::I()->SetMainCameraActor(m_spMainCameraActor);
 }
 
-Actors& Scene::FindActors(EActorLayerType actorLayer)
-{
-	return const_cast<Actors&>(FindConstActors(actorLayer));
-}
-
-const Actors& Scene::FindConstActors(EActorLayerType actorLayer) const
-{
-	return (m_layerActors[TO_NUM(actorLayer)]);
-}
-
 ActorPtr Scene::FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
 {
-	std::vector<std::shared_ptr<CellActor>> foundActorPtrs;
-	FindDerivedActors<CellActor>(actorLayer, foundActorPtrs);
-	if (foundActorPtrs.empty() == true)
+	std::vector<std::shared_ptr<CellActor>> foundCellActors;
+	FindDerivedActors<CellActor>(actorLayer, foundCellActors);
+	if (foundCellActors.empty() == true)
 	{
 		return nullptr;
 	}
 
-	for (const std::shared_ptr<CellActor>& spCellActor : foundActorPtrs)
+	for (const std::shared_ptr<CellActor>& spCellActor : foundCellActors)
 	{
 		if (spCellActor->CheckEqaulCellPosition(cellPos) == true)
 		{
@@ -115,41 +99,26 @@ void Scene::EraseReservedActors()
 		return;
 	}
 
-	for (const ActorPtr& spActor : m_reserveEraseActorsForNextFrame)
+	for (const ActorPtr& spReserveEraseActor : m_reserveEraseActorsForNextFrame)
 	{
-		if (spActor == nullptr)
+		if (spReserveEraseActor == nullptr)
 		{
 			continue;
 		}
 
-		const std::string& strActorName = spActor->GetActorName();
+		// 제거하기 전에 액터의 이름은 백업
+		const std::string& strActorName = spReserveEraseActor->GetActorName();
 
-#pragma region 레이어 액터 처리
-		Actors& refLayerActors = FindActors(spActor->GetActorLayer());
-		auto foundLayerActorIter = std::find_if(refLayerActors.begin(), refLayerActors.end(),
+		auto foundEraseActorIter = std::find_if(m_actors.begin(), m_actors.end(),
 			[&] (const ActorPtr& spOtherActor)
 			{
-				return (spActor == spOtherActor);
+				return (spReserveEraseActor == spOtherActor);
 			});
 
-		if (foundLayerActorIter != refLayerActors.cend())
+		if (foundEraseActorIter != m_actors.cend())
 		{
-			refLayerActors.erase(foundLayerActorIter);
+			m_actors.erase(foundEraseActorIter);
 		}
-#pragma endregion
-
-#pragma region 업데이트 액터 처리
-		auto foundActorByUpdateOrderIter = std::find_if(m_actorsByUpdateOrder.begin(), m_actorsByUpdateOrder.end(),
-			[&](const ActorPtr& spOtherActor)
-			{
-				return (spActor == spOtherActor);
-			});
-
-		if (foundActorByUpdateOrderIter != m_actorsByUpdateOrder.cend())
-		{
-			m_actorsByUpdateOrder.erase(foundActorByUpdateOrderIter);
-		}
-#pragma endregion
 
 		DEFAULT_TRACE_LOG("액터 제거! (%s)", strActorName.c_str());
 	}

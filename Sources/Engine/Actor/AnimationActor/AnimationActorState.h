@@ -1,7 +1,7 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-DECLARE_COMPILETIMER_COUNTER(AnimationActorStateIdCount);
+DECLARE_COMPILETIMER_COUNTER(AnimationActorStateIdCounter);
 
 class AnimationActor;
 

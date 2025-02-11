@@ -23,13 +23,19 @@
     <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\SnakeActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyRespawner\EnemyRespawner.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\GameApplication\WindowProcedure.cpp" />
-    <ClCompile Include="Sources\Client\Monster\SnakeActor.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -197,14 +203,20 @@
     <ClInclude Include="Sources\Client\Editor\EditorActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\SnakeActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyRespawner\EnemyRespawner.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\GameApplication.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\GameApplication\WindowProcedure.h" />
     <ClInclude Include="Sources\Client\Global\Inclusion.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\Monster\SnakeActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">

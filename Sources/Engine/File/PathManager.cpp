@@ -35,8 +35,8 @@ void PathManager::AddPathAtCurrentWorkingDirectory(const std::string& strRelativ
 
 void PathManager::AddPath(const std::string& strKey, const std::filesystem::path& filePath)
 {
-	const auto& retInsert = m_mapPath.insert(std::make_pair(strKey, filePath));
-	if (retInsert.second == false)
+	auto insertedIter = m_mapPath.insert(std::make_pair(strKey, filePath));
+	if (insertedIter.second == false)
 	{
 		// ¿À·ù
 	}
@@ -44,7 +44,7 @@ void PathManager::AddPath(const std::string& strKey, const std::filesystem::path
 
 const std::filesystem::path& PathManager::FindPath(const std::string& strKey)
 {
-	const auto& foundIter = m_mapPath.find(strKey);
+	auto foundIter = m_mapPath.find(strKey);
 	if (foundIter == m_mapPath.cend())
 	{
 		return g_nullFilePath;

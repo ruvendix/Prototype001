@@ -20,8 +20,8 @@ void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLog
 {
 	ErrorInfo errorInfo{ pLogCategory, strFormatError };
 
-	const auto& retInsert = m_mapErrorInfo.insert(std::make_pair(errorCode, errorInfo));
-	if (retInsert.second == false)
+	auto insertedIter = m_mapErrorInfo.insert(std::make_pair(errorCode, errorInfo));
+	if (insertedIter.second == false)
 	{
 		ERROR_LOG(LogDefault, "오류 내용 등록 실패!");
 	}
@@ -29,7 +29,7 @@ void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLog
 
 const ErrorInfo* ErrorHandler::FindErrorInfo(EErrorCode errorCode) const
 {
-	const auto& foundIter = m_mapErrorInfo.find(errorCode);
+	auto foundIter = m_mapErrorInfo.find(errorCode);
 	if (foundIter == m_mapErrorInfo.cend())
 	{
 		return nullptr;

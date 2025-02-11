@@ -132,7 +132,5 @@ using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
 using EffectPtr = std::shared_ptr<class Effect>;
 using AnimationActorStatePtr = std::shared_ptr<class AnimationActorState>;
 
-using Actors = std::vector<ActorPtr>;
-
 // Bound된 함수는 항상 void() 형식
 using BoundFunction = std::function<void()>;

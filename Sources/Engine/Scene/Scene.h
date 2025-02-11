@@ -49,23 +49,20 @@ public:
 	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
 	std::shared_ptr<TActor> CreateActorToSceneImpl(const std::shared_ptr<TActor>& spNewActor, EActorLayerType actorLayer)
 	{
-		Actors& refActors = FindActors(actorLayer);
-
 		// 중복된 액터인지 확인
-		auto foundIter = std::find_if(refActors.begin(), refActors.end(),
+		auto foundIter = std::find_if(m_actors.begin(), m_actors.end(),
 			[&] (const ActorPtr& spOther)
 			{
 				return (spNewActor == spOther);
 			});
 
 		// 없을 때만 추가
-		if (foundIter == refActors.cend())
+		if (foundIter == m_actors.cend())
 		{
-			refActors.push_back(spNewActor);
+			m_actors.push_back(spNewActor);
 
 			// 업데이트 순서에 따른 액터 목록 처리
-			m_actorsByUpdateOrder.push_back(spNewActor);
-			std::stable_sort(m_actorsByUpdateOrder.begin(), m_actorsByUpdateOrder.end(),
+			std::stable_sort(m_actors.begin(), m_actors.end(),
 				[&](const ActorPtr& spLhs, const ActorPtr& spRhs)
 				{
 					return (spLhs->GetActorUpdateOrder() < spRhs->GetActorUpdateOrder());
@@ -78,15 +75,15 @@ public:
 	template <typename TActor>
 	void FindDerivedActors(EActorLayerType actorLayer, std::vector<std::shared_ptr<TActor>>& outActorPtrs) const
 	{
-		const Actors& foundActorPtrs = FindConstActors(actorLayer);
-		if (foundActorPtrs.empty() == true)
+		if (m_actors.empty() == true)
 		{
 			return;
 		}
 
-		for (const ActorPtr& spActor : foundActorPtrs)
+		for (const ActorPtr& spActor : m_actors)
 		{
-			if (spActor == nullptr)
+			if ((spActor == nullptr) ||
+				(spActor->GetActorLayer() != actorLayer))
 			{
 				continue;
 			}
@@ -119,15 +116,13 @@ public:
 public:
 	void RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetActor);
 	
-	Actors& FindActors(EActorLayerType actorLayer);
-	const Actors& FindConstActors(EActorLayerType actorLayer) const;
 	ActorPtr FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const;
 
 	void ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
 	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);
 
-	LayerActors& GetLayerActors() { return m_layerActors; }
-	const LayerActors& GetLayerActors() const { return m_layerActors; }
+	Actors& GetActors() { return m_actors; }
+	const Actors& GetActors() const { return m_actors; }
 
 private:
 	void EraseReservedActors();
@@ -137,8 +132,6 @@ private:
 	std::shared_ptr<CameraActor> m_spMainCameraActor = nullptr;
 	Event<const EffectSpawnInfo& /* spNextScene */> m_sceneCreateEffect;
 
-	LayerActors m_layerActors; // 씬에 있는 모든 액터 (업데이트와 렌더링은 따로 관리)
-	Actors m_actorsByUpdateOrder; // 업데이트 순서에 따른 씬에 있는 모든 액터
-
+	Actors m_actors; // 씬에 있는 모든 액터 (업데이트는 정렬로 처리, 렌더링은 따로 처리)
 	Actors m_reserveEraseActorsForNextFrame; // 다음 프레임에서 제거될 액터들
 };

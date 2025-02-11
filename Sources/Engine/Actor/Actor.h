@@ -36,7 +36,7 @@ public:
 	template <typename TComponent>
 	const TComponent* FindConstComponent() const
 	{
-		const auto& foundIter = m_mapComponent.find(TComponent::s_id);
+		auto foundIter = m_mapComponent.find(TComponent::s_id);
 		if (foundIter == m_mapComponent.cend())
 		{
 			return nullptr;
@@ -59,8 +59,8 @@ public:
 		spComponent->Startup();
 		spComponent->SetOwner(this);
 
-		const auto& retInsert = m_mapComponent.insert(std::make_pair(TComponent::s_id, spComponent));
-		if (retInsert.second == false)
+		auto insertedIter = m_mapComponent.insert(std::make_pair(TComponent::s_id, spComponent));
+		if (insertedIter.second == false)
 		{
 			return nullptr;
 		}

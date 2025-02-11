@@ -1,9 +1,11 @@
-// Copyright 2024 Ruvendix, All Rights Reserved.
+// Copyright 2025 Ruvendix, All Rights Reserved.
 #include "Pch.h"
 #include "SnakeActor.h"
 
 #include "Engine/Actor/WorldTileMapActor.h"
 #include "Engine/Actor/AnimationActor/AnimationActorState.h"
+
+DEFINE_COMPILETIME_ID(SnakeActor, EnemeyActorIdCounter)
 
 class SnakeActor::Pimpl
 {
@@ -94,6 +96,8 @@ void SnakeActor::ProcessDamaged()
 	effectSpawnInfo.effectSize = Size(80, 80);
 	pCurrentScene->ReserveCreateEffect(effectSpawnInfo);
 
+	// »ç¸Á ·çÆ¾
+	DecreaseEnemyCountToEnemyRespawner();
 	pCurrentScene->ReserveEraseActor(shared_from_this());
 	DEFAULT_TRACE_LOG("¹ì »ç¸Á!");
 }

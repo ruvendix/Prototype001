@@ -10,6 +10,9 @@ public:
     void Update(float deltaSeconds);
     void Reset();
 
+    void SetOn() { m_bOn = true; }
+    void SetOff() { m_bOn = false; }
+
     void SetTriggerTime(float triggerTime) { m_triggerTime = triggerTime; }
     void SetLoop(bool bLoop) { m_bLoop = bLoop; }
     void SetSwitch(bool bOn) { m_bOn = bOn; }

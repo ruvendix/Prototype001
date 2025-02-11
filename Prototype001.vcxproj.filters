@@ -104,14 +104,17 @@
     <Filter Include="Sources\Engine\Actor\AnimationActor">
       <UniqueIdentifier>{8c257be7-2e2c-43cd-87c7-2a4168f3a372}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Client\Monster">
-      <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Engine\Actor\EffectActor">
       <UniqueIdentifier>{66038f97-ccd5-4c54-a60d-6329d43da8b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Engine\Resource\Effect">
       <UniqueIdentifier>{68cd27b8-05ab-479e-8fec-94ed58b13f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\EnemyRespawner">
+      <UniqueIdentifier>{67536825-0764-4ae2-8348-df8d940fbfe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\EnemyMonster">
+      <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +292,6 @@
     <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.cpp">
       <Filter>Sources\Engine\Actor\AnimationActor</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Monster\SnakeActor.cpp">
-      <Filter>Sources\Client\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Client\ClientMain.cpp">
       <Filter>Sources\Client</Filter>
     </ClCompile>
@@ -300,6 +300,15 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Resource\Effect\Effect.cpp">
       <Filter>Sources\Engine\Resource\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyRespawner\EnemyRespawner.cpp">
+      <Filter>Sources\Client\EnemyRespawner</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\SnakeActor.cpp">
+      <Filter>Sources\Client\EnemyMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor.cpp">
+      <Filter>Sources\Client\EnemyMonster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -546,9 +555,6 @@
     <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.h">
       <Filter>Sources\Engine\Actor\AnimationActor</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\Monster\SnakeActor.h">
-      <Filter>Sources\Client\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\ActorDataTypes.h">
       <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
@@ -566,6 +572,15 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Resource\Effect\EffectStructs.h">
       <Filter>Sources\Engine\Resource\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyRespawner\EnemyRespawner.h">
+      <Filter>Sources\Client\EnemyRespawner</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\SnakeActor.h">
+      <Filter>Sources\Client\EnemyMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor.h">
+      <Filter>Sources\Client\EnemyMonster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

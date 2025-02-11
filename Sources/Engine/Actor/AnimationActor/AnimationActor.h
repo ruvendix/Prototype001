@@ -15,7 +15,7 @@ public:
 	using ActorLookAtDynamicSpriteTable = std::array<DynamicSpritePtr, TO_NUM(EActorLookAtType::Count)>;
 
 public:
-	AnimationActor();
+	using Super::Super;
 	virtual ~AnimationActor();
 
 public:

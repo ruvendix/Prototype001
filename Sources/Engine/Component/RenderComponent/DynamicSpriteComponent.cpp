@@ -45,7 +45,7 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 			}
 
 			// 이진 검색으로 찾기 (무조건 타임 테이블 안에 있음)
-			const auto& foundIter = std::lower_bound(vecTimeTable.cbegin(), vecTimeTable.cend(), m_localTime);
+			auto foundIter = std::lower_bound(vecTimeTable.cbegin(), vecTimeTable.cend(), m_localTime);
 			m_currentSpriteDrawInfoIdx = std::distance(vecTimeTable.cbegin(), foundIter);
 		}
 		else
