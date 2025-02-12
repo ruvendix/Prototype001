@@ -24,7 +24,7 @@ public:
 
 public:
 	template <typename TActorState>
-	void CreateActorStateLookAtDynamicSprites(const std::string& strPrefix, bool bLoop)
+	void CreateActorStateLookAtDynamicSprites(const std::string& strPrefix, bool bLoopDynamicSprite)
 	{
 		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
 		if (foundIter != m_mapActorStateDynamicSprite.cend())
@@ -41,7 +41,7 @@ public:
 			// 스프라이트 로딩인데 없으니 생성
 			const DynamicSpritePtr& spDynamicSprite = ResourceMananger::I()->CreateDynamicSprite(strDynamicSpriteName);
 			ASSERT_LOG(spDynamicSprite != nullptr);
-			spDynamicSprite->SetLoopDynamicSprite(bLoop);
+			spDynamicSprite->SetLoopDynamicSprite(bLoopDynamicSprite);
 			spDynamicSprite->FindAndSetTexture(m_actorLookAtTexturePathTable[i]);
 
 			actorLookAtDynamicSpriteTable[i] = spDynamicSprite;

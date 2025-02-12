@@ -17,9 +17,7 @@ void CameraActor::Startup()
 
 bool CameraActor::CheckInCameraVision(const Actor* pActor) const
 {
-	const TransformComponent* pTargetTransformComponent = pActor->BringTransformComponent();
-	ASSERT_LOG(pTargetTransformComponent != nullptr);
-	const Vec2d& targetWorldPos = pTargetTransformComponent->GetPosition();
+	const Vec2d& targetWorldPos = pActor->BringPosition();
 	return (CheckInCameraVision(targetWorldPos));
 }
 

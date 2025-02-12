@@ -122,3 +122,8 @@ void DynamicSpriteComponent::ApplyDynamicSprite(const DynamicSpritePtr& spDynami
 	m_spriteKeyFrameCount = spDynamicSprite->GetSpriteKeyFrameCount();
 	m_spDynamicSprite = spDynamicSprite;
 }
+
+float DynamicSpriteComponent::BringDynamicSpriteDurationTime() const
+{
+	return (m_spDynamicSprite->GetDurationTime());
+}

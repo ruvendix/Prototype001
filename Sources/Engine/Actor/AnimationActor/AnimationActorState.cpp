@@ -73,7 +73,7 @@ void AnimationActorAttackState::UpdateState(float deltaSeconds)
 
 	DynamicSpriteComponent* pDynamicSpriteComponent = pOwner->FindComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
-	if (pDynamicSpriteComponent->IsAnimationEnd() == false)
+	if (pDynamicSpriteComponent->IsDynamicSpriteEnd() == false)
 	{
 		return;
 	}

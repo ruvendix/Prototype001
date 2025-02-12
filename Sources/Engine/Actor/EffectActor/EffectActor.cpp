@@ -2,6 +2,9 @@
 #include "Pch.h"
 #include "EffectActor.h"
 
+#include "Engine/Component/EffectComponent/FollowerEffectComponent.h"
+#include "Engine/Component/EffectComponent/LifeTimeEffectComponent.h"
+
 EffectActor::EffectActor()
 {
 	
@@ -15,7 +18,9 @@ EffectActor::~EffectActor()
 void EffectActor::Startup()
 {
 	Super::Startup();
+
 	AddComponent<DynamicSpriteComponent>();
+	AddComponent<LifeTimeEffectComponent>();
 }
 
 bool EffectActor::Update(float deltaSeconds)
@@ -23,17 +28,6 @@ bool EffectActor::Update(float deltaSeconds)
 	if (Super::Update(deltaSeconds) == false)
 	{
 		return false;
-	}
-
-	// 각 기능은 컴포넌트로 분기
-	DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
-	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
-	if (pDynamicSpriteComponent->IsAnimationEnd())
-	{
-		Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-		ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
-		pCurrentScene->ReserveEraseActor(shared_from_this());
-		return true;
 	}
 
 	return true;
@@ -59,4 +53,22 @@ void EffectActor::SpawnEffect(const EffectSpawnInfo& effectSpawnInfo)
 
 	const Vec2d& vEffectSwpanWorldPos = CellActor::ConvertCellPositionToWorldPosition(effectSpawnInfo.spawnCellPos);
 	pTransformComponent->SetPosition(vEffectSwpanWorldPos);
+
+	LifeTimeEffectComponent* pLifeTimeEffectComponent = FindComponent<LifeTimeEffectComponent>();
+	ASSERT_LOG_RETURN(pLifeTimeEffectComponent != nullptr);
+
+	// LifeTime을 따로 설정하지 않았다면 DynamicSprite의 재생 시간을 적용
+	float dynamicSpriteDurationTime = pDynamicSpriteComponent->BringDynamicSpriteDurationTime();
+	if (effectSpawnInfo.lifeTime > dynamicSpriteDurationTime)
+	{
+		dynamicSpriteDurationTime = effectSpawnInfo.lifeTime;
+	}
+	pLifeTimeEffectComponent->SetLifeTime(dynamicSpriteDurationTime);
+
+	if (effectSpawnInfo.spTargetActor != nullptr)
+	{
+		FollowerEffectComponent* pFollowerEffectComponent = AddComponent<FollowerEffectComponent>();
+		ASSERT_LOG_RETURN(pFollowerEffectComponent != nullptr);
+		pFollowerEffectComponent->SetTargetActor(effectSpawnInfo.spTargetActor);
+	}
 }

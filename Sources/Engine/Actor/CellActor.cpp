@@ -60,9 +60,8 @@ void CellActor::ApplyCellPosition(int32 x, int32 y)
 {
 	m_cellPos = Position2d{ x, y };
 
-	TransformComponent* pTransformComponent = BringTransformComponent();
-	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
-	pTransformComponent->SetPosition(ConvertCellPositionToWorldPosition(x, y));
+	const Vec2d& vWorldPos = ConvertCellPositionToWorldPosition(x, y);
+	ApplyPosition(vWorldPos);
 }
 
 void CellActor::ApplyCellPosition(const Position2d& cellPos)
@@ -83,7 +82,7 @@ Position2d CellActor::ApplyRandomCellPosition()
 		if (pCurrentScene->CheckCanMoveToCellPosition(tempRandomCellPos) == true)
 		{
 			ApplyCellPosition(tempRandomCellPos);
-			randomCellPos = std::move(tempRandomCellPos);
+			randomCellPos = tempRandomCellPos;
 			break;
 		}
 	}
@@ -93,8 +92,7 @@ Position2d CellActor::ApplyRandomCellPosition()
 
 bool CellActor::CheckEqaulCellPosition(const Position2d& otherCellPos) const
 {
-	const TransformComponent* pTransformComponent = BringTransformComponent();
-	ASSERT_LOG_RETURN_VALUE(pTransformComponent != nullptr, false);
-	const Position2d& myCellPos = CellActor::ConvertWorldPositionToCellPosition(pTransformComponent->GetPosition());
+	const Vec2d& vWorldPos = BringPosition();
+	const Position2d& myCellPos = CellActor::ConvertWorldPositionToCellPosition(vWorldPos);
 	return (myCellPos == otherCellPos);
 }

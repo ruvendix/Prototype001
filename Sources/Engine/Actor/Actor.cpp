@@ -113,7 +113,7 @@ void Actor::AddChild(const ActorPtr& spChild)
 void Actor::ApplyScreenCenterPosition()
 {
 	const Size& halfResolution = SceneRenderer::I()->GetViewerHalfResoultion();
-	BringTransformComponent()->SetPosition(static_cast<float>(halfResolution.width), static_cast<float>(halfResolution.height));
+	ApplyPosition(static_cast<float>(halfResolution.width), static_cast<float>(halfResolution.height));
 }
 
 TransformComponent* Actor::BringTransformComponent()
@@ -124,6 +124,26 @@ TransformComponent* Actor::BringTransformComponent()
 const TransformComponent* Actor::BringTransformComponent() const
 {
 	return (FindConstComponent<TransformComponent>());
+}
+
+void Actor::ApplyPosition(float x, float y)
+{
+	Vec2d vPos(x, y);
+	ApplyPosition(vPos);
+}
+
+void Actor::ApplyPosition(const Vec2d& vPos)
+{
+	TransformComponent* pTransformComponent = BringTransformComponent();
+	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
+	pTransformComponent->SetPosition(vPos);
+}
+
+const Vec2d& Actor::BringPosition() const
+{
+	const TransformComponent* pTransformComponent = BringTransformComponent();
+	ASSERT_LOG(pTransformComponent != nullptr);
+	return (pTransformComponent->GetPosition());
 }
 
 void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent) const

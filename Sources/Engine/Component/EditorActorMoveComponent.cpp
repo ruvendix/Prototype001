@@ -16,16 +16,17 @@ EditorActorMoveComponent::~EditorActorMoveComponent()
 
 bool EditorActorMoveComponent::Update(float deltaSeconds)
 {
-	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
-	Vec2d vActorNextPos = pTransformComponent->GetPosition();
+	Actor* pOwner = GetOwner();
+	ASSERT_LOG_RETURN_VALUE(pOwner != nullptr, false);
 
+	Vec2d vActorNextPos = pOwner->BringPosition();
 	Vec2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
 	vActorNextPos += vMovePos;
 
 	vActorNextPos.x = global::Clamp(vActorNextPos.x, m_movableRangeRect.left, m_movableRangeRect.right);
 	vActorNextPos.y = global::Clamp(vActorNextPos.y, m_movableRangeRect.top, m_movableRangeRect.bottom);
 
-	pTransformComponent->SetPosition(vActorNextPos);
+	pOwner->ApplyPosition(vActorNextPos);
 	return true;
 }
 

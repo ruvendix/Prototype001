@@ -79,6 +79,12 @@
     <ClCompile Include="Sources\Engine\Component\EditorActorMoveComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\EffectComponent\FollowerEffectComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\EffectComponent\LifeTimeEffectComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -264,6 +270,12 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\EditorActorMoveComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\EffectComponent\FollowerEffectComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\EffectComponent\LifeTimeEffectComponent.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\RenderComponent\DynamicSpriteComponent.h">

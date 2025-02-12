@@ -16,13 +16,14 @@ CellActorMoveComponent::~CellActorMoveComponent()
 
 bool CellActorMoveComponent::Update(float deltaSeconds)
 {
-	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
-	Vec2d vActorNextPos = pTransformComponent->GetPosition();
+	Actor* pOwner = GetOwner();
+	ASSERT_LOG_RETURN_VALUE(pOwner != nullptr, false);
 
+	Vec2d vActorNextPos = pOwner->BringPosition();
 	Vec2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
 	vActorNextPos += vMovePos;
 
-	pTransformComponent->SetPosition(vActorNextPos);
+	pOwner->ApplyPosition(vActorNextPos);
 	return true;
 }
 
@@ -40,8 +41,9 @@ void CellActorMoveComponent::ApplyMoveDirection(const Vec2d& vMoveDir)
 
 bool CellActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 {
-	TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
-	const Vec2d& currentPos = pTransformComponent->GetPosition();
+	Actor* pOwner = GetOwner();
+	ASSERT_LOG_RETURN_VALUE(pOwner != nullptr, false);
+	const Vec2d& currentPos = pOwner->BringPosition();
 
 	// 이제 그 둘의 거리 비교
 	const Vec2d& diffPos = (m_destPos - currentPos);
@@ -54,7 +56,7 @@ bool CellActorMoveComponent::CheckGoalPosition(float deltaSeconds) const
 			return false;
 		}
 
-		pTransformComponent->SetPosition(m_destPos);
+		pOwner->ApplyPosition(m_destPos);
 		DEFAULT_TRACE_LOG("목표지점까지 너무 멀어서 강제로 세팅!");
 	}
 	
@@ -75,9 +77,6 @@ void CellActorMoveComponent::ApplyDestinationDataToOwner()
 		return;
 	}
 
+	pOwner->ApplyPosition(m_destPos);
 	pOwner->SetCellPosition(m_destCellPos);
-
-	TransformComponent* pTransformComponent = pOwner->BringTransformComponent();
-	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
-	pTransformComponent->SetPosition(m_destPos);
 }

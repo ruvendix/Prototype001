@@ -116,6 +116,9 @@
     <Filter Include="Sources\Client\EnemyMonster">
       <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Engine\Component\EffectComponent">
+      <UniqueIdentifier>{da40d7ba-221f-4cc0-8565-2b9f149c283f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -309,6 +312,12 @@
     </ClCompile>
     <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor.cpp">
       <Filter>Sources\Client\EnemyMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\EffectComponent\FollowerEffectComponent.cpp">
+      <Filter>Sources\Engine\Component\EffectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Component\EffectComponent\LifeTimeEffectComponent.cpp">
+      <Filter>Sources\Engine\Component\EffectComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -581,6 +590,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor.h">
       <Filter>Sources\Client\EnemyMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\EffectComponent\FollowerEffectComponent.h">
+      <Filter>Sources\Engine\Component\EffectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Component\EffectComponent\LifeTimeEffectComponent.h">
+      <Filter>Sources\Engine\Component\EffectComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

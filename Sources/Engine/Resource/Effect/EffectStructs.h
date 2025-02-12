@@ -6,4 +6,6 @@ struct EffectSpawnInfo
 	std::string strEffectName;
 	Position2d spawnCellPos;
 	Size effectSize;
+	float lifeTime = 0.0f;
+	ActorPtr spTargetActor = nullptr;
 };

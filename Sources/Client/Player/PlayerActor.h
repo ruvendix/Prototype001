@@ -1,9 +1,6 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class WorldTileMapActor;
-
-// 일단은 클라이언트에 있는 걸 사용
 class PlayerActor : public AnimationActor
 {
 	DECLARE_PIMPL;

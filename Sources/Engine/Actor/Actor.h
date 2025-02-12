@@ -97,9 +97,14 @@ public:
 	void AddChild(const ActorPtr& spChild);
 	void ApplyScreenCenterPosition();
 
-	// 자주 사용해서 따로 빼놓음
+#pragma region 자주 사용해서 따로 만듬
 	TransformComponent* BringTransformComponent();
 	const TransformComponent* BringTransformComponent() const;
+
+	void ApplyPosition(float x, float y);
+	void ApplyPosition(const Vec2d& vPos);
+	const Vec2d& BringPosition() const;
+#pragma endregion
 
 	void FindRenderComponents(RenderComponentVector& outVecRenderComponent) const;
 

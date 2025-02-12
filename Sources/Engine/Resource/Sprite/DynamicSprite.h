@@ -27,9 +27,11 @@ public:
 
 	void SetLoopDynamicSprite(bool bLoop) { m_bLoop = bLoop; }
 	bool IsLoopDynamicSprite() const { return (m_bLoop == true); }
-	
+
 	const std::vector<float>& GetTimeTable() const { return m_vecTimeTable; }
 	int32 GetSpriteKeyFrameCount() const { return m_vecSpriteDrawInfo.size(); }
+
+	float GetDurationTime() const { return (m_vecTimeTable.back()); }
 
 private:
 	std::vector<float> m_vecTimeTable; 

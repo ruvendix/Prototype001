@@ -33,7 +33,10 @@ void SceneTracer::Tracer()
 		[](const ActorPtr& spLhs, const ActorPtr& spRhs)
 		{
 			const TransformComponent* pLhsTransformComponent = spLhs->BringTransformComponent();
+			ASSERT_LOG(pLhsTransformComponent != nullptr);
+
 			const TransformComponent* pRhsTransformComponent = spRhs->BringTransformComponent();
+			ASSERT_LOG(pRhsTransformComponent != nullptr);
 
 			return (pLhsTransformComponent->GetPositionY() < pRhsTransformComponent->GetPositionY());
 		});
