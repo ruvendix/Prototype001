@@ -8,8 +8,8 @@ template <typename TReturn, typename... TArgs>
 class DelegatorBase<TReturn(TArgs...)>
 {
 public:
-    virtual TReturn CallFunctions(TArgs&&... args) const = 0;
-    virtual TReturn CallFixedArgumentFunctions() const = 0;
+    virtual TReturn InvokeFunctions(TArgs&&... args) const = 0;
+    virtual TReturn InvokeFixedArgumentFunctions() const = 0;
 
 public:
     template <typename TClass>
@@ -87,7 +87,7 @@ template <typename... TArgs>
 class Delegator<void(TArgs...)> : public DelegatorBase<void(TArgs...)>
 {
 public:
-    virtual void CallFunctions(TArgs&&... args) const override
+    virtual void InvokeFunctions(TArgs&&... args) const override
     {
         for (const auto& boundFunc : this->m_vecBoundFunc)
         {
@@ -95,7 +95,7 @@ public:
         }
     }
 
-    virtual void CallFixedArgumentFunctions() const override
+    virtual void InvokeFixedArgumentFunctions() const override
     {
         for (const auto& boundFixedArgsFunction : this->m_vecBoundFixedArgsFunc)
         {
@@ -108,7 +108,7 @@ template <typename TReturn, typename... TArgs>
 class Delegator<TReturn(TArgs...)> : public DelegatorBase<TReturn(TArgs...)>
 {
 public:
-    virtual TReturn CallFunctions(TArgs&&... args) const override
+    virtual TReturn InvokeFunctions(TArgs&&... args) const override
     {
         TReturn retValue = TReturn();
         for (const auto& boundFunc : this->m_vecBoundFunc)
@@ -119,7 +119,7 @@ public:
         return retValue;
     }
 
-    virtual TReturn CallFixedArgumentFunctions() const override
+    virtual TReturn InvokeFixedArgumentFunctions() const override
     {
         TReturn retValue = TReturn();
         for (const auto& boundFixedArgsFunction : this->m_vecBoundFixedArgsFunc)

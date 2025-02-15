@@ -60,23 +60,24 @@ void PlayerActor::Pimpl::InitializePlayerInput()
 #pragma region 방향키에 따른 값 설정
 	InputActionMappingInfo leftKeyInputMappingInfo;
 	leftKeyInputMappingInfo.inputValue = EInputValue::Left; // 왼쪽키를 누르면 작동하는 것 테스트
-	leftKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
+	leftKeyInputMappingInfo.inputTrigger = EInputTrigger::PressedAndHolding; // 딱 한번만 누름
 	leftKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Negative);
 	spPlayerWalkInputAction->AddInputMappingInfo(leftKeyInputMappingInfo);
 
 	InputActionMappingInfo rightKeyInputMappingInfo;
 	rightKeyInputMappingInfo.inputValue = EInputValue::Right;
-	rightKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
+	rightKeyInputMappingInfo.inputTrigger = EInputTrigger::PressedAndHolding;
 	spPlayerWalkInputAction->AddInputMappingInfo(rightKeyInputMappingInfo);
 
 	InputActionMappingInfo upKeyInputMappingInfo;
 	upKeyInputMappingInfo.inputValue = EInputValue::Up; // 왼쪽키를 누르면 작동하는 것 테스트
-	upKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed; // 딱 한번만 누름
+	upKeyInputMappingInfo.inputTrigger = EInputTrigger::PressedAndHolding; // 딱 한번만 누름
 	upKeyInputMappingInfo.inputActionValueModifierBitset.BitsOn(EInputActionValueModifierType::Swizzle, EInputActionValueModifierType::Negative);
 	spPlayerWalkInputAction->AddInputMappingInfo(upKeyInputMappingInfo);
 
 	InputActionMappingInfo downKeyInputMappingInfo;
 	downKeyInputMappingInfo.inputValue = EInputValue::Down;
+	downKeyInputMappingInfo.inputTrigger = EInputTrigger::PressedAndHolding;
 	downKeyInputMappingInfo.inputActionValueModifierBitset.BitOn(EInputActionValueModifierType::Swizzle);
 	spPlayerWalkInputAction->AddInputMappingInfo(downKeyInputMappingInfo);
 #pragma endregion
@@ -94,7 +95,7 @@ void PlayerActor::Pimpl::InitializePlayerInput()
 
 	InputActionMappingInfo spaceBarKeyInputMappingInfo;
 	spaceBarKeyInputMappingInfo.inputValue = EInputValue::SpaceBar;
-	spaceBarKeyInputMappingInfo.inputTrigger = EInputTrigger::OnlyPressed;
+	spaceBarKeyInputMappingInfo.inputTrigger = EInputTrigger::PressedAndHolding;
 	spPlayerAttackInputAction->AddInputMappingInfo(spaceBarKeyInputMappingInfo);
 
 	LocalPlayerInputSystem::I()->BindInputActionHandler(spPlayerAttackInputAction, m_pOwner, &PlayerActor::OnSpaceBarKeyHandler);
@@ -185,7 +186,7 @@ void PlayerActor::Startup()
 	// 이동 처리
 	AddComponent<CellActorMoveComponent>();
 	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
-	pMoveComponent->SetMoveSpeed(90.0f);
+	pMoveComponent->SetMoveSpeed(110.0f);
 	pMoveComponent->SetDestinationCellPosition(GetCellPosition()); // 초기화니까 똑같음
 }
 
@@ -206,7 +207,15 @@ void PlayerActor::Cleanup()
 
 void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
-	const Vec2d& vMoveDir = pInputAction->BringValue<Vec2d>();
+	Vec2d vMoveDir = pInputAction->BringValue<Vec2d>();
+
+	// 축값이 전부 존재한다면 무효
+	if ((vMoveDir.x != 0.0f) &&
+		(vMoveDir.y != 0.0f))
+	{
+		return;
+	}
+
 	if (m_spPimpl->DirectionKeyHandlerImpl(vMoveDir) == false)
 	{
 		return;

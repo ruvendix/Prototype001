@@ -30,6 +30,16 @@ namespace
 		}
 		break;
 
+		case EInputTrigger::PressedAndHolding:
+		{
+			if ((currentInputValueState == EInputValueState::Pressed) ||
+				(currentInputValueState == EInputValueState::Holding))
+			{
+				bResult = true;
+			}
+		}
+		break;		
+
 		case EInputTrigger::OnlyReleased:
 		{
 			bResult = (currentInputValueState == EInputValueState::Released);
@@ -91,9 +101,13 @@ bool InputAction::ProcessInputAction()
 		// 현재 입력 상태가 설정한 트리거를 작동시키는지?
 		if (CheckValidInputTriggerOnCurrentInputValueState(inputActionMappingInfo) == true)
 		{
-			m_inputActionDelegator.CallFixedArgumentFunctions();
 			bSucced = true;
 		}
+	}
+
+	if (bSucced == true) // 일반적으로는 키 하나당 매핑 정보가 하나인데 축 입력 같은 경우는 키 여러개에 함수는 하나
+	{
+		m_inputActionDelegator.InvokeFixedArgumentFunctions();
 	}
 
 	m_inputActionValue.ResetInputActionValue();

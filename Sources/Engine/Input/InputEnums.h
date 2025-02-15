@@ -39,6 +39,7 @@ enum class EInputTrigger
 {
 	OnlyPressed = 0, // 입력 상태가 최초로 Pressed가 되었을 때만
 	PressedAndRelease, // 입력 상태가 Pressed와 Release일 때만
+	PressedAndHolding, // Pressed와 Holding일 때만
 	OnlyReleased, // 입력 상태가 최초로 Released가 되었을 때만
 	Triggered, // Pressed, Holding, Release 전부
 

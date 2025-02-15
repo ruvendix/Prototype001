@@ -23,7 +23,7 @@ public:
 			return;
 		}
 
-		m_delegator.CallFixedArgumentFunctions();
+		m_delegator.InvokeFixedArgumentFunctions();
 		m_delegator.AllDisconnectFunction();
 	}
 

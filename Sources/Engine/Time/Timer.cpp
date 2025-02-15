@@ -21,7 +21,7 @@ void Timer::Update(float deltaSeconds)
         // 델리게이터가 있는지?
         if (m_timerDelegator.IsBoundAnyFixedArgumentsFunction())
         {
-            m_timerDelegator.CallFixedArgumentFunctions();
+            m_timerDelegator.InvokeFixedArgumentFunctions();
         }
 
         // 로컬 타임은 콜백 처리가 끝난 후에 갱신
