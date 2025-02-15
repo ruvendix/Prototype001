@@ -28,8 +28,13 @@ bool Scene::Update(float deltaSeconds)
 	// 업데이트 순서대로 이미 정렬된 상태
 	for (const ActorPtr& spActor : m_actors)
 	{
-		if ((spActor != nullptr) &&
-			(spActor->Update(deltaSeconds) == false))
+		if ((spActor == nullptr) ||
+			(spActor->IsActorFlagBitOn(EActorFlag::Activation) == false))
+		{
+			continue;
+		}
+
+		if (spActor->Update(deltaSeconds) == false)
 		{
 			return false;
 		}
@@ -72,10 +77,10 @@ void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetAct
 	SceneRenderer::I()->SetMainCameraActor(m_spMainCameraActor);
 }
 
-ActorPtr Scene::FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
+ActorPtr Scene::FindCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
 {
 	std::vector<std::shared_ptr<CellActor>> foundCellActors;
-	FindDerivedActors<CellActor>(actorLayer, foundCellActors);
+	FindExactTypeActors<CellActor>(actorLayer, foundCellActors);
 	if (foundCellActors.empty() == true)
 	{
 		return nullptr;

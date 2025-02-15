@@ -4,7 +4,21 @@
 
 #include "AnimationActorState.h"
 
-AnimationActor::ActorLookAtStringTable AnimationActor::s_actorLookAtStringTable = { "Left", "Up", "Right", "Down" };
+AnimationActor::ActorLookAtStringTable AnimationActor::g_actorLookAtStringTable =
+{ 
+	"Left",
+	"Up",
+	"Right",
+	"Down"
+};
+
+const std::array<Position2d, TO_NUM(EActorLookAtDirection::Count)> AnimationActor::g_lookAtForwardCellPosTable =
+{
+	Position2d(-1, +0),
+	Position2d(+0, -1),
+	Position2d(+1, +0),
+	Position2d(+0, +1),
+};
 
 AnimationActor::~AnimationActor()
 {
@@ -25,66 +39,59 @@ bool AnimationActor::Update(float deltaSeconds)
 	}
 
 	m_animationActorStateChangeEvent.ExcuteIfBound();
-	m_spAnimationActorState->UpdateState(deltaSeconds);
+	m_spAnimationActorState->Update(deltaSeconds);
 
 	return true;
 }
 
 // 실수니까 정확히 체크
-void AnimationActor::ApplyMoveDirection(const Vec2d& vMoveDir)
+void AnimationActor::ApplyMoveDirectionToLookAtDirection(const Vec2d& vMoveDir)
 {
 	if (math::CheckAlikeValue(vMoveDir.x, 1.0f) == true)
 	{
-		m_lookAtType = EActorLookAtType::Right;
+		m_lookAtDir = EActorLookAtDirection::Right;
 	}
 	else if (math::CheckAlikeValue(vMoveDir.x, -1.0f) == true)
 	{
-		m_lookAtType = EActorLookAtType::Left;
+		m_lookAtDir = EActorLookAtDirection::Left;
 	}
 
 	if (math::CheckAlikeValue(vMoveDir.y, 1.0f) == true)
 	{
-		m_lookAtType = EActorLookAtType::Down;
+		m_lookAtDir = EActorLookAtDirection::Down;
 	}
 	else if (math::CheckAlikeValue(vMoveDir.y, -1.0f) == true)
 	{
-		m_lookAtType = EActorLookAtType::Up;
+		m_lookAtDir = EActorLookAtDirection::Up;
 	}
 }
 
 // 방향마다 텍스처 분리되지 않은 경우
-void AnimationActor::LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath)
+void AnimationActor::LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath)
 {
-	for (int32 i = 0; i < TO_NUM(EActorLookAtType::Count); ++i)
+	for (int32 i = 0; i < TO_NUM(EActorLookAtDirection::Count); ++i)
 	{
-		m_actorLookAtTexturePathTable[i] = strActorLookAtTexturePath;
+		m_actorLookAtDirTexturePathTable[i] = strActorLookAtDirTexturePath;
 	}
 
-	ResourceMananger::I()->LoadTexture(strActorLookAtTexturePath);
+	ResourceMananger::I()->LoadTexture(strActorLookAtDirTexturePath);
 }
 
-void AnimationActor::LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath, EActorLookAtType actorLookAtType)
+void AnimationActor::LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath, EActorLookAtDirection actorLookAtDir)
 {
-	m_actorLookAtTexturePathTable[TO_NUM(actorLookAtType)] = strActorLookAtTexturePath;
-	ResourceMananger::I()->LoadTexture(strActorLookAtTexturePath);
+	m_actorLookAtDirTexturePathTable[TO_NUM(actorLookAtDir)] = strActorLookAtDirTexturePath;
+	ResourceMananger::I()->LoadTexture(strActorLookAtDirTexturePath);
 }
 
 Position2d AnimationActor::CalculateForwardCellPosition() const
 {
-	std::array<Position2d, TO_NUM(EActorLookAtType::Count)> arrLookAtForwardCellPos =
-	{
-		Position2d(-1, +0),
-		Position2d(+0, -1),
-		Position2d(+1, +0),
-		Position2d(+0, +1),
-	};
-
-	Position2d forwardCellPos = (GetCellPosition() + arrLookAtForwardCellPos[TO_NUM(m_lookAtType)]);
+	Position2d forwardCellPos = (GetCellPosition() + g_lookAtForwardCellPosTable[TO_NUM(m_lookAtDir)]);
 	return forwardCellPos;
 }
 
 void AnimationActor::OnChangeAnimationActorState(const AnimationActorStatePtr& spAnimationActorState)
 {
-	DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경!");
 	m_spAnimationActorState = spAnimationActorState;
+	m_spAnimationActorState->Startup();
+	DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경! (지연)");
 }

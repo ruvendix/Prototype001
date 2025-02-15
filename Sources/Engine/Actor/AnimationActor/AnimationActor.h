@@ -3,6 +3,7 @@
 
 #include "Engine/Resource/ResourceMananger.h"
 #include "Engine/Resource/Sprite/DynamicSprite.h"
+#include "AnimationActorState.h"
 
 class WorldTileMapActor;
 
@@ -11,8 +12,10 @@ class AnimationActor : public CellActor
 	using Super = CellActor;
 
 public:
-	using ActorLookAtStringTable = std::array<std::string, TO_NUM(EActorLookAtType::Count)>;
-	using ActorLookAtDynamicSpriteTable = std::array<DynamicSpritePtr, TO_NUM(EActorLookAtType::Count)>;
+	using ActorLookAtStringTable = std::array<std::string, TO_NUM(EActorLookAtDirection::Count)>;
+	using ActorLookAtDynamicSpriteTable = std::array<DynamicSpritePtr, TO_NUM(EActorLookAtDirection::Count)>;
+
+	static const std::array<Position2d, TO_NUM(EActorLookAtDirection::Count)> g_lookAtForwardCellPosTable;
 
 public:
 	using Super::Super;
@@ -33,16 +36,16 @@ public:
 		}
 
 		ActorLookAtDynamicSpriteTable actorLookAtDynamicSpriteTable;
-		for (int32 i = 0; i < TO_NUM(EActorLookAtType::Count); ++i)
+		for (int32 i = 0; i < TO_NUM(EActorLookAtDirection::Count); ++i)
 		{
 			std::string strDynamicSpriteName;
-			MakeFormatString(strDynamicSpriteName, "%s%s", strPrefix.c_str(), s_actorLookAtStringTable[i].c_str());
+			MakeFormatString(strDynamicSpriteName, "%s%s", strPrefix.c_str(), g_actorLookAtStringTable[i].c_str());
 
 			// 스프라이트 로딩인데 없으니 생성
 			const DynamicSpritePtr& spDynamicSprite = ResourceMananger::I()->CreateDynamicSprite(strDynamicSpriteName);
 			ASSERT_LOG(spDynamicSprite != nullptr);
 			spDynamicSprite->SetLoopDynamicSprite(bLoopDynamicSprite);
-			spDynamicSprite->FindAndSetTexture(m_actorLookAtTexturePathTable[i]);
+			spDynamicSprite->FindAndSetTexture(m_actorLookAtDirTexturePathTable[i]);
 
 			actorLookAtDynamicSpriteTable[i] = spDynamicSprite;
 		}
@@ -53,7 +56,7 @@ public:
 
 	template <typename TActorState>
 	void AddActorStateKeyFrame(int32 startIdx, int32 endIdx, int32 spriteLine,
-		const Size& drawSize, uint32 colorKey, float keepTime, EActorLookAtType actorLookAtType)
+		const Size& drawSize, uint32 colorKey, float keepTime, EActorLookAtDirection actorLookAtDir)
 	{
 		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
 		if (foundIter == m_mapActorStateDynamicSprite.cend())
@@ -63,7 +66,7 @@ public:
 
 		// 해당되는 스프라이트 가져오기
 		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;		
-		const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtType)];
+		const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)];
 		ASSERT_LOG(spDynamicSprite != nullptr);
 		spDynamicSprite->AddKeyFrames(startIdx, endIdx, spriteLine, drawSize, colorKey, keepTime);
 	}
@@ -78,7 +81,7 @@ public:
 		}
 
 		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
-		for (int32 i = 0; i < TO_NUM(EActorLookAtType::Count); ++i)
+		for (int32 i = 0; i < TO_NUM(EActorLookAtDirection::Count); ++i)
 		{
 			// 해당되는 스프라이트 가져오기
 			const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[i];
@@ -88,7 +91,7 @@ public:
 	}
 
 	template <typename TActorState>
-	DynamicSpritePtr FindActorStateLookAtDynamicSprite(EActorLookAtType actorLookAtType) const
+	DynamicSpritePtr FindActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const
 	{
 		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
 		if (foundIter == m_mapActorStateDynamicSprite.cend())
@@ -97,7 +100,7 @@ public:
 		}
 
 		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
-		return (actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtType)]);
+		return (actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)]);
 	}
 
 	template <typename TActorState>
@@ -106,12 +109,17 @@ public:
 		DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
 		ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-		const DynamicSpritePtr& spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TActorState>(m_lookAtType);
+		DynamicSpritePtr spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TActorState>(m_lookAtDir);
+		if (spChangeActorStateDynamicSprite == nullptr)
+		{
+			spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<AnimationActorIdleState>(m_lookAtDir);
+		}
+
 		pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
 	}
 
 	template <typename TAnimationActorState>
-	void ReserveNextPlayerState()
+	void ReserveChangeNextState()
 	{
 		AnimationActorStatePtr spNextAnimationActorState = std::make_shared<TAnimationActorState>(this);
 		m_animationActorStateChangeEvent.RegisterEventHandler(this, &AnimationActor::OnChangeAnimationActorState, spNextAnimationActorState);
@@ -119,21 +127,23 @@ public:
 
 	// Update보다 빠르니까 즉시 전환해도 됨
 	template <typename TAnimationActorState>
-	void ImmediatelyChangePlayerState()
+	void ImmediatelyChangeState()
 	{
 		m_spAnimationActorState = std::make_shared<TAnimationActorState>(this);
+		m_spAnimationActorState->Startup();
+		DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경! (즉시)");
 	}
 
 	template <typename TAnimationActorState>
-	bool IsSameAnimationActorState()
+	bool IsSameAnimationActorState() const
 	{
 		return (std::dynamic_pointer_cast<TAnimationActorState>(m_spAnimationActorState) != nullptr);
 	}
 
 public:
-	void ApplyMoveDirection(const Vec2d& vMoveDir);
-	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath);
-	void LoadActorLookAtTexture(const std::string& strActorLookAtTexturePath, EActorLookAtType actorLookAtType);
+	void ApplyMoveDirectionToLookAtDirection(const Vec2d& vMoveDir);
+	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath);
+	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath, EActorLookAtDirection actorLookAtDir);
 	
 	Position2d CalculateForwardCellPosition() const;
 
@@ -144,14 +154,14 @@ private:
 	void OnChangeAnimationActorState(const AnimationActorStatePtr& spAnimationActorState);
 
 private:
-	static ActorLookAtStringTable s_actorLookAtStringTable;
+	static ActorLookAtStringTable g_actorLookAtStringTable;
 
 private:
-	EActorLookAtType m_lookAtType = EActorLookAtType::Down;
+	EActorLookAtDirection m_lookAtDir = EActorLookAtDirection::Down;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 
-	ActorLookAtStringTable m_actorLookAtTexturePathTable;
-	std::unordered_map<int32, std::array<DynamicSpritePtr, TO_NUM(EActorLookAtType::Count)>> m_mapActorStateDynamicSprite;
+	ActorLookAtStringTable m_actorLookAtDirTexturePathTable;
+	std::unordered_map<int32, std::array<DynamicSpritePtr, TO_NUM(EActorLookAtDirection::Count)>> m_mapActorStateDynamicSprite;
 
 	AnimationActorStatePtr m_spAnimationActorState = nullptr;
 	Event<const AnimationActorStatePtr& /* spNextAnimationActorState */> m_animationActorStateChangeEvent;

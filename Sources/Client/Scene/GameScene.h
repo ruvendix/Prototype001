@@ -1,15 +1,15 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class WorldBackgroundActor;
-class WorldTileMapActor;
+#include "WorldTileMapScene.h"
+
 class PlayerActor;
 class SnakeActor;
 
-class GameScene : public Scene
+class GameScene : public WorldTileMapScene
 {
 public:
-	using Super = Scene;
+	using Super = WorldTileMapScene;
 
 public:
 	GameScene();
@@ -19,11 +19,7 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	bool CheckCanMoveToCellPosition(const Position2d& destCellPos) const override;
-
 private:
-	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
-	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 	std::shared_ptr<PlayerActor> m_spPlayerActor = nullptr;
 	std::shared_ptr<SnakeActor> m_spSnakeActor = nullptr;
 

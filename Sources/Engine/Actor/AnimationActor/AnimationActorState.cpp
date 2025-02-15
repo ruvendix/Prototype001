@@ -16,6 +16,20 @@ AnimationActorState::~AnimationActorState()
 
 }
 
+void AnimationActorState::Startup()
+{
+
+}
+
+bool AnimationActorState::Update(float deltaSeconds)
+{
+	return true;
+}
+
+void AnimationActorState::Cleanup()
+{
+
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEFINE_COMPILETIME_ID(AnimationActorIdleState, AnimationActorStateIdCounter)
 
@@ -24,9 +38,14 @@ AnimationActorIdleState::~AnimationActorIdleState()
 
 }
 
-void AnimationActorIdleState::UpdateState(float deltaSeconds)
+void AnimationActorIdleState::Startup()
 {
+	GetOwner()->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
+}
 
+bool AnimationActorIdleState::Update(float deltaSeconds)
+{
+	return true;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEFINE_COMPILETIME_ID(AnimationActorWalkState, AnimationActorStateIdCounter)
@@ -36,7 +55,12 @@ AnimationActorWalkState::~AnimationActorWalkState()
 
 }
 
-void AnimationActorWalkState::UpdateState(float deltaSeconds)
+void AnimationActorWalkState::Startup()
+{
+	GetOwner()->ChangeActorStateDynamicSprite<AnimationActorWalkState>();
+}
+
+bool AnimationActorWalkState::Update(float deltaSeconds)
 {
 	AnimationActor* pOwner = GetOwner();
 	ASSERT_LOG(pOwner != nullptr);
@@ -54,9 +78,11 @@ void AnimationActorWalkState::UpdateState(float deltaSeconds)
 		pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
 
 		// Idle 상태로 전환
-		pOwner->ReserveNextPlayerState<AnimationActorIdleState>();
+		pOwner->ReserveChangeNextState<AnimationActorIdleState>();
 		DEFAULT_TRACE_LOG("(걷기 -> 기본) 상태로 전환!");
 	}
+
+	return true;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEFINE_COMPILETIME_ID(AnimationActorAttackState, AnimationActorStateIdCounter)
@@ -66,7 +92,12 @@ AnimationActorAttackState::~AnimationActorAttackState()
 
 }
 
-void AnimationActorAttackState::UpdateState(float deltaSeconds)
+void AnimationActorAttackState::Startup()
+{
+	GetOwner()->ChangeActorStateDynamicSprite<AnimationActorAttackState>();
+}
+
+bool AnimationActorAttackState::Update(float deltaSeconds)
 {
 	AnimationActor* pOwner = GetOwner();
 	ASSERT_LOG(pOwner != nullptr);
@@ -75,15 +106,15 @@ void AnimationActorAttackState::UpdateState(float deltaSeconds)
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 	if (pDynamicSpriteComponent->IsDynamicSpriteEnd() == false)
 	{
-		return;
+		return false;
 	}
 
 #pragma region 피해받은 액터가 있는지?
 	const Position2d& forwardCellPos = pOwner->CalculateForwardCellPosition();
 
 	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
-	const ActorPtr& spVictimActor = pCurrentScene->FindAnyCellActor(EActorLayerType::Creature, forwardCellPos);
+	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
+	const ActorPtr& spVictimActor = pCurrentScene->FindCellActor(EActorLayerType::Creature, forwardCellPos);
 	if (spVictimActor != nullptr)
 	{
 		spVictimActor->ProcessDamaged();
@@ -94,7 +125,8 @@ void AnimationActorAttackState::UpdateState(float deltaSeconds)
 	pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
 
 	// Idle 상태로 전환
-	pOwner->ReserveNextPlayerState<AnimationActorIdleState>();
+	pOwner->ReserveChangeNextState<AnimationActorIdleState>();
 
 	DEFAULT_TRACE_LOG("(공격 -> 기본) 상태로 전환!");
+	return true;
 }

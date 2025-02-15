@@ -73,8 +73,10 @@ public:
 	}
 
 	template <typename TActor>
-	void FindDerivedActors(EActorLayerType actorLayer, std::vector<std::shared_ptr<TActor>>& outActorPtrs) const
+	void FindExactTypeActors(EActorLayerType actorLayer, std::vector<std::shared_ptr<TActor>>& outFoundExactTypeActors) const
 	{
+		static_assert(std::is_base_of_v<Actor, TActor> == true, "TActor isn't derived actor");
+
 		if (m_actors.empty() == true)
 		{
 			return;
@@ -88,35 +90,40 @@ public:
 				continue;
 			}
 
+			if (spActor->IsActorFlagBitOn(EActorFlag::Activation) == false)
+			{
+				continue;
+			}
+
 			const std::shared_ptr<TActor>& spExactTypeActor = std::dynamic_pointer_cast<TActor>(spActor);
 			if (spExactTypeActor == nullptr)
 			{
 				continue;
 			}
 
-			outActorPtrs.push_back(spExactTypeActor);
+			outFoundExactTypeActors.push_back(spExactTypeActor);
 		}
 	}
 
 	template <typename TActor>
-	std::shared_ptr<TActor> FindAnyExactTypeCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
+	std::shared_ptr<TActor> FindExactTypeBaseOfCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
 	{
 		static_assert(std::is_base_of_v<CellActor, TActor> == true, "TActor isn't derived cellActor");
 
-		const ActorPtr& spFoundCellActor = FindAnyCellActor(actorLayer, cellPos);
+		const ActorPtr& spFoundCellActor = FindCellActor(actorLayer, cellPos);
 		const std::shared_ptr<TActor>& spResultActor = std::dynamic_pointer_cast<TActor>(spFoundCellActor);
 		if (spResultActor == nullptr)
 		{
 			return nullptr;
 		}
 
-		return spFoundCellActor;
+		return spResultActor;
 	}
 
 public:
 	void RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetActor);
 	
-	ActorPtr FindAnyCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const;
+	ActorPtr FindCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const;
 
 	void ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
 	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);

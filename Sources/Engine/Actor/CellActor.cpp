@@ -90,6 +90,13 @@ Position2d CellActor::ApplyRandomCellPosition()
 	return randomCellPos;
 }
 
+Vec2d CellActor::CalculateMoveDirectionByCellPosition(const Position2d& destCellPos) const
+{
+	const Position2d& diffCellPos = (destCellPos - GetCellPosition());
+	const Vec2d& vMoveDir{ static_cast<float>(diffCellPos.x),  static_cast<float>(diffCellPos.y) };
+	return vMoveDir;
+}
+
 bool CellActor::CheckEqaulCellPosition(const Position2d& otherCellPos) const
 {
 	const Vec2d& vWorldPos = BringPosition();

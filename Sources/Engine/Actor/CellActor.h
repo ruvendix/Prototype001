@@ -26,6 +26,8 @@ public:
 	void ApplyCellPosition(const Position2d& cellPos);
 	Position2d ApplyRandomCellPosition();
 
+	Vec2d CalculateMoveDirectionByCellPosition(const Position2d& destCellPos) const;
+
 	void SetCellPosition(const Position2d& cellPos) { m_cellPos = cellPos; }
 	const Position2d& GetCellPosition() const { return m_cellPos; }
 

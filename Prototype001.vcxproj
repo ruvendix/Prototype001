@@ -23,10 +23,16 @@
     <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor.cpp">
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Sources\Client\EnemyMonster\SnakeActor.cpp">
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor\SnakeActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\EnemyRespawner\EnemyRespawner.cpp">
@@ -37,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="Sources\Client\GameApplication\WindowProcedure.cpp" />
     <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\WorldTileMapScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\Scene\EditScene.cpp">
@@ -209,10 +218,16 @@
     <ClInclude Include="Sources\Client\Editor\EditorActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor.h">
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\SnakeActor.h">
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\SnakeActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\EnemyRespawner\EnemyRespawner.h">
@@ -226,6 +241,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\WorldTileMapScene.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Scene\EditScene.h">

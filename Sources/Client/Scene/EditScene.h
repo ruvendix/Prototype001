@@ -1,14 +1,14 @@
 // Copyright 2025 Ruvendix, All Rights Reserved.
 #pragma once
 
-class WorldBackgroundActor;
-class WorldTileMapActor;
+#include "WorldTileMapScene.h"
+
 class EditorActor;
 
-class EditScene : public Scene
+class EditScene : public WorldTileMapScene
 {
 public:
-	using Super = Scene;
+	using Super = WorldTileMapScene;
 
 public:
 	EditScene();
@@ -19,7 +19,5 @@ public:
 	virtual void Cleanup() override;
 
 private:
-	std::shared_ptr<WorldBackgroundActor> m_spWorldBackgroundActor = nullptr;
-	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 	std::shared_ptr<EditorActor> m_spEditorActor = nullptr;
 };

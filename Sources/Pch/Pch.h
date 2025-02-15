@@ -19,6 +19,7 @@
 #include <chrono>
 #include <filesystem>
 #include <functional>
+#include <map>
 #include <unordered_map>
 #include <thread>
 #include <format>

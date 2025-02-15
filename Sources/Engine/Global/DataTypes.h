@@ -27,20 +27,35 @@ struct Position2d
 	int32 x = 0;
 	int32 y = 0;
 
-	Position2d operator + (const Position2d& otherPos) const
+	Position2d operator + (const Position2d& other) const
 	{
-		return Position2d(x + otherPos.x, y + otherPos.y);
+		return Position2d(x + other.x, y + other.y);
 	}
-	
-	bool operator == (const Position2d& otherPos) const
+
+	Position2d operator - (const Position2d& other) const
 	{
-		if ((x == otherPos.x) &&
-			(y == otherPos.y))
+		return Position2d(x - other.x, y - other.y);
+	}
+
+	bool operator == (const Position2d& other) const
+	{
+		if ((x == other.x) &&
+			(y == other.y))
 		{
 			return true;
 		}
 
 		return false;
+	}
+
+	bool operator < (const Position2d& other) const
+	{
+		if (x != other.x)
+		{
+			return x < other.x;
+		}
+
+		return (y < other.y);
 	}
 };
 

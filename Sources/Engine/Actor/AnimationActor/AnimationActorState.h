@@ -5,13 +5,15 @@ DECLARE_COMPILETIMER_COUNTER(AnimationActorStateIdCounter);
 
 class AnimationActor;
 
-class AnimationActorState
+class AnimationActorState : public ICoreLoop
 {
 public:
 	AnimationActorState(AnimationActor* pOwner);
 	virtual ~AnimationActorState();
 
-	virtual void UpdateState(float deltaSeconds) = 0;
+	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
+	virtual void Cleanup() override;
 
 public:
 	AnimationActor* GetOwner() const { return m_pOwner; }
@@ -30,7 +32,8 @@ public:
 	virtual ~AnimationActorIdleState();
 
 public:
-	virtual void UpdateState(float deltaSeconds) override;
+	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
 };
 
 class AnimationActorWalkState : public AnimationActorState
@@ -43,7 +46,8 @@ public:
 	virtual ~AnimationActorWalkState();
 
 public:
-	virtual void UpdateState(float deltaSeconds) override;
+	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
 };
 
 class AnimationActorAttackState : public AnimationActorState
@@ -55,5 +59,7 @@ public:
 	using Super::Super;
 	virtual ~AnimationActorAttackState();
 
-	virtual void UpdateState(float deltaSeconds) override;
+public:
+	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
 };

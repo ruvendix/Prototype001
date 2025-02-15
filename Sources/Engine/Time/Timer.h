@@ -19,6 +19,7 @@ public:
     void SetTimerDelegator(const DefaultDelegator& timerDelegator) { m_timerDelegator = timerDelegator; }
 
     float GetLocalTime() const { return m_localTime; }
+    bool IsTimerOn() const { return (m_bOn == true); }
 
 private:
     float m_triggerTime = 0.0f;

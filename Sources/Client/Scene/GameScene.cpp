@@ -5,7 +5,7 @@
 #include "Engine/Actor/WorldTileMapActor.h"
 #include "Client/World/WorldBackgroundActor.h"
 #include "Client/Player/PlayerActor.h"
-#include "Client/EnemyMonster/SnakeActor.h"
+#include "Client/EnemyMonster/EnemyMonsterActor/SnakeActor.h"
 
 GameScene::GameScene()
 {
@@ -31,31 +31,22 @@ void GameScene::Startup()
 	spHitEffect->SetDynamicSprite(spOneTimeHitEffectDynamicSprite);
 #pragma endregion
 
-#pragma region 월드맵 처리
-	// 월드맵 액터 추가
-	m_spWorldBackgroundActor = CreateActorToScene<WorldBackgroundActor>(EActorLayerType::WorldBackground);
-
-	// 셀 정보 넣기
-	WorldContext::I()->SetCellSize(48);
-
-	// 셀 정보에 따른 타일맵 구성
-	m_spWorldTileMapActor = CreateActorToScene<WorldTileMapActor>(EActorLayerType::WorldForeground);
-	m_spWorldTileMapActor->ShowWorldTileGuideShape(false);
-#pragma endregion
+	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = GetWorldTileMapActor();
+	spWorldTileMapActor->ShowWorldTileGuideShape(false);
 
 	// 플레이어 액터 추가
 	m_spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
-	m_spPlayerActor->SetWorldTileMapActor(m_spWorldTileMapActor);
+	m_spPlayerActor->SetWorldTileMapActor(spWorldTileMapActor);
 
 	// 기본 뱀 액터 추가
 	m_spSnakeActor = CreateActor<SnakeActor>(EActorLayerType::Creature);
 	m_spSnakeActor->SetActorName("뱀");
-	m_spSnakeActor->SetWorldTileMapActor(m_spWorldTileMapActor);
+	m_spSnakeActor->SetWorldTileMapActor(spWorldTileMapActor);
 
 	// 적군들 자동 생성기
 	m_spEnemyRespawner = std::make_shared<EnemyRespawner>();
 	m_spEnemyRespawner->Startup();
-	m_spEnemyRespawner->SetMaxEnemyCount(10);
+	m_spEnemyRespawner->SetMaxEnemyCount(1);
 	m_spEnemyRespawner->AddPrototypeEnemyActor(m_spSnakeActor);
 	m_spEnemyRespawner->RespawnEnemies(this);
 
@@ -78,20 +69,4 @@ bool GameScene::Update(float deltaSeconds)
 void GameScene::Cleanup()
 {
 	Super::Cleanup();
-}
-
-bool GameScene::CheckCanMoveToCellPosition(const Position2d& destCellPos) const
-{
-	if (m_spWorldTileMapActor->CheckMovingAvailableTile(destCellPos) == false)
-	{
-		return false;
-	}
-
-	const ActorPtr& spFoundActor = FindAnyCellActor(EActorLayerType::Creature, destCellPos);
-	if (spFoundActor != nullptr)
-	{
-		return false;
-	}
-
-	return true;
 }

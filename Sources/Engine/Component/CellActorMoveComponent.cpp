@@ -27,7 +27,46 @@ bool CellActorMoveComponent::Update(float deltaSeconds)
 	return true;
 }
 
-void CellActorMoveComponent::ApplyMoveDirection(const Vec2d& vMoveDir)
+ComponentPtr CellActorMoveComponent::CreateClone()
+{
+	return std::make_shared<CellActorMoveComponent>(*this);
+}
+
+bool CellActorMoveComponent::ProcessMove(const Vec2d& vMoveDir)
+{
+	AnimationActor* pAnimationActor = dynamic_cast<AnimationActor*>(GetOwner());
+	if (pAnimationActor == nullptr)
+	{
+		return false;
+	}
+
+	// 현재 셀 좌표 백업
+	Position2d currentCellPos = m_destCellPos;
+
+	// 목표 지점 바꾸고
+	ApplyMoveDirectionToLookAtDirection(vMoveDir);
+
+	// 보는 방향 바꾸고
+	pAnimationActor->ApplyMoveDirectionToLookAtDirection(vMoveDir);
+
+	// 이동 가능한지?
+	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
+	if (pCurrentScene->CheckCanMoveToCellPosition(GetDestinationCellPosition()) == false)
+	{
+		pAnimationActor->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
+
+		SetDestinationCellPosition(currentCellPos);
+		ResetMoveDirection();
+		DEFAULT_TRACE_LOG("이동 못함!");
+
+		return false;
+	}
+
+	return true;
+}
+
+void CellActorMoveComponent::ApplyMoveDirectionToLookAtDirection(const Vec2d& vMoveDir)
 {
 	m_destCellPos.x += static_cast<int32>(vMoveDir.x);
 	m_destCellPos.y += static_cast<int32>(vMoveDir.y);

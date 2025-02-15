@@ -56,8 +56,19 @@ void EnemyRespawner::RespawnEnemies(Scene* pCurrentScene)
 		++g_enemyId;
 
 		const std::shared_ptr<CellActor>& spNewEnemyActor = pCurrentScene->CreateCloneActorToScene(spPrototypeEnemyActor);
+#if 1
+		const Position2d& randomCellPos{ 6, 10 };
+		spNewEnemyActor->ApplyCellPosition(randomCellPos);
+#else
 		const Position2d& randomCellPos = spNewEnemyActor->ApplyRandomCellPosition();
 		DEFAULT_TRACE_LOG("%s 리스폰 위치(%d, %d)", strNewEnemyActorName.c_str(), randomCellPos.x, randomCellPos.y);
+#endif
+
+		CellActorMoveComponent* pNewEnemyActorMoveComponent = spNewEnemyActor->FindComponent<CellActorMoveComponent>();
+		if (pNewEnemyActorMoveComponent != nullptr)
+		{
+			pNewEnemyActorMoveComponent->SetDestinationCellPosition(randomCellPos);
+		}
 	}
 
 	m_currentEnemyCount = m_maxEnemyCount;

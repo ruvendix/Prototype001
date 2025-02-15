@@ -6,7 +6,6 @@ DEFINE_COMPILETIME_ID(LifeTimeEffectComponent, ComponentIdCounter)
 
 void LifeTimeEffectComponent::Startup()
 {
-	// 타이머 설정
 	m_lifeTimer = TimerManager::I()->CreateTimer(0.0f, false, this, &LifeTimeEffectComponent::OnLifeTimeEnd);
 }
 

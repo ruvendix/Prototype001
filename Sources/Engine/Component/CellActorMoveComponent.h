@@ -11,9 +11,12 @@ public:
 
 public:
 	virtual bool Update(float deltaSeconds) override;
+	virtual ComponentPtr CreateClone() override;
 
 public:
-	void ApplyMoveDirection(const Vec2d& vMoveDir);
+	bool ProcessMove(const Vec2d& vMoveDir);
+
+	void ApplyMoveDirectionToLookAtDirection(const Vec2d& vMoveDir);
 	bool CheckGoalPosition(float deltaSeconds) const;
 
 	void ResetMoveDirection();

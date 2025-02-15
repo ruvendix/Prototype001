@@ -27,7 +27,7 @@ enum class EActorUpdateOrder
 	Post,
 };
 
-enum class EActorLookAtType
+enum class EActorLookAtDirection
 {
 	Left = 0,
 	Up,

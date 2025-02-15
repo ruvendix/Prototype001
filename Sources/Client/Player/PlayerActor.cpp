@@ -2,7 +2,6 @@
 #include "Pch.h"
 #include "PlayerActor.h"
 
-#include "Engine/Actor/WorldTileMapActor.h"
 #include "Engine/Actor/AnimationActor/AnimationActorState.h"
 
 class PlayerActor::Pimpl
@@ -20,10 +19,10 @@ public:
 void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 {
 	// 이걸 확실하게 맞추려면 인덱스마다 넣어야함
-	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerLeft.bmp", EActorLookAtType::Left);
-	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerRight.bmp", EActorLookAtType::Right);
-	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerDown.bmp", EActorLookAtType::Down);
-	m_pOwner->LoadActorLookAtTexture("Assets/Texture/Player/PlayerUp.bmp", EActorLookAtType::Up);
+	m_pOwner->LoadActorLookAtDirectionTexture("Assets/Texture/Player/PlayerLeft.bmp", EActorLookAtDirection::Left);
+	m_pOwner->LoadActorLookAtDirectionTexture("Assets/Texture/Player/PlayerRight.bmp", EActorLookAtDirection::Right);
+	m_pOwner->LoadActorLookAtDirectionTexture("Assets/Texture/Player/PlayerDown.bmp", EActorLookAtDirection::Down);
+	m_pOwner->LoadActorLookAtDirectionTexture("Assets/Texture/Player/PlayerUp.bmp", EActorLookAtDirection::Up);
 
 	// 상태마다 스프라이트를 미리 만들고
 	m_pOwner->CreateActorStateLookAtDynamicSprites<AnimationActorIdleState>("PlayerIdle", true);
@@ -39,7 +38,7 @@ void PlayerActor::Pimpl::LoadAndStartupPlayerSprite()
 	DynamicSpriteComponent* pDynamicSpriteComponent = m_pOwner->AddComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = m_pOwner->FindActorStateLookAtDynamicSprite<AnimationActorIdleState>(EActorLookAtType::Down);
+	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = m_pOwner->FindActorStateLookAtDynamicSprite<AnimationActorIdleState>(EActorLookAtDirection::Down);
 	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
 }
 
@@ -106,39 +105,26 @@ void PlayerActor::Pimpl::InitializePlayerInput()
 
 bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 {
+	// 축값이 전부 존재한다면 무효
+	if ((vMoveDir.x != 0.0f) &&
+		(vMoveDir.y != 0.0f))
+	{
+		return false;
+	}
+
 	if (m_pOwner->IsSameAnimationActorState<AnimationActorIdleState>() == false)
 	{
 		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
 		return false;
 	}
 
-	CellActorMoveComponent* pMoveComponent = m_pOwner->FindComponent<CellActorMoveComponent>();
-	ASSERT_LOG_RETURN_VALUE(pMoveComponent != nullptr, false);
-
-	// 현재 셀 좌표 백업
-	Position2d currentCellPos = pMoveComponent->GetDestinationCellPosition();
-
-	// 목표 지점 및 방향 바꾸고
-	m_pOwner->ApplyMoveDirection(vMoveDir);
-	pMoveComponent->ApplyMoveDirection(vMoveDir);
-
-	// 이동 가능한지?
-	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
-	if (pCurrentScene->CheckCanMoveToCellPosition(pMoveComponent->GetDestinationCellPosition()) == false)
+	CellActorMoveComponent* pCellActorMoveComponent = m_pOwner->FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
+	if (pCellActorMoveComponent->ProcessMove(vMoveDir) == false)
 	{
-		// Idle 스프라이트로 바꿈
-		m_pOwner->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
-
-		pMoveComponent->SetDestinationCellPosition(currentCellPos);
-		pMoveComponent->ResetMoveDirection();
-		DEFAULT_TRACE_LOG("이동 못함!");
-
 		return false;
 	}
 
-	// Walk 스프라이트로 바꿈
-	m_pOwner->ChangeActorStateDynamicSprite<AnimationActorWalkState>();
 	return true;
 }
 
@@ -205,23 +191,34 @@ void PlayerActor::Cleanup()
 	return (Super::Cleanup());
 }
 
+void PlayerActor::ProcessDamaged()
+{
+	// 이펙트 생성
+	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+
+	EffectSpawnInfo effectSpawnInfo;
+	effectSpawnInfo.strEffectName = "OneTime_HitEffect";
+	effectSpawnInfo.spawnCellPos = GetCellPosition();
+	effectSpawnInfo.effectSize = Size(80, 80);
+	pCurrentScene->ReserveCreateEffect(effectSpawnInfo);
+
+	// 사망 루틴
+	//pCurrentScene->ReserveEraseActor(shared_from_this());
+	//SetActorFlagBitOff(EActorFlag::Activation);
+
+	DEFAULT_TRACE_LOG("플레이어 사망!");
+}
+
 void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
 	Vec2d vMoveDir = pInputAction->BringValue<Vec2d>();
-
-	// 축값이 전부 존재한다면 무효
-	if ((vMoveDir.x != 0.0f) &&
-		(vMoveDir.y != 0.0f))
-	{
-		return;
-	}
-
 	if (m_spPimpl->DirectionKeyHandlerImpl(vMoveDir) == false)
 	{
 		return;
 	}
 
-	ImmediatelyChangePlayerState<AnimationActorWalkState>();
+	ImmediatelyChangeState<AnimationActorWalkState>();
 	DEFAULT_TRACE_LOG("(기본 -> 걷기) 상태로 전환!");
 }
 
@@ -232,6 +229,6 @@ void PlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)
 		return;
 	}
 	
-	ImmediatelyChangePlayerState<AnimationActorAttackState>();
+	ImmediatelyChangeState<AnimationActorAttackState>();
 	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
 }

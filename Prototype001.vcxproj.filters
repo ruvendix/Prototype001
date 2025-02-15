@@ -119,6 +119,15 @@
     <Filter Include="Sources\Engine\Component\EffectComponent">
       <UniqueIdentifier>{da40d7ba-221f-4cc0-8565-2b9f149c283f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Client\EnemyMonster\EnemyMonsterState">
+      <UniqueIdentifier>{380203db-0d47-431a-b3d2-a0223198f2a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\EnemyMonster\EnemyMonsterActor">
+      <UniqueIdentifier>{d77314b5-0b28-485d-9396-69b44447e5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\EnemyMonster\EnemyMonsterComponent">
+      <UniqueIdentifier>{3596df10-f942-4dab-9c66-275e755fdded}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -307,17 +316,26 @@
     <ClCompile Include="Sources\Client\EnemyRespawner\EnemyRespawner.cpp">
       <Filter>Sources\Client\EnemyRespawner</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Client\EnemyMonster\SnakeActor.cpp">
-      <Filter>Sources\Client\EnemyMonster</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor.cpp">
-      <Filter>Sources\Client\EnemyMonster</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Component\EffectComponent\FollowerEffectComponent.cpp">
       <Filter>Sources\Engine\Component\EffectComponent</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Component\EffectComponent\LifeTimeEffectComponent.cpp">
       <Filter>Sources\Engine\Component\EffectComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Scene\WorldTileMapScene.cpp">
+      <Filter>Sources\Client\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.cpp">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterState</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.cpp">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterActor\SnakeActor.cpp">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.cpp">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -585,17 +603,26 @@
     <ClInclude Include="Sources\Client\EnemyRespawner\EnemyRespawner.h">
       <Filter>Sources\Client\EnemyRespawner</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\SnakeActor.h">
-      <Filter>Sources\Client\EnemyMonster</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor.h">
-      <Filter>Sources\Client\EnemyMonster</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Component\EffectComponent\FollowerEffectComponent.h">
       <Filter>Sources\Engine\Component\EffectComponent</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Component\EffectComponent\LifeTimeEffectComponent.h">
       <Filter>Sources\Engine\Component\EffectComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Scene\WorldTileMapScene.h">
+      <Filter>Sources\Client\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterState</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\SnakeActor.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

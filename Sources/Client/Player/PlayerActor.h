@@ -14,6 +14,8 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual void ProcessDamaged() override;
+
 private:
 	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
 	void OnSpaceBarKeyHandler(const InputActionValue* pInputAction);

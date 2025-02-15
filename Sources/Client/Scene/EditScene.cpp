@@ -20,20 +20,9 @@ void EditScene::Startup()
 {
 	Super::Startup();
 
-#pragma region 월드맵 처리
-	// 월드맵 액터 추가
-	m_spWorldBackgroundActor = CreateActorToScene<WorldBackgroundActor>(EActorLayerType::WorldBackground);
-
-	// 셀 정보 넣기
-	WorldContext::I()->SetCellSize(48);
-
-	// 셀 정보에 따른 타일맵 구성
-	m_spWorldTileMapActor = CreateActorToScene<WorldTileMapActor>(EActorLayerType::WorldForeground);
-#pragma endregion
-
 	m_spEditorActor = CreateActorToScene<EditorActor>(EActorLayerType::Default);
 	m_spEditorActor->SetActorFlagBitOff(EActorFlag::RenderingTarget);
-	m_spEditorActor->SetWorldTileMapActor(m_spWorldTileMapActor);
+	m_spEditorActor->SetWorldTileMapActor(GetWorldTileMapActor());
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spEditorActor);
