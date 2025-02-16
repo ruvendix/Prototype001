@@ -25,15 +25,56 @@ bool EnmeyMonsterIdleState::Update(float deltaSeconds)
 
 	// 추적 가능한 플레이어를 찾을 때만 추적 상태로 변경
 	const std::shared_ptr<PlayerActor>& spFoundPlayerActor = spEnemyMonsterOwner->FindChaseAvailablePlayerActor();
-	if (spFoundPlayerActor == nullptr)
+	if (spFoundPlayerActor != nullptr)
+	{
+		spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterChaseState>();
+		DEFAULT_TRACE_LOG("몬스터 (Idle -> 추적) 상태로 전환!");
+		return true;
+	}
+
+	// 그게 아니면 그냥 돌아다님
+	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
+	if (pCellActorMoveComponent->IsZeroMoveDirectionVector())
+	{
+		ProcessIdleStateByRandomMove();
+		return true;
+	}
+
+	if (pCellActorMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, false) == false)
 	{
 		return false;
 	}
 
-	spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterChaseState>();
-	DEFAULT_TRACE_LOG("몬스터 (Idle -> 추적) 상태로 전환!");
+	pCellActorMoveComponent->ResetMoveDirectionVector();
+	pCellActorMoveComponent->ApplyDestinationDataToOwner();
 
+	ProcessIdleStateByRandomMove();
 	return true;
+}
+
+void EnmeyMonsterIdleState::ProcessIdleStateByRandomMove() const
+{
+	EnemyMonsterActor* spEnemyMonsterOwner = dynamic_cast<EnemyMonsterActor*>(GetOwner());
+	if (spEnemyMonsterOwner == nullptr)
+	{
+		return;
+	}
+
+	// 랜덤하게 이동
+	int32 randMoveDirIdx = (std::rand() % TO_NUM(EActorLookAtDirection::Count));
+	const Position2d& moveDir = AnimationActor::g_lookAtForwardCellPosTable[randMoveDirIdx];
+	const Vector2d& vMoveDir = Vector2d{ static_cast<float>(moveDir.x), static_cast<float>(moveDir.y) };
+
+	// 이동 정보 처리
+	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN(pCellActorMoveComponent != nullptr);
+	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir) == false)
+	{
+		return;
+	}
+
+	spEnemyMonsterOwner->ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEFINE_COMPILETIME_ID(EnmeyMonsterChaseState, AnimationActorStateIdCounter)
@@ -52,31 +93,34 @@ bool EnmeyMonsterChaseState::Update(float deltaSeconds)
 	AnimationActor* pOwner = GetOwner();
 	ASSERT_LOG(pOwner != nullptr);
 
-	// 이동 컴포넌트
-	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
-	ASSERT_LOG_RETURN_VALUE(pMoveComponent != nullptr, false);
-	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == false)
-	{
-		return false;
-	}
-
-	pMoveComponent->ResetMoveDirection();
-
-	// 이동이 완료되었으니 목적지 셀 좌표를 현재 셀 좌표로 적용
-	pMoveComponent->ApplyDestinationDataToOwner();
-
 	EnemyMonsterActor* spEnemyMonsterOwner = dynamic_cast<EnemyMonsterActor*>(pOwner);
 	if (spEnemyMonsterOwner == nullptr)
 	{
 		return false;
 	}
 
+	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
+	if (pCellActorMoveComponent->IsZeroMoveDirectionVector())
+	{
+		ProcessChaseStateByNavigationPath();
+		return true;
+	}
+
+	if (pCellActorMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, false) == false)
+	{
+		return false;
+	}
+
+	pCellActorMoveComponent->ResetMoveDirectionVector();
+	pCellActorMoveComponent->ApplyDestinationDataToOwner();
+
 #pragma region 한칸 이동하면 플레이어와 한칸 차이인지 확인
 	const std::shared_ptr<PlayerActor>& spFoundAttackablePlayerActor = spEnemyMonsterOwner->FindNearbyPlayerActor();
 	if (spFoundAttackablePlayerActor != nullptr)
 	{
 		// 바라보는 방향 조정
-		const Vec2d& vMoveDir = spEnemyMonsterOwner->CalculateMoveDirectionByCellPosition(spFoundAttackablePlayerActor->GetCellPosition());
+		const Vector2d& vMoveDir = spEnemyMonsterOwner->CalculateMoveDirectionByCellPosition(spFoundAttackablePlayerActor->GetCellPosition());
 		spEnemyMonsterOwner->ApplyMoveDirectionToLookAtDirection(vMoveDir);
 		spEnemyMonsterOwner->ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
 
@@ -87,13 +131,28 @@ bool EnmeyMonsterChaseState::Update(float deltaSeconds)
 	}
 #pragma endregion
 
-#pragma region 한칸 이동하면 여전히 플레이어를 추적할 수 있는지 확인
-	// 추적 가능한 플레이어를 못 찾았으면 Idle로 변경
+	ProcessChaseStateByNavigationPath();
+	return true;
+}
+
+void EnmeyMonsterChaseState::ProcessChaseStateByNavigationPath() const
+{
+	EnemyMonsterActor* spEnemyMonsterOwner = dynamic_cast<EnemyMonsterActor*>(GetOwner());
+	if (spEnemyMonsterOwner == nullptr)
+	{
+		return;
+	}
+
+	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN(pCellActorMoveComponent != nullptr);
+
+#pragma region 플레이어를 추적할 수 있는지 확인
 	const std::shared_ptr<PlayerActor>& spFoundChaseablePlayerActor = spEnemyMonsterOwner->FindChaseAvailablePlayerActor();
 	if (spFoundChaseablePlayerActor == nullptr)
 	{
+		// 추적 가능한 플레이어를 못 찾았으면 Idle로 변경
 		spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterIdleState>();
-		return false;
+		return;
 	}
 #pragma endregion
 
@@ -104,23 +163,20 @@ bool EnmeyMonsterChaseState::Update(float deltaSeconds)
 	if (vecNavigationPos.empty() == true)
 	{
 		spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterIdleState>();
-		return false;
+		return;
 	}
 
 	// 이동할 위치에서 현재 위치와의 차이로 방향 벡터 판단
-	const Vec2d& vMoveDir = pOwner->CalculateMoveDirectionByCellPosition(vecNavigationPos[0]);
+	const Vector2d& vMoveDir = spEnemyMonsterOwner->CalculateMoveDirectionByCellPosition(vecNavigationPos[0]);
 
-	// 이동 처리
-	CellActorMoveComponent* pCellActorMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
-	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
-	if (pCellActorMoveComponent->ProcessMove(vMoveDir) == false)
+	// 이동 정보 처리
+	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir) == false)
 	{
 		spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterIdleState>();
-		return false;
+		return;
 	}
 
-	GetOwner()->ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
-	return true;
+	spEnemyMonsterOwner->ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEFINE_COMPILETIME_ID(EnmeyMonsterAttackState, AnimationActorStateIdCounter)

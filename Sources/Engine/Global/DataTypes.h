@@ -22,43 +22,6 @@ struct CompiletimeCounter
 	static int32 s_num;
 };
 
-struct Position2d
-{
-	int32 x = 0;
-	int32 y = 0;
-
-	Position2d operator + (const Position2d& other) const
-	{
-		return Position2d(x + other.x, y + other.y);
-	}
-
-	Position2d operator - (const Position2d& other) const
-	{
-		return Position2d(x - other.x, y - other.y);
-	}
-
-	bool operator == (const Position2d& other) const
-	{
-		if ((x == other.x) &&
-			(y == other.y))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	bool operator < (const Position2d& other) const
-	{
-		if (x != other.x)
-		{
-			return x < other.x;
-		}
-
-		return (y < other.y);
-	}
-};
-
 struct Array2dInfo
 {
 	int32 xIdxCount = 0;
@@ -71,70 +34,6 @@ struct FloatRect
 	float right = 0.0f;
 	float top = 0.0f;
 	float bottom = 0.0f;
-};
-
-// 이건 분량이 커지면 분리
-struct Vec2d
-{
-	float x = 0.0f;
-	float y = 0.0f;
-
-	Vec2d operator + (const Vec2d& other) const
-	{
-		Vec2d ret;
-		ret.x = (x + other.x);
-		ret.y = (y + other.y);
-
-		return ret;
-	}
-
-	Vec2d operator - (const Vec2d& other) const
-	{
-		Vec2d ret;
-		ret.x = (x - other.x);
-		ret.y = (y - other.y);
-
-		return ret;
-	}
-
-	Vec2d operator * (const Vec2d& other) const
-	{
-		Vec2d ret;
-		ret.x = (x * other.x);
-		ret.y = (y * other.y);
-
-		return ret;
-	}
-
-	Vec2d operator * (float scalar) const
-	{
-		Vec2d vResult;
-		vResult.x = (x * scalar);
-		vResult.y = (y * scalar);
-
-		return vResult;
-	}
-
-	const Vec2d& operator += (const Vec2d& other)
-	{
-		x += other.x;
-		y += other.y;
-
-		return (*this);
-	}
-
-	const Vec2d& operator *= (float scalar)
-	{
-		x *= scalar;
-		y *= scalar;
-
-		return (*this);
-	}
-
-	float CalculateLengthSquare() const
-	{
-		return (std::pow(x, 2.0f) + std::pow(y, 2.0f));
-	}
 };
 
 using ActorPtr = std::shared_ptr<class Actor>;

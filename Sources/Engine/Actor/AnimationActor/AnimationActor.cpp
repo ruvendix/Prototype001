@@ -44,8 +44,13 @@ bool AnimationActor::Update(float deltaSeconds)
 	return true;
 }
 
+bool AnimationActor::CheckMovingState() const
+{
+	return (IsSameAnimationActorState<AnimationActorWalkState>());
+}
+
 // 실수니까 정확히 체크
-void AnimationActor::ApplyMoveDirectionToLookAtDirection(const Vec2d& vMoveDir)
+void AnimationActor::ApplyMoveDirectionToLookAtDirection(const Vector2d& vMoveDir)
 {
 	if (math::CheckAlikeValue(vMoveDir.x, 1.0f) == true)
 	{

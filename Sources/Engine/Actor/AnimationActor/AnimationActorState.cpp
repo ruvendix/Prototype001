@@ -67,9 +67,9 @@ bool AnimationActorWalkState::Update(float deltaSeconds)
 
 	// 이동 컴포넌트
 	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
-	if (pMoveComponent->CheckGoalPosition(deltaSeconds) == true)
+	if (pMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, true) == true)
 	{
-		pMoveComponent->ResetMoveDirection();
+		pMoveComponent->ResetMoveDirectionVector();
 
 		// 이동이 완료되었으니 목적지 셀 좌표를 현재 셀 좌표로 적용
 		pMoveComponent->ApplyDestinationDataToOwner();
@@ -114,7 +114,7 @@ bool AnimationActorAttackState::Update(float deltaSeconds)
 
 	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
 	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
-	const ActorPtr& spVictimActor = pCurrentScene->FindCellActor(EActorLayerType::Creature, forwardCellPos);
+	const ActorPtr& spVictimActor = pCurrentScene->FindCellActor(EActorLayerType::Creature, forwardCellPos, nullptr);
 	if (spVictimActor != nullptr)
 	{
 		spVictimActor->ProcessDamaged();

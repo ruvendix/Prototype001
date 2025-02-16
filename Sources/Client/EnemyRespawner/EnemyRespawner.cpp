@@ -56,7 +56,9 @@ void EnemyRespawner::RespawnEnemies(Scene* pCurrentScene)
 		++g_enemyId;
 
 		const std::shared_ptr<CellActor>& spNewEnemyActor = pCurrentScene->CreateCloneActorToScene(spPrototypeEnemyActor);
-#if 1
+		spNewEnemyActor->SetActorName(strNewEnemyActorName);
+
+#if 0
 		const Position2d& randomCellPos{ 6, 10 };
 		spNewEnemyActor->ApplyCellPosition(randomCellPos);
 #else

@@ -19,8 +19,8 @@ bool EditorActorMoveComponent::Update(float deltaSeconds)
 	Actor* pOwner = GetOwner();
 	ASSERT_LOG_RETURN_VALUE(pOwner != nullptr, false);
 
-	Vec2d vActorNextPos = pOwner->BringPosition();
-	Vec2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
+	Vector2d vActorNextPos = pOwner->BringPosition();
+	Vector2d vMovePos = (m_vMoveDir * m_moveSpeed * deltaSeconds);
 	vActorNextPos += vMovePos;
 
 	vActorNextPos.x = global::Clamp(vActorNextPos.x, m_movableRangeRect.left, m_movableRangeRect.right);

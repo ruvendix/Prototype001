@@ -121,6 +121,8 @@ void EditorActor::Cleanup()
 
 void EditorActor::OnMouseLeftButtonHandler(const InputActionValue* pInputAction)
 {
+	UNREFERENCED_PARAMETER(pInputAction);
+
 	// 현재 마우스 좌표를 타일에 적용
 	m_spWorldTileMapActor->ApplyCurrentMousePositionToTile();
 	DEFAULT_TRACE_LOG("마우스 왼쪽 버튼");
@@ -128,6 +130,8 @@ void EditorActor::OnMouseLeftButtonHandler(const InputActionValue* pInputAction)
 
 void EditorActor::OnMouseRightButtonHandler(const InputActionValue* pInputAction)
 {
+	UNREFERENCED_PARAMETER(pInputAction);
+
 	SceneManager::I()->ReserveNextScene<GameScene>();
 	DEFAULT_TRACE_LOG("마우스 오른쪽 버튼");
 }
@@ -135,10 +139,10 @@ void EditorActor::OnMouseRightButtonHandler(const InputActionValue* pInputAction
 void EditorActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
 	EditorActorMoveComponent* pEditorActorMoveComponent = FindComponent<EditorActorMoveComponent>();
-	pEditorActorMoveComponent->SetMoveDirection(pInputAction->BringValue<Vec2d>());
+	pEditorActorMoveComponent->SetMoveDirection(pInputAction->BringValue<Vector2d>());
 
 #if 0
-	const Vec2d& vMoveDir = pInputAction->BringValue<Vec2d>();
+	const Vector2d& vMoveDir = pInputAction->BringValue<Vector2d>();
 	DEFAULT_TRACE_LOG("(%f %f)", vMoveDir.x, vMoveDir.y);
 #endif
 }

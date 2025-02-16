@@ -9,6 +9,10 @@ class EnemyMonsterActor : public AnimationActor
 	using Super = AnimationActor;
 
 public:
+	static bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos,
+		int32 chaseRange, std::vector<Position2d>& outVecNavigationPath);
+
+public:
 	using Super::Super;
 
 	EnemyMonsterActor(const EnemyMonsterActor& srcActor);
@@ -16,10 +20,8 @@ public:
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-	
-public:
-	static bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos,
-		int32 chaseRange, std::vector<Position2d>& outVecNavigationPath);
+
+	virtual bool CheckMovingState() const override;
 
 public:
 	void DecreaseEnemyCountToEnemyRespawner() const;

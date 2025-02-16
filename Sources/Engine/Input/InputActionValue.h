@@ -15,7 +15,7 @@ public:
 	{
 		if ((std::is_same_v<TData, bool> == false) &&
 			(std::is_same_v<TData, float> == false) &&
-			(std::is_same_v<TData, Vec2d> == false))
+			(std::is_same_v<TData, Vector2d> == false))
 		{
 			ERROR_LOG(LogInput, "유효하지 않은 형식의 값!");
 			return false;

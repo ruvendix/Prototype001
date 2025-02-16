@@ -12,7 +12,7 @@ public:
 	virtual void Startup() override;
 
 	bool CheckInCameraVision(const Actor* pActor) const;
-	bool CheckInCameraVision(const Vec2d& worldPos) const;
+	bool CheckInCameraVision(const Vector2d& worldPos) const;
 
-	const Vec2d& BringCameraOffsetPosition() const;
+	const Vector2d& BringCameraOffsetPosition() const;
 };

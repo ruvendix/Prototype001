@@ -337,6 +337,9 @@
     <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.cpp">
       <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Math\Vector2d.cpp">
+      <Filter>Sources\Engine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Global\DataTypes.h">
@@ -623,6 +626,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
       <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Math\Vector2d.h">
+      <Filter>Sources\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Math\Position2d.h">
+      <Filter>Sources\Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

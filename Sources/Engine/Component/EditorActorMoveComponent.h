@@ -15,12 +15,12 @@ public:
 public:
 	void CalculateMovableRangeRect();
 
-	void SetMoveDirection(const Vec2d& vMoveDir) { m_vMoveDir = vMoveDir; }
+	void SetMoveDirection(const Vector2d& vMoveDir) { m_vMoveDir = vMoveDir; }
 	void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
 
 private:
 	FloatRect m_movableRangeRect;
 
-	Vec2d m_vMoveDir;
+	Vector2d m_vMoveDir;
 	float m_moveSpeed = 0.0f;
 };

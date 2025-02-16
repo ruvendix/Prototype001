@@ -26,7 +26,7 @@ bool CameraComponent::Update(float deltaSeconds)
 		pTargetActor = GetOwner();
 	}
 
-	const Vec2d& vTargetWorldPos = pTargetActor->BringPosition();
+	const Vector2d& vTargetWorldPos = pTargetActor->BringPosition();
 	const Size& viewerHalfResolution = SceneRenderer::I()->GetViewerHalfResoultion();
 
 	// 카메라 오프셋의 기준은 화면 정중앙이므로 이 부분을 고려해야함!

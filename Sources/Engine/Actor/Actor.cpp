@@ -14,7 +14,7 @@ Actor::Actor(const std::string& strName)
 
 Actor::Actor(const Actor& srcActor)
 {
-	m_strActorName = srcActor.m_strActorName;
+	//m_strActorName = srcActor.m_strActorName;
 	m_actorBitsetFlag = srcActor.m_actorBitsetFlag;
 	m_actorLayer = srcActor.m_actorLayer;
 
@@ -128,18 +128,18 @@ const TransformComponent* Actor::BringTransformComponent() const
 
 void Actor::ApplyPosition(float x, float y)
 {
-	Vec2d vPos(x, y);
+	Vector2d vPos(x, y);
 	ApplyPosition(vPos);
 }
 
-void Actor::ApplyPosition(const Vec2d& vPos)
+void Actor::ApplyPosition(const Vector2d& vPos)
 {
 	TransformComponent* pTransformComponent = BringTransformComponent();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetPosition(vPos);
 }
 
-const Vec2d& Actor::BringPosition() const
+const Vector2d& Actor::BringPosition() const
 {
 	const TransformComponent* pTransformComponent = BringTransformComponent();
 	ASSERT_LOG(pTransformComponent != nullptr);
@@ -162,7 +162,7 @@ void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent) c
 		ASSERT_LOG(pRenderComponent != nullptr);
 
 		// 설정된 레이어에 따라 컨테이너에 넣음
-		if (global::ValidateIndexRange(m_actorLayer, EActorLayerType::Count) == false)
+		if (global::ValidateIndexRangeByEnum(m_actorLayer, EActorLayerType::Count) == false)
 		{
 			DETAIL_ERROR_LOG(EErrorCode::InvalidRenderingLayer);
 		}

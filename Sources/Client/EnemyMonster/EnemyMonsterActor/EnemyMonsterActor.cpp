@@ -102,7 +102,7 @@ bool EnemyMonsterActor::CalculateNavigationPath(const Position2d& srcCellPos, co
 			}
 
 			// 갈 수 있는 곳인지 확인
-			if (pCurrentScene->CheckCanMoveToCellPosition(nextAStarNode.cellPos) == false)
+			if (pCurrentScene->CheckCanMoveToCellPosition(nextAStarNode.cellPos, nullptr) == false)
 			{
 				continue;
 			}
@@ -133,15 +133,15 @@ bool EnemyMonsterActor::CalculateNavigationPath(const Position2d& srcCellPos, co
 	if (bFoundNavigationPath == false)
 	{
 		int32 bestSecondaryCost = INT32_MAX;
-		
+
 		// mapBestPrimaryCost는 최대한 찾은 경로까지의 정보가 있음
 		for (const auto& bestPrimaryCostIter : mapBestPrimaryCost)
 		{
 			if (bestPrimaryCostIter.second == bestSecondaryCost)
 			{
 				int32 dist1 = CalculateHeuristic(srcCellPos, resultDestCellPos);
-				int32 dist2 = CalculateHeuristic(srcCellPos, bestPrimaryCostIter.first);;
-				
+				int32 dist2 = CalculateHeuristic(srcCellPos, bestPrimaryCostIter.first);
+
 				if (dist1 > dist2)
 				{
 					resultDestCellPos = bestPrimaryCostIter.first;
@@ -203,6 +203,11 @@ bool EnemyMonsterActor::Update(float deltaSeconds)
 	}
 
 	return true;
+}
+
+bool EnemyMonsterActor::CheckMovingState() const
+{
+	return (IsSameAnimationActorState<EnmeyMonsterChaseState>());
 }
 
 void EnemyMonsterActor::DecreaseEnemyCountToEnemyRespawner() const

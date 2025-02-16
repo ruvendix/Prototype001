@@ -51,7 +51,7 @@ void EffectActor::SpawnEffect(const EffectSpawnInfo& effectSpawnInfo)
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetSize(effectSpawnInfo.effectSize);
 
-	const Vec2d& vEffectSwpanWorldPos = CellActor::ConvertCellPositionToWorldPosition(effectSpawnInfo.spawnCellPos);
+	const Vector2d& vEffectSwpanWorldPos = CellActor::ConvertCellPositionToWorldPosition(effectSpawnInfo.spawnCellPos);
 	pTransformComponent->SetPosition(vEffectSwpanWorldPos);
 
 	LifeTimeEffectComponent* pLifeTimeEffectComponent = FindComponent<LifeTimeEffectComponent>();

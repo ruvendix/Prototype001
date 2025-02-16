@@ -54,7 +54,7 @@ void Scene::Cleanup()
 	}
 }
 
-bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos) const
+bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos, const ActorPtr& spExcludeActor) const
 {
 	return true;
 }
@@ -77,7 +77,7 @@ void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetAct
 	SceneRenderer::I()->SetMainCameraActor(m_spMainCameraActor);
 }
 
-ActorPtr Scene::FindCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const
+std::shared_ptr<CellActor> Scene::FindCellActor(EActorLayerType actorLayer, const Position2d& targetCellPos, const ActorPtr& spExcludeActor) const
 {
 	std::vector<std::shared_ptr<CellActor>> foundCellActors;
 	FindExactTypeActors<CellActor>(actorLayer, foundCellActors);
@@ -88,9 +88,24 @@ ActorPtr Scene::FindCellActor(EActorLayerType actorLayer, const Position2d& cell
 
 	for (const std::shared_ptr<CellActor>& spCellActor : foundCellActors)
 	{
-		if (spCellActor->CheckEqaulCellPosition(cellPos) == true)
+		if (spCellActor == spExcludeActor)
+		{
+			continue;
+		}
+
+		if (spCellActor->CheckEqaulCellPosition(targetCellPos) == true)
 		{
 			return spCellActor;
+		}
+
+		if (spCellActor->CheckMovingState() == true)
+		{
+			const CellActorMoveComponent* pCellActorMoveComponent = spCellActor->FindComponent<CellActorMoveComponent>();
+			if ((pCellActorMoveComponent != nullptr) &&
+				(pCellActorMoveComponent->GetDestinationCellPosition() == targetCellPos))
+			{
+				return spCellActor;
+			}
 		}
 	}
 

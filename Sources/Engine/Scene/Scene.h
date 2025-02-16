@@ -11,7 +11,7 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	virtual bool CheckCanMoveToCellPosition(const Position2d& destCellPos) const;
+	virtual bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const ActorPtr& spExcludeActor) const;
 
 public:
 	template <typename TActor>
@@ -110,7 +110,7 @@ public:
 	{
 		static_assert(std::is_base_of_v<CellActor, TActor> == true, "TActor isn't derived cellActor");
 
-		const ActorPtr& spFoundCellActor = FindCellActor(actorLayer, cellPos);
+		const ActorPtr& spFoundCellActor = FindCellActor(actorLayer, cellPos, nullptr);
 		const std::shared_ptr<TActor>& spResultActor = std::dynamic_pointer_cast<TActor>(spFoundCellActor);
 		if (spResultActor == nullptr)
 		{
@@ -123,7 +123,7 @@ public:
 public:
 	void RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetActor);
 	
-	ActorPtr FindCellActor(EActorLayerType actorLayer, const Position2d& cellPos) const;
+	std::shared_ptr<CellActor> FindCellActor(EActorLayerType actorLayer, const Position2d& targetCellPos, const ActorPtr& spExcludeActor) const;
 
 	void ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
 	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);

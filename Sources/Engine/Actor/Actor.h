@@ -102,8 +102,8 @@ public:
 	const TransformComponent* BringTransformComponent() const;
 
 	void ApplyPosition(float x, float y);
-	void ApplyPosition(const Vec2d& vPos);
-	const Vec2d& BringPosition() const;
+	void ApplyPosition(const Vector2d& vPos);
+	const Vector2d& BringPosition() const;
 #pragma endregion
 
 	void FindRenderComponents(RenderComponentVector& outVecRenderComponent) const;
@@ -114,7 +114,7 @@ public:
 	bool IsActorFlagBitOn(EActorFlag actorFlag) const { return (m_actorBitsetFlag.IsBitOn(actorFlag)); }
 
 	const ActorBitset& GetActorBitsetFlag() const { return m_actorBitsetFlag; }
-	const ActorPtr& GetChildNoCast(int32 childIdx) const { return (m_vecChild[childIdx]); }
+	const ActorPtr& GetChildNoCast(int32 childIdx) const { return (m_vecChild[static_cast<uint32>(childIdx)]); }
 
 	void SetActorLayer(EActorLayerType actorLayer) { m_actorLayer = actorLayer; }
 	EActorLayerType GetActorLayer() const { return m_actorLayer; }

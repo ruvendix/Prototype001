@@ -17,6 +17,8 @@
 
 #include "Engine/Math/MathUtility.h"
 #include "Engine/Math/Size.h"
+#include "Engine/Math/Vector2d.h"
+#include "Engine/Math/Position2d.h"
 
 #include "Engine/File/FileStream.h"
 

@@ -46,11 +46,11 @@ void InputActionValue::ProcessInputActionValue(const InputActionMappingInfo& inp
 
 	case EInputActionValueType::Vector2:
 	{
-		Vec2d vAxis2d;
+		Vector2d vAxis2d;
 
 		if (m_value.has_value() == true)
 		{
-			vAxis2d = std::any_cast<Vec2d>(m_value);
+			vAxis2d = std::any_cast<Vector2d>(m_value);
 		}
 
 		if (bActivationValue == true)

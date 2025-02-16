@@ -17,7 +17,7 @@ public:
 	void ReleaseBuffers();
 
 	HDC CreateCompatibleDc();
-	Vec2d ConvertWorldPositionToRenderingPosition(const Vec2d& worldPos) const;
+	Vector2d ConvertWorldPositionToRenderingPosition(const Vector2d& worldPos) const;
 
 	const Size& GetViewerResolution() const { return m_viewerInfo.resolution; }
 	

@@ -12,7 +12,7 @@ public:
 	void LoadAndStartupPlayerSprite();
 	void InitializePlayerInput();
 
-	bool DirectionKeyHandlerImpl(const Vec2d& vMoveDir);
+	bool DirectionKeyHandlerImpl(const Vector2d& vMoveDir);
 	bool SpaceBarKeyHandlerImpl();
 };
 
@@ -103,7 +103,7 @@ void PlayerActor::Pimpl::InitializePlayerInput()
 #pragma endregion
 }
 
-bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
+bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vector2d& vMoveDir)
 {
 	// 축값이 전부 존재한다면 무효
 	if ((vMoveDir.x != 0.0f) &&
@@ -120,7 +120,7 @@ bool PlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vec2d& vMoveDir)
 
 	CellActorMoveComponent* pCellActorMoveComponent = m_pOwner->FindComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
-	if (pCellActorMoveComponent->ProcessMove(vMoveDir) == false)
+	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir) == false)
 	{
 		return false;
 	}
@@ -212,7 +212,7 @@ void PlayerActor::ProcessDamaged()
 
 void PlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
-	Vec2d vMoveDir = pInputAction->BringValue<Vec2d>();
+	Vector2d vMoveDir = pInputAction->BringValue<Vector2d>();
 	if (m_spPimpl->DirectionKeyHandlerImpl(vMoveDir) == false)
 	{
 		return;

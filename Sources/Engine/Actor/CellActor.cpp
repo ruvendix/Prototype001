@@ -4,23 +4,23 @@
 
 #include "Engine/Component/CellActorMoveComponent.h"
 
-Vec2d CellActor::ConvertCellPositionToWorldPosition(const Position2d& cellPos)
+Vector2d CellActor::ConvertCellPositionToWorldPosition(const Position2d& cellPos)
 {
 	return (ConvertCellPositionToWorldPosition(cellPos.x, cellPos.y));
 }
 
-Vec2d CellActor::ConvertCellPositionToWorldPosition(int32 x, int32 y)
+Vector2d CellActor::ConvertCellPositionToWorldPosition(int32 x, int32 y)
 {
 	int32 cellSize = WorldContext::I()->GetCellSize();
 
-	Vec2d convertedPos;
+	Vector2d convertedPos;
 	convertedPos.x = static_cast<float>((x * cellSize) + (cellSize / 2));
 	convertedPos.y = static_cast<float>((y * cellSize) + (cellSize / 2));
 
 	return convertedPos;
 }
 
-Position2d CellActor::ConvertWorldPositionToCellPosition(const Vec2d& worldPos)
+Position2d CellActor::ConvertWorldPositionToCellPosition(const Vector2d& worldPos)
 {
 	return (ConvertWorldPositionToCellPosition(worldPos.x, worldPos.y));
 }
@@ -56,11 +56,16 @@ void CellActor::Cleanup()
 	return (Super::Cleanup());
 }
 
+bool CellActor::CheckMovingState() const
+{
+	return false;
+}
+
 void CellActor::ApplyCellPosition(int32 x, int32 y)
 {
 	m_cellPos = Position2d{ x, y };
 
-	const Vec2d& vWorldPos = ConvertCellPositionToWorldPosition(x, y);
+	const Vector2d& vWorldPos = ConvertCellPositionToWorldPosition(x, y);
 	ApplyPosition(vWorldPos);
 }
 
@@ -79,7 +84,7 @@ Position2d CellActor::ApplyRandomCellPosition()
 	while (true)
 	{
 		const Position2d& tempRandomCellPos = WorldContext::I()->CalculateRandomCellPosition();
-		if (pCurrentScene->CheckCanMoveToCellPosition(tempRandomCellPos) == true)
+		if (pCurrentScene->CheckCanMoveToCellPosition(tempRandomCellPos, nullptr) == true)
 		{
 			ApplyCellPosition(tempRandomCellPos);
 			randomCellPos = tempRandomCellPos;
@@ -90,16 +95,16 @@ Position2d CellActor::ApplyRandomCellPosition()
 	return randomCellPos;
 }
 
-Vec2d CellActor::CalculateMoveDirectionByCellPosition(const Position2d& destCellPos) const
+Vector2d CellActor::CalculateMoveDirectionByCellPosition(const Position2d& destCellPos) const
 {
 	const Position2d& diffCellPos = (destCellPos - GetCellPosition());
-	const Vec2d& vMoveDir{ static_cast<float>(diffCellPos.x),  static_cast<float>(diffCellPos.y) };
+	const Vector2d& vMoveDir{ static_cast<float>(diffCellPos.x),  static_cast<float>(diffCellPos.y) };
 	return vMoveDir;
 }
 
 bool CellActor::CheckEqaulCellPosition(const Position2d& otherCellPos) const
 {
-	const Vec2d& vWorldPos = BringPosition();
+	const Vector2d& vWorldPos = BringPosition();
 	const Position2d& myCellPos = CellActor::ConvertWorldPositionToCellPosition(vWorldPos);
 	return (myCellPos == otherCellPos);
 }

@@ -25,6 +25,8 @@ public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 
+	virtual bool CheckMovingState() const;
+
 public:
 	template <typename TActorState>
 	void CreateActorStateLookAtDynamicSprites(const std::string& strPrefix, bool bLoopDynamicSprite)
@@ -110,12 +112,10 @@ public:
 		ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
 		DynamicSpritePtr spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TActorState>(m_lookAtDir);
-		if (spChangeActorStateDynamicSprite == nullptr)
+		if (spChangeActorStateDynamicSprite != nullptr)
 		{
-			spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<AnimationActorIdleState>(m_lookAtDir);
+			pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
 		}
-
-		pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
 	}
 
 	template <typename TAnimationActorState>
@@ -141,7 +141,7 @@ public:
 	}
 
 public:
-	void ApplyMoveDirectionToLookAtDirection(const Vec2d& vMoveDir);
+	void ApplyMoveDirectionToLookAtDirection(const Vector2d& vMoveDir);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath, EActorLookAtDirection actorLookAtDir);
 	

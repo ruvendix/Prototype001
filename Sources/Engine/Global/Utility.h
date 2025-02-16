@@ -26,7 +26,7 @@ namespace global
 	}
 
 	template <typename TEnum>
-	bool ValidateIndexRange(TEnum value, TEnum size)
+	bool ValidateIndexRangeByEnum(TEnum value, TEnum size)
 	{
 		return ValidateIndexRange(TO_NUM(value), TO_NUM(size));
 	}

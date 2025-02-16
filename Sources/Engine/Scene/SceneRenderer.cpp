@@ -58,12 +58,12 @@ HDC SceneRenderer::CreateCompatibleDc()
 	return (::CreateCompatibleDC(m_hFrontBufferDc));
 }
 
-Vec2d SceneRenderer::ConvertWorldPositionToRenderingPosition(const Vec2d& worldPos) const
+Vector2d SceneRenderer::ConvertWorldPositionToRenderingPosition(const Vector2d& worldPos) const
 {
 	ASSERT_LOG(m_spMainCameraActor != nullptr);
 	CameraComponent* pCameraComponent = m_spMainCameraActor->FindComponent<CameraComponent>();
 	ASSERT_LOG(pCameraComponent != nullptr);
 
-	Vec2d renderingPos = (worldPos - pCameraComponent->GetCameraOffsetPosition());
+	Vector2d renderingPos = (worldPos - pCameraComponent->GetCameraOffsetPosition());
 	return renderingPos;
 }

@@ -58,7 +58,7 @@ private: \
 
 #define VALIDATE_INDEX_RANGE(idx, size) global::ValidateIndexRange(static_cast<int32>(idx), static_cast<int32>(size));
 
-#define TO_NUM(enumValue) static_cast<int32>(enumValue)
+#define TO_NUM(enumValue) static_cast<uint32>(enumValue)
 #define TO_ENUM(value, EnumType) static_cast<EnumType>(value)
 
 #define DECLARE_COMPILETIMER_COUNTER(TCounter) struct TCounter { }

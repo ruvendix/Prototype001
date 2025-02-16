@@ -21,7 +21,7 @@ Position2d RenderComponent::CalculateRenderingStartPosition()
 	ASSERT_LOG(pTransformComponent != nullptr);
 
 	// ÁßÁ¡ ÁÂÇ¥°¡ ÇÇº¿
-	Vec2d renderingPos = SceneRenderer::I()->ConvertWorldPositionToRenderingPosition(pTransformComponent->GetPosition());
+	Vector2d renderingPos = SceneRenderer::I()->ConvertWorldPositionToRenderingPosition(pTransformComponent->GetPosition());
 
 	Position2d renderingStartPos;
 	renderingStartPos.x = static_cast<int32>(renderingPos.x) - (pTransformComponent->GetWidth() / 2);

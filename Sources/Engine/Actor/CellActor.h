@@ -9,9 +9,9 @@ public:
 	using Super = Actor;
 
 public:
-	static Vec2d ConvertCellPositionToWorldPosition(const Position2d& cellPos);
-	static Vec2d ConvertCellPositionToWorldPosition(int32 x, int32 y);
-	static Position2d ConvertWorldPositionToCellPosition(const Vec2d& worldPos);
+	static Vector2d ConvertCellPositionToWorldPosition(const Position2d& cellPos);
+	static Vector2d ConvertCellPositionToWorldPosition(int32 x, int32 y);
+	static Position2d ConvertWorldPositionToCellPosition(const Vector2d& worldPos);
 	static Position2d ConvertWorldPositionToCellPosition(float posX, float posY);
 
 public:
@@ -22,11 +22,13 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual bool CheckMovingState() const;
+
 	void ApplyCellPosition(int32 x, int32 y);
 	void ApplyCellPosition(const Position2d& cellPos);
 	Position2d ApplyRandomCellPosition();
 
-	Vec2d CalculateMoveDirectionByCellPosition(const Position2d& destCellPos) const;
+	Vector2d CalculateMoveDirectionByCellPosition(const Position2d& destCellPos) const;
 
 	void SetCellPosition(const Position2d& cellPos) { m_cellPos = cellPos; }
 	const Position2d& GetCellPosition() const { return m_cellPos; }

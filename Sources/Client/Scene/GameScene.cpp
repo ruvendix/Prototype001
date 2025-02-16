@@ -46,7 +46,7 @@ void GameScene::Startup()
 	// 적군들 자동 생성기
 	m_spEnemyRespawner = std::make_shared<EnemyRespawner>();
 	m_spEnemyRespawner->Startup();
-	m_spEnemyRespawner->SetMaxEnemyCount(1);
+	m_spEnemyRespawner->SetMaxEnemyCount(20);
 	m_spEnemyRespawner->AddPrototypeEnemyActor(m_spSnakeActor);
 	m_spEnemyRespawner->RespawnEnemies(this);
 

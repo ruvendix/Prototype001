@@ -54,6 +54,7 @@
 #else
 #define ASSERT_LOG(expression) __noop
 #define ASSERT_LOG_RETURN(expression) __noop
+#define ASSERT_LOG_RETURN_VALUE(expression, value) __noop
 #endif
 
 #define DETAIL_ERROR_LOG(errorCode, ...) ErrorHandler::I()->ProcessErrorContents(errorCode, __VA_ARGS__)

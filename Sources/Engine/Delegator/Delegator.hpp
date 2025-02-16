@@ -8,6 +8,9 @@ template <typename TReturn, typename... TArgs>
 class DelegatorBase<TReturn(TArgs...)>
 {
 public:
+    DelegatorBase() = default;
+    virtual ~DelegatorBase() = default;
+
     virtual TReturn InvokeFunctions(TArgs&&... args) const = 0;
     virtual TReturn InvokeFixedArgumentFunctions() const = 0;
 
@@ -87,6 +90,10 @@ template <typename... TArgs>
 class Delegator<void(TArgs...)> : public DelegatorBase<void(TArgs...)>
 {
 public:
+    Delegator() = default;
+    virtual ~Delegator() = default;
+
+public:
     virtual void InvokeFunctions(TArgs&&... args) const override
     {
         for (const auto& boundFunc : this->m_vecBoundFunc)
@@ -107,6 +114,10 @@ public:
 template <typename TReturn, typename... TArgs>
 class Delegator<TReturn(TArgs...)> : public DelegatorBase<TReturn(TArgs...)>
 {
+public:
+    Delegator() = default;
+    virtual ~Delegator() = default;
+
 public:
     virtual TReturn InvokeFunctions(TArgs&&... args) const override
     {

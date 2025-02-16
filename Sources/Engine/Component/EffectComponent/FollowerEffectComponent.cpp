@@ -21,7 +21,7 @@ bool FollowerEffectComponent::Update(float deltaSeconds)
 		return false;
 	}
 
-	const Vec2d& vTargetPos = m_spTargetActor->BringPosition();
+	const Vector2d& vTargetPos = m_spTargetActor->BringPosition();
 	GetOwner()->ApplyPosition(vTargetPos);
 
 	return true;
