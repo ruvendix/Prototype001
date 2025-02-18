@@ -4,9 +4,9 @@
 class EnemyRespawner;
 class PlayerActor;
 
-class EnemyMonsterActor : public AnimationActor
+class EnemyMonsterActor : public PawnActor
 {
-	using Super = AnimationActor;
+	using Super = PawnActor;
 
 public:
 	static bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos,

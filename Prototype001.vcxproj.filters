@@ -101,9 +101,6 @@
     <Filter Include="Sources\Client\Editor">
       <UniqueIdentifier>{a9473c3c-7072-447c-8615-deed306b60cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Engine\Actor\AnimationActor">
-      <UniqueIdentifier>{8c257be7-2e2c-43cd-87c7-2a4168f3a372}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Engine\Actor\EffectActor">
       <UniqueIdentifier>{66038f97-ccd5-4c54-a60d-6329d43da8b2}</UniqueIdentifier>
     </Filter>
@@ -113,11 +110,17 @@
     <Filter Include="Sources\Client\EnemyRespawner">
       <UniqueIdentifier>{67536825-0764-4ae2-8348-df8d940fbfe2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Client\EnemyMonster">
-      <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Engine\Component\EffectComponent">
       <UniqueIdentifier>{da40d7ba-221f-4cc0-8565-2b9f149c283f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\Weapon">
+      <UniqueIdentifier>{4a5f34f4-83d8-4f48-86df-f0f0aa98443f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\Weapon\WeaponComponent">
+      <UniqueIdentifier>{6dac4a8b-db17-44dd-a6fd-3b80db25731c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Client\EnemyMonster">
+      <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Client\EnemyMonster\EnemyMonsterState">
       <UniqueIdentifier>{380203db-0d47-431a-b3d2-a0223198f2a8}</UniqueIdentifier>
@@ -127,6 +130,9 @@
     </Filter>
     <Filter Include="Sources\Client\EnemyMonster\EnemyMonsterComponent">
       <UniqueIdentifier>{3596df10-f942-4dab-9c66-275e755fdded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\Actor\PawnActor">
+      <UniqueIdentifier>{8c257be7-2e2c-43cd-87c7-2a4168f3a372}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -232,9 +238,6 @@
     <ClCompile Include="Sources\Engine\Component\CellActorMoveComponent.cpp">
       <Filter>Sources\Engine\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
-      <Filter>Sources\Client\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Component\CameraComponent.cpp">
       <Filter>Sources\Engine\Component</Filter>
     </ClCompile>
@@ -298,12 +301,6 @@
     <ClCompile Include="Sources\Client\Editor\EditorActor.cpp">
       <Filter>Sources\Client\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActor.cpp">
-      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.cpp">
-      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Client\ClientMain.cpp">
       <Filter>Sources\Client</Filter>
     </ClCompile>
@@ -325,6 +322,21 @@
     <ClCompile Include="Sources\Client\Scene\WorldTileMapScene.cpp">
       <Filter>Sources\Client\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\Math\Vector2d.cpp">
+      <Filter>Sources\Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\WeaponActor.cpp">
+      <Filter>Sources\Client\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\WeaponFactory.cpp">
+      <Filter>Sources\Client\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
+      <Filter>Sources\Client\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\WeaponComponent\WeaponSequenceAttackComponent.cpp">
+      <Filter>Sources\Client\Weapon\WeaponComponent</Filter>
+    </ClCompile>
     <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.cpp">
       <Filter>Sources\Client\EnemyMonster\EnemyMonsterState</Filter>
     </ClCompile>
@@ -337,8 +349,14 @@
     <ClCompile Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.cpp">
       <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Engine\Math\Vector2d.cpp">
-      <Filter>Sources\Engine\Math</Filter>
+    <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
+      <Filter>Sources\Client\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\PawnActor\PawnActor.cpp">
+      <Filter>Sources\Engine\Actor\PawnActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\PawnActor\PawnActorState.cpp">
+      <Filter>Sources\Engine\Actor\PawnActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -579,12 +597,6 @@
     <ClInclude Include="Sources\Client\Editor\EditorActor.h">
       <Filter>Sources\Client\Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActor.h">
-      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.h">
-      <Filter>Sources\Engine\Actor\AnimationActor</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\ActorDataTypes.h">
       <Filter>Sources\Engine\Actor</Filter>
     </ClInclude>
@@ -615,23 +627,44 @@
     <ClInclude Include="Sources\Client\Scene\WorldTileMapScene.h">
       <Filter>Sources\Client\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
-      <Filter>Sources\Client\EnemyMonster\EnemyMonsterState</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\SnakeActor.h">
-      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.h">
-      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
-      <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Math\Vector2d.h">
       <Filter>Sources\Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Math\Position2d.h">
       <Filter>Sources\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponActor.h">
+      <Filter>Sources\Client\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponFactory.h">
+      <Filter>Sources\Client\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerState.h">
+      <Filter>Sources\Client\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponComponent\WeaponSequenceAttackComponent.h">
+      <Filter>Sources\Client\Weapon\WeaponComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterState</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterActor\SnakeActor.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
+      <Filter>Sources\Client\EnemyMonster\EnemyMonsterComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponEnums.h">
+      <Filter>Sources\Client\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\PawnActor\PawnActor.h">
+      <Filter>Sources\Engine\Actor\PawnActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\PawnActor\PawnActorState.h">
+      <Filter>Sources\Engine\Actor\PawnActor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

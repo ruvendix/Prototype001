@@ -14,7 +14,7 @@ public:
 	virtual ComponentPtr CreateClone() override;
 
 public:
-	bool ProcessMoveDirection(const Vector2d& vMoveDir);
+	bool ProcessMoveDirection(const Vector2d& vMoveDir, bool bMoveForward);
 
 	void ApplyMoveDirectionToDestination(const Vector2d& vMoveDir);
 	bool TryCheckValidateGoalPosition(float deltaSeconds, bool bForceApplyGoalPos) const;

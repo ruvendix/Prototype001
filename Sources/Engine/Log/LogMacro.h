@@ -33,21 +33,21 @@
 
 #ifdef _DEBUG
 #define ASSERT_LOG(expression) \
-	if ((expression) == false) \
+	if (!(expression)) \
 	{ \
         LogSystem::I()->Log(&g_LogAssert, #expression, ELogVerbosity::Assert, __FILE__, __LINE__, __FUNCTION__); \
 	}
 
 #define ASSERT_LOG_RETURN(expression) \
 	ASSERT_LOG(expression) \
-	if ((expression) == false) \
+	if (!(expression)) \
 	{ \
 		return; \
 	}
 
 #define ASSERT_LOG_RETURN_VALUE(expression, value) \
 	ASSERT_LOG(expression) \
-	if ((expression) == false) \
+	if (!(expression)) \
 	{ \
 		return value; \
 	}

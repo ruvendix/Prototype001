@@ -95,7 +95,7 @@ bool InputAction::ProcessInputAction()
 	// 매핑된 정보를 확인하면서 입력 내용 처리
 	for (const InputActionMappingInfo& inputActionMappingInfo : m_vecInputActionMappingInfo)
 	{
-		// 트리거와 별개로 값을 세팅
+		// 트리거와 별개로 값을 설정
 		m_inputActionValue.ProcessInputActionValue(inputActionMappingInfo, m_inputActionValueType);
 
 		// 현재 입력 상태가 설정한 트리거를 작동시키는지?

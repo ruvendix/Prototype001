@@ -55,7 +55,7 @@
 #include "Engine/Actor/CameraActor.h"
 #include "Engine/Actor/CellActor.h"
 #include "Engine/Actor/EffectActor/EffectActor.h"
-#include "Engine/Actor/AnimationActor/AnimationActor.h"
+#include "Engine/Actor/PawnActor/PawnActor.h"
 
 #include "Engine/Scene/Scene.h"
 #include "Engine/Scene/SceneTracer.h"

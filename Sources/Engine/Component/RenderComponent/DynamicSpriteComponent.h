@@ -19,8 +19,7 @@ public:
 	void ApplyDynamicSprite(const DynamicSpritePtr& spDynamicSprite);
 
 	float BringDynamicSpriteDurationTime() const;
-
-	bool IsDynamicSpriteEnd() const { return (m_currentSpriteDrawInfoIdx == m_spriteKeyFrameCount); }
+	bool CheckDynamicSpriteEnd() const;
 
 private:
 	// 타이머를 사용하지 않음

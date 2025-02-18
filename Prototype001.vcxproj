@@ -42,7 +42,8 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\GameApplication\WindowProcedure.cpp" />
-    <ClCompile Include="Sources\Client\Player\PlayerActor.cpp">
+    <ClCompile Include="Sources\Client\Player\PlayerActor.cpp" />
+    <ClCompile Include="Sources\Client\Player\PlayerState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Client\Scene\WorldTileMapScene.cpp">
@@ -54,16 +55,19 @@
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\WeaponActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\WeaponComponent\WeaponSequenceAttackComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\WeaponFactory.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Client\World\WorldBackgroundActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\Actor.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActor.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CameraActor.cpp">
@@ -71,6 +75,12 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\CellActor.cpp" />
     <ClCompile Include="Sources\Engine\Actor\EffectActor\EffectActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\PawnActor\PawnActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Actor\PawnActor\PawnActorState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\WorldTileActor.cpp">
@@ -247,6 +257,9 @@
     <ClInclude Include="Sources\Client\Player\PlayerActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\Client\Player\PlayerState.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\Client\Scene\WorldTileMapScene.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -254,6 +267,18 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponComponent\WeaponSequenceAttackComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponEnums.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\WeaponFactory.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\World\WorldBackgroundActor.h">
@@ -266,17 +291,17 @@
     <ClInclude Include="Sources\Engine\Actor\ActorEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActor.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="Sources\Engine\Actor\AnimationActor\AnimationActorState.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CameraActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\CellActor.h" />
     <ClInclude Include="Sources\Engine\Actor\EffectActor\EffectActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\PawnActor\PawnActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Actor\PawnActor\PawnActorState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\WorldTileActor.h">

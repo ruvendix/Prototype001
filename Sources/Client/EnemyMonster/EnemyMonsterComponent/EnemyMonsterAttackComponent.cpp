@@ -52,5 +52,7 @@ void EnemyMonsterAttackComponent::OnAttackToVictimPlayerActor(const std::shared_
 	}
 
 	//DEFAULT_TRACE_LOG("공격 주기!");
-	spVictimPlayerActor->ProcessDamaged();
+
+	const std::shared_ptr<PawnActor>& spAttacker = GetOwner()->SharedFromThisExactType<PawnActor>();
+	spVictimPlayerActor->ProcessDamaged(spAttacker);
 }

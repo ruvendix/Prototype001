@@ -5,9 +5,10 @@
 #include "Client/Player/PlayerActor.h"
 #include "Client/EnemyMonster/EnemyMonsterComponent/EnemyMonsterAttackComponent.h"
 
-DEFINE_COMPILETIME_ID(EnmeyMonsterIdleState, AnimationActorStateIdCounter)
+DEFINE_COMPILETIME_ID(EnmeyMonsterIdleState, PawnActorStateIdCounter)
 EnmeyMonsterIdleState::~EnmeyMonsterIdleState()
 {
+
 }
 
 void EnmeyMonsterIdleState::Startup()
@@ -63,13 +64,13 @@ void EnmeyMonsterIdleState::ProcessIdleStateByRandomMove() const
 
 	// 랜덤하게 이동
 	int32 randMoveDirIdx = (std::rand() % TO_NUM(EActorLookAtDirection::Count));
-	const Position2d& moveDir = AnimationActor::g_lookAtForwardCellPosTable[randMoveDirIdx];
+	const Position2d& moveDir = PawnActor::g_lookAtForwardCellPosTable[randMoveDirIdx];
 	const Vector2d& vMoveDir = Vector2d{ static_cast<float>(moveDir.x), static_cast<float>(moveDir.y) };
 
 	// 이동 정보 처리
 	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN(pCellActorMoveComponent != nullptr);
-	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir) == false)
+	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
 	{
 		return;
 	}
@@ -77,7 +78,7 @@ void EnmeyMonsterIdleState::ProcessIdleStateByRandomMove() const
 	spEnemyMonsterOwner->ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEFINE_COMPILETIME_ID(EnmeyMonsterChaseState, AnimationActorStateIdCounter)
+DEFINE_COMPILETIME_ID(EnmeyMonsterChaseState, PawnActorStateIdCounter)
 EnmeyMonsterChaseState::~EnmeyMonsterChaseState()
 {
 
@@ -90,7 +91,7 @@ void EnmeyMonsterChaseState::Startup()
 
 bool EnmeyMonsterChaseState::Update(float deltaSeconds)
 {
-	AnimationActor* pOwner = GetOwner();
+	PawnActor* pOwner = GetOwner();
 	ASSERT_LOG(pOwner != nullptr);
 
 	EnemyMonsterActor* spEnemyMonsterOwner = dynamic_cast<EnemyMonsterActor*>(pOwner);
@@ -170,7 +171,7 @@ void EnmeyMonsterChaseState::ProcessChaseStateByNavigationPath() const
 	const Vector2d& vMoveDir = spEnemyMonsterOwner->CalculateMoveDirectionByCellPosition(vecNavigationPos[0]);
 
 	// 이동 정보 처리
-	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir) == false)
+	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
 	{
 		spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterIdleState>();
 		return;
@@ -179,7 +180,7 @@ void EnmeyMonsterChaseState::ProcessChaseStateByNavigationPath() const
 	spEnemyMonsterOwner->ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEFINE_COMPILETIME_ID(EnmeyMonsterAttackState, AnimationActorStateIdCounter)
+DEFINE_COMPILETIME_ID(EnmeyMonsterAttackState, PawnActorStateIdCounter)
 EnmeyMonsterAttackState::~EnmeyMonsterAttackState()
 {
 

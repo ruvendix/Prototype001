@@ -34,6 +34,9 @@ void GameScene::Startup()
 	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = GetWorldTileMapActor();
 	spWorldTileMapActor->ShowWorldTileGuideShape(false);
 
+	// 무기 공장 작동
+	WeaponFactory::I()->Startup();
+
 	// 플레이어 액터 추가
 	m_spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
 	m_spPlayerActor->SetWorldTileMapActor(spWorldTileMapActor);

@@ -24,7 +24,6 @@ public:
 	virtual void LoadFromFileStream(const FileStream& fileStream);
 
 	virtual ActorPtr CreateClone();
-	virtual void ProcessDamaged();
 
 public:
 	template <typename TComponent>

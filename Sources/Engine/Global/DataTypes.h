@@ -37,6 +37,8 @@ struct FloatRect
 };
 
 using ActorPtr = std::shared_ptr<class Actor>;
+using PawnActorPtr = std::shared_ptr<class PawnActor>;
+
 using ComponentPtr = std::shared_ptr<class Component>;
 using ScenePtr = std::shared_ptr<class Scene>;
 using PersistantResourcePtr = std::shared_ptr<class PersistantResource>;
@@ -44,7 +46,7 @@ using TexturePtr = std::shared_ptr<class Texture>;
 using StaticSpritePtr = std::shared_ptr<class StaticSprite>;
 using DynamicSpritePtr = std::shared_ptr<class DynamicSprite>;
 using EffectPtr = std::shared_ptr<class Effect>;
-using AnimationActorStatePtr = std::shared_ptr<class AnimationActorState>;
+using PawnActorStatePtr = std::shared_ptr<class PawnActorState>;
 
 // Bound된 함수는 항상 void() 형식
 using BoundFunction = std::function<void()>;

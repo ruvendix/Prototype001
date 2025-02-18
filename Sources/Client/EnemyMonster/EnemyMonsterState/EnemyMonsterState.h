@@ -1,14 +1,14 @@
 // Copyright 2025 Ruvendix, All Rights Reserved.
 #pragma once
 
-#include "Engine/Actor/AnimationActor/AnimationActorState.h"
+#include "Engine/Actor/PawnActor/PawnActorState.h"
 
-class AnimationActor;
+class PawnActor;
 
-class EnmeyMonsterIdleState : public AnimationActorState
+class EnmeyMonsterIdleState : public PawnActorState
 {
 	DECLARE_COMPILETIME_ID;
-	using Super = AnimationActorState;
+	using Super = PawnActorState;
 
 public:
 	using Super::Super;
@@ -22,10 +22,10 @@ public:
 	void ProcessIdleStateByRandomMove() const;
 };
 
-class EnmeyMonsterChaseState : public AnimationActorState
+class EnmeyMonsterChaseState : public PawnActorState
 {
 	DECLARE_COMPILETIME_ID;
-	using Super = AnimationActorState;
+	using Super = PawnActorState;
 
 public:
 	using Super::Super;
@@ -39,10 +39,10 @@ public:
 	void ProcessChaseStateByNavigationPath() const;
 };
 
-class EnmeyMonsterAttackState : public AnimationActorState
+class EnmeyMonsterAttackState : public PawnActorState
 {
 	DECLARE_COMPILETIME_ID;
-	using Super = AnimationActorState;
+	using Super = PawnActorState;
 
 public:
 	using Super::Super;

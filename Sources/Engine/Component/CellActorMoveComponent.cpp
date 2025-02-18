@@ -32,10 +32,10 @@ ComponentPtr CellActorMoveComponent::CreateClone()
 	return std::make_shared<CellActorMoveComponent>(*this);
 }
 
-bool CellActorMoveComponent::ProcessMoveDirection(const Vector2d& vMoveDir)
+bool CellActorMoveComponent::ProcessMoveDirection(const Vector2d& vMoveDir, bool bMoveForward)
 {
-	const std::shared_ptr<AnimationActor>& spAnimationActor = std::dynamic_pointer_cast<AnimationActor>(GetOwner()->shared_from_this());
-	if (spAnimationActor == nullptr)
+	const std::shared_ptr<PawnActor>& spPawnActor = std::dynamic_pointer_cast<PawnActor>(GetOwner()->shared_from_this());
+	if (spPawnActor == nullptr)
 	{
 		return false;
 	}
@@ -46,15 +46,18 @@ bool CellActorMoveComponent::ProcessMoveDirection(const Vector2d& vMoveDir)
 	// 목표 지점 바꾸고
 	ApplyMoveDirectionToDestination(vMoveDir);
 
-	// 보는 방향 바꾸고
-	spAnimationActor->ApplyMoveDirectionToLookAtDirection(vMoveDir);
+	// 전방으로 이동할 때만 보는 방향을 바꿈
+	if (bMoveForward == true)
+	{
+		spPawnActor->ApplyMoveDirectionToLookAtDirection(vMoveDir);
+	}
 
 	// 이동 가능한지?
 	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
 	ASSERT_LOG_RETURN_VALUE(pCurrentScene != nullptr, false);
-	if (pCurrentScene->CheckCanMoveToCellPosition(GetDestinationCellPosition(), spAnimationActor) == false)
+	if (pCurrentScene->CheckCanMoveToCellPosition(GetDestinationCellPosition(), spPawnActor) == false)
 	{
-		spAnimationActor->ChangeActorStateDynamicSprite<AnimationActorIdleState>();
+		spPawnActor->ChangeActorStateDynamicSprite<PawnActorIdleState>();
 
 		SetDestinationCellPosition(currentCellPos);
 		ResetMoveDirectionVector();
@@ -102,7 +105,7 @@ bool CellActorMoveComponent::TryCheckValidateGoalPosition(float deltaSeconds, bo
 		if (bForceApplyGoalPos == true)
 		{
 			pOwner->ApplyPosition(m_destPos);
-			DEFAULT_TRACE_LOG("목표지점까지 너무 멀어서 강제로 세팅!");
+			DEFAULT_TRACE_LOG("목표지점까지 너무 멀어서 강제로 설정!");
 		}
 	}
 	

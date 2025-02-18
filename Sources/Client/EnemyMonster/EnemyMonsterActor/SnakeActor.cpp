@@ -22,7 +22,7 @@ void SnakeActor::Pimpl::LoadAndStartupSnakeSprite()
 	// 상태마다 스프라이트를 미리 만들고
 	m_pOwner->CreateActorStateLookAtDynamicSprites<EnmeyMonsterIdleState>("SnakeIdle", true);
 
-	// 스프라이트마다 세팅
+	// 스프라이트마다 설정
 	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 0, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Down);
 	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 1, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Right);
 	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 2, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Left);
@@ -83,7 +83,7 @@ ActorPtr SnakeActor::CreateClone()
 	return std::make_shared<SnakeActor>(*this);
 }
 
-void SnakeActor::ProcessDamaged()
+void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 {
 	// 이펙트 생성
 	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();

@@ -100,11 +100,6 @@ ActorPtr Actor::CreateClone()
 	return std::make_shared<Actor>(*this);
 }
 
-void Actor::ProcessDamaged()
-{
-
-}
-
 void Actor::AddChild(const ActorPtr& spChild)
 {
 	m_vecChild.push_back(spChild);

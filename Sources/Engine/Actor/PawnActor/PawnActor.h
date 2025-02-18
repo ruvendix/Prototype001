@@ -3,11 +3,11 @@
 
 #include "Engine/Resource/ResourceMananger.h"
 #include "Engine/Resource/Sprite/DynamicSprite.h"
-#include "AnimationActorState.h"
+#include "PawnActorState.h"
 
 class WorldTileMapActor;
 
-class AnimationActor : public CellActor
+class PawnActor : public CellActor
 {
 	using Super = CellActor;
 
@@ -16,16 +16,22 @@ public:
 	using ActorLookAtDynamicSpriteTable = std::array<DynamicSpritePtr, TO_NUM(EActorLookAtDirection::Count)>;
 
 	static const std::array<Position2d, TO_NUM(EActorLookAtDirection::Count)> g_lookAtForwardCellPosTable;
+	static const std::array<Position2d, TO_NUM(EActorLookAtDirection::Count)> g_lookAtBackwardCellPosTable;
+
+	static const std::array<EActorLookAtDirection, TO_NUM(EActorLookAtDirection::Count)> g_oppositeLookAtDirTable;
 
 public:
 	using Super::Super;
-	virtual ~AnimationActor();
+
+	PawnActor(const PawnActor& src);
+	virtual ~PawnActor();
 
 public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 
 	virtual bool CheckMovingState() const;
+	virtual void ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker);
 
 public:
 	template <typename TActorState>
@@ -67,7 +73,7 @@ public:
 		}
 
 		// 해당되는 스프라이트 가져오기
-		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;		
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
 		const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)];
 		ASSERT_LOG(spDynamicSprite != nullptr);
 		spDynamicSprite->AddKeyFrames(startIdx, endIdx, spriteLine, drawSize, colorKey, keepTime);
@@ -118,40 +124,55 @@ public:
 		}
 	}
 
-	template <typename TAnimationActorState>
+	template <typename TPawnActorState>
 	void ReserveChangeNextState()
 	{
-		AnimationActorStatePtr spNextAnimationActorState = std::make_shared<TAnimationActorState>(this);
-		m_animationActorStateChangeEvent.RegisterEventHandler(this, &AnimationActor::OnChangeAnimationActorState, spNextAnimationActorState);
+		PawnActorStatePtr spNextPawnActorState = std::make_shared<TPawnActorState>(this);
+		m_PawnActorStateChangeEvent.RegisterEventHandler(this, &PawnActor::OnChangePawnActorState, spNextPawnActorState);
 	}
 
 	// Update보다 빠르니까 즉시 전환해도 됨
-	template <typename TAnimationActorState>
+	template <typename TPawnActorState>
 	void ImmediatelyChangeState()
 	{
-		m_spAnimationActorState = std::make_shared<TAnimationActorState>(this);
-		m_spAnimationActorState->Startup();
+		m_spPawnActorState = std::make_shared<TPawnActorState>(this);
+		m_spPawnActorState->Startup();
 		DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경! (즉시)");
 	}
 
-	template <typename TAnimationActorState>
-	bool IsSameAnimationActorState() const
+	template <typename TPawnActorState>
+	bool IsSamePawnActorState() const
 	{
-		return (std::dynamic_pointer_cast<TAnimationActorState>(m_spAnimationActorState) != nullptr);
+		return (GetCurrentPawnActorState<TPawnActorState>() != nullptr);
+	}
+
+	template <typename TPawnActorState>
+	std::shared_ptr<TPawnActorState> GetCurrentPawnActorState() const
+	{
+		return (std::dynamic_pointer_cast<TPawnActorState>(m_spPawnActorState));
 	}
 
 public:
 	void ApplyMoveDirectionToLookAtDirection(const Vector2d& vMoveDir);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath, EActorLookAtDirection actorLookAtDir);
-	
+
+	void ChangeActorDynamicSpriteByExternal(const DynamicSpritePtr& spChangedDynamicSprite);
+
 	Position2d CalculateForwardCellPosition() const;
+	Position2d CalculateBackwardCellPosition() const;
+
+	Vector2d CalculateBackwardDirection() const;
+
+	bool CheckPossibleKnockback(EActorLookAtDirection srcLookAtDir) const;
 
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 	const std::shared_ptr<WorldTileMapActor>& GetWorldTileMapActor() const { return m_spWorldTileMapActor; }
 
+	EActorLookAtDirection GetActorLookAtDirection() const { return m_lookAtDir; }
+
 private:
-	void OnChangeAnimationActorState(const AnimationActorStatePtr& spAnimationActorState);
+	void OnChangePawnActorState(const PawnActorStatePtr& spPawnActorState);
 
 private:
 	static ActorLookAtStringTable g_actorLookAtStringTable;
@@ -161,8 +182,8 @@ private:
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 
 	ActorLookAtStringTable m_actorLookAtDirTexturePathTable;
-	std::unordered_map<int32, std::array<DynamicSpritePtr, TO_NUM(EActorLookAtDirection::Count)>> m_mapActorStateDynamicSprite;
+	std::unordered_map<int32, ActorLookAtDynamicSpriteTable> m_mapActorStateDynamicSprite;
 
-	AnimationActorStatePtr m_spAnimationActorState = nullptr;
-	Event<const AnimationActorStatePtr& /* spNextAnimationActorState */> m_animationActorStateChangeEvent;
+	PawnActorStatePtr m_spPawnActorState = nullptr;
+	Event<const PawnActorStatePtr& /* spNextPawnActorState */> m_PawnActorStateChangeEvent;
 };

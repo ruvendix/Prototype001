@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "EnemyMonsterActor.h"
 
-#include "Engine/Actor/AnimationActor/AnimationActorState.h"
+#include "Engine/Actor/PawnActor/PawnActorState.h"
 #include "Client/Player/PlayerActor.h"
 #include "Client/EnemyMonster/EnemyMonsterState/EnemyMonsterState.h"
 #include "Client/EnemyMonster/EnemyMonsterComponent/EnemyMonsterAttackComponent.h"
@@ -89,7 +89,7 @@ bool EnemyMonsterActor::CalculateNavigationPath(const Position2d& srcCellPos, co
 			continue;
 		}
 
-		for (const Position2d& dirCellPos : AnimationActor::g_lookAtForwardCellPosTable)
+		for (const Position2d& dirCellPos : PawnActor::g_lookAtForwardCellPosTable)
 		{
 			AStarNode nextAStarNode;
 			nextAStarNode.cellPos = (astarNode.cellPos + dirCellPos);
@@ -207,7 +207,7 @@ bool EnemyMonsterActor::Update(float deltaSeconds)
 
 bool EnemyMonsterActor::CheckMovingState() const
 {
-	return (IsSameAnimationActorState<EnmeyMonsterChaseState>());
+	return (IsSamePawnActorState<EnmeyMonsterChaseState>());
 }
 
 void EnemyMonsterActor::DecreaseEnemyCountToEnemyRespawner() const
@@ -234,7 +234,7 @@ std::shared_ptr<PlayerActor> EnemyMonsterActor::FindNearbyPlayerActor() const
 	{
 		ASSERT_LOG(spPlayerActor != nullptr);
 
-		for (const Position2d& dirCellPos : AnimationActor::g_lookAtForwardCellPosTable)
+		for (const Position2d& dirCellPos : PawnActor::g_lookAtForwardCellPosTable)
 		{
 			Position2d nearbyCellPos = (GetCellPosition() + dirCellPos);
 			if (spPlayerActor->CheckEqaulCellPosition(nearbyCellPos) == true)

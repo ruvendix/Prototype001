@@ -23,10 +23,18 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 		return false;
 	}
 
-	if ((m_spDynamicSprite->IsLoopDynamicSprite() == false) &&
-		(m_currentSpriteDrawInfoIdx == m_spriteKeyFrameCount))
+	// 이전 프레임에서 마지막 키프레임을 달성했다면 현재 프레임에서 추가 처리
+	if (CheckDynamicSpriteEnd() == true)
 	{
-		return false;
+		if (m_spDynamicSprite->IsLoopDynamicSprite())
+		{
+			m_localTime -= (m_spDynamicSprite->GetDurationTime());
+			m_currentSpriteDrawInfoIdx = 0;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	m_localTime += deltaSeconds;
@@ -50,17 +58,7 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 		}
 		else
 		{
-			++m_currentSpriteDrawInfoIdx;
-		}
-
-		// 인덱스가 증가된 뒤에 처리
-		if (m_currentSpriteDrawInfoIdx == m_spriteKeyFrameCount)
-		{
-			if (m_spDynamicSprite->IsLoopDynamicSprite())
-			{
-				m_localTime -= spriteKeyFrameTime;
-				m_currentSpriteDrawInfoIdx = 0;
-			}
+			m_currentSpriteDrawInfoIdx = global::Clamp(m_currentSpriteDrawInfoIdx + 1, 0, m_spriteKeyFrameCount - 1);
 		}
 	}
 
@@ -126,4 +124,9 @@ void DynamicSpriteComponent::ApplyDynamicSprite(const DynamicSpritePtr& spDynami
 float DynamicSpriteComponent::BringDynamicSpriteDurationTime() const
 {
 	return (m_spDynamicSprite->GetDurationTime());
+}
+
+bool DynamicSpriteComponent::CheckDynamicSpriteEnd() const
+{
+	return (m_localTime > m_spDynamicSprite->GetDurationTime());
 }
