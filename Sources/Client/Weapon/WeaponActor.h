@@ -6,21 +6,30 @@ class WeaponActor : public PawnActor
 	DECLARE_PIMPL;
 	using Super = PawnActor;
 
+	static const int32 HAS_NOT_PROJECTILE = -1;
+
 public:
 	using Super::Super;
+
+	WeaponActor(const WeaponActor& srcActor);
 	virtual ~WeaponActor();
 
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual ActorPtr CreateClone() override;
+
 public:
 	void ApplyDynamicSpriteToOwner();
+	bool TryCreateProjectile();
 
 	void SetWeaponOwner(const std::shared_ptr<PawnActor>& spWeaponOwner) { m_spWeaponOwner = spWeaponOwner; }
 	std::shared_ptr<PawnActor> GetWeaponOwner() const { return (m_spWeaponOwner.lock()); }
 
+	void SetProjectileId(int32 projectileId) { m_projectileId = projectileId; }
+
 private:
-	// 컴포넌트처럼 투사체 생성기 넣으면 되긴함
+	int32 m_projectileId = HAS_NOT_PROJECTILE;
 	std::weak_ptr<PawnActor> m_spWeaponOwner;
 };

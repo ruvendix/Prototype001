@@ -4,6 +4,12 @@
 
 #include "Engine/Actor/PawnActor/PawnActorState.h"
 
+WeaponActor::WeaponActor(const WeaponActor& srcActor) :
+	Super(srcActor)
+{
+	m_projectileId = srcActor.m_projectileId;
+}
+
 WeaponActor::~WeaponActor()
 {
 
@@ -29,6 +35,11 @@ void WeaponActor::Cleanup()
 	Super::Cleanup();
 }
 
+ActorPtr WeaponActor::CreateClone()
+{
+	return (std::make_shared<WeaponActor>(*this));
+}
+
 void WeaponActor::ApplyDynamicSpriteToOwner()
 {
 	const std::shared_ptr<PawnActor>& spWeaponOwner = m_spWeaponOwner.lock();
@@ -36,4 +47,24 @@ void WeaponActor::ApplyDynamicSpriteToOwner()
 
 	const DynamicSpritePtr& spChangedWeaponDynamicSprite = FindActorStateLookAtDynamicSprite<PawnActorIdleState>(spWeaponOwner->GetActorLookAtDirection());
 	spWeaponOwner->ChangeActorDynamicSpriteByExternal(spChangedWeaponDynamicSprite);
+}
+
+bool WeaponActor::TryCreateProjectile()
+{
+	if (m_projectileId == HAS_NOT_PROJECTILE)
+	{
+		return false;
+	}
+
+	ProjectileSpawnInfo projectileSpawnInfo;
+	projectileSpawnInfo.projectileId = m_projectileId;
+	projectileSpawnInfo.projectileSize = Size{ 100, 100 };
+	projectileSpawnInfo.flyingSpeed = 500.0f;
+
+	const std::shared_ptr<PawnActor>& spWeaponOwner = GetWeaponOwner();
+	projectileSpawnInfo.spawnCellPos = spWeaponOwner->CalculateForwardCellPosition();
+	projectileSpawnInfo.vMoveDir = spWeaponOwner->CalculateMoveDirectionByCellPosition(projectileSpawnInfo.spawnCellPos);
+
+	WeaponFactory::I()->ReserveCreateProjectileActor(projectileSpawnInfo);
+	return true;
 }

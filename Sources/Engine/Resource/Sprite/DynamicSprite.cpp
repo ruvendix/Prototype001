@@ -16,6 +16,12 @@ void DynamicSprite::AddKeyFrame(const SpriteDrawInfo& spriteDrawInfo, float keep
 {
 	m_vecSpriteDrawInfo.push_back(spriteDrawInfo);
 
+	// 유지시간이 0초인 건 패스
+	if (math::CheckAlikeValue(keepTime, 0.0f) == true)
+	{
+		return;
+	}
+
 	if (m_vecTimeTable.empty() == true)
 	{
 		m_vecTimeTable.push_back(keepTime);

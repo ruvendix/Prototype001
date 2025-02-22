@@ -19,5 +19,5 @@ void LifeTimeEffectComponent::OnLifeTimeEnd()
 {
 	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
 	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
-	pCurrentScene->ReserveEraseActor(GetOwner()->shared_from_this());
+	pCurrentScene->ReserveEraseActor(GetOwner()->SharedFromThisExactType<Actor>());
 }

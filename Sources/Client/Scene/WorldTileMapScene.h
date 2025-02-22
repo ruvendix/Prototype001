@@ -16,7 +16,7 @@ public:
 	virtual void Startup() override;
 
 public:
-	bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const ActorPtr& spExcludeActor) const override;
+	bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const Actor* pExcludeActor) const override;
 
 	const std::shared_ptr<WorldTileMapActor>& GetWorldTileMapActor() const { return m_spWorldTileMapActor; }
 

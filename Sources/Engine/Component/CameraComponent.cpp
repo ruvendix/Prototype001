@@ -17,9 +17,9 @@ CameraComponent::~CameraComponent()
 bool CameraComponent::Update(float deltaSeconds)
 {
 	Actor* pTargetActor = nullptr;
-	if (m_spTargetActor != nullptr)
+	if (m_spFollowTargetActor != nullptr)
 	{
-		pTargetActor = m_spTargetActor.get();
+		pTargetActor = m_spFollowTargetActor.get();
 	}
 	else
 	{

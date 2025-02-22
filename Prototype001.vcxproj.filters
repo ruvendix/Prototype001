@@ -134,6 +134,9 @@
     <Filter Include="Sources\Engine\Actor\PawnActor">
       <UniqueIdentifier>{8c257be7-2e2c-43cd-87c7-2a4168f3a372}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Client\Weapon\Projectile">
+      <UniqueIdentifier>{e8c62bff-45dc-4cd2-af81-f847431b149b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Client\GameApplication\GameApplication.cpp">
@@ -357,6 +360,12 @@
     </ClCompile>
     <ClCompile Include="Sources\Engine\Actor\PawnActor\PawnActorState.cpp">
       <Filter>Sources\Engine\Actor\PawnActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\Projectile\ProjectileActor.cpp">
+      <Filter>Sources\Client\Weapon\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\Projectile\ProjectileAttackComponent.cpp">
+      <Filter>Sources\Client\Weapon\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -665,6 +674,15 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\Actor\PawnActor\PawnActorState.h">
       <Filter>Sources\Engine\Actor\PawnActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\Projectile\ProjectileActor.h">
+      <Filter>Sources\Client\Weapon\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\Projectile\ProjectileStructs.h">
+      <Filter>Sources\Client\Weapon\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\Projectile\ProjectileAttackComponent.h">
+      <Filter>Sources\Client\Weapon\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ public:
 
 private:
 	std::shared_ptr<PlayerActor> m_spPlayerActor = nullptr;
-	std::shared_ptr<SnakeActor> m_spSnakeActor = nullptr;
 
+	std::shared_ptr<SnakeActor> m_spSnakeActor = nullptr;
 	std::shared_ptr<EnemyRespawner> m_spEnemyRespawner = nullptr;
 };

@@ -11,7 +11,7 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	virtual bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const ActorPtr& spExcludeActor) const;
+	virtual bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const Actor* pExcludeActor) const;
 
 public:
 	template <typename TActor>
@@ -123,21 +123,21 @@ public:
 public:
 	void RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetActor);
 	
-	std::shared_ptr<CellActor> FindCellActor(EActorLayerType actorLayer, const Position2d& targetCellPos, const ActorPtr& spExcludeActor) const;
+	std::shared_ptr<CellActor> FindCellActor(EActorLayerType actorLayer, const Position2d& targetCellPos, const Actor* pExcludeActor) const;
 
-	void ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
-	void ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor);
+	void ReserveCreateEffectActor(const EffectSpawnInfo& effectSpawnInfo);
+	void ReserveEraseActor(const ActorPtr& spActor);
 
 	Actors& GetActors() { return m_actors; }
 	const Actors& GetActors() const { return m_actors; }
 
 private:
 	void EraseReservedActors();
-	void OnCreateEffect(const EffectSpawnInfo& effectSpawnInfo);
+	void OnCreateEffectActor(const EffectSpawnInfo& effectSpawnInfo);
 
 private:
 	std::shared_ptr<CameraActor> m_spMainCameraActor = nullptr;
-	Event<const EffectSpawnInfo& /* spNextScene */> m_sceneCreateEffect;
+	Event<const EffectSpawnInfo&> m_createEffectActorEvent;
 
 	Actors m_actors; // 씬에 있는 모든 액터 (업데이트는 정렬로 처리, 렌더링은 따로 처리)
 	Actors m_reserveEraseActorsForNextFrame; // 다음 프레임에서 제거될 액터들

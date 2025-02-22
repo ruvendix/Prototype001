@@ -23,7 +23,7 @@ bool Scene::Update(float deltaSeconds)
 	EraseReservedActors();
 
 	// 이펙트 생성
-	m_sceneCreateEffect.ExcuteIfBound();
+	m_createEffectActorEvent.ExcuteIfBound();
 
 	// 업데이트 순서대로 이미 정렬된 상태
 	for (const ActorPtr& spActor : m_actors)
@@ -54,7 +54,7 @@ void Scene::Cleanup()
 	}
 }
 
-bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos, const ActorPtr& spExcludeActor) const
+bool Scene::CheckCanMoveToCellPosition(const Position2d& destCellPos, const Actor* pExcludeActor) const
 {
 	return true;
 }
@@ -73,11 +73,11 @@ void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetAct
 		return;
 	}
 
-	pCameraComponent->SetTargetActor(spMainCameraTargetActor);
+	pCameraComponent->SetFollowTargetActor(spMainCameraTargetActor);
 	SceneRenderer::I()->SetMainCameraActor(m_spMainCameraActor);
 }
 
-std::shared_ptr<CellActor> Scene::FindCellActor(EActorLayerType actorLayer, const Position2d& targetCellPos, const ActorPtr& spExcludeActor) const
+std::shared_ptr<CellActor> Scene::FindCellActor(EActorLayerType actorLayer, const Position2d& targetCellPos, const Actor* pExcludeActor) const
 {
 	std::vector<std::shared_ptr<CellActor>> foundCellActors;
 	FindExactTypeActors<CellActor>(actorLayer, foundCellActors);
@@ -88,7 +88,7 @@ std::shared_ptr<CellActor> Scene::FindCellActor(EActorLayerType actorLayer, cons
 
 	for (const std::shared_ptr<CellActor>& spCellActor : foundCellActors)
 	{
-		if (spCellActor == spExcludeActor)
+		if (pExcludeActor == spCellActor.get())
 		{
 			continue;
 		}
@@ -146,21 +146,21 @@ void Scene::EraseReservedActors()
 	m_reserveEraseActorsForNextFrame.clear();
 }
 
-void Scene::OnCreateEffect(const EffectSpawnInfo& effectSpawnInfo)
+void Scene::OnCreateEffectActor(const EffectSpawnInfo& effectSpawnInfo)
 {
 	const std::shared_ptr<EffectActor>& spEffectActor = CreateActorToScene<EffectActor>(EActorLayerType::Effect, EActorUpdateOrder::Post);
 	spEffectActor->SpawnEffect(effectSpawnInfo);
 	DEFAULT_TRACE_LOG("이펙트 생성! (%s)", effectSpawnInfo.strEffectName.c_str());
 }
 
-void Scene::ReserveCreateEffect(const EffectSpawnInfo& effectSpawnInfo)
+void Scene::ReserveCreateEffectActor(const EffectSpawnInfo& effectSpawnInfo)
 {
-	m_sceneCreateEffect.RegisterEventHandler(this, &Scene::OnCreateEffect, effectSpawnInfo);
+	m_createEffectActorEvent.RegisterEventHandler(this, &Scene::OnCreateEffectActor, effectSpawnInfo);
 }
 
-void Scene::ReserveEraseActor(const std::shared_ptr<EnableSharedClass>& spActor)
+void Scene::ReserveEraseActor(const ActorPtr& spActor)
 {
-	m_reserveEraseActorsForNextFrame.push_back(std::static_pointer_cast<Actor>(spActor));
+	m_reserveEraseActorsForNextFrame.push_back(spActor);
 
 	auto overlapIter = std::unique(m_reserveEraseActorsForNextFrame.begin(), m_reserveEraseActorsForNextFrame.end(),
 		[](const ActorPtr& spLhsActor, const ActorPtr& spRhsActor)

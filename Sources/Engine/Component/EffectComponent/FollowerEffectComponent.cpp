@@ -16,12 +16,12 @@ FollowerEffectComponent::~FollowerEffectComponent()
 
 bool FollowerEffectComponent::Update(float deltaSeconds)
 {
-	if (m_spTargetActor == nullptr)
+	if (m_spFollowTargetActor == nullptr)
 	{
 		return false;
 	}
 
-	const Vector2d& vTargetPos = m_spTargetActor->BringPosition();
+	const Vector2d& vTargetPos = m_spFollowTargetActor->BringPosition();
 	GetOwner()->ApplyPosition(vTargetPos);
 
 	return true;

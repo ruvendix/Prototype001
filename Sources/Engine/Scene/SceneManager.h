@@ -41,5 +41,5 @@ private:
 
 private:
 	ScenePtr m_spScene = nullptr;
-	Event<const ScenePtr& /* spNextScene */> m_sceneChangeEvent;
+	Event<const ScenePtr&> m_sceneChangeEvent;
 };

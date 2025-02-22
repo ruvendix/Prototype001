@@ -66,6 +66,10 @@ bool GameScene::Update(float deltaSeconds)
 
 	// 리스폰된 적군은 다음 프레임부터 활동함 (렌더링은 바로 개시)
 	m_spEnemyRespawner->Update(deltaSeconds);
+
+	// 예약된 투사체는 이번 프레임에서 생성
+	WeaponFactory::I()->Update(deltaSeconds);
+
 	return true;
 }
 

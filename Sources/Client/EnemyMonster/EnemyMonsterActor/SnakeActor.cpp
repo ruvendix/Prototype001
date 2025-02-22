@@ -93,10 +93,10 @@ void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	effectSpawnInfo.strEffectName = "OneTime_HitEffect";
 	effectSpawnInfo.spawnCellPos = GetCellPosition();
 	effectSpawnInfo.effectSize = Size(80, 80);
-	pCurrentScene->ReserveCreateEffect(effectSpawnInfo);
+	pCurrentScene->ReserveCreateEffectActor(effectSpawnInfo);
 
 	// »ç¸Á ·çÆ¾
 	DecreaseEnemyCountToEnemyRespawner();
-	pCurrentScene->ReserveEraseActor(shared_from_this());
+	pCurrentScene->ReserveEraseActor(SharedFromThisExactType<Actor>());
 	DEFAULT_TRACE_LOG("¹ì »ç¸Á!");
 }

@@ -30,14 +30,14 @@ void WorldTileMapScene::Startup()
 #pragma endregion
 }
 
-bool WorldTileMapScene::CheckCanMoveToCellPosition(const Position2d& destCellPos, const ActorPtr& spExcludeActor) const
+bool WorldTileMapScene::CheckCanMoveToCellPosition(const Position2d& destCellPos, const Actor* pExcludeActor) const
 {
 	if (m_spWorldTileMapActor->CheckMovingAvailableTile(destCellPos) == false)
 	{
 		return false;
 	}
 
-	const ActorPtr& spFoundActor = FindCellActor(EActorLayerType::Creature, destCellPos, spExcludeActor);
+	const ActorPtr& spFoundActor = FindCellActor(EActorLayerType::Creature, destCellPos, pExcludeActor);
 	if (spFoundActor != nullptr)
 	{
 		return false;

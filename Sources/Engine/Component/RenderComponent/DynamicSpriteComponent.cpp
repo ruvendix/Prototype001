@@ -23,6 +23,12 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 		return false;
 	}
 
+	const std::vector<float>& vecTimeTable = m_spDynamicSprite->GetTimeTable();
+	if (vecTimeTable.empty() == true)
+	{
+		return false;
+	}
+
 	// 이전 프레임에서 마지막 키프레임을 달성했다면 현재 프레임에서 추가 처리
 	if (CheckDynamicSpriteEnd() == true)
 	{
@@ -42,8 +48,6 @@ bool DynamicSpriteComponent::Update(float deltaSeconds)
 	float spriteKeyFrameTime = m_spDynamicSprite->GetSpriteKeyFrameTime(m_currentSpriteDrawInfoIdx);
 	if (m_localTime > spriteKeyFrameTime)
 	{
-		const std::vector<float>& vecTimeTable = m_spDynamicSprite->GetTimeTable();
-
 		float endKeyFrameTime = vecTimeTable.back();
 		if (m_localTime > (endKeyFrameTime * 1.2f)) // 120% 넘어가면 프레임 드랍으로 가정
 		{
@@ -81,8 +85,9 @@ void DynamicSpriteComponent::Render(HDC hBackBufferDc)
 	// 렌더링할 스프라이트 인덱스 알아내기
 	int32 renderingSpriteDrawInfoIdx = m_currentSpriteDrawInfoIdx;
 
-	// 무한 반복이 아니라면 마지막 인덱스로 고정
-	if (m_spDynamicSprite->IsLoopDynamicSprite() == false)
+	// 인덱스가 0이 아니고 무한 반복이 아니라면 마지막 인덱스로 고정
+	if ((renderingSpriteDrawInfoIdx != 0) &&
+		(m_spDynamicSprite->IsLoopDynamicSprite() == false))
 	{
 		if (m_currentSpriteDrawInfoIdx == m_spDynamicSprite->GetSpriteKeyFrameCount())
 		{

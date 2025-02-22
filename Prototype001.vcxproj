@@ -55,6 +55,12 @@
     <ClCompile Include="Sources\Client\Scene\GameScene.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\Projectile\ProjectileActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Client\Weapon\Projectile\ProjectileAttackComponent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Sources\Client\Weapon\WeaponActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -267,6 +273,15 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Scene\GameScene.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\Projectile\ProjectileActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\Projectile\ProjectileAttackComponent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Client\Weapon\Projectile\ProjectileStructs.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\Client\Weapon\WeaponActor.h">

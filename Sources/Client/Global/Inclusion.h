@@ -3,6 +3,10 @@
 
 #include "Client/Weapon/WeaponEnums.h"
 #include "Client/Weapon/WeaponActor.h"
+
+#include "Client/Weapon/Projectile/ProjectileStructs.h"
+#include "Client/Weapon/Projectile/ProjectileActor.h"
+
 #include "Client/Weapon/WeaponFactory.h"
 
 #include "Client/EnemyMonster/EnemyMonsterActor/EnemyMonsterActor.h"

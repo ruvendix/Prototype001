@@ -12,8 +12,8 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 
 public:
-	void SetTargetActor(const ActorPtr& spActor) { m_spTargetActor = spActor; }
+	void SetFollowTargetActor(const ActorPtr& spFollowTargetActor) { m_spFollowTargetActor = spFollowTargetActor; }
 
 private:
-	ActorPtr m_spTargetActor = nullptr;
+	ActorPtr m_spFollowTargetActor = nullptr;
 };

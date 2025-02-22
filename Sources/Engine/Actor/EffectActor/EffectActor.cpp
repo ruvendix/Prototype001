@@ -51,8 +51,7 @@ void EffectActor::SpawnEffect(const EffectSpawnInfo& effectSpawnInfo)
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetSize(effectSpawnInfo.effectSize);
 
-	const Vector2d& vEffectSwpanWorldPos = CellActor::ConvertCellPositionToWorldPosition(effectSpawnInfo.spawnCellPos);
-	pTransformComponent->SetPosition(vEffectSwpanWorldPos);
+	ApplyCellPosition(effectSpawnInfo.spawnCellPos);
 
 	LifeTimeEffectComponent* pLifeTimeEffectComponent = FindComponent<LifeTimeEffectComponent>();
 	ASSERT_LOG_RETURN(pLifeTimeEffectComponent != nullptr);
@@ -65,10 +64,10 @@ void EffectActor::SpawnEffect(const EffectSpawnInfo& effectSpawnInfo)
 	}
 	pLifeTimeEffectComponent->SetLifeTime(dynamicSpriteDurationTime);
 
-	if (effectSpawnInfo.spTargetActor != nullptr)
+	if (effectSpawnInfo.spFollowTargetActor != nullptr)
 	{
 		FollowerEffectComponent* pFollowerEffectComponent = AddComponent<FollowerEffectComponent>();
 		ASSERT_LOG_RETURN(pFollowerEffectComponent != nullptr);
-		pFollowerEffectComponent->SetTargetActor(effectSpawnInfo.spTargetActor);
+		pFollowerEffectComponent->SetFollowTargetActor(effectSpawnInfo.spFollowTargetActor);
 	}
 }

@@ -219,7 +219,7 @@ void PlayerActor::Startup()
 	m_spPimpl->InitializePlayerInput();
 
 	// 무기 설정
-	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(0);
+	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(2);
 	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Secondary)] = WeaponFactory::I()->CreateWeaponActor(1);
 
 	for (const std::shared_ptr<WeaponActor>& spWeaponActor : m_arrWeaponActor)
@@ -271,7 +271,7 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	effectSpawnInfo.strEffectName = "OneTime_HitEffect";
 	effectSpawnInfo.spawnCellPos = GetCellPosition();
 	effectSpawnInfo.effectSize = Size(80, 80);
-	pCurrentScene->ReserveCreateEffect(effectSpawnInfo);
+	pCurrentScene->ReserveCreateEffectActor(effectSpawnInfo);
 
 	if (IsSamePawnActorState<PlayerDefenceState>())
 	{
