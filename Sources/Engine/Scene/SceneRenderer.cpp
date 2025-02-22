@@ -23,18 +23,8 @@ void SceneRenderer::Render()
 	// ¹é¹öÆÛ¸¦ Èò»öÀ¸·Î µ¤À½
 	::PatBlt(m_hBackBufferDc, 0, 0, viewerResolution.width, viewerResolution.height, WHITENESS);
 
-	RenderComponentVector vecRenderComponent;
-	for (const Actors& actors : SceneTracer::I()->GetRenderableActors())
-	{
-		for (const ActorPtr& spActor : actors)
-		{
-			// ¾×ÅÍ¸¶´Ù ·»´õ ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
-			spActor->FindRenderComponents(vecRenderComponent);
-		}
-	}
-
 	// ·»´õ ÄÄÆ÷³ÍÆ®¸¶´Ù ·»´õ Ã³¸®
-	for (RenderComponent* pRenderComponent : vecRenderComponent)
+	for (RenderComponent* pRenderComponent : SceneTracer::I()->GetOutputRenderComponents())
 	{
 		ASSERT_LOG(pRenderComponent != nullptr);
 		pRenderComponent->Render(m_hBackBufferDc);

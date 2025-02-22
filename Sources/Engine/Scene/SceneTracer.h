@@ -8,11 +8,9 @@ class SceneTracer
 public:
 	void Tracer();
 
-	LayerActors& GetRenderableActors() { return m_arrRenderableActors; }
-	const LayerActors& GetRenderableActors() const { return m_arrRenderableActors; }
-
-	void CleanupRenderableActors();
+	RenderComponentVector& GetOutputRenderComponents() { return m_vecOutputRenderComponent; }
+	const RenderComponentVector& GetOutputRenderComponents() const { return m_vecOutputRenderComponent; }
 
 private:
-	LayerActors m_arrRenderableActors;
+	RenderComponentVector m_vecOutputRenderComponent;
 };

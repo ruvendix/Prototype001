@@ -8,7 +8,7 @@ DEFINE_SINGLETON(SceneTracer);
 
 void SceneTracer::Tracer()
 {
-	CleanupRenderableActors();
+	LayerActors renderableLayerActors;
 
 	Scene* pScene = SceneManager::I()->GetCurrentScene();
 	ASSERT_LOG_RETURN(pScene != nullptr);
@@ -24,12 +24,12 @@ void SceneTracer::Tracer()
 			continue;
 		}
 
-		m_arrRenderableActors[TO_NUM(spActor->GetActorLayer())].push_back(spActor);
+		renderableLayerActors[TO_NUM(spActor->GetActorLayer())].push_back(spActor);
 	}
 
 	// Actor를 Y값으로 정렬 (일단은 Creature만)
-	std::sort(m_arrRenderableActors[TO_NUM(EActorLayerType::Creature)].begin(),
-		m_arrRenderableActors[TO_NUM(EActorLayerType::Creature)].end(),
+	std::sort(renderableLayerActors[TO_NUM(EActorLayerType::Creature)].begin(),
+		renderableLayerActors[TO_NUM(EActorLayerType::Creature)].end(),
 		[](const ActorPtr& spLhs, const ActorPtr& spRhs)
 		{
 			const TransformComponent* pLhsTransformComponent = spLhs->BringTransformComponent();
@@ -40,12 +40,16 @@ void SceneTracer::Tracer()
 
 			return (pLhsTransformComponent->GetPositionY() < pRhsTransformComponent->GetPositionY());
 		});
-}
 
-void SceneTracer::CleanupRenderableActors()
-{
-	for (Actors& actors : m_arrRenderableActors)
+#pragma region 렌더링할 렌더 컴포넌트 수집
+	m_vecOutputRenderComponent.clear();
+	for (const Actors& actors : renderableLayerActors)
 	{
-		actors.clear();
+		for (const ActorPtr& spActor : actors)
+		{
+			// 액터마다 렌더 컴포넌트 가져오기
+			spActor->FindRenderComponents(m_vecOutputRenderComponent);
+		}
 	}
+#pragma endregion
 }
