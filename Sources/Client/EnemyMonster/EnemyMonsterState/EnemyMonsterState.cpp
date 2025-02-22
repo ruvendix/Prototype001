@@ -39,18 +39,8 @@ bool EnmeyMonsterIdleState::Update(float deltaSeconds)
 	if (pCellActorMoveComponent->IsZeroMoveDirectionVector())
 	{
 		ProcessIdleStateByRandomMove();
-		return true;
 	}
 
-	if (pCellActorMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, false) == false)
-	{
-		return false;
-	}
-
-	pCellActorMoveComponent->ResetMoveDirectionVector();
-	pCellActorMoveComponent->ApplyDestinationDataToOwner();
-
-	ProcessIdleStateByRandomMove();
 	return true;
 }
 
@@ -102,19 +92,10 @@ bool EnmeyMonsterChaseState::Update(float deltaSeconds)
 
 	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
-	if (pCellActorMoveComponent->IsZeroMoveDirectionVector())
-	{
-		ProcessChaseStateByNavigationPath();
-		return true;
-	}
-
-	if (pCellActorMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, false) == false)
+	if (pCellActorMoveComponent->IsZeroMoveDirectionVector() == false)
 	{
 		return false;
 	}
-
-	pCellActorMoveComponent->ResetMoveDirectionVector();
-	pCellActorMoveComponent->ApplyDestinationDataToOwner();
 
 #pragma region 한칸 이동하면 플레이어와 한칸 차이인지 확인
 	const std::shared_ptr<PlayerActor>& spFoundAttackablePlayerActor = spEnemyMonsterOwner->FindNearbyPlayerActor();

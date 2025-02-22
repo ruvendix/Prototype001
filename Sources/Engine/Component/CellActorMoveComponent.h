@@ -15,9 +15,10 @@ public:
 
 public:
 	bool ProcessMoveDirection(const Vector2d& vMoveDir, bool bMoveForward);
+	void ProcessMoving();
 
 	void ApplyMoveDirectionToDestination(const Vector2d& vMoveDir);
-	bool TryCheckValidateGoalPosition(float deltaSeconds, bool bForceApplyGoalPos) const;
+	bool CheckArrivedGoalPosition(float deltaSeconds, const Vector2d& vCurrentPos) const;
 
 	void ResetMoveDirectionVector();
 	void ApplyDestinationDataToOwner();

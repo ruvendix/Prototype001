@@ -59,7 +59,7 @@ bool WeaponActor::TryCreateProjectile()
 	ProjectileSpawnInfo projectileSpawnInfo;
 	projectileSpawnInfo.projectileId = m_projectileId;
 	projectileSpawnInfo.projectileSize = Size{ 100, 100 };
-	projectileSpawnInfo.flyingSpeed = 500.0f;
+	projectileSpawnInfo.flyingSpeed = 1000.0f;
 
 	const std::shared_ptr<PawnActor>& spWeaponOwner = GetWeaponOwner();
 	projectileSpawnInfo.spawnCellPos = spWeaponOwner->CalculateForwardCellPosition();

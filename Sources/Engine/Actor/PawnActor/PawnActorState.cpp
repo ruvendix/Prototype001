@@ -67,13 +67,8 @@ bool PawnActorWalkState::Update(float deltaSeconds)
 
 	// 이동 컴포넌트
 	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
-	if (pMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, true) == true)
+	if (pMoveComponent->IsZeroMoveDirectionVector())
 	{
-		pMoveComponent->ResetMoveDirectionVector();
-
-		// 이동이 완료되었으니 목적지 셀 좌표를 현재 셀 좌표로 적용
-		pMoveComponent->ApplyDestinationDataToOwner();
-
 		// 스프라이트는 현재 프레임에서 바로 전환
 		pOwner->ChangeActorStateDynamicSprite<PawnActorIdleState>();
 

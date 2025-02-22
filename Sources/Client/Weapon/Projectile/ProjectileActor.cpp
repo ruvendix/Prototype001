@@ -46,6 +46,21 @@ ActorPtr ProjectileActor::CreateClone()
 	return (std::make_shared<ProjectileActor>(*this));
 }
 
+void ProjectileActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
+{
+	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+
+	// 이펙트 생성
+	EffectSpawnInfo effectSpawnInfo;
+	effectSpawnInfo.strEffectName = "OneTime_HitEffect";
+	effectSpawnInfo.spawnCellPos = GetCellPosition();
+	effectSpawnInfo.effectSize = Size(80, 80);
+	pCurrentScene->ReserveCreateEffectActor(effectSpawnInfo);
+
+	pCurrentScene->ReserveEraseActor(spAttacker); // 투사체는 자기 자신한테만 피해를 받음
+}
+
 void ProjectileActor::SpawnProjectile(const ProjectileSpawnInfo& projectileSpawnInfo)
 {
 	TransformComponent* pTransformComponent = BringTransformComponent();

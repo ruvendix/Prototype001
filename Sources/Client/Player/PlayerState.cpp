@@ -46,19 +46,6 @@ void PlayerDefenceState::Startup()
 
 bool PlayerDefenceState::Update(float deltaSeconds)
 {
-	PawnActor* pOwner = GetOwner();
-	ASSERT_LOG(pOwner != nullptr);
-
-	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
-	if ((CheckKnockbackExisted() == true) &&
-		(pMoveComponent->TryCheckValidateGoalPosition(deltaSeconds, true) == true))
-	{
-		pMoveComponent->ResetMoveDirectionVector();
-		pMoveComponent->ApplyDestinationDataToOwner();
-
-		DEFAULT_TRACE_LOG("방어 상태에서 넉백!");
-	}
-
 	return (UpdateWeaponActor(deltaSeconds, GetOwner(), EWeaponSlotType::Secondary));
 }
 

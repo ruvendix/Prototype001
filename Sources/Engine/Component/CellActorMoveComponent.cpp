@@ -16,7 +16,12 @@ CellActorMoveComponent::~CellActorMoveComponent()
 
 bool CellActorMoveComponent::Update(float deltaSeconds)
 {
-	Actor* pOwner = GetOwner();
+	if (IsZeroMoveDirectionVector())
+	{
+		return false;
+	}
+
+	PawnActor* pOwner = dynamic_cast<PawnActor*>(GetOwner());
 	ASSERT_LOG_RETURN_VALUE(pOwner != nullptr, false);
 
 	Vector2d vActorNextPos = pOwner->BringPosition();
@@ -24,6 +29,14 @@ bool CellActorMoveComponent::Update(float deltaSeconds)
 	vActorNextPos += vMovePos;
 
 	pOwner->ApplyPosition(vActorNextPos);
+
+	// 도달했는지 확인
+	if (CheckArrivedGoalPosition(deltaSeconds, vActorNextPos) == true)
+	{
+		ResetMoveDirectionVector();
+		pOwner->ApplyCellPosition(m_destCellPos);
+	}
+
 	return true;
 }
 
@@ -69,6 +82,19 @@ bool CellActorMoveComponent::ProcessMoveDirection(const Vector2d& vMoveDir, bool
 	return true;
 }
 
+void CellActorMoveComponent::ProcessMoving()
+{
+	PawnActor* pPawnActor = dynamic_cast<PawnActor*>(GetOwner());
+	if (pPawnActor == nullptr)
+	{
+		return;
+	}
+
+	// 목표 지점만 바꿔서 진행
+	const Vector2d& vMoveDir = pPawnActor->CalculateMoveDirectionByCellPosition(pPawnActor->CalculateForwardCellPosition());
+	ApplyMoveDirectionToDestination(vMoveDir);
+}
+
 void CellActorMoveComponent::ApplyMoveDirectionToDestination(const Vector2d& vMoveDir)
 {
 	m_destCellPos.x += static_cast<int32>(vMoveDir.x);
@@ -85,32 +111,25 @@ void CellActorMoveComponent::ApplyMoveDirectionToDestination(const Vector2d& vMo
 	m_vMoveDir = vMoveDir;
 }
 
-bool CellActorMoveComponent::TryCheckValidateGoalPosition(float deltaSeconds, bool bForceApplyGoalPos) const
+bool CellActorMoveComponent::CheckArrivedGoalPosition(float deltaSeconds, const Vector2d& vCurrentPos) const
 {
-	Actor* pOwner = GetOwner();
-	ASSERT_LOG_RETURN_VALUE(pOwner != nullptr, false);
-	const Vector2d& currentPos = pOwner->BringPosition();
-
 	// 이제 그 둘의 거리 비교
-	const Vector2d& diffPos = (m_destPos - currentPos);
+	const Vector2d& diffPos = (m_destPos - vCurrentPos);
 	float diffLengthSquare = diffPos.CalculateLengthSquare();
-	if (diffLengthSquare > (m_moveSpeed * deltaSeconds)) // 숫자가 작을수록 높은 프레임, 낮을수록 낮은 프레임
+	if (diffLengthSquare < (m_moveSpeed * deltaSeconds)) // 정상이라면 이게 맞음
 	{
-		float cellSize = static_cast<float>(WorldContext::I()->GetCellSize());
-		if (diffLengthSquare < (std::pow(cellSize, 2.0f)))
-		{
-			return false;
-		}
-
-		if (bForceApplyGoalPos == true)
-		{
-			pOwner->ApplyPosition(m_destPos);
-			DEFAULT_TRACE_LOG("목표지점까지 너무 멀어서 강제로 설정!");
-		}
+		return true;
 	}
-	
+
+	// 프레임 드랍되었을 때의 상황 (셀 사이의 최대 거리로 비교)
+	float cellSize = static_cast<float>(WorldContext::I()->GetCellSize());
+	if (diffLengthSquare > (std::pow(cellSize, 2.0f)))
+	{
+		return true;
+	}
+
 	//DEFAULT_TRACE_LOG("도달!");
-	return true;
+	return false;
 }
 
 void CellActorMoveComponent::ResetMoveDirectionVector()
