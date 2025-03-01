@@ -1,0 +1,10 @@
+syntax = "proto3";
+package Protocol;
+
+enum EPlayerType
+{
+	PlayerTypeNone = 0;
+	PlayerTypeKnight = 1;
+	PlayerTypeMage = 2;
+	PlayerTypeArcher = 3;
+}
