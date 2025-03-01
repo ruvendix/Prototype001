@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sources\Packet\ServerPacketHandler.cpp">
+      <Filter>Sources\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ServerMain.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Session\GameSession.cpp">
+      <Filter>Sources\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Session\GameSessionManager.cpp">
+      <Filter>Sources\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Pch\Pch.cpp">
+      <Filter>Sources\Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Enum.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Protocol.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Struct.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\Session\GameSession.h">
+      <Filter>Sources\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Packet\ServerPacketHandler.h">
+      <Filter>Sources\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Session\GameSessionManager.h">
+      <Filter>Sources\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Global\Types.h">
+      <Filter>Sources\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Pch\Pch.h">
+      <Filter>Sources\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Enum.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Protocol.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Struct.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{079f3685-a627-49f1-b801-7aed7c9092fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Session">
+      <UniqueIdentifier>{e9196629-2793-4976-8ccd-39679587a78b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Packet">
+      <UniqueIdentifier>{0232d3cf-45df-4041-933d-fd94071790db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Global">
+      <UniqueIdentifier>{2b366a63-1e57-4207-bee5-e0becd7b62c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Pch">
+      <UniqueIdentifier>{e51c8012-88aa-49a7-b139-1263cb6926cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Protobuf">
+      <UniqueIdentifier>{23739f0e-3d49-40f2-9c8b-c6be6124fb72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

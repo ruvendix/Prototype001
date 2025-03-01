@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{27245997-f24a-4727-a523-13259fc6c7fe}</ProjectGuid>
+    <RootNamespace>ServerCore</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v143</PlatformToolset>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v143</PlatformToolset>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Bin\</OutDir>
+    <IntDir>Intermediates\</IntDir>
+    <TargetName>$(ProjectName)_Debug</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Bin\</OutDir>
+    <IntDir>Intermediates\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>call "$(SolutionDir)..\..\ThirdParty\ProtobufPackage\CompileProto.bat"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>call "$(SolutionDir)..\..\ThirdParty\ProtobufPackage\CompileProto.bat"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\Global\Types.h" />
+    <ClInclude Include="Sources\Network\Buffer\BufferReader.h" />
+    <ClInclude Include="Sources\Network\Buffer\BufferWriter.h" />
+    <ClInclude Include="Sources\Network\IocpCore.h" />
+    <ClInclude Include="Sources\Network\IocpEvent.h" />
+    <ClInclude Include="Sources\Network\IocpObject.h" />
+    <ClInclude Include="Sources\Network\Listener.h" />
+    <ClInclude Include="Sources\Network\NetworkAddress.h" />
+    <ClInclude Include="Sources\Network\Buffer\ReceiveBuffer.h" />
+    <ClInclude Include="Sources\Network\Buffer\SendBuffer.h" />
+    <ClInclude Include="Sources\Network\Service.h" />
+    <ClInclude Include="Sources\Network\Session\PacketSession.h" />
+    <ClInclude Include="Sources\Network\Session\Session.h" />
+    <ClInclude Include="Sources\Socket\SocketUtility.h" />
+    <ClInclude Include="Sources\Pch\Pch.h" />
+    <ClInclude Include="Sources\Thread\ThreadPool.h" />
+    <ClInclude Include="Sources\Thread\Tls.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\Network\Buffer\BufferReader.cpp" />
+    <ClCompile Include="Sources\Network\Buffer\BufferWriter.cpp" />
+    <ClCompile Include="Sources\Network\IocpCore.cpp" />
+    <ClCompile Include="Sources\Network\IocpEvent.cpp" />
+    <ClCompile Include="Sources\Network\IocpObject.cpp" />
+    <ClCompile Include="Sources\Network\Listener.cpp" />
+    <ClCompile Include="Sources\Network\NetworkAddress.cpp" />
+    <ClCompile Include="Sources\Network\Buffer\ReceiveBuffer.cpp" />
+    <ClCompile Include="Sources\Network\Buffer\SendBuffer.cpp" />
+    <ClCompile Include="Sources\Network\Service.cpp" />
+    <ClCompile Include="Sources\Network\Session\PacketSession.cpp" />
+    <ClCompile Include="Sources\Network\Session\Session.cpp" />
+    <ClCompile Include="Sources\Socket\SocketUtility.cpp" />
+    <ClCompile Include="Sources\Pch\Pch.cpp" />
+    <ClCompile Include="Sources\Thread\ThreadPool.cpp" />
+    <ClCompile Include="Sources\Thread\Tls.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

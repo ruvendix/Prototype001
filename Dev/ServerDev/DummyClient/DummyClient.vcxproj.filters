@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sources\ClientMain.cpp" />
+    <ClCompile Include="Sources\Packet\ClientPacketHandler.cpp">
+      <Filter>Sources\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Pch\Pch.cpp">
+      <Filter>Sources\Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Session\ServerSession.cpp">
+      <Filter>Sources\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Enum.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Protocol.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Struct.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\Packet\ClientPacketHandler.h">
+      <Filter>Sources\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Pch\Pch.h">
+      <Filter>Sources\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Session\ServerSession.h">
+      <Filter>Sources\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Enum.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Protocol.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Struct.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{46ef7824-9d1b-4435-aca4-d2712d27233a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Packet">
+      <UniqueIdentifier>{cc26a247-cfdb-47e2-b67a-1c2f27549321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Pch">
+      <UniqueIdentifier>{aee9385e-51ee-4cd4-8298-202ec27b2c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Session">
+      <UniqueIdentifier>{f98d12dd-1752-43b4-ad07-e7952adc9392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Protobuf">
+      <UniqueIdentifier>{b49b23fe-a3c3-431e-bd8e-d0419041548e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
