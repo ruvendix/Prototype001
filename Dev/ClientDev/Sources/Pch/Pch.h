@@ -2,9 +2,11 @@
 #pragma once
 
 // 컴파일된 ProtoBuffer는 공유 가능하지만 프로젝트마다 연결은 되어있어야 함!
-#include "ProtoBuffer/ProtoFiles/Enum.pb.h"
-#include "ProtoBuffer/ProtoFiles/Struct.pb.h"
-#include "ProtoBuffer/ProtoFiles/Protocol.pb.h"
+#include "ClientSources/Network/Protobuf/Enum.pb.h"
+#include "ClientSources/Network/Protobuf/Struct.pb.h"
+#include "ClientSources/Network/Protobuf/Protocol.pb.h"
+
+#include "google/protobuf/message_lite.h"
 
 #include "CommonInclusion.h"
 
@@ -18,6 +20,6 @@
 //#pragma comment(lib, "ServerCore_Debug.lib")
 #pragma comment(lib, "libprotobufd.lib")
 #else
-#pragma comment(lib, "ServerCore.lib")
+//#pragma comment(lib, "ServerCore.lib")
 #pragma comment(lib, "libprotobuf.lib")
 #endif

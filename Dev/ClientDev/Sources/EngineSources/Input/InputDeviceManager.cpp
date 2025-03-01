@@ -101,7 +101,10 @@ bool InputDeviceMananger::Update(float deltaSeconds)
 	}
 
 	// 마우스 좌표 갱신
-	m_spMouseDevice->Update(deltaSeconds);
+	if (m_spMouseDevice != nullptr)
+	{
+		m_spMouseDevice->Update(deltaSeconds);
+	}
 
 	return true;
 }

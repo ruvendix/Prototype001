@@ -137,6 +137,9 @@
     <Filter Include="Sources\ClientSources\Network">
       <UniqueIdentifier>{72d77fb7-c5a3-4807-9a7c-58b5e61e924f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ClientSources\Network\Protobuf">
+      <UniqueIdentifier>{e392d897-8fd1-430e-b205-0b231b694069}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\ClientSources\GameApplication\GameApplication.cpp">
@@ -361,17 +364,17 @@
     <ClCompile Include="Sources\ClientSources\Weapon\Projectile\ProjectileAttackComponent.cpp">
       <Filter>Sources\ClientSources\Weapon\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ClientSources\ClientMain.cpp">
+    <ClCompile Include="Sources\ClientMain.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\ProtoBuffer\ProtoFiles\Enum.pb.cc">
-      <Filter>Sources\ClientSources\Network</Filter>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Enum.pb.cc">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\ProtoBuffer\ProtoFiles\Protocol.pb.cc">
-      <Filter>Sources\ClientSources\Network</Filter>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.cc">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\ProtoBuffer\ProtoFiles\Struct.pb.cc">
-      <Filter>Sources\ClientSources\Network</Filter>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Struct.pb.cc">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -672,14 +675,14 @@
     <ClInclude Include="Sources\ClientSources\Weapon\Projectile\ProjectileAttackComponent.h">
       <Filter>Sources\ClientSources\Weapon\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\ProtoBuffer\ProtoFiles\Enum.pb.h">
-      <Filter>Sources\ClientSources\Network</Filter>
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Enum.pb.h">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\ProtoBuffer\ProtoFiles\Protocol.pb.h">
-      <Filter>Sources\ClientSources\Network</Filter>
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.h">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\ProtoBuffer\ProtoFiles\Struct.pb.h">
-      <Filter>Sources\ClientSources\Network</Filter>
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Struct.pb.h">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

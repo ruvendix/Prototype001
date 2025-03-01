@@ -25,7 +25,8 @@ bool WorldTileActor::Update(float deltaSeconds)
 	}
 
 	const std::shared_ptr<CameraActor>& spMainCameraActor = SceneRenderer::I()->GetMainCameraActor();
-	if (spMainCameraActor->CheckInCameraVision(this) == true)
+	if ((spMainCameraActor != nullptr) &&
+		(spMainCameraActor->CheckInCameraVision(this) == true))
 	{
 		SetActorFlagBitOn(EActorFlag::RenderingTarget);
 	}

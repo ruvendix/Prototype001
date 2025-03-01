@@ -38,6 +38,63 @@ if %ERRORLEVEL% equ 0 (
 )
 
 echo -----------------------------------------------------------------------------------------------------
+echo.
+
+echo -----------------------------------------------------------------------------------------------------
+echo 컴파일된 프로토 파일 복사 시작
+
+REM 복사에서 제외할 확장자 설정
+set "EXCLUDE_EXT=.proto"
+
+REM proto 파일을 복사할 경로 설정
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\ServerDev\Server\Sources\ProtoBuffer\
+for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
+echo 프로토 파일이 복사될 서버 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
+
+for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
+    if /i not "%%~xf"=="%EXCLUDE_EXT%" (
+		xcopy /Y %%f "%ABSOLUTE_PROTO_FILE_COPY_PATH%"
+    )
+)
+echo.
+
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\ServerDev\DummyClient\Sources\ProtoBuffer\
+for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
+echo 프로토 파일이 복사될 더미 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
+
+for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
+    if /i not "%%~xf"=="%EXCLUDE_EXT%" (
+		xcopy /Y %%f "%ABSOLUTE_PROTO_FILE_COPY_PATH%"
+    )
+)
+echo.
+
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\ClientDev\Sources\ClientSources\Network\ProtoBufferPacket\
+for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
+echo 프로토 파일이 복사될 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
+
+for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
+    if /i not "%%~xf"=="%EXCLUDE_EXT%" (
+		xcopy /Y %%f "%ABSOLUTE_PROTO_FILE_COPY_PATH%"
+    )
+)
+echo.
+echo 컴파일된 프로토 파일 복사 완료
+
+echo.
+echo 컴파일된 원본 파일 제거 시작
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\Common\ProtoBuffer\ProtoFiles\
+for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
+echo 제거할 컴파일된 원본 파일이 있는 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
+
+for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
+    if /i not "%%~xf"=="%EXCLUDE_EXT%" (
+		del %%f
+    )
+)
+echo 컴파일된 원본 파일 제거 완료
+
+echo -----------------------------------------------------------------------------------------------------
 echo #####################################################################################################
 
 pause

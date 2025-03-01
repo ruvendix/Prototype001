@@ -58,7 +58,6 @@ void GameApplication::Startup()
 {
     // 힙 메모리 체크용
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc(10); // 메모리 할당할 때 중단점
 
     // 타이머에 사용되는 주파수 초기화
     InitializePerformanceFrequency();
@@ -143,4 +142,7 @@ void GameApplication::Cleanup()
 {
     SceneRenderer::I()->ReleaseBuffers();
     SceneManager::I()->Cleanup();
+
+    // Protobuf 정리
+    google::protobuf::ShutdownProtobufLibrary();
 }

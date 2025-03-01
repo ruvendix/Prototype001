@@ -4,14 +4,10 @@
 
 int32 APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR szCmdLine, _In_ int32 cmdShow)
 {
-    Protocol::S_TEST abc;
-    abc.set_hp(100);
-    abc.hp();
-
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(szCmdLine);
     UNREFERENCED_PARAMETER(cmdShow);
-
+    
     GameApplication::I()->SetInstanceHandle(hInstance);
     return (GameApplication::I()->Drive());
 }

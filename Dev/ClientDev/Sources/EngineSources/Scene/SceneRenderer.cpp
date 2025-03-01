@@ -50,7 +50,11 @@ HDC SceneRenderer::CreateCompatibleDc()
 
 Vector2d SceneRenderer::ConvertWorldPositionToRenderingPosition(const Vector2d& worldPos) const
 {
-	ASSERT_LOG(m_spMainCameraActor != nullptr);
+	if (m_spMainCameraActor == nullptr)
+	{
+		return Vector2d();
+	}
+
 	CameraComponent* pCameraComponent = m_spMainCameraActor->FindComponent<CameraComponent>();
 	ASSERT_LOG(pCameraComponent != nullptr);
 

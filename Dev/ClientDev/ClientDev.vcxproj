@@ -11,16 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Common\ProtoBuffer\ProtoFiles\Enum.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    <ClCompile Include="Sources\ClientMain.cpp">
+      <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="..\Common\ProtoBuffer\ProtoFiles\Protocol.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\Common\ProtoBuffer\ProtoFiles\Struct.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\ClientSources\ClientMain.cpp" />
     <ClCompile Include="Sources\ClientSources\Editor\EditorActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -43,6 +36,18 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\ClientSources\GameApplication\WindowProcedure.cpp" />
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Enum.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Struct.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Sources\ClientSources\Player\PlayerActor.cpp" />
     <ClCompile Include="Sources\ClientSources\Player\PlayerState.cpp">
       <DeploymentContent>false</DeploymentContent>
@@ -233,9 +238,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\ProtoBuffer\ProtoFiles\Enum.pb.h" />
-    <ClInclude Include="..\Common\ProtoBuffer\ProtoFiles\Protocol.pb.h" />
-    <ClInclude Include="..\Common\ProtoBuffer\ProtoFiles\Struct.pb.h" />
     <ClInclude Include="Sources\ClientSources\Editor\EditorActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -261,6 +263,9 @@
     <ClInclude Include="Sources\ClientSources\Global\Inclusion.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Enum.pb.h" />
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.h" />
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Struct.pb.h" />
     <ClInclude Include="Sources\ClientSources\Player\PlayerActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -592,7 +597,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Sources;Sources/Pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
