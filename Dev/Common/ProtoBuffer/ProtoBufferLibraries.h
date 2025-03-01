@@ -86,5 +86,5 @@
 #pragma comment(lib, "absl_time_zone.lib")
 //#pragma comment(lib, "absl_vlog_config_internal.lib")
 
-//#pragma comment(lib, "libutf8_range.lib")
-#pragma comment(lib, "libutf8_validity.lib")
+//#pragma comment(lib, "utf8_range.lib")
+#pragma comment(lib, "utf8_validity.lib")

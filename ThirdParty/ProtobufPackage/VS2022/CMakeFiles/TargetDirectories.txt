@@ -1,0 +1,6 @@
+C:/Users/user/Desktop/Backup/Study/Cpp/Prototype001/ThirdParty/ProtobufPackage/VS2022/CMakeFiles/libprotobuf-lite.dir
+C:/Users/user/Desktop/Backup/Study/Cpp/Prototype001/ThirdParty/ProtobufPackage/VS2022/CMakeFiles/libprotobuf.dir
+C:/Users/user/Desktop/Backup/Study/Cpp/Prototype001/ThirdParty/ProtobufPackage/VS2022/CMakeFiles/libprotoc.dir
+C:/Users/user/Desktop/Backup/Study/Cpp/Prototype001/ThirdParty/ProtobufPackage/VS2022/CMakeFiles/protoc.dir
+C:/Users/user/Desktop/Backup/Study/Cpp/Prototype001/ThirdParty/ProtobufPackage/VS2022/CMakeFiles/ALL_BUILD.dir
+C:/Users/user/Desktop/Backup/Study/Cpp/Prototype001/ThirdParty/ProtobufPackage/VS2022/CMakeFiles/ZERO_CHECK.dir

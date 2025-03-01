@@ -1,6 +1,11 @@
 ﻿// Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+// 컴파일된 ProtoBuffer는 공유 가능하지만 프로젝트마다 연결은 되어있어야 함!
+#include "ProtoBuffer/ProtoFiles/Enum.pb.h"
+#include "ProtoBuffer/ProtoFiles/Struct.pb.h"
+#include "ProtoBuffer/ProtoFiles/Protocol.pb.h"
+
 #include "CommonInclusion.h"
 
 // 엔진에서 자주 사용하는 헤더 파일 모음입니다.
@@ -9,6 +14,10 @@
 // 클라이언트에서 자주 사용하는 헤더 파일 모음입니다.
 #include "ClientSources/Global/Inclusion.h"
 
-// lib 파일 링크입니다.
-#pragma comment(lib, "Winmm.lib")
-#pragma comment(lib, "Msimg32.lib")
+#ifdef _DEBUG
+//#pragma comment(lib, "ServerCore_Debug.lib")
+#pragma comment(lib, "libprotobufd.lib")
+#else
+#pragma comment(lib, "ServerCore.lib")
+#pragma comment(lib, "libprotobuf.lib")
+#endif

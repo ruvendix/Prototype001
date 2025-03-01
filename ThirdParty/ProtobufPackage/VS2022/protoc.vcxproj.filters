@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\user\Desktop\Backup\Study\Cpp\Prototype001\ThirdParty\ProtobufPackage\protobuf\src\google\protobuf\compiler\main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\user\Desktop\Backup\Study\Cpp\Prototype001\ThirdParty\ProtobufPackage\protobuf\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\user\Desktop\Backup\Study\Cpp\Prototype001\ThirdParty\ProtobufPackage\VS2022\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D1702537-0A26-3531-9EE9-957C0A8DC921}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
