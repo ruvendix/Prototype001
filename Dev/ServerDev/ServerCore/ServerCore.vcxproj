@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Sources;$(ProjectDir)Sources\Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -53,7 +53,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Sources;$(ProjectDir)Sources\Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
@@ -61,41 +61,106 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Global\Types.h" />
-    <ClInclude Include="Sources\Network\Buffer\BufferReader.h" />
-    <ClInclude Include="Sources\Network\Buffer\BufferWriter.h" />
-    <ClInclude Include="Sources\Network\IocpCore.h" />
-    <ClInclude Include="Sources\Network\IocpEvent.h" />
-    <ClInclude Include="Sources\Network\IocpObject.h" />
-    <ClInclude Include="Sources\Network\Listener.h" />
-    <ClInclude Include="Sources\Network\NetworkAddress.h" />
-    <ClInclude Include="Sources\Network\Buffer\ReceiveBuffer.h" />
-    <ClInclude Include="Sources\Network\Buffer\SendBuffer.h" />
-    <ClInclude Include="Sources\Network\Service.h" />
-    <ClInclude Include="Sources\Network\Session\PacketSession.h" />
-    <ClInclude Include="Sources\Network\Session\Session.h" />
-    <ClInclude Include="Sources\Socket\SocketUtility.h" />
-    <ClInclude Include="Sources\Pch\Pch.h" />
-    <ClInclude Include="Sources\Thread\ThreadPool.h" />
-    <ClInclude Include="Sources\Thread\Tls.h" />
+    <ClInclude Include="Sources\Network\Buffer\BufferReader.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Buffer\BufferWriter.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Buffer\ReceiveBuffer.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Buffer\SendBuffer.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\IocpCore.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\IocpEvent.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\IocpObject.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Listener.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\NetworkAddress.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Service.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Session\PacketSession.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Network\Session\Session.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Pch\Pch.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\ServerCoreGlobal\Inclusion.h" />
+    <ClInclude Include="Sources\ServerCoreGlobal\Types.h" />
+    <ClInclude Include="Sources\Socket\SocketUtility.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Thread\ThreadPool.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\Thread\Tls.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Network\Buffer\BufferReader.cpp" />
-    <ClCompile Include="Sources\Network\Buffer\BufferWriter.cpp" />
-    <ClCompile Include="Sources\Network\IocpCore.cpp" />
-    <ClCompile Include="Sources\Network\IocpEvent.cpp" />
-    <ClCompile Include="Sources\Network\IocpObject.cpp" />
-    <ClCompile Include="Sources\Network\Listener.cpp" />
-    <ClCompile Include="Sources\Network\NetworkAddress.cpp" />
-    <ClCompile Include="Sources\Network\Buffer\ReceiveBuffer.cpp" />
-    <ClCompile Include="Sources\Network\Buffer\SendBuffer.cpp" />
-    <ClCompile Include="Sources\Network\Service.cpp" />
-    <ClCompile Include="Sources\Network\Session\PacketSession.cpp" />
-    <ClCompile Include="Sources\Network\Session\Session.cpp" />
-    <ClCompile Include="Sources\Socket\SocketUtility.cpp" />
-    <ClCompile Include="Sources\Pch\Pch.cpp" />
-    <ClCompile Include="Sources\Thread\ThreadPool.cpp" />
-    <ClCompile Include="Sources\Thread\Tls.cpp" />
+    <ClCompile Include="Sources\Network\Buffer\BufferReader.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Buffer\BufferWriter.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Buffer\ReceiveBuffer.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Buffer\SendBuffer.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\IocpCore.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\IocpEvent.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\IocpObject.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Listener.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\NetworkAddress.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Service.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Session\PacketSession.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Network\Session\Session.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Pch\Pch.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Socket\SocketUtility.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Thread\ThreadPool.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\Thread\Tls.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
