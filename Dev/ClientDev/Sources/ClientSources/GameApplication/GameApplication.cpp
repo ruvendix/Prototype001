@@ -109,6 +109,7 @@ void GameApplication::Startup()
     InputDeviceMananger::I()->Startup();
     ResourceMananger::I()->Startup();    
     SceneManager::I()->Startup();
+    NetworkManager::I()->Startup();
 #pragma endregion
 
     // 씬 생성해서 테스트
@@ -129,6 +130,9 @@ bool GameApplication::Update(float deltaSeconds)
     // 씬 처리
     SceneManager::I()->Update(deltaSeconds); // 기본 갱신(입력 처리, 좌표 갱신 등)
 
+    // 네트워크 처리
+    NetworkManager::I()->Update(deltaSeconds);
+
     /*
     후속 갱신 때 유효한 액터인지 판정됨
     유효한 액터들은 트랜스폼을 갱신하는데 2D에서는 의미 없고
@@ -142,6 +146,7 @@ void GameApplication::Cleanup()
 {
     SceneRenderer::I()->ReleaseBuffers();
     SceneManager::I()->Cleanup();
+    NetworkManager::I()->Cleanup();
 
     // Protobuf 정리
     google::protobuf::ShutdownProtobufLibrary();

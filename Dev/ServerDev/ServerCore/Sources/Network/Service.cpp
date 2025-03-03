@@ -27,20 +27,6 @@ void RxService::Cleanup()
 
 }
 
-class Parent : public std::enable_shared_from_this<Parent>
-{
-public:
-	Parent() = default;
-	virtual ~Parent() = default;
-};
-
-class Child : public Parent
-{
-public:
-	Child() = default;
-	virtual ~Child() = default;
-};
-
 RxSessionPtr RxService::CreateSession()
 {
 	RxSessionPtr spSession = m_serviceInfo.sessionFactoryFunc();

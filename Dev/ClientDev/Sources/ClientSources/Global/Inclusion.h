@@ -11,3 +11,7 @@
 
 #include "ClientSources/EnemyMonster/EnemyMonsterActor/EnemyMonsterActor.h"
 #include "ClientSources/EnemyRespawner/EnemyRespawner.h"
+
+#include "ClientSources/Network/NetworkManager.h"
+#include "ClientSources/Network/Session/ServerSession.h"
+#include "ClientSources/Network/Packet/ClientPacketHandler.h"

@@ -36,6 +36,10 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Sources\ClientSources\GameApplication\WindowProcedure.cpp" />
+    <ClCompile Include="Sources\ClientSources\Network\NetworkManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.cpp" />
     <ClCompile Include="Sources\ClientSources\Network\Protobuf\Enum.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -48,6 +52,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Session\ServerSession.cpp" />
     <ClCompile Include="Sources\ClientSources\Player\PlayerActor.cpp" />
     <ClCompile Include="Sources\ClientSources\Player\PlayerState.cpp">
       <DeploymentContent>false</DeploymentContent>
@@ -263,9 +268,14 @@
     <ClInclude Include="Sources\ClientSources\Global\Inclusion.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\NetworkManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.h" />
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Enum.pb.h" />
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.h" />
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Struct.pb.h" />
+    <ClInclude Include="Sources\ClientSources\Network\Session\ServerSession.h" />
     <ClInclude Include="Sources\ClientSources\Player\PlayerActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -572,7 +582,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;$(SolutionDir)..\ServerDev;$(SolutionDir)..\ServerDev\ServerCore\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -582,6 +592,7 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ServerDev\Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
@@ -597,7 +608,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Sources;Sources/Pch;$(SolutionDir)..\Common;$(SolutionDir)..\ServerDev;$(SolutionDir)..\ServerDev\ServerCore\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
@@ -605,6 +616,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ServerDev\Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

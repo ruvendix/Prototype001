@@ -140,6 +140,12 @@
     <Filter Include="Sources\ClientSources\Network\Protobuf">
       <UniqueIdentifier>{e392d897-8fd1-430e-b205-0b231b694069}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ClientSources\Network\Session">
+      <UniqueIdentifier>{6d0c78ca-63ac-40c3-a60c-53ab14b62fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ClientSources\Network\Packet">
+      <UniqueIdentifier>{1e3b0d41-8043-4984-b7ea-4d045beeaaf6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\ClientSources\GameApplication\GameApplication.cpp">
@@ -375,6 +381,15 @@
     </ClCompile>
     <ClCompile Include="Sources\ClientSources\Network\Protobuf\Struct.pb.cc">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\NetworkManager.cpp">
+      <Filter>Sources\ClientSources\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Session\ServerSession.cpp">
+      <Filter>Sources\ClientSources\Network\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.cpp">
+      <Filter>Sources\ClientSources\Network\Packet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -683,6 +698,15 @@
     </ClInclude>
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Struct.pb.h">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\NetworkManager.h">
+      <Filter>Sources\ClientSources\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\Session\ServerSession.h">
+      <Filter>Sources\ClientSources\Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.h">
+      <Filter>Sources\ClientSources\Network\Packet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

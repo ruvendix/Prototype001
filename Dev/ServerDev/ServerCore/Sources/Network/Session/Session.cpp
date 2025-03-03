@@ -372,3 +372,8 @@ int32 RxSession::HandleLastError()
 
 	return errorCode;
 }
+
+void RxSession::ReleaseConnect()
+{
+	SAFE_DELETE(m_pConnectEvent);
+}

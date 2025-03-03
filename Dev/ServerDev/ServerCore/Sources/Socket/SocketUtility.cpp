@@ -63,7 +63,7 @@ int32 RxSocketUtility::HandleLastError()
 			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 			reinterpret_cast<LPTSTR>(&msgBuffer), 0, nullptr);
 
-		::OutputDebugString(reinterpret_cast<LPTSTR>(msgBuffer));
+		//::OutputDebugString(reinterpret_cast<LPTSTR>(msgBuffer));
 		LocalFree(msgBuffer);
 
 		break;

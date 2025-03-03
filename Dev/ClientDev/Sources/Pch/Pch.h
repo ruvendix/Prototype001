@@ -10,6 +10,9 @@
 
 #include "CommonInclusion.h"
 
+// 서버에서 자주 사용하는 헤더 파일 모음입니다.
+#include "ServerCore/Sources/ServerCoreGlobal/Inclusion.h"
+
 // 엔진에서 자주 사용하는 헤더 파일 모음입니다.
 #include "EngineSources/Global/Inclusion.h"
 
@@ -17,9 +20,9 @@
 #include "ClientSources/Global/Inclusion.h"
 
 #ifdef _DEBUG
-//#pragma comment(lib, "ServerCore_Debug.lib")
+#pragma comment(lib, "ServerCore_Debug.lib")
 #pragma comment(lib, "libprotobufd.lib")
 #else
-//#pragma comment(lib, "ServerCore.lib")
+#pragma comment(lib, "ServerCore.lib")
 #pragma comment(lib, "libprotobuf.lib")
 #endif
