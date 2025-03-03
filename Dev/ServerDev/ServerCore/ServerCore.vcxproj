@@ -48,7 +48,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <PostBuildEvent>
-      <Command>call "$(SolutionDir)..\..\ThirdParty\ProtobufPackage\CompileProto.bat"</Command>
+      <Command>call "$(SolutionDir)..\Common\Protobuf\CompileProto.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -57,7 +57,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
-      <Command>call "$(SolutionDir)..\..\ThirdParty\ProtobufPackage\CompileProto.bat"</Command>
+      <Command>call "$(SolutionDir)..\Common\Protobuf\CompileProto.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

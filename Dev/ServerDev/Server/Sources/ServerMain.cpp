@@ -73,15 +73,6 @@ int main()
 		);
 	}
 
-	while (true) // 서버가 클라로 패킷을 쏨
-	{
-		std::vector<BuffData> vecBuff{ BuffData {100, 1.5f}, BuffData{200, 2.3f}, BuffData {300, 0.7f } };
-		RxSendBufferPtr spSendBuffer = RxServerPacketHandler::I()->MakeTestPacket(1001, 100, 10, vecBuff);
-		RxGameSessionManager::I()->Broadcast(spSendBuffer);
-
-		std::this_thread::sleep_for(250ms);
-	}
-
 	g_threadPool.Join();
 
 	/*

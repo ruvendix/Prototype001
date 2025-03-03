@@ -1,0 +1,7 @@
+syntax = "proto3";
+package Protocol;
+
+enum EProtocolId
+{
+	EnterGame = 0;
+}

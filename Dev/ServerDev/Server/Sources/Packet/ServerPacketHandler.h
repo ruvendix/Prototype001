@@ -1,12 +1,6 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-struct BuffData
-{
-	uint64 buffId;
-	float remainTime;
-};
-
 class RxServerPacketHandler
 {
 public:
@@ -18,10 +12,11 @@ public:
 	~RxServerPacketHandler();
 
 	void HandlePacket(BYTE* buffer, int32 numOfBytes);
-	RxSendBufferPtr MakeTestPacket(uint64 id, uint32 hp, uint16 attack, const std::vector<BuffData>& vecBuff);
+
+	RxSendBufferPtr MakeEnterGamePacket();
 
 	template <typename TPacket>
-	RxSendBufferPtr MakeSendBuffer(const TPacket& packet, uint16 protocolId)
+	RxSendBufferPtr MakeSendBuffer(const TPacket& packet, Protocol::EProtocolId protocolId)
 	{
 		uint16 dataSize = static_cast<uint16>(packet.ByteSizeLong());
 		uint16 packetSize = sizeof(RxPacketHeader) + dataSize;

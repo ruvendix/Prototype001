@@ -4,7 +4,8 @@
 // 컴파일된 ProtoBuffer는 공유 가능하지만 프로젝트마다 연결은 되어있어야 함!
 #include "ClientSources/Network/Protobuf/Enum.pb.h"
 #include "ClientSources/Network/Protobuf/Struct.pb.h"
-#include "ClientSources/Network/Protobuf/Protocol.pb.h"
+#include "ClientSources/Network/Protobuf/ProtocolId.pb.h"
+#include "ClientSources/Network/Protobuf/Packet.pb.h"
 
 #include "google/protobuf/message_lite.h"
 

@@ -11,7 +11,7 @@ public:
     DelegatorBase() = default;
     virtual ~DelegatorBase() = default;
 
-    virtual TReturn InvokeFunctions(TArgs&&... args) const = 0;
+    virtual TReturn InvokeFunctions(TArgs... args) const = 0;
     virtual TReturn InvokeFixedArgumentFunctions() const = 0;
 
 public:
@@ -94,7 +94,7 @@ public:
     virtual ~Delegator() = default;
 
 public:
-    virtual void InvokeFunctions(TArgs&&... args) const override
+    virtual void InvokeFunctions(TArgs... args) const override
     {
         for (const auto& boundFunc : this->m_vecBoundFunc)
         {
@@ -119,7 +119,7 @@ public:
     virtual ~Delegator() = default;
 
 public:
-    virtual TReturn InvokeFunctions(TArgs&&... args) const override
+    virtual TReturn InvokeFunctions(TArgs... args) const override
     {
         TReturn retValue = TReturn();
         for (const auto& boundFunc : this->m_vecBoundFunc)

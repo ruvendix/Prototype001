@@ -70,7 +70,8 @@
     <ClCompile Include="Sources\Packet\ClientPacketHandler.cpp" />
     <ClCompile Include="Sources\Pch\Pch.cpp" />
     <ClCompile Include="Sources\Protobuf\Enum.pb.cc" />
-    <ClCompile Include="Sources\Protobuf\Protocol.pb.cc" />
+    <ClCompile Include="Sources\Protobuf\Packet.pb.cc" />
+    <ClCompile Include="Sources\Protobuf\ProtocolId.pb.cc" />
     <ClCompile Include="Sources\Protobuf\Struct.pb.cc" />
     <ClCompile Include="Sources\Session\ServerSession.cpp" />
   </ItemGroup>
@@ -78,7 +79,8 @@
     <ClInclude Include="Sources\Packet\ClientPacketHandler.h" />
     <ClInclude Include="Sources\Pch\Pch.h" />
     <ClInclude Include="Sources\Protobuf\Enum.pb.h" />
-    <ClInclude Include="Sources\Protobuf\Protocol.pb.h" />
+    <ClInclude Include="Sources\Protobuf\Packet.pb.h" />
+    <ClInclude Include="Sources\Protobuf\ProtocolId.pb.h" />
     <ClInclude Include="Sources\Protobuf\Struct.pb.h" />
     <ClInclude Include="Sources\Session\ServerSession.h" />
   </ItemGroup>

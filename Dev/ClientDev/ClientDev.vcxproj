@@ -44,7 +44,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.cc">
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Packet.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\ProtocolId.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -268,12 +272,16 @@
     <ClInclude Include="Sources\ClientSources\Global\Inclusion.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\NetworkMacros.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="Sources\ClientSources\Network\NetworkManager.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.h" />
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Enum.pb.h" />
-    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.h" />
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Packet.pb.h" />
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\ProtocolId.pb.h" />
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Struct.pb.h" />
     <ClInclude Include="Sources\ClientSources\Network\Session\ServerSession.h" />
     <ClInclude Include="Sources\ClientSources\Player\PlayerActor.h">

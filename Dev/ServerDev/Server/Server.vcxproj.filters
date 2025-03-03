@@ -19,10 +19,13 @@
     <ClCompile Include="Sources\Protobuf\Enum.pb.cc">
       <Filter>Sources\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Protobuf\Protocol.pb.cc">
+    <ClCompile Include="Sources\Protobuf\Struct.pb.cc">
       <Filter>Sources\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Protobuf\Struct.pb.cc">
+    <ClCompile Include="Sources\Protobuf\ProtocolId.pb.cc">
+      <Filter>Sources\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Protobuf\Packet.pb.cc">
       <Filter>Sources\Protobuf</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,10 +48,13 @@
     <ClInclude Include="Sources\Protobuf\Enum.pb.h">
       <Filter>Sources\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Protobuf\Protocol.pb.h">
+    <ClInclude Include="Sources\Protobuf\Struct.pb.h">
       <Filter>Sources\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Protobuf\Struct.pb.h">
+    <ClInclude Include="Sources\Protobuf\ProtocolId.pb.h">
+      <Filter>Sources\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Protobuf\Packet.pb.h">
       <Filter>Sources\Protobuf</Filter>
     </ClInclude>
   </ItemGroup>

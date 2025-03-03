@@ -11,3 +11,9 @@ message S_TEST
 	uint32 attack = 3;
 	repeated BuffData buffs = 4;
 }
+
+message S_EnterGame
+{
+	bool enterSuccess = 1;
+	uint64 userId = 2;
+}

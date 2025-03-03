@@ -10,7 +10,7 @@ set PROTO_COMPILER_PATH=%~dp0
 REM echo %PROTO_COMPILER_PATH%
 
 REM 목표 경로를 절대 경로로 변환 (반복문을 이용해서 상대 경로를 절대 경로로 변환함)
-set ABSOULTE_PROTO_DIRECTORY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\Common\Protobuf\ProtoFiles\
+set ABSOULTE_PROTO_DIRECTORY_PATH=%PROTO_COMPILER_PATH%ProtoFiles\
 for %%I in ("%ABSOULTE_PROTO_DIRECTORY_PATH%") do set "ABSOULTE_PROTO_DIRECTORY_PATH=%%~fI"
 echo 프로토 파일의 디렉토리: %ABSOULTE_PROTO_DIRECTORY_PATH%
 REM pause
@@ -47,7 +47,7 @@ REM 복사에서 제외할 확장자 설정
 set "EXCLUDE_EXT=.proto"
 
 REM proto 파일을 복사할 경로 설정
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\ServerDev\Server\Sources\Protobuf\
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ServerDev\Server\Sources\Protobuf\
 for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
 echo 프로토 파일이 복사될 서버 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
 
@@ -58,7 +58,7 @@ for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
 )
 echo.
 
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\ServerDev\DummyClient\Sources\Protobuf\
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ServerDev\DummyClient\Sources\Protobuf\
 for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
 echo 프로토 파일이 복사될 더미 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
 
@@ -69,7 +69,7 @@ for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
 )
 echo.
 
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\ClientDev\Sources\ClientSources\Network\Protobuf\
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ClientDev\Sources\ClientSources\Network\Protobuf\
 for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
 echo 프로토 파일이 복사될 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
 
@@ -83,7 +83,7 @@ echo 컴파일된 프로토 파일 복사 완료
 
 echo.
 echo 컴파일된 원본 파일 제거 시작
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\Dev\Common\ProtoBuffer\ProtoFiles\
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%ProtoFiles\
 for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
 echo 제거할 컴파일된 원본 파일이 있는 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
 

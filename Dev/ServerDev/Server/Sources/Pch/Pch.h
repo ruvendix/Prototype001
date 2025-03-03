@@ -4,7 +4,8 @@
 // 컴파일된 ProtoBuffer는 공유 가능하지만 프로젝트마다 연결은 되어있어야 함!
 #include "Protobuf/Enum.pb.h"
 #include "Protobuf/Struct.pb.h"
-#include "Protobuf/Protocol.pb.h"
+#include "Protobuf/ProtocolId.pb.h"
+#include "Protobuf/Packet.pb.h"
 
 #include "CommonInclusion.h"
 

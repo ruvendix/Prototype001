@@ -46,21 +46,11 @@ void RxServerPacketHandler::HandlePacket(BYTE* buffer, int32 numOfBytes)
 	}
 }
 
-RxSendBufferPtr RxServerPacketHandler::MakeTestPacket(uint64 id, uint32 hp, uint16 attack, const std::vector<BuffData>& vecBuff)
+RxSendBufferPtr RxServerPacketHandler::MakeEnterGamePacket()
 {
-	Protocol::S_TEST packet;
-	packet.set_id(10);
-	packet.set_hp(100);
-	packet.set_attack(10);
+	Protocol::S_EnterGame packet;
+	packet.set_entersuccess(true);
+	packet.set_userid(0);
 
-	Protocol::BuffData* pBuffData = packet.add_buffs();
-	pBuffData->set_buffid(100);
-	pBuffData->set_remaintime(1.2f);
-	pBuffData->add_victims(10);
-
-	pBuffData = packet.add_buffs();
-	pBuffData->set_buffid(200);
-	pBuffData->set_remaintime(2.2f);
-
-	return MakeSendBuffer(packet, 1);
+	return MakeSendBuffer(packet, Protocol::EProtocolId::EnterGame);
 }

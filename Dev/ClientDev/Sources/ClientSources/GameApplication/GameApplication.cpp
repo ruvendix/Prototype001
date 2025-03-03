@@ -110,6 +110,7 @@ void GameApplication::Startup()
     ResourceMananger::I()->Startup();    
     SceneManager::I()->Startup();
     NetworkManager::I()->Startup();
+    ClientPacketHandler::I()->Startup();
 #pragma endregion
 
     // 씬 생성해서 테스트
@@ -147,6 +148,7 @@ void GameApplication::Cleanup()
     SceneRenderer::I()->ReleaseBuffers();
     SceneManager::I()->Cleanup();
     NetworkManager::I()->Cleanup();
+    ClientPacketHandler::I()->Cleanup();
 
     // Protobuf 정리
     google::protobuf::ShutdownProtobufLibrary();

@@ -3,6 +3,7 @@
 #include "GameSession.h"
 
 #include "GameSessionManager.h"
+#include "Packet/ServerPacketHandler.h"
 
 RxGameSession::RxGameSession()
 {
@@ -18,6 +19,9 @@ void RxGameSession::ProcessConnectImpl()
 {
 	const RxGameSessionPtr& refSpGameSession = std::dynamic_pointer_cast<RxGameSession>(shared_from_this());
 	RxGameSessionManager::I()->AddGameSession(refSpGameSession);
+
+	// 클라이언트 입장!
+	Send(RxServerPacketHandler::I()->MakeEnterGamePacket());
 }
 
 void RxGameSession::ProcessDisconnectImpl()

@@ -376,9 +376,6 @@
     <ClCompile Include="Sources\ClientSources\Network\Protobuf\Enum.pb.cc">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.cc">
-      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\ClientSources\Network\Protobuf\Struct.pb.cc">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClCompile>
@@ -390,6 +387,12 @@
     </ClCompile>
     <ClCompile Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.cpp">
       <Filter>Sources\ClientSources\Network\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\Packet.pb.cc">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Network\Protobuf\ProtocolId.pb.cc">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -693,9 +696,6 @@
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Enum.pb.h">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Protocol.pb.h">
-      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\ClientSources\Network\Protobuf\Struct.pb.h">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
     </ClInclude>
@@ -707,6 +707,15 @@
     </ClInclude>
     <ClInclude Include="Sources\ClientSources\Network\Packet\ClientPacketHandler.h">
       <Filter>Sources\ClientSources\Network\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\Packet.pb.h">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\Protobuf\ProtocolId.pb.h">
+      <Filter>Sources\ClientSources\Network\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Network\NetworkMacros.h">
+      <Filter>Sources\ClientSources\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
