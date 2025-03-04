@@ -1,6 +1,8 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+#include "ClientSources/CreatureActor/CreatureActor.h"
+
 #include "ClientSources/Weapon/WeaponEnums.h"
 #include "ClientSources/Weapon/WeaponActor.h"
 

@@ -146,6 +146,9 @@
     <Filter Include="Sources\ClientSources\Network\Packet">
       <UniqueIdentifier>{1e3b0d41-8043-4984-b7ea-4d045beeaaf6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ClientSources\CreatureActor">
+      <UniqueIdentifier>{f4baa741-193a-481b-b53c-77679c5f3d3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\ClientSources\GameApplication\GameApplication.cpp">
@@ -393,6 +396,12 @@
     </ClCompile>
     <ClCompile Include="Sources\ClientSources\Network\Protobuf\ProtocolId.pb.cc">
       <Filter>Sources\ClientSources\Network\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\CreatureActor\CreatureActor.cpp">
+      <Filter>Sources\ClientSources\CreatureActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ClientSources\Player\LocalPlayerActor.cpp">
+      <Filter>Sources\ClientSources\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -716,6 +725,12 @@
     </ClInclude>
     <ClInclude Include="Sources\ClientSources\Network\NetworkMacros.h">
       <Filter>Sources\ClientSources\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\CreatureActor\CreatureActor.h">
+      <Filter>Sources\ClientSources\CreatureActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ClientSources\Player\LocalPlayerActor.h">
+      <Filter>Sources\ClientSources\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

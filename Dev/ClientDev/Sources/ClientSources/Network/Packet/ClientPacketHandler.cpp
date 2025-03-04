@@ -10,6 +10,7 @@ DEFINE_SINGLETON(ClientPacketHandler);
 void ClientPacketHandler::Startup()
 {
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::EnterGame, &ClientPacketHandler::HandlePacket_EnterGame);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::GameCreatureInfo, &ClientPacketHandler::HandlePacket_GameCreatureInfo);
 }
 
 void ClientPacketHandler::Cleanup()
@@ -37,4 +38,9 @@ void ClientPacketHandler::HandlePacket(BYTE* buffer, int32 numOfBytes)
 void ClientPacketHandler::HandlePacket_EnterGame(BYTE* buffer, int32 numOfBytes)
 {
 	START_PACKET_CONTENTS(buffer, Protocol::S_EnterGame, packet);
+}
+
+void ClientPacketHandler::HandlePacket_GameCreatureInfo(BYTE* buffer, int32 numOfBytes)
+{
+	START_PACKET_CONTENTS(buffer, Protocol::S_GameCreatureInfo, packet);
 }

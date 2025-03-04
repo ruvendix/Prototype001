@@ -49,8 +49,8 @@ void RxServerPacketHandler::HandlePacket(BYTE* buffer, int32 numOfBytes)
 RxSendBufferPtr RxServerPacketHandler::MakeEnterGamePacket()
 {
 	Protocol::S_EnterGame packet;
-	packet.set_entersuccess(true);
-	packet.set_userid(0);
+	packet.set_enter_success(true);
+	packet.set_user_id(0);
 
 	return MakeSendBuffer(packet, Protocol::EProtocolId::EnterGame);
 }

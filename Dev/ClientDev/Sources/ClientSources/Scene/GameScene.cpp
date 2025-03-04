@@ -4,7 +4,7 @@
 
 #include "EngineSources/Actor/WorldTileMapActor.h"
 #include "ClientSources/World/WorldBackgroundActor.h"
-#include "ClientSources/Player/PlayerActor.h"
+#include "ClientSources/Player/LocalPlayerActor.h"
 #include "ClientSources/EnemyMonster/EnemyMonsterActor/SnakeActor.h"
 
 GameScene::GameScene()
@@ -38,8 +38,8 @@ void GameScene::Startup()
 	WeaponFactory::I()->Startup();
 
 	// 플레이어 액터 추가
-	m_spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
-	m_spPlayerActor->SetWorldTileMapActor(spWorldTileMapActor);
+	m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
+	m_spLocalPlayerActor->SetWorldTileMapActor(spWorldTileMapActor);
 
 	// 기본 뱀 액터 추가
 	m_spSnakeActor = CreateActor<SnakeActor>(EActorLayerType::Creature);
@@ -54,7 +54,7 @@ void GameScene::Startup()
 	m_spEnemyRespawner->RespawnEnemies(this);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
- 	RegisterMainCameraActorToScene(m_spPlayerActor);
+ 	RegisterMainCameraActorToScene(m_spLocalPlayerActor);
 }
 
 bool GameScene::Update(float deltaSeconds)

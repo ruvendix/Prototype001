@@ -4,16 +4,22 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-message S_TEST
-{
-	uint64 id = 1;
-	uint32 hp = 2;
-	uint32 attack = 3;
-	repeated BuffData buffs = 4;
-}
+// repeated BuffData buffs = 4;
 
 message S_EnterGame
 {
-	bool enterSuccess = 1;
-	uint64 userId = 2;
+	bool enter_success = 1;
+	uint64 user_id = 2;
+}
+
+message S_GameCreatureInfo
+{
+	uint64 creature_id = 1;
+	uint32 cell_pos_x = 2;
+	uint32 cell_pos_y = 3;
+	EActorLookAtDir look_at_dir = 4;
+	uint32 action_state_id = 5;
+	uint32 max_hp = 6;
+	uint32 hp = 7;
+	uint32 attack = 8;
 }

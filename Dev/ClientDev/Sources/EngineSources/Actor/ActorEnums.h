@@ -27,6 +27,7 @@ enum class EActorUpdateOrder
 	Post,
 };
 
+// 엔진이 서버에 관여하면 안되므로 이건 서버의 값을 변환해서 사용하는 걸로 고정
 enum class EActorLookAtDirection
 {
 	Left = 0,

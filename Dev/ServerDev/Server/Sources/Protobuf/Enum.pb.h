@@ -47,32 +47,33 @@ PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
-enum EPlayerType : int {
-  PlayerTypeNone = 0,
-  PlayerTypeKnight = 1,
-  PlayerTypeMage = 2,
-  PlayerTypeArcher = 3,
-  EPlayerType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  EPlayerType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+enum EActorLookAtDir : int {
+  Left = 0,
+  Up = 1,
+  Right = 2,
+  Down = 3,
+  Count = 4,
+  EActorLookAtDir_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EActorLookAtDir_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool EPlayerType_IsValid(int value);
-constexpr EPlayerType EPlayerType_MIN = PlayerTypeNone;
-constexpr EPlayerType EPlayerType_MAX = PlayerTypeArcher;
-constexpr int EPlayerType_ARRAYSIZE = EPlayerType_MAX + 1;
+bool EActorLookAtDir_IsValid(int value);
+constexpr EActorLookAtDir EActorLookAtDir_MIN = Left;
+constexpr EActorLookAtDir EActorLookAtDir_MAX = Count;
+constexpr int EActorLookAtDir_ARRAYSIZE = EActorLookAtDir_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EPlayerType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EActorLookAtDir_descriptor();
 template<typename T>
-inline const std::string& EPlayerType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, EPlayerType>::value ||
+inline const std::string& EActorLookAtDir_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EActorLookAtDir>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function EPlayerType_Name.");
+    "Incorrect type passed to function EActorLookAtDir_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    EPlayerType_descriptor(), enum_t_value);
+    EActorLookAtDir_descriptor(), enum_t_value);
 }
-inline bool EPlayerType_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EPlayerType* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EPlayerType>(
-    EPlayerType_descriptor(), name, value);
+inline bool EActorLookAtDir_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EActorLookAtDir* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EActorLookAtDir>(
+    EActorLookAtDir_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -96,10 +97,10 @@ inline bool EPlayerType_Parse(
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Protocol::EPlayerType> : ::std::true_type {};
+template <> struct is_proto_enum< ::Protocol::EActorLookAtDir> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EPlayerType>() {
-  return ::Protocol::EPlayerType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EActorLookAtDir>() {
+  return ::Protocol::EActorLookAtDir_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

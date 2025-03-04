@@ -29,14 +29,13 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010Protocol*a\n\013EPlayerType\022\022\n"
-  "\016PlayerTypeNone\020\000\022\024\n\020PlayerTypeKnight\020\001\022"
-  "\022\n\016PlayerTypeMage\020\002\022\024\n\020PlayerTypeArcher\020"
-  "\003b\006proto3"
+  "\n\nEnum.proto\022\010Protocol*C\n\017EActorLookAtDi"
+  "r\022\010\n\004Left\020\000\022\006\n\002Up\020\001\022\t\n\005Right\020\002\022\010\n\004Down\020\003"
+  "\022\t\n\005Count\020\004b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 129, descriptor_table_protodef_Enum_2eproto,
+    false, false, 99, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -50,16 +49,17 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_Enum_2ep
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_Enum_2eproto(&descriptor_table_Enum_2eproto);
 namespace Protocol {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EPlayerType_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EActorLookAtDir_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[0];
 }
-bool EPlayerType_IsValid(int value) {
+bool EActorLookAtDir_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
     case 2:
     case 3:
+    case 4:
       return true;
     default:
       return false;

@@ -1,10 +1,11 @@
 syntax = "proto3";
 package Protocol;
 
-enum EPlayerType
+enum EActorLookAtDir
 {
-	PlayerTypeNone = 0;
-	PlayerTypeKnight = 1;
-	PlayerTypeMage = 2;
-	PlayerTypeArcher = 3;
+	Left = 0;
+	Up = 1;
+	Right = 2;
+	Down = 3;
+	Count = 4;
 }

@@ -3,7 +3,7 @@
 
 #include "WorldTileMapScene.h"
 
-class PlayerActor;
+class LocalPlayerActor;
 class SnakeActor;
 
 class GameScene : public WorldTileMapScene
@@ -20,7 +20,7 @@ public:
 	virtual void Cleanup() override;
 
 private:
-	std::shared_ptr<PlayerActor> m_spPlayerActor = nullptr;
+	std::shared_ptr<LocalPlayerActor> m_spLocalPlayerActor = nullptr;
 
 	std::shared_ptr<SnakeActor> m_spSnakeActor = nullptr;
 	std::shared_ptr<EnemyRespawner> m_spEnemyRespawner = nullptr;

@@ -16,6 +16,7 @@ public:
 
 private:
 	void HandlePacket_EnterGame(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_GameCreatureInfo(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;
