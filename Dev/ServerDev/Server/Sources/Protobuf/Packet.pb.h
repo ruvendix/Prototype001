@@ -47,16 +47,20 @@ struct TableStruct_Packet_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Packet_2eproto;
 namespace Protocol {
+class S_AddGameEntities;
+struct S_AddGameEntitiesDefaultTypeInternal;
+extern S_AddGameEntitiesDefaultTypeInternal _S_AddGameEntities_default_instance_;
 class S_EnterGame;
 struct S_EnterGameDefaultTypeInternal;
 extern S_EnterGameDefaultTypeInternal _S_EnterGame_default_instance_;
-class S_GameCreatureInfo;
-struct S_GameCreatureInfoDefaultTypeInternal;
-extern S_GameCreatureInfoDefaultTypeInternal _S_GameCreatureInfo_default_instance_;
+class S_GameEntityInfo;
+struct S_GameEntityInfoDefaultTypeInternal;
+extern S_GameEntityInfoDefaultTypeInternal _S_GameEntityInfo_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
+template<> ::Protocol::S_AddGameEntities* Arena::CreateMaybeMessage<::Protocol::S_AddGameEntities>(Arena*);
 template<> ::Protocol::S_EnterGame* Arena::CreateMaybeMessage<::Protocol::S_EnterGame>(Arena*);
-template<> ::Protocol::S_GameCreatureInfo* Arena::CreateMaybeMessage<::Protocol::S_GameCreatureInfo>(Arena*);
+template<> ::Protocol::S_GameEntityInfo* Arena::CreateMaybeMessage<::Protocol::S_GameEntityInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
@@ -221,24 +225,24 @@ class S_EnterGame final :
 };
 // -------------------------------------------------------------------
 
-class S_GameCreatureInfo final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_GameCreatureInfo) */ {
+class S_GameEntityInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_GameEntityInfo) */ {
  public:
-  inline S_GameCreatureInfo() : S_GameCreatureInfo(nullptr) {}
-  ~S_GameCreatureInfo() override;
-  explicit PROTOBUF_CONSTEXPR S_GameCreatureInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline S_GameEntityInfo() : S_GameEntityInfo(nullptr) {}
+  ~S_GameEntityInfo() override;
+  explicit PROTOBUF_CONSTEXPR S_GameEntityInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  S_GameCreatureInfo(const S_GameCreatureInfo& from);
-  S_GameCreatureInfo(S_GameCreatureInfo&& from) noexcept
-    : S_GameCreatureInfo() {
+  S_GameEntityInfo(const S_GameEntityInfo& from);
+  S_GameEntityInfo(S_GameEntityInfo&& from) noexcept
+    : S_GameEntityInfo() {
     *this = ::std::move(from);
   }
 
-  inline S_GameCreatureInfo& operator=(const S_GameCreatureInfo& from) {
+  inline S_GameEntityInfo& operator=(const S_GameEntityInfo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline S_GameCreatureInfo& operator=(S_GameCreatureInfo&& from) noexcept {
+  inline S_GameEntityInfo& operator=(S_GameEntityInfo&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -261,20 +265,20 @@ class S_GameCreatureInfo final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const S_GameCreatureInfo& default_instance() {
+  static const S_GameEntityInfo& default_instance() {
     return *internal_default_instance();
   }
-  static inline const S_GameCreatureInfo* internal_default_instance() {
-    return reinterpret_cast<const S_GameCreatureInfo*>(
-               &_S_GameCreatureInfo_default_instance_);
+  static inline const S_GameEntityInfo* internal_default_instance() {
+    return reinterpret_cast<const S_GameEntityInfo*>(
+               &_S_GameEntityInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(S_GameCreatureInfo& a, S_GameCreatureInfo& b) {
+  friend void swap(S_GameEntityInfo& a, S_GameEntityInfo& b) {
     a.Swap(&b);
   }
-  inline void Swap(S_GameCreatureInfo* other) {
+  inline void Swap(S_GameEntityInfo* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -287,7 +291,7 @@ class S_GameCreatureInfo final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(S_GameCreatureInfo* other) {
+  void UnsafeArenaSwap(S_GameEntityInfo* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -295,14 +299,14 @@ class S_GameCreatureInfo final :
 
   // implements Message ----------------------------------------------
 
-  S_GameCreatureInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<S_GameCreatureInfo>(arena);
+  S_GameEntityInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_GameEntityInfo>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const S_GameCreatureInfo& from);
+  void CopyFrom(const S_GameEntityInfo& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const S_GameCreatureInfo& from) {
-    S_GameCreatureInfo::MergeImpl(*this, from);
+  void MergeFrom( const S_GameEntityInfo& from) {
+    S_GameEntityInfo::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -320,15 +324,15 @@ class S_GameCreatureInfo final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(S_GameCreatureInfo* other);
+  void InternalSwap(S_GameEntityInfo* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.S_GameCreatureInfo";
+    return "Protocol.S_GameEntityInfo";
   }
   protected:
-  explicit S_GameCreatureInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit S_GameEntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -342,7 +346,7 @@ class S_GameCreatureInfo final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kCreatureIdFieldNumber = 1,
+    kEntityIdFieldNumber = 1,
     kCellPosXFieldNumber = 2,
     kCellPosYFieldNumber = 3,
     kLookAtDirFieldNumber = 4,
@@ -351,13 +355,13 @@ class S_GameCreatureInfo final :
     kHpFieldNumber = 7,
     kAttackFieldNumber = 8,
   };
-  // uint64 creature_id = 1;
-  void clear_creature_id();
-  uint64_t creature_id() const;
-  void set_creature_id(uint64_t value);
+  // uint64 entity_id = 1;
+  void clear_entity_id();
+  uint64_t entity_id() const;
+  void set_entity_id(uint64_t value);
   private:
-  uint64_t _internal_creature_id() const;
-  void _internal_set_creature_id(uint64_t value);
+  uint64_t _internal_entity_id() const;
+  void _internal_set_entity_id(uint64_t value);
   public:
 
   // uint32 cell_pos_x = 2;
@@ -423,7 +427,7 @@ class S_GameCreatureInfo final :
   void _internal_set_attack(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Protocol.S_GameCreatureInfo)
+  // @@protoc_insertion_point(class_scope:Protocol.S_GameEntityInfo)
  private:
   class _Internal;
 
@@ -431,7 +435,7 @@ class S_GameCreatureInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    uint64_t creature_id_;
+    uint64_t entity_id_;
     uint32_t cell_pos_x_;
     uint32_t cell_pos_y_;
     int look_at_dir_;
@@ -439,6 +443,163 @@ class S_GameCreatureInfo final :
     uint32_t max_hp_;
     uint32_t hp_;
     uint32_t attack_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_AddGameEntities final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_AddGameEntities) */ {
+ public:
+  inline S_AddGameEntities() : S_AddGameEntities(nullptr) {}
+  ~S_AddGameEntities() override;
+  explicit PROTOBUF_CONSTEXPR S_AddGameEntities(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_AddGameEntities(const S_AddGameEntities& from);
+  S_AddGameEntities(S_AddGameEntities&& from) noexcept
+    : S_AddGameEntities() {
+    *this = ::std::move(from);
+  }
+
+  inline S_AddGameEntities& operator=(const S_AddGameEntities& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_AddGameEntities& operator=(S_AddGameEntities&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_AddGameEntities& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_AddGameEntities* internal_default_instance() {
+    return reinterpret_cast<const S_AddGameEntities*>(
+               &_S_AddGameEntities_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(S_AddGameEntities& a, S_AddGameEntities& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_AddGameEntities* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_AddGameEntities* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_AddGameEntities* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_AddGameEntities>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_AddGameEntities& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_AddGameEntities& from) {
+    S_AddGameEntities::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_AddGameEntities* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_AddGameEntities";
+  }
+  protected:
+  explicit S_AddGameEntities(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kGameEntitiesFieldNumber = 1,
+  };
+  // repeated .Protocol.S_GameEntityInfo gameEntities = 1;
+  int gameentities_size() const;
+  private:
+  int _internal_gameentities_size() const;
+  public:
+  void clear_gameentities();
+  ::Protocol::S_GameEntityInfo* mutable_gameentities(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_GameEntityInfo >*
+      mutable_gameentities();
+  private:
+  const ::Protocol::S_GameEntityInfo& _internal_gameentities(int index) const;
+  ::Protocol::S_GameEntityInfo* _internal_add_gameentities();
+  public:
+  const ::Protocol::S_GameEntityInfo& gameentities(int index) const;
+  ::Protocol::S_GameEntityInfo* add_gameentities();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_GameEntityInfo >&
+      gameentities() const;
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_AddGameEntities)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_GameEntityInfo > gameentities_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -497,171 +658,217 @@ inline void S_EnterGame::set_user_id(uint64_t value) {
 
 // -------------------------------------------------------------------
 
-// S_GameCreatureInfo
+// S_GameEntityInfo
 
-// uint64 creature_id = 1;
-inline void S_GameCreatureInfo::clear_creature_id() {
-  _impl_.creature_id_ = uint64_t{0u};
+// uint64 entity_id = 1;
+inline void S_GameEntityInfo::clear_entity_id() {
+  _impl_.entity_id_ = uint64_t{0u};
 }
-inline uint64_t S_GameCreatureInfo::_internal_creature_id() const {
-  return _impl_.creature_id_;
+inline uint64_t S_GameEntityInfo::_internal_entity_id() const {
+  return _impl_.entity_id_;
 }
-inline uint64_t S_GameCreatureInfo::creature_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.creature_id)
-  return _internal_creature_id();
+inline uint64_t S_GameEntityInfo::entity_id() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.entity_id)
+  return _internal_entity_id();
 }
-inline void S_GameCreatureInfo::_internal_set_creature_id(uint64_t value) {
+inline void S_GameEntityInfo::_internal_set_entity_id(uint64_t value) {
   
-  _impl_.creature_id_ = value;
+  _impl_.entity_id_ = value;
 }
-inline void S_GameCreatureInfo::set_creature_id(uint64_t value) {
-  _internal_set_creature_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.creature_id)
+inline void S_GameEntityInfo::set_entity_id(uint64_t value) {
+  _internal_set_entity_id(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.entity_id)
 }
 
 // uint32 cell_pos_x = 2;
-inline void S_GameCreatureInfo::clear_cell_pos_x() {
+inline void S_GameEntityInfo::clear_cell_pos_x() {
   _impl_.cell_pos_x_ = 0u;
 }
-inline uint32_t S_GameCreatureInfo::_internal_cell_pos_x() const {
+inline uint32_t S_GameEntityInfo::_internal_cell_pos_x() const {
   return _impl_.cell_pos_x_;
 }
-inline uint32_t S_GameCreatureInfo::cell_pos_x() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.cell_pos_x)
+inline uint32_t S_GameEntityInfo::cell_pos_x() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.cell_pos_x)
   return _internal_cell_pos_x();
 }
-inline void S_GameCreatureInfo::_internal_set_cell_pos_x(uint32_t value) {
+inline void S_GameEntityInfo::_internal_set_cell_pos_x(uint32_t value) {
   
   _impl_.cell_pos_x_ = value;
 }
-inline void S_GameCreatureInfo::set_cell_pos_x(uint32_t value) {
+inline void S_GameEntityInfo::set_cell_pos_x(uint32_t value) {
   _internal_set_cell_pos_x(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.cell_pos_x)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.cell_pos_x)
 }
 
 // uint32 cell_pos_y = 3;
-inline void S_GameCreatureInfo::clear_cell_pos_y() {
+inline void S_GameEntityInfo::clear_cell_pos_y() {
   _impl_.cell_pos_y_ = 0u;
 }
-inline uint32_t S_GameCreatureInfo::_internal_cell_pos_y() const {
+inline uint32_t S_GameEntityInfo::_internal_cell_pos_y() const {
   return _impl_.cell_pos_y_;
 }
-inline uint32_t S_GameCreatureInfo::cell_pos_y() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.cell_pos_y)
+inline uint32_t S_GameEntityInfo::cell_pos_y() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.cell_pos_y)
   return _internal_cell_pos_y();
 }
-inline void S_GameCreatureInfo::_internal_set_cell_pos_y(uint32_t value) {
+inline void S_GameEntityInfo::_internal_set_cell_pos_y(uint32_t value) {
   
   _impl_.cell_pos_y_ = value;
 }
-inline void S_GameCreatureInfo::set_cell_pos_y(uint32_t value) {
+inline void S_GameEntityInfo::set_cell_pos_y(uint32_t value) {
   _internal_set_cell_pos_y(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.cell_pos_y)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.cell_pos_y)
 }
 
 // .Protocol.EActorLookAtDir look_at_dir = 4;
-inline void S_GameCreatureInfo::clear_look_at_dir() {
+inline void S_GameEntityInfo::clear_look_at_dir() {
   _impl_.look_at_dir_ = 0;
 }
-inline ::Protocol::EActorLookAtDir S_GameCreatureInfo::_internal_look_at_dir() const {
+inline ::Protocol::EActorLookAtDir S_GameEntityInfo::_internal_look_at_dir() const {
   return static_cast< ::Protocol::EActorLookAtDir >(_impl_.look_at_dir_);
 }
-inline ::Protocol::EActorLookAtDir S_GameCreatureInfo::look_at_dir() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.look_at_dir)
+inline ::Protocol::EActorLookAtDir S_GameEntityInfo::look_at_dir() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.look_at_dir)
   return _internal_look_at_dir();
 }
-inline void S_GameCreatureInfo::_internal_set_look_at_dir(::Protocol::EActorLookAtDir value) {
+inline void S_GameEntityInfo::_internal_set_look_at_dir(::Protocol::EActorLookAtDir value) {
   
   _impl_.look_at_dir_ = value;
 }
-inline void S_GameCreatureInfo::set_look_at_dir(::Protocol::EActorLookAtDir value) {
+inline void S_GameEntityInfo::set_look_at_dir(::Protocol::EActorLookAtDir value) {
   _internal_set_look_at_dir(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.look_at_dir)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.look_at_dir)
 }
 
 // uint32 action_state_id = 5;
-inline void S_GameCreatureInfo::clear_action_state_id() {
+inline void S_GameEntityInfo::clear_action_state_id() {
   _impl_.action_state_id_ = 0u;
 }
-inline uint32_t S_GameCreatureInfo::_internal_action_state_id() const {
+inline uint32_t S_GameEntityInfo::_internal_action_state_id() const {
   return _impl_.action_state_id_;
 }
-inline uint32_t S_GameCreatureInfo::action_state_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.action_state_id)
+inline uint32_t S_GameEntityInfo::action_state_id() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.action_state_id)
   return _internal_action_state_id();
 }
-inline void S_GameCreatureInfo::_internal_set_action_state_id(uint32_t value) {
+inline void S_GameEntityInfo::_internal_set_action_state_id(uint32_t value) {
   
   _impl_.action_state_id_ = value;
 }
-inline void S_GameCreatureInfo::set_action_state_id(uint32_t value) {
+inline void S_GameEntityInfo::set_action_state_id(uint32_t value) {
   _internal_set_action_state_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.action_state_id)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.action_state_id)
 }
 
 // uint32 max_hp = 6;
-inline void S_GameCreatureInfo::clear_max_hp() {
+inline void S_GameEntityInfo::clear_max_hp() {
   _impl_.max_hp_ = 0u;
 }
-inline uint32_t S_GameCreatureInfo::_internal_max_hp() const {
+inline uint32_t S_GameEntityInfo::_internal_max_hp() const {
   return _impl_.max_hp_;
 }
-inline uint32_t S_GameCreatureInfo::max_hp() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.max_hp)
+inline uint32_t S_GameEntityInfo::max_hp() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.max_hp)
   return _internal_max_hp();
 }
-inline void S_GameCreatureInfo::_internal_set_max_hp(uint32_t value) {
+inline void S_GameEntityInfo::_internal_set_max_hp(uint32_t value) {
   
   _impl_.max_hp_ = value;
 }
-inline void S_GameCreatureInfo::set_max_hp(uint32_t value) {
+inline void S_GameEntityInfo::set_max_hp(uint32_t value) {
   _internal_set_max_hp(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.max_hp)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.max_hp)
 }
 
 // uint32 hp = 7;
-inline void S_GameCreatureInfo::clear_hp() {
+inline void S_GameEntityInfo::clear_hp() {
   _impl_.hp_ = 0u;
 }
-inline uint32_t S_GameCreatureInfo::_internal_hp() const {
+inline uint32_t S_GameEntityInfo::_internal_hp() const {
   return _impl_.hp_;
 }
-inline uint32_t S_GameCreatureInfo::hp() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.hp)
+inline uint32_t S_GameEntityInfo::hp() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.hp)
   return _internal_hp();
 }
-inline void S_GameCreatureInfo::_internal_set_hp(uint32_t value) {
+inline void S_GameEntityInfo::_internal_set_hp(uint32_t value) {
   
   _impl_.hp_ = value;
 }
-inline void S_GameCreatureInfo::set_hp(uint32_t value) {
+inline void S_GameEntityInfo::set_hp(uint32_t value) {
   _internal_set_hp(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.hp)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.hp)
 }
 
 // uint32 attack = 8;
-inline void S_GameCreatureInfo::clear_attack() {
+inline void S_GameEntityInfo::clear_attack() {
   _impl_.attack_ = 0u;
 }
-inline uint32_t S_GameCreatureInfo::_internal_attack() const {
+inline uint32_t S_GameEntityInfo::_internal_attack() const {
   return _impl_.attack_;
 }
-inline uint32_t S_GameCreatureInfo::attack() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_GameCreatureInfo.attack)
+inline uint32_t S_GameEntityInfo::attack() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_GameEntityInfo.attack)
   return _internal_attack();
 }
-inline void S_GameCreatureInfo::_internal_set_attack(uint32_t value) {
+inline void S_GameEntityInfo::_internal_set_attack(uint32_t value) {
   
   _impl_.attack_ = value;
 }
-inline void S_GameCreatureInfo::set_attack(uint32_t value) {
+inline void S_GameEntityInfo::set_attack(uint32_t value) {
   _internal_set_attack(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_GameCreatureInfo.attack)
+  // @@protoc_insertion_point(field_set:Protocol.S_GameEntityInfo.attack)
+}
+
+// -------------------------------------------------------------------
+
+// S_AddGameEntities
+
+// repeated .Protocol.S_GameEntityInfo gameEntities = 1;
+inline int S_AddGameEntities::_internal_gameentities_size() const {
+  return _impl_.gameentities_.size();
+}
+inline int S_AddGameEntities::gameentities_size() const {
+  return _internal_gameentities_size();
+}
+inline void S_AddGameEntities::clear_gameentities() {
+  _impl_.gameentities_.Clear();
+}
+inline ::Protocol::S_GameEntityInfo* S_AddGameEntities::mutable_gameentities(int index) {
+  // @@protoc_insertion_point(field_mutable:Protocol.S_AddGameEntities.gameEntities)
+  return _impl_.gameentities_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_GameEntityInfo >*
+S_AddGameEntities::mutable_gameentities() {
+  // @@protoc_insertion_point(field_mutable_list:Protocol.S_AddGameEntities.gameEntities)
+  return &_impl_.gameentities_;
+}
+inline const ::Protocol::S_GameEntityInfo& S_AddGameEntities::_internal_gameentities(int index) const {
+  return _impl_.gameentities_.Get(index);
+}
+inline const ::Protocol::S_GameEntityInfo& S_AddGameEntities::gameentities(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.S_AddGameEntities.gameEntities)
+  return _internal_gameentities(index);
+}
+inline ::Protocol::S_GameEntityInfo* S_AddGameEntities::_internal_add_gameentities() {
+  return _impl_.gameentities_.Add();
+}
+inline ::Protocol::S_GameEntityInfo* S_AddGameEntities::add_gameentities() {
+  ::Protocol::S_GameEntityInfo* _add = _internal_add_gameentities();
+  // @@protoc_insertion_point(field_add:Protocol.S_AddGameEntities.gameEntities)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::S_GameEntityInfo >&
+S_AddGameEntities::gameentities() const {
+  // @@protoc_insertion_point(field_list:Protocol.S_AddGameEntities.gameEntities)
+  return _impl_.gameentities_;
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

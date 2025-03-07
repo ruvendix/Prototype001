@@ -1,81 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Sources\Packet\ServerPacketHandler.cpp">
-      <Filter>Sources\Packet</Filter>
+    <ClCompile Include="ServerSources\ServerMain.cpp">
+      <Filter>ServerSources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ServerMain.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="ServerSources\Session\GameSession.cpp">
+      <Filter>ServerSources\Session</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Session\GameSession.cpp">
-      <Filter>Sources\Session</Filter>
+    <ClCompile Include="ServerSources\Session\GameSessionManager.cpp">
+      <Filter>ServerSources\Session</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Session\GameSessionManager.cpp">
-      <Filter>Sources\Session</Filter>
+    <ClCompile Include="ServerSources\Packet\ServerPacketHandler.cpp">
+      <Filter>ServerSources\Packet</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Pch\Pch.cpp">
-      <Filter>Sources\Pch</Filter>
+    <ClCompile Include="ServerSources\Pch\Pch.cpp">
+      <Filter>ServerSources\Pch</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Protobuf\Enum.pb.cc">
-      <Filter>Sources\Protobuf</Filter>
+    <ClCompile Include="ServerSources\Protobuf\Enum.pb.cc">
+      <Filter>ServerSources\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Protobuf\Struct.pb.cc">
-      <Filter>Sources\Protobuf</Filter>
+    <ClCompile Include="ServerSources\Protobuf\Packet.pb.cc">
+      <Filter>ServerSources\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Protobuf\ProtocolId.pb.cc">
-      <Filter>Sources\Protobuf</Filter>
+    <ClCompile Include="ServerSources\Protobuf\ProtocolId.pb.cc">
+      <Filter>ServerSources\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Protobuf\Packet.pb.cc">
-      <Filter>Sources\Protobuf</Filter>
+    <ClCompile Include="ServerSources\Protobuf\Struct.pb.cc">
+      <Filter>ServerSources\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\GameEntity.cpp">
+      <Filter>ServerSources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\GameRoom.cpp">
+      <Filter>ServerSources\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Session\GameSession.h">
-      <Filter>Sources\Session</Filter>
+    <ClInclude Include="ServerSources\Session\GameSession.h">
+      <Filter>ServerSources\Session</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Packet\ServerPacketHandler.h">
-      <Filter>Sources\Packet</Filter>
+    <ClInclude Include="ServerSources\Session\GameSessionManager.h">
+      <Filter>ServerSources\Session</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Session\GameSessionManager.h">
-      <Filter>Sources\Session</Filter>
+    <ClInclude Include="ServerSources\Packet\ServerPacketHandler.h">
+      <Filter>ServerSources\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Global\Types.h">
-      <Filter>Sources\Global</Filter>
+    <ClInclude Include="ServerSources\Global\DataTypes.h">
+      <Filter>ServerSources\Global</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Pch\Pch.h">
-      <Filter>Sources\Pch</Filter>
+    <ClInclude Include="ServerSources\Pch\Pch.h">
+      <Filter>ServerSources\Pch</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Protobuf\Enum.pb.h">
-      <Filter>Sources\Protobuf</Filter>
+    <ClInclude Include="ServerSources\Protobuf\Enum.pb.h">
+      <Filter>ServerSources\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Protobuf\Struct.pb.h">
-      <Filter>Sources\Protobuf</Filter>
+    <ClInclude Include="ServerSources\Protobuf\Packet.pb.h">
+      <Filter>ServerSources\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Protobuf\ProtocolId.pb.h">
-      <Filter>Sources\Protobuf</Filter>
+    <ClInclude Include="ServerSources\Protobuf\ProtocolId.pb.h">
+      <Filter>ServerSources\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Protobuf\Packet.pb.h">
-      <Filter>Sources\Protobuf</Filter>
+    <ClInclude Include="ServerSources\Protobuf\Struct.pb.h">
+      <Filter>ServerSources\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\GameEntity.h">
+      <Filter>ServerSources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\GameRoom.h">
+      <Filter>ServerSources\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Sources">
+    <Filter Include="ServerSources">
       <UniqueIdentifier>{079f3685-a627-49f1-b801-7aed7c9092fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Session">
+    <Filter Include="ServerSources\Session">
       <UniqueIdentifier>{e9196629-2793-4976-8ccd-39679587a78b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Packet">
+    <Filter Include="ServerSources\Packet">
       <UniqueIdentifier>{0232d3cf-45df-4041-933d-fd94071790db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Global">
+    <Filter Include="ServerSources\Global">
       <UniqueIdentifier>{2b366a63-1e57-4207-bee5-e0becd7b62c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Pch">
+    <Filter Include="ServerSources\Pch">
       <UniqueIdentifier>{e51c8012-88aa-49a7-b139-1263cb6926cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Protobuf">
+    <Filter Include="ServerSources\Protobuf">
       <UniqueIdentifier>{23739f0e-3d49-40f2-9c8b-c6be6124fb72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerSources\Game">
+      <UniqueIdentifier>{7a4c159d-fb42-4abe-93b6-b74f868fe562}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

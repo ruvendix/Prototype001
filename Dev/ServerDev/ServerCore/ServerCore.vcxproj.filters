@@ -1,134 +1,134 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Sources\Thread\Tls.h">
-      <Filter>Sources\Thread</Filter>
+    <ClInclude Include="ServerCoreSources\UniversalInclusion.h">
+      <Filter>ServerCoreSources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Thread\ThreadPool.h">
-      <Filter>Sources\Thread</Filter>
+    <ClInclude Include="ServerCoreSources\Thread\ThreadPool.h">
+      <Filter>ServerCoreSources\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\NetworkAddress.h">
-      <Filter>Sources\Network</Filter>
+    <ClInclude Include="ServerCoreSources\Thread\Tls.h">
+      <Filter>ServerCoreSources\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Session\Session.h">
-      <Filter>Sources\Network\Session</Filter>
+    <ClInclude Include="ServerCoreSources\Network\IocpCore.h">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Service.h">
-      <Filter>Sources\Network</Filter>
+    <ClInclude Include="ServerCoreSources\Network\IocpEvent.h">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Buffer\SendBuffer.h">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClInclude Include="ServerCoreSources\Network\IocpObject.h">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Buffer\BufferWriter.h">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Listener.h">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Buffer\BufferReader.h">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClInclude Include="ServerCoreSources\Network\NetworkAddress.h">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\IocpObject.h">
-      <Filter>Sources\Network</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Service.h">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\IocpCore.h">
-      <Filter>Sources\Network</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Session\PacketSession.h">
+      <Filter>ServerCoreSources\Network\Session</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Pch\Pch.h">
-      <Filter>Sources\Pch</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Session\Session.h">
+      <Filter>ServerCoreSources\Network\Session</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Listener.h">
-      <Filter>Sources\Network</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Buffer\BufferReader.h">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\IocpEvent.h">
-      <Filter>Sources\Network</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Buffer\BufferWriter.h">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Session\PacketSession.h">
-      <Filter>Sources\Network\Session</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Buffer\ReceiveBuffer.h">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Network\Buffer\ReceiveBuffer.h">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClInclude Include="ServerCoreSources\Network\Buffer\SendBuffer.h">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Socket\SocketUtility.h">
-      <Filter>Sources\Socket</Filter>
+    <ClInclude Include="ServerCoreSources\Socket\SocketUtility.h">
+      <Filter>ServerCoreSources\Socket</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ServerCoreGlobal\Inclusion.h">
-      <Filter>Sources\ServerCoreGlobal</Filter>
+    <ClInclude Include="ServerCoreSources\Pch\Pch.h">
+      <Filter>ServerCoreSources\Pch</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ServerCoreGlobal\Types.h">
-      <Filter>Sources\ServerCoreGlobal</Filter>
+    <ClInclude Include="ServerCoreSources\Global\DataTypes.h">
+      <Filter>ServerCoreSources\Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Thread\ThreadPool.cpp">
-      <Filter>Sources\Thread</Filter>
+    <ClCompile Include="ServerCoreSources\Thread\ThreadPool.cpp">
+      <Filter>ServerCoreSources\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Session\PacketSession.cpp">
-      <Filter>Sources\Network\Session</Filter>
+    <ClCompile Include="ServerCoreSources\Thread\Tls.cpp">
+      <Filter>ServerCoreSources\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Buffer\ReceiveBuffer.cpp">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClCompile Include="ServerCoreSources\Network\IocpCore.cpp">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Buffer\BufferReader.cpp">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClCompile Include="ServerCoreSources\Network\IocpEvent.cpp">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Buffer\BufferWriter.cpp">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClCompile Include="ServerCoreSources\Network\IocpObject.cpp">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\IocpObject.cpp">
-      <Filter>Sources\Network</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Listener.cpp">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Socket\SocketUtility.cpp">
-      <Filter>Sources\Socket</Filter>
+    <ClCompile Include="ServerCoreSources\Network\NetworkAddress.cpp">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Pch\Pch.cpp">
-      <Filter>Sources\Pch</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Service.cpp">
+      <Filter>ServerCoreSources\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\IocpCore.cpp">
-      <Filter>Sources\Network</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Session\PacketSession.cpp">
+      <Filter>ServerCoreSources\Network\Session</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Listener.cpp">
-      <Filter>Sources\Network</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Session\Session.cpp">
+      <Filter>ServerCoreSources\Network\Session</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\IocpEvent.cpp">
-      <Filter>Sources\Network</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Buffer\BufferReader.cpp">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Buffer\SendBuffer.cpp">
-      <Filter>Sources\Network\Buffer</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Buffer\BufferWriter.cpp">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\NetworkAddress.cpp">
-      <Filter>Sources\Network</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Buffer\ReceiveBuffer.cpp">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Session\Session.cpp">
-      <Filter>Sources\Network\Session</Filter>
+    <ClCompile Include="ServerCoreSources\Network\Buffer\SendBuffer.cpp">
+      <Filter>ServerCoreSources\Network\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Thread\Tls.cpp">
-      <Filter>Sources\Thread</Filter>
+    <ClCompile Include="ServerCoreSources\Socket\SocketUtility.cpp">
+      <Filter>ServerCoreSources\Socket</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Network\Service.cpp">
-      <Filter>Sources\Network</Filter>
+    <ClCompile Include="ServerCoreSources\Pch\Pch.cpp">
+      <Filter>ServerCoreSources\Pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Sources">
+    <Filter Include="ServerCoreSources">
       <UniqueIdentifier>{4dc53b82-4aff-4cd6-bb7c-c7fe1eddc481}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Thread">
+    <Filter Include="ServerCoreSources\Thread">
       <UniqueIdentifier>{f420eb77-c167-4ea5-a667-4403b9baeb5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Network">
+    <Filter Include="ServerCoreSources\Network">
       <UniqueIdentifier>{b3af5f11-bb9c-4c11-996c-ecada22ed813}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Network\Session">
+    <Filter Include="ServerCoreSources\Network\Session">
       <UniqueIdentifier>{e136d0f8-100c-4a1c-a4bf-33e3a06097bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Network\Buffer">
+    <Filter Include="ServerCoreSources\Network\Buffer">
       <UniqueIdentifier>{41e1cc1f-6789-484a-9036-b3ae92e70809}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Socket">
+    <Filter Include="ServerCoreSources\Socket">
       <UniqueIdentifier>{79348e67-d6c8-48cf-baad-46eb37d8bf4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Pch">
+    <Filter Include="ServerCoreSources\Pch">
       <UniqueIdentifier>{ea91665b-fd27-4eb7-ad32-af244dcd4def}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\ServerCoreGlobal">
+    <Filter Include="ServerCoreSources\Global">
       <UniqueIdentifier>{b2e2662e-4d48-466a-8076-3cfb770e19d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

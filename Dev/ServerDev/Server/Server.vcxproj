@@ -47,45 +47,93 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Sources;Sources\Pch;$(SolutionDir);$(SolutionDir)..\Common;$(SolutionDir)ServerCore\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ServerSources;ServerSources\Pch;$(SolutionDir);$(SolutionDir)..\;$(SolutionDir)..\EngineDev;$(SolutionDir)ServerCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Bin;$(SolutionDir)..\EngineDev\Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Sources;Sources\Pch;$(SolutionDir);$(SolutionDir)..\Common;$(SolutionDir)ServerCore\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ServerSources;ServerSources\Pch;$(SolutionDir);$(SolutionDir)..\;$(SolutionDir)..\EngineDev;$(SolutionDir)ServerCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Bin;$(SolutionDir)..\EngineDev\Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Packet\ServerPacketHandler.cpp" />
-    <ClCompile Include="Sources\Protobuf\Enum.pb.cc" />
-    <ClCompile Include="Sources\Protobuf\Packet.pb.cc" />
-    <ClCompile Include="Sources\Protobuf\ProtocolId.pb.cc" />
-    <ClCompile Include="Sources\Protobuf\Struct.pb.cc" />
-    <ClCompile Include="Sources\ServerMain.cpp" />
-    <ClCompile Include="Sources\Pch\Pch.cpp" />
-    <ClCompile Include="Sources\Session\GameSession.cpp" />
-    <ClCompile Include="Sources\Session\GameSessionManager.cpp" />
+    <ClCompile Include="ServerSources\Game\GameEntity.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\GameRoom.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Packet\ServerPacketHandler.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Pch\Pch.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Protobuf\Enum.pb.cc">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Protobuf\Packet.pb.cc">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Protobuf\ProtocolId.pb.cc">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Protobuf\Struct.pb.cc">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\ServerMain.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Session\GameSession.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Session\GameSessionManager.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Global\Types.h" />
-    <ClInclude Include="Sources\Packet\ServerPacketHandler.h" />
-    <ClInclude Include="Sources\Pch\Pch.h" />
-    <ClInclude Include="Sources\Protobuf\Enum.pb.h" />
-    <ClInclude Include="Sources\Protobuf\Packet.pb.h" />
-    <ClInclude Include="Sources\Protobuf\ProtocolId.pb.h" />
-    <ClInclude Include="Sources\Protobuf\Struct.pb.h" />
-    <ClInclude Include="Sources\Session\GameSession.h" />
-    <ClInclude Include="Sources\Session\GameSessionManager.h" />
+    <ClInclude Include="ServerSources\Game\GameEntity.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\GameRoom.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Global\DataTypes.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Packet\ServerPacketHandler.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Pch\Pch.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Protobuf\Enum.pb.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Protobuf\Packet.pb.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Protobuf\ProtocolId.pb.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Protobuf\Struct.pb.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Session\GameSession.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Session\GameSessionManager.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,5 +4,5 @@ package Protocol;
 enum EProtocolId
 {
 	EnterGame = 0;
-	GameCreatureInfo = 1;
+	GameEntityInfo = 1;
 }

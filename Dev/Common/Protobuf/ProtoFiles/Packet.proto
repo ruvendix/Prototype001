@@ -4,17 +4,15 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-// repeated BuffData buffs = 4;
-
 message S_EnterGame
 {
 	bool enter_success = 1;
 	uint64 user_id = 2;
 }
 
-message S_GameCreatureInfo
+message S_GameEntityInfo
 {
-	uint64 creature_id = 1;
+	uint64 entity_id = 1;
 	uint32 cell_pos_x = 2;
 	uint32 cell_pos_y = 3;
 	EActorLookAtDir look_at_dir = 4;
@@ -22,4 +20,9 @@ message S_GameCreatureInfo
 	uint32 max_hp = 6;
 	uint32 hp = 7;
 	uint32 attack = 8;
+}
+
+message S_AddGameEntities
+{
+	repeated S_GameEntityInfo gameEntities = 1;
 }
