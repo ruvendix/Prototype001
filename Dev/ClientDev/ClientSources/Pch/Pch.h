@@ -52,15 +52,16 @@
 #pragma endregion
 
 #pragma region 클라이언트에서 자주 사용하는 헤더 파일 모음입니다.
+#include "Global/DataTypes.h"
 #include "Editor/EditorActor.h"
 
 #include "Weapon/WeaponEnums.h"
 #include "Weapon/WeaponActor.h"
-
 #include "Weapon/Projectile/ProjectileStructs.h"
 #include "Weapon/Projectile/ProjectileActor.h"
-
 #include "Weapon/WeaponFactory.h"
+
+#include "Player/PlayerActor.h"
 
 #include "EnemyMonster/EnemyMonsterActor/EnemyMonsterActor.h"
 #include "EnemyRespawner/EnemyRespawner.h"

@@ -2,3 +2,16 @@ syntax = "proto3";
 package Protocol;
 
 import "Enum.proto";
+
+message GameEntityInfo
+{
+	uint64 entity_id = 1;
+	uint32 cell_pos_x = 2;
+	uint32 cell_pos_y = 3;
+	EGameEntityType entity_type = 4;
+	EActorLookAtDir look_at_dir = 5;
+	uint32 action_state_id = 6;
+	uint32 max_hp = 7;
+	uint32 hp = 8;
+	uint32 attack = 9;
+}

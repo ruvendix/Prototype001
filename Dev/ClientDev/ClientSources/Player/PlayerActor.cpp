@@ -120,3 +120,13 @@ void PlayerActor::LoadAndStartupPlayerSprite()
 	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = FindActorStateLookAtDynamicSprite<PawnActorIdleState>(EActorLookAtDirection::Down);
 	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
 }
+
+void PlayerActor::ApplyGamePlayerInfoFromServer(const Protocol::GameEntityInfo& gamePlayerInfo)
+{
+	Position2d gamePlayerCellPos = Position2d(gamePlayerInfo.cell_pos_x(), gamePlayerInfo.cell_pos_y());
+	ApplyCellPosition(gamePlayerCellPos);
+
+	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG(pMoveComponent != nullptr);
+	pMoveComponent->SetDestinationCellPosition(gamePlayerCellPos);
+}

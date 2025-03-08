@@ -48,22 +48,18 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\Protobuf\Enum.pb.cc">
-      <DeploymentContent>false</DeploymentContent>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\Protobuf\Packet.pb.cc">
-      <DeploymentContent>false</DeploymentContent>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\Protobuf\ProtocolId.pb.cc">
-      <DeploymentContent>false</DeploymentContent>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\Protobuf\Struct.pb.cc">
-      <DeploymentContent>false</DeploymentContent>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -140,7 +136,7 @@
     <ClInclude Include="ClientSources\GameApplication\WindowProcedure.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ClientSources\Network\NetworkMacros.h">
+    <ClInclude Include="ClientSources\Global\DataTypes.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Network\NetworkManager.h">
@@ -149,18 +145,10 @@
     <ClInclude Include="ClientSources\Network\Packet\ClientPacketHandler.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ClientSources\Network\Protobuf\Enum.pb.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="ClientSources\Network\Protobuf\Packet.pb.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="ClientSources\Network\Protobuf\ProtocolId.pb.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="ClientSources\Network\Protobuf\Struct.pb.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
+    <ClInclude Include="ClientSources\Network\Protobuf\Enum.pb.h" />
+    <ClInclude Include="ClientSources\Network\Protobuf\Packet.pb.h" />
+    <ClInclude Include="ClientSources\Network\Protobuf\ProtocolId.pb.h" />
+    <ClInclude Include="ClientSources\Network\Protobuf\Struct.pb.h" />
     <ClInclude Include="ClientSources\Network\Session\ServerSession.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

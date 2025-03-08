@@ -10,19 +10,12 @@ message S_EnterGame
 	uint64 user_id = 2;
 }
 
-message S_GameEntityInfo
+message S_CreateLocalGamePlayer
 {
-	uint64 entity_id = 1;
-	uint32 cell_pos_x = 2;
-	uint32 cell_pos_y = 3;
-	EActorLookAtDir look_at_dir = 4;
-	uint32 action_state_id = 5;
-	uint32 max_hp = 6;
-	uint32 hp = 7;
-	uint32 attack = 8;
+	GameEntityInfo local_game_player_info = 1;
 }
 
-message S_AddGameEntities
+message S_SyncGameEntities
 {
-	repeated S_GameEntityInfo gameEntities = 1;
+	repeated GameEntityInfo game_entities = 1;
 }

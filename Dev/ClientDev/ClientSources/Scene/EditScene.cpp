@@ -36,4 +36,5 @@ bool EditScene::Update(float deltaSeconds)
 void EditScene::Cleanup()
 {
 	Super::Cleanup();
+	SceneRenderer::I()->SetMainCameraActor(nullptr);
 }

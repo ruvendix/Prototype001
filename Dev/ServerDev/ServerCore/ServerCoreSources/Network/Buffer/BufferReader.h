@@ -11,15 +11,7 @@ public:
 	bool Read(T* pDest) { return Read(pDest, sizeof(T)); }
 	bool Read(void* pDest, uint32 numOfBytes);
 
-	template <typename T> // 데이터를 복사해야 하므로 rValue만 가능
-	RxBufferReader& operator>>(OUT T& dest)
-	{
-		dest = *(reinterpret_cast<T*>(&m_targetBuffer[m_currentReadPos]));
-		m_currentReadPos += sizeof(T);
-		return *this;
-	}
-
-	uint32 GetRemainSize() { return m_targetSize - m_currentReadPos; }
+	uint32 GetRemainSize() { return (m_targetSize - m_currentReadPos); }
 
 private:
 	BYTE* m_targetBuffer = nullptr; // 읽을 버퍼

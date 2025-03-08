@@ -6,7 +6,7 @@
 struct RxPacketHeader
 {
 	uint16 protocolId = 0; // 이거 보통 enum으로 함
-	uint16 packetSize = 0;
+	uint16 packetFullSize = 0;
 };
 
 class RxPacketSession : public RxSession

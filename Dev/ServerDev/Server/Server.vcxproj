@@ -69,6 +69,9 @@
     <ClCompile Include="ServerSources\Game\GameEntity.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="ServerSources\Game\GamePlayer.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="ServerSources\Game\GameRoom.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -102,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerSources\Game\GameEntity.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\GamePlayer.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ServerSources\Game\GameRoom.h">

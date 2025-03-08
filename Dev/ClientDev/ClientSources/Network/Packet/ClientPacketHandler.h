@@ -16,7 +16,8 @@ public:
 
 private:
 	void HandlePacket_EnterGame(BYTE* buffer, int32 numOfBytes);
-	void HandlePacket_GameEntityInfo(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_CreateLocalGamePlayer(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_SyncGameEntities(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

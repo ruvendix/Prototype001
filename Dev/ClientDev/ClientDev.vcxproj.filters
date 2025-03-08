@@ -58,6 +58,9 @@
     <Filter Include="ClientSources\Pch">
       <UniqueIdentifier>{6e2c879c-f2b4-47b2-9b9c-574293a12c6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ClientSources\Global">
+      <UniqueIdentifier>{405a955a-9b15-4842-ab55-cbb7fc9112d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientSources\ClientMain.cpp">
@@ -129,6 +132,15 @@
     <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
       <Filter>ClientSources\Network</Filter>
     </ClCompile>
+    <ClCompile Include="ClientSources\Network\Session\ServerSession.cpp">
+      <Filter>ClientSources\Network\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\Network\Packet\ClientPacketHandler.cpp">
+      <Filter>ClientSources\Network\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\Pch\Pch.cpp">
+      <Filter>ClientSources\Pch</Filter>
+    </ClCompile>
     <ClCompile Include="ClientSources\Network\Protobuf\Enum.pb.cc">
       <Filter>ClientSources\Network\Protobuf</Filter>
     </ClCompile>
@@ -140,15 +152,6 @@
     </ClCompile>
     <ClCompile Include="ClientSources\Network\Protobuf\Struct.pb.cc">
       <Filter>ClientSources\Network\Protobuf</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientSources\Network\Session\ServerSession.cpp">
-      <Filter>ClientSources\Network\Session</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientSources\Network\Packet\ClientPacketHandler.cpp">
-      <Filter>ClientSources\Network\Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientSources\Pch\Pch.cpp">
-      <Filter>ClientSources\Pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,11 +224,17 @@
     <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
       <Filter>ClientSources\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSources\Network\NetworkMacros.h">
-      <Filter>ClientSources\Network</Filter>
-    </ClInclude>
     <ClInclude Include="ClientSources\Network\NetworkManager.h">
       <Filter>ClientSources\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\Network\Session\ServerSession.h">
+      <Filter>ClientSources\Network\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\Network\Packet\ClientPacketHandler.h">
+      <Filter>ClientSources\Network\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\Pch\Pch.h">
+      <Filter>ClientSources\Pch</Filter>
     </ClInclude>
     <ClInclude Include="ClientSources\Network\Protobuf\Enum.pb.h">
       <Filter>ClientSources\Network\Protobuf</Filter>
@@ -239,14 +248,8 @@
     <ClInclude Include="ClientSources\Network\Protobuf\Struct.pb.h">
       <Filter>ClientSources\Network\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSources\Network\Session\ServerSession.h">
-      <Filter>ClientSources\Network\Session</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientSources\Network\Packet\ClientPacketHandler.h">
-      <Filter>ClientSources\Network\Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientSources\Pch\Pch.h">
-      <Filter>ClientSources\Pch</Filter>
+    <ClInclude Include="ClientSources\Global\DataTypes.h">
+      <Filter>ClientSources\Global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

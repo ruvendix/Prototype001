@@ -47,7 +47,7 @@ REM 복사에서 제외할 확장자 설정
 set "EXCLUDE_EXT=.proto"
 
 REM proto 파일을 복사할 경로 설정
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ServerDev\Server\Sources\Protobuf\
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ServerDev\Server\ServerSources\Protobuf\
 for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
 echo 프로토 파일이 복사될 서버 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
 
@@ -58,18 +58,18 @@ for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
 )
 echo.
 
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ServerDev\DummyClient\Sources\Protobuf\
-for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
-echo 프로토 파일이 복사될 더미 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
+REM set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ServerDev\DummyClient\Sources\Protobuf\
+REM for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
+REM echo 프로토 파일이 복사될 더미 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
+REM 
+REM for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
+REM     if /i not "%%~xf"=="%EXCLUDE_EXT%" (
+REM 		xcopy /Y %%f "%ABSOLUTE_PROTO_FILE_COPY_PATH%"
+REM     )
+REM )
+REM echo.
 
-for %%f in ("%ABSOULTE_PROTO_DIRECTORY_PATH%\*") do (
-    if /i not "%%~xf"=="%EXCLUDE_EXT%" (
-		xcopy /Y %%f "%ABSOLUTE_PROTO_FILE_COPY_PATH%"
-    )
-)
-echo.
-
-set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ClientDev\Sources\ClientSources\Network\Protobuf\
+set ABSOLUTE_PROTO_FILE_COPY_PATH=%PROTO_COMPILER_PATH%..\..\ClientDev\ClientSources\Network\Protobuf\
 for %%I in ("%ABSOLUTE_PROTO_FILE_COPY_PATH%") do set "ABSOLUTE_PROTO_FILE_COPY_PATH=%%~fI"
 echo 프로토 파일이 복사될 클라이언트 디렉토리: %ABSOLUTE_PROTO_FILE_COPY_PATH%
 

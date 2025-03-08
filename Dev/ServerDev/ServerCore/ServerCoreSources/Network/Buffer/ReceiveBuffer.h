@@ -24,8 +24,8 @@ public:
 		return &(m_blockBuffers[m_wirtePos]);
 	}
 
-	uint32 GetDataSize() const { assert(m_readPos < m_wirtePos); return (m_wirtePos - m_readPos); }
-	uint32 GetRemainSize() const { assert(m_wirtePos < m_capacity); return (m_capacity - m_wirtePos); }
+	uint32 GetDataSize() const { assert(m_readPos <= m_wirtePos); return (m_wirtePos - m_readPos); }
+	uint32 GetRemainSize() const { assert(m_wirtePos <= m_capacity); return (m_capacity - m_wirtePos); }
 
 private:
 	uint32 m_capacity = 0;

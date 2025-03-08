@@ -18,6 +18,8 @@ public:
 
 public:
 	void LoadAndStartupPlayerSprite();
+	void ApplyGamePlayerInfoFromServer(const Protocol::GameEntityInfo& gamePlayerInfo);
+
 	const std::shared_ptr<WeaponActor>& GetWeaponActor(EWeaponSlotType weaponSlot) const { return m_arrWeaponActor[TO_NUM(weaponSlot)]; }
 
 private:

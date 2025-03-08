@@ -3,3 +3,4 @@
 
 using RxGameSessionPtr = std::shared_ptr<class RxGameSession>;
 using GameEntityPtr = std::shared_ptr<class GameEntity>;
+using GamePlayerPtr = std::shared_ptr<class GamePlayer>;

@@ -128,7 +128,7 @@ public:
 	void ReserveChangeNextState()
 	{
 		PawnActorStatePtr spNextPawnActorState = std::make_shared<TPawnActorState>(this);
-		m_PawnActorStateChangeEvent.RegisterEventHandler(this, &PawnActor::OnChangePawnActorState, spNextPawnActorState);
+		m_pawnActorStateChangeEvent.RegisterEventHandler(this, &PawnActor::OnChangePawnActorState, spNextPawnActorState);
 	}
 
 	// Update보다 빠르니까 즉시 전환해도 됨
@@ -185,5 +185,5 @@ private:
 	std::unordered_map<int32, ActorLookAtDynamicSpriteTable> m_mapActorStateDynamicSprite;
 
 	PawnActorStatePtr m_spPawnActorState = nullptr;
-	Event<const PawnActorStatePtr& /* spNextPawnActorState */> m_PawnActorStateChangeEvent;
+	Event<const PawnActorStatePtr& /* spNextPawnActorState */> m_pawnActorStateChangeEvent;
 };

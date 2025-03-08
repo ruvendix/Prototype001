@@ -15,4 +15,4 @@
 #define START_PACKET_CONTENTS(rawBuffer, PacketType, identifier) \
 	RxPacketHeader* pPacketHeader = reinterpret_cast<RxPacketHeader*>(rawBuffer); \
 	PacketType identifier; \
-	identifier.ParseFromArray(&pPacketHeader[1], (pPacketHeader->packetSize) - sizeof(RxPacketHeader));
+	identifier.ParseFromArray(&pPacketHeader[1], (pPacketHeader->packetFullSize) - sizeof(RxPacketHeader));

@@ -9,3 +9,9 @@ enum EActorLookAtDir
 	Down = 3;
 	Count = 4;
 }
+
+enum EGameEntityType
+{
+	Player = 0;
+	Monster = 1;
+}

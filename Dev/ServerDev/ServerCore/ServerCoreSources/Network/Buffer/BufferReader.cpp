@@ -21,7 +21,7 @@ bool RxBufferReader::Read(void* pDest, uint32 numOfBytes)
 		return false;
 	}
 
-	::CopyMemory(pDest, m_targetBuffer, sizeof(BYTE) * numOfBytes);
+	::CopyMemory(pDest, &m_targetBuffer[m_currentReadPos], sizeof(BYTE) * numOfBytes);
 	m_currentReadPos += numOfBytes;
 	
 	return true;

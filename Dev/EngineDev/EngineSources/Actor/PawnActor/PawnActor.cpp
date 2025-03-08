@@ -65,7 +65,7 @@ bool PawnActor::Update(float deltaSeconds)
 		return false;
 	}
 
-	m_PawnActorStateChangeEvent.ExcuteIfBound();
+	m_pawnActorStateChangeEvent.ExcuteIfBound();
 	m_spPawnActorState->Update(deltaSeconds);
 
 	return true;

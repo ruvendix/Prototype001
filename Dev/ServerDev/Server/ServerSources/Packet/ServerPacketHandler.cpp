@@ -30,12 +30,16 @@ RxSendBufferPtr RxServerPacketHandler::MakeEnterGamePacket()
 	return MakeSendBuffer(enterGamePacket, Protocol::EProtocolId::EnterGame);
 }
 
-RxSendBufferPtr RxServerPacketHandler::MakeGameEntityInfoPacket(uint32 gameEntityId)
+RxSendBufferPtr RxServerPacketHandler::MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& localGamePlayerInfo)
 {
-	Protocol::S_GameEntityInfo gameEntityInfoPacket;
-	gameEntityInfoPacket.set_entity_id(gameEntityId);
-	gameEntityInfoPacket.set_cell_pos_x(6);
-	gameEntityInfoPacket.set_cell_pos_y(6);
+	Protocol::S_CreateLocalGamePlayer localGamePlayerPacket;
+	Protocol::GameEntityInfo* pLocalGamePlayerInfo = localGamePlayerPacket.mutable_local_game_player_info();
+	*pLocalGamePlayerInfo = localGamePlayerInfo;
 
-	return MakeSendBuffer(gameEntityInfoPacket, Protocol::EProtocolId::GameEntityInfo);
+	return MakeSendBuffer(localGamePlayerPacket, Protocol::EProtocolId::CreateLocalGamePlayer);
+}
+
+RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntitiesPacket(const Protocol::S_SyncGameEntities& syncGameEntities)
+{
+	return MakeSendBuffer(syncGameEntities, Protocol::EProtocolId::SyncGameEntities);
 }

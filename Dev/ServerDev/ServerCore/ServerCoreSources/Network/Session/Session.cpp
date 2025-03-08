@@ -230,10 +230,10 @@ void RxSession::RegisterSend()
 		//uint32 writeSize = 0;
 		while (m_queueSendBuffer.empty() == false)
 		{
-			const RxSendBufferPtr& spSendBuffer = m_queueSendBuffer.front();
+			RxSendBufferPtr spSendBuffer = m_queueSendBuffer.front();
 			//writeSize += spSendBuffer->GetWriteSize(); // 누적
 
-			m_queueSendBuffer.pop();
+			m_queueSendBuffer.pop(); // 여기서 레퍼런스 카운트 날라감
 			vecSendBuffer.push_back(spSendBuffer);
 		}
 	}
@@ -311,7 +311,8 @@ void RxSession::ProcessReceive(uint32 numOfBytes)
 	uint32 processedDataSize = ProcessReceiveImpl(m_receiveBuffer.GetReadPosition(), dataSize);
 
 	if ((processedDataSize < 0) || // 처리된 데이터 크기가 0보다 작으면 문제있음
-		(processedDataSize < dataSize)) // 요청한만큼 처리를 못했으니 문제있음
+		(processedDataSize < dataSize) || // 요청한만큼 처리를 못했으니 문제있음
+		(m_receiveBuffer.ProcessRead(numOfBytes) == false)) // 수신 버퍼에서 데이터를 수신한만큼 썼으니 다음에 읽어야 할 위치 이동
 	{
 		Disconnect(L"요청한만큼 수신 처리를 못했음");
 		return;

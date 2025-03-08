@@ -34,6 +34,9 @@
     <ClCompile Include="ServerSources\Game\GameRoom.cpp">
       <Filter>ServerSources\Game</Filter>
     </ClCompile>
+    <ClCompile Include="ServerSources\Game\GamePlayer.cpp">
+      <Filter>ServerSources\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerSources\Session\GameSession.h">
@@ -67,6 +70,9 @@
       <Filter>ServerSources\Game</Filter>
     </ClInclude>
     <ClInclude Include="ServerSources\Game\GameRoom.h">
+      <Filter>ServerSources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\GamePlayer.h">
       <Filter>ServerSources\Game</Filter>
     </ClInclude>
   </ItemGroup>

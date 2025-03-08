@@ -19,6 +19,9 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+public:
+	void ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket);
+
 private:
 	std::shared_ptr<LocalPlayerActor> m_spLocalPlayerActor = nullptr;
 

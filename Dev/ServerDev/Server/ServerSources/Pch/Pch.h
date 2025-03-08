@@ -17,7 +17,10 @@
 #include "Global/DataTypes.h"
 #include "Packet/ServerPacketHandler.h"
 #include "Session/GameSession.h"
+#include "Session/GameSessionManager.h"
+
 #include "Game/GameEntity.h"
+#include "Game/GamePlayer.h"
 #include "Game/GameRoom.h"
 
 #ifdef _DEBUG

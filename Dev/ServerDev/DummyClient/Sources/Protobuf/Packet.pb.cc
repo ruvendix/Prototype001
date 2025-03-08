@@ -55,19 +55,19 @@ struct S_GameEntityInfoDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_GameEntityInfoDefaultTypeInternal _S_GameEntityInfo_default_instance_;
-PROTOBUF_CONSTEXPR S_AddGameEntities::S_AddGameEntities(
+PROTOBUF_CONSTEXPR S_SyncGameEntities::S_SyncGameEntities(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.gameentities_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct S_AddGameEntitiesDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_AddGameEntitiesDefaultTypeInternal()
+struct S_SyncGameEntitiesDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_SyncGameEntitiesDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_AddGameEntitiesDefaultTypeInternal() {}
+  ~S_SyncGameEntitiesDefaultTypeInternal() {}
   union {
-    S_AddGameEntities _instance;
+    S_SyncGameEntities _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_AddGameEntitiesDefaultTypeInternal _S_AddGameEntities_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_SyncGameEntitiesDefaultTypeInternal _S_SyncGameEntities_default_instance_;
 }  // namespace Protocol
 static ::_pb::Metadata file_level_metadata_Packet_2eproto[3];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_2eproto = nullptr;
@@ -97,23 +97,23 @@ const uint32_t TableStruct_Packet_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::S_GameEntityInfo, _impl_.hp_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_GameEntityInfo, _impl_.attack_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_AddGameEntities, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_SyncGameEntities, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_AddGameEntities, _impl_.gameentities_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_SyncGameEntities, _impl_.gameentities_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::S_EnterGame)},
   { 8, -1, -1, sizeof(::Protocol::S_GameEntityInfo)},
-  { 22, -1, -1, sizeof(::Protocol::S_AddGameEntities)},
+  { 22, -1, -1, sizeof(::Protocol::S_SyncGameEntities)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_EnterGame_default_instance_._instance,
   &::Protocol::_S_GameEntityInfo_default_instance_._instance,
-  &::Protocol::_S_AddGameEntities_default_instance_._instance,
+  &::Protocol::_S_SyncGameEntities_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Packet_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -124,9 +124,9 @@ const char descriptor_table_protodef_Packet_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022.\n\013look_at_dir"
   "\030\004 \001(\0162\031.Protocol.EActorLookAtDir\022\027\n\017act"
   "ion_state_id\030\005 \001(\r\022\016\n\006max_hp\030\006 \001(\r\022\n\n\002hp"
-  "\030\007 \001(\r\022\016\n\006attack\030\010 \001(\r\"E\n\021S_AddGameEntit"
-  "ies\0220\n\014gameEntities\030\001 \003(\0132\032.Protocol.S_G"
-  "ameEntityInfob\006proto3"
+  "\030\007 \001(\r\022\016\n\006attack\030\010 \001(\r\"F\n\022S_SyncGameEnti"
+  "ties\0220\n\014gameEntities\030\001 \003(\0132\032.Protocol.S_"
+  "GameEntityInfob\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Packet_2eproto_deps[2] = {
   &::descriptor_table_Enum_2eproto,
@@ -134,7 +134,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_Packet_2eproto_deps
 };
 static ::_pbi::once_flag descriptor_table_Packet_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_2eproto = {
-    false, false, 381, descriptor_table_protodef_Packet_2eproto,
+    false, false, 382, descriptor_table_protodef_Packet_2eproto,
     "Packet.proto",
     &descriptor_table_Packet_2eproto_once, descriptor_table_Packet_2eproto_deps, 2, 3,
     schemas, file_default_instances, TableStruct_Packet_2eproto::offsets,
@@ -720,28 +720,28 @@ void S_GameEntityInfo::InternalSwap(S_GameEntityInfo* other) {
 
 // ===================================================================
 
-class S_AddGameEntities::_Internal {
+class S_SyncGameEntities::_Internal {
  public:
 };
 
-S_AddGameEntities::S_AddGameEntities(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+S_SyncGameEntities::S_SyncGameEntities(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.S_AddGameEntities)
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_SyncGameEntities)
 }
-S_AddGameEntities::S_AddGameEntities(const S_AddGameEntities& from)
+S_SyncGameEntities::S_SyncGameEntities(const S_SyncGameEntities& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  S_AddGameEntities* const _this = this; (void)_this;
+  S_SyncGameEntities* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.gameentities_){from._impl_.gameentities_}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:Protocol.S_AddGameEntities)
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_SyncGameEntities)
 }
 
-inline void S_AddGameEntities::SharedCtor(
+inline void S_SyncGameEntities::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -751,8 +751,8 @@ inline void S_AddGameEntities::SharedCtor(
   };
 }
 
-S_AddGameEntities::~S_AddGameEntities() {
-  // @@protoc_insertion_point(destructor:Protocol.S_AddGameEntities)
+S_SyncGameEntities::~S_SyncGameEntities() {
+  // @@protoc_insertion_point(destructor:Protocol.S_SyncGameEntities)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -760,17 +760,17 @@ S_AddGameEntities::~S_AddGameEntities() {
   SharedDtor();
 }
 
-inline void S_AddGameEntities::SharedDtor() {
+inline void S_SyncGameEntities::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.gameentities_.~RepeatedPtrField();
 }
 
-void S_AddGameEntities::SetCachedSize(int size) const {
+void S_SyncGameEntities::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void S_AddGameEntities::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.S_AddGameEntities)
+void S_SyncGameEntities::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_SyncGameEntities)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -779,7 +779,7 @@ void S_AddGameEntities::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* S_AddGameEntities::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* S_SyncGameEntities::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -821,9 +821,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* S_AddGameEntities::_InternalSerialize(
+uint8_t* S_SyncGameEntities::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_AddGameEntities)
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_SyncGameEntities)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -839,12 +839,12 @@ uint8_t* S_AddGameEntities::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_AddGameEntities)
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_SyncGameEntities)
   return target;
 }
 
-size_t S_AddGameEntities::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.S_AddGameEntities)
+size_t S_SyncGameEntities::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_SyncGameEntities)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -861,17 +861,17 @@ size_t S_AddGameEntities::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_AddGameEntities::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_SyncGameEntities::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    S_AddGameEntities::MergeImpl
+    S_SyncGameEntities::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_AddGameEntities::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_SyncGameEntities::GetClassData() const { return &_class_data_; }
 
 
-void S_AddGameEntities::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<S_AddGameEntities*>(&to_msg);
-  auto& from = static_cast<const S_AddGameEntities&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_AddGameEntities)
+void S_SyncGameEntities::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_SyncGameEntities*>(&to_msg);
+  auto& from = static_cast<const S_SyncGameEntities&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_SyncGameEntities)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -880,24 +880,24 @@ void S_AddGameEntities::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void S_AddGameEntities::CopyFrom(const S_AddGameEntities& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_AddGameEntities)
+void S_SyncGameEntities::CopyFrom(const S_SyncGameEntities& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_SyncGameEntities)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool S_AddGameEntities::IsInitialized() const {
+bool S_SyncGameEntities::IsInitialized() const {
   return true;
 }
 
-void S_AddGameEntities::InternalSwap(S_AddGameEntities* other) {
+void S_SyncGameEntities::InternalSwap(S_SyncGameEntities* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.gameentities_.InternalSwap(&other->_impl_.gameentities_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata S_AddGameEntities::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata S_SyncGameEntities::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_2eproto_getter, &descriptor_table_Packet_2eproto_once,
       file_level_metadata_Packet_2eproto[2]);
@@ -914,9 +914,9 @@ template<> PROTOBUF_NOINLINE ::Protocol::S_GameEntityInfo*
 Arena::CreateMaybeMessage< ::Protocol::S_GameEntityInfo >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_GameEntityInfo >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Protocol::S_AddGameEntities*
-Arena::CreateMaybeMessage< ::Protocol::S_AddGameEntities >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::S_AddGameEntities >(arena);
+template<> PROTOBUF_NOINLINE ::Protocol::S_SyncGameEntities*
+Arena::CreateMaybeMessage< ::Protocol::S_SyncGameEntities >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_SyncGameEntities >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

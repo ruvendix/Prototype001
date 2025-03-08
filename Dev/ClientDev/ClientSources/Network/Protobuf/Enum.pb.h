@@ -75,6 +75,31 @@ inline bool EActorLookAtDir_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EActorLookAtDir>(
     EActorLookAtDir_descriptor(), name, value);
 }
+enum EGameEntityType : int {
+  Player = 0,
+  Monster = 1,
+  EGameEntityType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EGameEntityType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool EGameEntityType_IsValid(int value);
+constexpr EGameEntityType EGameEntityType_MIN = Player;
+constexpr EGameEntityType EGameEntityType_MAX = Monster;
+constexpr int EGameEntityType_ARRAYSIZE = EGameEntityType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityType_descriptor();
+template<typename T>
+inline const std::string& EGameEntityType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EGameEntityType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function EGameEntityType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    EGameEntityType_descriptor(), enum_t_value);
+}
+inline bool EGameEntityType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EGameEntityType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EGameEntityType>(
+    EGameEntityType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -101,6 +126,11 @@ template <> struct is_proto_enum< ::Protocol::EActorLookAtDir> : ::std::true_typ
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EActorLookAtDir>() {
   return ::Protocol::EActorLookAtDir_descriptor();
+}
+template <> struct is_proto_enum< ::Protocol::EGameEntityType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EGameEntityType>() {
+  return ::Protocol::EGameEntityType_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

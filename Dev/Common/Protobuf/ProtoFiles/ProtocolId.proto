@@ -4,5 +4,6 @@ package Protocol;
 enum EProtocolId
 {
 	EnterGame = 0;
-	GameEntityInfo = 1;
+	CreateLocalGamePlayer = 1;
+	SyncGameEntities = 2;
 }
