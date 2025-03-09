@@ -25,6 +25,7 @@ void RxGameSession::ProcessConnectImpl()
 
 	// 클라이언트를 방에 입장!
 	GameRoom::I()->EnterGameRoom(spGameSession);
+	DEFAULT_TRACE_LOG("게임 세션 입장: %p", spGameSession);
 }
 
 void RxGameSession::ProcessDisconnectImpl()
@@ -34,6 +35,7 @@ void RxGameSession::ProcessDisconnectImpl()
 
 	// 클라이언트를 방에서 내보냄!
 	GameRoom::I()->LeaveGameRoom(spGameSession);
+	DEFAULT_TRACE_LOG("게임 세션 나감: %p", spGameSession);
 }
 
 void RxGameSession::ProcessReceivePacket(BYTE* buffer, uint32 numOfBytes)

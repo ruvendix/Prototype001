@@ -23,15 +23,20 @@ BOOL WINAPI OnClose_ConsoleHandler(DWORD signal)
 		(signal == CTRL_SHUTDOWN_EVENT))
 	{
 		g_spServerService->GetIocpCorePtr()->Cleanup();
+		g_spServerService->Cleanup();
 		g_threadPool.Cleanup();
 		RxSocketUtility::Cleanup();
 
-		::OutputDebugStringA("서버 프로그램 종료 (서브 쓰레드들 정리중)\n");
+		DEFAULT_TRACE_LOG("서버 프로그램 종료 (서브 쓰레드들 정리중)");
+
+		LogSystem::I()->Cleanup();
+		ErrorHandler::I()->Cleanup();
 
 		// 모든 서브 쓰레드들이 안전하게 종료될 때까지 시간 벌이
 		std::this_thread::sleep_for(1s);
 		return TRUE;
 	}
+
 	return FALSE;
 }
 
@@ -59,6 +64,7 @@ int main()
 	g_spServerService = std::make_shared<RxServerService>(serviceInfo);
 	g_spServerService->Startup();
 
+#if 0
 	for (uint32 i = 0; i < 5; ++i)
 	{
 		g_threadPool.AddTask(
@@ -73,15 +79,18 @@ int main()
 		);
 	}
 
-	g_threadPool.Join();
-
 	/*
 	멀티쓰레드 콘솔 프로그램은 종료 신호를 따로 보내야함...
 	종료 처리는 ConsoleHandler에서 담당
 	*/
 
-	LogSystem::I()->Cleanup();
-	ErrorHandler::I()->Cleanup();
+	g_threadPool.Join();
+#else
+	while (true)
+	{
+		g_spServerService->GetIocpCorePtr()->Dispatch(0);
+	}
+#endif
 
 	return 0;
 }

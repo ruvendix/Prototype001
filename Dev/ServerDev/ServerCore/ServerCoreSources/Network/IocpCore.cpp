@@ -40,22 +40,20 @@ bool RxIocpCore::Dispatch(uint32 timeMilliseconds)
 
 	if (::GetQueuedCompletionStatus(m_hIocp, &dwNumOfBytes, &key, reinterpret_cast<LPOVERLAPPED*>(&pIocpEvent), timeMilliseconds) == FALSE)
 	{
-		RxIocpObjectPtr spIocpObj = nullptr;
-
 		switch (RxSocketUtility::HandleLastError())
 		{
-		case WSA_OPERATION_ABORTED: // 다시 시도			
-			RxSocketUtility::HandleLastError();
+		default: // 처리 목록에 없으면 이걸로
+		{
+			if (pIocpEvent == nullptr)
+			{
+				return false;
+			}
 
-			spIocpObj = pIocpEvent->GetOwner();
+			RxIocpObjectPtr spIocpObj = pIocpEvent->GetOwner();
 			spIocpObj->Dispatch(pIocpEvent, dwNumOfBytes);
-
-			break;
-
-		default: // 무조건 아웃
-			//::OutputDebugStringA("무조건 아웃임!\n");
-			return false;
 		}
+		break;
+		}  
 	}
 	else
 	{

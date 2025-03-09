@@ -89,7 +89,7 @@ void RxClientService::Cleanup()
 /////////////////////////////////////////////////////////////////
 RxServerService::~RxServerService()
 {
-
+	::OutputDebugString("서버 서비스 소멸!\n");
 }
 
 bool RxServerService::Startup()
@@ -123,4 +123,4 @@ bool RxServerService::Startup()
 void RxServerService::Cleanup()
 {
 	Super::Cleanup();
-}
+} 

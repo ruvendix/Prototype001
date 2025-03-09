@@ -23,6 +23,7 @@ void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
 	// 새로운 게임 플레이어 생성
 	GamePlayerPtr spNewLocalGamePlayer = std::make_shared<GamePlayer>();
 	spNewLocalGamePlayer->SetGameSession(spGameSession);
+	spGameSession->SetGamePlayer(spNewLocalGamePlayer);
 
 	// 새로운 게임 플레이어에게 기본 정보 넣기
 	Protocol::GameEntityInfo& refNewLocalGamePlayerInfo = spNewLocalGamePlayer->GetGameEntityInfo();

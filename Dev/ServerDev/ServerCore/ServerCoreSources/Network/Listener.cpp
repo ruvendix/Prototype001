@@ -16,6 +16,8 @@ RxListener::RxListener(const RxServicePtr& spOwner)
 
 RxListener::~RxListener()
 {
+	::OutputDebugString("¸®½º³Ê ¼Ò¸ê!\n");
+
 	for (RxIocpEvent* pIocpEvent : m_acceptEvents)
 	{
 		SAFE_DELETE(pIocpEvent);
@@ -79,7 +81,7 @@ void RxListener::RegisterAccept(RxIocpEvent* pAcceptEvent)
 	pAcceptEvent->SetSession(spSession);
 
 	DWORD dwReceivedBytes = 0;
-	if (RxSocketUtility::AcceptEx(m_listenSocket, spSession, &dwReceivedBytes, pAcceptEvent) == FALSE)
+ 	if (RxSocketUtility::AcceptEx(m_listenSocket, spSession, &dwReceivedBytes, pAcceptEvent) == FALSE)
 	{
 		int32 errCode = ::WSAGetLastError();
 		if (errCode != WSA_IO_PENDING)

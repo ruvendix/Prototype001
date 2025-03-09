@@ -55,6 +55,9 @@ int32 RxSocketUtility::HandleLastError()
 	case WSA_IO_PENDING:
 		break;
 
+	case WSA_WAIT_TIMEOUT:
+		break;
+
 	default:
 		void* msgBuffer = nullptr;
 		::FormatMessage(
