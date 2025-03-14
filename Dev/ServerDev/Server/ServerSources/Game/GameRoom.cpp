@@ -126,17 +126,46 @@ void GameRoom::RemoveGameEntity(const GameEntityPtr& spGameEntity)
 	}
 
 	const Protocol::GameEntityInfo& gameEntityInfo = spGameEntity->GetGameEntityInfo();
+	uint64 gameEntityId = gameEntityInfo.entity_id();
+
 	switch (gameEntityInfo.entity_type())
 	{
 	case Protocol::EGameEntityType::Player:
-		m_mapGamePlayer.erase(gameEntityInfo.entity_id());
+		m_mapGamePlayer.erase(gameEntityId);
 		break;
 
 	case Protocol::EGameEntityType::Monster:
-		m_mapGameMonster.erase(gameEntityInfo.entity_id());
+		m_mapGameMonster.erase(gameEntityId);
 		break;
 
 	default:
 		break;
 	}
+}
+
+void GameRoom::ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove)
+{
+	const Protocol::GameEntityInfo& gamePlayerInfo = syncGamePlayerMove.game_player_info();
+	const GamePlayerPtr& spGamePlayer = FindGamePlayer(gamePlayerInfo.entity_id());
+	if (spGamePlayer == nullptr)
+	{
+		return;
+	}
+
+	spGamePlayer->ApplyGameEntityMoveInfo(gamePlayerInfo);
+
+	// 변경된 사실을 모든 유저에게 전달
+	const RxSendBufferPtr& spSendSyncGamePlayer = RxServerPacketHandler::I()->MakeSyncGamePlayerMovePacket(gamePlayerInfo);
+	RxGameSessionManager::I()->Broadcast(spSendSyncGamePlayer);
+}
+
+GamePlayerPtr GameRoom::FindGamePlayer(uint64 entityId) const
+{
+	auto foundIter = m_mapGamePlayer.find(entityId);
+	if (foundIter == m_mapGamePlayer.cend())
+	{
+		return nullptr;
+	}
+
+	return (foundIter->second);
 }

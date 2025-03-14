@@ -113,7 +113,7 @@ void RxListener::ProcessAccept(RxIocpEvent* pAcceptEvent)
 		return;
 	}
 
-	printf("Client connected!\n");
+	DEFAULT_TRACE_LOG("Client connected! (Socket: %d)\n", spSession->GetSocket());
 
 	RxNetworkAddress networkAddr(sockAddr);
 	spSession->SetNetworkAddress(networkAddr);

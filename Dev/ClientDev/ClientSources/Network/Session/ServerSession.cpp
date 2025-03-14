@@ -29,6 +29,7 @@ void RxServerSession::ProcessSendImpl(uint32 numOfBytes)
 
 void RxServerSession::ProcessReceivePacket(BYTE* buffer, uint32 numOfBytes)
 {
-	DEFAULT_TRACE_LOG("numOfBytes(%d)", numOfBytes);
+	RxPacketHeader packetHeader = *(reinterpret_cast<RxPacketHeader*>(buffer));
+	DEFAULT_TRACE_LOG("ProcessReceivePacket packetHeader(Id: %d, Size: %d)", packetHeader.protocolId, packetHeader.packetFullSize);
 	ClientPacketHandler::I()->HandlePacket(buffer, numOfBytes);
 }

@@ -19,7 +19,7 @@ void NetworkManager::Startup()
 
 	// Service´Â CommonÀÓ...
 	m_spClientService = std::make_shared<RxClientService>(serviceInfo);
-	m_spClientService->Startup();
+	bool b = m_spClientService->Startup();
 }
 
 bool NetworkManager::Update(float deltaSeconds)
@@ -38,4 +38,9 @@ RxServerSessionPtr NetworkManager::CreateServerSession()
 {
 	m_spServerSession = std::make_shared<RxServerSession>();
 	return m_spServerSession;
+}
+
+void NetworkManager::SendPacket(const RxSendBufferPtr& spPacket)
+{
+	m_spServerSession->Send(spPacket);
 }

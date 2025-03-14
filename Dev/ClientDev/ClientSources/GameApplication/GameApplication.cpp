@@ -112,6 +112,10 @@ void GameApplication::Startup()
     ClientPacketHandler::I()->Startup();
 #pragma endregion
 
+    // 로그 폴더 생성
+    LogSystem::I()->RegisterFileLoggerPathKey("ClientLog");
+    FILE_LOG(LogDefault, "Test");
+
     // 씬 생성해서 테스트
     SceneManager::I()->CreateCurrentScene<EditScene>();
 }

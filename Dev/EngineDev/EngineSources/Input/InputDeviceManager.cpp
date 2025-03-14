@@ -2,8 +2,6 @@
 #include "Pch.h"
 #include "InputDeviceManager.h"
 
-#include "InputMacros.h"
-
 DEFINE_SINGLETON(InputDeviceMananger);
 
 void InputDeviceMananger::Startup()
@@ -41,13 +39,24 @@ void InputDeviceMananger::Startup()
 
 bool InputDeviceMananger::Update(float deltaSeconds)
 {
+	BYTE arrKeyState[256] = { };
+	if (::GetKeyboardState(arrKeyState) == FALSE)
+	{
+		return false;
+	}
+
 	// 플레이어의 현재 입력 상태를 확인
 	int32 inputValueCount = TO_NUM(EInputValue::Count);
 	for (int32 i = 0; i < inputValueCount; ++i)
 	{
 		InputRawInfo& refInputRawInfo = m_arrInputRawInfo[i];
-		bool bExistedLocalPlayerInput = IS_EXIST_LOCAL_PLAYER_INPUT(refInputRawInfo.virtualCode);
 
+		/*
+		이전 프레임에서는 누르지 않았지만 현재 프레임에서는 누른 경우와
+		이전 프레임에서 눌렀는데 현재 프레임에서도 누른 경우일 때
+		최상위 비트는 1이 되므로 0x80으로 확인 가능
+		*/
+		bool bExistedLocalPlayerInput = ((arrKeyState[refInputRawInfo.virtualCode] & 0x80) != 0);
 		switch (refInputRawInfo.inputValueState)
 		{
 		case EInputValueState::Pressed:

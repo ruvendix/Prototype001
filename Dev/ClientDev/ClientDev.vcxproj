@@ -41,6 +41,9 @@
     <ClCompile Include="ClientSources\GameApplication\WindowProcedure.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="ClientSources\GameEntity\GameEntityActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -134,6 +137,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\GameApplication\WindowProcedure.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ClientSources\GameEntity\GameEntityActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Global\DataTypes.h">
@@ -287,6 +293,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\EngineDev\Bin;$(SolutionDir)..\ServerDev\Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

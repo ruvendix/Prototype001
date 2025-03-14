@@ -18,8 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protobuf", "Protobuf", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
 	ProjectSection(SolutionItems) = preProject
 		..\Common\Protobuf\ProtoFiles\Enum.proto = ..\Common\Protobuf\ProtoFiles\Enum.proto
-		..\Common\Protobuf\ProtoFiles\ProtocolId.proto = ..\Common\Protobuf\ProtoFiles\ProtocolId.proto
 		..\Common\Protobuf\ProtoFiles\Packet.proto = ..\Common\Protobuf\ProtoFiles\Packet.proto
+		..\Common\Protobuf\ProtoFiles\ProtocolId.proto = ..\Common\Protobuf\ProtoFiles\ProtocolId.proto
 		..\Common\Protobuf\ProtoFiles\Struct.proto = ..\Common\Protobuf\ProtoFiles\Struct.proto
 	EndProjectSection
 EndProject

@@ -21,3 +21,9 @@ void GameEntity::Cleanup()
 {
 
 }
+
+void GameEntity::ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo)
+{
+	m_gameEntityInfo.set_cell_pos_x(gameEntityInfo.cell_pos_x());
+	m_gameEntityInfo.set_cell_pos_y(gameEntityInfo.cell_pos_y());
+}

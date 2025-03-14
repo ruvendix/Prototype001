@@ -1,9 +1,13 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class RxServerPacketHandler
+class RxServerPacketHandler : public ICoreLoop
 {
 	DECLARE_SINGLETON(RxServerPacketHandler)
+
+public:
+	virtual void Startup() override;
+	virtual void Cleanup() override;
 
 public:
 	void HandlePacket(BYTE* buffer, int32 numOfBytes);
@@ -11,7 +15,10 @@ public:
 	RxSendBufferPtr MakeEnterGamePacket();
 	RxSendBufferPtr MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& localGamePlayerInfo);
 	RxSendBufferPtr MakeSyncGameEntitiesPacket(const Protocol::S_SyncGameEntities& syncGameEntities);
+	RxSendBufferPtr MakeSyncGamePlayerPacket(const Protocol::GameEntityInfo& syncGamePlayerInfo);
+	RxSendBufferPtr MakeSyncGamePlayerMovePacket(const Protocol::GameEntityInfo& syncGamePlayerInfo);
 
+private:
 	template <typename TPacket>
 	RxSendBufferPtr MakeSendBuffer(const TPacket& packet, Protocol::EProtocolId protocolId)
 	{
@@ -19,15 +26,18 @@ public:
 		uint16 packetFullSize = sizeof(RxPacketHeader) + packetDataSize;
 
 		RxSendBufferPtr spSendBuffer = std::make_shared<RxSendBuffer>(packetFullSize);
-		
+
 		RxPacketHeader* pPacketHeader = reinterpret_cast<RxPacketHeader*>(spSendBuffer->GetBufferPointer());
 		pPacketHeader->packetFullSize = packetFullSize;
 		pPacketHeader->protocolId = protocolId;
-		
+
 		assert(packet.SerializeToArray(&pPacketHeader[1], packetDataSize));
 		spSendBuffer->SetWriteSize(packetFullSize);
 		return spSendBuffer;
 	}
+
+private:
+	void HandlePacket_SyncGamePlayerMove(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

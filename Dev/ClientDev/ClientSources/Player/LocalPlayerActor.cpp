@@ -11,7 +11,6 @@ class LocalPlayerActor::Pimpl
 public:
 	void InitializePlayerInput();
 
-	bool DirectionKeyHandlerImpl(const Vector2d& vMoveDir);
 	bool SpaceBarKeyHandlerImpl();
 	bool AKeyHandlerImpl(const InputActionValue* pInputAction);
 };
@@ -91,31 +90,6 @@ void LocalPlayerActor::Pimpl::InitializePlayerInput()
 	spPlayerInputMappingContext->AddInputAction(spPlayerDefenceInputAction);
 #pragma endregion
 #pragma endregion
-}
-
-bool LocalPlayerActor::Pimpl::DirectionKeyHandlerImpl(const Vector2d& vMoveDir)
-{
-	// 축값이 전부 존재한다면 무효
-	if ((vMoveDir.x != 0.0f) &&
-		(vMoveDir.y != 0.0f))
-	{
-		return false;
-	}
-
-	if (m_pOwner->IsSamePawnActorState<PawnActorIdleState>() == false)
-	{
-		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
-		return false;
-	}
-
-	CellActorMoveComponent* pCellActorMoveComponent = m_pOwner->FindComponent<CellActorMoveComponent>();
-	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
-	if (pCellActorMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
-	{
-		return false;
-	}
-
-	return true;
 }
 
 bool LocalPlayerActor::Pimpl::SpaceBarKeyHandlerImpl()
@@ -204,13 +178,7 @@ void LocalPlayerActor::Cleanup()
 void LocalPlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
 	Vector2d vMoveDir = pInputAction->BringValue<Vector2d>();
-	if (m_spPimpl->DirectionKeyHandlerImpl(vMoveDir) == false)
-	{
-		return;
-	}
-
-	ImmediatelyChangeState<PawnActorWalkState>();
-	DEFAULT_TRACE_LOG("(기본 -> 걷기) 상태로 전환!");
+	ProcessMoveDirection(vMoveDir);
 }
 
 void LocalPlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)

@@ -10,6 +10,10 @@ public:
 	virtual void Startup() override;
 	virtual void Cleanup() override;
 
+	void ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo);
+
+	void SetGameEntityInfo(const Protocol::GameEntityInfo& gameEntityInfo) { m_gameEntityInfo = gameEntityInfo; }
+
 	Protocol::GameEntityInfo& GetGameEntityInfo() { return m_gameEntityInfo; }
 	const Protocol::GameEntityInfo& GetGameEntityInfo() const { return m_gameEntityInfo; }
 

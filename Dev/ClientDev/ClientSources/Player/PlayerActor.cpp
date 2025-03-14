@@ -97,6 +97,32 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	DEFAULT_TRACE_LOG("플레이어 사망!");
 }
 
+void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)
+{
+	// 축값이 전부 존재한다면 무효
+	if ((vMoveDir.x != 0.0f) &&
+		(vMoveDir.y != 0.0f))
+	{
+		return;
+	}
+
+	if (IsSamePawnActorState<PawnActorIdleState>() == false)
+	{
+		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
+		return;
+	}
+
+	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
+	if (pMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
+	{
+		return;
+	}
+
+	ImmediatelyChangeState<PawnActorWalkState>();
+	DEFAULT_TRACE_LOG("(기본 -> 걷기) 상태로 전환!");
+}
+
 void PlayerActor::LoadAndStartupPlayerSprite()
 {
 	// 이걸 확실하게 맞추려면 인덱스마다 넣어야함
@@ -119,14 +145,4 @@ void PlayerActor::LoadAndStartupPlayerSprite()
 
 	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = FindActorStateLookAtDynamicSprite<PawnActorIdleState>(EActorLookAtDirection::Down);
 	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
-}
-
-void PlayerActor::ApplyGamePlayerInfoFromServer(const Protocol::GameEntityInfo& gamePlayerInfo)
-{
-	Position2d gamePlayerCellPos = Position2d(gamePlayerInfo.cell_pos_x(), gamePlayerInfo.cell_pos_y());
-	ApplyCellPosition(gamePlayerCellPos);
-
-	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
-	ASSERT_LOG(pMoveComponent != nullptr);
-	pMoveComponent->SetDestinationCellPosition(gamePlayerCellPos);
 }

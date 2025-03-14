@@ -48,6 +48,9 @@ int main()
 	}
 
 	LogSystem::I()->Startup();
+	LogSystem::I()->RegisterFileLoggerPathKey("ServerLog");
+	FILE_LOG(LogDefault, "Test");
+
 	ErrorHandler::I()->Startup();
 
 	RxSocketUtility::Startup();
@@ -63,6 +66,8 @@ int main()
 
 	g_spServerService = std::make_shared<RxServerService>(serviceInfo);
 	g_spServerService->Startup();
+
+	RxServerPacketHandler::I()->Startup();
 
 #if 0
 	for (uint32 i = 0; i < 5; ++i)

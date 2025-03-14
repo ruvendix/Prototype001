@@ -6,4 +6,6 @@ enum EProtocolId
 	EnterGame = 0;
 	CreateLocalGamePlayer = 1;
 	SyncGameEntities = 2;
+	SyncGamePlayer = 3;
+	SyncGamePlayerMove = 4;
 }

@@ -19,3 +19,18 @@ message S_SyncGameEntities
 {
 	repeated GameEntityInfo game_entities = 1;
 }
+
+message S_SyncGamePlayer
+{
+	GameEntityInfo game_player_info = 1;
+}
+
+message C_SyncGamePlayerMove
+{
+	GameEntityInfo game_player_info = 1;
+}
+
+message S_SyncGamePlayerMove
+{
+	GameEntityInfo game_player_info = 1;
+}

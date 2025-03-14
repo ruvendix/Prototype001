@@ -297,9 +297,6 @@
     <ClInclude Include="EngineSources\Input\InputEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="EngineSources\Input\InputMacros.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="EngineSources\Input\InputMappingContext.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

@@ -450,9 +450,6 @@
     <ClInclude Include="EngineSources\Input\InputEnums.h">
       <Filter>EngineSources\Input</Filter>
     </ClInclude>
-    <ClInclude Include="EngineSources\Input\InputMacros.h">
-      <Filter>EngineSources\Input</Filter>
-    </ClInclude>
     <ClInclude Include="EngineSources\Input\InputMappingContext.h">
       <Filter>EngineSources\Input</Filter>
     </ClInclude>

@@ -14,6 +14,7 @@ public:
 
 public:
 	RxServerSessionPtr CreateServerSession();
+	void SendPacket(const RxSendBufferPtr& spPacket);
 
 private:
 	RxServicePtr m_spClientService = nullptr;
