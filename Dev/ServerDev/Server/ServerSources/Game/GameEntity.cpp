@@ -35,6 +35,11 @@ void GameEntity::ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEnt
 	m_gameEntityInfo.set_cell_pos_y(gameEntityInfo.cell_pos_y());
 }
 
+void GameEntity::ApplyGameEntityState(const Protocol::GameEntityInfo& gameEntityInfo)
+{
+	m_gameEntityInfo.set_entity_state(gameEntityInfo.entity_state());
+}
+
 Protocol::EGameEntityLookAtDir GameEntity::CalculateActorLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo)
 {
 	const Position2d& currentCellPos = { static_cast<int32>(m_gameEntityInfo.cell_pos_x()), static_cast<int32>(m_gameEntityInfo.cell_pos_y()) };

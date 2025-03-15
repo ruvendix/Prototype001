@@ -24,8 +24,10 @@ public:
 
 	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_SyncGameEntityLookAtDir& syncGameEntityLookAtDir);
 	void ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove);
+	void ParsingPacket_SyncGameEntityState(const Protocol::C_SyncGameEntityState& syncGameEntityState);
 
 private:
+	GameEntityPtr FindGameEntity(const Protocol::GameEntityInfo& gameEntityInfo) const;
 	GamePlayerPtr FindGamePlayer(uint64 entityId) const;
 
 private:

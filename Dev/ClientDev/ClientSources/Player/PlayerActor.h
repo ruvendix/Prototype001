@@ -15,8 +15,12 @@ public:
 	virtual void Cleanup() override;
 
 	virtual void ProcessMoveDirection(const Vector2d& vMoveDir) override;
+	virtual void ProcessAttack() override;
+	virtual void ProcessDefense() override;
 	virtual void ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker) override;
-	
+
+	virtual void RegisterStateOnBidirectional() override;
+
 public:
 	void LoadAndStartupPlayerSprite();
 	const std::shared_ptr<WeaponActor>& GetWeaponActor(EWeaponSlotType weaponSlot) const { return m_arrWeaponActor[TO_NUM(weaponSlot)]; }

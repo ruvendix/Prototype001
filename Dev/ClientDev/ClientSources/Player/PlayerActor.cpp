@@ -16,14 +16,14 @@ void PlayerActor::Startup()
 	// 플레이어 스프라이트 로딩 및 초기화
 	LoadAndStartupPlayerSprite();
 
-	//// 무기 설정
-	//m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(2);
-	//m_arrWeaponActor[TO_NUM(EWeaponSlotType::Secondary)] = WeaponFactory::I()->CreateWeaponActor(1);
+	// 무기 설정
+	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(0);
+	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Secondary)] = WeaponFactory::I()->CreateWeaponActor(1);
 
-	//for (const std::shared_ptr<WeaponActor>& spWeaponActor : m_arrWeaponActor)
-	//{
-	//	spWeaponActor->SetWeaponOwner(std::dynamic_pointer_cast<PlayerActor>(shared_from_this()));
-	//}
+	for (const std::shared_ptr<WeaponActor>& spWeaponActor : m_arrWeaponActor)
+	{
+		spWeaponActor->SetWeaponOwner(std::dynamic_pointer_cast<PlayerActor>(shared_from_this()));
+	}
 
 #pragma region 플레이어 기본 정보 초기화
 	TransformComponent* pTransformComponent = BringTransformComponent();
@@ -97,6 +97,19 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	DEFAULT_TRACE_LOG("플레이어 사망!");
 }
 
+void PlayerActor::RegisterStateOnBidirectional()
+{
+	RegisterActorState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
+	RegisterActorState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
+	RegisterActorState<PlayerAttackState>(Protocol::EGameEntityState::Attack);
+	RegisterActorState<PlayerDefenceState>(Protocol::EGameEntityState::Defense);
+
+	RegisterGameEntityState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
+	RegisterGameEntityState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
+	RegisterGameEntityState<PlayerAttackState>(Protocol::EGameEntityState::Attack);
+	RegisterGameEntityState<PlayerDefenceState>(Protocol::EGameEntityState::Defense);
+}
+
 void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 {
 	// 축값이 전부 존재한다면 무효
@@ -121,6 +134,24 @@ void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 
 	ImmediatelyChangeState<PawnActorWalkState>();
 	DEFAULT_TRACE_LOG("(기본 -> 걷기) 상태로 전환!");
+}
+
+void PlayerActor::ProcessAttack()
+{
+	if (IsSamePawnActorState<PawnActorIdleState>() == false)
+	{
+		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
+		return;
+	}
+
+	ImmediatelyChangeState<PlayerAttackState>();
+	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
+}
+
+void PlayerActor::ProcessDefense()
+{
+	ImmediatelyChangeState<PlayerDefenceState>();
+	DEFAULT_TRACE_LOG("(기본 -> 방어) 상태로 전환!");
 }
 
 void PlayerActor::LoadAndStartupPlayerSprite()

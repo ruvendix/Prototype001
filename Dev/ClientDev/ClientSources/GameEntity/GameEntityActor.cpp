@@ -10,10 +10,7 @@ GameEntityActor::~GameEntityActor()
 void GameEntityActor::Startup()
 {
 	Super::Startup();
-
-	RegisterActorState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
-	RegisterActorState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
-	RegisterActorState<PawnActorAttackState>(Protocol::EGameEntityState::Attack);
+	RegisterStateOnBidirectional();
 }
 
 bool GameEntityActor::Update(float deltaSeconds)
@@ -35,6 +32,27 @@ void GameEntityActor::Cleanup()
 void GameEntityActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 {
 
+}
+
+void GameEntityActor::ProcessDefense()
+{
+
+}
+
+void GameEntityActor::ProcessAttack()
+{
+
+}
+
+void GameEntityActor::RegisterStateOnBidirectional()
+{
+	RegisterActorState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
+	RegisterActorState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
+	RegisterActorState<PawnActorAttackState>(Protocol::EGameEntityState::Attack);
+
+	RegisterGameEntityState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
+	RegisterGameEntityState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
+	RegisterGameEntityState<PawnActorAttackState>(Protocol::EGameEntityState::Attack);
 }
 
 void GameEntityActor::SyncFromServer_GameEntityInfo(const Protocol::GameEntityInfo& gameEntityInfo)
@@ -65,6 +83,12 @@ void GameEntityActor::SyncFromServer_GameEntityMove(const Protocol::GameEntityIn
 	ProcessMoveDirection(vMoveDir); // 네트워크 플레이어는 따로 처리해야함
 }
 
+void GameEntityActor::SyncFromServer_GameEntityState(const Protocol::GameEntityInfo& gameEntityInfo)
+{
+	const PawnActorStatePtr& spActorState = FindActorState(gameEntityInfo.entity_state());
+	ImmediatelyChangeStateByExternal(spActorState);
+}
+
 void GameEntityActor::SyncToServer_GameEntityInfoIfNeed()
 {
 	if (m_spGameEntityInfo == nullptr)
@@ -74,6 +98,7 @@ void GameEntityActor::SyncToServer_GameEntityInfoIfNeed()
 
 	SyncToServer_GameEntityLookAtDirectionIfNeed();
 	SyncToServer_GameEntityMoveIfNeed();
+	SyncToServer_GameEntityAttackIfNeed();
 }
 
 EActorLookAtDirection GameEntityActor::ConvertGameEntityLookAtDirectionToActorLookAtDirection(Protocol::EGameEntityLookAtDir gameEntityLookAtDir) const
@@ -106,13 +131,7 @@ Protocol::EGameEntityLookAtDir GameEntityActor::ConvertActorLookAtDirectionToGam
 
 void GameEntityActor::ApplyActorStateFromServer(Protocol::EGameEntityState gameEntityState)
 {
-	auto foundIter = m_mapActorState.find(TO_NUM(gameEntityState));
-	if (foundIter == m_mapActorState.cend())
-	{
-		ERROR_LOG(LogDefault, "등록되지 않은 액터의 상태 Id! (%d)", TO_NUM(gameEntityState));
-	}
-
-	ImmediatelyChangeStateByExternal(foundIter->second);
+	ImmediatelyChangeStateByExternal(FindActorState(gameEntityState));
 }
 
 void GameEntityActor::ApplyActorLookAtDirectionFromServer(Protocol::EGameEntityLookAtDir gameEntityLookAtDir)
@@ -125,6 +144,34 @@ bool GameEntityActor::CheckClientAndServerIsSameLookAtDirection() const
 {
 	Protocol::EGameEntityLookAtDir gameEntityLookAtDir = m_spGameEntityInfo->entitye_look_at_dir();
 	return (gameEntityLookAtDir == ConvertActorLookAtDirectionToGameEntityLookAtDirection(GetActorLookAtDirection()));
+}
+
+bool GameEntityActor::CheckClientAndServerIsSameGameEntityState() const
+{
+	const PawnActorStatePtr& spActorStateFromServer = FindActorState(m_spGameEntityInfo->entity_state());
+	return (spActorStateFromServer->CompiletimeId() == GetCurrentPawnActorState()->CompiletimeId());
+}
+
+Protocol::EGameEntityState GameEntityActor::FindGameEntityState(uint32 actorStateId) const
+{
+	auto foundIter = m_mapGameEntityState.find(actorStateId);
+	if (foundIter == m_mapGameEntityState.cend())
+	{
+		ERROR_LOG(LogDefault, "등록되지 않은 게임 엔티티의 상태 Id! (%d)", actorStateId);
+	}
+
+	return static_cast<Protocol::EGameEntityState>(foundIter->second);
+}
+
+PawnActorStatePtr GameEntityActor::FindActorState(Protocol::EGameEntityState gameEntityState) const
+{
+	auto foundIter = m_mapActorState.find(TO_NUM(gameEntityState));
+	if (foundIter == m_mapActorState.cend())
+	{
+		ERROR_LOG(LogDefault, "등록되지 않은 액터의 상태 Id! (%d)", TO_NUM(gameEntityState));
+	}
+
+	return (foundIter->second);
 }
 
 void GameEntityActor::SyncToServer_GameEntityLookAtDirectionIfNeed()
@@ -158,9 +205,22 @@ void GameEntityActor::SyncToServer_GameEntityMoveIfNeed()
 		// 서버로 요청할 이동 관련 정보
 		m_spGameEntityInfo->set_cell_pos_x(currentDestCellPos.x);
 		m_spGameEntityInfo->set_cell_pos_y(currentDestCellPos.y);
-		m_spGameEntityInfo->set_entity_state(Protocol::EGameEntityState::Walk);
 
 		const RxSendBufferPtr& spSendSyncGamePlayerPacket = ClientPacketHandler::I()->MakeSyncGamePlayerMovePacket(m_spGameEntityInfo);
 		NetworkManager::I()->SendPacket(spSendSyncGamePlayerPacket);
 	}
+}
+
+void GameEntityActor::SyncToServer_GameEntityAttackIfNeed()
+{
+	if (CheckClientAndServerIsSameGameEntityState() == true)
+	{
+		return;
+	}
+
+	Protocol::EGameEntityState gameEntityState = FindGameEntityState(GetCurrentPawnActorState()->CompiletimeId());
+	m_spGameEntityInfo->set_entity_state(gameEntityState);
+
+	const RxSendBufferPtr& spSendSyncGamePlayerPacket = ClientPacketHandler::I()->MakeSyncGameEntityStatePacket(m_spGameEntityInfo);
+	NetworkManager::I()->SendPacket(spSendSyncGamePlayerPacket);
 }

@@ -25,7 +25,17 @@ PlayerAttackState::~PlayerAttackState()
 
 void PlayerAttackState::Startup()
 {
+	PlayerActor* pPlayer = dynamic_cast<PlayerActor*>(GetOwner());
+	ASSERT_LOG(pPlayer != nullptr);
 
+	// 현재 무기에 따라 작동
+	const std::shared_ptr<WeaponActor>& spPrimaryWeapon = pPlayer->GetWeaponActor(EWeaponSlotType::Primary);
+	if (spPrimaryWeapon == nullptr)
+	{
+		return;
+	}
+
+	spPrimaryWeapon->ApplyDynamicSpriteToOwner();
 }
 
 bool PlayerAttackState::Update(float deltaSeconds)
@@ -41,7 +51,17 @@ PlayerDefenceState::~PlayerDefenceState()
 
 void PlayerDefenceState::Startup()
 {
+	PlayerActor* pPlayer = dynamic_cast<PlayerActor*>(GetOwner());
+	ASSERT_LOG(pPlayer != nullptr);
 
+	// 현재 무기에 따라 작동
+	const std::shared_ptr<WeaponActor>& spSecondaryWeapon = pPlayer->GetWeaponActor(EWeaponSlotType::Secondary);
+	if (spSecondaryWeapon == nullptr)
+	{
+		return;
+	}
+
+	spSecondaryWeapon->ApplyDynamicSpriteToOwner();
 }
 
 bool PlayerDefenceState::Update(float deltaSeconds)

@@ -163,8 +163,8 @@ void GameRoom::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_Syn
 	spGameEntity->ApplyGameEntityLookAtDirection(gameEntityInfo);
 
 	// 변경된 사실을 모든 유저에게 전달
-	const RxSendBufferPtr& spSendSyncGamePlayer = RxServerPacketHandler::I()->MakeSyncGameEntityLookAtDirectionPacket(gameEntityInfo);
-	RxGameSessionManager::I()->Broadcast(spSendSyncGamePlayer);
+	const RxSendBufferPtr& spSyncGameEntityLookAtDirPacket = RxServerPacketHandler::I()->MakeSyncGameEntityLookAtDirectionPacket(gameEntityInfo);
+	RxGameSessionManager::I()->Broadcast(spSyncGameEntityLookAtDirPacket);
 }
 
 void GameRoom::ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove)
@@ -180,8 +180,37 @@ void GameRoom::ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayer
 	spGamePlayer->ApplyGameEntityMoveInfo(gamePlayerInfo);
 
 	// 변경된 사실을 모든 유저에게 전달
-	const RxSendBufferPtr& spSendSyncGamePlayer = RxServerPacketHandler::I()->MakeSyncGamePlayerMovePacket(gamePlayerInfo);
-	RxGameSessionManager::I()->Broadcast(spSendSyncGamePlayer);
+	const RxSendBufferPtr& spSyncGamePlayerMovePacket = RxServerPacketHandler::I()->MakeSyncGamePlayerMovePacket(gamePlayerInfo);
+	RxGameSessionManager::I()->Broadcast(spSyncGamePlayerMovePacket);
+}
+
+void GameRoom::ParsingPacket_SyncGameEntityState(const Protocol::C_SyncGameEntityState& syncGameEntityState)
+{
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityState.game_player_info();
+	GameEntityPtr spGameEntity = FindGameEntity(gameEntityInfo);
+	ASSERT_LOG(spGameEntity != nullptr);
+
+	spGameEntity->ApplyGameEntityState(gameEntityInfo);
+
+	// 변경된 사실을 모든 유저에게 전달
+	const RxSendBufferPtr& spSyncGameEntityStatePacket = RxServerPacketHandler::I()->MakeSyncGameEntityStatePacket(gameEntityInfo);
+	RxGameSessionManager::I()->Broadcast(spSyncGameEntityStatePacket);
+}
+
+GameEntityPtr GameRoom::FindGameEntity(const Protocol::GameEntityInfo& gameEntityInfo) const
+{
+	GameEntityPtr spGameEntity = nullptr;
+	switch (gameEntityInfo.entity_type())
+	{
+	case Protocol::EGameEntityType::Player:
+		spGameEntity = FindGamePlayer(gameEntityInfo.entity_id());
+		break;
+
+	case Protocol::EGameEntityType::Monster:
+		break;
+	}
+
+	return spGameEntity;
 }
 
 GamePlayerPtr GameRoom::FindGamePlayer(uint64 entityId) const

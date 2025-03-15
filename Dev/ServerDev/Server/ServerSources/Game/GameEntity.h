@@ -13,6 +13,7 @@ public:
 public:
 	void ApplyGameEntityLookAtDirection(const Protocol::GameEntityInfo& gameEntityInfo);
 	void ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo);
+	void ApplyGameEntityState(const Protocol::GameEntityInfo& gameEntityInfo);
 
 	Protocol::EGameEntityLookAtDir CalculateActorLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo);
 

@@ -55,12 +55,13 @@ enum EProtocolId : int {
   SyncGamePlayer = 4,
   SyncGameEntityLookAtDir = 5,
   SyncGamePlayerMove = 6,
+  SyncGameEntityState = 7,
   EProtocolId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   EProtocolId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool EProtocolId_IsValid(int value);
 constexpr EProtocolId EProtocolId_MIN = EnterGame;
-constexpr EProtocolId EProtocolId_MAX = SyncGamePlayerMove;
+constexpr EProtocolId EProtocolId_MAX = SyncGameEntityState;
 constexpr int EProtocolId_ARRAYSIZE = EProtocolId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EProtocolId_descriptor();

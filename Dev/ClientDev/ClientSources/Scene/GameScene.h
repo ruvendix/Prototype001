@@ -29,6 +29,7 @@ public:
 	void ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& syncGamePlayer);
 	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDir);
 	void ParsingPacket_SyncGamePlayerMove(const Protocol::S_SyncGamePlayerMove& syncGamePlayerMove);
+	void ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEntityState& syncGameEntityState);
 
 private:
 	std::shared_ptr<LocalPlayerActor> m_spLocalPlayerActor = nullptr;

@@ -51,3 +51,13 @@ message S_SyncGameEntityLookAtDir
 {
 	GameEntityInfo game_player_info = 1;
 }
+
+message C_SyncGameEntityState
+{
+	GameEntityInfo game_player_info = 1;
+}
+
+message S_SyncGameEntityState
+{
+	GameEntityInfo game_player_info = 1;
+}

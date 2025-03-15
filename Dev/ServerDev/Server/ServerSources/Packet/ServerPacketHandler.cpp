@@ -8,6 +8,7 @@ void RxServerPacketHandler::Startup()
 {
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityLookAtDir, &RxServerPacketHandler::HandlePacket_SyncGameEntityLookAtDirectionPacket);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGamePlayerMove, &RxServerPacketHandler::HandlePacket_SyncGamePlayerMovePacket);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityState, &RxServerPacketHandler::HandlePacket_SyncGameEntityStatePacket);
 }
 
 void RxServerPacketHandler::Cleanup()
@@ -94,6 +95,15 @@ RxSendBufferPtr RxServerPacketHandler::MakeSyncGamePlayerMovePacket(const Protoc
 	return MakeSendBuffer(syncGamePlayerMove, Protocol::EProtocolId::SyncGamePlayerMove);
 }
 
+RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntityStatePacket(const Protocol::GameEntityInfo& syncGameEntityInfo)
+{
+	Protocol::S_SyncGameEntityState syncGameEntityState;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityState.mutable_game_player_info();
+	(*pGameEntityInfo) = syncGameEntityInfo;
+
+	return MakeSendBuffer(syncGameEntityState, Protocol::EProtocolId::SyncGameEntityState);
+}
+
 void RxServerPacketHandler::HandlePacket_SyncGameEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes)
 {
 	START_PACKET_CONTENTS(buffer, Protocol::C_SyncGameEntityLookAtDir, packet);
@@ -106,4 +116,11 @@ void RxServerPacketHandler::HandlePacket_SyncGamePlayerMovePacket(BYTE* buffer, 
 	START_PACKET_CONTENTS(buffer, Protocol::C_SyncGamePlayerMove, packet);
 	GameRoom::I()->ParsingPacket_SyncGamePlayerMove(packet);
 	DEFAULT_TRACE_LOG("클라이언트로부터 이동 패킷 받음!");
+}
+
+void RxServerPacketHandler::HandlePacket_SyncGameEntityStatePacket(BYTE* buffer, int32 numOfBytes)
+{
+	START_PACKET_CONTENTS(buffer, Protocol::C_SyncGameEntityState, packet);
+	GameRoom::I()->ParsingPacket_SyncGameEntityState(packet);
+	DEFAULT_TRACE_LOG("클라이언트로부터 상태 패킷 받음!");
 }

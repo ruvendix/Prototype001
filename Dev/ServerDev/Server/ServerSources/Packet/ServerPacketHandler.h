@@ -19,6 +19,7 @@ public:
 	RxSendBufferPtr MakeSyncGamePlayerPacket(const Protocol::GameEntityInfo& syncGamePlayerInfo);
 	RxSendBufferPtr MakeSyncGameEntityLookAtDirectionPacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 	RxSendBufferPtr MakeSyncGamePlayerMovePacket(const Protocol::GameEntityInfo& syncGamePlayerInfo);
+	RxSendBufferPtr MakeSyncGameEntityStatePacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 
 private:
 	template <typename TPacket>
@@ -41,6 +42,7 @@ private:
 private:
 	void HandlePacket_SyncGameEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGamePlayerMovePacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_SyncGameEntityStatePacket(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

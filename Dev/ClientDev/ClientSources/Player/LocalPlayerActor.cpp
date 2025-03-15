@@ -11,7 +11,6 @@ class LocalPlayerActor::Pimpl
 public:
 	void InitializePlayerInput();
 
-	bool SpaceBarKeyHandlerImpl();
 	bool AKeyHandlerImpl(const InputActionValue* pInputAction);
 };
 
@@ -92,25 +91,6 @@ void LocalPlayerActor::Pimpl::InitializePlayerInput()
 #pragma endregion
 }
 
-bool LocalPlayerActor::Pimpl::SpaceBarKeyHandlerImpl()
-{
-	if (m_pOwner->IsSamePawnActorState<PawnActorIdleState>() == false)
-	{
-		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
-		return false;
-	}
-
-	// 현재 무기에 따라 작동
-	const std::shared_ptr<WeaponActor>& spPrimaryWeapon = m_pOwner->GetWeaponActor(EWeaponSlotType::Primary);
-	if (spPrimaryWeapon == nullptr)
-	{
-		return false;
-	}
-
-	spPrimaryWeapon->ApplyDynamicSpriteToOwner();
-	return true;
-}
-
 bool LocalPlayerActor::Pimpl::AKeyHandlerImpl(const InputActionValue* pInputAction)
 {
 	bool bIdleState = m_pOwner->IsSamePawnActorState<PawnActorIdleState>();
@@ -140,14 +120,6 @@ bool LocalPlayerActor::Pimpl::AKeyHandlerImpl(const InputActionValue* pInputActi
 		return false;
 	}
 
-	// 현재 무기에 따라 작동
-	const std::shared_ptr<WeaponActor>& spSecondaryWeapon = m_pOwner->GetWeaponActor(EWeaponSlotType::Secondary);
-	if (spSecondaryWeapon == nullptr)
-	{
-		return false;
-	}
-
-	spSecondaryWeapon->ApplyDynamicSpriteToOwner();
 	return true;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,13 +155,7 @@ void LocalPlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputActio
 
 void LocalPlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)
 {
-	if (m_spPimpl->SpaceBarKeyHandlerImpl() == false)
-	{
-		return;
-	}
-
-	ImmediatelyChangeState<PlayerAttackState>();
-	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
+	ProcessAttack();
 }
 
 void LocalPlayerActor::OnAKeyHandler(const InputActionValue* pInputAction)
@@ -199,6 +165,5 @@ void LocalPlayerActor::OnAKeyHandler(const InputActionValue* pInputAction)
 		return;
 	}
 
-	ImmediatelyChangeState<PlayerDefenceState>();
-	DEFAULT_TRACE_LOG("(기본 -> 방어) 상태로 전환!");
+	ProcessDefense();
 }

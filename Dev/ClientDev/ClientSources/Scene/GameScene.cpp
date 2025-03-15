@@ -41,7 +41,7 @@ void GameScene::Startup()
 	spWorldTileMapActor->ShowWorldTileGuideShape(false);
 
 	// 무기 공장 작동
-	//WeaponFactory::I()->Startup();
+	WeaponFactory::I()->Startup();
 
 	// 플레이어 액터 추가
 	//m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
@@ -199,4 +199,16 @@ void GameScene::ParsingPacket_SyncGamePlayerMove(const Protocol::S_SyncGamePlaye
 	}
 
 	spGamePlayerActor->SyncFromServer_GameEntityMove(gamePlayerInfo);
+}
+
+void GameScene::ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEntityState& syncGameEntityState)
+{
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityState.game_player_info();
+	const GameEntityActorPtr& spGameEntityActor = FindGameEntityActor(gameEntityInfo.entity_id());
+	if (spGameEntityActor == nullptr)
+	{
+		return;
+	}
+
+	spGameEntityActor->SyncFromServer_GameEntityState(gameEntityInfo);
 }

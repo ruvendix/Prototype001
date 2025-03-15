@@ -97,6 +97,7 @@ void WeaponFactory::Pimpl::InitializeProjectilePrototypes()
 	spArrow->AddActorStateKeyFrame<PawnActorIdleState>(0, 0, 3, Size{ 100, 100 }, RGB(128, 128, 128), 0.0f, EActorLookAtDirection::Up);
 
 	// 기본 스프라이트 설정
+	spArrow->SetActorLookAtDirection(EActorLookAtDirection::Down);
 	spArrow->ChangeActorStateDynamicSprite<PawnActorIdleState>();
 
 	auto insertedIter = refMapPrototypeProjectile.insert(std::make_pair(0, spArrow));

@@ -14,6 +14,10 @@ public:
 	virtual void Cleanup() override;
 
 	virtual void ProcessMoveDirection(const Vector2d& vMoveDir);
+	virtual void ProcessDefense();
+	virtual void ProcessAttack();
+
+	virtual void RegisterStateOnBidirectional();
 
 public:
 	template <typename TActorState>
@@ -29,10 +33,24 @@ public:
 		ASSERT_LOG(insertedIter.second == true);
 	}
 
+	template <typename TActorState>
+	void RegisterGameEntityState(Protocol::EGameEntityState gameEntityState)
+	{
+		auto foundIter = m_mapGameEntityState.find(TActorState::s_id);
+		if (foundIter != m_mapGameEntityState.cend())
+		{
+			return;
+		}
+
+		auto insertedIter = m_mapGameEntityState.insert(std::make_pair(TActorState::s_id, TO_NUM(gameEntityState)));
+		ASSERT_LOG(insertedIter.second == true);
+	}
+
 public:
 	void SyncFromServer_GameEntityInfo(const Protocol::GameEntityInfo& gameEntityInfo);
 	void SyncFromServer_GameEntityLookAtDirection(const Protocol::GameEntityInfo& gameEntityInfo);
 	void SyncFromServer_GameEntityMove(const Protocol::GameEntityInfo& gameEntityInfo);
+	void SyncFromServer_GameEntityState(const Protocol::GameEntityInfo& gameEntityInfo);
 
 	void SyncToServer_GameEntityInfoIfNeed();
 
@@ -43,14 +61,20 @@ public:
 	void ApplyActorLookAtDirectionFromServer(Protocol::EGameEntityLookAtDir gameEntityLookAtDir);
 
 	bool CheckClientAndServerIsSameLookAtDirection() const;
+	bool CheckClientAndServerIsSameGameEntityState() const;
+
+	Protocol::EGameEntityState FindGameEntityState(uint32 actorStateId) const;
+	PawnActorStatePtr FindActorState(Protocol::EGameEntityState gameEntityState) const;
 
 	uint64 GetGameEntityId() const { return (m_spGameEntityInfo->entity_id()); }
 
 private:
 	void SyncToServer_GameEntityLookAtDirectionIfNeed();
 	void SyncToServer_GameEntityMoveIfNeed();
+	void SyncToServer_GameEntityAttackIfNeed();
 
 private:
+	std::unordered_map<uint32, uint32> m_mapGameEntityState;
 	std::unordered_map<uint32, PawnActorStatePtr> m_mapActorState;
 	std::shared_ptr<Protocol::GameEntityInfo> m_spGameEntityInfo;
 };
