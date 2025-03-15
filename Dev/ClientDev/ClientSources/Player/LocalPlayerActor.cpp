@@ -120,7 +120,7 @@ bool LocalPlayerActor::Pimpl::AKeyHandlerImpl(const InputActionValue* pInputActi
 	{
 		if (m_pOwner->IsSamePawnActorState<PlayerDefenceState>())
 		{
-			const std::shared_ptr<PlayerDefenceState>& spPlayerDefenceState = m_pOwner->GetCurrentPawnActorState<PlayerDefenceState>();
+			const std::shared_ptr<PlayerDefenceState>& spPlayerDefenceState = m_pOwner->GetCurrentExactPawnActorState<PlayerDefenceState>();
 			if (spPlayerDefenceState->CheckKnockbackExisted() == false)
 			{
 				m_pOwner->ImmediatelyChangeState<PawnActorIdleState>();

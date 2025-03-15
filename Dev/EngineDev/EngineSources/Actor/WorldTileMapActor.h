@@ -16,12 +16,16 @@ public:
 	virtual void SaveToFileStream(const FileStream& fileStream) const override;
 	virtual void LoadFromFileStream(const FileStream& fileStream) override;
 
+public:
 	void ApplyCurrentMousePositionToTile();
 	bool CheckMovingAvailableTile(const Position2d& cellPos) const;
 
 	int32 ConvertCellPositionToTileIndex(const Position2d& cellPos) const;
 	void ShowWorldTileGuideShape(bool bShow);
 
+	void SetUseResources(bool bUseRes) { m_bUseRes = bUseRes; }
+
 private:
 	Array2dInfo m_tileArray2dInfo;
+	bool m_bUseRes = true;
 };

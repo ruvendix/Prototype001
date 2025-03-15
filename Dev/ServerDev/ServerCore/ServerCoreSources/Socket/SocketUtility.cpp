@@ -45,11 +45,11 @@ int32 RxSocketUtility::HandleLastError()
 	switch (lastErrorCode)
 	{
 	case WSA_INVALID_HANDLE:
-		DEFAULT_TRACE_LOG("유효하지 않은 핸들\n");
+		DEFAULT_TRACE_LOG("유효하지 않은 핸들");
 		break;
 
 	case WSA_OPERATION_ABORTED:
-		DEFAULT_TRACE_LOG("작업 중단\n");
+		DEFAULT_TRACE_LOG("작업 중단");
 		break;
 
 	case WSA_IO_PENDING:

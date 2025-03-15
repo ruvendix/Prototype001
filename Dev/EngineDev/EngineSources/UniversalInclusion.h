@@ -27,3 +27,21 @@
 
 #include "EngineSources/Time/TimeUtility.h"
 #include "EngineSources/Time/TimerManager.h"
+
+#include "EngineSources/World/WorldContext.h"
+
+#include "EngineSources/Component/Component.h"
+#include "EngineSources/Component/TransformComponent.h"
+#include "EngineSources/Component/CellActorMoveComponent.h"
+#include "EngineSources/Component/CameraComponent.h"
+#include "EngineSources/Component/RenderComponent/RenderComponent.h"
+#include "EngineSources/Component/RenderComponent/StaticSpriteComponent.h"
+#include "EngineSources/Component/RenderComponent/DynamicSpriteComponent.h"
+
+#include "EngineSources/Actor/ActorDataTypes.h"
+#include "EngineSources/Actor/Actor.h"
+#include "EngineSources/Actor/CameraActor.h"
+#include "EngineSources/Actor/CellActor.h"
+#include "EngineSources/Actor/EffectActor/EffectActor.h"
+#include "EngineSources/Actor/PawnActor/PawnActor.h"
+#include "EngineSources/Actor/WorldTileMapActor.h"

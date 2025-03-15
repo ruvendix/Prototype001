@@ -181,12 +181,12 @@ class GameEntityInfo final :
     kEntityIdFieldNumber = 1,
     kCellPosXFieldNumber = 2,
     kCellPosYFieldNumber = 3,
-    kEntityTypeFieldNumber = 4,
-    kLookAtDirFieldNumber = 5,
-    kActionStateIdFieldNumber = 6,
-    kMaxHpFieldNumber = 7,
-    kHpFieldNumber = 8,
-    kAttackFieldNumber = 9,
+    kMaxHpFieldNumber = 4,
+    kHpFieldNumber = 5,
+    kAttackFieldNumber = 6,
+    kEntityTypeFieldNumber = 7,
+    kEntityeLookAtDirFieldNumber = 8,
+    kEntityStateFieldNumber = 9,
   };
   // uint64 entity_id = 1;
   void clear_entity_id();
@@ -215,34 +215,7 @@ class GameEntityInfo final :
   void _internal_set_cell_pos_y(uint32_t value);
   public:
 
-  // .Protocol.EGameEntityType entity_type = 4;
-  void clear_entity_type();
-  ::Protocol::EGameEntityType entity_type() const;
-  void set_entity_type(::Protocol::EGameEntityType value);
-  private:
-  ::Protocol::EGameEntityType _internal_entity_type() const;
-  void _internal_set_entity_type(::Protocol::EGameEntityType value);
-  public:
-
-  // .Protocol.EActorLookAtDir look_at_dir = 5;
-  void clear_look_at_dir();
-  ::Protocol::EActorLookAtDir look_at_dir() const;
-  void set_look_at_dir(::Protocol::EActorLookAtDir value);
-  private:
-  ::Protocol::EActorLookAtDir _internal_look_at_dir() const;
-  void _internal_set_look_at_dir(::Protocol::EActorLookAtDir value);
-  public:
-
-  // uint32 action_state_id = 6;
-  void clear_action_state_id();
-  uint32_t action_state_id() const;
-  void set_action_state_id(uint32_t value);
-  private:
-  uint32_t _internal_action_state_id() const;
-  void _internal_set_action_state_id(uint32_t value);
-  public:
-
-  // uint32 max_hp = 7;
+  // uint32 max_hp = 4;
   void clear_max_hp();
   uint32_t max_hp() const;
   void set_max_hp(uint32_t value);
@@ -251,7 +224,7 @@ class GameEntityInfo final :
   void _internal_set_max_hp(uint32_t value);
   public:
 
-  // uint32 hp = 8;
+  // uint32 hp = 5;
   void clear_hp();
   uint32_t hp() const;
   void set_hp(uint32_t value);
@@ -260,13 +233,40 @@ class GameEntityInfo final :
   void _internal_set_hp(uint32_t value);
   public:
 
-  // uint32 attack = 9;
+  // uint32 attack = 6;
   void clear_attack();
   uint32_t attack() const;
   void set_attack(uint32_t value);
   private:
   uint32_t _internal_attack() const;
   void _internal_set_attack(uint32_t value);
+  public:
+
+  // .Protocol.EGameEntityType entity_type = 7;
+  void clear_entity_type();
+  ::Protocol::EGameEntityType entity_type() const;
+  void set_entity_type(::Protocol::EGameEntityType value);
+  private:
+  ::Protocol::EGameEntityType _internal_entity_type() const;
+  void _internal_set_entity_type(::Protocol::EGameEntityType value);
+  public:
+
+  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
+  void clear_entitye_look_at_dir();
+  ::Protocol::EGameEntityLookAtDir entitye_look_at_dir() const;
+  void set_entitye_look_at_dir(::Protocol::EGameEntityLookAtDir value);
+  private:
+  ::Protocol::EGameEntityLookAtDir _internal_entitye_look_at_dir() const;
+  void _internal_set_entitye_look_at_dir(::Protocol::EGameEntityLookAtDir value);
+  public:
+
+  // .Protocol.EGameEntityState entity_state = 9;
+  void clear_entity_state();
+  ::Protocol::EGameEntityState entity_state() const;
+  void set_entity_state(::Protocol::EGameEntityState value);
+  private:
+  ::Protocol::EGameEntityState _internal_entity_state() const;
+  void _internal_set_entity_state(::Protocol::EGameEntityState value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.GameEntityInfo)
@@ -280,12 +280,12 @@ class GameEntityInfo final :
     uint64_t entity_id_;
     uint32_t cell_pos_x_;
     uint32_t cell_pos_y_;
-    int entity_type_;
-    int look_at_dir_;
-    uint32_t action_state_id_;
     uint32_t max_hp_;
     uint32_t hp_;
     uint32_t attack_;
+    int entity_type_;
+    int entitye_look_at_dir_;
+    int entity_state_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -362,67 +362,7 @@ inline void GameEntityInfo::set_cell_pos_y(uint32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.cell_pos_y)
 }
 
-// .Protocol.EGameEntityType entity_type = 4;
-inline void GameEntityInfo::clear_entity_type() {
-  _impl_.entity_type_ = 0;
-}
-inline ::Protocol::EGameEntityType GameEntityInfo::_internal_entity_type() const {
-  return static_cast< ::Protocol::EGameEntityType >(_impl_.entity_type_);
-}
-inline ::Protocol::EGameEntityType GameEntityInfo::entity_type() const {
-  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.entity_type)
-  return _internal_entity_type();
-}
-inline void GameEntityInfo::_internal_set_entity_type(::Protocol::EGameEntityType value) {
-  
-  _impl_.entity_type_ = value;
-}
-inline void GameEntityInfo::set_entity_type(::Protocol::EGameEntityType value) {
-  _internal_set_entity_type(value);
-  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.entity_type)
-}
-
-// .Protocol.EActorLookAtDir look_at_dir = 5;
-inline void GameEntityInfo::clear_look_at_dir() {
-  _impl_.look_at_dir_ = 0;
-}
-inline ::Protocol::EActorLookAtDir GameEntityInfo::_internal_look_at_dir() const {
-  return static_cast< ::Protocol::EActorLookAtDir >(_impl_.look_at_dir_);
-}
-inline ::Protocol::EActorLookAtDir GameEntityInfo::look_at_dir() const {
-  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.look_at_dir)
-  return _internal_look_at_dir();
-}
-inline void GameEntityInfo::_internal_set_look_at_dir(::Protocol::EActorLookAtDir value) {
-  
-  _impl_.look_at_dir_ = value;
-}
-inline void GameEntityInfo::set_look_at_dir(::Protocol::EActorLookAtDir value) {
-  _internal_set_look_at_dir(value);
-  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.look_at_dir)
-}
-
-// uint32 action_state_id = 6;
-inline void GameEntityInfo::clear_action_state_id() {
-  _impl_.action_state_id_ = 0u;
-}
-inline uint32_t GameEntityInfo::_internal_action_state_id() const {
-  return _impl_.action_state_id_;
-}
-inline uint32_t GameEntityInfo::action_state_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.action_state_id)
-  return _internal_action_state_id();
-}
-inline void GameEntityInfo::_internal_set_action_state_id(uint32_t value) {
-  
-  _impl_.action_state_id_ = value;
-}
-inline void GameEntityInfo::set_action_state_id(uint32_t value) {
-  _internal_set_action_state_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.action_state_id)
-}
-
-// uint32 max_hp = 7;
+// uint32 max_hp = 4;
 inline void GameEntityInfo::clear_max_hp() {
   _impl_.max_hp_ = 0u;
 }
@@ -442,7 +382,7 @@ inline void GameEntityInfo::set_max_hp(uint32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.max_hp)
 }
 
-// uint32 hp = 8;
+// uint32 hp = 5;
 inline void GameEntityInfo::clear_hp() {
   _impl_.hp_ = 0u;
 }
@@ -462,7 +402,7 @@ inline void GameEntityInfo::set_hp(uint32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.hp)
 }
 
-// uint32 attack = 9;
+// uint32 attack = 6;
 inline void GameEntityInfo::clear_attack() {
   _impl_.attack_ = 0u;
 }
@@ -480,6 +420,66 @@ inline void GameEntityInfo::_internal_set_attack(uint32_t value) {
 inline void GameEntityInfo::set_attack(uint32_t value) {
   _internal_set_attack(value);
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.attack)
+}
+
+// .Protocol.EGameEntityType entity_type = 7;
+inline void GameEntityInfo::clear_entity_type() {
+  _impl_.entity_type_ = 0;
+}
+inline ::Protocol::EGameEntityType GameEntityInfo::_internal_entity_type() const {
+  return static_cast< ::Protocol::EGameEntityType >(_impl_.entity_type_);
+}
+inline ::Protocol::EGameEntityType GameEntityInfo::entity_type() const {
+  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.entity_type)
+  return _internal_entity_type();
+}
+inline void GameEntityInfo::_internal_set_entity_type(::Protocol::EGameEntityType value) {
+  
+  _impl_.entity_type_ = value;
+}
+inline void GameEntityInfo::set_entity_type(::Protocol::EGameEntityType value) {
+  _internal_set_entity_type(value);
+  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.entity_type)
+}
+
+// .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
+inline void GameEntityInfo::clear_entitye_look_at_dir() {
+  _impl_.entitye_look_at_dir_ = 0;
+}
+inline ::Protocol::EGameEntityLookAtDir GameEntityInfo::_internal_entitye_look_at_dir() const {
+  return static_cast< ::Protocol::EGameEntityLookAtDir >(_impl_.entitye_look_at_dir_);
+}
+inline ::Protocol::EGameEntityLookAtDir GameEntityInfo::entitye_look_at_dir() const {
+  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.entitye_look_at_dir)
+  return _internal_entitye_look_at_dir();
+}
+inline void GameEntityInfo::_internal_set_entitye_look_at_dir(::Protocol::EGameEntityLookAtDir value) {
+  
+  _impl_.entitye_look_at_dir_ = value;
+}
+inline void GameEntityInfo::set_entitye_look_at_dir(::Protocol::EGameEntityLookAtDir value) {
+  _internal_set_entitye_look_at_dir(value);
+  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.entitye_look_at_dir)
+}
+
+// .Protocol.EGameEntityState entity_state = 9;
+inline void GameEntityInfo::clear_entity_state() {
+  _impl_.entity_state_ = 0;
+}
+inline ::Protocol::EGameEntityState GameEntityInfo::_internal_entity_state() const {
+  return static_cast< ::Protocol::EGameEntityState >(_impl_.entity_state_);
+}
+inline ::Protocol::EGameEntityState GameEntityInfo::entity_state() const {
+  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.entity_state)
+  return _internal_entity_state();
+}
+inline void GameEntityInfo::_internal_set_entity_state(::Protocol::EGameEntityState value) {
+  
+  _impl_.entity_state_ = value;
+}
+inline void GameEntityInfo::set_entity_state(::Protocol::EGameEntityState value) {
+  _internal_set_entity_state(value);
+  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.entity_state)
 }
 
 #ifdef __GNUC__

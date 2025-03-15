@@ -6,6 +6,7 @@ class PlayerActor;
 
 class EnemyMonsterActor : public PawnActor
 {
+	DEFINE_ROOT_COMPILETIME_ID_CLASS;
 	using Super = PawnActor;
 
 public:

@@ -5,6 +5,8 @@ DECLARE_COMPILETIMER_COUNTER(ComponentIdCounter);
 
 class Component : public ICoreLoop
 {
+	DEFINE_ROOT_COMPILETIME_ID_CLASS;
+
 public:
 	Component();
 	virtual ~Component();

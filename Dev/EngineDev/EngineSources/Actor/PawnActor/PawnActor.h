@@ -143,16 +143,21 @@ public:
 	template <typename TPawnActorState>
 	bool IsSamePawnActorState() const
 	{
-		return (GetCurrentPawnActorState<TPawnActorState>() != nullptr);
+		return (GetCurrentExactPawnActorState<TPawnActorState>() != nullptr);
 	}
 
 	template <typename TPawnActorState>
-	std::shared_ptr<TPawnActorState> GetCurrentPawnActorState() const
+	std::shared_ptr<TPawnActorState> GetCurrentExactPawnActorState() const
 	{
 		return (std::dynamic_pointer_cast<TPawnActorState>(m_spPawnActorState));
 	}
 
 public:
+	void ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActorState);
+	void ApplyLookAtDirectionToCurrentDynamicSprite();
+
+	DynamicSpritePtr FindCurrentActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const;
+
 	void ApplyMoveDirectionToLookAtDirection(const Vector2d& vMoveDir);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath, EActorLookAtDirection actorLookAtDir);
@@ -169,7 +174,10 @@ public:
 	void SetWorldTileMapActor(const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor) { m_spWorldTileMapActor = spWorldTileMapActor; }
 	const std::shared_ptr<WorldTileMapActor>& GetWorldTileMapActor() const { return m_spWorldTileMapActor; }
 
+	void SetActorLookAtDirection(EActorLookAtDirection lookAtDir) { m_lookAtDir = lookAtDir; }
 	EActorLookAtDirection GetActorLookAtDirection() const { return m_lookAtDir; }
+
+	PawnActorStatePtr GetCurrentPawnActorState() const { return m_spPawnActorState; };
 
 private:
 	void OnChangePawnActorState(const PawnActorStatePtr& spPawnActorState);
@@ -178,7 +186,7 @@ private:
 	static ActorLookAtStringTable g_actorLookAtStringTable;
 
 private:
-	EActorLookAtDirection m_lookAtDir = EActorLookAtDirection::Down;
+	EActorLookAtDirection m_lookAtDir = EActorLookAtDirection::Count;
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 
 	ActorLookAtStringTable m_actorLookAtDirTexturePathTable;

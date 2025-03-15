@@ -5,6 +5,8 @@
 #include "GameSessionManager.h"
 #include "Packet/ServerPacketHandler.h"
 
+DEFINE_COMPILETIMER_COUNTER(UserIdCounter);
+
 RxGameSession::RxGameSession()
 {
 	DEFAULT_TRACE_LOG("(%p 게임 세션) 생성!\n", this);
@@ -21,7 +23,8 @@ void RxGameSession::ProcessConnectImpl()
 	RxGameSessionManager::I()->AddGameSession(spGameSession);
 
 	// 클라이언트 입장!
-	Send(RxServerPacketHandler::I()->MakeEnterGamePacket());
+	m_userId = GET_NEXT_COMPILEITME_ID(UserIdCounter);
+	Send(RxServerPacketHandler::I()->MakeEnterGamePacket(m_userId));
 
 	// 클라이언트를 방에 입장!
 	GameRoom::I()->EnterGameRoom(spGameSession);
@@ -30,6 +33,9 @@ void RxGameSession::ProcessConnectImpl()
 
 void RxGameSession::ProcessDisconnectImpl()
 {
+	// 나갔으므로 모든 게임 세션에게 알림
+	RxGameSessionManager::I()->Broadcast(RxServerPacketHandler::I()->MakeLeaveGamePacket(m_userId, m_spGamePlayer.lock()));
+
 	const RxGameSessionPtr& spGameSession = SharedFromThisExactType<RxGameSession>();
 	RxGameSessionManager::I()->RemoveGameSession(spGameSession);
 

@@ -10,7 +10,11 @@ public:
 	virtual void Startup() override;
 	virtual void Cleanup() override;
 
+public:
+	void ApplyGameEntityLookAtDirection(const Protocol::GameEntityInfo& gameEntityInfo);
 	void ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo);
+
+	Protocol::EGameEntityLookAtDir CalculateActorLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo);
 
 	void SetGameEntityInfo(const Protocol::GameEntityInfo& gameEntityInfo) { m_gameEntityInfo = gameEntityInfo; }
 

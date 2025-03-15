@@ -34,11 +34,14 @@ void GameScene::Startup()
 	spHitEffect->SetDynamicSprite(spOneTimeHitEffectDynamicSprite);
 #pragma endregion
 
+	const std::shared_ptr<WorldBackgroundActor>& spWorldBackgroundActor = GetWorldBackgroundActor();
+	spWorldBackgroundActor->SetActorFlagBitOff(EActorFlag::RenderingTarget);
+
 	const std::shared_ptr<WorldTileMapActor>& spWorldTileMapActor = GetWorldTileMapActor();
 	spWorldTileMapActor->ShowWorldTileGuideShape(false);
 
 	// 무기 공장 작동
-	WeaponFactory::I()->Startup();
+	//WeaponFactory::I()->Startup();
 
 	// 플레이어 액터 추가
 	//m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
@@ -102,6 +105,19 @@ GameEntityActorPtr GameScene::FindGameEntityActor(uint64 gameEntityId) const
 	return nullptr;
 }
 
+void GameScene::ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leaveGamePacket)
+{
+	DEFAULT_TRACE_LOG("%lld 유저 나감", leaveGamePacket.user_id());
+	const Protocol::GameEntityInfo& leaveGamePlayerInfo = leaveGamePacket.game_player_info();
+	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(leaveGamePlayerInfo.entity_id());
+	if (spGamePlayerActor == nullptr)
+	{
+		return;
+	}
+
+	ReserveEraseActor(spGamePlayerActor);
+}
+
 void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket)
 {
 	const Protocol::GameEntityInfo& localGamePlayerInfo = createLocalGamePlayerPacket.local_game_player_info();
@@ -110,6 +126,10 @@ void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLoca
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spLocalPlayerActor);
+
+	// 월드 배경 렌더링 시작
+	const std::shared_ptr<WorldBackgroundActor>& spWorldBackgroundActor = GetWorldBackgroundActor();
+	spWorldBackgroundActor->SetActorFlagBitOn(EActorFlag::RenderingTarget);
 }
 
 void GameScene::ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntities)
@@ -155,6 +175,18 @@ void GameScene::ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& s
 	}
 
 	spGamePlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
+}
+
+void GameScene::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDir)
+{
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDir.game_player_info();
+	const GameEntityActorPtr& spGameEntityActor = FindGameEntityActor(gameEntityInfo.entity_id());
+	if (spGameEntityActor == nullptr)
+	{
+		return;
+	}
+
+	spGameEntityActor->SyncFromServer_GameEntityLookAtDirection(gameEntityInfo);
 }
 
 void GameScene::ParsingPacket_SyncGamePlayerMove(const Protocol::S_SyncGamePlayerMove& syncGamePlayerMove)

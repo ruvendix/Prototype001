@@ -1,7 +1,7 @@
 syntax = "proto3";
 package Protocol;
 
-enum EActorLookAtDir
+enum EGameEntityLookAtDir
 {
 	Left = 0;
 	Up = 1;
@@ -14,4 +14,13 @@ enum EGameEntityType
 {
 	Player = 0;
 	Monster = 1;
+}
+
+enum EGameEntityState
+{
+	Idle = 0;
+	Walk = 1;
+	Attack = 2;
+	Defense = 3;
+	Chase = 4;
 }

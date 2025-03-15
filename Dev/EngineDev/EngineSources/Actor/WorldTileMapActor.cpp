@@ -91,7 +91,11 @@ void WorldTileMapActor::LoadFromFileStream(const FileStream& fileStream)
 			// 타일은 씬 액터로 만들기! (셀 좌표가 필요함)
 			const std::shared_ptr<WorldTileActor> spWorldTileActor = Scene::CreateActor<WorldTileActor>(EActorLayerType::WorldForeground);
 			spWorldTileActor->LoadFromFileStream(fileStream);
-			spWorldTileActor->InitializeWorldTile(x, y, strWorldTileSpritePath);
+			
+			if (m_bUseRes == true)
+			{
+				spWorldTileActor->InitializeWorldTile(x, y, strWorldTileSpritePath);
+			}
 
 			AddChild(spWorldTileActor);
 		}

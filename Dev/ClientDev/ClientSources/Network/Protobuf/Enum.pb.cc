@@ -22,21 +22,23 @@ namespace _pbi = _pb::internal;
 
 namespace Protocol {
 }  // namespace Protocol
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[2];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[3];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Enum_2eproto = nullptr;
 const uint32_t TableStruct_Enum_2eproto::offsets[1] = {};
 static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010Protocol*C\n\017EActorLookAtDi"
-  "r\022\010\n\004Left\020\000\022\006\n\002Up\020\001\022\t\n\005Right\020\002\022\010\n\004Down\020\003"
-  "\022\t\n\005Count\020\004**\n\017EGameEntityType\022\n\n\006Player"
-  "\020\000\022\013\n\007Monster\020\001b\006proto3"
+  "\n\nEnum.proto\022\010Protocol*H\n\024EGameEntityLoo"
+  "kAtDir\022\010\n\004Left\020\000\022\006\n\002Up\020\001\022\t\n\005Right\020\002\022\010\n\004D"
+  "own\020\003\022\t\n\005Count\020\004**\n\017EGameEntityType\022\n\n\006P"
+  "layer\020\000\022\013\n\007Monster\020\001*J\n\020EGameEntityState"
+  "\022\010\n\004Idle\020\000\022\010\n\004Walk\020\001\022\n\n\006Attack\020\002\022\013\n\007Defe"
+  "nse\020\003\022\t\n\005Chase\020\004b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 143, descriptor_table_protodef_Enum_2eproto,
+    false, false, 224, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -50,11 +52,11 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_Enum_2ep
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_Enum_2eproto(&descriptor_table_Enum_2eproto);
 namespace Protocol {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EActorLookAtDir_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityLookAtDir_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[0];
 }
-bool EActorLookAtDir_IsValid(int value) {
+bool EGameEntityLookAtDir_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -75,6 +77,23 @@ bool EGameEntityType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityState_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[2];
+}
+bool EGameEntityState_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
       return true;
     default:
       return false;

@@ -10,6 +10,13 @@ message S_EnterGame
 	uint64 user_id = 2;
 }
 
+message S_LeaveGame
+{
+	bool leave_success = 1;
+	uint64 user_id = 2;
+	GameEntityInfo game_player_info = 3;
+}
+
 message S_CreateLocalGamePlayer
 {
 	GameEntityInfo local_game_player_info = 1;
@@ -31,6 +38,16 @@ message C_SyncGamePlayerMove
 }
 
 message S_SyncGamePlayerMove
+{
+	GameEntityInfo game_player_info = 1;
+}
+
+message C_SyncGameEntityLookAtDir
+{
+	GameEntityInfo game_player_info = 1;
+}
+
+message S_SyncGameEntityLookAtDir
 {
 	GameEntityInfo game_player_info = 1;
 }

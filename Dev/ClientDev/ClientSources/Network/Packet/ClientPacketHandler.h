@@ -15,6 +15,7 @@ public:
 	void HandlePacket(BYTE* buffer, int32 numOfBytes);
 
 	RxSendBufferPtr MakeSyncGamePlayerMovePacket(const std::shared_ptr<Protocol::GameEntityInfo>& spGamePlayerInfo);
+	RxSendBufferPtr MakeSyncGameEntityLookAtDirectionPacket(const std::shared_ptr<Protocol::GameEntityInfo>& spGameEntityInfo);
 
 private:
 	template <typename TPacket>
@@ -36,9 +37,11 @@ private:
 
 private:
 	void HandlePacket_EnterGame(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_LeaveGame(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_CreateLocalGamePlayer(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGameEntities(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGamePlayer(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_SyncGameEntityLookAtDirection(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGamePlayerMove(BYTE* buffer, int32 numOfBytes);
 
 private:

@@ -18,6 +18,7 @@ public:
 public:
 	bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const Actor* pExcludeActor) const override;
 
+	const std::shared_ptr<WorldBackgroundActor>& GetWorldBackgroundActor() const { return m_spWorldBackgroundActor; }
 	const std::shared_ptr<WorldTileMapActor>& GetWorldTileMapActor() const { return m_spWorldTileMapActor; }
 
 private:

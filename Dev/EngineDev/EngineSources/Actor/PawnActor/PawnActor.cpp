@@ -81,6 +81,37 @@ void PawnActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 
 }
 
+void PawnActor::ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActorState)
+{
+	m_spPawnActorState = spActorState;
+	m_spPawnActorState->Startup();
+	DEFAULT_TRACE_LOG("외부로부터 애니메이션 액터 상태 변경! (즉시)");
+}
+
+void PawnActor::ApplyLookAtDirectionToCurrentDynamicSprite()
+{
+	DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
+	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
+
+	DynamicSpritePtr spChangeActorStateDynamicSprite = FindCurrentActorStateLookAtDynamicSprite(m_lookAtDir);
+	if (spChangeActorStateDynamicSprite != nullptr)
+	{
+		pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
+	}
+}
+
+DynamicSpritePtr PawnActor::FindCurrentActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const
+{
+	auto foundIter = m_mapActorStateDynamicSprite.find(m_spPawnActorState->CompiletimeId());
+	if (foundIter == m_mapActorStateDynamicSprite.cend())
+	{
+		return nullptr;
+	}
+
+	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
+	return (actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)]);
+}
+
 // 실수니까 정확히 체크
 void PawnActor::ApplyMoveDirectionToLookAtDirection(const Vector2d& vMoveDir)
 {

@@ -26,12 +26,12 @@ PROTOBUF_CONSTEXPR GameEntityInfo::GameEntityInfo(
     /*decltype(_impl_.entity_id_)*/uint64_t{0u}
   , /*decltype(_impl_.cell_pos_x_)*/0u
   , /*decltype(_impl_.cell_pos_y_)*/0u
-  , /*decltype(_impl_.entity_type_)*/0
-  , /*decltype(_impl_.look_at_dir_)*/0
-  , /*decltype(_impl_.action_state_id_)*/0u
   , /*decltype(_impl_.max_hp_)*/0u
   , /*decltype(_impl_.hp_)*/0u
   , /*decltype(_impl_.attack_)*/0u
+  , /*decltype(_impl_.entity_type_)*/0
+  , /*decltype(_impl_.entitye_look_at_dir_)*/0
+  , /*decltype(_impl_.entity_state_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct GameEntityInfoDefaultTypeInternal {
   PROTOBUF_CONSTEXPR GameEntityInfoDefaultTypeInternal()
@@ -57,12 +57,12 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_id_),
   PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.cell_pos_x_),
   PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.cell_pos_y_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_type_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.look_at_dir_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.action_state_id_),
   PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.max_hp_),
   PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.hp_),
   PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.attack_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_type_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entitye_look_at_dir_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_state_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::GameEntityInfo)},
@@ -73,21 +73,22 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\360\001\n"
+  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\226\002\n"
   "\016GameEntityInfo\022\021\n\tentity_id\030\001 \001(\004\022\022\n\nce"
-  "ll_pos_x\030\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022.\n\013en"
-  "tity_type\030\004 \001(\0162\031.Protocol.EGameEntityTy"
-  "pe\022.\n\013look_at_dir\030\005 \001(\0162\031.Protocol.EActo"
-  "rLookAtDir\022\027\n\017action_state_id\030\006 \001(\r\022\016\n\006m"
-  "ax_hp\030\007 \001(\r\022\n\n\002hp\030\010 \001(\r\022\016\n\006attack\030\t \001(\rb"
-  "\006proto3"
+  "ll_pos_x\030\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022\016\n\006ma"
+  "x_hp\030\004 \001(\r\022\n\n\002hp\030\005 \001(\r\022\016\n\006attack\030\006 \001(\r\022."
+  "\n\013entity_type\030\007 \001(\0162\031.Protocol.EGameEnti"
+  "tyType\022;\n\023entitye_look_at_dir\030\010 \001(\0162\036.Pr"
+  "otocol.EGameEntityLookAtDir\0220\n\014entity_st"
+  "ate\030\t \001(\0162\032.Protocol.EGameEntityStateb\006p"
+  "roto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 287, descriptor_table_protodef_Struct_2eproto,
+    false, false, 325, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
     &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 1,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
@@ -121,18 +122,18 @@ GameEntityInfo::GameEntityInfo(const GameEntityInfo& from)
       decltype(_impl_.entity_id_){}
     , decltype(_impl_.cell_pos_x_){}
     , decltype(_impl_.cell_pos_y_){}
-    , decltype(_impl_.entity_type_){}
-    , decltype(_impl_.look_at_dir_){}
-    , decltype(_impl_.action_state_id_){}
     , decltype(_impl_.max_hp_){}
     , decltype(_impl_.hp_){}
     , decltype(_impl_.attack_){}
+    , decltype(_impl_.entity_type_){}
+    , decltype(_impl_.entitye_look_at_dir_){}
+    , decltype(_impl_.entity_state_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&_impl_.entity_id_, &from._impl_.entity_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.attack_) -
-    reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.attack_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.entity_state_) -
+    reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.entity_state_));
   // @@protoc_insertion_point(copy_constructor:Protocol.GameEntityInfo)
 }
 
@@ -144,12 +145,12 @@ inline void GameEntityInfo::SharedCtor(
       decltype(_impl_.entity_id_){uint64_t{0u}}
     , decltype(_impl_.cell_pos_x_){0u}
     , decltype(_impl_.cell_pos_y_){0u}
-    , decltype(_impl_.entity_type_){0}
-    , decltype(_impl_.look_at_dir_){0}
-    , decltype(_impl_.action_state_id_){0u}
     , decltype(_impl_.max_hp_){0u}
     , decltype(_impl_.hp_){0u}
     , decltype(_impl_.attack_){0u}
+    , decltype(_impl_.entity_type_){0}
+    , decltype(_impl_.entitye_look_at_dir_){0}
+    , decltype(_impl_.entity_state_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -178,8 +179,8 @@ void GameEntityInfo::Clear() {
   (void) cached_has_bits;
 
   ::memset(&_impl_.entity_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.attack_) -
-      reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.attack_));
+      reinterpret_cast<char*>(&_impl_.entity_state_) -
+      reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.entity_state_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -213,53 +214,54 @@ const char* GameEntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.EGameEntityType entity_type = 4;
+      // uint32 max_hp = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.max_hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 hp = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          _impl_.hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 attack = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          _impl_.attack_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.EGameEntityType entity_type = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_entity_type(static_cast<::Protocol::EGameEntityType>(val));
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.EActorLookAtDir look_at_dir = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_set_look_at_dir(static_cast<::Protocol::EActorLookAtDir>(val));
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 action_state_id = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
-          _impl_.action_state_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 max_hp = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
-          _impl_.max_hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 hp = 8;
+      // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
-          _impl_.hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
+          _internal_set_entitye_look_at_dir(static_cast<::Protocol::EGameEntityLookAtDir>(val));
         } else
           goto handle_unusual;
         continue;
-      // uint32 attack = 9;
+      // .Protocol.EGameEntityState entity_state = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
-          _impl_.attack_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
+          _internal_set_entity_state(static_cast<::Protocol::EGameEntityState>(val));
         } else
           goto handle_unusual;
         continue;
@@ -310,42 +312,43 @@ uint8_t* GameEntityInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_cell_pos_y(), target);
   }
 
-  // .Protocol.EGameEntityType entity_type = 4;
+  // uint32 max_hp = 4;
+  if (this->_internal_max_hp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_max_hp(), target);
+  }
+
+  // uint32 hp = 5;
+  if (this->_internal_hp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(5, this->_internal_hp(), target);
+  }
+
+  // uint32 attack = 6;
+  if (this->_internal_attack() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_attack(), target);
+  }
+
+  // .Protocol.EGameEntityType entity_type = 7;
   if (this->_internal_entity_type() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      4, this->_internal_entity_type(), target);
+      7, this->_internal_entity_type(), target);
   }
 
-  // .Protocol.EActorLookAtDir look_at_dir = 5;
-  if (this->_internal_look_at_dir() != 0) {
+  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
+  if (this->_internal_entitye_look_at_dir() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      5, this->_internal_look_at_dir(), target);
+      8, this->_internal_entitye_look_at_dir(), target);
   }
 
-  // uint32 action_state_id = 6;
-  if (this->_internal_action_state_id() != 0) {
+  // .Protocol.EGameEntityState entity_state = 9;
+  if (this->_internal_entity_state() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_action_state_id(), target);
-  }
-
-  // uint32 max_hp = 7;
-  if (this->_internal_max_hp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(7, this->_internal_max_hp(), target);
-  }
-
-  // uint32 hp = 8;
-  if (this->_internal_hp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(8, this->_internal_hp(), target);
-  }
-
-  // uint32 attack = 9;
-  if (this->_internal_attack() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(9, this->_internal_attack(), target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      9, this->_internal_entity_state(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -379,36 +382,37 @@ size_t GameEntityInfo::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_cell_pos_y());
   }
 
-  // .Protocol.EGameEntityType entity_type = 4;
+  // uint32 max_hp = 4;
+  if (this->_internal_max_hp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_max_hp());
+  }
+
+  // uint32 hp = 5;
+  if (this->_internal_hp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_hp());
+  }
+
+  // uint32 attack = 6;
+  if (this->_internal_attack() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_attack());
+  }
+
+  // .Protocol.EGameEntityType entity_type = 7;
   if (this->_internal_entity_type() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_type());
   }
 
-  // .Protocol.EActorLookAtDir look_at_dir = 5;
-  if (this->_internal_look_at_dir() != 0) {
+  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
+  if (this->_internal_entitye_look_at_dir() != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_look_at_dir());
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_entitye_look_at_dir());
   }
 
-  // uint32 action_state_id = 6;
-  if (this->_internal_action_state_id() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_action_state_id());
-  }
-
-  // uint32 max_hp = 7;
-  if (this->_internal_max_hp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_max_hp());
-  }
-
-  // uint32 hp = 8;
-  if (this->_internal_hp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_hp());
-  }
-
-  // uint32 attack = 9;
-  if (this->_internal_attack() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_attack());
+  // .Protocol.EGameEntityState entity_state = 9;
+  if (this->_internal_entity_state() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_state());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -438,15 +442,6 @@ void GameEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   if (from._internal_cell_pos_y() != 0) {
     _this->_internal_set_cell_pos_y(from._internal_cell_pos_y());
   }
-  if (from._internal_entity_type() != 0) {
-    _this->_internal_set_entity_type(from._internal_entity_type());
-  }
-  if (from._internal_look_at_dir() != 0) {
-    _this->_internal_set_look_at_dir(from._internal_look_at_dir());
-  }
-  if (from._internal_action_state_id() != 0) {
-    _this->_internal_set_action_state_id(from._internal_action_state_id());
-  }
   if (from._internal_max_hp() != 0) {
     _this->_internal_set_max_hp(from._internal_max_hp());
   }
@@ -455,6 +450,15 @@ void GameEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   }
   if (from._internal_attack() != 0) {
     _this->_internal_set_attack(from._internal_attack());
+  }
+  if (from._internal_entity_type() != 0) {
+    _this->_internal_set_entity_type(from._internal_entity_type());
+  }
+  if (from._internal_entitye_look_at_dir() != 0) {
+    _this->_internal_set_entitye_look_at_dir(from._internal_entitye_look_at_dir());
+  }
+  if (from._internal_entity_state() != 0) {
+    _this->_internal_set_entity_state(from._internal_entity_state());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -474,8 +478,8 @@ void GameEntityInfo::InternalSwap(GameEntityInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GameEntityInfo, _impl_.attack_)
-      + sizeof(GameEntityInfo::_impl_.attack_)
+      PROTOBUF_FIELD_OFFSET(GameEntityInfo, _impl_.entity_state_)
+      + sizeof(GameEntityInfo::_impl_.entity_state_)
       - PROTOBUF_FIELD_OFFSET(GameEntityInfo, _impl_.entity_id_)>(
           reinterpret_cast<char*>(&_impl_.entity_id_),
           reinterpret_cast<char*>(&other->_impl_.entity_id_));

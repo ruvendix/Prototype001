@@ -6,6 +6,8 @@
 
 class ILogger
 {
+	DEFINE_ROOT_COMPILETIME_ID_CLASS;
+
 public:
 	ILogger() = default;
 	virtual ~ILogger() = default;

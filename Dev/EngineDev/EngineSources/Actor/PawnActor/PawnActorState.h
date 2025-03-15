@@ -7,6 +7,8 @@ class PawnActor;
 
 class PawnActorState : public ICoreLoop
 {
+	DEFINE_ROOT_COMPILETIME_ID_CLASS;
+
 public:
 	PawnActorState(PawnActor* pOwner);
 	virtual ~PawnActorState();

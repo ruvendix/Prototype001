@@ -3,6 +3,8 @@
 
 DECLARE_COMPILETIMER_COUNTER(GameEntityIdCounter);
 
+class WorldTileMapActor;
+
 class GameRoom : public EnableSharedClass
 {
 	DECLARE_SINGLETON(GameRoom)
@@ -20,12 +22,14 @@ public:
 	void AddGameEntity(const GameEntityPtr& spGameEntity);
 	void RemoveGameEntity(const GameEntityPtr& spGameEntity);
 
+	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_SyncGameEntityLookAtDir& syncGameEntityLookAtDir);
 	void ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove);
 
 private:
 	GamePlayerPtr FindGamePlayer(uint64 entityId) const;
 
 private:
+	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 	std::unordered_map<uint64, GamePlayerPtr> m_mapGamePlayer;
 	std::unordered_map<uint64, GameEntityPtr> m_mapGameMonster;
 };

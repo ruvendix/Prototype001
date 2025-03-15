@@ -23,9 +23,11 @@ public:
 	GameEntityActorPtr FindGameEntityActor(uint64 gameEntityId) const;
 
 public:
+	void ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leaveGamePacket);
 	void ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket);
 	void ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntities);
 	void ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& syncGamePlayer);
+	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDir);
 	void ParsingPacket_SyncGamePlayerMove(const Protocol::S_SyncGamePlayerMove& syncGamePlayerMove);
 
 private:

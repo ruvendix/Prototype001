@@ -2,17 +2,23 @@
 #include "Pch.h"
 #include "GameRoom.h"
 
+#include "EngineSources/Actor/Actor.h"
+#include "EngineSources/Actor/WorldTileMapActor.h"
+
 DEFINE_SINGLETON(GameRoom);
 DEFINE_COMPILETIMER_COUNTER(GameEntityIdCounter);
 
 void GameRoom::Startup()
 {
-
+	WorldContext::I()->SetCellSize(48);
+	m_spWorldTileMapActor = std::make_shared<WorldTileMapActor>();
+	m_spWorldTileMapActor->SetUseResources(false);
+	m_spWorldTileMapActor->Startup();
 }
 
 void GameRoom::Cleanup()
 {
-
+	m_spWorldTileMapActor->Cleanup();
 }
 
 void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
@@ -28,6 +34,8 @@ void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
 	// 새로운 게임 플레이어에게 기본 정보 넣기
 	Protocol::GameEntityInfo& refNewLocalGamePlayerInfo = spNewLocalGamePlayer->GetGameEntityInfo();
 	refNewLocalGamePlayerInfo.set_entity_id(newGameEntityId);
+	refNewLocalGamePlayerInfo.set_entitye_look_at_dir(Protocol::EGameEntityLookAtDir::Down);
+	refNewLocalGamePlayerInfo.set_entity_state(Protocol::EGameEntityState::Idle);
 	refNewLocalGamePlayerInfo.set_cell_pos_x(6);
 	refNewLocalGamePlayerInfo.set_cell_pos_y(6);
 
@@ -143,6 +151,22 @@ void GameRoom::RemoveGameEntity(const GameEntityPtr& spGameEntity)
 	}
 }
 
+void GameRoom::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_SyncGameEntityLookAtDir& syncGameEntityLookAtDir)
+{
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDir.game_player_info();
+	const GamePlayerPtr& spGameEntity = FindGamePlayer(gameEntityInfo.entity_id());
+	if (spGameEntity == nullptr)
+	{
+		return;
+	}
+
+	spGameEntity->ApplyGameEntityLookAtDirection(gameEntityInfo);
+
+	// 변경된 사실을 모든 유저에게 전달
+	const RxSendBufferPtr& spSendSyncGamePlayer = RxServerPacketHandler::I()->MakeSyncGameEntityLookAtDirectionPacket(gameEntityInfo);
+	RxGameSessionManager::I()->Broadcast(spSendSyncGamePlayer);
+}
+
 void GameRoom::ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove)
 {
 	const Protocol::GameEntityInfo& gamePlayerInfo = syncGamePlayerMove.game_player_info();
@@ -152,6 +176,7 @@ void GameRoom::ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayer
 		return;
 	}
 
+	// 이동 가능한지는 여기서 더블체크 필요!
 	spGamePlayer->ApplyGameEntityMoveInfo(gamePlayerInfo);
 
 	// 변경된 사실을 모든 유저에게 전달

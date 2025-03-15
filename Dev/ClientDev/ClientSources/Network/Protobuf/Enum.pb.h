@@ -47,33 +47,33 @@ PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
-enum EActorLookAtDir : int {
+enum EGameEntityLookAtDir : int {
   Left = 0,
   Up = 1,
   Right = 2,
   Down = 3,
   Count = 4,
-  EActorLookAtDir_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  EActorLookAtDir_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+  EGameEntityLookAtDir_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EGameEntityLookAtDir_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool EActorLookAtDir_IsValid(int value);
-constexpr EActorLookAtDir EActorLookAtDir_MIN = Left;
-constexpr EActorLookAtDir EActorLookAtDir_MAX = Count;
-constexpr int EActorLookAtDir_ARRAYSIZE = EActorLookAtDir_MAX + 1;
+bool EGameEntityLookAtDir_IsValid(int value);
+constexpr EGameEntityLookAtDir EGameEntityLookAtDir_MIN = Left;
+constexpr EGameEntityLookAtDir EGameEntityLookAtDir_MAX = Count;
+constexpr int EGameEntityLookAtDir_ARRAYSIZE = EGameEntityLookAtDir_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EActorLookAtDir_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityLookAtDir_descriptor();
 template<typename T>
-inline const std::string& EActorLookAtDir_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, EActorLookAtDir>::value ||
+inline const std::string& EGameEntityLookAtDir_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EGameEntityLookAtDir>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function EActorLookAtDir_Name.");
+    "Incorrect type passed to function EGameEntityLookAtDir_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    EActorLookAtDir_descriptor(), enum_t_value);
+    EGameEntityLookAtDir_descriptor(), enum_t_value);
 }
-inline bool EActorLookAtDir_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EActorLookAtDir* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EActorLookAtDir>(
-    EActorLookAtDir_descriptor(), name, value);
+inline bool EGameEntityLookAtDir_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EGameEntityLookAtDir* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EGameEntityLookAtDir>(
+    EGameEntityLookAtDir_descriptor(), name, value);
 }
 enum EGameEntityType : int {
   Player = 0,
@@ -100,6 +100,34 @@ inline bool EGameEntityType_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EGameEntityType>(
     EGameEntityType_descriptor(), name, value);
 }
+enum EGameEntityState : int {
+  Idle = 0,
+  Walk = 1,
+  Attack = 2,
+  Defense = 3,
+  Chase = 4,
+  EGameEntityState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EGameEntityState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool EGameEntityState_IsValid(int value);
+constexpr EGameEntityState EGameEntityState_MIN = Idle;
+constexpr EGameEntityState EGameEntityState_MAX = Chase;
+constexpr int EGameEntityState_ARRAYSIZE = EGameEntityState_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityState_descriptor();
+template<typename T>
+inline const std::string& EGameEntityState_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EGameEntityState>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function EGameEntityState_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    EGameEntityState_descriptor(), enum_t_value);
+}
+inline bool EGameEntityState_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EGameEntityState* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EGameEntityState>(
+    EGameEntityState_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -122,15 +150,20 @@ inline bool EGameEntityType_Parse(
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Protocol::EActorLookAtDir> : ::std::true_type {};
+template <> struct is_proto_enum< ::Protocol::EGameEntityLookAtDir> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EActorLookAtDir>() {
-  return ::Protocol::EActorLookAtDir_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EGameEntityLookAtDir>() {
+  return ::Protocol::EGameEntityLookAtDir_descriptor();
 }
 template <> struct is_proto_enum< ::Protocol::EGameEntityType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EGameEntityType>() {
   return ::Protocol::EGameEntityType_descriptor();
+}
+template <> struct is_proto_enum< ::Protocol::EGameEntityState> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EGameEntityState>() {
+  return ::Protocol::EGameEntityState_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

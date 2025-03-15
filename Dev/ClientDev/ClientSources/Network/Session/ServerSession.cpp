@@ -4,12 +4,12 @@
 
 RxServerSession::RxServerSession()
 {
-	DEFAULT_TRACE_LOG("RxServerSession 积己!\n");
+	::OutputDebugString("辑滚 技记 积己!\n");
 }
 
 RxServerSession::~RxServerSession()
 {
-	DEFAULT_TRACE_LOG("RxServerSession 家戈!\n");
+	::OutputDebugString("辑滚 技记 家戈!\n");
 }
 
 void RxServerSession::ProcessConnectImpl()

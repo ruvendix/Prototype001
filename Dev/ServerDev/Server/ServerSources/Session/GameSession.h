@@ -1,6 +1,8 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
+DECLARE_COMPILETIMER_COUNTER(UserIdCounter);
+
 class RxGameSession : public RxPacketSession
 {
 public:
@@ -22,5 +24,6 @@ public:
 	}
 
 private:
+	uint64 m_userId = 0;
 	std::weak_ptr<GamePlayer> m_spGamePlayer;
 };

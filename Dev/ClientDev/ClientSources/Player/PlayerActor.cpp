@@ -16,14 +16,14 @@ void PlayerActor::Startup()
 	// 플레이어 스프라이트 로딩 및 초기화
 	LoadAndStartupPlayerSprite();
 
-	// 무기 설정
-	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(2);
-	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Secondary)] = WeaponFactory::I()->CreateWeaponActor(1);
+	//// 무기 설정
+	//m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(2);
+	//m_arrWeaponActor[TO_NUM(EWeaponSlotType::Secondary)] = WeaponFactory::I()->CreateWeaponActor(1);
 
-	for (const std::shared_ptr<WeaponActor>& spWeaponActor : m_arrWeaponActor)
-	{
-		spWeaponActor->SetWeaponOwner(std::dynamic_pointer_cast<PlayerActor>(shared_from_this()));
-	}
+	//for (const std::shared_ptr<WeaponActor>& spWeaponActor : m_arrWeaponActor)
+	//{
+	//	spWeaponActor->SetWeaponOwner(std::dynamic_pointer_cast<PlayerActor>(shared_from_this()));
+	//}
 
 #pragma region 플레이어 기본 정보 초기화
 	TransformComponent* pTransformComponent = BringTransformComponent();
@@ -139,10 +139,14 @@ void PlayerActor::LoadAndStartupPlayerSprite()
 	AddActorStateKeyFrames<PawnActorIdleState>(0, 9, 0, Size{ 200, 200 }, RGB(128, 128, 128), 0.1f);
 	AddActorStateKeyFrames<PawnActorWalkState>(0, 9, 1, Size{ 200, 200 }, RGB(128, 128, 128), 0.05f);
 
-	// 기본 스프라이트 설정 (PlayerIdleDown)
+	// 다이나믹 스프라이트 추가
 	DynamicSpriteComponent* pDynamicSpriteComponent = AddComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = FindActorStateLookAtDynamicSprite<PawnActorIdleState>(EActorLookAtDirection::Down);
-	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
+	// 기본 스프라이트 설정 (PlayerIdleDown)
+	//DynamicSpriteComponent* pDynamicSpriteComponent = AddComponent<DynamicSpriteComponent>();
+	//ASSERT_LOG(pDynamicSpriteComponent != nullptr);
+
+	//const DynamicSpritePtr& spDefaultPlayerDynamicSprite = FindActorStateLookAtDynamicSprite<PawnActorIdleState>(EActorLookAtDirection::Down);
+	//pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
 }
