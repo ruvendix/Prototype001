@@ -69,6 +69,8 @@ public:
 	uint64 GetGameEntityId() const { return (m_spGameEntityInfo->entity_id()); }
 	Protocol::EGameEntityState GetGameEntityState() const { return (m_spGameEntityInfo->entity_state()); }
 
+	bool IsCreatedGameEntityInfo() { return (m_spGameEntityInfo != nullptr); }
+
 private:
 	void SyncToServer_GameEntityLookAtDirectionIfNeed();
 	void SyncToServer_GameEntityMoveIfNeed();

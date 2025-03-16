@@ -20,5 +20,5 @@ message GameEntityInfo
 message GameMonsterInfo
 {
 	uint32 monster_id = 1;
-	GameEntityInfo game_entity_info = 2;
+	GameEntityInfo entity_info = 2;
 }

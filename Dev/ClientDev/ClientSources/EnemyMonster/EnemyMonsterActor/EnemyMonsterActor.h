@@ -4,10 +4,10 @@
 class EnemyRespawner;
 class PlayerActor;
 
-class EnemyMonsterActor : public PawnActor
+class EnemyMonsterActor : public GameEntityActor
 {
 	DEFINE_ROOT_COMPILETIME_ID_CLASS;
-	using Super = PawnActor;
+	using Super = GameEntityActor;
 
 public:
 	static bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos,
@@ -22,6 +22,7 @@ public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 
+	virtual void ProcessMoveDirection(const Vector2d& vMoveDir) override;
 	virtual bool CheckMovingState() const override;
 
 public:

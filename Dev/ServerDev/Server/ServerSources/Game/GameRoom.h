@@ -11,6 +11,7 @@ class GameRoom : public EnableSharedClass
 
 public:
 	virtual void Startup() override;
+	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
 public:
@@ -25,7 +26,7 @@ public:
 	void RemoveGameEntity(const GameEntityPtr& spGameEntity);
 
 	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_SyncGameEntityLookAtDir& syncGameEntityLookAtDir);
-	void ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove);
+	void ParsingPacket_SyncGameEntityMove(const Protocol::C_SyncGameEntityMove& syncGameEntityMove);
 	void ParsingPacket_SyncGameEntityState(const Protocol::C_SyncGameEntityState& syncGameEntityState);
 
 	Position2d GenerateRandomCellPosition();

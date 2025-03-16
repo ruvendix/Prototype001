@@ -14,7 +14,7 @@ void ClientPacketHandler::Startup()
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntities, &ClientPacketHandler::HandlePacket_SyncGameEntities);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGamePlayer, &ClientPacketHandler::HandlePacket_SyncGamePlayer);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityLookAtDir, &ClientPacketHandler::HandlePacket_SyncGameEntityLookAtDirection);
-	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGamePlayerMove, &ClientPacketHandler::HandlePacket_SyncGamePlayerMove);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityMove, &ClientPacketHandler::HandlePacket_SyncGameEntityMove);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityState, &ClientPacketHandler::HandlePacket_SyncGameEntityState);
 }
 
@@ -42,30 +42,30 @@ void ClientPacketHandler::HandlePacket(BYTE* buffer, int32 numOfBytes)
 
 RxSendBufferPtr ClientPacketHandler::MakeSyncGameEntityLookAtDirectionPacket(const std::shared_ptr<Protocol::GameEntityInfo>& spGameEntityInfo)
 {
-	Protocol::C_SyncGameEntityLookAtDir syncGameEntityLookAtDir;
-	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityLookAtDir.mutable_game_player_info();
+	Protocol::C_SyncGameEntityLookAtDir syncGameEntityLookAtDirPacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityLookAtDirPacket.mutable_entity_info();
 	pGameEntityInfo->set_entity_id(spGameEntityInfo->entity_id());
 	pGameEntityInfo->set_entitye_look_at_dir(spGameEntityInfo->entitye_look_at_dir());
 
-	return MakeSendBuffer(syncGameEntityLookAtDir, Protocol::EProtocolId::SyncGameEntityLookAtDir);
+	return MakeSendBuffer(syncGameEntityLookAtDirPacket, Protocol::EProtocolId::SyncGameEntityLookAtDir);
 }
 
 RxSendBufferPtr ClientPacketHandler::MakeSyncGamePlayerMovePacket(const std::shared_ptr<Protocol::GameEntityInfo>& spGamePlayerInfo)
 {
-	Protocol::C_SyncGamePlayerMove syncGamePlayerMovePacket;
-	Protocol::GameEntityInfo* pGamePlayerInfo = syncGamePlayerMovePacket.mutable_game_player_info();
-	pGamePlayerInfo->set_entity_id(spGamePlayerInfo->entity_id());
-	pGamePlayerInfo->set_entity_state(spGamePlayerInfo->entity_state());
-	pGamePlayerInfo->set_cell_pos_x(spGamePlayerInfo->cell_pos_x());
-	pGamePlayerInfo->set_cell_pos_y(spGamePlayerInfo->cell_pos_y());
+	Protocol::C_SyncGameEntityMove syncGameEntityMovePacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityMovePacket.mutable_entity_info();
+	pGameEntityInfo->set_entity_id(spGamePlayerInfo->entity_id());
+	pGameEntityInfo->set_entity_state(spGamePlayerInfo->entity_state());
+	pGameEntityInfo->set_cell_pos_x(spGamePlayerInfo->cell_pos_x());
+	pGameEntityInfo->set_cell_pos_y(spGamePlayerInfo->cell_pos_y());
 
-	return MakeSendBuffer(syncGamePlayerMovePacket, Protocol::EProtocolId::SyncGamePlayerMove);
+	return MakeSendBuffer(syncGameEntityMovePacket, Protocol::EProtocolId::SyncGameEntityMove);
 }
 
 RxSendBufferPtr ClientPacketHandler::MakeSyncGameEntityStatePacket(const std::shared_ptr<Protocol::GameEntityInfo>& spGameEntityInfo)
 {
-	Protocol::C_SyncGamePlayerMove syncGameEntityStatePacket;
-	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityStatePacket.mutable_game_player_info();
+	Protocol::C_SyncGameEntityState syncGameEntityStatePacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityStatePacket.mutable_entity_info();
 	pGameEntityInfo->set_entity_id(spGameEntityInfo->entity_id());
 	pGameEntityInfo->set_entity_state(spGameEntityInfo->entity_state());
 
@@ -124,13 +124,13 @@ void ClientPacketHandler::HandlePacket_SyncGameEntityLookAtDirection(BYTE* buffe
 	pGameScene->ParsingPacket_SyncGameEntityLookAtDirection(packet);
 }
 
-void ClientPacketHandler::HandlePacket_SyncGamePlayerMove(BYTE* buffer, int32 numOfBytes)
+void ClientPacketHandler::HandlePacket_SyncGameEntityMove(BYTE* buffer, int32 numOfBytes)
 {
-	START_PACKET_CONTENTS(buffer, Protocol::S_SyncGamePlayerMove, packet);
+	START_PACKET_CONTENTS(buffer, Protocol::S_SyncGameEntityMove, packet);
 
 	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
 	ASSERT_LOG(pGameScene != nullptr);
-	pGameScene->ParsingPacket_SyncGamePlayerMove(packet);
+	pGameScene->ParsingPacket_SyncGameEntityMove(packet);
 }
 
 void ClientPacketHandler::HandlePacket_SyncGameEntityState(BYTE* buffer, int32 numOfBytes)

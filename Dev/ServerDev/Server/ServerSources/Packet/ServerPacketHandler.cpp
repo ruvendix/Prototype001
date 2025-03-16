@@ -7,7 +7,7 @@ DEFINE_SINGLETON(RxServerPacketHandler);
 void RxServerPacketHandler::Startup()
 {
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityLookAtDir, &RxServerPacketHandler::HandlePacket_SyncGameEntityLookAtDirectionPacket);
-	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGamePlayerMove, &RxServerPacketHandler::HandlePacket_SyncGamePlayerMovePacket);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityMove, &RxServerPacketHandler::HandlePacket_SyncGameEntityMovePacket);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityState, &RxServerPacketHandler::HandlePacket_SyncGameEntityStatePacket);
 }
 
@@ -48,17 +48,17 @@ RxSendBufferPtr RxServerPacketHandler::MakeLeaveGamePacket(uint64 gameSessionId,
 	leaveGamePacket.set_leave_success(true);
 	leaveGamePacket.set_user_id(gameSessionId);
 
-	Protocol::GameEntityInfo* pGamePlayerInfo = leaveGamePacket.mutable_game_player_info();
-	(*pGamePlayerInfo) = spLeaveGamePlayer->GetGameEntityInfo();
+	Protocol::GameEntityInfo* pGameEntityInfo = leaveGamePacket.mutable_entity_info();
+	(*pGameEntityInfo) = spLeaveGamePlayer->GetGameEntityInfo();
 
 	return MakeSendBuffer(leaveGamePacket, Protocol::EProtocolId::LeaveGame);
 }
 
-RxSendBufferPtr RxServerPacketHandler::MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& localGamePlayerInfo)
+RxSendBufferPtr RxServerPacketHandler::MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& syncGameEntityInfo)
 {
 	Protocol::S_CreateLocalGamePlayer localGamePlayerPacket;
-	Protocol::GameEntityInfo* pLocalGamePlayerInfo = localGamePlayerPacket.mutable_game_player_info();
-	*pLocalGamePlayerInfo = localGamePlayerInfo;
+	Protocol::GameEntityInfo* pGameEntityInfo = localGamePlayerPacket.mutable_entity_info();
+	(*pGameEntityInfo) = syncGameEntityInfo;
 
 	return MakeSendBuffer(localGamePlayerPacket, Protocol::EProtocolId::CreateLocalGamePlayer);
 }
@@ -68,40 +68,40 @@ RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntitiesPacket(const Protocol
 	return MakeSendBuffer(syncGameEntities, Protocol::EProtocolId::SyncGameEntities);
 }
 
-RxSendBufferPtr RxServerPacketHandler::MakeSyncGamePlayerPacket(const Protocol::GameEntityInfo& syncGamePlayerInfo)
+RxSendBufferPtr RxServerPacketHandler::MakeSyncGamePlayerPacket(const Protocol::GameEntityInfo& syncGameEntityInfo)
 {
-	Protocol::S_SyncGamePlayer syncGamePlayer;
-	Protocol::GameEntityInfo* pGamePlayerInfo = syncGamePlayer.mutable_game_player_info();
-	(*pGamePlayerInfo) = syncGamePlayerInfo;
+	Protocol::S_SyncGamePlayer syncGamePlayerPacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGamePlayerPacket.mutable_entity_info();
+	(*pGameEntityInfo) = syncGameEntityInfo;
 
-	return MakeSendBuffer(syncGamePlayer, Protocol::EProtocolId::SyncGamePlayer);
+	return MakeSendBuffer(syncGamePlayerPacket, Protocol::EProtocolId::SyncGamePlayer);
 }
 
 RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntityLookAtDirectionPacket(const Protocol::GameEntityInfo& syncGameEntityInfo)
 {
-	Protocol::S_SyncGamePlayerMove syncGameEntityLookAtDir;
-	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityLookAtDir.mutable_game_player_info();
+	Protocol::S_SyncGameEntityLookAtDir syncGameEntityLookAtDirPacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityLookAtDirPacket.mutable_entity_info();
 	(*pGameEntityInfo) = syncGameEntityInfo;
 
-	return MakeSendBuffer(syncGameEntityLookAtDir, Protocol::EProtocolId::SyncGameEntityLookAtDir);
+	return MakeSendBuffer(syncGameEntityLookAtDirPacket, Protocol::EProtocolId::SyncGameEntityLookAtDir);
 }
 
-RxSendBufferPtr RxServerPacketHandler::MakeSyncGamePlayerMovePacket(const Protocol::GameEntityInfo& syncGamePlayerInfo)
+RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntityMovePacket(const Protocol::GameEntityInfo& syncGameEntityInfo)
 {
-	Protocol::S_SyncGamePlayerMove syncGamePlayerMove;
-	Protocol::GameEntityInfo* pGamePlayerInfo = syncGamePlayerMove.mutable_game_player_info();
-	(*pGamePlayerInfo) = syncGamePlayerInfo;
+	Protocol::S_SyncGameEntityMove syncGameEntityMovePacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityMovePacket.mutable_entity_info();
+	(*pGameEntityInfo) = syncGameEntityInfo;
 
-	return MakeSendBuffer(syncGamePlayerMove, Protocol::EProtocolId::SyncGamePlayerMove);
+	return MakeSendBuffer(syncGameEntityMovePacket, Protocol::EProtocolId::SyncGameEntityMove);
 }
 
 RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntityStatePacket(const Protocol::GameEntityInfo& syncGameEntityInfo)
 {
-	Protocol::S_SyncGameEntityState syncGameEntityState;
-	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityState.mutable_game_player_info();
+	Protocol::S_SyncGameEntityState syncGameEntityStatePacket;
+	Protocol::GameEntityInfo* pGameEntityInfo = syncGameEntityStatePacket.mutable_entity_info();
 	(*pGameEntityInfo) = syncGameEntityInfo;
 
-	return MakeSendBuffer(syncGameEntityState, Protocol::EProtocolId::SyncGameEntityState);
+	return MakeSendBuffer(syncGameEntityStatePacket, Protocol::EProtocolId::SyncGameEntityState);
 }
 
 void RxServerPacketHandler::HandlePacket_SyncGameEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes)
@@ -111,10 +111,10 @@ void RxServerPacketHandler::HandlePacket_SyncGameEntityLookAtDirectionPacket(BYT
 	DEFAULT_TRACE_LOG("클라이언트로부터 게임 엔티티의 보는 방향 받음!");
 }
 
-void RxServerPacketHandler::HandlePacket_SyncGamePlayerMovePacket(BYTE* buffer, int32 numOfBytes)
+void RxServerPacketHandler::HandlePacket_SyncGameEntityMovePacket(BYTE* buffer, int32 numOfBytes)
 {
-	START_PACKET_CONTENTS(buffer, Protocol::C_SyncGamePlayerMove, packet);
-	GameRoom::I()->ParsingPacket_SyncGamePlayerMove(packet);
+	START_PACKET_CONTENTS(buffer, Protocol::C_SyncGameEntityMove, packet);
+	GameRoom::I()->ParsingPacket_SyncGameEntityMove(packet);
 	DEFAULT_TRACE_LOG("클라이언트로부터 이동 패킷 받음!");
 }
 

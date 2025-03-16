@@ -95,7 +95,11 @@ int main()
 #else
 	while (true)
 	{
+		::timeBeginPeriod(1);
+		::Sleep(16);
 		g_spServerService->GetIocpCorePtr()->Dispatch(0);
+		GameRoom::I()->Update(0.016f); // 서버도 60프레임으로 맞춤
+		::timeEndPeriod(1);
 	}
 #endif
 

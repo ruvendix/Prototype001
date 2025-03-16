@@ -33,7 +33,7 @@ const char descriptor_table_protodef_ProtocolId_2eproto[] PROTOBUF_SECTION_VARIA
   "olId\022\r\n\tEnterGame\020\000\022\r\n\tLeaveGame\020\001\022\031\n\025Cr"
   "eateLocalGamePlayer\020\002\022\024\n\020SyncGameEntitie"
   "s\020\003\022\022\n\016SyncGamePlayer\020\004\022\033\n\027SyncGameEntit"
-  "yLookAtDir\020\005\022\026\n\022SyncGamePlayerMove\020\006\022\027\n\023"
+  "yLookAtDir\020\005\022\026\n\022SyncGameEntityMove\020\006\022\027\n\023"
   "SyncGameEntityState\020\007b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProtocolId_2eproto_once;

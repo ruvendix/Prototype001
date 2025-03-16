@@ -205,6 +205,19 @@ bool EnemyMonsterActor::Update(float deltaSeconds)
 	return true;
 }
 
+void EnemyMonsterActor::ProcessMoveDirection(const Vector2d& vMoveDir)
+{
+	// 이동 정보 처리
+	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
+	if (pMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
+	{
+		return;
+	}
+
+	ChangeActorStateDynamicSprite<EnmeyMonsterIdleState>();
+}
+
 bool EnemyMonsterActor::CheckMovingState() const
 {
 	return (IsSamePawnActorState<EnmeyMonsterChaseState>());

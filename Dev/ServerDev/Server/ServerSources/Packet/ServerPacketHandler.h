@@ -14,11 +14,11 @@ public:
 
 	RxSendBufferPtr MakeEnterGamePacket(uint64 gameSessionId);
 	RxSendBufferPtr MakeLeaveGamePacket(uint64 gameSessionId, const std::shared_ptr<GamePlayer>& spLeaveGamePlayer);
-	RxSendBufferPtr MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& localGamePlayerInfo);
+	RxSendBufferPtr MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 	RxSendBufferPtr MakeSyncGameEntitiesPacket(const Protocol::S_SyncGameEntities& syncGameEntities);
-	RxSendBufferPtr MakeSyncGamePlayerPacket(const Protocol::GameEntityInfo& syncGamePlayerInfo);
+	RxSendBufferPtr MakeSyncGamePlayerPacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 	RxSendBufferPtr MakeSyncGameEntityLookAtDirectionPacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
-	RxSendBufferPtr MakeSyncGamePlayerMovePacket(const Protocol::GameEntityInfo& syncGamePlayerInfo);
+	RxSendBufferPtr MakeSyncGameEntityMovePacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 	RxSendBufferPtr MakeSyncGameEntityStatePacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 
 private:
@@ -41,7 +41,7 @@ private:
 
 private:
 	void HandlePacket_SyncGameEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes);
-	void HandlePacket_SyncGamePlayerMovePacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_SyncGameEntityMovePacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGameEntityStatePacket(BYTE* buffer, int32 numOfBytes);
 
 private:

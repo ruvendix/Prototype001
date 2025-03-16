@@ -54,7 +54,7 @@ enum EProtocolId : int {
   SyncGameEntities = 3,
   SyncGamePlayer = 4,
   SyncGameEntityLookAtDir = 5,
-  SyncGamePlayerMove = 6,
+  SyncGameEntityMove = 6,
   SyncGameEntityState = 7,
   EProtocolId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   EProtocolId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()

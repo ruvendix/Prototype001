@@ -43,7 +43,7 @@ private:
 	void HandlePacket_SyncGameEntities(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGamePlayer(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGameEntityLookAtDirection(BYTE* buffer, int32 numOfBytes);
-	void HandlePacket_SyncGamePlayerMove(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_SyncGameEntityMove(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGameEntityState(BYTE* buffer, int32 numOfBytes);
 
 private:

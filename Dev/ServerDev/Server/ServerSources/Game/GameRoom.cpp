@@ -9,7 +9,7 @@
 DEFINE_SINGLETON(GameRoom);
 DEFINE_COMPILETIMER_COUNTER(GameEntityIdCounter);
 
-const uint32 MAX_MONSTER_RESPAWN_COUNT = 20;
+const uint32 MAX_MONSTER_RESPAWN_COUNT = 1;
 
 void GameRoom::Startup()
 {
@@ -22,6 +22,25 @@ void GameRoom::Startup()
 
 	// 몬스터 정보 추가
 	InitializeMonsters();
+}
+
+bool GameRoom::Update(float deltaSeconds)
+{
+	for (auto iter : m_mapGamePlayer)
+	{
+		const GamePlayerPtr& spGamePlayer = iter.second;
+		ASSERT_LOG(spGamePlayer != nullptr);
+		spGamePlayer->Update(deltaSeconds);
+	}
+
+	for (auto iter : m_mapGameMonster)
+	{
+		const GameMonsterPtr& spGameMonster = iter.second;
+		ASSERT_LOG(spGameMonster != nullptr);
+		spGameMonster->Update(deltaSeconds);
+	}
+
+	return true;
 }
 
 void GameRoom::Cleanup()
@@ -90,13 +109,13 @@ void GameRoom::SyncGameEntities(const RxGameSessionPtr& spGameSession)
 
 	for (auto gamePlayerIter : m_mapGamePlayer)
 	{
-		Protocol::GameEntityInfo* pGamePlayerInfo = syncGameEntitiesPacket.add_game_players();
+		Protocol::GameEntityInfo* pGamePlayerInfo = syncGameEntitiesPacket.add_players_info();
 		*pGamePlayerInfo = gamePlayerIter.second->GetGameEntityInfo();
 	}
 
 	for (auto gameMonsterIter : m_mapGameMonster)
 	{
-		Protocol::GameMonsterInfo* pGameMonsterInfo = syncGameEntitiesPacket.add_game_monsters();
+		Protocol::GameMonsterInfo* pGameMonsterInfo = syncGameEntitiesPacket.add_monsters_info();
 		gameMonsterIter.second->CopyGameMonsterInfo(pGameMonsterInfo);
 	}
 
@@ -143,7 +162,7 @@ void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity, bool bBroadcast)
 	if (bBroadcast == true)
 	{
 		Protocol::S_SyncGameEntities syncGameEntitiesPacket;
-		Protocol::GameEntityInfo* pNewGamePlayerEntityInfo = syncGameEntitiesPacket.add_game_players();
+		Protocol::GameEntityInfo* pNewGamePlayerEntityInfo = syncGameEntitiesPacket.add_players_info();
 		*pNewGamePlayerEntityInfo = (spGameEntity->GetGameEntityInfo());
 
 		const RxSendBufferPtr& spSendSyncGameEntities = RxServerPacketHandler::I()->MakeSyncGameEntitiesPacket(syncGameEntitiesPacket);
@@ -178,7 +197,7 @@ void GameRoom::RemoveGameEntity(const GameEntityPtr& spGameEntity)
 
 void GameRoom::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_SyncGameEntityLookAtDir& syncGameEntityLookAtDir)
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDir.game_player_info();
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDir.entity_info();
 	const GamePlayerPtr& spGameEntity = FindGamePlayer(gameEntityInfo.entity_id());
 	if (spGameEntity == nullptr)
 	{
@@ -192,26 +211,26 @@ void GameRoom::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_Syn
 	RxGameSessionManager::I()->Broadcast(spSyncGameEntityLookAtDirPacket);
 }
 
-void GameRoom::ParsingPacket_SyncGamePlayerMove(const Protocol::C_SyncGamePlayerMove& syncGamePlayerMove)
+void GameRoom::ParsingPacket_SyncGameEntityMove(const Protocol::C_SyncGameEntityMove& syncGameEntityMove)
 {
-	const Protocol::GameEntityInfo& gamePlayerInfo = syncGamePlayerMove.game_player_info();
-	const GamePlayerPtr& spGamePlayer = FindGamePlayer(gamePlayerInfo.entity_id());
-	if (spGamePlayer == nullptr)
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityMove.entity_info();
+	const GameEntityPtr& spGameEntity = FindGameEntity(gameEntityInfo);
+	if (spGameEntity == nullptr)
 	{
 		return;
 	}
 
 	// 이동 가능한지는 여기서 더블체크 필요!
-	spGamePlayer->ApplyGameEntityMoveInfo(gamePlayerInfo);
+	spGameEntity->ApplyGameEntityMoveInfo(gameEntityInfo);
 
 	// 변경된 사실을 모든 유저에게 전달
-	const RxSendBufferPtr& spSyncGamePlayerMovePacket = RxServerPacketHandler::I()->MakeSyncGamePlayerMovePacket(gamePlayerInfo);
-	RxGameSessionManager::I()->Broadcast(spSyncGamePlayerMovePacket);
+	const RxSendBufferPtr& spSyncGameEntityMovePacket = RxServerPacketHandler::I()->MakeSyncGameEntityMovePacket(gameEntityInfo);
+	RxGameSessionManager::I()->Broadcast(spSyncGameEntityMovePacket);
 }
 
 void GameRoom::ParsingPacket_SyncGameEntityState(const Protocol::C_SyncGameEntityState& syncGameEntityState)
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityState.game_player_info();
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityState.entity_info();
 	GameEntityPtr spGameEntity = FindGameEntity(gameEntityInfo);
 	ASSERT_LOG(spGameEntity != nullptr);
 

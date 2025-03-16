@@ -10,7 +10,7 @@ GameMonsterPtr GameMonsterFactory::CreateRandomMonster(uint32 gameEntityId)
 	Protocol::GameMonsterInfo newGameMonsterInfo;
 	newGameMonsterInfo.set_monster_id(0); // ÀÌ°Ô ·£´ý
 
-	Protocol::GameEntityInfo* pNewGameEntityInfo = newGameMonsterInfo.mutable_game_entity_info();
+	Protocol::GameEntityInfo* pNewGameEntityInfo = newGameMonsterInfo.mutable_entity_info();
 	pNewGameEntityInfo->set_entity_id(gameEntityId);
 	pNewGameEntityInfo->set_entity_type(Protocol::EGameEntityType::Monster);
 	pNewGameEntityInfo->set_entitye_look_at_dir(Protocol::EGameEntityLookAtDir::Down);
@@ -18,8 +18,10 @@ GameMonsterPtr GameMonsterFactory::CreateRandomMonster(uint32 gameEntityId)
 
 	// ·£´ý ¼¿ ÁÂÇ¥
 	const Position2d& randomCellPos = GameRoom::I()->GenerateRandomCellPosition();
-	pNewGameEntityInfo->set_cell_pos_x(randomCellPos.x);
-	pNewGameEntityInfo->set_cell_pos_y(randomCellPos.y);
+	//pNewGameEntityInfo->set_cell_pos_x(randomCellPos.x);
+	//pNewGameEntityInfo->set_cell_pos_y(randomCellPos.y);
+	pNewGameEntityInfo->set_cell_pos_x(6);
+	pNewGameEntityInfo->set_cell_pos_y(8);
 
 	GameMonsterPtr spGameMonster = std::make_shared<GameMonster>();
 	spGameMonster->Startup();

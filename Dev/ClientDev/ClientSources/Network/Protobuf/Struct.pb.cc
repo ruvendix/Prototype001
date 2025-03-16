@@ -44,7 +44,7 @@ struct GameEntityInfoDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GameEntityInfoDefaultTypeInternal _GameEntityInfo_default_instance_;
 PROTOBUF_CONSTEXPR GameMonsterInfo::GameMonsterInfo(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.game_entity_info_)*/nullptr
+    /*decltype(_impl_.entity_info_)*/nullptr
   , /*decltype(_impl_.monster_id_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct GameMonsterInfoDefaultTypeInternal {
@@ -84,7 +84,7 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::GameMonsterInfo, _impl_.monster_id_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameMonsterInfo, _impl_.game_entity_info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::GameMonsterInfo, _impl_.entity_info_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::GameEntityInfo)},
@@ -104,17 +104,17 @@ const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "\n\013entity_type\030\007 \001(\0162\031.Protocol.EGameEnti"
   "tyType\022;\n\023entitye_look_at_dir\030\010 \001(\0162\036.Pr"
   "otocol.EGameEntityLookAtDir\0220\n\014entity_st"
-  "ate\030\t \001(\0162\032.Protocol.EGameEntityState\"Y\n"
-  "\017GameMonsterInfo\022\022\n\nmonster_id\030\001 \001(\r\0222\n\020"
-  "game_entity_info\030\002 \001(\0132\030.Protocol.GameEn"
-  "tityInfob\006proto3"
+  "ate\030\t \001(\0162\032.Protocol.EGameEntityState\"T\n"
+  "\017GameMonsterInfo\022\022\n\nmonster_id\030\001 \001(\r\022-\n\013"
+  "entity_info\030\002 \001(\0132\030.Protocol.GameEntityI"
+  "nfob\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 416, descriptor_table_protodef_Struct_2eproto,
+    false, false, 411, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
     &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 2,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
@@ -521,12 +521,12 @@ void GameEntityInfo::InternalSwap(GameEntityInfo* other) {
 
 class GameMonsterInfo::_Internal {
  public:
-  static const ::Protocol::GameEntityInfo& game_entity_info(const GameMonsterInfo* msg);
+  static const ::Protocol::GameEntityInfo& entity_info(const GameMonsterInfo* msg);
 };
 
 const ::Protocol::GameEntityInfo&
-GameMonsterInfo::_Internal::game_entity_info(const GameMonsterInfo* msg) {
-  return *msg->_impl_.game_entity_info_;
+GameMonsterInfo::_Internal::entity_info(const GameMonsterInfo* msg) {
+  return *msg->_impl_.entity_info_;
 }
 GameMonsterInfo::GameMonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -538,13 +538,13 @@ GameMonsterInfo::GameMonsterInfo(const GameMonsterInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   GameMonsterInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.game_entity_info_){nullptr}
+      decltype(_impl_.entity_info_){nullptr}
     , decltype(_impl_.monster_id_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_game_entity_info()) {
-    _this->_impl_.game_entity_info_ = new ::Protocol::GameEntityInfo(*from._impl_.game_entity_info_);
+  if (from._internal_has_entity_info()) {
+    _this->_impl_.entity_info_ = new ::Protocol::GameEntityInfo(*from._impl_.entity_info_);
   }
   _this->_impl_.monster_id_ = from._impl_.monster_id_;
   // @@protoc_insertion_point(copy_constructor:Protocol.GameMonsterInfo)
@@ -555,7 +555,7 @@ inline void GameMonsterInfo::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.game_entity_info_){nullptr}
+      decltype(_impl_.entity_info_){nullptr}
     , decltype(_impl_.monster_id_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -572,7 +572,7 @@ GameMonsterInfo::~GameMonsterInfo() {
 
 inline void GameMonsterInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.game_entity_info_;
+  if (this != internal_default_instance()) delete _impl_.entity_info_;
 }
 
 void GameMonsterInfo::SetCachedSize(int size) const {
@@ -585,10 +585,10 @@ void GameMonsterInfo::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaForAllocation() == nullptr && _impl_.game_entity_info_ != nullptr) {
-    delete _impl_.game_entity_info_;
+  if (GetArenaForAllocation() == nullptr && _impl_.entity_info_ != nullptr) {
+    delete _impl_.entity_info_;
   }
-  _impl_.game_entity_info_ = nullptr;
+  _impl_.entity_info_ = nullptr;
   _impl_.monster_id_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -607,10 +607,10 @@ const char* GameMonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.GameEntityInfo game_entity_info = 2;
+      // .Protocol.GameEntityInfo entity_info = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
-          ptr = ctx->ParseMessage(_internal_mutable_game_entity_info(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -650,11 +650,11 @@ uint8_t* GameMonsterInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_monster_id(), target);
   }
 
-  // .Protocol.GameEntityInfo game_entity_info = 2;
-  if (this->_internal_has_game_entity_info()) {
+  // .Protocol.GameEntityInfo entity_info = 2;
+  if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(2, _Internal::game_entity_info(this),
-        _Internal::game_entity_info(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::entity_info(this),
+        _Internal::entity_info(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -673,11 +673,11 @@ size_t GameMonsterInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.GameEntityInfo game_entity_info = 2;
-  if (this->_internal_has_game_entity_info()) {
+  // .Protocol.GameEntityInfo entity_info = 2;
+  if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.game_entity_info_);
+        *_impl_.entity_info_);
   }
 
   // uint32 monster_id = 1;
@@ -703,9 +703,9 @@ void GameMonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_has_game_entity_info()) {
-    _this->_internal_mutable_game_entity_info()->::Protocol::GameEntityInfo::MergeFrom(
-        from._internal_game_entity_info());
+  if (from._internal_has_entity_info()) {
+    _this->_internal_mutable_entity_info()->::Protocol::GameEntityInfo::MergeFrom(
+        from._internal_entity_info());
   }
   if (from._internal_monster_id() != 0) {
     _this->_internal_set_monster_id(from._internal_monster_id());
@@ -730,9 +730,9 @@ void GameMonsterInfo::InternalSwap(GameMonsterInfo* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(GameMonsterInfo, _impl_.monster_id_)
       + sizeof(GameMonsterInfo::_impl_.monster_id_)
-      - PROTOBUF_FIELD_OFFSET(GameMonsterInfo, _impl_.game_entity_info_)>(
-          reinterpret_cast<char*>(&_impl_.game_entity_info_),
-          reinterpret_cast<char*>(&other->_impl_.game_entity_info_));
+      - PROTOBUF_FIELD_OFFSET(GameMonsterInfo, _impl_.entity_info_)>(
+          reinterpret_cast<char*>(&_impl_.entity_info_),
+          reinterpret_cast<char*>(&other->_impl_.entity_info_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GameMonsterInfo::GetMetadata() const {

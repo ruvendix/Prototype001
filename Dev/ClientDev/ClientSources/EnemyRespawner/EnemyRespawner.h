@@ -42,5 +42,5 @@ private:
 	Timer m_respawnWaitTimer;
 	int32 m_currentEnemyCount = 0;
 	int32 m_maxEnemyCount = 0;
-	std::unordered_map<int32, std::shared_ptr<CellActor>> m_mapPrototypeEnemyActors; // 리스폰 전용 프로토타입 적군들 (씬에 안 넣음)
+	std::unordered_map<int32, std::shared_ptr<EnemyMonsterActor>> m_mapPrototypeEnemyActors; // 리스폰 전용 프로토타입 적군들 (씬에 안 넣음)
 };

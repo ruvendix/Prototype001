@@ -99,6 +99,12 @@ GameEntityActorPtr GameScene::FindGameEntityActor(uint64 gameEntityId) const
 
 	for (const GameEntityActorPtr& spGameEntityActor : vecGameEntityActor)
 	{
+		if ((spGameEntityActor != nullptr) &&
+			(spGameEntityActor->IsCreatedGameEntityInfo() == false))
+		{
+			continue;
+		}
+
 		if (spGameEntityActor->GetGameEntityId() == gameEntityId)
 		{
 			return spGameEntityActor;
@@ -111,8 +117,8 @@ GameEntityActorPtr GameScene::FindGameEntityActor(uint64 gameEntityId) const
 void GameScene::ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leaveGamePacket)
 {
 	DEFAULT_TRACE_LOG("%lld 유저 나감", leaveGamePacket.user_id());
-	const Protocol::GameEntityInfo& leaveGamePlayerInfo = leaveGamePacket.game_player_info();
-	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(leaveGamePlayerInfo.entity_id());
+	const Protocol::GameEntityInfo& gameEntityInfo = leaveGamePacket.entity_info();
+	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gameEntityInfo.entity_id());
 	if (spGamePlayerActor == nullptr)
 	{
 		return;
@@ -123,9 +129,9 @@ void GameScene::ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leave
 
 void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket)
 {
-	const Protocol::GameEntityInfo& gamePlayerInfo = createLocalGamePlayerPacket.game_player_info();
+	const Protocol::GameEntityInfo& gameEntityInfo = createLocalGamePlayerPacket.entity_info();
 	m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
-	m_spLocalPlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
+	m_spLocalPlayerActor->SyncFromServer_GameEntityInfo(gameEntityInfo);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spLocalPlayerActor);
@@ -135,12 +141,12 @@ void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLoca
 	spWorldBackgroundActor->SetActorFlagBitOn(EActorFlag::RenderingTarget);
 }
 
-void GameScene::ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntities)
+void GameScene::ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntitiesPacket)
 {
-	int32 gamePlayerCount = syncGameEntities.game_players_size();
+	int32 gamePlayerCount = syncGameEntitiesPacket.players_info_size();
 	for (int32 i = 0; i < gamePlayerCount; ++i)
 	{
-		const Protocol::GameEntityInfo& gamePlayerInfo = syncGameEntities.game_players(i);
+		const Protocol::GameEntityInfo& gamePlayerInfo = syncGameEntitiesPacket.players_info(i);
 
 		// 로컬 플레이어는 제외
 		if (m_spLocalPlayerActor->GetGameEntityId() == gamePlayerInfo.entity_id())
@@ -152,29 +158,29 @@ void GameScene::ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntit
 		spPlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
 	}
 
-	int32 gameMonsterCount = syncGameEntities.game_monsters_size();
+	int32 gameMonsterCount = syncGameEntitiesPacket.monsters_info_size();
 	for (int32 i = 0; i < gameMonsterCount; ++i)
 	{
-		const Protocol::GameMonsterInfo& gameMonsterInfo = syncGameEntities.game_monsters(i);
+		const Protocol::GameMonsterInfo& gameMonsterInfo = syncGameEntitiesPacket.monsters_info(i);
 		m_spEnemyRespawner->RespawnEnemy(gameMonsterInfo, this);
 	}
 }
 
-void GameScene::ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& syncGamePlayer)
+void GameScene::ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& syncGamePlayerPacket)
 {
-	const Protocol::GameEntityInfo& gamePlayerInfo = syncGamePlayer.game_player_info();
-	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gamePlayerInfo.entity_id());
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGamePlayerPacket.entity_info();
+	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gameEntityInfo.entity_id());
 	if (spGamePlayerActor == nullptr)
 	{
 		return;
 	}
 
-	spGamePlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
+	spGamePlayerActor->SyncFromServer_GameEntityInfo(gameEntityInfo);
 }
 
-void GameScene::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDir)
+void GameScene::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDirPacket)
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDir.game_player_info();
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDirPacket.entity_info();
 	const GameEntityActorPtr& spGameEntityActor = FindGameEntityActor(gameEntityInfo.entity_id());
 	if (spGameEntityActor == nullptr)
 	{
@@ -184,21 +190,21 @@ void GameScene::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_Sy
 	spGameEntityActor->SyncFromServer_GameEntityLookAtDirection(gameEntityInfo);
 }
 
-void GameScene::ParsingPacket_SyncGamePlayerMove(const Protocol::S_SyncGamePlayerMove& syncGamePlayerMove)
+void GameScene::ParsingPacket_SyncGameEntityMove(const Protocol::S_SyncGameEntityMove& syncGamePlayerMovePacket)
 {
-	const Protocol::GameEntityInfo& gamePlayerInfo = syncGamePlayerMove.game_player_info();
-	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gamePlayerInfo.entity_id());
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGamePlayerMovePacket.entity_info();
+	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gameEntityInfo.entity_id());
 	if (spGamePlayerActor == nullptr)
 	{
 		return;
 	}
 
-	spGamePlayerActor->SyncFromServer_GameEntityMove(gamePlayerInfo);
+	spGamePlayerActor->SyncFromServer_GameEntityMove(gameEntityInfo);
 }
 
-void GameScene::ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEntityState& syncGameEntityState)
+void GameScene::ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEntityState& syncGameEntityStatePacket)
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityState.game_player_info();
+	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityStatePacket.entity_info();
 	const GameEntityActorPtr& spGameEntityActor = FindGameEntityActor(gameEntityInfo.entity_id());
 	if (spGameEntityActor == nullptr)
 	{

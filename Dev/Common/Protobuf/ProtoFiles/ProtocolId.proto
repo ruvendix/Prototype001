@@ -9,6 +9,6 @@ enum EProtocolId
 	SyncGameEntities = 3;
 	SyncGamePlayer = 4;
 	SyncGameEntityLookAtDir = 5;
-	SyncGamePlayerMove = 6;
+	SyncGameEntityMove = 6;
 	SyncGameEntityState = 7;
 }
