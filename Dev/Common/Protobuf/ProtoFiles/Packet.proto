@@ -19,12 +19,13 @@ message S_LeaveGame
 
 message S_CreateLocalGamePlayer
 {
-	GameEntityInfo local_game_player_info = 1;
+	GameEntityInfo game_player_info = 1;
 }
 
 message S_SyncGameEntities
 {
-	repeated GameEntityInfo game_entities = 1;
+	repeated GameEntityInfo game_players = 1;
+	repeated GameMonsterInfo game_monsters = 2;
 }
 
 message S_SyncGamePlayer

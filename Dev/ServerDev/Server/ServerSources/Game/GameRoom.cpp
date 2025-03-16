@@ -4,21 +4,40 @@
 
 #include "EngineSources/Actor/Actor.h"
 #include "EngineSources/Actor/WorldTileMapActor.h"
+#include "Monster/GameMonsterFactory.h"
 
 DEFINE_SINGLETON(GameRoom);
 DEFINE_COMPILETIMER_COUNTER(GameEntityIdCounter);
 
+const uint32 MAX_MONSTER_RESPAWN_COUNT = 20;
+
 void GameRoom::Startup()
 {
+	WorldContext::I()->SetWorldSize(Size{3024, 2064});
 	WorldContext::I()->SetCellSize(48);
+
 	m_spWorldTileMapActor = std::make_shared<WorldTileMapActor>();
 	m_spWorldTileMapActor->SetUseResources(false);
 	m_spWorldTileMapActor->Startup();
+
+	// 몬스터 정보 추가
+	InitializeMonsters();
 }
 
 void GameRoom::Cleanup()
 {
 	m_spWorldTileMapActor->Cleanup();
+}
+
+void GameRoom::InitializeMonsters()
+{
+	for (int32 i = 0; i < MAX_MONSTER_RESPAWN_COUNT; ++i)
+	{
+		uint32 newGameEntityId = GET_NEXT_COMPILEITME_ID(GameEntityIdCounter);
+		ASSERT_LOG_RETURN(m_mapGameMonster.find(newGameEntityId) == m_mapGameMonster.cend());
+		const GameMonsterPtr& spNewGameMonster = GameMonsterFactory::I()->CreateRandomMonster(newGameEntityId);
+		AddGameEntity(spNewGameMonster, false);
+	}
 }
 
 void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
@@ -32,22 +51,25 @@ void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
 	spGameSession->SetGamePlayer(spNewLocalGamePlayer);
 
 	// 새로운 게임 플레이어에게 기본 정보 넣기
-	Protocol::GameEntityInfo& refNewLocalGamePlayerInfo = spNewLocalGamePlayer->GetGameEntityInfo();
-	refNewLocalGamePlayerInfo.set_entity_id(newGameEntityId);
-	refNewLocalGamePlayerInfo.set_entitye_look_at_dir(Protocol::EGameEntityLookAtDir::Down);
-	refNewLocalGamePlayerInfo.set_entity_state(Protocol::EGameEntityState::Idle);
-	refNewLocalGamePlayerInfo.set_cell_pos_x(6);
-	refNewLocalGamePlayerInfo.set_cell_pos_y(6);
+	Protocol::GameEntityInfo newLocalGamePlayerInfo;
+	newLocalGamePlayerInfo.set_entity_id(newGameEntityId);
+	newLocalGamePlayerInfo.set_entity_type(Protocol::EGameEntityType::Player);
+	newLocalGamePlayerInfo.set_entitye_look_at_dir(Protocol::EGameEntityLookAtDir::Down);
+	newLocalGamePlayerInfo.set_entity_state(Protocol::EGameEntityState::Idle);
+	newLocalGamePlayerInfo.set_cell_pos_x(6);
+	newLocalGamePlayerInfo.set_cell_pos_y(6);
+
+	spNewLocalGamePlayer->SetGameEntityInfo(newLocalGamePlayerInfo);
 
 	// 입장한 클라이언트에게 게임 플레이어 정보 전송
-	const RxSendBufferPtr& pLocalGamePlayerPacket = RxServerPacketHandler::I()->MakeCreateLocalGamePlayerPacket(refNewLocalGamePlayerInfo);
+	const RxSendBufferPtr& pLocalGamePlayerPacket = RxServerPacketHandler::I()->MakeCreateLocalGamePlayerPacket(newLocalGamePlayerInfo);
 	spGameSession->Send(pLocalGamePlayerPacket);
 
 	// 현재 서버에 있는 모든 오브젝트 정보를 입장한 클라이언트에게 전송
 	SyncGameEntities(spGameSession);
 
 	// 입장한 클라이언트를 등록 (현재 서버에 접속 중인 모든 클라이언트에게 알림)
-	AddGameEntity(spNewLocalGamePlayer);
+	AddGameEntity(spNewLocalGamePlayer, true);
 }
 
 void GameRoom::LeaveGameRoom(const RxGameSessionPtr& spGameSession)
@@ -68,21 +90,21 @@ void GameRoom::SyncGameEntities(const RxGameSessionPtr& spGameSession)
 
 	for (auto gamePlayerIter : m_mapGamePlayer)
 	{
-		Protocol::GameEntityInfo* pGamePlayerInfo = syncGameEntitiesPacket.add_game_entities();
+		Protocol::GameEntityInfo* pGamePlayerInfo = syncGameEntitiesPacket.add_game_players();
 		*pGamePlayerInfo = gamePlayerIter.second->GetGameEntityInfo();
 	}
 
 	for (auto gameMonsterIter : m_mapGameMonster)
 	{
-		Protocol::GameEntityInfo* pGameMonsterInfo = syncGameEntitiesPacket.add_game_entities();
-		*pGameMonsterInfo = gameMonsterIter.second->GetGameEntityInfo();
+		Protocol::GameMonsterInfo* pGameMonsterInfo = syncGameEntitiesPacket.add_game_monsters();
+		gameMonsterIter.second->CopyGameMonsterInfo(pGameMonsterInfo);
 	}
 
 	const RxSendBufferPtr& spSendSyncGameEntitiesPacket = RxServerPacketHandler::I()->MakeSyncGameEntitiesPacket(syncGameEntitiesPacket);
 	spGameSession->Send(spSendSyncGameEntitiesPacket);
 }
 
-void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity)
+void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity, bool bBroadcast)
 {
 	const Protocol::GameEntityInfo& spGameEntityInfo = spGameEntity->GetGameEntityInfo();
 
@@ -103,7 +125,8 @@ void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity)
 
 	case Protocol::EGameEntityType::Monster:
 	{
-		auto insertedIter = m_mapGameMonster.insert(std::make_pair(entityId, spGameEntity));
+		const GameMonsterPtr& spGameMonster = std::dynamic_pointer_cast<GameMonster>(spGameEntity);
+		auto insertedIter = m_mapGameMonster.insert(std::make_pair(entityId, spGameMonster));
 		if (insertedIter.second == false)
 		{
 			DETAIL_ERROR_LOG(EErrorCode::ServerGameEntityInsertFailed);
@@ -116,14 +139,16 @@ void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity)
 		return;
 	}
 
-#pragma region 서버에 접속한 모든 클라이언트에게 입장한 클라이언트 정보 전송
-	Protocol::S_SyncGameEntities syncGameEntitiesPacket;
-	Protocol::GameEntityInfo* pNewGamePlayerEntityInfo = syncGameEntitiesPacket.add_game_entities();
-	*pNewGamePlayerEntityInfo = (spGameEntity->GetGameEntityInfo());
+	// 서버에 접속한 모든 클라이언트에게 입장한 클라이언트 정보 전송
+	if (bBroadcast == true)
+	{
+		Protocol::S_SyncGameEntities syncGameEntitiesPacket;
+		Protocol::GameEntityInfo* pNewGamePlayerEntityInfo = syncGameEntitiesPacket.add_game_players();
+		*pNewGamePlayerEntityInfo = (spGameEntity->GetGameEntityInfo());
 
-	const RxSendBufferPtr& spSendSyncGameEntities = RxServerPacketHandler::I()->MakeSyncGameEntitiesPacket(syncGameEntitiesPacket);
-	RxGameSessionManager::I()->Broadcast(spSendSyncGameEntities);
-#pragma endregion
+		const RxSendBufferPtr& spSendSyncGameEntities = RxServerPacketHandler::I()->MakeSyncGameEntitiesPacket(syncGameEntitiesPacket);
+		RxGameSessionManager::I()->Broadcast(spSendSyncGameEntities);
+	}
 }
 
 void GameRoom::RemoveGameEntity(const GameEntityPtr& spGameEntity)
@@ -197,6 +222,40 @@ void GameRoom::ParsingPacket_SyncGameEntityState(const Protocol::C_SyncGameEntit
 	RxGameSessionManager::I()->Broadcast(spSyncGameEntityStatePacket);
 }
 
+Position2d GameRoom::GenerateRandomCellPosition()
+{
+	Position2d randomCellPos;
+
+	while (true)
+	{
+		const Position2d& tempRandomCellPos = WorldContext::I()->CalculateRandomCellPosition();
+		if (CheckCanMoveToCellPosition(tempRandomCellPos, nullptr) == true)
+		{
+			randomCellPos = tempRandomCellPos;
+			break;
+		}
+	}
+
+	return randomCellPos;
+}
+
+bool GameRoom::CheckCanMoveToCellPosition(const Position2d& destCellPos, const GameEntityPtr& spExcludeGameEntity) const
+{
+	if (m_spWorldTileMapActor->CheckMovingAvailableTile(destCellPos) == false)
+	{
+		return false;
+	}
+
+	const GameEntityPtr& spFoundGameEntity = FindGameEntity(destCellPos);
+	if ((spFoundGameEntity != nullptr) ||
+		(spFoundGameEntity != spExcludeGameEntity))
+	{
+		return false;
+	}
+
+	return true;
+}
+
 GameEntityPtr GameRoom::FindGameEntity(const Protocol::GameEntityInfo& gameEntityInfo) const
 {
 	GameEntityPtr spGameEntity = nullptr;
@@ -207,16 +266,44 @@ GameEntityPtr GameRoom::FindGameEntity(const Protocol::GameEntityInfo& gameEntit
 		break;
 
 	case Protocol::EGameEntityType::Monster:
+		spGameEntity = FindGameMonster(gameEntityInfo.entity_id());
 		break;
 	}
 
 	return spGameEntity;
 }
 
+GameEntityPtr GameRoom::FindGameEntity(const Position2d& targetCellPos) const
+{
+	// 플레이어부터 확인
+	for (auto foundIter : m_mapGamePlayer)
+	{
+		const GamePlayerPtr& spGamePlayer = foundIter.second;
+		ASSERT_LOG(spGamePlayer != nullptr);
+		if (spGamePlayer->CheckSameCellPosition(targetCellPos) == true)
+		{
+			return spGamePlayer;
+		}
+	}
+
+	return nullptr;
+}
+
 GamePlayerPtr GameRoom::FindGamePlayer(uint64 entityId) const
 {
 	auto foundIter = m_mapGamePlayer.find(entityId);
 	if (foundIter == m_mapGamePlayer.cend())
+	{
+		return nullptr;
+	}
+
+	return (foundIter->second);
+}
+
+GameMonsterPtr GameRoom::FindGameMonster(uint64 entityId) const
+{
+	auto foundIter = m_mapGameMonster.find(entityId);
+	if (foundIter == m_mapGameMonster.cend())
 	{
 		return nullptr;
 	}

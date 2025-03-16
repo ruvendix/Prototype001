@@ -70,10 +70,16 @@
     <ClCompile Include="ServerSources\Game\GameEntity.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="ServerSources\Game\GamePlayer.cpp">
+    <ClCompile Include="ServerSources\Game\GameRoom.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="ServerSources\Game\GameRoom.cpp">
+    <ClCompile Include="ServerSources\Game\Monster\GameMonster.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\Monster\GameMonsterFactory.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\Player\GamePlayer.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ServerSources\Packet\ServerPacketHandler.cpp">
@@ -108,10 +114,16 @@
     <ClInclude Include="ServerSources\Game\GameEntity.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ServerSources\Game\GamePlayer.h">
+    <ClInclude Include="ServerSources\Game\GameRoom.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ServerSources\Game\GameRoom.h">
+    <ClInclude Include="ServerSources\Game\Monster\GameMonster.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Monster\GameMonsterFactory.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Player\GamePlayer.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ServerSources\Global\DataTypes.h">

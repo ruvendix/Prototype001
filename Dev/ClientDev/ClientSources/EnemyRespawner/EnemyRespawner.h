@@ -15,6 +15,7 @@ public:
 	virtual void Cleanup() override;
 
 	virtual void RespawnEnemies(Scene* pCurrentScene);
+	virtual void RespawnEnemy(const Protocol::GameMonsterInfo& gameMonsterInfo, Scene* pCurrentScene);
 
 public:
 	template <typename TEnemyActor>

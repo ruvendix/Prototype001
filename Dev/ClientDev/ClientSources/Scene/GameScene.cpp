@@ -47,6 +47,9 @@ void GameScene::Startup()
 	//m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
 	//m_spLocalPlayerActor->SetWorldTileMapActor(spWorldTileMapActor);
 
+	// 서버가 필요한 정보는?
+	// 몬스터 Id 이건 커먼, 그리고 기본 상태, 개수는 랜덤
+
 	// 기본 뱀 액터 추가
 	m_spSnakeActor = CreateActor<SnakeActor>(EActorLayerType::Creature);
 	m_spSnakeActor->SetActorName("뱀");
@@ -55,9 +58,9 @@ void GameScene::Startup()
 	// 적군들 자동 생성기
 	m_spEnemyRespawner = std::make_shared<EnemyRespawner>();
 	m_spEnemyRespawner->Startup();
-	m_spEnemyRespawner->SetMaxEnemyCount(0);
+	m_spEnemyRespawner->SetMaxEnemyCount(1);
 	m_spEnemyRespawner->AddPrototypeEnemyActor(m_spSnakeActor);
-	m_spEnemyRespawner->RespawnEnemies(this);
+	//m_spEnemyRespawner->RespawnEnemies(this);
 }
 
 bool GameScene::Update(float deltaSeconds)
@@ -120,9 +123,9 @@ void GameScene::ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leave
 
 void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket)
 {
-	const Protocol::GameEntityInfo& localGamePlayerInfo = createLocalGamePlayerPacket.local_game_player_info();
+	const Protocol::GameEntityInfo& gamePlayerInfo = createLocalGamePlayerPacket.game_player_info();
 	m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
-	m_spLocalPlayerActor->SyncFromServer_GameEntityInfo(localGamePlayerInfo);
+	m_spLocalPlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spLocalPlayerActor);
@@ -134,34 +137,26 @@ void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLoca
 
 void GameScene::ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntities)
 {
-	int32 gameEntityCount = syncGameEntities.game_entities_size();
-	for (int32 i = 0; i < gameEntityCount; ++i)
+	int32 gamePlayerCount = syncGameEntities.game_players_size();
+	for (int32 i = 0; i < gamePlayerCount; ++i)
 	{
-		const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntities.game_entities(i);
-		switch (gameEntityInfo.entity_type())
+		const Protocol::GameEntityInfo& gamePlayerInfo = syncGameEntities.game_players(i);
+
+		// 로컬 플레이어는 제외
+		if (m_spLocalPlayerActor->GetGameEntityId() == gamePlayerInfo.entity_id())
 		{
-		case Protocol::EGameEntityType::Player:
-		{
-			// 로컬 플레이어는 제외
-			if (m_spLocalPlayerActor->GetGameEntityId() == gameEntityInfo.entity_id())
-			{
-				continue;
-			}
-
-			const PlayerActorPtr& spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
-			spPlayerActor->SyncFromServer_GameEntityInfo(gameEntityInfo);
+			continue;
 		}
-		break;
 
-		case Protocol::EGameEntityType::Monster:
-		{
+		const PlayerActorPtr& spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
+		spPlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
+	}
 
-		}
-		break;
-
-		default:
-			break;
-		}
+	int32 gameMonsterCount = syncGameEntities.game_monsters_size();
+	for (int32 i = 0; i < gameMonsterCount; ++i)
+	{
+		const Protocol::GameMonsterInfo& gameMonsterInfo = syncGameEntities.game_monsters(i);
+		m_spEnemyRespawner->RespawnEnemy(gameMonsterInfo, this);
 	}
 }
 

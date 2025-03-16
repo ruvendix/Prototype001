@@ -20,7 +20,8 @@
 #include "Session/GameSessionManager.h"
 
 #include "Game/GameEntity.h"
-#include "Game/GamePlayer.h"
+#include "Game/Player/GamePlayer.h"
+#include "Game/Monster/GameMonster.h"
 #include "Game/GameRoom.h"
 
 #ifdef _DEBUG

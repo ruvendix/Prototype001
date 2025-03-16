@@ -40,6 +40,12 @@ void GameEntity::ApplyGameEntityState(const Protocol::GameEntityInfo& gameEntity
 	m_gameEntityInfo.set_entity_state(gameEntityInfo.entity_state());
 }
 
+bool GameEntity::CheckSameCellPosition(const Position2d& targetCellPos) const
+{
+	const Position2d& currentCellPos = { static_cast<int32>(m_gameEntityInfo.cell_pos_x()), static_cast<int32>(m_gameEntityInfo.cell_pos_y()) };
+	return (currentCellPos == targetCellPos);
+}
+
 Protocol::EGameEntityLookAtDir GameEntity::CalculateActorLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo)
 {
 	const Position2d& currentCellPos = { static_cast<int32>(m_gameEntityInfo.cell_pos_x()), static_cast<int32>(m_gameEntityInfo.cell_pos_y()) };

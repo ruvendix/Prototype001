@@ -557,25 +557,25 @@ class S_CreateLocalGamePlayer final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kLocalGamePlayerInfoFieldNumber = 1,
+    kGamePlayerInfoFieldNumber = 1,
   };
-  // .Protocol.GameEntityInfo local_game_player_info = 1;
-  bool has_local_game_player_info() const;
+  // .Protocol.GameEntityInfo game_player_info = 1;
+  bool has_game_player_info() const;
   private:
-  bool _internal_has_local_game_player_info() const;
+  bool _internal_has_game_player_info() const;
   public:
-  void clear_local_game_player_info();
-  const ::Protocol::GameEntityInfo& local_game_player_info() const;
-  PROTOBUF_NODISCARD ::Protocol::GameEntityInfo* release_local_game_player_info();
-  ::Protocol::GameEntityInfo* mutable_local_game_player_info();
-  void set_allocated_local_game_player_info(::Protocol::GameEntityInfo* local_game_player_info);
+  void clear_game_player_info();
+  const ::Protocol::GameEntityInfo& game_player_info() const;
+  PROTOBUF_NODISCARD ::Protocol::GameEntityInfo* release_game_player_info();
+  ::Protocol::GameEntityInfo* mutable_game_player_info();
+  void set_allocated_game_player_info(::Protocol::GameEntityInfo* game_player_info);
   private:
-  const ::Protocol::GameEntityInfo& _internal_local_game_player_info() const;
-  ::Protocol::GameEntityInfo* _internal_mutable_local_game_player_info();
+  const ::Protocol::GameEntityInfo& _internal_game_player_info() const;
+  ::Protocol::GameEntityInfo* _internal_mutable_game_player_info();
   public:
-  void unsafe_arena_set_allocated_local_game_player_info(
-      ::Protocol::GameEntityInfo* local_game_player_info);
-  ::Protocol::GameEntityInfo* unsafe_arena_release_local_game_player_info();
+  void unsafe_arena_set_allocated_game_player_info(
+      ::Protocol::GameEntityInfo* game_player_info);
+  ::Protocol::GameEntityInfo* unsafe_arena_release_game_player_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_CreateLocalGamePlayer)
  private:
@@ -585,7 +585,7 @@ class S_CreateLocalGamePlayer final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::GameEntityInfo* local_game_player_info_;
+    ::Protocol::GameEntityInfo* game_player_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -714,25 +714,44 @@ class S_SyncGameEntities final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kGameEntitiesFieldNumber = 1,
+    kGamePlayersFieldNumber = 1,
+    kGameMonstersFieldNumber = 2,
   };
-  // repeated .Protocol.GameEntityInfo game_entities = 1;
-  int game_entities_size() const;
+  // repeated .Protocol.GameEntityInfo game_players = 1;
+  int game_players_size() const;
   private:
-  int _internal_game_entities_size() const;
+  int _internal_game_players_size() const;
   public:
-  void clear_game_entities();
-  ::Protocol::GameEntityInfo* mutable_game_entities(int index);
+  void clear_game_players();
+  ::Protocol::GameEntityInfo* mutable_game_players(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameEntityInfo >*
-      mutable_game_entities();
+      mutable_game_players();
   private:
-  const ::Protocol::GameEntityInfo& _internal_game_entities(int index) const;
-  ::Protocol::GameEntityInfo* _internal_add_game_entities();
+  const ::Protocol::GameEntityInfo& _internal_game_players(int index) const;
+  ::Protocol::GameEntityInfo* _internal_add_game_players();
   public:
-  const ::Protocol::GameEntityInfo& game_entities(int index) const;
-  ::Protocol::GameEntityInfo* add_game_entities();
+  const ::Protocol::GameEntityInfo& game_players(int index) const;
+  ::Protocol::GameEntityInfo* add_game_players();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameEntityInfo >&
-      game_entities() const;
+      game_players() const;
+
+  // repeated .Protocol.GameMonsterInfo game_monsters = 2;
+  int game_monsters_size() const;
+  private:
+  int _internal_game_monsters_size() const;
+  public:
+  void clear_game_monsters();
+  ::Protocol::GameMonsterInfo* mutable_game_monsters(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameMonsterInfo >*
+      mutable_game_monsters();
+  private:
+  const ::Protocol::GameMonsterInfo& _internal_game_monsters(int index) const;
+  ::Protocol::GameMonsterInfo* _internal_add_game_monsters();
+  public:
+  const ::Protocol::GameMonsterInfo& game_monsters(int index) const;
+  ::Protocol::GameMonsterInfo* add_game_monsters();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameMonsterInfo >&
+      game_monsters() const;
 
   // @@protoc_insertion_point(class_scope:Protocol.S_SyncGameEntities)
  private:
@@ -742,7 +761,8 @@ class S_SyncGameEntities final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameEntityInfo > game_entities_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameEntityInfo > game_players_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameMonsterInfo > game_monsters_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2031,39 +2051,39 @@ inline void S_LeaveGame::set_allocated_game_player_info(::Protocol::GameEntityIn
 
 // S_CreateLocalGamePlayer
 
-// .Protocol.GameEntityInfo local_game_player_info = 1;
-inline bool S_CreateLocalGamePlayer::_internal_has_local_game_player_info() const {
-  return this != internal_default_instance() && _impl_.local_game_player_info_ != nullptr;
+// .Protocol.GameEntityInfo game_player_info = 1;
+inline bool S_CreateLocalGamePlayer::_internal_has_game_player_info() const {
+  return this != internal_default_instance() && _impl_.game_player_info_ != nullptr;
 }
-inline bool S_CreateLocalGamePlayer::has_local_game_player_info() const {
-  return _internal_has_local_game_player_info();
+inline bool S_CreateLocalGamePlayer::has_game_player_info() const {
+  return _internal_has_game_player_info();
 }
-inline const ::Protocol::GameEntityInfo& S_CreateLocalGamePlayer::_internal_local_game_player_info() const {
-  const ::Protocol::GameEntityInfo* p = _impl_.local_game_player_info_;
+inline const ::Protocol::GameEntityInfo& S_CreateLocalGamePlayer::_internal_game_player_info() const {
+  const ::Protocol::GameEntityInfo* p = _impl_.game_player_info_;
   return p != nullptr ? *p : reinterpret_cast<const ::Protocol::GameEntityInfo&>(
       ::Protocol::_GameEntityInfo_default_instance_);
 }
-inline const ::Protocol::GameEntityInfo& S_CreateLocalGamePlayer::local_game_player_info() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_CreateLocalGamePlayer.local_game_player_info)
-  return _internal_local_game_player_info();
+inline const ::Protocol::GameEntityInfo& S_CreateLocalGamePlayer::game_player_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_CreateLocalGamePlayer.game_player_info)
+  return _internal_game_player_info();
 }
-inline void S_CreateLocalGamePlayer::unsafe_arena_set_allocated_local_game_player_info(
-    ::Protocol::GameEntityInfo* local_game_player_info) {
+inline void S_CreateLocalGamePlayer::unsafe_arena_set_allocated_game_player_info(
+    ::Protocol::GameEntityInfo* game_player_info) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.local_game_player_info_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.game_player_info_);
   }
-  _impl_.local_game_player_info_ = local_game_player_info;
-  if (local_game_player_info) {
+  _impl_.game_player_info_ = game_player_info;
+  if (game_player_info) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_CreateLocalGamePlayer.local_game_player_info)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_CreateLocalGamePlayer.game_player_info)
 }
-inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::release_local_game_player_info() {
+inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::release_game_player_info() {
   
-  ::Protocol::GameEntityInfo* temp = _impl_.local_game_player_info_;
-  _impl_.local_game_player_info_ = nullptr;
+  ::Protocol::GameEntityInfo* temp = _impl_.game_player_info_;
+  _impl_.game_player_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -2075,86 +2095,123 @@ inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::release_local_game_p
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::unsafe_arena_release_local_game_player_info() {
-  // @@protoc_insertion_point(field_release:Protocol.S_CreateLocalGamePlayer.local_game_player_info)
+inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::unsafe_arena_release_game_player_info() {
+  // @@protoc_insertion_point(field_release:Protocol.S_CreateLocalGamePlayer.game_player_info)
   
-  ::Protocol::GameEntityInfo* temp = _impl_.local_game_player_info_;
-  _impl_.local_game_player_info_ = nullptr;
+  ::Protocol::GameEntityInfo* temp = _impl_.game_player_info_;
+  _impl_.game_player_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::_internal_mutable_local_game_player_info() {
+inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::_internal_mutable_game_player_info() {
   
-  if (_impl_.local_game_player_info_ == nullptr) {
+  if (_impl_.game_player_info_ == nullptr) {
     auto* p = CreateMaybeMessage<::Protocol::GameEntityInfo>(GetArenaForAllocation());
-    _impl_.local_game_player_info_ = p;
+    _impl_.game_player_info_ = p;
   }
-  return _impl_.local_game_player_info_;
+  return _impl_.game_player_info_;
 }
-inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::mutable_local_game_player_info() {
-  ::Protocol::GameEntityInfo* _msg = _internal_mutable_local_game_player_info();
-  // @@protoc_insertion_point(field_mutable:Protocol.S_CreateLocalGamePlayer.local_game_player_info)
+inline ::Protocol::GameEntityInfo* S_CreateLocalGamePlayer::mutable_game_player_info() {
+  ::Protocol::GameEntityInfo* _msg = _internal_mutable_game_player_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_CreateLocalGamePlayer.game_player_info)
   return _msg;
 }
-inline void S_CreateLocalGamePlayer::set_allocated_local_game_player_info(::Protocol::GameEntityInfo* local_game_player_info) {
+inline void S_CreateLocalGamePlayer::set_allocated_game_player_info(::Protocol::GameEntityInfo* game_player_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.local_game_player_info_);
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.game_player_info_);
   }
-  if (local_game_player_info) {
+  if (game_player_info) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
         ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
-                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(local_game_player_info));
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(game_player_info));
     if (message_arena != submessage_arena) {
-      local_game_player_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, local_game_player_info, submessage_arena);
+      game_player_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, game_player_info, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.local_game_player_info_ = local_game_player_info;
-  // @@protoc_insertion_point(field_set_allocated:Protocol.S_CreateLocalGamePlayer.local_game_player_info)
+  _impl_.game_player_info_ = game_player_info;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_CreateLocalGamePlayer.game_player_info)
 }
 
 // -------------------------------------------------------------------
 
 // S_SyncGameEntities
 
-// repeated .Protocol.GameEntityInfo game_entities = 1;
-inline int S_SyncGameEntities::_internal_game_entities_size() const {
-  return _impl_.game_entities_.size();
+// repeated .Protocol.GameEntityInfo game_players = 1;
+inline int S_SyncGameEntities::_internal_game_players_size() const {
+  return _impl_.game_players_.size();
 }
-inline int S_SyncGameEntities::game_entities_size() const {
-  return _internal_game_entities_size();
+inline int S_SyncGameEntities::game_players_size() const {
+  return _internal_game_players_size();
 }
-inline ::Protocol::GameEntityInfo* S_SyncGameEntities::mutable_game_entities(int index) {
-  // @@protoc_insertion_point(field_mutable:Protocol.S_SyncGameEntities.game_entities)
-  return _impl_.game_entities_.Mutable(index);
+inline ::Protocol::GameEntityInfo* S_SyncGameEntities::mutable_game_players(int index) {
+  // @@protoc_insertion_point(field_mutable:Protocol.S_SyncGameEntities.game_players)
+  return _impl_.game_players_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameEntityInfo >*
-S_SyncGameEntities::mutable_game_entities() {
-  // @@protoc_insertion_point(field_mutable_list:Protocol.S_SyncGameEntities.game_entities)
-  return &_impl_.game_entities_;
+S_SyncGameEntities::mutable_game_players() {
+  // @@protoc_insertion_point(field_mutable_list:Protocol.S_SyncGameEntities.game_players)
+  return &_impl_.game_players_;
 }
-inline const ::Protocol::GameEntityInfo& S_SyncGameEntities::_internal_game_entities(int index) const {
-  return _impl_.game_entities_.Get(index);
+inline const ::Protocol::GameEntityInfo& S_SyncGameEntities::_internal_game_players(int index) const {
+  return _impl_.game_players_.Get(index);
 }
-inline const ::Protocol::GameEntityInfo& S_SyncGameEntities::game_entities(int index) const {
-  // @@protoc_insertion_point(field_get:Protocol.S_SyncGameEntities.game_entities)
-  return _internal_game_entities(index);
+inline const ::Protocol::GameEntityInfo& S_SyncGameEntities::game_players(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.S_SyncGameEntities.game_players)
+  return _internal_game_players(index);
 }
-inline ::Protocol::GameEntityInfo* S_SyncGameEntities::_internal_add_game_entities() {
-  return _impl_.game_entities_.Add();
+inline ::Protocol::GameEntityInfo* S_SyncGameEntities::_internal_add_game_players() {
+  return _impl_.game_players_.Add();
 }
-inline ::Protocol::GameEntityInfo* S_SyncGameEntities::add_game_entities() {
-  ::Protocol::GameEntityInfo* _add = _internal_add_game_entities();
-  // @@protoc_insertion_point(field_add:Protocol.S_SyncGameEntities.game_entities)
+inline ::Protocol::GameEntityInfo* S_SyncGameEntities::add_game_players() {
+  ::Protocol::GameEntityInfo* _add = _internal_add_game_players();
+  // @@protoc_insertion_point(field_add:Protocol.S_SyncGameEntities.game_players)
   return _add;
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameEntityInfo >&
-S_SyncGameEntities::game_entities() const {
-  // @@protoc_insertion_point(field_list:Protocol.S_SyncGameEntities.game_entities)
-  return _impl_.game_entities_;
+S_SyncGameEntities::game_players() const {
+  // @@protoc_insertion_point(field_list:Protocol.S_SyncGameEntities.game_players)
+  return _impl_.game_players_;
+}
+
+// repeated .Protocol.GameMonsterInfo game_monsters = 2;
+inline int S_SyncGameEntities::_internal_game_monsters_size() const {
+  return _impl_.game_monsters_.size();
+}
+inline int S_SyncGameEntities::game_monsters_size() const {
+  return _internal_game_monsters_size();
+}
+inline ::Protocol::GameMonsterInfo* S_SyncGameEntities::mutable_game_monsters(int index) {
+  // @@protoc_insertion_point(field_mutable:Protocol.S_SyncGameEntities.game_monsters)
+  return _impl_.game_monsters_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameMonsterInfo >*
+S_SyncGameEntities::mutable_game_monsters() {
+  // @@protoc_insertion_point(field_mutable_list:Protocol.S_SyncGameEntities.game_monsters)
+  return &_impl_.game_monsters_;
+}
+inline const ::Protocol::GameMonsterInfo& S_SyncGameEntities::_internal_game_monsters(int index) const {
+  return _impl_.game_monsters_.Get(index);
+}
+inline const ::Protocol::GameMonsterInfo& S_SyncGameEntities::game_monsters(int index) const {
+  // @@protoc_insertion_point(field_get:Protocol.S_SyncGameEntities.game_monsters)
+  return _internal_game_monsters(index);
+}
+inline ::Protocol::GameMonsterInfo* S_SyncGameEntities::_internal_add_game_monsters() {
+  return _impl_.game_monsters_.Add();
+}
+inline ::Protocol::GameMonsterInfo* S_SyncGameEntities::add_game_monsters() {
+  ::Protocol::GameMonsterInfo* _add = _internal_add_game_monsters();
+  // @@protoc_insertion_point(field_add:Protocol.S_SyncGameEntities.game_monsters)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::GameMonsterInfo >&
+S_SyncGameEntities::game_monsters() const {
+  // @@protoc_insertion_point(field_list:Protocol.S_SyncGameEntities.game_monsters)
+  return _impl_.game_monsters_;
 }
 
 // -------------------------------------------------------------------

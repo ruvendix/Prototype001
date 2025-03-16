@@ -57,7 +57,7 @@ RxSendBufferPtr RxServerPacketHandler::MakeLeaveGamePacket(uint64 gameSessionId,
 RxSendBufferPtr RxServerPacketHandler::MakeCreateLocalGamePlayerPacket(const Protocol::GameEntityInfo& localGamePlayerInfo)
 {
 	Protocol::S_CreateLocalGamePlayer localGamePlayerPacket;
-	Protocol::GameEntityInfo* pLocalGamePlayerInfo = localGamePlayerPacket.mutable_local_game_player_info();
+	Protocol::GameEntityInfo* pLocalGamePlayerInfo = localGamePlayerPacket.mutable_game_player_info();
 	*pLocalGamePlayerInfo = localGamePlayerInfo;
 
 	return MakeSendBuffer(localGamePlayerPacket, Protocol::EProtocolId::CreateLocalGamePlayer);

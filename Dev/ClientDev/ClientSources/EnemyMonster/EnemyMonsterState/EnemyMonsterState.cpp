@@ -18,28 +18,28 @@ void EnmeyMonsterIdleState::Startup()
 
 bool EnmeyMonsterIdleState::Update(float deltaSeconds)
 {
-	EnemyMonsterActor* spEnemyMonsterOwner = dynamic_cast<EnemyMonsterActor*>(GetOwner());
-	if (spEnemyMonsterOwner == nullptr)
-	{
-		return false;
-	}
+	//EnemyMonsterActor* spEnemyMonsterOwner = dynamic_cast<EnemyMonsterActor*>(GetOwner());
+	//if (spEnemyMonsterOwner == nullptr)
+	//{
+	//	return false;
+	//}
 
-	// 추적 가능한 플레이어를 찾을 때만 추적 상태로 변경
-	const std::shared_ptr<PlayerActor>& spFoundPlayerActor = spEnemyMonsterOwner->FindChaseAvailablePlayerActor();
-	if (spFoundPlayerActor != nullptr)
-	{
-		spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterChaseState>();
-		DEFAULT_TRACE_LOG("몬스터 (Idle -> 추적) 상태로 전환!");
-		return true;
-	}
+	//// 추적 가능한 플레이어를 찾을 때만 추적 상태로 변경
+	//const std::shared_ptr<PlayerActor>& spFoundPlayerActor = spEnemyMonsterOwner->FindChaseAvailablePlayerActor();
+	//if (spFoundPlayerActor != nullptr)
+	//{
+	//	spEnemyMonsterOwner->ReserveChangeNextState<EnmeyMonsterChaseState>();
+	//	DEFAULT_TRACE_LOG("몬스터 (Idle -> 추적) 상태로 전환!");
+	//	return true;
+	//}
 
-	// 그게 아니면 그냥 돌아다님
-	CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
-	ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
-	if (pCellActorMoveComponent->IsZeroMoveDirectionVector())
-	{
-		ProcessIdleStateByRandomMove();
-	}
+	//// 그게 아니면 그냥 돌아다님
+	//CellActorMoveComponent* pCellActorMoveComponent = spEnemyMonsterOwner->FindComponent<CellActorMoveComponent>();
+	//ASSERT_LOG_RETURN_VALUE(pCellActorMoveComponent != nullptr, false);
+	//if (pCellActorMoveComponent->IsZeroMoveDirectionVector())
+	//{
+	//	ProcessIdleStateByRandomMove();
+	//}
 
 	return true;
 }

@@ -191,7 +191,7 @@ void EnemyMonsterActor::Startup()
 {
 	Super::Startup();
 	AddComponent<CellActorMoveComponent>();
-	AddComponent<EnemyMonsterAttackComponent>();
+	//AddComponent<EnemyMonsterAttackComponent>();
 	ImmediatelyChangeState<EnmeyMonsterIdleState>();
 }
 
