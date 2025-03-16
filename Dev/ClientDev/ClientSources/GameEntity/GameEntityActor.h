@@ -67,6 +67,7 @@ public:
 	PawnActorStatePtr FindActorState(Protocol::EGameEntityState gameEntityState) const;
 
 	uint64 GetGameEntityId() const { return (m_spGameEntityInfo->entity_id()); }
+	Protocol::EGameEntityState GetGameEntityState() const { return (m_spGameEntityInfo->entity_state()); }
 
 private:
 	void SyncToServer_GameEntityLookAtDirectionIfNeed();

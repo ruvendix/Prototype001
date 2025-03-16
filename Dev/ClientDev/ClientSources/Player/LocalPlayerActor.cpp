@@ -116,7 +116,7 @@ bool LocalPlayerActor::Pimpl::AKeyHandlerImpl(const InputActionValue* pInputActi
 
 	if (bIdleState == false)
 	{
-		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
+		//DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
 		return false;
 	}
 
@@ -139,7 +139,13 @@ void LocalPlayerActor::Startup()
 
 bool LocalPlayerActor::Update(float deltaSeconds)
 {
-	return Super::Update(deltaSeconds);
+	if (Super::Update(deltaSeconds) == false)
+	{
+		return false;
+	}
+
+	SyncToServer_GameEntityInfoIfNeed();
+	return true;
 }
 
 void LocalPlayerActor::Cleanup()

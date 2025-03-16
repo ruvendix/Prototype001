@@ -20,7 +20,6 @@ bool GameEntityActor::Update(float deltaSeconds)
 		return false;
 	}
 
-	SyncToServer_GameEntityInfoIfNeed();
 	return true;
 }
 

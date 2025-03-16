@@ -19,7 +19,7 @@ void NetworkManager::Startup()
 
 	// Service´Â CommonÀÓ...
 	m_spClientService = std::make_shared<RxClientService>(serviceInfo);
-	bool b = m_spClientService->Startup();
+	m_spClientService->Startup();
 }
 
 bool NetworkManager::Update(float deltaSeconds)

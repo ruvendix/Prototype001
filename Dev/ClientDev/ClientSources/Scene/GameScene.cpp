@@ -210,5 +210,11 @@ void GameScene::ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEnti
 		return;
 	}
 
+	// 로컬 플레이어는 제외
+	if (m_spLocalPlayerActor->GetGameEntityId() == gameEntityInfo.entity_id())
+	{
+		return;
+	}
+
 	spGameEntityActor->SyncFromServer_GameEntityState(gameEntityInfo);
 }
