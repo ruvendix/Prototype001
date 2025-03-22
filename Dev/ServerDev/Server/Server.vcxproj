@@ -79,6 +79,12 @@
     <ClCompile Include="ServerSources\Game\Monster\GameMonsterFactory.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="ServerSources\Game\Monster\GameMonsterActionState.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\Monster\GameMonsterUtility.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="ServerSources\Game\Player\GamePlayer.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -121,6 +127,12 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ServerSources\Game\Monster\GameMonsterFactory.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Monster\GameMonsterActionState.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Monster\GameMonsterUtility.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ServerSources\Game\Player\GamePlayer.h">

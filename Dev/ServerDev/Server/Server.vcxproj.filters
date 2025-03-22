@@ -43,6 +43,12 @@
     <ClCompile Include="ServerSources\Game\Monster\GameMonsterFactory.cpp">
       <Filter>ServerSources\Game\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="ServerSources\Game\Monster\GameMonsterActionState.cpp">
+      <Filter>ServerSources\Game\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSources\Game\Monster\GameMonsterUtility.cpp">
+      <Filter>ServerSources\Game\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerSources\Session\GameSession.h">
@@ -85,6 +91,12 @@
       <Filter>ServerSources\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="ServerSources\Game\Monster\GameMonsterFactory.h">
+      <Filter>ServerSources\Game\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Monster\GameMonsterActionState.h">
+      <Filter>ServerSources\Game\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Monster\GameMonsterUtility.h">
       <Filter>ServerSources\Game\Monster</Filter>
     </ClInclude>
   </ItemGroup>

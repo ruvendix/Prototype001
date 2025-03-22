@@ -14,7 +14,13 @@ void ErrorHandler::Startup()
 	InsertErrorInfo(EErrorCode::InvalidRenderingLayer, &g_LogDefault, "유효하지 않은 렌더링 레이어!");
 	InsertErrorInfo(EErrorCode::InvalidFileStream, &g_LogResource, "유효하지 않은 파일 스트림!");	
 	InsertErrorInfo(EErrorCode::NoReturnNullObject, &g_LogDefault, "널 객체를 반환할 정도면 이미 망한 상황!");
-	InsertErrorInfo(EErrorCode::ServerGameEntityInsertFailed, &g_LogDefault, "서버에서 게임 개체 등록 실패!");	
+
+	// 이건 클라로 이동
+	InsertErrorInfo(EErrorCode::ConnectFailedToServer, &g_LogDefault, "서버로 연결 실패!");
+	InsertErrorInfo(EErrorCode::DisconnectFromServer, &g_LogDefault, "서버로부터 연결 끊김!");
+
+	// 이건 서버로 이동
+	InsertErrorInfo(EErrorCode::ServerGameEntityInsertFailed, &g_LogDefault, "서버에서 게임 개체 등록 실패!");
 }
 
 void ErrorHandler::InsertErrorInfo(EErrorCode errorCode, const LogCategory* pLogCategory, const std::string& strFormatError)

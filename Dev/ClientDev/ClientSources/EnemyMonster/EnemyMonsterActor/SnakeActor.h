@@ -17,5 +17,7 @@ public:
 	virtual void Cleanup() override;
 
 	virtual ActorPtr CreateClone() override;
+	virtual void RegisterStateOnBidirectional() override;
+
 	virtual void ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker) override;
 };

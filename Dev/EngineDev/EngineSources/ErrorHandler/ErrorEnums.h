@@ -12,4 +12,6 @@ enum class EErrorCode
 	InvalidFileStream,
 	NoReturnNullObject,
 	ServerGameEntityInsertFailed,
+	ConnectFailedToServer,
+	DisconnectFromServer,
 };

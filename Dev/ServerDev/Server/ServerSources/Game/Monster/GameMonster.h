@@ -1,6 +1,8 @@
 // Copyright 2025 Ruvendix, All Rights Reserved.
 #pragma once
 
+class GameMonsterActionState;
+
 class GameMonster : public GameEntity
 {
 public:
@@ -11,19 +13,29 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	virtual void UpdateIdle(float deltaSeconds);
-	virtual void UpdateWalk(float deltaSeconds);
+public:
+	template <typename TState>
+	void ReserveNextState()
+	{
+		ASSERT_LOG_RETURN((std::is_base_of_v<GameMonsterActionState, TState> == true));
+		const std::shared_ptr<TState>& spNextActionState = std::make_shared<TState>(SharedFromThisExactType<GameMonster>());
+		spNextActionState->Startup();
+		m_reserveNextStateEvent.RegisterEventHandler([=](){ m_spActionState = spNextActionState; });
+	}
 
 public:
 	void ApplyGameMonsterInfo(const Protocol::GameMonsterInfo& srcGameMonsterInfo);
 	void CopyGameMonsterInfo(Protocol::GameMonsterInfo* pDestGameMonsterInfo);
 
-private:
-	void OnTimerIdle();
-	void OnTimerWalk();
+	uint32 GetChaseRange() const { return m_chaseRange; }
+	uint32 GetAttackableRange() const { return m_attackableRange; }
 
 private:
 	uint32 m_monsterId = 0;
-	Timer m_timerOnIdle;
-	Timer m_timerOnWalk;
+
+	uint32 m_chaseRange = 7;
+	uint32 m_attackableRange = 1;
+
+	Event<void> m_reserveNextStateEvent;
+	std::shared_ptr<GameMonsterActionState> m_spActionState = nullptr;
 };

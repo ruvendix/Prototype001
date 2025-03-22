@@ -14,7 +14,9 @@ public:
 	virtual void Cleanup() override;
 
 	void SetInstanceHandle(HINSTANCE hGameAppInstance) { m_hGameAppInstance = hGameAppInstance; }
+	void SetForceShutdown(bool bForceShutdown) { m_bForceShutdown = bForceShutdown; }
 
 private:
 	HINSTANCE m_hGameAppInstance = nullptr;
+	bool m_bForceShutdown = false;
 };

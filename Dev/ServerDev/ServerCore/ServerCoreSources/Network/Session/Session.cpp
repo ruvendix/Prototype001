@@ -365,6 +365,10 @@ int32 RxSession::HandleLastError()
 
 	switch (errorCode)
 	{
+	case WSAENOTCONN:
+		ProcessConnectFailedImpl();
+		break;
+
 	case WSAECONNRESET:
 	case WSAECONNABORTED:
 		Disconnect(L"치명적인 오류");

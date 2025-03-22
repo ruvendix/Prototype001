@@ -32,7 +32,8 @@ int32 GameApplication::Drive()
         else
         {
             float deltaSeconds = GameFrameHandler::I()->GetDeltaSeconds();
-            if (Update(deltaSeconds) == false)
+            if ((m_bForceShutdown == true) ||
+                (Update(deltaSeconds) == false))
             {
                 break;
             }

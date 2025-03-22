@@ -32,11 +32,12 @@ public:
 	Position2d GenerateRandomCellPosition();
 	bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const GameEntityPtr& spExcludeGameEntity) const;
 
-private:
 	GameEntityPtr FindGameEntity(const Protocol::GameEntityInfo& gameEntityInfo) const;
 	GameEntityPtr FindGameEntity(const Position2d& targetCellPos) const;
 	GamePlayerPtr FindGamePlayer(uint64 entityId) const;
 	GameMonsterPtr FindGameMonster(uint64 entityId) const;
+
+	const std::unordered_map<uint64, GamePlayerPtr>& GetGamePlayers() const { return m_mapGamePlayer; }
 
 private:
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;

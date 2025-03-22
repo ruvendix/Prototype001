@@ -14,6 +14,7 @@ public:
 
 	// 컨텐츠 코드에서 재정의 필요
 	virtual void   ProcessConnectImpl() {}
+	virtual void   ProcessConnectFailedImpl() {}
 	virtual void   ProcessDisconnectImpl() {}
 	virtual uint32 ProcessReceiveImpl(BYTE* buffer, uint32 numOfBytes) { return numOfBytes; }
 	virtual void   ProcessSendImpl(uint32 numOfBytes) {}

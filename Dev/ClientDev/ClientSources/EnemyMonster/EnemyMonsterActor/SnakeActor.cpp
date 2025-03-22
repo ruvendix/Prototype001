@@ -83,6 +83,19 @@ ActorPtr SnakeActor::CreateClone()
 	return std::make_shared<SnakeActor>(*this);
 }
 
+void SnakeActor::RegisterStateOnBidirectional()
+{
+	RegisterActorState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
+	RegisterActorState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
+	RegisterActorState<EnmeyMonsterChaseState>(Protocol::EGameEntityState::Chase);
+	RegisterActorState<EnmeyMonsterAttackState>(Protocol::EGameEntityState::Attack);
+
+	RegisterGameEntityState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
+	RegisterGameEntityState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
+	RegisterGameEntityState<EnmeyMonsterChaseState>(Protocol::EGameEntityState::Chase);
+	RegisterGameEntityState<EnmeyMonsterAttackState>(Protocol::EGameEntityState::Attack);
+}
+
 void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 {
 	// ÀÌÆåÆ® »ý¼º

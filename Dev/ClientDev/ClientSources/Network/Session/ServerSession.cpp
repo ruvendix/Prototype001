@@ -2,6 +2,8 @@
 #include "Pch.h"
 #include "ServerSession.h"
 
+#include "GameApplication/GameApplication.h"
+
 RxServerSession::RxServerSession()
 {
 	::OutputDebugString("辑滚 技记 积己!\n");
@@ -17,9 +19,16 @@ void RxServerSession::ProcessConnectImpl()
 	DEFAULT_TRACE_LOG("Connected to server\n");
 }
 
+void RxServerSession::ProcessConnectFailedImpl()
+{
+	DETAIL_ERROR_LOG(EErrorCode::ConnectFailedToServer);
+	GameApplication::I()->SetForceShutdown(true);
+}
+
 void RxServerSession::ProcessDisconnectImpl()
 {
-	DEFAULT_TRACE_LOG("Disconnected from server\n");
+	DETAIL_ERROR_LOG(EErrorCode::DisconnectFromServer);
+	GameApplication::I()->SetForceShutdown(true);
 }
 
 void RxServerSession::ProcessSendImpl(uint32 numOfBytes)

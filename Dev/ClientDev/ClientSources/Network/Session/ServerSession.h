@@ -8,6 +8,7 @@ public:
 	virtual ~RxServerSession();
 
 	virtual void ProcessConnectImpl() override;
+	virtual void ProcessConnectFailedImpl() override;	
 	virtual void ProcessDisconnectImpl() override;
 	virtual void ProcessSendImpl(uint32 numOfBytes) override;
 

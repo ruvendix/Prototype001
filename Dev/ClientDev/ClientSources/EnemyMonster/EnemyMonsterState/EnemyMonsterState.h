@@ -17,9 +17,6 @@ public:
 public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-
-public:
-	void ProcessIdleStateByRandomMove() const;
 };
 
 class EnmeyMonsterChaseState : public PawnActorState
@@ -34,9 +31,6 @@ public:
 public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
-
-public:
-	void ProcessChaseStateByNavigationPath() const;
 };
 
 class EnmeyMonsterAttackState : public PawnActorState

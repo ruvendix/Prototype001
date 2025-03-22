@@ -33,13 +33,13 @@ public:
     bool IsBoundAnyFunction() const { return (m_vecBoundFunc.empty() == false); }
     bool IsBoundAnyFixedArgumentsFunction() const { return (m_vecBoundFixedArgsFunc.empty() == false); }
 
-    void ConnectStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc)
+    void ConnectStaticFunction(std::function<TReturn(TArgs...)> staticFunc)
     {
         const auto& argsIdxSequence = std::make_index_sequence<sizeof...(TArgs)>();
         ConnectStaticFunctionImpl(staticFunc, argsIdxSequence);
     }
 
-    void ConnectFixedArgumentsStaticFunction(const std::function<TReturn(TArgs...)>& staticFunc, TArgs&&... args)
+    void ConnectFixedArgumentsStaticFunction(std::function<TReturn(TArgs...)> staticFunc, TArgs&&... args)
     {
         const auto& boundFunc = std::bind(staticFunc, std::forward<TArgs>(args)...);
         m_vecBoundFixedArgsFunc.push_back(boundFunc);

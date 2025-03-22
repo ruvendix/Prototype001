@@ -30,7 +30,7 @@ void GameEntity::ApplyGameEntityLookAtDirection(const Protocol::GameEntityInfo& 
 void GameEntity::ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo)
 {
 	m_gameEntityInfo.set_entity_state(gameEntityInfo.entity_state());
-	m_gameEntityInfo.set_entitye_look_at_dir(CalculateActorLookAtDirection(gameEntityInfo));
+	m_gameEntityInfo.set_entitye_look_at_dir(CalculateGameEntityLookAtDirection(gameEntityInfo));
 	m_gameEntityInfo.set_cell_pos_x(gameEntityInfo.cell_pos_x());
 	m_gameEntityInfo.set_cell_pos_y(gameEntityInfo.cell_pos_y());
 }
@@ -46,29 +46,49 @@ bool GameEntity::CheckSameCellPosition(const Position2d& targetCellPos) const
 	return (currentCellPos == targetCellPos);
 }
 
-Protocol::EGameEntityLookAtDir GameEntity::CalculateActorLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo)
+Position2d GameEntity::MakeCurrentCellPosition() const
 {
-	const Position2d& currentCellPos = { static_cast<int32>(m_gameEntityInfo.cell_pos_x()), static_cast<int32>(m_gameEntityInfo.cell_pos_y()) };
-	const Position2d& destCellPos = { static_cast<int32>(modifiedGameEntityInfo.cell_pos_x()), static_cast<int32>(modifiedGameEntityInfo.cell_pos_y()) };
+	const Protocol::GameEntityInfo& gameEntityInfo = GetGameEntityInfo();
 
-	Protocol::EGameEntityLookAtDir gameEntityeLookAtDir = Protocol::EGameEntityLookAtDir::Count;
+	Position2d currentCellPos;
+	currentCellPos.x = static_cast<int32>(gameEntityInfo.cell_pos_x());
+	currentCellPos.y = static_cast<int32>(gameEntityInfo.cell_pos_y());
+	return currentCellPos;
+}
+
+Protocol::EGameEntityLookAtDir GameEntity::CalculateGameEntityLookAtDirection(const Position2d& destCellPos)
+{
+	const Position2d& currentCellPos = MakeCurrentCellPosition();
+
+	Protocol::EGameEntityLookAtDir gameEntityLookAtDir = Protocol::EGameEntityLookAtDir::Count;
 	const Position2d& diffCellPos = (destCellPos - currentCellPos);
 	if (diffCellPos.x == 1)
 	{
-		gameEntityeLookAtDir = Protocol::EGameEntityLookAtDir::Right;
+		gameEntityLookAtDir = Protocol::EGameEntityLookAtDir::Right;
 	}
 	else if (diffCellPos.x == -1)
 	{
-		gameEntityeLookAtDir = Protocol::EGameEntityLookAtDir::Left;
+		gameEntityLookAtDir = Protocol::EGameEntityLookAtDir::Left;
 	}
 	else if (diffCellPos.y == 1)
 	{
-		gameEntityeLookAtDir = Protocol::EGameEntityLookAtDir::Down;
+		gameEntityLookAtDir = Protocol::EGameEntityLookAtDir::Down;
 	}
 	else if (diffCellPos.y == -1)
 	{
-		gameEntityeLookAtDir = Protocol::EGameEntityLookAtDir::Up;
+		gameEntityLookAtDir = Protocol::EGameEntityLookAtDir::Up;
 	}
 
-	return gameEntityeLookAtDir;
+	return gameEntityLookAtDir;
+}
+
+Protocol::EGameEntityLookAtDir GameEntity::CalculateGameEntityLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo)
+{
+	const Position2d& destCellPos =
+	{
+		static_cast<int32>(modifiedGameEntityInfo.cell_pos_x()),
+		static_cast<int32>(modifiedGameEntityInfo.cell_pos_y())
+	};
+
+	return (CalculateGameEntityLookAtDirection(destCellPos));
 }
