@@ -24,7 +24,7 @@ void StaticSpriteComponent::Render(HDC hBackBufferDc)
 	//TRACE_LOG(LogDefault, "스프라이트 컴포넌트!");
 
 	// 좌표 가져오기
-	const TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
+	const TransformComponent* pTransformComponent = GetOwner()->GetComponent<TransformComponent>();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 
 	Position2d renderingStartPos = CalculateRenderingStartPosition();

@@ -246,6 +246,7 @@
     <ClInclude Include="EngineSources\ErrorHandler\ErrorHandler.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="EngineSources\ErrorHandler\ErrorHandlerBase.hpp" />
     <ClInclude Include="EngineSources\Event\Event.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

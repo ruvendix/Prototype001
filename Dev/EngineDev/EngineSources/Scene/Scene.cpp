@@ -63,7 +63,7 @@ void Scene::RegisterMainCameraActorToScene(const ActorPtr& spMainCameraTargetAct
 {
 	m_spMainCameraActor = CreateActorToScene<CameraActor>(EActorLayerType::Default, EActorUpdateOrder::Post);
 	
-	CameraComponent* pCameraComponent = m_spMainCameraActor->FindComponent<CameraComponent>();
+	CameraComponent* pCameraComponent = m_spMainCameraActor->GetComponent<CameraComponent>();
 	ASSERT_LOG_RETURN(pCameraComponent != nullptr);
 
 	// 만약에 타겟 액터가 오너라면 무시
@@ -100,7 +100,7 @@ std::shared_ptr<CellActor> Scene::FindCellActor(EActorLayerType actorLayer, cons
 
 		if (spCellActor->CheckMovingState() == true)
 		{
-			const CellActorMoveComponent* pCellActorMoveComponent = spCellActor->FindComponent<CellActorMoveComponent>();
+			const CellActorMoveComponent* pCellActorMoveComponent = spCellActor->GetComponent<CellActorMoveComponent>();
 			if ((pCellActorMoveComponent != nullptr) &&
 				(pCellActorMoveComponent->GetDestinationCellPosition() == targetCellPos))
 			{

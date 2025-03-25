@@ -114,7 +114,7 @@ public:
 	template <typename TActorState>
 	void ChangeActorStateDynamicSprite()
 	{
-		DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
+		DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 		ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
 		DynamicSpritePtr spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TActorState>(m_lookAtDir);

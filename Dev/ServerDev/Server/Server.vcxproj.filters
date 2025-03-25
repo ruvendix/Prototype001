@@ -49,6 +49,9 @@
     <ClCompile Include="ServerSources\Game\Monster\GameMonsterUtility.cpp">
       <Filter>ServerSources\Game\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="ServerSources\ErrorHandler\ServerErrorHandler.cpp">
+      <Filter>ServerSources\ErrorHandler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerSources\Session\GameSession.h">
@@ -99,6 +102,12 @@
     <ClInclude Include="ServerSources\Game\Monster\GameMonsterUtility.h">
       <Filter>ServerSources\Game\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="ServerSources\ErrorHandler\ServerErrorHandler.h">
+      <Filter>ServerSources\ErrorHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSources\ErrorHandler\ErrorEnums.h">
+      <Filter>ServerSources\ErrorHandler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ServerSources">
@@ -127,6 +136,9 @@
     </Filter>
     <Filter Include="ServerSources\Game\Player">
       <UniqueIdentifier>{b7abef11-44f3-4a2f-90ef-79f0cf2074be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerSources\ErrorHandler">
+      <UniqueIdentifier>{69c9c089-6d01-466c-8d28-4d047f18e8d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

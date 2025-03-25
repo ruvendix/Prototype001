@@ -67,6 +67,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ServerSources\ErrorHandler\ServerErrorHandler.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="ServerSources\Game\GameEntity.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -117,6 +120,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ServerSources\ErrorHandler\ErrorEnums.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\ErrorHandler\ServerErrorHandler.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="ServerSources\Game\GameEntity.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

@@ -15,6 +15,7 @@
 #include "Common/Macros.h"
 
 #include "Global/DataTypes.h"
+#include "ErrorHandler/ServerErrorHandler.h"
 #include "Packet/ServerPacketHandler.h"
 #include "Session/GameSession.h"
 #include "Session/GameSessionManager.h"

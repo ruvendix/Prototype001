@@ -17,7 +17,7 @@ RenderComponent::~RenderComponent()
 Position2d RenderComponent::CalculateRenderingStartPosition()
 {
 	// 좌표 가져오기
-	const TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
+	const TransformComponent* pTransformComponent = GetOwner()->GetComponent<TransformComponent>();
 	ASSERT_LOG(pTransformComponent != nullptr);
 
 	// 중점 좌표가 피봇

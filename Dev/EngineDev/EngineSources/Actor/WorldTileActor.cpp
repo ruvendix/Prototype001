@@ -62,7 +62,7 @@ void WorldTileActor::InitializeWorldTile(int32 cellX, int32 cellY, const std::st
 
 	int32 cellSize = WorldContext::I()->GetCellSize();
 
-	TransformComponent* pWorldTileTransform = BringTransformComponent();
+	TransformComponent* pWorldTileTransform = GetComponent<TransformComponent>();
 	pWorldTileTransform->SetSize(cellSize, cellSize);
 
 	// 이미지 넣기

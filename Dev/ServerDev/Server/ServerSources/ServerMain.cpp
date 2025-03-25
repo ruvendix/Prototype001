@@ -31,7 +31,7 @@ BOOL WINAPI OnClose_ConsoleHandler(DWORD signal)
 
 		GameRoom::I()->Cleanup();
 		LogSystem::I()->Cleanup();
-		ErrorHandler::I()->Cleanup();
+		ServerErrorHandler::I()->Cleanup();
 
 		// 모든 서브 쓰레드들이 안전하게 종료될 때까지 시간 벌이
 		//std::this_thread::sleep_for(1s);
@@ -52,7 +52,7 @@ int main()
 	LogSystem::I()->RegisterFileLoggerPathKey("ServerLog");
 	FILE_LOG(LogDefault, "Test");
 
-	ErrorHandler::I()->Startup();
+	ServerErrorHandler::I()->Startup();
 
 	RxSocketUtility::Startup();
 

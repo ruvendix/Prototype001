@@ -63,14 +63,14 @@ void ProjectileActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacke
 
 void ProjectileActor::SpawnProjectile(const ProjectileSpawnInfo& projectileSpawnInfo)
 {
-	TransformComponent* pTransformComponent = BringTransformComponent();
+	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetSize(projectileSpawnInfo.projectileSize);
 
 	ApplyCellPosition(projectileSpawnInfo.spawnCellPos);
 
 	// 투사체는 이동하는 기능이 있음
-	CellActorMoveComponent* pCellActorMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pCellActorMoveComponent = GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN(pCellActorMoveComponent != nullptr);
 	pCellActorMoveComponent->SetMoveSpeed(projectileSpawnInfo.flyingSpeed);
 	pCellActorMoveComponent->SetDestinationCellPosition(projectileSpawnInfo.spawnCellPos);

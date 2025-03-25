@@ -20,7 +20,7 @@ bool ProjectileAttackComponent::Update(float deltaSeconds)
 	ASSERT_LOG_RETURN_VALUE(pAttacker != nullptr, false);
 
 	// 한칸 이동했다면 계속 이동시켜줌
-	CellActorMoveComponent* pMoveComponent = pAttacker->FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = pAttacker->GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN_VALUE(pMoveComponent != nullptr, false);
 	if (pMoveComponent->IsZeroMoveDirectionVector())
 	{

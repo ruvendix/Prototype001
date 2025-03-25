@@ -105,7 +105,9 @@ void GameApplication::Startup()
 
 #pragma region 전역 객체 초기화
     LogSystem::I()->Startup();
-    ErrorHandler::I()->Startup();
+    EngineErrorHandler::I()->Startup();
+    ClientErrorHandler::I()->Startup();
+    // 서버 예약
     GameFrameHandler::I()->Startup();
     InputDeviceMananger::I()->Startup();
     ResourceMananger::I()->Startup();    

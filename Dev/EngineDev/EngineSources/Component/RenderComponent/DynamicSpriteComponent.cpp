@@ -76,7 +76,7 @@ void DynamicSpriteComponent::Render(HDC hBackBufferDc)
 	ASSERT_LOG_RETURN(pTex != nullptr);
 
 	// 좌표 가져오기
-	const TransformComponent* pTransformComponent = GetOwner()->BringTransformComponent();
+	const TransformComponent* pTransformComponent = GetOwner()->GetComponent<TransformComponent>();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 
 	// 중점 좌표가 피봇

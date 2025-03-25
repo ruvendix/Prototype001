@@ -75,6 +75,6 @@ bool PlayerDefenceState::CheckKnockbackExisted() const
 	ASSERT_LOG(pOwner != nullptr);
 
 	// 방어 상태인데 이동 벡터가 존재하면 넉백 진행중
-	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = pOwner->GetComponent<CellActorMoveComponent>();
 	return (pMoveComponent->IsZeroMoveDirectionVector() == false);
 }

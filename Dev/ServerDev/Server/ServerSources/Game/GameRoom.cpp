@@ -136,7 +136,7 @@ void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity, bool bBroadcast)
 		auto insertedIter = m_mapGamePlayer.insert(std::make_pair(entityId, spGamePlayer));
 		if (insertedIter.second == false)
 		{
-			DETAIL_ERROR_LOG(EErrorCode::ServerGameEntityInsertFailed);
+			DETAIL_ERROR_LOG(ServerErrorHandler, EServerErrorCode::NetworkGameEntityInsertFailed);
 			return;
 		}
 	}
@@ -148,7 +148,7 @@ void GameRoom::AddGameEntity(const GameEntityPtr& spGameEntity, bool bBroadcast)
 		auto insertedIter = m_mapGameMonster.insert(std::make_pair(entityId, spGameMonster));
 		if (insertedIter.second == false)
 		{
-			DETAIL_ERROR_LOG(EErrorCode::ServerGameEntityInsertFailed);
+			DETAIL_ERROR_LOG(ServerErrorHandler, EServerErrorCode::NetworkGameEntityInsertFailed);
 			return;
 		}
 	}

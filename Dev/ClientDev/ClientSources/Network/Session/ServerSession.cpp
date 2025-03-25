@@ -21,13 +21,13 @@ void RxServerSession::ProcessConnectImpl()
 
 void RxServerSession::ProcessConnectFailedImpl()
 {
-	DETAIL_ERROR_LOG(EErrorCode::ConnectFailedToServer);
+	DETAIL_ERROR_LOG(ClientErrorHandler, EClientErrorCode::ConnectFailedToServer);
 	GameApplication::I()->SetForceShutdown(true);
 }
 
 void RxServerSession::ProcessDisconnectImpl()
 {
-	DETAIL_ERROR_LOG(EErrorCode::DisconnectFromServer);
+	DETAIL_ERROR_LOG(ClientErrorHandler, EClientErrorCode::DisconnectFromServer);
 	GameApplication::I()->SetForceShutdown(true);
 }
 

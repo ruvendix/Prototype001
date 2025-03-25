@@ -23,6 +23,7 @@
 #include "EngineSources/Math/Vector2d.h"
 
 #include "EngineSources/Event/Event.hpp"
+#include "EngineSources/ErrorHandler/ErrorHandlerBase.hpp"
 #include "EngineSources/ErrorHandler/ErrorHandler.h"
 
 #include "EngineSources/Time/TimeUtility.h"

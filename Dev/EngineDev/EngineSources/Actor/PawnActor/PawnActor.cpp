@@ -90,7 +90,7 @@ void PawnActor::ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActo
 
 void PawnActor::ApplyLookAtDirectionToCurrentDynamicSprite()
 {
-	DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
+	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
 	DynamicSpritePtr spChangeActorStateDynamicSprite = FindCurrentActorStateLookAtDynamicSprite(m_lookAtDir);
@@ -153,7 +153,7 @@ void PawnActor::LoadActorLookAtDirectionTexture(const std::string& strActorLookA
 
 void PawnActor::ChangeActorDynamicSpriteByExternal(const DynamicSpritePtr& spChangedDynamicSprite)
 {
-	DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
+	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 	pDynamicSpriteComponent->ApplyDynamicSprite(spChangedDynamicSprite);
 }

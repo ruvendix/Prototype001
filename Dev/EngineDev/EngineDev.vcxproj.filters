@@ -498,5 +498,8 @@
     <ClInclude Include="EngineSources\UtilityClass\SortVector.hpp">
       <Filter>EngineSources\UtilityClass</Filter>
     </ClInclude>
+    <ClInclude Include="EngineSources\ErrorHandler\ErrorHandlerBase.hpp">
+      <Filter>EngineSources\ErrorHandler</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

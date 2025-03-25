@@ -51,14 +51,14 @@ void SnakeActor::Startup()
 	m_spPimpl->LoadAndStartupSnakeSprite();
 
 #pragma region 스네이크 기본 정보 초기화
-	TransformComponent* pTransformComponent = BringTransformComponent();
+	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
 	ASSERT_LOG(pTransformComponent != nullptr);
 
 	// 좌표와 크기 설정
 	//pTransformComponent->SetPosition(0.0f, 0.0f);
 	pTransformComponent->SetSize(100, 100);
 
-	CellActorMoveComponent* pCellActorMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pCellActorMoveComponent = GetComponent<CellActorMoveComponent>();
 	pCellActorMoveComponent->SetMoveSpeed(40.0f);
 #pragma endregion
 }

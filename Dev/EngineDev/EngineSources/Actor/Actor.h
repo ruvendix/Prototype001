@@ -26,57 +26,34 @@ public:
 
 public:
 	template <typename TComponent>
-	TComponent* FindComponent()
+	TComponent* GetComponent()
 	{
-		return const_cast<TComponent*>(FindConstComponent<TComponent>());
+		return const_cast<TComponent*>(GetConstComponent<TComponent>());
 	}
 
 	template <typename TComponent>
-	const TComponent* FindConstComponent() const
+	const TComponent* GetConstComponent() const
 	{
-		auto foundIter = m_mapComponent.find(TComponent::s_id);
-		if (foundIter == m_mapComponent.cend())
-		{
-			return nullptr;
-		}
-
-		return dynamic_cast<const TComponent*>(foundIter->second.get());
+		return dynamic_cast<const TComponent*>(m_vecComponent[TComponent::s_id].get());
 	}
 
 	template <typename TComponent>
 	TComponent* AddComponent()
 	{
-		TComponent* pFoundComponent = FindComponent<TComponent>();
-		if (pFoundComponent != nullptr)
-		{
-			DETAIL_ERROR_LOG(EErrorCode::ExistedComponent);
-			return nullptr;
-		}
+		static_assert(std::is_base_of_v<Component, TComponent> == true, "TComponent isn't derived component");
 
 		std::shared_ptr<TComponent> spComponent = std::make_shared<TComponent>();
 		spComponent->Startup();
 		spComponent->SetOwner(this);
 
-		auto insertedIter = m_mapComponent.insert(std::make_pair(TComponent::s_id, spComponent));
-		if (insertedIter.second == false)
-		{
-			return nullptr;
-		}
-
+		m_vecComponent[TComponent::s_id] = spComponent;
 		return (spComponent.get());
 	}
 
 	template <typename TComponent>
 	void RemoveComponent()
 	{
-		TComponent* pFoundComponent = FindConstComponent<TComponent>();
-		if (pFoundComponent == nullptr)
-		{
-			// 에러 넣기
-			return;
-		}
-
-		m_mapComponent.erase(TComponent::s_id);
+		m_vecComponent[TComponent::s_id] = nullptr;
 	}
 
 	template <typename TActor>
@@ -96,9 +73,6 @@ public:
 	void ApplyScreenCenterPosition();
 
 #pragma region 자주 사용해서 따로 만듬
-	TransformComponent* BringTransformComponent();
-	const TransformComponent* BringTransformComponent() const;
-
 	void ApplyPosition(float x, float y);
 	void ApplyPosition(const Vector2d& vPos);
 	const Vector2d& BringPosition() const;
@@ -127,7 +101,7 @@ public:
 
 private:
 	std::string m_strActorName;
-	std::unordered_map<int32, ComponentPtr> m_mapComponent;
+	std::vector<ComponentPtr> m_vecComponent;
 
 	ActorBitset m_actorBitsetFlag;
 	EActorLayerType m_actorLayer = EActorLayerType::Default;

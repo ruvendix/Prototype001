@@ -24,7 +24,7 @@ bool WeaponSequenceAttackComponent::Update(float deltaSeconds)
 	ASSERT_LOG_RETURN_VALUE(spAttacker != nullptr, false);
 
 	// 이건 공격 애니메이션은 있음
-	const DynamicSpriteComponent* pDynamicSpriteComponent = spAttacker->FindComponent<DynamicSpriteComponent>();
+	const DynamicSpriteComponent* pDynamicSpriteComponent = spAttacker->GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG_RETURN_VALUE(pDynamicSpriteComponent != nullptr, false);
 	if (pDynamicSpriteComponent->CheckDynamicSpriteEnd() == false)
 	{

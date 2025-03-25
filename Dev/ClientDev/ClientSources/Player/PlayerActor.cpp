@@ -26,7 +26,7 @@ void PlayerActor::Startup()
 	}
 
 #pragma region 플레이어 기본 정보 초기화
-	TransformComponent* pTransformComponent = BringTransformComponent();
+	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
 	ASSERT_LOG(pTransformComponent != nullptr);
 
 	// 좌표와 크기 설정
@@ -39,7 +39,7 @@ void PlayerActor::Startup()
 
 	// 이동 처리
 	AddComponent<CellActorMoveComponent>();
-	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = GetComponent<CellActorMoveComponent>();
 	pMoveComponent->SetMoveSpeed(110.0f);
 	pMoveComponent->SetDestinationCellPosition(GetCellPosition()); // 초기화니까 똑같음
 }
@@ -79,7 +79,7 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 		// 넉백이 가능한 상황이라면 넉백 실행
 		if (CheckPossibleKnockback(spAttacker->GetActorLookAtDirection()) == true)
 		{
-			CellActorMoveComponent* pCellActorMoveComponent = FindComponent<CellActorMoveComponent>();
+			CellActorMoveComponent* pCellActorMoveComponent = GetComponent<CellActorMoveComponent>();
 			ASSERT_LOG_RETURN(pCellActorMoveComponent != nullptr);
 			pCellActorMoveComponent->ProcessMoveDirection(CalculateBackwardDirection(), false);
 
@@ -125,7 +125,7 @@ void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 		return;
 	}
 
-	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
 	if (pMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
 	{

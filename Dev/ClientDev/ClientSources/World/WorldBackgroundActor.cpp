@@ -26,7 +26,7 @@ void WorldBackgroundActor::Startup()
 	worldMapSpriteDrawInfo.drawSize = worldSize;
 	spWorldMapSprite->SetSpriteDrawInfo(worldMapSpriteDrawInfo);
 
-	TransformComponent* pTransformComponent = BringTransformComponent();
+	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
 	pTransformComponent->SetPosition(worldSize.width / 2.0f, worldSize.height / 2.0f);
 	pTransformComponent->SetSize(worldSize);
 

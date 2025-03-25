@@ -18,11 +18,21 @@ Actor::Actor(const Actor& srcActor)
 	m_actorBitsetFlag = srcActor.m_actorBitsetFlag;
 	m_actorLayer = srcActor.m_actorLayer;
 
-	for (auto iter : srcActor.m_mapComponent)
+	// 복사 생성자라서 미리 할당
+	uint32 componentCount = GET_COMPILEITME_ID_COUNT(ComponentIdCounter);
+	m_vecComponent.resize(componentCount);
+
+	for (uint32 i = 0; i < componentCount; ++i)
 	{
-		const ComponentPtr& spCloneComponent = (iter.second)->CreateClone();
+		const ComponentPtr& spSrcComponent = srcActor.m_vecComponent[i];
+		if (spSrcComponent == nullptr)
+		{
+			continue;
+		}
+
+		const ComponentPtr& spCloneComponent = spSrcComponent->CreateClone();
 		spCloneComponent->SetOwner(this);
-		m_mapComponent.insert(std::make_pair(iter.first, spCloneComponent));
+		m_vecComponent[i] = spCloneComponent;
 	}
 
 	for (const ActorPtr& spChild : m_vecChild)
@@ -38,6 +48,11 @@ Actor::~Actor()
 
 void Actor::Startup()
 {
+	if (m_vecComponent.empty() == true)
+	{
+		m_vecComponent.resize(GET_COMPILEITME_ID_COUNT(ComponentIdCounter));
+	}
+
 	// 기본 플래그 설정
 	m_actorBitsetFlag.BitsOn(
 		EActorFlag::Activation,
@@ -50,9 +65,12 @@ void Actor::Startup()
 bool Actor::Update(float deltaSeconds)
 {
 	// 부모부터 처리!
-	for (auto& iter : m_mapComponent)
+	for (const ComponentPtr& spComponent : m_vecComponent)
 	{
-		(iter.second)->Update(deltaSeconds);
+		if (spComponent != nullptr)
+		{
+			spComponent->Update(deltaSeconds);
+		}
 	}
 
 	for (auto& spChild : m_vecChild)
@@ -71,19 +89,21 @@ void Actor::Cleanup()
 		spChild->Cleanup();
 	}
 
-	for (auto& iter : m_mapComponent)
+	for (const ComponentPtr& spComponent : m_vecComponent)
 	{
-		(iter.second)->Cleanup();
+		if (spComponent != nullptr)
+		{
+			spComponent->Cleanup();
+		}
 	}
-
-	m_mapComponent.clear();
+	m_vecComponent.clear();
 }
 
 void Actor::SaveToFileStream(const FileStream& fileStream) const
 {
 	if (fileStream.IsOpenFileStream() == false)
 	{
-		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
+		DETAIL_ERROR_LOG(EngineErrorHandler, EEngineErrorCode::InvalidFileStream);
 	}
 }
 
@@ -91,7 +111,7 @@ void Actor::LoadFromFileStream(const FileStream& fileStream)
 {
 	if (fileStream.IsOpenFileStream() == false)
 	{
-		DETAIL_ERROR_LOG(EErrorCode::InvalidFileStream);
+		DETAIL_ERROR_LOG(EngineErrorHandler,EEngineErrorCode::InvalidFileStream);
 	}
 }
 
@@ -111,16 +131,6 @@ void Actor::ApplyScreenCenterPosition()
 	ApplyPosition(static_cast<float>(halfResolution.width), static_cast<float>(halfResolution.height));
 }
 
-TransformComponent* Actor::BringTransformComponent()
-{
-	return (FindComponent<TransformComponent>());
-}
-
-const TransformComponent* Actor::BringTransformComponent() const
-{
-	return (FindConstComponent<TransformComponent>());
-}
-
 void Actor::ApplyPosition(float x, float y)
 {
 	Vector2d vPos(x, y);
@@ -129,23 +139,28 @@ void Actor::ApplyPosition(float x, float y)
 
 void Actor::ApplyPosition(const Vector2d& vPos)
 {
-	TransformComponent* pTransformComponent = BringTransformComponent();
+	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetPosition(vPos);
 }
 
 const Vector2d& Actor::BringPosition() const
 {
-	const TransformComponent* pTransformComponent = BringTransformComponent();
+	const TransformComponent* pTransformComponent = GetConstComponent<TransformComponent>();
 	ASSERT_LOG(pTransformComponent != nullptr);
 	return (pTransformComponent->GetPosition());
 }
 
 void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent) const
 {
-	for (auto& iter : m_mapComponent)
+	for (const ComponentPtr& spComponent : m_vecComponent)
 	{
-		Component* pComponent = (iter.second).get();
+		if (spComponent == nullptr)
+		{
+			continue;
+		}
+
+		Component* pComponent = spComponent.get();
 		if ((pComponent == nullptr) ||
 			(pComponent->IsRenderComponent() == false))
 		{
@@ -159,7 +174,7 @@ void Actor::FindRenderComponents(RenderComponentVector& outVecRenderComponent) c
 		// 설정된 레이어에 따라 컨테이너에 넣음
 		if (global::ValidateIndexRangeByEnum(m_actorLayer, EActorLayerType::Count) == false)
 		{
-			DETAIL_ERROR_LOG(EErrorCode::InvalidRenderingLayer);
+			DETAIL_ERROR_LOG(EngineErrorHandler, EEngineErrorCode::InvalidRenderingLayer);
 		}
 
 		outVecRenderComponent.push_back(pRenderComponent);

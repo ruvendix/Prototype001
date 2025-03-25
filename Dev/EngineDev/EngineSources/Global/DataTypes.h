@@ -17,8 +17,6 @@ struct CompiletimeCounter
 {
 	// 각 TCounter마다 고유한 카운트 시작값
 	static uint32 NextValue() { return s_num++; }
-	static uint32 GetCount() { return s_num; }
-
 	static uint32 s_num;
 };
 

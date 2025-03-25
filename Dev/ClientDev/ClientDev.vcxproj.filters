@@ -64,6 +64,9 @@
     <Filter Include="ClientSources\EnemyMonster\EnemyRespawner">
       <UniqueIdentifier>{67536825-0764-4ae2-8348-df8d940fbfe2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ClientSources\ErrorHandler">
+      <UniqueIdentifier>{f90981ac-69bb-484b-a54f-083030014794}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientSources\ClientMain.cpp">
@@ -101,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="ClientSources\Editor\EditorActorMoveComponent.cpp">
       <Filter>ClientSources\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientSources\EnemyRespawner\EnemyRespawner.cpp">
-      <Filter>ClientSources\EnemyMonster\EnemyRespawner</Filter>
     </ClCompile>
     <ClCompile Include="ClientSources\Weapon\WeaponActor.cpp">
       <Filter>ClientSources\Weapon</Filter>
@@ -159,6 +159,12 @@
     <ClCompile Include="ClientSources\GameEntity\GameEntityActor.cpp">
       <Filter>ClientSources\GameEntity</Filter>
     </ClCompile>
+    <ClCompile Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.cpp">
+      <Filter>ClientSources\EnemyMonster\EnemyRespawner</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\ErrorHandler\ClientErrorHandler.cpp">
+      <Filter>ClientSources\ErrorHandler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientSources\GameApplication\GameApplication.h">
@@ -193,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="ClientSources\Editor\EditorActorMoveComponent.h">
       <Filter>ClientSources\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientSources\EnemyRespawner\EnemyRespawner.h">
-      <Filter>ClientSources\EnemyMonster\EnemyRespawner</Filter>
     </ClInclude>
     <ClInclude Include="ClientSources\Weapon\WeaponActor.h">
       <Filter>ClientSources\Weapon</Filter>
@@ -259,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="ClientSources\GameEntity\GameEntityActor.h">
       <Filter>ClientSources\GameEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.h">
+      <Filter>ClientSources\EnemyMonster\EnemyRespawner</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\ErrorHandler\ClientErrorHandler.h">
+      <Filter>ClientSources\ErrorHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\ErrorHandler\ErrorEnums.h">
+      <Filter>ClientSources\ErrorHandler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

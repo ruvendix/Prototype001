@@ -60,7 +60,7 @@ bool EnmeyMonsterAttackState::Update(float deltaSeconds)
 //	const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
 //	ASSERT_LOG(pCurrentScene != nullptr);
 //
-//	EnemyMonsterAttackComponent* pEnemyMonsterAttackComponent = spEnemyMonsterOwner->FindComponent<EnemyMonsterAttackComponent>();
+//	EnemyMonsterAttackComponent* pEnemyMonsterAttackComponent = spEnemyMonsterOwner->GetComponent<EnemyMonsterAttackComponent>();
 //	ASSERT_LOG_RETURN_VALUE(pEnemyMonsterAttackComponent != nullptr, false);
 //
 //	// 바로 앞에 플레이어가 없다면 추적 상태나 Idle로 변경

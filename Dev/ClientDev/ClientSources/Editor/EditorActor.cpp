@@ -138,7 +138,7 @@ void EditorActor::OnMouseRightButtonHandler(const InputActionValue* pInputAction
 
 void EditorActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
 {
-	EditorActorMoveComponent* pEditorActorMoveComponent = FindComponent<EditorActorMoveComponent>();
+	EditorActorMoveComponent* pEditorActorMoveComponent = GetComponent<EditorActorMoveComponent>();
 	pEditorActorMoveComponent->SetMoveDirection(pInputAction->BringValue<Vector2d>());
 
 #if 0

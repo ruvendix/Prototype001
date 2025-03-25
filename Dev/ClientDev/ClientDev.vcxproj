@@ -32,7 +32,10 @@
     <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterState\EnemyMonsterState.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="ClientSources\EnemyRespawner\EnemyRespawner.cpp">
+    <ClCompile Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ClientSources\ErrorHandler\ClientErrorHandler.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ClientSources\GameApplication\GameApplication.cpp">
@@ -130,7 +133,13 @@
     <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ClientSources\EnemyRespawner\EnemyRespawner.h">
+    <ClInclude Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ClientSources\ErrorHandler\ClientErrorHandler.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ClientSources\ErrorHandler\ErrorEnums.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\GameApplication\GameApplication.h">

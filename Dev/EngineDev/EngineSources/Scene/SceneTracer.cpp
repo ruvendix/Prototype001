@@ -14,7 +14,7 @@ void SceneTracer::Tracer()
 	ASSERT_LOG_RETURN(pScene != nullptr);
 	for (const ActorPtr& spActor : pScene->GetActors())
 	{
-		TransformComponent* pTransformComponent = spActor->FindComponent<TransformComponent>();
+		TransformComponent* pTransformComponent = spActor->GetComponent<TransformComponent>();
 		ASSERT_LOG(pTransformComponent != nullptr);
 		pTransformComponent->BuildWolrdMatrix();
 
@@ -32,10 +32,10 @@ void SceneTracer::Tracer()
 		renderableLayerActors[TO_NUM(EActorLayerType::Creature)].end(),
 		[](const ActorPtr& spLhs, const ActorPtr& spRhs)
 		{
-			const TransformComponent* pLhsTransformComponent = spLhs->BringTransformComponent();
+			const TransformComponent* pLhsTransformComponent = spLhs->GetComponent<TransformComponent>();
 			ASSERT_LOG(pLhsTransformComponent != nullptr);
 
-			const TransformComponent* pRhsTransformComponent = spRhs->BringTransformComponent();
+			const TransformComponent* pRhsTransformComponent = spRhs->GetComponent<TransformComponent>();
 			ASSERT_LOG(pRhsTransformComponent != nullptr);
 
 			return (pLhsTransformComponent->GetPositionY() < pRhsTransformComponent->GetPositionY());

@@ -62,7 +62,7 @@ void GameEntityActor::SyncFromServer_GameEntityInfo(const Protocol::GameEntityIn
 	Position2d gameEntityCellPos = Position2d(gameEntityInfo.cell_pos_x(), gameEntityInfo.cell_pos_y());
 	ApplyCellPosition(gameEntityCellPos);
 
-	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG(pMoveComponent != nullptr);
 	pMoveComponent->SetDestinationCellPosition(gameEntityCellPos);
 
@@ -195,7 +195,7 @@ void GameEntityActor::SyncToServer_GameEntityMoveIfNeed()
 		static_cast<int32>(m_spGameEntityInfo->cell_pos_y())
 	};
 
-	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
 
 	const Position2d& currentDestCellPos = pMoveComponent->GetDestinationCellPosition();

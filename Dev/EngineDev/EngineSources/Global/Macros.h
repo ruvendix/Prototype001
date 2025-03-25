@@ -64,6 +64,7 @@ private: \
 #define DECLARE_COMPILETIMER_COUNTER(TCounter) struct TCounter { }
 #define DEFINE_COMPILETIMER_COUNTER(TCounter) uint32 CompiletimeCounter<TCounter>::s_num = 0
 #define GET_NEXT_COMPILEITME_ID(TCounter) CompiletimeCounter<TCounter>::NextValue()
+#define GET_COMPILEITME_ID_COUNT(TCounter) CompiletimeCounter<TCounter>::s_num
 
 #define DEFINE_ROOT_COMPILETIME_ID_CLASS public: virtual uint32 CompiletimeId() const { return -1; }
 #define DEFINE_COMPILETIME_ID(Type, TCounter) uint32 Type::s_id = GET_NEXT_COMPILEITME_ID(TCounter);

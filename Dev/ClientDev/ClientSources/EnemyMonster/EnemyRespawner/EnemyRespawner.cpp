@@ -66,7 +66,7 @@ void EnemyRespawner::RespawnEnemies(Scene* pCurrentScene)
 		DEFAULT_TRACE_LOG("%s 리스폰 위치(%d, %d)", strNewEnemyActorName.c_str(), randomCellPos.x, randomCellPos.y);
 #endif
 
-		CellActorMoveComponent* pNewEnemyActorMoveComponent = spNewEnemyActor->FindComponent<CellActorMoveComponent>();
+		CellActorMoveComponent* pNewEnemyActorMoveComponent = spNewEnemyActor->GetComponent<CellActorMoveComponent>();
 		if (pNewEnemyActorMoveComponent != nullptr)
 		{
 			pNewEnemyActorMoveComponent->SetDestinationCellPosition(randomCellPos);

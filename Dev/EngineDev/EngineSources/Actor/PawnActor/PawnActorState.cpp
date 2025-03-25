@@ -66,7 +66,7 @@ bool PawnActorWalkState::Update(float deltaSeconds)
 	ASSERT_LOG(pOwner != nullptr);
 
 	// 이동 컴포넌트
-	CellActorMoveComponent* pMoveComponent = pOwner->FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = pOwner->GetComponent<CellActorMoveComponent>();
 	if (pMoveComponent->IsZeroMoveDirectionVector())
 	{
 		// 스프라이트는 현재 프레임에서 바로 전환
@@ -97,7 +97,7 @@ bool PawnActorAttackState::Update(float deltaSeconds)
 	PawnActor* pAttacker = GetOwner();
 	ASSERT_LOG(pAttacker != nullptr);
 
-	DynamicSpriteComponent* pDynamicSpriteComponent = pAttacker->FindComponent<DynamicSpriteComponent>();
+	DynamicSpriteComponent* pDynamicSpriteComponent = pAttacker->GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 	if (pDynamicSpriteComponent->CheckDynamicSpriteEnd() == false)
 	{

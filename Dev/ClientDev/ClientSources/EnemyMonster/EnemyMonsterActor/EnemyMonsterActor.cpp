@@ -208,7 +208,7 @@ bool EnemyMonsterActor::Update(float deltaSeconds)
 void EnemyMonsterActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 {
 	// 이동 정보 처리
-	CellActorMoveComponent* pMoveComponent = FindComponent<CellActorMoveComponent>();
+	CellActorMoveComponent* pMoveComponent = GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN(pMoveComponent != nullptr);
 	if (pMoveComponent->ProcessMoveDirection(vMoveDir, true) == false)
 	{

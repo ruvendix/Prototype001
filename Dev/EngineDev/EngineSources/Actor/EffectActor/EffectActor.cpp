@@ -43,17 +43,17 @@ void EffectActor::SpawnEffect(const EffectSpawnInfo& effectSpawnInfo)
 	const EffectPtr& spEffect = ResourceMananger::I()->FindEffect(effectSpawnInfo.strEffectName);
 	ASSERT_LOG_RETURN(spEffect != nullptr);
 
-	DynamicSpriteComponent* pDynamicSpriteComponent = FindComponent<DynamicSpriteComponent>();
+	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG_RETURN(pDynamicSpriteComponent != nullptr);
 	pDynamicSpriteComponent->ApplyDynamicSprite(spEffect->GetDynamicSprite());
 
-	TransformComponent* pTransformComponent = BringTransformComponent();
+	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetSize(effectSpawnInfo.effectSize);
 
 	ApplyCellPosition(effectSpawnInfo.spawnCellPos);
 
-	LifeTimeEffectComponent* pLifeTimeEffectComponent = FindComponent<LifeTimeEffectComponent>();
+	LifeTimeEffectComponent* pLifeTimeEffectComponent = GetComponent<LifeTimeEffectComponent>();
 	ASSERT_LOG_RETURN(pLifeTimeEffectComponent != nullptr);
 
 	// LifeTime을 따로 설정하지 않았다면 DynamicSprite의 재생 시간을 적용

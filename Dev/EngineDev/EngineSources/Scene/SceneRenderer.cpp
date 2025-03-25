@@ -55,7 +55,7 @@ Vector2d SceneRenderer::ConvertWorldPositionToRenderingPosition(const Vector2d& 
 		return Vector2d();
 	}
 
-	CameraComponent* pCameraComponent = m_spMainCameraActor->FindComponent<CameraComponent>();
+	CameraComponent* pCameraComponent = m_spMainCameraActor->GetComponent<CameraComponent>();
 	ASSERT_LOG(pCameraComponent != nullptr);
 
 	Vector2d renderingPos = (worldPos - pCameraComponent->GetCameraOffsetPosition());
