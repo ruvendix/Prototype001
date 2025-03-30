@@ -68,7 +68,8 @@ void GameMonsterIdleState::OnActionTimer()
 		if (GameMonsterUtility::CheckValidDistance(spMonsterCurrentCellPos, spFoundPlayerCellPos, spOwner->GetAttackableRange()) == true)
 		{
 			refGameEntityInfo.set_entity_state(Protocol::EGameEntityState::Attack);
-			spOwner->ReserveNextState<GameMonsterAttackState>();
+			const std::shared_ptr<GameMonsterAttackState>& spAttackState = spOwner->ReserveNextState<GameMonsterAttackState>();
+			spAttackState->SetVictimPlayer(spFoundPlayer);
 			DEFAULT_TRACE_LOG("몬스터 (Idle -> Attack) 전환!");
 		}
 		else
@@ -131,10 +132,10 @@ void GameMonsterWalkState::OnActionTimer()
 	const std::shared_ptr<GameMonster>& spOwner = BringOwner();
 	ASSERT_LOG_RETURN(spOwner != nullptr);
 
-	Protocol::GameEntityInfo gameEntityInfo = spOwner->GetGameEntityInfo();
-	gameEntityInfo.set_entity_state(Protocol::EGameEntityState::Idle);
+	Protocol::GameEntityInfo& refGameEntityInfo = spOwner->GetGameEntityInfo();
+	refGameEntityInfo.set_entity_state(Protocol::EGameEntityState::Idle);
 
-	const RxSendBufferPtr& syncGameEntityStatePacket = RxServerPacketHandler::I()->MakeSyncGameEntityStatePacket(gameEntityInfo);
+	const RxSendBufferPtr& syncGameEntityStatePacket = RxServerPacketHandler::I()->MakeSyncGameEntityStatePacket(refGameEntityInfo);
 	RxGameSessionManager::I()->Broadcast(syncGameEntityStatePacket);
 
 	spOwner->ReserveNextState<GameMonsterIdleState>();
@@ -162,7 +163,8 @@ void GameMonsterChaseState::OnActionTimer()
 		if (spFoundPlayer != nullptr)
 		{
 			refGameEntityInfo.set_entity_state(Protocol::EGameEntityState::Attack);
-			spOwner->ReserveNextState<GameMonsterAttackState>();
+			const std::shared_ptr<GameMonsterAttackState>& spAttackState = spOwner->ReserveNextState<GameMonsterAttackState>();
+			spAttackState->SetVictimPlayer(spFoundPlayer);
 			DEFAULT_TRACE_LOG("몬스터 (Chase -> Attack) 전환!");
 		}
 		else
@@ -185,9 +187,8 @@ bool GameMonsterChaseState::ProcessNavigationPath(std::vector<Position2d>& outVe
 {
 	const std::shared_ptr<GameMonster>& spOwner = BringOwner();
 	ASSERT_LOG_RETURN_VALUE(spOwner != nullptr, false);
-	Protocol::GameEntityInfo& refGameEntityInfo = spOwner->GetGameEntityInfo();
 
-	// 유저를 추적할 수 있는지 확인
+	// 유저를 추격할 수 있는지 확인
 	const GamePlayerPtr& spFoundPlayer = GameMonsterUtility::FindNearestPlayer(spOwner, spOwner->GetChaseRange());
 	if (spFoundPlayer == nullptr)
 	{
@@ -233,5 +234,63 @@ void GameMonsterAttackState::Startup()
 
 void GameMonsterAttackState::OnActionTimer()
 {
-	DEFAULT_TRACE_LOG("공격 개시!");
+	if (m_spVictimPlayer == nullptr)
+	{
+		ToIdleState();
+		return;
+	}
+
+	Protocol::GameEntityInfo& refVictimPlayerInfo = m_spVictimPlayer->GetGameEntityInfo();
+	const Position2d& victimCellPos = m_spVictimPlayer->MakeCurrentCellPosition();
+
+	const std::shared_ptr<GameMonster>& spOwner = BringOwner();
+	ASSERT_LOG_RETURN(spOwner != nullptr);
+
+	// 공격 방향 알아내기
+	Protocol::EGameEntityLookAtDir attackerLookAtDir = spOwner->CalculateGameEntityLookAtDirection(victimCellPos);
+	ASSERT_LOG(attackerLookAtDir != Protocol::EGameEntityLookAtDir::Count);
+	Protocol::GameEntityInfo& refAttackerInfo = spOwner->GetGameEntityInfo();
+	refAttackerInfo.set_entitye_look_at_dir(attackerLookAtDir);
+
+	// 스탯 계산인데 일단 임시
+	int32 remainVictimPlayerHp = ((refVictimPlayerInfo.hp() + refVictimPlayerInfo.defense()) - refAttackerInfo.attack());
+	remainVictimPlayerHp = global::Clamp(remainVictimPlayerHp, 0, refVictimPlayerInfo.max_hp());
+	refVictimPlayerInfo.set_hp(remainVictimPlayerHp);
+
+	if (remainVictimPlayerHp <= 0) // 사망
+	{
+		m_spVictimPlayer = nullptr;
+		refVictimPlayerInfo.set_entity_state(Protocol::EGameEntityState::Death);
+		GameRoom::I()->RemoveGameEntity(m_spVictimPlayer);
+
+		ToIdleState();
+	}
+	else // 공격자와 멀어진 경우는 상황에 따라 판단
+	{
+		// 전방에 있는지?
+		const Position2d& attackerForwardCellPos = spOwner->MakeForwardCellPosition();
+		if (attackerForwardCellPos != victimCellPos)
+		{
+			// 추격 상태로 변경
+			refAttackerInfo.set_entity_state(Protocol::EGameEntityState::Chase);
+			spOwner->ReserveNextState<GameMonsterIdleState>();
+			DEFAULT_TRACE_LOG("몬스터 (Attack -> Chase) 전환!");
+			return;
+		}
+	}
+
+	const RxSendBufferPtr& attackToGameEntityPacket = RxServerPacketHandler::I()->MakeAttackToGameEntityPacket(refAttackerInfo, refVictimPlayerInfo);
+	RxGameSessionManager::I()->Broadcast(attackToGameEntityPacket);
+	DEFAULT_TRACE_LOG("공격 개시! (Victim hp: %d (%p))", remainVictimPlayerHp, m_spVictimPlayer);
+}
+
+void GameMonsterAttackState::ToIdleState()
+{
+	const std::shared_ptr<GameMonster>& spOwner = BringOwner();
+	ASSERT_LOG_RETURN(spOwner != nullptr);
+
+	Protocol::GameEntityInfo& refGameEntityInfo = spOwner->GetGameEntityInfo();
+	refGameEntityInfo.set_entity_state(Protocol::EGameEntityState::Idle);
+	spOwner->ReserveNextState<GameMonsterIdleState>();
+	DEFAULT_TRACE_LOG("몬스터 (Attack -> Idle) 전환!");
 }

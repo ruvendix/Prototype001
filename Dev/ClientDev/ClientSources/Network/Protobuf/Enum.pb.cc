@@ -32,13 +32,13 @@ const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\n\nEnum.proto\022\010Protocol*H\n\024EGameEntityLoo"
   "kAtDir\022\010\n\004Left\020\000\022\006\n\002Up\020\001\022\t\n\005Right\020\002\022\010\n\004D"
   "own\020\003\022\t\n\005Count\020\004**\n\017EGameEntityType\022\n\n\006P"
-  "layer\020\000\022\013\n\007Monster\020\001*J\n\020EGameEntityState"
+  "layer\020\000\022\013\n\007Monster\020\001*U\n\020EGameEntityState"
   "\022\010\n\004Idle\020\000\022\010\n\004Walk\020\001\022\n\n\006Attack\020\002\022\013\n\007Defe"
-  "nse\020\003\022\t\n\005Chase\020\004b\006proto3"
+  "nse\020\003\022\t\n\005Chase\020\004\022\t\n\005Death\020\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 224, descriptor_table_protodef_Enum_2eproto,
+    false, false, 235, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -94,6 +94,7 @@ bool EGameEntityState_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
       return true;
     default:
       return false;

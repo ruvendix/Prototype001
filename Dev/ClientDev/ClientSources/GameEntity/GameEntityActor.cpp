@@ -88,6 +88,14 @@ void GameEntityActor::SyncFromServer_GameEntityState(const Protocol::GameEntityI
 	ImmediatelyChangeStateByExternal(spActorState);
 }
 
+void GameEntityActor::SyncFromServer_AttackToGameEntity(const GameEntityActorPtr& spAttacker, const Protocol::GameEntityInfo& victimInfo)
+{
+	ASSERT_LOG(spAttacker != nullptr);
+	ProcessDamaged(spAttacker);
+
+	m_spGameEntityInfo->set_hp(victimInfo.hp());
+}
+
 void GameEntityActor::SyncToServer_GameEntityInfoIfNeed()
 {
 	if (m_spGameEntityInfo == nullptr)
@@ -136,7 +144,11 @@ void GameEntityActor::ApplyActorStateFromServer(Protocol::EGameEntityState gameE
 void GameEntityActor::ApplyActorLookAtDirectionFromServer(Protocol::EGameEntityLookAtDir gameEntityLookAtDir)
 {
 	SetActorLookAtDirection(ConvertGameEntityLookAtDirectionToActorLookAtDirection(gameEntityLookAtDir));
-	ApplyLookAtDirectionToCurrentDynamicSprite();
+	if (ApplyLookAtDirectionSprite() == false)
+	{
+		// 이것도 실패하면 문제가 있음
+		ASSERT_LOG(ApplyLookAtDirectionSpriteOnDefaultState() == true);
+	}
 }
 
 bool GameEntityActor::CheckClientAndServerIsSameLookAtDirection() const

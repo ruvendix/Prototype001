@@ -8,13 +8,15 @@ message GameEntityInfo
 	uint64 entity_id = 1;
 	uint32 cell_pos_x = 2;
 	uint32 cell_pos_y = 3;
-	uint32 max_hp = 4;
-	uint32 hp = 5;
-	uint32 attack = 6;
 
-	EGameEntityType entity_type = 7;
-	EGameEntityLookAtDir entitye_look_at_dir = 8;
-	EGameEntityState entity_state = 9;
+	int32 max_hp = 4;
+	int32 hp = 5;
+	uint32 attack = 6;
+	uint32 defense = 7;
+
+	EGameEntityType entity_type = 8;
+	EGameEntityLookAtDir entitye_look_at_dir = 9;
+	EGameEntityState entity_state = 10;
 }
 
 message GameMonsterInfo

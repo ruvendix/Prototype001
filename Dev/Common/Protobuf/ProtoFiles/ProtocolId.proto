@@ -11,4 +11,5 @@ enum EProtocolId
 	SyncGameEntityLookAtDir = 5;
 	SyncGameEntityMove = 6;
 	SyncGameEntityState = 7;
+	AttackToGameEntity = 8;
 }

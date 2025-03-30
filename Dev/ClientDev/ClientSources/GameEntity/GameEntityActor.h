@@ -51,6 +51,7 @@ public:
 	void SyncFromServer_GameEntityLookAtDirection(const Protocol::GameEntityInfo& gameEntityInfo);
 	void SyncFromServer_GameEntityMove(const Protocol::GameEntityInfo& gameEntityInfo);
 	void SyncFromServer_GameEntityState(const Protocol::GameEntityInfo& gameEntityInfo);
+	void SyncFromServer_AttackToGameEntity(const GameEntityActorPtr& spAttacker, const Protocol::GameEntityInfo& victimInfo);
 
 	void SyncToServer_GameEntityInfoIfNeed();
 

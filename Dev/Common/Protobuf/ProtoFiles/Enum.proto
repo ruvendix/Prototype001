@@ -23,4 +23,5 @@ enum EGameEntityState
 	Attack = 2;
 	Defense = 3;
 	Chase = 4;
+	Death = 5;
 }

@@ -168,8 +168,22 @@ struct S_SyncGameEntityStateDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_SyncGameEntityStateDefaultTypeInternal _S_SyncGameEntityState_default_instance_;
+PROTOBUF_CONSTEXPR S_AttckToGameEntity::S_AttckToGameEntity(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.attacker_info_)*/nullptr
+  , /*decltype(_impl_.victim_info_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_AttckToGameEntityDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_AttckToGameEntityDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_AttckToGameEntityDefaultTypeInternal() {}
+  union {
+    S_AttckToGameEntity _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_AttckToGameEntityDefaultTypeInternal _S_AttckToGameEntity_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_2eproto[11];
+static ::_pb::Metadata file_level_metadata_Packet_2eproto[12];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_2eproto = nullptr;
 
@@ -255,6 +269,14 @@ const uint32_t TableStruct_Packet_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_SyncGameEntityState, _impl_.entity_info_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_AttckToGameEntity, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_AttckToGameEntity, _impl_.attacker_info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_AttckToGameEntity, _impl_.victim_info_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::S_EnterGame)},
@@ -268,6 +290,7 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 60, -1, -1, sizeof(::Protocol::S_SyncGameEntityLookAtDir)},
   { 67, -1, -1, sizeof(::Protocol::C_SyncGameEntityState)},
   { 74, -1, -1, sizeof(::Protocol::S_SyncGameEntityState)},
+  { 81, -1, -1, sizeof(::Protocol::S_AttckToGameEntity)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -282,6 +305,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_SyncGameEntityLookAtDir_default_instance_._instance,
   &::Protocol::_C_SyncGameEntityState_default_instance_._instance,
   &::Protocol::_S_SyncGameEntityState_default_instance_._instance,
+  &::Protocol::_S_AttckToGameEntity_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Packet_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -307,7 +331,10 @@ const char descriptor_table_protodef_Packet_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "fo\"F\n\025C_SyncGameEntityState\022-\n\013entity_in"
   "fo\030\001 \001(\0132\030.Protocol.GameEntityInfo\"F\n\025S_"
   "SyncGameEntityState\022-\n\013entity_info\030\001 \001(\013"
-  "2\030.Protocol.GameEntityInfob\006proto3"
+  "2\030.Protocol.GameEntityInfo\"u\n\023S_AttckToG"
+  "ameEntity\022/\n\rattacker_info\030\001 \001(\0132\030.Proto"
+  "col.GameEntityInfo\022-\n\013victim_info\030\002 \001(\0132"
+  "\030.Protocol.GameEntityInfob\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Packet_2eproto_deps[2] = {
   &::descriptor_table_Enum_2eproto,
@@ -315,9 +342,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_Packet_2eproto_deps
 };
 static ::_pbi::once_flag descriptor_table_Packet_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_2eproto = {
-    false, false, 914, descriptor_table_protodef_Packet_2eproto,
+    false, false, 1033, descriptor_table_protodef_Packet_2eproto,
     "Packet.proto",
-    &descriptor_table_Packet_2eproto_once, descriptor_table_Packet_2eproto_deps, 2, 11,
+    &descriptor_table_Packet_2eproto_once, descriptor_table_Packet_2eproto_deps, 2, 12,
     schemas, file_default_instances, TableStruct_Packet_2eproto::offsets,
     file_level_metadata_Packet_2eproto, file_level_enum_descriptors_Packet_2eproto,
     file_level_service_descriptors_Packet_2eproto,
@@ -2616,6 +2643,257 @@ void S_SyncGameEntityState::InternalSwap(S_SyncGameEntityState* other) {
       file_level_metadata_Packet_2eproto[10]);
 }
 
+// ===================================================================
+
+class S_AttckToGameEntity::_Internal {
+ public:
+  static const ::Protocol::GameEntityInfo& attacker_info(const S_AttckToGameEntity* msg);
+  static const ::Protocol::GameEntityInfo& victim_info(const S_AttckToGameEntity* msg);
+};
+
+const ::Protocol::GameEntityInfo&
+S_AttckToGameEntity::_Internal::attacker_info(const S_AttckToGameEntity* msg) {
+  return *msg->_impl_.attacker_info_;
+}
+const ::Protocol::GameEntityInfo&
+S_AttckToGameEntity::_Internal::victim_info(const S_AttckToGameEntity* msg) {
+  return *msg->_impl_.victim_info_;
+}
+void S_AttckToGameEntity::clear_attacker_info() {
+  if (GetArenaForAllocation() == nullptr && _impl_.attacker_info_ != nullptr) {
+    delete _impl_.attacker_info_;
+  }
+  _impl_.attacker_info_ = nullptr;
+}
+void S_AttckToGameEntity::clear_victim_info() {
+  if (GetArenaForAllocation() == nullptr && _impl_.victim_info_ != nullptr) {
+    delete _impl_.victim_info_;
+  }
+  _impl_.victim_info_ = nullptr;
+}
+S_AttckToGameEntity::S_AttckToGameEntity(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_AttckToGameEntity)
+}
+S_AttckToGameEntity::S_AttckToGameEntity(const S_AttckToGameEntity& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_AttckToGameEntity* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.attacker_info_){nullptr}
+    , decltype(_impl_.victim_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_attacker_info()) {
+    _this->_impl_.attacker_info_ = new ::Protocol::GameEntityInfo(*from._impl_.attacker_info_);
+  }
+  if (from._internal_has_victim_info()) {
+    _this->_impl_.victim_info_ = new ::Protocol::GameEntityInfo(*from._impl_.victim_info_);
+  }
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_AttckToGameEntity)
+}
+
+inline void S_AttckToGameEntity::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.attacker_info_){nullptr}
+    , decltype(_impl_.victim_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_AttckToGameEntity::~S_AttckToGameEntity() {
+  // @@protoc_insertion_point(destructor:Protocol.S_AttckToGameEntity)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_AttckToGameEntity::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.attacker_info_;
+  if (this != internal_default_instance()) delete _impl_.victim_info_;
+}
+
+void S_AttckToGameEntity::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_AttckToGameEntity::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_AttckToGameEntity)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.attacker_info_ != nullptr) {
+    delete _impl_.attacker_info_;
+  }
+  _impl_.attacker_info_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.victim_info_ != nullptr) {
+    delete _impl_.victim_info_;
+  }
+  _impl_.victim_info_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_AttckToGameEntity::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .Protocol.GameEntityInfo attacker_info = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_attacker_info(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.GameEntityInfo victim_info = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_victim_info(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_AttckToGameEntity::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_AttckToGameEntity)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .Protocol.GameEntityInfo attacker_info = 1;
+  if (this->_internal_has_attacker_info()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::attacker_info(this),
+        _Internal::attacker_info(this).GetCachedSize(), target, stream);
+  }
+
+  // .Protocol.GameEntityInfo victim_info = 2;
+  if (this->_internal_has_victim_info()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::victim_info(this),
+        _Internal::victim_info(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_AttckToGameEntity)
+  return target;
+}
+
+size_t S_AttckToGameEntity::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_AttckToGameEntity)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.GameEntityInfo attacker_info = 1;
+  if (this->_internal_has_attacker_info()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.attacker_info_);
+  }
+
+  // .Protocol.GameEntityInfo victim_info = 2;
+  if (this->_internal_has_victim_info()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.victim_info_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_AttckToGameEntity::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_AttckToGameEntity::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_AttckToGameEntity::GetClassData() const { return &_class_data_; }
+
+
+void S_AttckToGameEntity::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_AttckToGameEntity*>(&to_msg);
+  auto& from = static_cast<const S_AttckToGameEntity&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_AttckToGameEntity)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_attacker_info()) {
+    _this->_internal_mutable_attacker_info()->::Protocol::GameEntityInfo::MergeFrom(
+        from._internal_attacker_info());
+  }
+  if (from._internal_has_victim_info()) {
+    _this->_internal_mutable_victim_info()->::Protocol::GameEntityInfo::MergeFrom(
+        from._internal_victim_info());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_AttckToGameEntity::CopyFrom(const S_AttckToGameEntity& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_AttckToGameEntity)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_AttckToGameEntity::IsInitialized() const {
+  return true;
+}
+
+void S_AttckToGameEntity::InternalSwap(S_AttckToGameEntity* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_AttckToGameEntity, _impl_.victim_info_)
+      + sizeof(S_AttckToGameEntity::_impl_.victim_info_)
+      - PROTOBUF_FIELD_OFFSET(S_AttckToGameEntity, _impl_.attacker_info_)>(
+          reinterpret_cast<char*>(&_impl_.attacker_info_),
+          reinterpret_cast<char*>(&other->_impl_.attacker_info_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_AttckToGameEntity::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_2eproto_getter, &descriptor_table_Packet_2eproto_once,
+      file_level_metadata_Packet_2eproto[11]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
@@ -2662,6 +2940,10 @@ Arena::CreateMaybeMessage< ::Protocol::C_SyncGameEntityState >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::S_SyncGameEntityState*
 Arena::CreateMaybeMessage< ::Protocol::S_SyncGameEntityState >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_SyncGameEntityState >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_AttckToGameEntity*
+Arena::CreateMaybeMessage< ::Protocol::S_AttckToGameEntity >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_AttckToGameEntity >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

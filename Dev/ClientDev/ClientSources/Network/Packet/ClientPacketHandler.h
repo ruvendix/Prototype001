@@ -45,6 +45,7 @@ private:
 	void HandlePacket_SyncGameEntityLookAtDirection(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGameEntityMove(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_SyncGameEntityState(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_AttackToGameEntity(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

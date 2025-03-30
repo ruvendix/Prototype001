@@ -15,12 +15,13 @@ public:
 
 public:
 	template <typename TState>
-	void ReserveNextState()
+	std::shared_ptr<TState> ReserveNextState()
 	{
-		ASSERT_LOG_RETURN((std::is_base_of_v<GameMonsterActionState, TState> == true));
+		static_assert((std::is_base_of_v<GameMonsterActionState, TState> == true), "TState isn't base of GameMonsterActionState!");
 		const std::shared_ptr<TState>& spNextActionState = std::make_shared<TState>(SharedFromThisExactType<GameMonster>());
 		spNextActionState->Startup();
 		m_reserveNextStateEvent.RegisterEventHandler([=](){ m_spActionState = spNextActionState; });
+		return spNextActionState;
 	}
 
 public:

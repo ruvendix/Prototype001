@@ -20,6 +20,7 @@ public:
 	RxSendBufferPtr MakeSyncGameEntityLookAtDirectionPacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 	RxSendBufferPtr MakeSyncGameEntityMovePacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
 	RxSendBufferPtr MakeSyncGameEntityStatePacket(const Protocol::GameEntityInfo& syncGameEntityInfo);
+	RxSendBufferPtr MakeAttackToGameEntityPacket(const Protocol::GameEntityInfo& attackerEntityInfo, const Protocol::GameEntityInfo& victimEntityInfo);
 
 private:
 	template <typename TPacket>

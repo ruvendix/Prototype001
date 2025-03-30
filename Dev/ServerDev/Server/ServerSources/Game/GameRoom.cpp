@@ -77,6 +77,9 @@ void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
 	newLocalGamePlayerInfo.set_entity_state(Protocol::EGameEntityState::Idle);
 	newLocalGamePlayerInfo.set_cell_pos_x(6);
 	newLocalGamePlayerInfo.set_cell_pos_y(6);
+	newLocalGamePlayerInfo.set_max_hp(30);
+	newLocalGamePlayerInfo.set_hp(30);
+	newLocalGamePlayerInfo.set_defense(2);
 
 	spNewLocalGamePlayer->SetGameEntityInfo(newLocalGamePlayerInfo);
 

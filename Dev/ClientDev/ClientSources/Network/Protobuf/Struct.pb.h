@@ -188,9 +188,10 @@ class GameEntityInfo final :
     kMaxHpFieldNumber = 4,
     kHpFieldNumber = 5,
     kAttackFieldNumber = 6,
-    kEntityTypeFieldNumber = 7,
-    kEntityeLookAtDirFieldNumber = 8,
-    kEntityStateFieldNumber = 9,
+    kDefenseFieldNumber = 7,
+    kEntityTypeFieldNumber = 8,
+    kEntityeLookAtDirFieldNumber = 9,
+    kEntityStateFieldNumber = 10,
   };
   // uint64 entity_id = 1;
   void clear_entity_id();
@@ -219,22 +220,22 @@ class GameEntityInfo final :
   void _internal_set_cell_pos_y(uint32_t value);
   public:
 
-  // uint32 max_hp = 4;
+  // int32 max_hp = 4;
   void clear_max_hp();
-  uint32_t max_hp() const;
-  void set_max_hp(uint32_t value);
+  int32_t max_hp() const;
+  void set_max_hp(int32_t value);
   private:
-  uint32_t _internal_max_hp() const;
-  void _internal_set_max_hp(uint32_t value);
+  int32_t _internal_max_hp() const;
+  void _internal_set_max_hp(int32_t value);
   public:
 
-  // uint32 hp = 5;
+  // int32 hp = 5;
   void clear_hp();
-  uint32_t hp() const;
-  void set_hp(uint32_t value);
+  int32_t hp() const;
+  void set_hp(int32_t value);
   private:
-  uint32_t _internal_hp() const;
-  void _internal_set_hp(uint32_t value);
+  int32_t _internal_hp() const;
+  void _internal_set_hp(int32_t value);
   public:
 
   // uint32 attack = 6;
@@ -246,7 +247,16 @@ class GameEntityInfo final :
   void _internal_set_attack(uint32_t value);
   public:
 
-  // .Protocol.EGameEntityType entity_type = 7;
+  // uint32 defense = 7;
+  void clear_defense();
+  uint32_t defense() const;
+  void set_defense(uint32_t value);
+  private:
+  uint32_t _internal_defense() const;
+  void _internal_set_defense(uint32_t value);
+  public:
+
+  // .Protocol.EGameEntityType entity_type = 8;
   void clear_entity_type();
   ::Protocol::EGameEntityType entity_type() const;
   void set_entity_type(::Protocol::EGameEntityType value);
@@ -255,7 +265,7 @@ class GameEntityInfo final :
   void _internal_set_entity_type(::Protocol::EGameEntityType value);
   public:
 
-  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
+  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 9;
   void clear_entitye_look_at_dir();
   ::Protocol::EGameEntityLookAtDir entitye_look_at_dir() const;
   void set_entitye_look_at_dir(::Protocol::EGameEntityLookAtDir value);
@@ -264,7 +274,7 @@ class GameEntityInfo final :
   void _internal_set_entitye_look_at_dir(::Protocol::EGameEntityLookAtDir value);
   public:
 
-  // .Protocol.EGameEntityState entity_state = 9;
+  // .Protocol.EGameEntityState entity_state = 10;
   void clear_entity_state();
   ::Protocol::EGameEntityState entity_state() const;
   void set_entity_state(::Protocol::EGameEntityState value);
@@ -284,9 +294,10 @@ class GameEntityInfo final :
     uint64_t entity_id_;
     uint32_t cell_pos_x_;
     uint32_t cell_pos_y_;
-    uint32_t max_hp_;
-    uint32_t hp_;
+    int32_t max_hp_;
+    int32_t hp_;
     uint32_t attack_;
+    uint32_t defense_;
     int entity_type_;
     int entitye_look_at_dir_;
     int entity_state_;
@@ -534,42 +545,42 @@ inline void GameEntityInfo::set_cell_pos_y(uint32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.cell_pos_y)
 }
 
-// uint32 max_hp = 4;
+// int32 max_hp = 4;
 inline void GameEntityInfo::clear_max_hp() {
-  _impl_.max_hp_ = 0u;
+  _impl_.max_hp_ = 0;
 }
-inline uint32_t GameEntityInfo::_internal_max_hp() const {
+inline int32_t GameEntityInfo::_internal_max_hp() const {
   return _impl_.max_hp_;
 }
-inline uint32_t GameEntityInfo::max_hp() const {
+inline int32_t GameEntityInfo::max_hp() const {
   // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.max_hp)
   return _internal_max_hp();
 }
-inline void GameEntityInfo::_internal_set_max_hp(uint32_t value) {
+inline void GameEntityInfo::_internal_set_max_hp(int32_t value) {
   
   _impl_.max_hp_ = value;
 }
-inline void GameEntityInfo::set_max_hp(uint32_t value) {
+inline void GameEntityInfo::set_max_hp(int32_t value) {
   _internal_set_max_hp(value);
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.max_hp)
 }
 
-// uint32 hp = 5;
+// int32 hp = 5;
 inline void GameEntityInfo::clear_hp() {
-  _impl_.hp_ = 0u;
+  _impl_.hp_ = 0;
 }
-inline uint32_t GameEntityInfo::_internal_hp() const {
+inline int32_t GameEntityInfo::_internal_hp() const {
   return _impl_.hp_;
 }
-inline uint32_t GameEntityInfo::hp() const {
+inline int32_t GameEntityInfo::hp() const {
   // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.hp)
   return _internal_hp();
 }
-inline void GameEntityInfo::_internal_set_hp(uint32_t value) {
+inline void GameEntityInfo::_internal_set_hp(int32_t value) {
   
   _impl_.hp_ = value;
 }
-inline void GameEntityInfo::set_hp(uint32_t value) {
+inline void GameEntityInfo::set_hp(int32_t value) {
   _internal_set_hp(value);
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.hp)
 }
@@ -594,7 +605,27 @@ inline void GameEntityInfo::set_attack(uint32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.attack)
 }
 
-// .Protocol.EGameEntityType entity_type = 7;
+// uint32 defense = 7;
+inline void GameEntityInfo::clear_defense() {
+  _impl_.defense_ = 0u;
+}
+inline uint32_t GameEntityInfo::_internal_defense() const {
+  return _impl_.defense_;
+}
+inline uint32_t GameEntityInfo::defense() const {
+  // @@protoc_insertion_point(field_get:Protocol.GameEntityInfo.defense)
+  return _internal_defense();
+}
+inline void GameEntityInfo::_internal_set_defense(uint32_t value) {
+  
+  _impl_.defense_ = value;
+}
+inline void GameEntityInfo::set_defense(uint32_t value) {
+  _internal_set_defense(value);
+  // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.defense)
+}
+
+// .Protocol.EGameEntityType entity_type = 8;
 inline void GameEntityInfo::clear_entity_type() {
   _impl_.entity_type_ = 0;
 }
@@ -614,7 +645,7 @@ inline void GameEntityInfo::set_entity_type(::Protocol::EGameEntityType value) {
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.entity_type)
 }
 
-// .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 8;
+// .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 9;
 inline void GameEntityInfo::clear_entitye_look_at_dir() {
   _impl_.entitye_look_at_dir_ = 0;
 }
@@ -634,7 +665,7 @@ inline void GameEntityInfo::set_entitye_look_at_dir(::Protocol::EGameEntityLookA
   // @@protoc_insertion_point(field_set:Protocol.GameEntityInfo.entitye_look_at_dir)
 }
 
-// .Protocol.EGameEntityState entity_state = 9;
+// .Protocol.EGameEntityState entity_state = 10;
 inline void GameEntityInfo::clear_entity_state() {
   _impl_.entity_state_ = 0;
 }

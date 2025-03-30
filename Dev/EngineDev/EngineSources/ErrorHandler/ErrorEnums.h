@@ -10,4 +10,5 @@ enum class EEngineErrorCode
 	InvalidRenderingLayer,
 	InvalidFileStream,
 	NoReturnNullObject,
+	EmptyLookAtDirectionSprite,
 };

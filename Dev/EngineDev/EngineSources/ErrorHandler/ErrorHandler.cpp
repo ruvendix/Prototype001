@@ -13,4 +13,5 @@ void EngineErrorHandler::Startup()
 	InsertErrorInfo(EEngineErrorCode::InvalidRenderingLayer, &g_LogDefault, "유효하지 않은 렌더링 레이어!");
 	InsertErrorInfo(EEngineErrorCode::InvalidFileStream, &g_LogResource, "유효하지 않은 파일 스트림!");
 	InsertErrorInfo(EEngineErrorCode::NoReturnNullObject, &g_LogDefault, "널 객체를 반환할 정도면 이미 망한 상황!");
+	InsertErrorInfo(EEngineErrorCode::EmptyLookAtDirectionSprite, &g_LogDefault, "보는 방향 스프라이트가 없음!");
 }

@@ -62,3 +62,9 @@ message S_SyncGameEntityState
 {
 	GameEntityInfo entity_info = 1;
 }
+
+message S_AttckToGameEntity
+{
+	GameEntityInfo attacker_info = 1;
+	GameEntityInfo victim_info = 2;
+}

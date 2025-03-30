@@ -15,8 +15,11 @@ public:
 	void ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo);
 	void ApplyGameEntityState(const Protocol::GameEntityInfo& gameEntityInfo);
 
+	bool CheckGameEntityState(Protocol::EGameEntityState gameEntityState) const;
 	bool CheckSameCellPosition(const Position2d& targetCellPos) const;
+	
 	Position2d MakeCurrentCellPosition() const;
+	Position2d MakeForwardCellPosition() const;
 
 	Protocol::EGameEntityLookAtDir CalculateGameEntityLookAtDirection(const Position2d& destCellPos);
 	Protocol::EGameEntityLookAtDir CalculateGameEntityLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo);

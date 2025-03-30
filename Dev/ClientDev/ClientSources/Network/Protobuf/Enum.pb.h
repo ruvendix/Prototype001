@@ -106,12 +106,13 @@ enum EGameEntityState : int {
   Attack = 2,
   Defense = 3,
   Chase = 4,
+  Death = 5,
   EGameEntityState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   EGameEntityState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool EGameEntityState_IsValid(int value);
 constexpr EGameEntityState EGameEntityState_MIN = Idle;
-constexpr EGameEntityState EGameEntityState_MAX = Chase;
+constexpr EGameEntityState EGameEntityState_MAX = Death;
 constexpr int EGameEntityState_ARRAYSIZE = EGameEntityState_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityState_descriptor();

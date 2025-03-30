@@ -15,6 +15,11 @@ GameMonsterPtr GameMonsterFactory::CreateRandomMonster(uint32 gameEntityId)
 	pNewGameEntityInfo->set_entity_type(Protocol::EGameEntityType::Monster);
 	pNewGameEntityInfo->set_entitye_look_at_dir(Protocol::EGameEntityLookAtDir::Down);
 	pNewGameEntityInfo->set_entity_state(Protocol::EGameEntityState::Idle);
+	pNewGameEntityInfo->set_max_hp(20);
+	pNewGameEntityInfo->set_hp(20);
+	//pNewGameEntityInfo->set_attack(5);
+	pNewGameEntityInfo->set_attack(15); // Å×½ºÆ®¿ë
+	pNewGameEntityInfo->set_defense(0);
 
 	// ·£´ý ¼¿ ÁÂÇ¥
 	const Position2d& randomCellPos = GameRoom::I()->GenerateRandomCellPosition();

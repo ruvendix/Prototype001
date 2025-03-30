@@ -154,7 +154,8 @@ public:
 
 public:
 	void ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActorState);
-	void ApplyLookAtDirectionToCurrentDynamicSprite();
+	bool ApplyLookAtDirectionSprite();
+	bool ApplyLookAtDirectionSpriteOnDefaultState();
 
 	DynamicSpritePtr FindCurrentActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const;
 

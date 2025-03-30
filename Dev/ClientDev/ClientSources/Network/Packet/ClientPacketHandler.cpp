@@ -16,6 +16,7 @@ void ClientPacketHandler::Startup()
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityLookAtDir, &ClientPacketHandler::HandlePacket_SyncGameEntityLookAtDirection);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityMove, &ClientPacketHandler::HandlePacket_SyncGameEntityMove);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::SyncGameEntityState, &ClientPacketHandler::HandlePacket_SyncGameEntityState);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::AttackToGameEntity, &ClientPacketHandler::HandlePacket_AttackToGameEntity);
 }
 
 void ClientPacketHandler::Cleanup()
@@ -140,4 +141,13 @@ void ClientPacketHandler::HandlePacket_SyncGameEntityState(BYTE* buffer, int32 n
 	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
 	ASSERT_LOG(pGameScene != nullptr);
 	pGameScene->ParsingPacket_SyncGameEntityState(packet);
+}
+
+void ClientPacketHandler::HandlePacket_AttackToGameEntity(BYTE* buffer, int32 numOfBytes)
+{
+	START_PACKET_CONTENTS(buffer, Protocol::S_AttckToGameEntity, packet);
+
+	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
+	ASSERT_LOG(pGameScene != nullptr);
+	pGameScene->ParsingPacket_AttackToGameEntity(packet);
 }

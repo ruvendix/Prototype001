@@ -104,6 +104,19 @@ RxSendBufferPtr RxServerPacketHandler::MakeSyncGameEntityStatePacket(const Proto
 	return MakeSendBuffer(syncGameEntityStatePacket, Protocol::EProtocolId::SyncGameEntityState);
 }
 
+RxSendBufferPtr RxServerPacketHandler::MakeAttackToGameEntityPacket(const Protocol::GameEntityInfo& attackerEntityInfo, const Protocol::GameEntityInfo& victimEntityInfo)
+{
+	Protocol::S_AttckToGameEntity attckToGameEntityPacket;
+
+	Protocol::GameEntityInfo* pAttackerInfo = attckToGameEntityPacket.mutable_attacker_info();
+	(*pAttackerInfo) = attackerEntityInfo;
+
+	Protocol::GameEntityInfo* pVictimInfo = attckToGameEntityPacket.mutable_victim_info();
+	(*pVictimInfo) = victimEntityInfo;
+
+	return MakeSendBuffer(attckToGameEntityPacket, Protocol::EProtocolId::AttackToGameEntity);
+}
+
 void RxServerPacketHandler::HandlePacket_SyncGameEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes)
 {
 	START_PACKET_CONTENTS(buffer, Protocol::C_SyncGameEntityLookAtDir, packet);

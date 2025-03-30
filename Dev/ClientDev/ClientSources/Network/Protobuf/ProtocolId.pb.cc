@@ -29,16 +29,17 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_ProtocolId_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020ProtocolId.proto\022\010Protocol*\276\001\n\013EProtoc"
+  "\n\020ProtocolId.proto\022\010Protocol*\326\001\n\013EProtoc"
   "olId\022\r\n\tEnterGame\020\000\022\r\n\tLeaveGame\020\001\022\031\n\025Cr"
   "eateLocalGamePlayer\020\002\022\024\n\020SyncGameEntitie"
   "s\020\003\022\022\n\016SyncGamePlayer\020\004\022\033\n\027SyncGameEntit"
   "yLookAtDir\020\005\022\026\n\022SyncGameEntityMove\020\006\022\027\n\023"
-  "SyncGameEntityState\020\007b\006proto3"
+  "SyncGameEntityState\020\007\022\026\n\022AttackToGameEnt"
+  "ity\020\010b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProtocolId_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProtocolId_2eproto = {
-    false, false, 229, descriptor_table_protodef_ProtocolId_2eproto,
+    false, false, 253, descriptor_table_protodef_ProtocolId_2eproto,
     "ProtocolId.proto",
     &descriptor_table_ProtocolId_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_ProtocolId_2eproto::offsets,
@@ -66,6 +67,7 @@ bool EProtocolId_IsValid(int value) {
     case 5:
     case 6:
     case 7:
+    case 8:
       return true;
     default:
       return false;

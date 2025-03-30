@@ -44,7 +44,8 @@ namespace GameMonsterUtility
 		for (const auto& iter : mapGamePlayer)
 		{
 			const GamePlayerPtr& spGamePlayer = iter.second;
-			if (spGamePlayer == nullptr)
+			if ((spGamePlayer == nullptr) ||
+				(spGamePlayer->CheckGameEntityState(Protocol::EGameEntityState::Death)))
 			{
 				continue;
 			}
@@ -63,7 +64,7 @@ namespace GameMonsterUtility
 
 	bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos, int32 chaseRange, std::vector<Position2d>& outVecNavigationPath)
 	{
-		// 추적 거리 안에 있는지 확인
+		// 추격 거리 안에 있는지 확인
 		int32 srcToDestCost = CalculateHeuristic(srcCellPos, destCellPos);
 		if (srcToDestCost > chaseRange)
 		{
@@ -115,7 +116,7 @@ namespace GameMonsterUtility
 				nextAStarNode.cellPos = (astarNode.cellPos + dirCellPos);
 				nextAStarNode.cost = CalculateHeuristic(nextAStarNode.cellPos, destCellPos);
 
-				// 추적 거리 안에 있는지 확인
+				// 추격 거리 안에 있는지 확인
 				if (chaseRange < nextAStarNode.cost)
 				{
 					continue;

@@ -88,7 +88,7 @@ void PawnActor::ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActo
 	DEFAULT_TRACE_LOG("외부로부터 애니메이션 액터 상태 변경! (즉시)");
 }
 
-void PawnActor::ApplyLookAtDirectionToCurrentDynamicSprite()
+bool PawnActor::ApplyLookAtDirectionSprite()
 {
 	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
@@ -97,7 +97,33 @@ void PawnActor::ApplyLookAtDirectionToCurrentDynamicSprite()
 	if (spChangeActorStateDynamicSprite != nullptr)
 	{
 		pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
+		return true;
 	}
+
+	return false;
+}
+
+bool PawnActor::ApplyLookAtDirectionSpriteOnDefaultState()
+{
+	if (m_mapActorStateDynamicSprite.empty() == true)
+	{
+		DETAIL_ERROR_LOG(EngineErrorHandler, EEngineErrorCode::EmptyLookAtDirectionSprite);
+		return false;
+	}
+
+	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
+	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
+
+	auto beginIter = m_mapActorStateDynamicSprite.begin();
+	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = beginIter->second;
+	DynamicSpritePtr spChangeActorStateDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(m_lookAtDir)];
+	if (spChangeActorStateDynamicSprite != nullptr)
+	{
+		pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
+		return true;
+	}
+
+	return false;
 }
 
 DynamicSpritePtr PawnActor::FindCurrentActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const

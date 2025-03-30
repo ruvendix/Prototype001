@@ -10,6 +10,7 @@ public:
 	virtual void Startup() override;
 	virtual void Cleanup() override;
 
+public:
 	void SetGameSession(const RxGameSessionPtr& spGameSession) { m_spGameSession = spGameSession; }
 	const RxGameSessionPtr& GetGameSession() const { return m_spGameSession; }
 

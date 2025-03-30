@@ -219,3 +219,30 @@ void GameScene::ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEnti
 
 	spGameEntityActor->SyncFromServer_GameEntityState(gameEntityInfo);
 }
+
+void GameScene::ParsingPacket_AttackToGameEntity(const Protocol::S_AttckToGameEntity& attackToGameEntityPacket)
+{
+	// 공격자부터 동기화
+	const Protocol::GameEntityInfo& attackerInfo = attackToGameEntityPacket.attacker_info();
+	const GameEntityActorPtr& spAttacker = FindGameEntityActor(attackerInfo.entity_id());
+	if (spAttacker == nullptr)
+	{
+		return;
+	}
+	spAttacker->SyncFromServer_GameEntityLookAtDirection(attackerInfo);
+
+	const Protocol::GameEntityInfo& victimInfo = attackToGameEntityPacket.victim_info();
+	const GameEntityActorPtr& spVictim = FindGameEntityActor(victimInfo.entity_id());
+	if (spVictim == nullptr)
+	{
+		return;
+	}
+
+	spVictim->SyncFromServer_AttackToGameEntity(spAttacker, victimInfo);
+
+	// 사망 처리
+	if (victimInfo.hp() <= 0)
+	{
+		ReserveEraseActor(spVictim);
+	}
+}

@@ -76,4 +76,11 @@ public:
 
 	virtual void Startup() override;
 	virtual void OnActionTimer() override;
+
+public:
+	void ToIdleState(); // 자주 사용해서 따로 만듬
+	void SetVictimPlayer(const GamePlayerPtr& spVictimPlayer) { m_spVictimPlayer = spVictimPlayer; }
+
+private:
+	GamePlayerPtr m_spVictimPlayer = nullptr;
 };
