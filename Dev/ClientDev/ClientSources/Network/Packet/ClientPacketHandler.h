@@ -46,6 +46,7 @@ private:
 	void HandlePacket_MoveEntityPacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_ModifyEntityStatePacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_HitDamageToEntityPacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_DiePlayerPacket(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

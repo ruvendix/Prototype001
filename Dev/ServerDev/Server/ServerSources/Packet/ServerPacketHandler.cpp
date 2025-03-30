@@ -117,6 +117,15 @@ RxSendBufferPtr RxServerPacketHandler::MakeHitDamageToEntityPacket(const Protoco
 	return MakeSendBuffer(hitDamageToEntityPacket, Protocol::EProtocolId::HitDamageToEntity);
 }
 
+RxSendBufferPtr RxServerPacketHandler::MakeDiePlayerPacket(const Protocol::NetworkEntityInfo& victimEntityInfo)
+{
+	Protocol::S_DiePlayerPacket diePlayerPacket;
+	Protocol::NetworkEntityInfo* pVictimInfo = diePlayerPacket.mutable_victim_info();
+	(*pVictimInfo) = victimEntityInfo;
+
+	return MakeSendBuffer(diePlayerPacket, Protocol::EProtocolId::DiePlayer);
+}
+
 void RxServerPacketHandler::HandlePacket_ModifyEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes)
 {
 	START_PACKET_CONTENTS(buffer, Protocol::C_ModifyEntityLookAtDirectionPacket, packet);

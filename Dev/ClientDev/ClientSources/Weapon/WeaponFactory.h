@@ -10,11 +10,11 @@ public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 
-	std::shared_ptr<WeaponActor> CreateWeaponActor(int32 weaponId);
+	std::shared_ptr<WeaponActor> CreateWeaponActor(int32 weaponId) const;
 	const WeaponActor* FindWeaponActorRawPointer(int32 weaponId) const;
 
 	// 일단은 무기 공장에 넣어봄
-	std::shared_ptr<ProjectileActor> CreateProjectileActor(int32 projectileId);
+	std::shared_ptr<ProjectileActor> CreateProjectileActor(int32 projectileId) const;
 	const ProjectileActor* FindProjectileActorRawPointer(int32 projectileId) const;
 	const std::shared_ptr<ProjectileActor>& FindProjectileActor(int32 projectileId) const;
 

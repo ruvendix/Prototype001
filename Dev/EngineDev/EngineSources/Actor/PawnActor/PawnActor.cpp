@@ -40,10 +40,8 @@ PawnActor::PawnActor(const PawnActor& src) : Super(src)
 {
 	m_lookAtDir = src.m_lookAtDir;
 	m_spWorldTileMapActor = src.m_spWorldTileMapActor;	
-	m_spPawnActorState = src.m_spPawnActorState;
 	m_actorLookAtDirTexturePathTable = src.m_actorLookAtDirTexturePathTable;
-	m_mapActorStateDynamicSprite = src.m_mapActorStateDynamicSprite;
-
+	m_vecActorStateDynamicSpriteTable = src.m_vecActorStateDynamicSpriteTable;
 	DEFAULT_TRACE_LOG("테스트!");
 }
 
@@ -55,7 +53,7 @@ PawnActor::~PawnActor()
 void PawnActor::Startup()
 {
 	Super::Startup();
-	m_spPawnActorState = std::make_shared<PawnActorIdleState>(this);
+	InitializeActorStateTable();
 }
 
 bool PawnActor::Update(float deltaSeconds)
@@ -66,14 +64,14 @@ bool PawnActor::Update(float deltaSeconds)
 	}
 
 	m_pawnActorStateChangeEvent.ExcuteIfBound();
-	m_spPawnActorState->Update(deltaSeconds);
+
+	const PawnActorStatePtr& spCurrentActorState = GetCurrentPawnActorState();
+	if (spCurrentActorState != nullptr)
+	{
+		spCurrentActorState->Update(deltaSeconds);
+	}
 
 	return true;
-}
-
-bool PawnActor::CheckMovingState() const
-{
-	return (IsSamePawnActorState<PawnActorWalkState>());
 }
 
 void PawnActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
@@ -81,11 +79,13 @@ void PawnActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 
 }
 
-void PawnActor::ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActorState)
+void PawnActor::InitializeActorStateTable()
 {
-	m_spPawnActorState = spActorState;
-	m_spPawnActorState->Startup();
-	DEFAULT_TRACE_LOG("외부로부터 애니메이션 액터 상태 변경! (즉시)");
+	m_vecActorStateTable.resize(GET_COMPILEITME_ID_COUNT(PawnActorStateIdCounter));
+
+	RegisterActorState<PawnActorIdleState>();
+	RegisterActorState<PawnActorWalkState>();
+	RegisterActorState<PawnActorAttackState>();
 }
 
 bool PawnActor::ApplyLookAtDirectionSprite()
@@ -105,7 +105,7 @@ bool PawnActor::ApplyLookAtDirectionSprite()
 
 bool PawnActor::ApplyLookAtDirectionSpriteOnDefaultState()
 {
-	if (m_mapActorStateDynamicSprite.empty() == true)
+	if (m_vecActorStateDynamicSpriteTable.empty() == true)
 	{
 		DETAIL_ERROR_LOG(EngineErrorHandler, EEngineErrorCode::EmptyLookAtDirectionSprite);
 		return false;
@@ -114,8 +114,7 @@ bool PawnActor::ApplyLookAtDirectionSpriteOnDefaultState()
 	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-	auto beginIter = m_mapActorStateDynamicSprite.begin();
-	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = beginIter->second;
+	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[0];
 	DynamicSpritePtr spChangeActorStateDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(m_lookAtDir)];
 	if (spChangeActorStateDynamicSprite != nullptr)
 	{
@@ -128,13 +127,13 @@ bool PawnActor::ApplyLookAtDirectionSpriteOnDefaultState()
 
 DynamicSpritePtr PawnActor::FindCurrentActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const
 {
-	auto foundIter = m_mapActorStateDynamicSprite.find(m_spPawnActorState->CompiletimeId());
-	if (foundIter == m_mapActorStateDynamicSprite.cend())
+	const PawnActorStatePtr& spCurrentActorState = GetCurrentPawnActorState();
+	if (spCurrentActorState == nullptr)
 	{
 		return nullptr;
 	}
 
-	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
+	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[spCurrentActorState->CompiletimeId()];
 	return (actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)]);
 }
 
@@ -177,6 +176,16 @@ void PawnActor::LoadActorLookAtDirectionTexture(const std::string& strActorLookA
 	ResourceMananger::I()->LoadTexture(strActorLookAtDirTexturePath);
 }
 
+void PawnActor::ImmediatelyChangeState(uint32 actorStateId)
+{
+	ASEERT_VALIDATE_INDEX(actorStateId, m_vecActorStateTable.size());
+	m_currentActorStateIdx = actorStateId;
+
+	const PawnActorStatePtr& spActorState = GetPawnActorState(actorStateId);
+	ASSERT_LOG(spActorState != nullptr);
+	spActorState->Startup();
+}
+
 void PawnActor::ChangeActorDynamicSpriteByExternal(const DynamicSpritePtr& spChangedDynamicSprite)
 {
 	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
@@ -208,9 +217,16 @@ bool PawnActor::CheckPossibleKnockback(EActorLookAtDirection srcLookAtDir) const
 	return (m_lookAtDir == g_oppositeLookAtDirTable[TO_NUM(srcLookAtDir)]);
 }
 
-void PawnActor::OnChangePawnActorState(const PawnActorStatePtr& spPawnActorState)
+void PawnActor::OnChangePawnActorState(uint32 nextActorStateIdx)
 {
-	m_spPawnActorState = spPawnActorState;
-	m_spPawnActorState->Startup();
+	ASEERT_VALIDATE_INDEX(nextActorStateIdx, m_vecActorStateTable.size());
+	m_currentActorStateIdx = nextActorStateIdx;
+
+	const PawnActorStatePtr& spCurrentActorState = GetCurrentPawnActorState();
+	if (spCurrentActorState != nullptr)
+	{
+		spCurrentActorState->Startup();
+	}
+
 	DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경! (지연)");
 }

@@ -9,7 +9,7 @@
 DEFINE_SINGLETON(GameRoom);
 DEFINE_COMPILETIMER_COUNTER(GameEntityIdCounter);
 
-const uint32 MAX_MONSTER_RESPAWN_COUNT = 20;
+const uint32 MAX_MONSTER_RESPAWN_COUNT = 1;
 
 void GameRoom::Startup()
 {
@@ -77,8 +77,11 @@ void GameRoom::EnterGameRoom(const RxGameSessionPtr& spGameSession)
 	mainPlayerInfo.set_entity_state(Protocol::ENetworkEntityState::Idle);
 	mainPlayerInfo.set_cell_pos_x(6);
 	mainPlayerInfo.set_cell_pos_y(6);
-	mainPlayerInfo.set_max_hp(30);
-	mainPlayerInfo.set_hp(30);
+	//mainPlayerInfo.set_max_hp(30);
+	//mainPlayerInfo.set_hp(30);
+	mainPlayerInfo.set_max_hp(3000);
+	mainPlayerInfo.set_hp(3000);
+	mainPlayerInfo.set_attack(5);
 	mainPlayerInfo.set_defense(2);
 
 	spMainPlayer->SetGameEntityInfo(mainPlayerInfo);

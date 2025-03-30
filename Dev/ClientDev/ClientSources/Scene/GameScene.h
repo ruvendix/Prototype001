@@ -31,6 +31,7 @@ public:
 	void ParsingPacket_MoveEntityPacket(const Protocol::S_MoveEntityPacket& moveEntityPacket) const;
 	void ParsingPacket_ModifyEntityStatePacket(const Protocol::S_ModifyEntityStatePacket& modifyEntityStatePacket) const;
 	void ParsingPacket_HitDamageToEntityPacket(const Protocol::S_HitDamageToEntityPacket& hitDamageToEntityPacket) const;
+	void ParsingPacket_DiePlayerPacket(const Protocol::S_DiePlayerPacket& diePlayerPacket);
 	
 private:
 	std::shared_ptr<LocalPlayerActor> m_spLocalPlayerActor = nullptr;

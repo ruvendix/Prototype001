@@ -21,6 +21,7 @@ public:
 	RxSendBufferPtr MakeMoveEntityPacket(const Protocol::NetworkEntityInfo& entityInfo);
 	RxSendBufferPtr MakeModifyEntityStatePacket(const Protocol::NetworkEntityInfo& entityInfo);
 	RxSendBufferPtr MakeHitDamageToEntityPacket(const Protocol::NetworkEntityInfo& attackerEntityInfo, const Protocol::NetworkEntityInfo& victimEntityInfo);
+	RxSendBufferPtr MakeDiePlayerPacket(const Protocol::NetworkEntityInfo& victimEntityInfo);
 
 private:
 	template <typename TPacket>

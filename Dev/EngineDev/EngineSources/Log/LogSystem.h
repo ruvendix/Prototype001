@@ -18,8 +18,7 @@ public:
 public:
 	void RegisterFileLoggerPathKey(const std::string& strFileLoggerPathKey);
 
-	void Log(const LogCategory* pLogCategory, const std::string& strLog,
-		ELogVerbosity logVerbosity, const char* szFilePath, int32 fileLine, const char* szFunction);
+	void Log(const LogCategory* pLogCategory, const std::string& strLog, ELogVerbosity logVerbosity, const char* szFilePath, int32 fileLine, const char* szFunction) const;
 
 private:
 	std::unordered_map<uint32, std::shared_ptr<ILogger>> m_mapLogger;

@@ -26,12 +26,6 @@
     <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterActor\SnakeActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterState\EnemyMonsterState.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -78,6 +72,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ClientSources\Player\LocalPlayerActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ClientSources\Player\NetworkPlayerActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ClientSources\Player\PlayerActor.cpp">
@@ -127,12 +124,6 @@
     <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterActor\SnakeActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -171,6 +162,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Player\LocalPlayerActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ClientSources\Player\NetworkPlayerActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Player\PlayerActor.h">

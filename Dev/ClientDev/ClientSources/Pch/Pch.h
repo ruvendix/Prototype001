@@ -50,7 +50,8 @@
 #include "Weapon/Projectile/ProjectileActor.h"
 #include "Weapon/WeaponFactory.h"
 
-#include "Player/PlayerActor.h"
+#include "Player/LocalPlayerActor.h"
+#include "Player/NetworkPlayerActor.h"
 
 #include "EnemyMonster/EnemyMonsterActor/EnemyMonsterActor.h"
 #include "EnemyMonster/EnemyRespawner/EnemyRespawner.h"

@@ -2,8 +2,6 @@
 #include "Pch.h"
 #include "SnakeActor.h"
 
-#include "ClientSources/EnemyMonster/EnemyMonsterState/EnemyMonsterState.h"
-
 DEFINE_COMPILETIME_ID(SnakeActor, EnemeyActorIdCounter)
 
 class SnakeActor::Pimpl
@@ -20,19 +18,19 @@ void SnakeActor::Pimpl::LoadAndStartupSnakeSprite()
 	m_pOwner->LoadActorLookAtDirectionTexture("Assets/Texture/Monster/Snake.bmp");
 
 	// 상태마다 스프라이트를 미리 만들고
-	m_pOwner->CreateActorStateLookAtDynamicSprites<EnmeyMonsterIdleState>("SnakeIdle", true);
+	m_pOwner->CreateActorStateLookAtDynamicSprites<PawnActorIdleState>("SnakeIdle", true);
 
 	// 스프라이트마다 설정
-	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 0, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Down);
-	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 1, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Right);
-	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 2, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Left);
-	m_pOwner->AddActorStateKeyFrame<EnmeyMonsterIdleState>(0, 3, 3, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Up);
+	m_pOwner->AddActorStateKeyFrame<PawnActorIdleState>(0, 3, 0, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Down);
+	m_pOwner->AddActorStateKeyFrame<PawnActorIdleState>(0, 3, 1, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Right);
+	m_pOwner->AddActorStateKeyFrame<PawnActorIdleState>(0, 3, 2, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Left);
+	m_pOwner->AddActorStateKeyFrame<PawnActorIdleState>(0, 3, 3, Size{ 100, 100 }, RGB(128, 128, 128), 0.15f, EActorLookAtDirection::Up);
 
 	// 기본 스프라이트 설정 (SnakeIdleDown)
 	DynamicSpriteComponent* pDynamicSpriteComponent = m_pOwner->AddComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = m_pOwner->FindActorStateLookAtDynamicSprite<EnmeyMonsterIdleState>(EActorLookAtDirection::Down);
+	const DynamicSpritePtr& spDefaultPlayerDynamicSprite = m_pOwner->FindActorStateLookAtDynamicSprite<PawnActorIdleState>(EActorLookAtDirection::Down);
 	pDynamicSpriteComponent->ApplyDynamicSprite(spDefaultPlayerDynamicSprite);
 }
 
@@ -85,15 +83,13 @@ ActorPtr SnakeActor::CreateClone()
 
 void SnakeActor::RegisterStateOnBidirectional()
 {
-	RegisterActorState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
-	RegisterActorState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
-	RegisterActorState<EnmeyMonsterChaseState>(Protocol::ENetworkEntityState::Chase);
-	RegisterActorState<EnmeyMonsterAttackState>(Protocol::ENetworkEntityState::Attack);
+	Super::RegisterStateOnBidirectional();
 
-	RegisterNetworkEntityState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
-	RegisterNetworkEntityState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
-	RegisterNetworkEntityState<EnmeyMonsterChaseState>(Protocol::ENetworkEntityState::Chase);
-	RegisterNetworkEntityState<EnmeyMonsterAttackState>(Protocol::ENetworkEntityState::Attack);
+	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Chase);
+	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Attack);
+
+	RegisterNetworkEntityStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Chase);
+	RegisterNetworkEntityStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Attack);
 }
 
 void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)

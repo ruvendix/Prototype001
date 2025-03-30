@@ -2,6 +2,11 @@
 #include "Pch.h"
 #include "NetworkEntityActor.h"
 
+NetworkEntityActor::NetworkEntityActor(const NetworkEntityActor& src) : Super(src)
+{
+
+}
+
 NetworkEntityActor::~NetworkEntityActor()
 {
 
@@ -38,20 +43,20 @@ void NetworkEntityActor::ProcessDefense()
 
 }
 
-void NetworkEntityActor::ProcessAttack()
+void NetworkEntityActor::ProcessAttackAction()
 {
 
 }
 
 void NetworkEntityActor::RegisterStateOnBidirectional()
 {
-	RegisterActorState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
-	RegisterActorState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
-	RegisterActorState<PawnActorAttackState>(Protocol::ENetworkEntityState::Attack);
+	m_arrActorStateIdMappingNetworkEntityStateTable.fill(0);
 
-	RegisterNetworkEntityState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
-	RegisterNetworkEntityState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
-	RegisterNetworkEntityState<PawnActorAttackState>(Protocol::ENetworkEntityState::Attack);
+	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
+	RegisterActorStateMappingTable<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
+
+	RegisterNetworkEntityStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
+	RegisterNetworkEntityStateMappingTable<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
 }
 
 void NetworkEntityActor::SyncFromServer_NetworkEntityInfo(const Protocol::NetworkEntityInfo& networkEntityInfo)
@@ -84,8 +89,8 @@ void NetworkEntityActor::SyncFromServer_NetworkEntityMove(const Protocol::Networ
 
 void NetworkEntityActor::SyncFromServer_NetworkEntityState(const Protocol::NetworkEntityInfo& networkEntityInfo)
 {
-	const PawnActorStatePtr& spActorState = FindActorState(networkEntityInfo.entity_state());
-	ImmediatelyChangeStateByExternal(spActorState);
+	uint32 actorStateId = FindActorStateId(networkEntityInfo.entity_state());
+	ImmediatelyChangeState(actorStateId);
 }
 
 void NetworkEntityActor::SyncFromServer_NetworkEntityHitDamage(const NetworkEntityActorPtr& spAttacker, const Protocol::NetworkEntityInfo& victimInfo)
@@ -124,7 +129,7 @@ EActorLookAtDirection NetworkEntityActor::ConvertNetworkEntityLookAtDirectionToA
 
 Protocol::ENetworkEntityLookAtDirection NetworkEntityActor::ConvertActorLookAtDirectionToNetworkEntityLookAtDirection(EActorLookAtDirection actorLookAtDir) const
 {
-	Protocol::ENetworkEntityLookAtDirection networkEntityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Count;
+	Protocol::ENetworkEntityLookAtDirection networkEntityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Down;
 	switch (actorLookAtDir)
 	{
 	case EActorLookAtDirection::Left: (networkEntityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Left); break;
@@ -138,7 +143,8 @@ Protocol::ENetworkEntityLookAtDirection NetworkEntityActor::ConvertActorLookAtDi
 
 void NetworkEntityActor::ApplyActorStateFromServer(Protocol::ENetworkEntityState networkEntityState)
 {
-	ImmediatelyChangeStateByExternal(FindActorState(networkEntityState));
+	uint32 actorStateId = FindActorStateId(networkEntityState);
+	ImmediatelyChangeState(actorStateId);
 }
 
 void NetworkEntityActor::ApplyActorLookAtDirectionFromServer(Protocol::ENetworkEntityLookAtDirection networkEntityLookAtDir)
@@ -159,30 +165,20 @@ bool NetworkEntityActor::CheckClientAndServerIsSameLookAtDirection() const
 
 bool NetworkEntityActor::CheckClientAndServerIsSameNetworkEntityState() const
 {
-	const PawnActorStatePtr& spActorStateFromServer = FindActorState(m_spNetworkEntityInfo->entity_state());
-	return (spActorStateFromServer->CompiletimeId() == GetCurrentPawnActorState()->CompiletimeId());
+	uint32 actorStateIdFromServer = FindActorStateId(m_spNetworkEntityInfo->entity_state());
+	return (GetCurrentPawnActorState()->CompiletimeId() == actorStateIdFromServer);
 }
 
 Protocol::ENetworkEntityState NetworkEntityActor::FindNetworkEntityState(uint32 actorStateId) const
 {
-	auto foundIter = m_mapNetworkEntityState.find(actorStateId);
-	if (foundIter == m_mapNetworkEntityState.cend())
-	{
-		ERROR_LOG(LogDefault, "등록되지 않은 게임 엔티티의 상태 Id! (%d)", actorStateId);
-	}
-
-	return static_cast<Protocol::ENetworkEntityState>(foundIter->second);
+	ASSERT_LOG(global::ValidateIndexRange(actorStateId, m_vecNetworkEntityStateMappingActorStateIdTable.size()) == true);
+	return (m_vecNetworkEntityStateMappingActorStateIdTable[actorStateId]);
 }
 
-PawnActorStatePtr NetworkEntityActor::FindActorState(Protocol::ENetworkEntityState networkEntityState) const
+uint32 NetworkEntityActor::FindActorStateId(Protocol::ENetworkEntityState networkEntityState) const
 {
-	auto foundIter = m_mapActorState.find(TO_NUM(networkEntityState));
-	if (foundIter == m_mapActorState.cend())
-	{
-		ERROR_LOG(LogDefault, "등록되지 않은 액터의 상태 Id! (%d)", TO_NUM(networkEntityState));
-	}
-
-	return (foundIter->second);
+	ASEERT_VALIDATE_INDEX(TO_NUM(networkEntityState), m_arrActorStateIdMappingNetworkEntityStateTable.size());
+	return (m_arrActorStateIdMappingNetworkEntityStateTable[TO_NUM(networkEntityState)]);
 }
 
 void NetworkEntityActor::SyncToServer_NetworkEntityLookAtDirectionIfNeed()

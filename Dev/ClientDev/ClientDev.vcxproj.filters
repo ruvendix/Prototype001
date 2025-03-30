@@ -31,14 +31,8 @@
     <Filter Include="ClientSources\EnemyMonster">
       <UniqueIdentifier>{7e412397-20dc-4daf-b12b-e766d3fa8d4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ClientSources\EnemyMonster\EnemyMonsterState">
-      <UniqueIdentifier>{380203db-0d47-431a-b3d2-a0223198f2a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ClientSources\EnemyMonster\EnemyMonsterActor">
       <UniqueIdentifier>{d77314b5-0b28-485d-9396-69b44447e5fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ClientSources\EnemyMonster\EnemyMonsterComponent">
-      <UniqueIdentifier>{3596df10-f942-4dab-9c66-275e755fdded}</UniqueIdentifier>
     </Filter>
     <Filter Include="ClientSources\Network">
       <UniqueIdentifier>{72d77fb7-c5a3-4807-9a7c-58b5e61e924f}</UniqueIdentifier>
@@ -117,17 +111,11 @@
     <ClCompile Include="ClientSources\Weapon\Projectile\ProjectileAttackComponent.cpp">
       <Filter>ClientSources\Weapon\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterState\EnemyMonsterState.cpp">
-      <Filter>ClientSources\EnemyMonster\EnemyMonsterState</Filter>
-    </ClCompile>
     <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.cpp">
       <Filter>ClientSources\EnemyMonster\EnemyMonsterActor</Filter>
     </ClCompile>
     <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterActor\SnakeActor.cpp">
       <Filter>ClientSources\EnemyMonster\EnemyMonsterActor</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.cpp">
-      <Filter>ClientSources\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
       <Filter>ClientSources\Network</Filter>
@@ -161,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="ClientSources\Network\NetworkEntityActor.cpp">
       <Filter>ClientSources\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\Player\NetworkPlayerActor.cpp">
+      <Filter>ClientSources\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,17 +209,11 @@
     <ClInclude Include="ClientSources\Weapon\Projectile\ProjectileStructs.h">
       <Filter>ClientSources\Weapon\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterState\EnemyMonsterState.h">
-      <Filter>ClientSources\EnemyMonster\EnemyMonsterState</Filter>
-    </ClInclude>
     <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterActor\EnemyMonsterActor.h">
       <Filter>ClientSources\EnemyMonster\EnemyMonsterActor</Filter>
     </ClInclude>
     <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterActor\SnakeActor.h">
       <Filter>ClientSources\EnemyMonster\EnemyMonsterActor</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientSources\EnemyMonster\EnemyMonsterComponent\EnemyMonsterAttackComponent.h">
-      <Filter>ClientSources\EnemyMonster\EnemyMonsterComponent</Filter>
     </ClInclude>
     <ClInclude Include="ClientSources\Network\NetworkManager.h">
       <Filter>ClientSources\Network</Filter>
@@ -268,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="ClientSources\Network\NetworkEntityActor.h">
       <Filter>ClientSources\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\Player\NetworkPlayerActor.h">
+      <Filter>ClientSources\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

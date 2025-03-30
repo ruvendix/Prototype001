@@ -51,6 +51,9 @@
 	{ \
 		return value; \
 	}
+
+#define ASEERT_VALIDATE_INDEX(idx, size) ASSERT_LOG(global::ValidateIndexRange(idx, size) == true);
+
 #else
 #define ASSERT_LOG(expression) __noop
 #define ASSERT_LOG_RETURN(expression) __noop

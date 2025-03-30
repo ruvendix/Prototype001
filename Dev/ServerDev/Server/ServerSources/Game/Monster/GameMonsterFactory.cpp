@@ -17,16 +17,16 @@ GameMonsterPtr GameMonsterFactory::CreateRandomMonster(uint32 entityId)
 	pNewMonsterInfo->set_entity_state(Protocol::ENetworkEntityState::Idle);
 	pNewMonsterInfo->set_max_hp(20);
 	pNewMonsterInfo->set_hp(20);
-	//pNewMonsterInfo->set_attack(5);
-	pNewMonsterInfo->set_attack(15); // Å×½ºÆ®¿ë
+	pNewMonsterInfo->set_attack(5);
+	//pNewMonsterInfo->set_attack(15); // Å×½ºÆ®¿ë
 	pNewMonsterInfo->set_defense(0);
 
 	// ·£´ý ¼¿ ÁÂÇ¥
 	const Position2d& randomCellPos = GameRoom::I()->GenerateRandomCellPosition();
-	pNewMonsterInfo->set_cell_pos_x(randomCellPos.x);
-	pNewMonsterInfo->set_cell_pos_y(randomCellPos.y);
-	//pNewMonsterInfo->set_cell_pos_x(6);
-	//pNewMonsterInfo->set_cell_pos_y(8);
+	//pNewMonsterInfo->set_cell_pos_x(randomCellPos.x);
+	//pNewMonsterInfo->set_cell_pos_y(randomCellPos.y);
+	pNewMonsterInfo->set_cell_pos_x(6);
+	pNewMonsterInfo->set_cell_pos_y(8);
 
 	GameMonsterPtr spMonster = std::make_shared<GameMonster>();
 	spMonster->Startup();

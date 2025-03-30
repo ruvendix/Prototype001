@@ -30,18 +30,18 @@ public:
 	virtual void Startup() override;
 	virtual bool Update(float deltaSeconds) override;
 
-	virtual bool CheckMovingState() const;
 	virtual void ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker);
+	virtual void InitializeActorStateTable();
 
 public:
-	template <typename TActorState>
+	template <typename TPawnActorState>
 	void CreateActorStateLookAtDynamicSprites(const std::string& strPrefix, bool bLoopDynamicSprite)
 	{
-		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
-		if (foundIter != m_mapActorStateDynamicSprite.cend())
+		if (m_vecActorStateDynamicSpriteTable.empty() == true)
 		{
-			return;
+			m_vecActorStateDynamicSpriteTable.resize(m_vecActorStateTable.size());
 		}
+		ASEERT_VALIDATE_INDEX(TPawnActorState::s_id, m_vecActorStateDynamicSpriteTable.size());
 
 		ActorLookAtDynamicSpriteTable actorLookAtDynamicSpriteTable;
 		for (int32 i = 0; i < TO_NUM(EActorLookAtDirection::Count); ++i)
@@ -58,37 +58,27 @@ public:
 			actorLookAtDynamicSpriteTable[i] = spDynamicSprite;
 		}
 
-		auto resultIter = m_mapActorStateDynamicSprite.insert(std::make_pair(TActorState::s_id, actorLookAtDynamicSpriteTable));
-		ASSERT_LOG(resultIter.second == true);
+		m_vecActorStateDynamicSpriteTable[TPawnActorState::s_id] = std::move(actorLookAtDynamicSpriteTable);
 	}
 
-	template <typename TActorState>
-	void AddActorStateKeyFrame(int32 startIdx, int32 endIdx, int32 spriteLine,
-		const Size& drawSize, uint32 colorKey, float keepTime, EActorLookAtDirection actorLookAtDir)
+	template <typename TPawnActorState>
+	void AddActorStateKeyFrame(int32 startIdx, int32 endIdx, int32 spriteLine, const Size& drawSize, uint32 colorKey, float keepTime, EActorLookAtDirection actorLookAtDir)
 	{
-		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
-		if (foundIter == m_mapActorStateDynamicSprite.cend())
-		{
-			return;
-		}
+		ASEERT_VALIDATE_INDEX(TPawnActorState::s_id, m_vecActorStateDynamicSpriteTable.size());
 
 		// 해당되는 스프라이트 가져오기
-		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[TPawnActorState::s_id];
 		const DynamicSpritePtr& spDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)];
 		ASSERT_LOG(spDynamicSprite != nullptr);
 		spDynamicSprite->AddKeyFrames(startIdx, endIdx, spriteLine, drawSize, colorKey, keepTime);
 	}
 
-	template <typename TActorState>
+	template <typename TPawnActorState>
 	void AddActorStateKeyFrames(int32 startIdx, int32 endIdx, int32 spriteLine, const Size& drawSize, uint32 colorKey, float keepTime)
 	{
-		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
-		if (foundIter == m_mapActorStateDynamicSprite.cend())
-		{
-			return;
-		}
+		ASEERT_VALIDATE_INDEX(TPawnActorState::s_id, m_vecActorStateDynamicSpriteTable.size());
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[TPawnActorState::s_id];
 
-		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
 		for (int32 i = 0; i < TO_NUM(EActorLookAtDirection::Count); ++i)
 		{
 			// 해당되는 스프라이트 가져오기
@@ -98,26 +88,21 @@ public:
 		}
 	}
 
-	template <typename TActorState>
+	template <typename TPawnActorState>
 	DynamicSpritePtr FindActorStateLookAtDynamicSprite(EActorLookAtDirection actorLookAtDir) const
 	{
-		auto foundIter = m_mapActorStateDynamicSprite.find(TActorState::s_id);
-		if (foundIter == m_mapActorStateDynamicSprite.cend())
-		{
-			return nullptr;
-		}
-
-		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = foundIter->second;
+		ASEERT_VALIDATE_INDEX(TPawnActorState::s_id, m_vecActorStateDynamicSpriteTable.size());
+		const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[TPawnActorState::s_id];
 		return (actorLookAtDynmaicSpriteTable[TO_NUM(actorLookAtDir)]);
 	}
 
-	template <typename TActorState>
+	template <typename TPawnActorState>
 	void ChangeActorStateDynamicSprite()
 	{
 		DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 		ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-		DynamicSpritePtr spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TActorState>(m_lookAtDir);
+		DynamicSpritePtr spChangeActorStateDynamicSprite = FindActorStateLookAtDynamicSprite<TPawnActorState>(m_lookAtDir);
 		if (spChangeActorStateDynamicSprite != nullptr)
 		{
 			pDynamicSpriteComponent->ApplyDynamicSprite(spChangeActorStateDynamicSprite);
@@ -127,16 +112,30 @@ public:
 	template <typename TPawnActorState>
 	void ReserveChangeNextState()
 	{
-		PawnActorStatePtr spNextPawnActorState = std::make_shared<TPawnActorState>(this);
-		m_pawnActorStateChangeEvent.RegisterEventHandler(this, &PawnActor::OnChangePawnActorState, spNextPawnActorState);
+		m_pawnActorStateChangeEvent.RegisterEventHandler(this, &PawnActor::OnChangePawnActorState, std::move(TPawnActorState::s_id));
+	}
+
+	template <typename TPawnActorState>
+	void RegisterActorState()
+	{
+		ASEERT_VALIDATE_INDEX(TPawnActorState::s_id, m_vecActorStateTable.size());
+		m_vecActorStateTable[TPawnActorState::s_id] = std::make_shared<TPawnActorState>(this);
+		DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경! (즉시)");
 	}
 
 	// Update보다 빠르니까 즉시 전환해도 됨
 	template <typename TPawnActorState>
 	void ImmediatelyChangeState()
 	{
-		m_spPawnActorState = std::make_shared<TPawnActorState>(this);
-		m_spPawnActorState->Startup();
+		ASEERT_VALIDATE_INDEX(TPawnActorState::s_id, m_vecActorStateTable.size());
+		m_currentActorStateIdx = TPawnActorState::s_id;
+
+		const PawnActorStatePtr& spCurrentActorState = GetCurrentPawnActorState();
+		if (spCurrentActorState != nullptr)
+		{
+			spCurrentActorState->Startup();
+		}
+
 		DEFAULT_TRACE_LOG("애니메이션 액터 상태 변경! (즉시)");
 	}
 
@@ -149,11 +148,11 @@ public:
 	template <typename TPawnActorState>
 	std::shared_ptr<TPawnActorState> GetCurrentExactPawnActorState() const
 	{
-		return (std::dynamic_pointer_cast<TPawnActorState>(m_spPawnActorState));
+		ASEERT_VALIDATE_INDEX(m_currentActorStateIdx, m_vecActorStateTable.size());
+		return (std::dynamic_pointer_cast<TPawnActorState>(GetCurrentPawnActorState()));
 	}
 
 public:
-	void ImmediatelyChangeStateByExternal(const PawnActorStatePtr& spActorState);
 	bool ApplyLookAtDirectionSprite();
 	bool ApplyLookAtDirectionSpriteOnDefaultState();
 
@@ -163,6 +162,7 @@ public:
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath);
 	void LoadActorLookAtDirectionTexture(const std::string& strActorLookAtDirTexturePath, EActorLookAtDirection actorLookAtDir);
 
+	void ImmediatelyChangeState(uint32 actorStateId);
 	void ChangeActorDynamicSpriteByExternal(const DynamicSpritePtr& spChangedDynamicSprite);
 
 	Position2d CalculateForwardCellPosition() const;
@@ -178,10 +178,20 @@ public:
 	void SetActorLookAtDirection(EActorLookAtDirection lookAtDir) { m_lookAtDir = lookAtDir; }
 	EActorLookAtDirection GetActorLookAtDirection() const { return m_lookAtDir; }
 
-	PawnActorStatePtr GetCurrentPawnActorState() const { return m_spPawnActorState; };
+	const PawnActorStatePtr& GetPawnActorState(uint32 actorStateId) const
+	{
+		ASEERT_VALIDATE_INDEX(actorStateId, m_vecActorStateTable.size());
+		return m_vecActorStateTable[actorStateId];
+	}
+
+	const PawnActorStatePtr& GetCurrentPawnActorState() const
+	{
+		ASEERT_VALIDATE_INDEX(m_currentActorStateIdx, m_vecActorStateTable.size());
+		return m_vecActorStateTable[m_currentActorStateIdx];
+	};
 
 private:
-	void OnChangePawnActorState(const PawnActorStatePtr& spPawnActorState);
+	void OnChangePawnActorState(uint32 nextActorStateIdx);
 
 private:
 	static ActorLookAtStringTable g_actorLookAtStringTable;
@@ -191,8 +201,9 @@ private:
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
 
 	ActorLookAtStringTable m_actorLookAtDirTexturePathTable;
-	std::unordered_map<int32, ActorLookAtDynamicSpriteTable> m_mapActorStateDynamicSprite;
+	std::vector<ActorLookAtDynamicSpriteTable> m_vecActorStateDynamicSpriteTable;
 
-	PawnActorStatePtr m_spPawnActorState = nullptr;
-	Event<const PawnActorStatePtr& /* spNextPawnActorState */> m_pawnActorStateChangeEvent;
+	uint32 m_currentActorStateIdx = PawnActorIdleState::s_id;
+	std::vector<PawnActorStatePtr> m_vecActorStateTable;
+	Event<uint32 /* nextActorStateIdx */> m_pawnActorStateChangeEvent;
 };

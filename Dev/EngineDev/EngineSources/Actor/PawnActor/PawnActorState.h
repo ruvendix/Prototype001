@@ -18,6 +18,7 @@ public:
 	virtual void Cleanup() override;
 
 public:
+	void SetOwner(PawnActor* pOwner) { m_pOwner = pOwner; }
 	PawnActor* GetOwner() const { return m_pOwner; }
 
 private:

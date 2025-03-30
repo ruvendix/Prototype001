@@ -12,7 +12,7 @@ namespace
 		ASSERT_LOG_RETURN_VALUE(pPlayer != nullptr, false);
 
 		// 무기에서 전부 처리
-		const std::shared_ptr<WeaponActor>& spWeaponActor = pPlayer->GetWeaponActor(weaponSlot);
+		const std::shared_ptr<WeaponActor>& spWeaponActor = pPlayer->GetWeapon(weaponSlot);
 		return spWeaponActor->Update(deltaSeconds);
 	}
 }
@@ -29,7 +29,7 @@ void PlayerAttackState::Startup()
 	ASSERT_LOG(pPlayer != nullptr);
 
 	// 현재 무기에 따라 작동
-	const std::shared_ptr<WeaponActor>& spPrimaryWeapon = pPlayer->GetWeaponActor(EWeaponSlotType::Primary);
+	const std::shared_ptr<WeaponActor>& spPrimaryWeapon = pPlayer->GetWeapon(EWeaponSlotType::Primary);
 	if (spPrimaryWeapon == nullptr)
 	{
 		return;
@@ -42,7 +42,7 @@ bool PlayerAttackState::Update(float deltaSeconds)
 {
 	return (UpdateWeaponActor(deltaSeconds, GetOwner(), EWeaponSlotType::Primary));
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////
 DEFINE_COMPILETIME_ID(PlayerDefenceState, PawnActorStateIdCounter)
 PlayerDefenceState::~PlayerDefenceState()
 {
@@ -55,7 +55,7 @@ void PlayerDefenceState::Startup()
 	ASSERT_LOG(pPlayer != nullptr);
 
 	// 현재 무기에 따라 작동
-	const std::shared_ptr<WeaponActor>& spSecondaryWeapon = pPlayer->GetWeaponActor(EWeaponSlotType::Secondary);
+	const std::shared_ptr<WeaponActor>& spSecondaryWeapon = pPlayer->GetWeapon(EWeaponSlotType::Secondary);
 	if (spSecondaryWeapon == nullptr)
 	{
 		return;

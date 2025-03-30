@@ -73,7 +73,7 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 
 	if (IsSamePawnActorState<PlayerDefenceState>())
 	{
-		const std::shared_ptr<WeaponActor>& spSecondaryWeapon = GetWeaponActor(EWeaponSlotType::Secondary);
+		const std::shared_ptr<WeaponActor>& spSecondaryWeapon = GetWeapon(EWeaponSlotType::Secondary);
 		// spSecondaryWeapon 이거의 스탯을 가져와서 이것 저것
 
 		// 넉백이 가능한 상황이라면 넉백 실행
@@ -97,17 +97,23 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	DEFAULT_TRACE_LOG("플레이어 사망!");
 }
 
+void PlayerActor::InitializeActorStateTable()
+{
+	Super::InitializeActorStateTable();
+
+	RegisterActorState<PlayerAttackState>();
+	RegisterActorState<PlayerDefenceState>();
+}
+
 void PlayerActor::RegisterStateOnBidirectional()
 {
-	RegisterActorState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
-	RegisterActorState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
-	RegisterActorState<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
-	RegisterActorState<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
+	Super::RegisterStateOnBidirectional();
 
-	RegisterNetworkEntityState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
-	RegisterNetworkEntityState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
-	RegisterNetworkEntityState<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
-	RegisterNetworkEntityState<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
+	RegisterActorStateMappingTable<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
+	RegisterActorStateMappingTable<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
+
+	RegisterNetworkEntityStateMappingTable<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
+	RegisterNetworkEntityStateMappingTable<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
 }
 
 void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)
@@ -134,18 +140,6 @@ void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 
 	ImmediatelyChangeState<PawnActorWalkState>();
 	DEFAULT_TRACE_LOG("(기본 -> 걷기) 상태로 전환!");
-}
-
-void PlayerActor::ProcessAttack()
-{
-	if (IsSamePawnActorState<PawnActorIdleState>() == false)
-	{
-		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
-		return;
-	}
-
-	ImmediatelyChangeState<PlayerAttackState>();
-	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
 }
 
 void PlayerActor::ProcessDefense()

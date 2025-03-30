@@ -49,7 +49,7 @@ void WeaponActor::ApplyDynamicSpriteToOwner()
 	spWeaponOwner->ChangeActorDynamicSpriteByExternal(spChangedWeaponDynamicSprite);
 }
 
-bool WeaponActor::TryCreateProjectile()
+bool WeaponActor::TryCreateProjectile() const
 {
 	if (m_projectileId == HAS_NOT_PROJECTILE)
 	{

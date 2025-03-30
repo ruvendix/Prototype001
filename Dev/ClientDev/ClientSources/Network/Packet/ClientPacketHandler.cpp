@@ -17,6 +17,7 @@ void ClientPacketHandler::Startup()
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::MoveEntity, &ClientPacketHandler::HandlePacket_MoveEntityPacket);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::ModifyEntityState, &ClientPacketHandler::HandlePacket_ModifyEntityStatePacket);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::HitDamageToEntity, &ClientPacketHandler::HandlePacket_HitDamageToEntityPacket);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::DiePlayer, &ClientPacketHandler::HandlePacket_DiePlayerPacket);
 }
 
 void ClientPacketHandler::Cleanup()
@@ -150,4 +151,13 @@ void ClientPacketHandler::HandlePacket_HitDamageToEntityPacket(BYTE* buffer, int
 	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
 	ASSERT_LOG(pGameScene != nullptr);
 	pGameScene->ParsingPacket_HitDamageToEntityPacket(packet);
+}
+
+void ClientPacketHandler::HandlePacket_DiePlayerPacket(BYTE* buffer, int32 numOfBytes)
+{
+	START_PACKET_CONTENTS(buffer, Protocol::S_DiePlayerPacket, packet);
+
+	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
+	ASSERT_LOG(pGameScene != nullptr);
+	pGameScene->ParsingPacket_DiePlayerPacket(packet);
 }

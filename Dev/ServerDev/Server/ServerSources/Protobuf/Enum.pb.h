@@ -52,13 +52,12 @@ enum ENetworkEntityLookAtDirection : int {
   Up = 1,
   Right = 2,
   Down = 3,
-  Count = 4,
   ENetworkEntityLookAtDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   ENetworkEntityLookAtDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool ENetworkEntityLookAtDirection_IsValid(int value);
 constexpr ENetworkEntityLookAtDirection ENetworkEntityLookAtDirection_MIN = Left;
-constexpr ENetworkEntityLookAtDirection ENetworkEntityLookAtDirection_MAX = Count;
+constexpr ENetworkEntityLookAtDirection ENetworkEntityLookAtDirection_MAX = Down;
 constexpr int ENetworkEntityLookAtDirection_ARRAYSIZE = ENetworkEntityLookAtDirection_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityLookAtDirection_descriptor();

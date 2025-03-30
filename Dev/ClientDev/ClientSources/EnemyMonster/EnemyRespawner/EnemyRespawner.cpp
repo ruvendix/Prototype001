@@ -94,7 +94,11 @@ void EnemyRespawner::RespawnEnemy(const Protocol::NetworkMonsterInfo& networkMon
 
 	const std::shared_ptr<EnemyMonsterActor>& spNewEnemyActor = pCurrentScene->CreateCloneActorToScene(spPrototypeEnemyActor);
 	spNewEnemyActor->SetActorName(strNewEnemyActorName);
+	spNewEnemyActor->InitializeActorStateTable();
+	spNewEnemyActor->RegisterStateOnBidirectional();
 	spNewEnemyActor->SyncFromServer_NetworkEntityInfo(networkEntityInfo);
+	spNewEnemyActor->ImmediatelyChangeState<PawnActorIdleState>();
+	++m_currentEnemyCount;
 
 	Position2d respawnCellPos = { static_cast<int32>(networkEntityInfo.cell_pos_x()), static_cast<int32>(networkEntityInfo.cell_pos_y()) };
 	DEFAULT_TRACE_LOG("%s 리스폰 위치(%d, %d)", strNewEnemyActorName.c_str(), respawnCellPos.x, respawnCellPos.y);

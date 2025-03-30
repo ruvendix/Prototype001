@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "GameEntity.h"
 
-const std::array<Position2d, TO_NUM(Protocol::ENetworkEntityLookAtDirection::Count)> g_lookAtForwardCellPosTable =
+const std::array<Position2d, Protocol::ENetworkEntityLookAtDirection_ARRAYSIZE> g_lookAtForwardCellPosTable =
 {
 	Position2d(-1, +0),
 	Position2d(+0, -1),
@@ -80,7 +80,7 @@ Protocol::ENetworkEntityLookAtDirection GameEntity::CalculateGameEntityLookAtDir
 {
 	const Position2d& currentCellPos = MakeCurrentCellPosition();
 
-	Protocol::ENetworkEntityLookAtDirection entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Count;
+	Protocol::ENetworkEntityLookAtDirection entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Down;
 	const Position2d& diffCellPos = (destCellPos - currentCellPos);
 	if (diffCellPos.x >= 1)
 	{

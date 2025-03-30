@@ -95,7 +95,7 @@ void GameMonsterIdleState::ProcessRandomMove()
 	Protocol::NetworkEntityInfo& refGameEntityInfo = spOwner->GetGameEntityInfo();
 
 	// 이동 가능한 곳을 못찾았으면 다음 기회에
-	int32 randMoveDirIdx = (std::rand() % TO_NUM(Protocol::ENetworkEntityLookAtDirection::Count));
+	int32 randMoveDirIdx = (std::rand() % Protocol::ENetworkEntityLookAtDirection_ARRAYSIZE);
 	const Position2d& moveDir = PawnActor::g_lookAtForwardCellPosTable[randMoveDirIdx];
 
 	Position2d destCellPos =
@@ -248,7 +248,6 @@ void GameMonsterAttackState::OnActionTimer()
 
 	// 공격 방향 알아내기
 	Protocol::ENetworkEntityLookAtDirection attackerLookAtDir = spOwner->CalculateGameEntityLookAtDirection(victimCellPos);
-	ASSERT_LOG(attackerLookAtDir != Protocol::ENetworkEntityLookAtDirection::Count);
 	Protocol::NetworkEntityInfo& refAttackerInfo = spOwner->GetGameEntityInfo();
 	refAttackerInfo.set_entitye_look_at_dir(attackerLookAtDir);
 
@@ -257,11 +256,11 @@ void GameMonsterAttackState::OnActionTimer()
 	remainVictimPlayerHp = global::Clamp(remainVictimPlayerHp, 0, refVictimPlayerInfo.max_hp());
 	refVictimPlayerInfo.set_hp(remainVictimPlayerHp);
 
-	if (remainVictimPlayerHp <= 0) // 사망
+	bool bPlayerDeath = (remainVictimPlayerHp <= 0);
+	if (bPlayerDeath == true) // 사망
 	{
 		m_spVictimPlayer = nullptr;
 		refVictimPlayerInfo.set_entity_state(Protocol::ENetworkEntityState::Death);
-		GameRoom::I()->RemoveGameEntity(m_spVictimPlayer);
 
 		ToIdleState();
 	}
@@ -282,6 +281,15 @@ void GameMonsterAttackState::OnActionTimer()
 	const RxSendBufferPtr& hitDamagePacket = RxServerPacketHandler::I()->MakeHitDamageToEntityPacket(refAttackerInfo, refVictimPlayerInfo);
 	RxGameSessionManager::I()->Broadcast(hitDamagePacket);
 	DEFAULT_TRACE_LOG("공격 받음! (Victim hp: %d (%p))", remainVictimPlayerHp, m_spVictimPlayer);
+
+	if (bPlayerDeath == true)
+	{
+		const RxSendBufferPtr& diePlayerPacket = RxServerPacketHandler::I()->MakeDiePlayerPacket(refVictimPlayerInfo);
+		RxGameSessionManager::I()->Broadcast(diePlayerPacket);
+
+		GameRoom::I()->RemoveGameEntity(m_spVictimPlayer);
+		DEFAULT_TRACE_LOG("개체 사망! (Victim: %p)", m_spVictimPlayer);
+	}
 }
 
 void GameMonsterAttackState::ToIdleState()

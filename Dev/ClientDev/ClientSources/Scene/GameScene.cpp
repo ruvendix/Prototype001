@@ -154,8 +154,8 @@ void GameScene::ParsingPacket_SyncEntitiesPacket(const Protocol::S_SyncEntitiesP
 			continue;
 		}
 
-		const PlayerActorPtr& spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
-		spPlayerActor->SyncFromServer_NetworkEntityInfo(networkPlayerInfo);
+		const PlayerActorPtr& spNetworkPlayerActor = CreateActorToScene<NetworkPlayerActor>(EActorLayerType::Creature);
+		spNetworkPlayerActor->SyncFromServer_NetworkEntityInfo(networkPlayerInfo);
 	}
 
 	int32 networkMonsterCount = syncEntitiesPacket.monsters_info_size();
@@ -239,4 +239,16 @@ void GameScene::ParsingPacket_HitDamageToEntityPacket(const Protocol::S_HitDamag
 	}
 
 	spNetworkVictim->SyncFromServer_NetworkEntityHitDamage(networkAttackerActor, networkVictimInfo);
+}
+
+void GameScene::ParsingPacket_DiePlayerPacket(const Protocol::S_DiePlayerPacket& diePlayerPacket)
+{
+	const Protocol::NetworkEntityInfo& networkVictimInfo = diePlayerPacket.victim_info();
+	const NetworkEntityActorPtr& networkVictimActor = FindNetworkEntityActor(networkVictimInfo.entity_id());
+	if (networkVictimActor == nullptr)
+	{
+		return;
+	}
+
+	ReserveEraseActor(networkVictimActor);
 }

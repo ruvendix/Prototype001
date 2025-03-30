@@ -119,7 +119,7 @@ bool WeaponFactory::Update(float deltaSeconds)
 	return true;
 }
 
-std::shared_ptr<WeaponActor> WeaponFactory::CreateWeaponActor(int32 weaponId)
+std::shared_ptr<WeaponActor> WeaponFactory::CreateWeaponActor(int32 weaponId) const
 {
 	const WeaponActor* pFoundPrototypeWeaponActor = FindWeaponActorRawPointer(weaponId);
 	if (pFoundPrototypeWeaponActor == nullptr)
@@ -129,6 +129,7 @@ std::shared_ptr<WeaponActor> WeaponFactory::CreateWeaponActor(int32 weaponId)
 
 	// 복사 생성자 호출
 	std::shared_ptr<WeaponActor> spNewWeaponActor = std::make_shared<WeaponActor>(*pFoundPrototypeWeaponActor);
+	spNewWeaponActor->InitializeActorStateTable();
 	return spNewWeaponActor;
 }
 
@@ -143,7 +144,7 @@ const WeaponActor* WeaponFactory::FindWeaponActorRawPointer(int32 weaponId) cons
 	return (foundIter->second.get());
 }
 
-std::shared_ptr<ProjectileActor> WeaponFactory::CreateProjectileActor(int32 projectileId)
+std::shared_ptr<ProjectileActor> WeaponFactory::CreateProjectileActor(int32 projectileId) const
 {
 	const ProjectileActor* pFoundPrototypeProjectileActor = FindProjectileActorRawPointer(projectileId);
 	if (pFoundPrototypeProjectileActor == nullptr)

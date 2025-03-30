@@ -1,11 +1,8 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-template <typename T>
-class Event;
-
 template <typename... TArgs>
-class Event<TArgs...>
+class Event
 {
 public:
 	template <typename TEventListener>
@@ -35,7 +32,7 @@ public:
 	}
 
 private:
-	Delegator<void(TArgs&&)...> m_delegator;
+	Delegator<void(TArgs)...> m_delegator;
 };
 
 template <>

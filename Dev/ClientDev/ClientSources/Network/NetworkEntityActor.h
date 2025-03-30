@@ -7,6 +7,7 @@ class NetworkEntityActor : public PawnActor
 
 public:
 	using Super::Super;
+	NetworkEntityActor(const NetworkEntityActor& src);
 	virtual ~NetworkEntityActor();
 
 	virtual void Startup() override;
@@ -15,35 +16,28 @@ public:
 
 	virtual void ProcessMoveDirection(const Vector2d& vMoveDir);
 	virtual void ProcessDefense();
-	virtual void ProcessAttack();
+	virtual void ProcessAttackAction();
 
 	virtual void RegisterStateOnBidirectional();
 
 public:
 	template <typename TActorState>
-	void RegisterActorState(Protocol::ENetworkEntityState networkEntityState)
+	void RegisterActorStateMappingTable(Protocol::ENetworkEntityState networkEntityState)
 	{
-		auto foundIter = m_mapActorState.find(TO_NUM(networkEntityState));
-		if (foundIter != m_mapActorState.cend())
-		{
-			return;
-		}
-
-		auto insertedIter = m_mapActorState.insert(std::make_pair(TO_NUM(networkEntityState), std::make_shared<TActorState>(this)));
-		ASSERT_LOG(insertedIter.second == true);
+		ASEERT_VALIDATE_INDEX(TO_NUM(networkEntityState), m_arrActorStateIdMappingNetworkEntityStateTable.size());
+		m_arrActorStateIdMappingNetworkEntityStateTable[TO_NUM(networkEntityState)] = TActorState::s_id;
 	}
 
 	template <typename TActorState>
-	void RegisterNetworkEntityState(Protocol::ENetworkEntityState networkEntityState)
+	void RegisterNetworkEntityStateMappingTable(Protocol::ENetworkEntityState networkEntityState)
 	{
-		auto foundIter = m_mapNetworkEntityState.find(TActorState::s_id);
-		if (foundIter != m_mapNetworkEntityState.cend())
+		if (m_vecNetworkEntityStateMappingActorStateIdTable.empty() == true)
 		{
-			return;
+			m_vecNetworkEntityStateMappingActorStateIdTable.resize(GET_COMPILEITME_ID_COUNT(PawnActorStateIdCounter));
 		}
 
-		auto insertedIter = m_mapNetworkEntityState.insert(std::make_pair(TActorState::s_id, TO_NUM(networkEntityState)));
-		ASSERT_LOG(insertedIter.second == true);
+		ASEERT_VALIDATE_INDEX(TActorState::s_id, m_vecNetworkEntityStateMappingActorStateIdTable.size());
+		m_vecNetworkEntityStateMappingActorStateIdTable[TActorState::s_id] = networkEntityState;
 	}
 
 public:
@@ -65,7 +59,7 @@ public:
 	bool CheckClientAndServerIsSameNetworkEntityState() const;
 
 	Protocol::ENetworkEntityState FindNetworkEntityState(uint32 actorStateId) const;
-	PawnActorStatePtr FindActorState(Protocol::ENetworkEntityState networkEntityState) const;
+	uint32 FindActorStateId(Protocol::ENetworkEntityState networkEntityState) const;
 
 	uint64 GetNetworkEntityId() const { return (m_spNetworkEntityInfo->entity_id()); }
 	Protocol::ENetworkEntityState GetNetworkEntityState() const { return (m_spNetworkEntityInfo->entity_state()); }
@@ -78,7 +72,9 @@ private:
 	void SyncToServer_NetworkEntityAttackIfNeed();
 
 private:
-	std::unordered_map<uint32, uint32> m_mapNetworkEntityState;
-	std::unordered_map<uint32, PawnActorStatePtr> m_mapActorState;
+	// 네트워크 개체 상태에 해당되는 액터의 상태
+	std::array<uint32, Protocol::ENetworkEntityState_ARRAYSIZE> m_arrActorStateIdMappingNetworkEntityStateTable;
+	std::vector<Protocol::ENetworkEntityState> m_vecNetworkEntityStateMappingActorStateIdTable;
+
 	std::shared_ptr<Protocol::NetworkEntityInfo> m_spNetworkEntityInfo;
 };

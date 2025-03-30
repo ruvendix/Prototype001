@@ -18,6 +18,9 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual void ProcessAttackAction() override;
+	virtual void ProcessWeaponAttack() override;
+
 private:
 	void OnDirectionKeyHandler(const InputActionValue* pInputAction);
 	void OnSpaceBarKeyHandler(const InputActionValue* pInputAction);

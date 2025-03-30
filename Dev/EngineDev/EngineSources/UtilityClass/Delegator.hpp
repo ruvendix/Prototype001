@@ -98,7 +98,7 @@ public:
     {
         for (const auto& boundFunc : this->m_vecBoundFunc)
         {
-            boundFunc(std::forward<TArgs&&>(args)...);
+            boundFunc(std::forward<TArgs>(args)...);
         }
     }
 
@@ -124,7 +124,7 @@ public:
         TReturn retValue = TReturn();
         for (const auto& boundFunc : this->m_vecBoundFunc)
         {
-            retValue = boundFunc(std::forward<TArgs&&>(args)...);
+            retValue = boundFunc(std::forward<TArgs>(args)...);
         }
 
         return retValue;

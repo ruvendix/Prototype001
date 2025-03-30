@@ -22,14 +22,14 @@ public:
 
 public:
 	void ApplyDynamicSpriteToOwner();
-	bool TryCreateProjectile();
+	bool TryCreateProjectile() const;
 
-	void SetWeaponOwner(const std::shared_ptr<PawnActor>& spWeaponOwner) { m_spWeaponOwner = spWeaponOwner; }
-	std::shared_ptr<PawnActor> GetWeaponOwner() const { return (m_spWeaponOwner.lock()); }
+	void SetWeaponOwner(const std::shared_ptr<NetworkEntityActor>& spWeaponOwner) { m_spWeaponOwner = spWeaponOwner; }
+	std::shared_ptr<NetworkEntityActor> GetWeaponOwner() const { return (m_spWeaponOwner.lock()); }
 
 	void SetProjectileId(int32 projectileId) { m_projectileId = projectileId; }
 
 private:
 	int32 m_projectileId = HAS_NOT_PROJECTILE;
-	std::weak_ptr<PawnActor> m_spWeaponOwner;
+	std::weak_ptr<NetworkEntityActor> m_spWeaponOwner;
 };

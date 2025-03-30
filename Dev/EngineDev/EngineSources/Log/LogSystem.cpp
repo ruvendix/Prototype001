@@ -56,8 +56,7 @@ void LogSystem::RegisterFileLoggerPathKey(const std::string& strFileLoggerPathKe
 	spFileLogger->RegisterLogPathKey(strFileLoggerPathKey);
 }
 
-void LogSystem::Log(const LogCategory* pLogCategory, const std::string& strLog,
-	ELogVerbosity logVerbosity, const char* szFilePath, int32 fileLine, const char* szFunction)
+void LogSystem::Log(const LogCategory* pLogCategory, const std::string& strLog, ELogVerbosity logVerbosity, const char* szFilePath, int32 fileLine, const char* szFunction) const
 {
 	if (m_mapLogger.empty() == true)
 	{
