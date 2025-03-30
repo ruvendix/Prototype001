@@ -43,19 +43,19 @@ namespace GameMonsterUtility
 		const std::unordered_map<uint64, GamePlayerPtr>& mapGamePlayer = GameRoom::I()->GetGamePlayers();
 		for (const auto& iter : mapGamePlayer)
 		{
-			const GamePlayerPtr& spGamePlayer = iter.second;
-			if ((spGamePlayer == nullptr) ||
-				(spGamePlayer->CheckGameEntityState(Protocol::EGameEntityState::Death)))
+			const GamePlayerPtr& spPlayer = iter.second;
+			if ((spPlayer == nullptr) ||
+				(spPlayer->CheckGameEntityState(Protocol::ENetworkEntityState::Death)))
 			{
 				continue;
 			}
 
-			const Position2d& playerCurrentCellPos = spGamePlayer->MakeCurrentCellPosition();
+			const Position2d& playerCurrentCellPos = spPlayer->MakeCurrentCellPosition();
 
 			// 유효한 거리 안에 있는지 확인
 			if (CheckValidDistance(monsterCurrentCellPos, playerCurrentCellPos, dist) == true)
 			{
-				return spGamePlayer;
+				return spPlayer;
 			}
 		}
 

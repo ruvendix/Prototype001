@@ -29,16 +29,17 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010Protocol*H\n\024EGameEntityLoo"
-  "kAtDir\022\010\n\004Left\020\000\022\006\n\002Up\020\001\022\t\n\005Right\020\002\022\010\n\004D"
-  "own\020\003\022\t\n\005Count\020\004**\n\017EGameEntityType\022\n\n\006P"
-  "layer\020\000\022\013\n\007Monster\020\001*U\n\020EGameEntityState"
-  "\022\010\n\004Idle\020\000\022\010\n\004Walk\020\001\022\n\n\006Attack\020\002\022\013\n\007Defe"
-  "nse\020\003\022\t\n\005Chase\020\004\022\t\n\005Death\020\005b\006proto3"
+  "\n\nEnum.proto\022\010Protocol*Q\n\035ENetworkEntity"
+  "LookAtDirection\022\010\n\004Left\020\000\022\006\n\002Up\020\001\022\t\n\005Rig"
+  "ht\020\002\022\010\n\004Down\020\003\022\t\n\005Count\020\004*-\n\022ENetworkEnt"
+  "ityType\022\n\n\006Player\020\000\022\013\n\007Monster\020\001*X\n\023ENet"
+  "workEntityState\022\010\n\004Idle\020\000\022\010\n\004Walk\020\001\022\n\n\006A"
+  "ttack\020\002\022\013\n\007Defense\020\003\022\t\n\005Chase\020\004\022\t\n\005Death"
+  "\020\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 235, descriptor_table_protodef_Enum_2eproto,
+    false, false, 250, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -52,11 +53,11 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_Enum_2ep
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_Enum_2eproto(&descriptor_table_Enum_2eproto);
 namespace Protocol {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityLookAtDir_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityLookAtDirection_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[0];
 }
-bool EGameEntityLookAtDir_IsValid(int value) {
+bool ENetworkEntityLookAtDirection_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -69,11 +70,11 @@ bool EGameEntityLookAtDir_IsValid(int value) {
   }
 }
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityType_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityType_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[1];
 }
-bool EGameEntityType_IsValid(int value) {
+bool ENetworkEntityType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -83,11 +84,11 @@ bool EGameEntityType_IsValid(int value) {
   }
 }
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEntityState_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityState_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[2];
 }
-bool EGameEntityState_IsValid(int value) {
+bool ENetworkEntityState_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:

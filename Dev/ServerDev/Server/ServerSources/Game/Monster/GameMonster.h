@@ -25,8 +25,8 @@ public:
 	}
 
 public:
-	void ApplyGameMonsterInfo(const Protocol::GameMonsterInfo& srcGameMonsterInfo);
-	void CopyGameMonsterInfo(Protocol::GameMonsterInfo* pDestGameMonsterInfo);
+	void ApplyGameMonsterInfo(const Protocol::NetworkMonsterInfo& srcMonsterInfo);
+	void CopyGameMonsterInfo(Protocol::NetworkMonsterInfo* pDestMonsterInfo);
 
 	uint32 GetChaseRange() const { return m_chaseRange; }
 	uint32 GetAttackableRange() const { return m_attackableRange; }

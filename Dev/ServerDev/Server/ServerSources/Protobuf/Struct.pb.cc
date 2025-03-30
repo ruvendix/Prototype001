@@ -21,7 +21,7 @@ namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace Protocol {
-PROTOBUF_CONSTEXPR GameEntityInfo::GameEntityInfo(
+PROTOBUF_CONSTEXPR NetworkEntityInfo::NetworkEntityInfo(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.entity_id_)*/uint64_t{0u}
   , /*decltype(_impl_.cell_pos_x_)*/0u
@@ -34,29 +34,29 @@ PROTOBUF_CONSTEXPR GameEntityInfo::GameEntityInfo(
   , /*decltype(_impl_.entitye_look_at_dir_)*/0
   , /*decltype(_impl_.entity_state_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct GameEntityInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR GameEntityInfoDefaultTypeInternal()
+struct NetworkEntityInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR NetworkEntityInfoDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~GameEntityInfoDefaultTypeInternal() {}
+  ~NetworkEntityInfoDefaultTypeInternal() {}
   union {
-    GameEntityInfo _instance;
+    NetworkEntityInfo _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GameEntityInfoDefaultTypeInternal _GameEntityInfo_default_instance_;
-PROTOBUF_CONSTEXPR GameMonsterInfo::GameMonsterInfo(
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NetworkEntityInfoDefaultTypeInternal _NetworkEntityInfo_default_instance_;
+PROTOBUF_CONSTEXPR NetworkMonsterInfo::NetworkMonsterInfo(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.entity_info_)*/nullptr
+    /*decltype(_impl_.monster_info_)*/nullptr
   , /*decltype(_impl_.monster_id_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct GameMonsterInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR GameMonsterInfoDefaultTypeInternal()
+struct NetworkMonsterInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR NetworkMonsterInfoDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~GameMonsterInfoDefaultTypeInternal() {}
+  ~NetworkMonsterInfoDefaultTypeInternal() {}
   union {
-    GameMonsterInfo _instance;
+    NetworkMonsterInfo _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GameMonsterInfoDefaultTypeInternal _GameMonsterInfo_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NetworkMonsterInfoDefaultTypeInternal _NetworkMonsterInfo_default_instance_;
 }  // namespace Protocol
 static ::_pb::Metadata file_level_metadata_Struct_2eproto[2];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Struct_2eproto = nullptr;
@@ -64,59 +64,60 @@ static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors
 
 const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_id_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.cell_pos_x_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.cell_pos_y_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.max_hp_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.hp_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.attack_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.defense_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_type_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entitye_look_at_dir_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameEntityInfo, _impl_.entity_state_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entity_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.cell_pos_x_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.cell_pos_y_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.max_hp_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.hp_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.attack_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.defense_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entity_type_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entitye_look_at_dir_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entity_state_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameMonsterInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkMonsterInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameMonsterInfo, _impl_.monster_id_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::GameMonsterInfo, _impl_.entity_info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkMonsterInfo, _impl_.monster_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkMonsterInfo, _impl_.monster_info_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::Protocol::GameEntityInfo)},
-  { 16, -1, -1, sizeof(::Protocol::GameMonsterInfo)},
+  { 0, -1, -1, sizeof(::Protocol::NetworkEntityInfo)},
+  { 16, -1, -1, sizeof(::Protocol::NetworkMonsterInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::Protocol::_GameEntityInfo_default_instance_._instance,
-  &::Protocol::_GameMonsterInfo_default_instance_._instance,
+  &::Protocol::_NetworkEntityInfo_default_instance_._instance,
+  &::Protocol::_NetworkMonsterInfo_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\247\002\n"
-  "\016GameEntityInfo\022\021\n\tentity_id\030\001 \001(\004\022\022\n\nce"
-  "ll_pos_x\030\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022\016\n\006ma"
-  "x_hp\030\004 \001(\005\022\n\n\002hp\030\005 \001(\005\022\016\n\006attack\030\006 \001(\r\022\017"
-  "\n\007defense\030\007 \001(\r\022.\n\013entity_type\030\010 \001(\0162\031.P"
-  "rotocol.EGameEntityType\022;\n\023entitye_look_"
-  "at_dir\030\t \001(\0162\036.Protocol.EGameEntityLookA"
-  "tDir\0220\n\014entity_state\030\n \001(\0162\032.Protocol.EG"
-  "ameEntityState\"T\n\017GameMonsterInfo\022\022\n\nmon"
-  "ster_id\030\001 \001(\r\022-\n\013entity_info\030\002 \001(\0132\030.Pro"
-  "tocol.GameEntityInfob\006proto3"
+  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\271\002\n"
+  "\021NetworkEntityInfo\022\021\n\tentity_id\030\001 \001(\004\022\022\n"
+  "\ncell_pos_x\030\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022\016\n"
+  "\006max_hp\030\004 \001(\005\022\n\n\002hp\030\005 \001(\005\022\016\n\006attack\030\006 \001("
+  "\r\022\017\n\007defense\030\007 \001(\r\0221\n\013entity_type\030\010 \001(\0162"
+  "\034.Protocol.ENetworkEntityType\022D\n\023entitye"
+  "_look_at_dir\030\t \001(\0162\'.Protocol.ENetworkEn"
+  "tityLookAtDirection\0223\n\014entity_state\030\n \001("
+  "\0162\035.Protocol.ENetworkEntityState\"[\n\022Netw"
+  "orkMonsterInfo\022\022\n\nmonster_id\030\001 \001(\r\0221\n\014mo"
+  "nster_info\030\002 \001(\0132\033.Protocol.NetworkEntit"
+  "yInfob\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 428, descriptor_table_protodef_Struct_2eproto,
+    false, false, 453, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
     &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 2,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
@@ -133,19 +134,19 @@ namespace Protocol {
 
 // ===================================================================
 
-class GameEntityInfo::_Internal {
+class NetworkEntityInfo::_Internal {
  public:
 };
 
-GameEntityInfo::GameEntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+NetworkEntityInfo::NetworkEntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.GameEntityInfo)
+  // @@protoc_insertion_point(arena_constructor:Protocol.NetworkEntityInfo)
 }
-GameEntityInfo::GameEntityInfo(const GameEntityInfo& from)
+NetworkEntityInfo::NetworkEntityInfo(const NetworkEntityInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  GameEntityInfo* const _this = this; (void)_this;
+  NetworkEntityInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.entity_id_){}
     , decltype(_impl_.cell_pos_x_){}
@@ -163,10 +164,10 @@ GameEntityInfo::GameEntityInfo(const GameEntityInfo& from)
   ::memcpy(&_impl_.entity_id_, &from._impl_.entity_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.entity_state_) -
     reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.entity_state_));
-  // @@protoc_insertion_point(copy_constructor:Protocol.GameEntityInfo)
+  // @@protoc_insertion_point(copy_constructor:Protocol.NetworkEntityInfo)
 }
 
-inline void GameEntityInfo::SharedCtor(
+inline void NetworkEntityInfo::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -185,8 +186,8 @@ inline void GameEntityInfo::SharedCtor(
   };
 }
 
-GameEntityInfo::~GameEntityInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.GameEntityInfo)
+NetworkEntityInfo::~NetworkEntityInfo() {
+  // @@protoc_insertion_point(destructor:Protocol.NetworkEntityInfo)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -194,16 +195,16 @@ GameEntityInfo::~GameEntityInfo() {
   SharedDtor();
 }
 
-inline void GameEntityInfo::SharedDtor() {
+inline void NetworkEntityInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
 }
 
-void GameEntityInfo::SetCachedSize(int size) const {
+void NetworkEntityInfo::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void GameEntityInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.GameEntityInfo)
+void NetworkEntityInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.NetworkEntityInfo)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -214,7 +215,7 @@ void GameEntityInfo::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* GameEntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* NetworkEntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -276,30 +277,30 @@ const char* GameEntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.EGameEntityType entity_type = 8;
+      // .Protocol.ENetworkEntityType entity_type = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_entity_type(static_cast<::Protocol::EGameEntityType>(val));
+          _internal_set_entity_type(static_cast<::Protocol::ENetworkEntityType>(val));
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 9;
+      // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_entitye_look_at_dir(static_cast<::Protocol::EGameEntityLookAtDir>(val));
+          _internal_set_entitye_look_at_dir(static_cast<::Protocol::ENetworkEntityLookAtDirection>(val));
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.EGameEntityState entity_state = 10;
+      // .Protocol.ENetworkEntityState entity_state = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_entity_state(static_cast<::Protocol::EGameEntityState>(val));
+          _internal_set_entity_state(static_cast<::Protocol::ENetworkEntityState>(val));
         } else
           goto handle_unusual;
         continue;
@@ -326,9 +327,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* GameEntityInfo::_InternalSerialize(
+uint8_t* NetworkEntityInfo::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.GameEntityInfo)
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.NetworkEntityInfo)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -374,21 +375,21 @@ uint8_t* GameEntityInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(7, this->_internal_defense(), target);
   }
 
-  // .Protocol.EGameEntityType entity_type = 8;
+  // .Protocol.ENetworkEntityType entity_type = 8;
   if (this->_internal_entity_type() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
       8, this->_internal_entity_type(), target);
   }
 
-  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 9;
+  // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
   if (this->_internal_entitye_look_at_dir() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
       9, this->_internal_entitye_look_at_dir(), target);
   }
 
-  // .Protocol.EGameEntityState entity_state = 10;
+  // .Protocol.ENetworkEntityState entity_state = 10;
   if (this->_internal_entity_state() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -399,12 +400,12 @@ uint8_t* GameEntityInfo::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.GameEntityInfo)
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.NetworkEntityInfo)
   return target;
 }
 
-size_t GameEntityInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.GameEntityInfo)
+size_t NetworkEntityInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.NetworkEntityInfo)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -446,19 +447,19 @@ size_t GameEntityInfo::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_defense());
   }
 
-  // .Protocol.EGameEntityType entity_type = 8;
+  // .Protocol.ENetworkEntityType entity_type = 8;
   if (this->_internal_entity_type() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_type());
   }
 
-  // .Protocol.EGameEntityLookAtDir entitye_look_at_dir = 9;
+  // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
   if (this->_internal_entitye_look_at_dir() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_entitye_look_at_dir());
   }
 
-  // .Protocol.EGameEntityState entity_state = 10;
+  // .Protocol.ENetworkEntityState entity_state = 10;
   if (this->_internal_entity_state() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_state());
@@ -467,17 +468,17 @@ size_t GameEntityInfo::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData GameEntityInfo::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData NetworkEntityInfo::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    GameEntityInfo::MergeImpl
+    NetworkEntityInfo::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GameEntityInfo::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*NetworkEntityInfo::GetClassData() const { return &_class_data_; }
 
 
-void GameEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<GameEntityInfo*>(&to_msg);
-  auto& from = static_cast<const GameEntityInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.GameEntityInfo)
+void NetworkEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<NetworkEntityInfo*>(&to_msg);
+  auto& from = static_cast<const NetworkEntityInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.NetworkEntityInfo)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -515,29 +516,29 @@ void GameEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void GameEntityInfo::CopyFrom(const GameEntityInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.GameEntityInfo)
+void NetworkEntityInfo::CopyFrom(const NetworkEntityInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.NetworkEntityInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool GameEntityInfo::IsInitialized() const {
+bool NetworkEntityInfo::IsInitialized() const {
   return true;
 }
 
-void GameEntityInfo::InternalSwap(GameEntityInfo* other) {
+void NetworkEntityInfo::InternalSwap(NetworkEntityInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GameEntityInfo, _impl_.entity_state_)
-      + sizeof(GameEntityInfo::_impl_.entity_state_)
-      - PROTOBUF_FIELD_OFFSET(GameEntityInfo, _impl_.entity_id_)>(
+      PROTOBUF_FIELD_OFFSET(NetworkEntityInfo, _impl_.entity_state_)
+      + sizeof(NetworkEntityInfo::_impl_.entity_state_)
+      - PROTOBUF_FIELD_OFFSET(NetworkEntityInfo, _impl_.entity_id_)>(
           reinterpret_cast<char*>(&_impl_.entity_id_),
           reinterpret_cast<char*>(&other->_impl_.entity_id_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata GameEntityInfo::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata NetworkEntityInfo::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
       file_level_metadata_Struct_2eproto[0]);
@@ -545,50 +546,50 @@ void GameEntityInfo::InternalSwap(GameEntityInfo* other) {
 
 // ===================================================================
 
-class GameMonsterInfo::_Internal {
+class NetworkMonsterInfo::_Internal {
  public:
-  static const ::Protocol::GameEntityInfo& entity_info(const GameMonsterInfo* msg);
+  static const ::Protocol::NetworkEntityInfo& monster_info(const NetworkMonsterInfo* msg);
 };
 
-const ::Protocol::GameEntityInfo&
-GameMonsterInfo::_Internal::entity_info(const GameMonsterInfo* msg) {
-  return *msg->_impl_.entity_info_;
+const ::Protocol::NetworkEntityInfo&
+NetworkMonsterInfo::_Internal::monster_info(const NetworkMonsterInfo* msg) {
+  return *msg->_impl_.monster_info_;
 }
-GameMonsterInfo::GameMonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+NetworkMonsterInfo::NetworkMonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.GameMonsterInfo)
+  // @@protoc_insertion_point(arena_constructor:Protocol.NetworkMonsterInfo)
 }
-GameMonsterInfo::GameMonsterInfo(const GameMonsterInfo& from)
+NetworkMonsterInfo::NetworkMonsterInfo(const NetworkMonsterInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  GameMonsterInfo* const _this = this; (void)_this;
+  NetworkMonsterInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.entity_info_){nullptr}
+      decltype(_impl_.monster_info_){nullptr}
     , decltype(_impl_.monster_id_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::GameEntityInfo(*from._impl_.entity_info_);
+  if (from._internal_has_monster_info()) {
+    _this->_impl_.monster_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.monster_info_);
   }
   _this->_impl_.monster_id_ = from._impl_.monster_id_;
-  // @@protoc_insertion_point(copy_constructor:Protocol.GameMonsterInfo)
+  // @@protoc_insertion_point(copy_constructor:Protocol.NetworkMonsterInfo)
 }
 
-inline void GameMonsterInfo::SharedCtor(
+inline void NetworkMonsterInfo::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.entity_info_){nullptr}
+      decltype(_impl_.monster_info_){nullptr}
     , decltype(_impl_.monster_id_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
 
-GameMonsterInfo::~GameMonsterInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.GameMonsterInfo)
+NetworkMonsterInfo::~NetworkMonsterInfo() {
+  // @@protoc_insertion_point(destructor:Protocol.NetworkMonsterInfo)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -596,30 +597,30 @@ GameMonsterInfo::~GameMonsterInfo() {
   SharedDtor();
 }
 
-inline void GameMonsterInfo::SharedDtor() {
+inline void NetworkMonsterInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.entity_info_;
+  if (this != internal_default_instance()) delete _impl_.monster_info_;
 }
 
-void GameMonsterInfo::SetCachedSize(int size) const {
+void NetworkMonsterInfo::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void GameMonsterInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.GameMonsterInfo)
+void NetworkMonsterInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.NetworkMonsterInfo)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaForAllocation() == nullptr && _impl_.entity_info_ != nullptr) {
-    delete _impl_.entity_info_;
+  if (GetArenaForAllocation() == nullptr && _impl_.monster_info_ != nullptr) {
+    delete _impl_.monster_info_;
   }
-  _impl_.entity_info_ = nullptr;
+  _impl_.monster_info_ = nullptr;
   _impl_.monster_id_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* GameMonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* NetworkMonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -633,10 +634,10 @@ const char* GameMonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.GameEntityInfo entity_info = 2;
+      // .Protocol.NetworkEntityInfo monster_info = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
-          ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_monster_info(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -664,9 +665,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* GameMonsterInfo::_InternalSerialize(
+uint8_t* NetworkMonsterInfo::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.GameMonsterInfo)
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.NetworkMonsterInfo)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -676,34 +677,34 @@ uint8_t* GameMonsterInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_monster_id(), target);
   }
 
-  // .Protocol.GameEntityInfo entity_info = 2;
-  if (this->_internal_has_entity_info()) {
+  // .Protocol.NetworkEntityInfo monster_info = 2;
+  if (this->_internal_has_monster_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(2, _Internal::entity_info(this),
-        _Internal::entity_info(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::monster_info(this),
+        _Internal::monster_info(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.GameMonsterInfo)
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.NetworkMonsterInfo)
   return target;
 }
 
-size_t GameMonsterInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.GameMonsterInfo)
+size_t NetworkMonsterInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.NetworkMonsterInfo)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.GameEntityInfo entity_info = 2;
-  if (this->_internal_has_entity_info()) {
+  // .Protocol.NetworkEntityInfo monster_info = 2;
+  if (this->_internal_has_monster_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.entity_info_);
+        *_impl_.monster_info_);
   }
 
   // uint32 monster_id = 1;
@@ -714,24 +715,24 @@ size_t GameMonsterInfo::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData GameMonsterInfo::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData NetworkMonsterInfo::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    GameMonsterInfo::MergeImpl
+    NetworkMonsterInfo::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GameMonsterInfo::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*NetworkMonsterInfo::GetClassData() const { return &_class_data_; }
 
 
-void GameMonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<GameMonsterInfo*>(&to_msg);
-  auto& from = static_cast<const GameMonsterInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.GameMonsterInfo)
+void NetworkMonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<NetworkMonsterInfo*>(&to_msg);
+  auto& from = static_cast<const NetworkMonsterInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.NetworkMonsterInfo)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::GameEntityInfo::MergeFrom(
-        from._internal_entity_info());
+  if (from._internal_has_monster_info()) {
+    _this->_internal_mutable_monster_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+        from._internal_monster_info());
   }
   if (from._internal_monster_id() != 0) {
     _this->_internal_set_monster_id(from._internal_monster_id());
@@ -739,29 +740,29 @@ void GameMonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const 
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void GameMonsterInfo::CopyFrom(const GameMonsterInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.GameMonsterInfo)
+void NetworkMonsterInfo::CopyFrom(const NetworkMonsterInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.NetworkMonsterInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool GameMonsterInfo::IsInitialized() const {
+bool NetworkMonsterInfo::IsInitialized() const {
   return true;
 }
 
-void GameMonsterInfo::InternalSwap(GameMonsterInfo* other) {
+void NetworkMonsterInfo::InternalSwap(NetworkMonsterInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GameMonsterInfo, _impl_.monster_id_)
-      + sizeof(GameMonsterInfo::_impl_.monster_id_)
-      - PROTOBUF_FIELD_OFFSET(GameMonsterInfo, _impl_.entity_info_)>(
-          reinterpret_cast<char*>(&_impl_.entity_info_),
-          reinterpret_cast<char*>(&other->_impl_.entity_info_));
+      PROTOBUF_FIELD_OFFSET(NetworkMonsterInfo, _impl_.monster_id_)
+      + sizeof(NetworkMonsterInfo::_impl_.monster_id_)
+      - PROTOBUF_FIELD_OFFSET(NetworkMonsterInfo, _impl_.monster_info_)>(
+          reinterpret_cast<char*>(&_impl_.monster_info_),
+          reinterpret_cast<char*>(&other->_impl_.monster_info_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata GameMonsterInfo::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata NetworkMonsterInfo::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
       file_level_metadata_Struct_2eproto[1]);
@@ -770,13 +771,13 @@ void GameMonsterInfo::InternalSwap(GameMonsterInfo* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::Protocol::GameEntityInfo*
-Arena::CreateMaybeMessage< ::Protocol::GameEntityInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::GameEntityInfo >(arena);
+template<> PROTOBUF_NOINLINE ::Protocol::NetworkEntityInfo*
+Arena::CreateMaybeMessage< ::Protocol::NetworkEntityInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::NetworkEntityInfo >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Protocol::GameMonsterInfo*
-Arena::CreateMaybeMessage< ::Protocol::GameMonsterInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::GameMonsterInfo >(arena);
+template<> PROTOBUF_NOINLINE ::Protocol::NetworkMonsterInfo*
+Arena::CreateMaybeMessage< ::Protocol::NetworkMonsterInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::NetworkMonsterInfo >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

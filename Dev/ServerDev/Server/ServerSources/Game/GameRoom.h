@@ -22,25 +22,26 @@ public:
 
 	void SyncGameEntities(const RxGameSessionPtr& spGameSession);
 
-	void AddGameEntity(const GameEntityPtr& spGameEntity, bool bBroadcast);
-	void RemoveGameEntity(const GameEntityPtr& spGameEntity);
+	void AddGameEntity(const GameEntityPtr& spEntity, bool bBroadcast);
+	void RemoveGameEntity(const GameEntityPtr& spEntity);
 
-	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::C_SyncGameEntityLookAtDir& syncGameEntityLookAtDir);
-	void ParsingPacket_SyncGameEntityMove(const Protocol::C_SyncGameEntityMove& syncGameEntityMove);
-	void ParsingPacket_SyncGameEntityState(const Protocol::C_SyncGameEntityState& syncGameEntityState);
+	void ParsingPacket_MoveEntityPacket(const Protocol::C_MoveEntityPacket& moveEntityPacket) const;
+	void ParsingPacket_ModifyEntityLookAtDirectionPacket(const Protocol::C_ModifyEntityLookAtDirectionPacket& modifyEntityLookAtDirectionPacket) const;
+	void ParsingPacket_ModifyEntityStatePacket(const Protocol::C_ModifyEntityStatePacket& modifyEntityStatePacket) const;
 
-	Position2d GenerateRandomCellPosition();
-	bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const GameEntityPtr& spExcludeGameEntity) const;
+	Position2d GenerateRandomCellPosition() const;
+	bool CheckCanMoveToCellPosition(const Position2d& destCellPos, const GameEntityPtr& spExcludeEntity) const;
 
-	GameEntityPtr FindGameEntity(const Protocol::GameEntityInfo& gameEntityInfo) const;
+	GameEntityPtr FindGameEntity(const Protocol::NetworkEntityInfo& entityInfo) const;
 	GameEntityPtr FindGameEntity(const Position2d& targetCellPos) const;
+
 	GamePlayerPtr FindGamePlayer(uint64 entityId) const;
 	GameMonsterPtr FindGameMonster(uint64 entityId) const;
 
-	const std::unordered_map<uint64, GamePlayerPtr>& GetGamePlayers() const { return m_mapGamePlayer; }
+	const std::unordered_map<uint64, GamePlayerPtr>& GetGamePlayers() const { return m_mapPlayer; }
 
 private:
 	std::shared_ptr<WorldTileMapActor> m_spWorldTileMapActor = nullptr;
-	std::unordered_map<uint64, GamePlayerPtr> m_mapGamePlayer;
-	std::unordered_map<uint64, GameMonsterPtr> m_mapGameMonster;
+	std::unordered_map<uint64, GamePlayerPtr> m_mapPlayer;
+	std::unordered_map<uint64, GameMonsterPtr> m_mapMonster;
 };

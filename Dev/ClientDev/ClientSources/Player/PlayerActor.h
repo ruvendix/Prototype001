@@ -1,10 +1,10 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class PlayerActor : public GameEntityActor
+class PlayerActor : public NetworkEntityActor
 {
 	DECLARE_PIMPL;
-	using Super = GameEntityActor;
+	using Super = NetworkEntityActor;
 
 public:
 	using Super::Super;

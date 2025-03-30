@@ -76,27 +76,27 @@ void EnemyRespawner::RespawnEnemies(Scene* pCurrentScene)
 	m_currentEnemyCount = m_maxEnemyCount;
 }
 
-void EnemyRespawner::RespawnEnemy(const Protocol::GameMonsterInfo& gameMonsterInfo, Scene* pCurrentScene)
+void EnemyRespawner::RespawnEnemy(const Protocol::NetworkMonsterInfo& networkMonsterInfo, Scene* pCurrentScene)
 {
 	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
 
 	// 여기가 리스폰 규칙
-	auto foundPrototypeEnemyActorIter = m_mapPrototypeEnemyActors.find(gameMonsterInfo.monster_id());
+	auto foundPrototypeEnemyActorIter = m_mapPrototypeEnemyActors.find(networkMonsterInfo.monster_id());
 	ASSERT_LOG(foundPrototypeEnemyActorIter != m_mapPrototypeEnemyActors.cend());
 	const std::shared_ptr<EnemyMonsterActor>& spPrototypeEnemyActor = (foundPrototypeEnemyActorIter->second);
 	ASSERT_LOG(spPrototypeEnemyActor != nullptr);
 
-	const Protocol::GameEntityInfo& gameEntityInfo = gameMonsterInfo.entity_info();
+	const Protocol::NetworkEntityInfo& networkEntityInfo = networkMonsterInfo.monster_info();
 
 	// 구분용 이름
 	std::string strNewEnemyActorName;
-	MakeFormatString(strNewEnemyActorName, "%s_%d", spPrototypeEnemyActor->GetActorName().c_str(), gameEntityInfo.entity_id());
+	MakeFormatString(strNewEnemyActorName, "%s_%d", spPrototypeEnemyActor->GetActorName().c_str(), networkEntityInfo.entity_id());
 
 	const std::shared_ptr<EnemyMonsterActor>& spNewEnemyActor = pCurrentScene->CreateCloneActorToScene(spPrototypeEnemyActor);
 	spNewEnemyActor->SetActorName(strNewEnemyActorName);
-	spNewEnemyActor->SyncFromServer_GameEntityInfo(gameEntityInfo);
+	spNewEnemyActor->SyncFromServer_NetworkEntityInfo(networkEntityInfo);
 
-	Position2d respawnCellPos = { static_cast<int32>(gameEntityInfo.cell_pos_x()), static_cast<int32>(gameEntityInfo.cell_pos_y()) };
+	Position2d respawnCellPos = { static_cast<int32>(networkEntityInfo.cell_pos_x()), static_cast<int32>(networkEntityInfo.cell_pos_y()) };
 	DEFAULT_TRACE_LOG("%s 리스폰 위치(%d, %d)", strNewEnemyActorName.c_str(), respawnCellPos.x, respawnCellPos.y);
 }
 

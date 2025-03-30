@@ -4,5 +4,5 @@
 enum class EServerErrorCode
 {
 	Unknown = 0,
-	NetworkGameEntityInsertFailed,
+	NetworkEntityInsertFailed,
 };

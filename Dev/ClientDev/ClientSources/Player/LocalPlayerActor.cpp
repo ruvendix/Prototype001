@@ -144,7 +144,7 @@ bool LocalPlayerActor::Update(float deltaSeconds)
 		return false;
 	}
 
-	SyncToServer_GameEntityInfoIfNeed();
+	SyncToServer_NetworkEntityInfoIfNeed();
 	return true;
 }
 

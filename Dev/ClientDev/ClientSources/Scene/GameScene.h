@@ -20,17 +20,17 @@ public:
 	virtual void Cleanup() override;
 
 public:
-	GameEntityActorPtr FindGameEntityActor(uint64 gameEntityId) const;
+	NetworkEntityActorPtr FindNetworkEntityActor(uint64 networkEntityId) const;
 
 public:
-	void ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leaveGamePacket);
-	void ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket);
-	void ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntitiesPacket);
-	void ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& syncGamePlayerPacket);
-	void ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDirPacket);
-	void ParsingPacket_SyncGameEntityMove(const Protocol::S_SyncGameEntityMove& syncGamePlayerMovePacket);
-	void ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEntityState& syncGameEntityStatePacket);
-	void ParsingPacket_AttackToGameEntity(const Protocol::S_AttckToGameEntity& attackToGameEntityPacket);
+	void ParsingPacket_LeaveGamePacket(const Protocol::S_LeaveGamePacket& leaveGamePacket);
+	void ParsingPacket_CreateMainPlayerPacket(const Protocol::S_CreateMainPlayerPacket& createMainPlayerPacket);
+	void ParsingPacket_SyncEntitiesPacket(const Protocol::S_SyncEntitiesPacket& syncEntitiesPacket);
+	void ParsingPacket_ModifyPlayerInformationPacket(const Protocol::S_ModifyPlayerInformationPacket& modifyPlayerInformationPacket) const;
+	void ParsingPacket_ModifyEntityLookAtDirectionPacket(const Protocol::S_ModifyEntityLookAtDirectionPacket& modifyEntityLookAtDirectionPacket) const;
+	void ParsingPacket_MoveEntityPacket(const Protocol::S_MoveEntityPacket& moveEntityPacket) const;
+	void ParsingPacket_ModifyEntityStatePacket(const Protocol::S_ModifyEntityStatePacket& modifyEntityStatePacket) const;
+	void ParsingPacket_HitDamageToEntityPacket(const Protocol::S_HitDamageToEntityPacket& hitDamageToEntityPacket) const;
 	
 private:
 	std::shared_ptr<LocalPlayerActor> m_spLocalPlayerActor = nullptr;

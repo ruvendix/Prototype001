@@ -44,7 +44,7 @@
     <ClCompile Include="ClientSources\GameApplication\WindowProcedure.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="ClientSources\GameEntity\GameEntityActor.cpp">
+    <ClCompile Include="ClientSources\Network\NetworkEntityActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
@@ -148,10 +148,10 @@
     <ClInclude Include="ClientSources\GameApplication\WindowProcedure.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ClientSources\GameEntity\GameEntityActor.h">
+    <ClInclude Include="ClientSources\Global\DataTypes.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
-    <ClInclude Include="ClientSources\Global\DataTypes.h">
+    <ClInclude Include="ClientSources\Network\NetworkEntityActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Network\NetworkManager.h">

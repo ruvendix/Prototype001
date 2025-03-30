@@ -88,50 +88,50 @@ void GameScene::Cleanup()
 	NetworkManager::I()->Cleanup();
 }
 
-GameEntityActorPtr GameScene::FindGameEntityActor(uint64 gameEntityId) const
+NetworkEntityActorPtr GameScene::FindNetworkEntityActor(uint64 NetworkEntityId) const
 {
-	std::vector<GameEntityActorPtr> vecGameEntityActor;
-	FindExactTypeActors<GameEntityActor>(EActorLayerType::Creature, vecGameEntityActor);
-	if (vecGameEntityActor.empty() == true)
+	std::vector<NetworkEntityActorPtr> vecNetworkEntityActor;
+	FindExactTypeActors<NetworkEntityActor>(EActorLayerType::Creature, vecNetworkEntityActor);
+	if (vecNetworkEntityActor.empty() == true)
 	{
 		return nullptr;
 	}
 
-	for (const GameEntityActorPtr& spGameEntityActor : vecGameEntityActor)
+	for (const NetworkEntityActorPtr& spNetworkEntityActor : vecNetworkEntityActor)
 	{
-		if ((spGameEntityActor != nullptr) &&
-			(spGameEntityActor->IsCreatedGameEntityInfo() == false))
+		if ((spNetworkEntityActor != nullptr) &&
+			(spNetworkEntityActor->IsCreatedNetworkEntityInfo() == false))
 		{
 			continue;
 		}
 
-		if (spGameEntityActor->GetGameEntityId() == gameEntityId)
+		if (spNetworkEntityActor->GetNetworkEntityId() == NetworkEntityId)
 		{
-			return spGameEntityActor;
+			return spNetworkEntityActor;
 		}
 	}
 	
 	return nullptr;
 }
 
-void GameScene::ParsingPacket_LeaveGamePlayer(const Protocol::S_LeaveGame& leaveGamePacket)
+void GameScene::ParsingPacket_LeaveGamePacket(const Protocol::S_LeaveGamePacket& leaveGamePacket)
 {
 	DEFAULT_TRACE_LOG("%lld 유저 나감", leaveGamePacket.user_id());
-	const Protocol::GameEntityInfo& gameEntityInfo = leaveGamePacket.entity_info();
-	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gameEntityInfo.entity_id());
-	if (spGamePlayerActor == nullptr)
+	const Protocol::NetworkEntityInfo& networkPlayerInfo = leaveGamePacket.player_info();
+	const NetworkEntityActorPtr& spNetworkPlayerActor = FindNetworkEntityActor(networkPlayerInfo.entity_id());
+	if (spNetworkPlayerActor == nullptr)
 	{
 		return;
 	}
 
-	ReserveEraseActor(spGamePlayerActor);
+	ReserveEraseActor(spNetworkPlayerActor);
 }
 
-void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLocalGamePlayer& createLocalGamePlayerPacket)
+void GameScene::ParsingPacket_CreateMainPlayerPacket(const Protocol::S_CreateMainPlayerPacket& createMainPlayerPacket)
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = createLocalGamePlayerPacket.entity_info();
+	const Protocol::NetworkEntityInfo& networkMainPlayerInfo = createMainPlayerPacket.main_player_info();
 	m_spLocalPlayerActor = CreateActorToScene<LocalPlayerActor>(EActorLayerType::Creature);
-	m_spLocalPlayerActor->SyncFromServer_GameEntityInfo(gameEntityInfo);
+	m_spLocalPlayerActor->SyncFromServer_NetworkEntityInfo(networkMainPlayerInfo);
 
 	// 카메라 등록하고 씬 렌더러의 메인 카메라 타겟으로 설정
 	RegisterMainCameraActorToScene(m_spLocalPlayerActor);
@@ -141,108 +141,102 @@ void GameScene::ParsingPacket_CreateLocalGamePlayer(const Protocol::S_CreateLoca
 	spWorldBackgroundActor->SetActorFlagBitOn(EActorFlag::RenderingTarget);
 }
 
-void GameScene::ParsingPacket_CreateGameEntities(const Protocol::S_SyncGameEntities& syncGameEntitiesPacket)
+void GameScene::ParsingPacket_SyncEntitiesPacket(const Protocol::S_SyncEntitiesPacket& syncEntitiesPacket)
 {
-	int32 gamePlayerCount = syncGameEntitiesPacket.players_info_size();
-	for (int32 i = 0; i < gamePlayerCount; ++i)
+	int32 networkPlayerCount = syncEntitiesPacket.players_info_size();
+	for (int32 i = 0; i < networkPlayerCount; ++i)
 	{
-		const Protocol::GameEntityInfo& gamePlayerInfo = syncGameEntitiesPacket.players_info(i);
+		const Protocol::NetworkEntityInfo& networkPlayerInfo = syncEntitiesPacket.players_info(i);
 
 		// 로컬 플레이어는 제외
-		if (m_spLocalPlayerActor->GetGameEntityId() == gamePlayerInfo.entity_id())
+		if (m_spLocalPlayerActor->GetNetworkEntityId() == networkPlayerInfo.entity_id())
 		{
 			continue;
 		}
 
 		const PlayerActorPtr& spPlayerActor = CreateActorToScene<PlayerActor>(EActorLayerType::Creature);
-		spPlayerActor->SyncFromServer_GameEntityInfo(gamePlayerInfo);
+		spPlayerActor->SyncFromServer_NetworkEntityInfo(networkPlayerInfo);
 	}
 
-	int32 gameMonsterCount = syncGameEntitiesPacket.monsters_info_size();
-	for (int32 i = 0; i < gameMonsterCount; ++i)
+	int32 networkMonsterCount = syncEntitiesPacket.monsters_info_size();
+	for (int32 i = 0; i < networkMonsterCount; ++i)
 	{
-		const Protocol::GameMonsterInfo& gameMonsterInfo = syncGameEntitiesPacket.monsters_info(i);
-		m_spEnemyRespawner->RespawnEnemy(gameMonsterInfo, this);
+		const Protocol::NetworkMonsterInfo& networkMonsterInfo = syncEntitiesPacket.monsters_info(i);
+		m_spEnemyRespawner->RespawnEnemy(networkMonsterInfo, this);
 	}
 }
 
-void GameScene::ParsingPacket_SyncGamePlayer(const Protocol::S_SyncGamePlayer& syncGamePlayerPacket)
+void GameScene::ParsingPacket_ModifyPlayerInformationPacket(const Protocol::S_ModifyPlayerInformationPacket& modifyPlayerInformationPacket) const
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGamePlayerPacket.entity_info();
-	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gameEntityInfo.entity_id());
-	if (spGamePlayerActor == nullptr)
-	{
-		return;
-	}
-
-	spGamePlayerActor->SyncFromServer_GameEntityInfo(gameEntityInfo);
-}
-
-void GameScene::ParsingPacket_SyncGameEntityLookAtDirection(const Protocol::S_SyncGameEntityLookAtDir& syncGameEntityLookAtDirPacket)
-{
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityLookAtDirPacket.entity_info();
-	const GameEntityActorPtr& spGameEntityActor = FindGameEntityActor(gameEntityInfo.entity_id());
-	if (spGameEntityActor == nullptr)
+	const Protocol::NetworkEntityInfo& networkPlayerInfo = modifyPlayerInformationPacket.player_info();
+	const NetworkEntityActorPtr& networkPlayerActor = FindNetworkEntityActor(networkPlayerInfo.entity_id());
+	if (networkPlayerActor == nullptr)
 	{
 		return;
 	}
 
-	spGameEntityActor->SyncFromServer_GameEntityLookAtDirection(gameEntityInfo);
+	networkPlayerActor->SyncFromServer_NetworkEntityInfo(networkPlayerInfo);
 }
 
-void GameScene::ParsingPacket_SyncGameEntityMove(const Protocol::S_SyncGameEntityMove& syncGamePlayerMovePacket)
+void GameScene::ParsingPacket_ModifyEntityLookAtDirectionPacket(const Protocol::S_ModifyEntityLookAtDirectionPacket& modifyEntityLookAtDirectionPacket) const
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGamePlayerMovePacket.entity_info();
-	const GameEntityActorPtr& spGamePlayerActor = FindGameEntityActor(gameEntityInfo.entity_id());
-	if (spGamePlayerActor == nullptr)
+	const Protocol::NetworkEntityInfo& networkEntityInfo = modifyEntityLookAtDirectionPacket.entity_info();
+	const NetworkEntityActorPtr& spNetworkEntityActor = FindNetworkEntityActor(networkEntityInfo.entity_id());
+	if (spNetworkEntityActor == nullptr)
 	{
 		return;
 	}
 
-	spGamePlayerActor->SyncFromServer_GameEntityMove(gameEntityInfo);
+	spNetworkEntityActor->SyncFromServer_NetworkEntityLookAtDirection(networkEntityInfo);
 }
 
-void GameScene::ParsingPacket_SyncGameEntityState(const Protocol::S_SyncGameEntityState& syncGameEntityStatePacket)
+void GameScene::ParsingPacket_MoveEntityPacket(const Protocol::S_MoveEntityPacket& moveEntityPacket) const
 {
-	const Protocol::GameEntityInfo& gameEntityInfo = syncGameEntityStatePacket.entity_info();
-	const GameEntityActorPtr& spGameEntityActor = FindGameEntityActor(gameEntityInfo.entity_id());
-	if (spGameEntityActor == nullptr)
+	const Protocol::NetworkEntityInfo& networkEntityInfo = moveEntityPacket.entity_info();
+	const NetworkEntityActorPtr& spNetworkEntityActor = FindNetworkEntityActor(networkEntityInfo.entity_id());
+	if (spNetworkEntityActor == nullptr)
+	{
+		return;
+	}
+
+	spNetworkEntityActor->SyncFromServer_NetworkEntityMove(networkEntityInfo);
+}
+
+void GameScene::ParsingPacket_ModifyEntityStatePacket(const Protocol::S_ModifyEntityStatePacket& modifyEntityStatePacket) const
+{
+	const Protocol::NetworkEntityInfo& networkEntityInfo = modifyEntityStatePacket.entity_info();
+	const NetworkEntityActorPtr& spNetworkEntityActor = FindNetworkEntityActor(networkEntityInfo.entity_id());
+	if (spNetworkEntityActor == nullptr)
 	{
 		return;
 	}
 
 	// 로컬 플레이어는 제외
-	if (m_spLocalPlayerActor->GetGameEntityId() == gameEntityInfo.entity_id())
+	if (m_spLocalPlayerActor->GetNetworkEntityId() == networkEntityInfo.entity_id())
 	{
 		return;
 	}
 
-	spGameEntityActor->SyncFromServer_GameEntityState(gameEntityInfo);
+	spNetworkEntityActor->SyncFromServer_NetworkEntityState(networkEntityInfo);
 }
 
-void GameScene::ParsingPacket_AttackToGameEntity(const Protocol::S_AttckToGameEntity& attackToGameEntityPacket)
+void GameScene::ParsingPacket_HitDamageToEntityPacket(const Protocol::S_HitDamageToEntityPacket& hitDamageToEntityPacket) const
 {
 	// 공격자부터 동기화
-	const Protocol::GameEntityInfo& attackerInfo = attackToGameEntityPacket.attacker_info();
-	const GameEntityActorPtr& spAttacker = FindGameEntityActor(attackerInfo.entity_id());
-	if (spAttacker == nullptr)
+	const Protocol::NetworkEntityInfo& networkAttackerInfo = hitDamageToEntityPacket.attacker_info();
+	const NetworkEntityActorPtr& networkAttackerActor = FindNetworkEntityActor(networkAttackerInfo.entity_id());
+	if (networkAttackerActor == nullptr)
 	{
 		return;
 	}
-	spAttacker->SyncFromServer_GameEntityLookAtDirection(attackerInfo);
+	networkAttackerActor->SyncFromServer_NetworkEntityLookAtDirection(networkAttackerInfo);
 
-	const Protocol::GameEntityInfo& victimInfo = attackToGameEntityPacket.victim_info();
-	const GameEntityActorPtr& spVictim = FindGameEntityActor(victimInfo.entity_id());
-	if (spVictim == nullptr)
+	const Protocol::NetworkEntityInfo& networkVictimInfo = hitDamageToEntityPacket.victim_info();
+	const NetworkEntityActorPtr& spNetworkVictim = FindNetworkEntityActor(networkVictimInfo.entity_id());
+	if (spNetworkVictim == nullptr)
 	{
 		return;
 	}
 
-	spVictim->SyncFromServer_AttackToGameEntity(spAttacker, victimInfo);
-
-	// 사망 처리
-	if (victimInfo.hp() <= 0)
-	{
-		ReserveEraseActor(spVictim);
-	}
+	spNetworkVictim->SyncFromServer_NetworkEntityHitDamage(networkAttackerActor, networkVictimInfo);
 }

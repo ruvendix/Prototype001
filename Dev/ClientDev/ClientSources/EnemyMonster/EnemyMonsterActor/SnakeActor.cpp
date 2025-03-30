@@ -85,15 +85,15 @@ ActorPtr SnakeActor::CreateClone()
 
 void SnakeActor::RegisterStateOnBidirectional()
 {
-	RegisterActorState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
-	RegisterActorState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
-	RegisterActorState<EnmeyMonsterChaseState>(Protocol::EGameEntityState::Chase);
-	RegisterActorState<EnmeyMonsterAttackState>(Protocol::EGameEntityState::Attack);
+	RegisterActorState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
+	RegisterActorState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
+	RegisterActorState<EnmeyMonsterChaseState>(Protocol::ENetworkEntityState::Chase);
+	RegisterActorState<EnmeyMonsterAttackState>(Protocol::ENetworkEntityState::Attack);
 
-	RegisterGameEntityState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
-	RegisterGameEntityState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
-	RegisterGameEntityState<EnmeyMonsterChaseState>(Protocol::EGameEntityState::Chase);
-	RegisterGameEntityState<EnmeyMonsterAttackState>(Protocol::EGameEntityState::Attack);
+	RegisterNetworkEntityState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
+	RegisterNetworkEntityState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
+	RegisterNetworkEntityState<EnmeyMonsterChaseState>(Protocol::ENetworkEntityState::Chase);
+	RegisterNetworkEntityState<EnmeyMonsterAttackState>(Protocol::ENetworkEntityState::Attack);
 }
 
 void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)

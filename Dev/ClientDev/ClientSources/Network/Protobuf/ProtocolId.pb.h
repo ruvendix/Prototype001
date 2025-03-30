@@ -50,19 +50,21 @@ namespace Protocol {
 enum EProtocolId : int {
   EnterGame = 0,
   LeaveGame = 1,
-  CreateLocalGamePlayer = 2,
-  SyncGameEntities = 3,
-  SyncGamePlayer = 4,
-  SyncGameEntityLookAtDir = 5,
-  SyncGameEntityMove = 6,
-  SyncGameEntityState = 7,
-  AttackToGameEntity = 8,
+  CreateMainPlayer = 2,
+  SyncEntities = 3,
+  MoveEntity = 4,
+  ModifyPlayerInformation = 5,
+  ModifyEntityLookAtDir = 6,
+  ModifyEntityState = 7,
+  AttackToEntity = 8,
+  HitDamageToEntity = 9,
+  DiePlayer = 10,
   EProtocolId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   EProtocolId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool EProtocolId_IsValid(int value);
 constexpr EProtocolId EProtocolId_MIN = EnterGame;
-constexpr EProtocolId EProtocolId_MAX = AttackToGameEntity;
+constexpr EProtocolId EProtocolId_MAX = DiePlayer;
 constexpr int EProtocolId_ARRAYSIZE = EProtocolId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EProtocolId_descriptor();

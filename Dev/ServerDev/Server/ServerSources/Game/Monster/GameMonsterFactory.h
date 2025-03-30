@@ -6,5 +6,5 @@ class GameMonsterFactory : public ICoreLoop
 	DECLARE_SINGLETON(GameMonsterFactory)
 
 public:
-	GameMonsterPtr CreateRandomMonster(uint32 gameEntityId);
+	GameMonsterPtr CreateRandomMonster(uint32 entityId);
 };

@@ -4,14 +4,13 @@
 class EnemyRespawner;
 class PlayerActor;
 
-class EnemyMonsterActor : public GameEntityActor
+class EnemyMonsterActor : public NetworkEntityActor
 {
 	DEFINE_ROOT_COMPILETIME_ID_CLASS;
-	using Super = GameEntityActor;
+	using Super = NetworkEntityActor;
 
 public:
-	static bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos,
-		int32 chaseRange, std::vector<Position2d>& outVecNavigationPath);
+	static bool CalculateNavigationPath(const Position2d& srcCellPos, const Position2d& destCellPos, int32 chaseRange, std::vector<Position2d>& outVecNavigationPath);
 
 public:
 	using Super::Super;

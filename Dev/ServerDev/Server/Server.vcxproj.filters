@@ -128,6 +128,9 @@
     <Filter Include="ServerSources\Protobuf">
       <UniqueIdentifier>{23739f0e-3d49-40f2-9c8b-c6be6124fb72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ServerSources\ErrorHandler">
+      <UniqueIdentifier>{69c9c089-6d01-466c-8d28-4d047f18e8d1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ServerSources\Game">
       <UniqueIdentifier>{7a4c159d-fb42-4abe-93b6-b74f868fe562}</UniqueIdentifier>
     </Filter>
@@ -136,9 +139,6 @@
     </Filter>
     <Filter Include="ServerSources\Game\Player">
       <UniqueIdentifier>{b7abef11-44f3-4a2f-90ef-79f0cf2074be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ServerSources\ErrorHandler">
-      <UniqueIdentifier>{69c9c089-6d01-466c-8d28-4d047f18e8d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

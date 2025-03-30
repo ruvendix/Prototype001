@@ -58,9 +58,6 @@
     <Filter Include="ClientSources\Global">
       <UniqueIdentifier>{405a955a-9b15-4842-ab55-cbb7fc9112d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ClientSources\GameEntity">
-      <UniqueIdentifier>{6fde1e59-b3bf-421d-b109-5d3ea64f57e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ClientSources\EnemyMonster\EnemyRespawner">
       <UniqueIdentifier>{67536825-0764-4ae2-8348-df8d940fbfe2}</UniqueIdentifier>
     </Filter>
@@ -156,14 +153,14 @@
     <ClCompile Include="ClientSources\Network\Protobuf\Struct.pb.cc">
       <Filter>ClientSources\Network\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSources\GameEntity\GameEntityActor.cpp">
-      <Filter>ClientSources\GameEntity</Filter>
-    </ClCompile>
     <ClCompile Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.cpp">
       <Filter>ClientSources\EnemyMonster\EnemyRespawner</Filter>
     </ClCompile>
     <ClCompile Include="ClientSources\ErrorHandler\ClientErrorHandler.cpp">
       <Filter>ClientSources\ErrorHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\Network\NetworkEntityActor.cpp">
+      <Filter>ClientSources\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +257,6 @@
     <ClInclude Include="ClientSources\Global\DataTypes.h">
       <Filter>ClientSources\Global</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSources\GameEntity\GameEntityActor.h">
-      <Filter>ClientSources\GameEntity</Filter>
-    </ClInclude>
     <ClInclude Include="ClientSources\EnemyMonster\EnemyRespawner\EnemyRespawner.h">
       <Filter>ClientSources\EnemyMonster\EnemyRespawner</Filter>
     </ClInclude>
@@ -271,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="ClientSources\ErrorHandler\ErrorEnums.h">
       <Filter>ClientSources\ErrorHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\Network\NetworkEntityActor.h">
+      <Filter>ClientSources\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

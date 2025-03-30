@@ -99,15 +99,15 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 
 void PlayerActor::RegisterStateOnBidirectional()
 {
-	RegisterActorState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
-	RegisterActorState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
-	RegisterActorState<PlayerAttackState>(Protocol::EGameEntityState::Attack);
-	RegisterActorState<PlayerDefenceState>(Protocol::EGameEntityState::Defense);
+	RegisterActorState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
+	RegisterActorState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
+	RegisterActorState<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
+	RegisterActorState<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
 
-	RegisterGameEntityState<PawnActorIdleState>(Protocol::EGameEntityState::Idle);
-	RegisterGameEntityState<PawnActorWalkState>(Protocol::EGameEntityState::Walk);
-	RegisterGameEntityState<PlayerAttackState>(Protocol::EGameEntityState::Attack);
-	RegisterGameEntityState<PlayerDefenceState>(Protocol::EGameEntityState::Defense);
+	RegisterNetworkEntityState<PawnActorIdleState>(Protocol::ENetworkEntityState::Idle);
+	RegisterNetworkEntityState<PawnActorWalkState>(Protocol::ENetworkEntityState::Walk);
+	RegisterNetworkEntityState<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
+	RegisterNetworkEntityState<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
 }
 
 void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)

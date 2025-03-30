@@ -37,8 +37,12 @@
 #pragma region 클라이언트에서 자주 사용하는 헤더 파일 모음입니다.
 #include "Global/DataTypes.h"
 #include "ErrorHandler/ClientErrorHandler.h"
-#include "GameEntity/GameEntityActor.h"
 #include "Editor/EditorActor.h"
+
+#include "Network/NetworkEntityActor.h"
+#include "Network/NetworkManager.h"
+#include "Network/Session/ServerSession.h"
+#include "Network/Packet/ClientPacketHandler.h"
 
 #include "Weapon/WeaponEnums.h"
 #include "Weapon/WeaponActor.h"
@@ -50,10 +54,6 @@
 
 #include "EnemyMonster/EnemyMonsterActor/EnemyMonsterActor.h"
 #include "EnemyMonster/EnemyRespawner/EnemyRespawner.h"
-
-#include "Network/NetworkManager.h"
-#include "Network/Session/ServerSession.h"
-#include "Network/Packet/ClientPacketHandler.h"
 #pragma endregion
 
 #ifdef _DEBUG

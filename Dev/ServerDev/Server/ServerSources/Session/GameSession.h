@@ -15,7 +15,7 @@ public:
 	virtual void ProcessSendImpl(uint32 numOfBytes) override;
 
 public:
-	void SetGamePlayer(const GamePlayerPtr& spGamePlayer) { m_spGamePlayer = spGamePlayer; }
+	void SetNetworkPlayer(const GamePlayerPtr& spPlayer) { m_spGamePlayer = spPlayer; }
 
 	GamePlayerPtr GetGamePlayer() const
 	{

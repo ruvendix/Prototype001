@@ -5,11 +5,13 @@ enum EProtocolId
 {
 	EnterGame = 0;
 	LeaveGame = 1;
-	CreateLocalGamePlayer = 2;
-	SyncGameEntities = 3;
-	SyncGamePlayer = 4;
-	SyncGameEntityLookAtDir = 5;
-	SyncGameEntityMove = 6;
-	SyncGameEntityState = 7;
-	AttackToGameEntity = 8;
+	CreateMainPlayer = 2;
+	SyncEntities = 3;
+	MoveEntity = 4;
+	ModifyPlayerInformation = 5;
+	ModifyEntityLookAtDir = 6;
+	ModifyEntityState = 7;
+	AttackToEntity = 8;
+	HitDamageToEntity = 9;
+	DiePlayer = 10;
 }

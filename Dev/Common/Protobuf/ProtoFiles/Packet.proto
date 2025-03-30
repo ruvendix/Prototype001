@@ -4,67 +4,79 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
-message S_EnterGame
+message S_EnterGamePacket
 {
 	bool enter_success = 1;
 	uint64 user_id = 2;
 }
 
-message S_LeaveGame
+message S_LeaveGamePacket
 {
 	bool leave_success = 1;
 	uint64 user_id = 2;
-	GameEntityInfo entity_info = 3;
+	NetworkEntityInfo player_info = 3;
 }
 
-message S_CreateLocalGamePlayer
+message S_CreateMainPlayerPacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo main_player_info = 1;
 }
 
-message S_SyncGameEntities
+// 생성과 갱신 둘 다 가능해서 Sync로 정함
+message S_SyncEntitiesPacket
 {
-	repeated GameEntityInfo players_info = 1;
-	repeated GameMonsterInfo monsters_info = 2;
+	repeated NetworkEntityInfo players_info = 1;
+	repeated NetworkMonsterInfo monsters_info = 2;
 }
 
-message S_SyncGamePlayer
+message C_MoveEntityPacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo entity_info = 1;
 }
 
-message C_SyncGameEntityMove
+message S_MoveEntityPacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo entity_info = 1;
 }
 
-message S_SyncGameEntityMove
+message S_ModifyPlayerInformationPacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo player_info = 1;
 }
 
-message C_SyncGameEntityLookAtDir
+message C_ModifyEntityLookAtDirectionPacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo entity_info = 1;
 }
 
-message S_SyncGameEntityLookAtDir
+message S_ModifyEntityLookAtDirectionPacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo entity_info = 1;
 }
 
-message C_SyncGameEntityState
+message C_ModifyEntityStatePacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo entity_info = 1;
 }
 
-message S_SyncGameEntityState
+message S_ModifyEntityStatePacket
 {
-	GameEntityInfo entity_info = 1;
+	NetworkEntityInfo entity_info = 1;
 }
 
-message S_AttckToGameEntity
+message C_AttckToEntityPacket
 {
-	GameEntityInfo attacker_info = 1;
-	GameEntityInfo victim_info = 2;
+	NetworkEntityInfo attacker_info = 1;
+	NetworkEntityInfo victim_info = 2;
+}
+
+message S_HitDamageToEntityPacket
+{
+	NetworkEntityInfo attacker_info = 1;
+	NetworkEntityInfo victim_info = 2;
+}
+
+message S_DiePlayerPacket
+{
+	NetworkEntityInfo victim_info = 1;
 }

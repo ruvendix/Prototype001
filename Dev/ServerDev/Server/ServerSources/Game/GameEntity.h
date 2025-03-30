@@ -11,24 +11,24 @@ public:
 	virtual void Cleanup() override;
 
 public:
-	void ApplyGameEntityLookAtDirection(const Protocol::GameEntityInfo& gameEntityInfo);
-	void ApplyGameEntityMoveInfo(const Protocol::GameEntityInfo& gameEntityInfo);
-	void ApplyGameEntityState(const Protocol::GameEntityInfo& gameEntityInfo);
+	void ApplyGameEntityLookAtDirection(const Protocol::NetworkEntityInfo& entityInfo);
+	void ApplyGameEntityMoveInfo(const Protocol::NetworkEntityInfo& entityInfo);
+	void ApplyGameEntityState(const Protocol::NetworkEntityInfo& entityInfo);
 
-	bool CheckGameEntityState(Protocol::EGameEntityState gameEntityState) const;
+	bool CheckGameEntityState(Protocol::ENetworkEntityState entityState) const;
 	bool CheckSameCellPosition(const Position2d& targetCellPos) const;
 	
 	Position2d MakeCurrentCellPosition() const;
 	Position2d MakeForwardCellPosition() const;
 
-	Protocol::EGameEntityLookAtDir CalculateGameEntityLookAtDirection(const Position2d& destCellPos);
-	Protocol::EGameEntityLookAtDir CalculateGameEntityLookAtDirection(const Protocol::GameEntityInfo& modifiedGameEntityInfo);
+	Protocol::ENetworkEntityLookAtDirection CalculateGameEntityLookAtDirection(const Position2d& destCellPos) const;
+	Protocol::ENetworkEntityLookAtDirection CalculateGameEntityLookAtDirection(const Protocol::NetworkEntityInfo& targetEntityInfo) const;
 
-	void SetGameEntityInfo(const Protocol::GameEntityInfo& gameEntityInfo) { m_gameEntityInfo = gameEntityInfo; }
+	void SetGameEntityInfo(const Protocol::NetworkEntityInfo& entityInfo) { m_entityInfo = entityInfo; }
 
-	Protocol::GameEntityInfo& GetGameEntityInfo() { return m_gameEntityInfo; }
-	const Protocol::GameEntityInfo& GetGameEntityInfo() const { return m_gameEntityInfo; }
+	Protocol::NetworkEntityInfo& GetGameEntityInfo() { return m_entityInfo; }
+	const Protocol::NetworkEntityInfo& GetGameEntityInfo() const { return m_entityInfo; }
 
 private:
-	Protocol::GameEntityInfo m_gameEntityInfo;
+	Protocol::NetworkEntityInfo m_entityInfo;
 };
