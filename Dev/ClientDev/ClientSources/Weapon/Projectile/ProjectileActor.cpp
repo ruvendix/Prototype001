@@ -67,14 +67,15 @@ void ProjectileActor::SpawnProjectile(const ProjectileSpawnInfo& projectileSpawn
 	ASSERT_LOG_RETURN(pTransformComponent != nullptr);
 	pTransformComponent->SetSize(projectileSpawnInfo.projectileSize);
 
-	ApplyCellPosition(projectileSpawnInfo.spawnCellPos);
-
 	// 투사체는 이동하는 기능이 있음
 	CellActorMoveComponent* pCellActorMoveComponent = GetComponent<CellActorMoveComponent>();
 	ASSERT_LOG_RETURN(pCellActorMoveComponent != nullptr);
 	pCellActorMoveComponent->SetMoveSpeed(projectileSpawnInfo.flyingSpeed);
-	pCellActorMoveComponent->SetDestinationCellPosition(projectileSpawnInfo.spawnCellPos);
 	pCellActorMoveComponent->ProcessMoveDirection(projectileSpawnInfo.vMoveDir, true);
 	
 	ChangeActorStateDynamicSprite<PawnActorIdleState>();
+
+	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
+	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
+	pCurrentScene->AddActor(SharedFromThisExactType<ProjectileActor>(), EActorLayerType::WorldForeground);
 }

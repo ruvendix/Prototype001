@@ -38,8 +38,9 @@
 #include "Global/DataTypes.h"
 #include "ErrorHandler/ClientErrorHandler.h"
 #include "Editor/EditorActor.h"
+#include "BaseActor/CommunicationActor.h"
+#include "BaseActor/ActionableActor.h"
 
-#include "Network/NetworkEntityActor.h"
 #include "Network/NetworkManager.h"
 #include "Network/Session/ServerSession.h"
 #include "Network/Packet/ClientPacketHandler.h"
@@ -66,3 +67,5 @@
 #pragma comment(lib, "ServerCore.lib")
 #pragma comment(lib, "libprotobuf.lib")
 #endif
+
+#pragma warning(disable:26813)

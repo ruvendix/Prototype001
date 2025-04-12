@@ -85,11 +85,11 @@ void SnakeActor::RegisterStateOnBidirectional()
 {
 	Super::RegisterStateOnBidirectional();
 
-	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Chase);
-	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Attack);
+	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::EEntityState::Chase);
+	RegisterActorStateMappingTable<PawnActorIdleState>(Protocol::EEntityState::Attack);
 
-	RegisterNetworkEntityStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Chase);
-	RegisterNetworkEntityStateMappingTable<PawnActorIdleState>(Protocol::ENetworkEntityState::Attack);
+	RegisterEntityStateMappingTable<PawnActorIdleState>(Protocol::EEntityState::Chase);
+	RegisterEntityStateMappingTable<PawnActorIdleState>(Protocol::EEntityState::Attack);
 }
 
 void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
@@ -105,7 +105,6 @@ void SnakeActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	pCurrentScene->ReserveCreateEffectActor(effectSpawnInfo);
 
 	// »ç¸Á ·çÆ¾
-	DecreaseEnemyCountToEnemyRespawner();
 	pCurrentScene->ReserveEraseActor(SharedFromThisExactType<Actor>());
 	DEFAULT_TRACE_LOG("¹ì »ç¸Á!");
 }

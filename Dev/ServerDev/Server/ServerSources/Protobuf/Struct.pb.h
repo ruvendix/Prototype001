@@ -46,39 +46,43 @@ struct TableStruct_Struct_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Struct_2eproto;
 namespace Protocol {
-class NetworkEntityInfo;
-struct NetworkEntityInfoDefaultTypeInternal;
-extern NetworkEntityInfoDefaultTypeInternal _NetworkEntityInfo_default_instance_;
-class NetworkMonsterInfo;
-struct NetworkMonsterInfoDefaultTypeInternal;
-extern NetworkMonsterInfoDefaultTypeInternal _NetworkMonsterInfo_default_instance_;
+class EntityInfo;
+struct EntityInfoDefaultTypeInternal;
+extern EntityInfoDefaultTypeInternal _EntityInfo_default_instance_;
+class MonsterInfo;
+struct MonsterInfoDefaultTypeInternal;
+extern MonsterInfoDefaultTypeInternal _MonsterInfo_default_instance_;
+class ProjectileInfo;
+struct ProjectileInfoDefaultTypeInternal;
+extern ProjectileInfoDefaultTypeInternal _ProjectileInfo_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
-template<> ::Protocol::NetworkEntityInfo* Arena::CreateMaybeMessage<::Protocol::NetworkEntityInfo>(Arena*);
-template<> ::Protocol::NetworkMonsterInfo* Arena::CreateMaybeMessage<::Protocol::NetworkMonsterInfo>(Arena*);
+template<> ::Protocol::EntityInfo* Arena::CreateMaybeMessage<::Protocol::EntityInfo>(Arena*);
+template<> ::Protocol::MonsterInfo* Arena::CreateMaybeMessage<::Protocol::MonsterInfo>(Arena*);
+template<> ::Protocol::ProjectileInfo* Arena::CreateMaybeMessage<::Protocol::ProjectileInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
 // ===================================================================
 
-class NetworkEntityInfo final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.NetworkEntityInfo) */ {
+class EntityInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.EntityInfo) */ {
  public:
-  inline NetworkEntityInfo() : NetworkEntityInfo(nullptr) {}
-  ~NetworkEntityInfo() override;
-  explicit PROTOBUF_CONSTEXPR NetworkEntityInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline EntityInfo() : EntityInfo(nullptr) {}
+  ~EntityInfo() override;
+  explicit PROTOBUF_CONSTEXPR EntityInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  NetworkEntityInfo(const NetworkEntityInfo& from);
-  NetworkEntityInfo(NetworkEntityInfo&& from) noexcept
-    : NetworkEntityInfo() {
+  EntityInfo(const EntityInfo& from);
+  EntityInfo(EntityInfo&& from) noexcept
+    : EntityInfo() {
     *this = ::std::move(from);
   }
 
-  inline NetworkEntityInfo& operator=(const NetworkEntityInfo& from) {
+  inline EntityInfo& operator=(const EntityInfo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline NetworkEntityInfo& operator=(NetworkEntityInfo&& from) noexcept {
+  inline EntityInfo& operator=(EntityInfo&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -101,20 +105,20 @@ class NetworkEntityInfo final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const NetworkEntityInfo& default_instance() {
+  static const EntityInfo& default_instance() {
     return *internal_default_instance();
   }
-  static inline const NetworkEntityInfo* internal_default_instance() {
-    return reinterpret_cast<const NetworkEntityInfo*>(
-               &_NetworkEntityInfo_default_instance_);
+  static inline const EntityInfo* internal_default_instance() {
+    return reinterpret_cast<const EntityInfo*>(
+               &_EntityInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(NetworkEntityInfo& a, NetworkEntityInfo& b) {
+  friend void swap(EntityInfo& a, EntityInfo& b) {
     a.Swap(&b);
   }
-  inline void Swap(NetworkEntityInfo* other) {
+  inline void Swap(EntityInfo* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -127,7 +131,7 @@ class NetworkEntityInfo final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(NetworkEntityInfo* other) {
+  void UnsafeArenaSwap(EntityInfo* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -135,14 +139,14 @@ class NetworkEntityInfo final :
 
   // implements Message ----------------------------------------------
 
-  NetworkEntityInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<NetworkEntityInfo>(arena);
+  EntityInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<EntityInfo>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const NetworkEntityInfo& from);
+  void CopyFrom(const EntityInfo& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const NetworkEntityInfo& from) {
-    NetworkEntityInfo::MergeImpl(*this, from);
+  void MergeFrom( const EntityInfo& from) {
+    EntityInfo::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -160,15 +164,15 @@ class NetworkEntityInfo final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(NetworkEntityInfo* other);
+  void InternalSwap(EntityInfo* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.NetworkEntityInfo";
+    return "Protocol.EntityInfo";
   }
   protected:
-  explicit NetworkEntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit EntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -190,7 +194,7 @@ class NetworkEntityInfo final :
     kAttackFieldNumber = 6,
     kDefenseFieldNumber = 7,
     kEntityTypeFieldNumber = 8,
-    kEntityeLookAtDirFieldNumber = 9,
+    kEntityLookAtDirFieldNumber = 9,
     kEntityStateFieldNumber = 10,
   };
   // uint64 entity_id = 1;
@@ -256,34 +260,34 @@ class NetworkEntityInfo final :
   void _internal_set_defense(uint32_t value);
   public:
 
-  // .Protocol.ENetworkEntityType entity_type = 8;
+  // .Protocol.EEntityType entity_type = 8;
   void clear_entity_type();
-  ::Protocol::ENetworkEntityType entity_type() const;
-  void set_entity_type(::Protocol::ENetworkEntityType value);
+  ::Protocol::EEntityType entity_type() const;
+  void set_entity_type(::Protocol::EEntityType value);
   private:
-  ::Protocol::ENetworkEntityType _internal_entity_type() const;
-  void _internal_set_entity_type(::Protocol::ENetworkEntityType value);
+  ::Protocol::EEntityType _internal_entity_type() const;
+  void _internal_set_entity_type(::Protocol::EEntityType value);
   public:
 
-  // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
-  void clear_entitye_look_at_dir();
-  ::Protocol::ENetworkEntityLookAtDirection entitye_look_at_dir() const;
-  void set_entitye_look_at_dir(::Protocol::ENetworkEntityLookAtDirection value);
+  // .Protocol.EEntityLookAtDirection entity_look_at_dir = 9;
+  void clear_entity_look_at_dir();
+  ::Protocol::EEntityLookAtDirection entity_look_at_dir() const;
+  void set_entity_look_at_dir(::Protocol::EEntityLookAtDirection value);
   private:
-  ::Protocol::ENetworkEntityLookAtDirection _internal_entitye_look_at_dir() const;
-  void _internal_set_entitye_look_at_dir(::Protocol::ENetworkEntityLookAtDirection value);
+  ::Protocol::EEntityLookAtDirection _internal_entity_look_at_dir() const;
+  void _internal_set_entity_look_at_dir(::Protocol::EEntityLookAtDirection value);
   public:
 
-  // .Protocol.ENetworkEntityState entity_state = 10;
+  // .Protocol.EEntityState entity_state = 10;
   void clear_entity_state();
-  ::Protocol::ENetworkEntityState entity_state() const;
-  void set_entity_state(::Protocol::ENetworkEntityState value);
+  ::Protocol::EEntityState entity_state() const;
+  void set_entity_state(::Protocol::EEntityState value);
   private:
-  ::Protocol::ENetworkEntityState _internal_entity_state() const;
-  void _internal_set_entity_state(::Protocol::ENetworkEntityState value);
+  ::Protocol::EEntityState _internal_entity_state() const;
+  void _internal_set_entity_state(::Protocol::EEntityState value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Protocol.NetworkEntityInfo)
+  // @@protoc_insertion_point(class_scope:Protocol.EntityInfo)
  private:
   class _Internal;
 
@@ -299,7 +303,7 @@ class NetworkEntityInfo final :
     uint32_t attack_;
     uint32_t defense_;
     int entity_type_;
-    int entitye_look_at_dir_;
+    int entity_look_at_dir_;
     int entity_state_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -308,24 +312,24 @@ class NetworkEntityInfo final :
 };
 // -------------------------------------------------------------------
 
-class NetworkMonsterInfo final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.NetworkMonsterInfo) */ {
+class MonsterInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.MonsterInfo) */ {
  public:
-  inline NetworkMonsterInfo() : NetworkMonsterInfo(nullptr) {}
-  ~NetworkMonsterInfo() override;
-  explicit PROTOBUF_CONSTEXPR NetworkMonsterInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline MonsterInfo() : MonsterInfo(nullptr) {}
+  ~MonsterInfo() override;
+  explicit PROTOBUF_CONSTEXPR MonsterInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  NetworkMonsterInfo(const NetworkMonsterInfo& from);
-  NetworkMonsterInfo(NetworkMonsterInfo&& from) noexcept
-    : NetworkMonsterInfo() {
+  MonsterInfo(const MonsterInfo& from);
+  MonsterInfo(MonsterInfo&& from) noexcept
+    : MonsterInfo() {
     *this = ::std::move(from);
   }
 
-  inline NetworkMonsterInfo& operator=(const NetworkMonsterInfo& from) {
+  inline MonsterInfo& operator=(const MonsterInfo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline NetworkMonsterInfo& operator=(NetworkMonsterInfo&& from) noexcept {
+  inline MonsterInfo& operator=(MonsterInfo&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -348,20 +352,20 @@ class NetworkMonsterInfo final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const NetworkMonsterInfo& default_instance() {
+  static const MonsterInfo& default_instance() {
     return *internal_default_instance();
   }
-  static inline const NetworkMonsterInfo* internal_default_instance() {
-    return reinterpret_cast<const NetworkMonsterInfo*>(
-               &_NetworkMonsterInfo_default_instance_);
+  static inline const MonsterInfo* internal_default_instance() {
+    return reinterpret_cast<const MonsterInfo*>(
+               &_MonsterInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(NetworkMonsterInfo& a, NetworkMonsterInfo& b) {
+  friend void swap(MonsterInfo& a, MonsterInfo& b) {
     a.Swap(&b);
   }
-  inline void Swap(NetworkMonsterInfo* other) {
+  inline void Swap(MonsterInfo* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -374,7 +378,7 @@ class NetworkMonsterInfo final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(NetworkMonsterInfo* other) {
+  void UnsafeArenaSwap(MonsterInfo* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -382,14 +386,14 @@ class NetworkMonsterInfo final :
 
   // implements Message ----------------------------------------------
 
-  NetworkMonsterInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<NetworkMonsterInfo>(arena);
+  MonsterInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<MonsterInfo>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const NetworkMonsterInfo& from);
+  void CopyFrom(const MonsterInfo& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const NetworkMonsterInfo& from) {
-    NetworkMonsterInfo::MergeImpl(*this, from);
+  void MergeFrom( const MonsterInfo& from) {
+    MonsterInfo::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -407,15 +411,15 @@ class NetworkMonsterInfo final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(NetworkMonsterInfo* other);
+  void InternalSwap(MonsterInfo* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.NetworkMonsterInfo";
+    return "Protocol.MonsterInfo";
   }
   protected:
-  explicit NetworkMonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit MonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -432,23 +436,23 @@ class NetworkMonsterInfo final :
     kMonsterInfoFieldNumber = 2,
     kMonsterIdFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo monster_info = 2;
+  // .Protocol.EntityInfo monster_info = 2;
   bool has_monster_info() const;
   private:
   bool _internal_has_monster_info() const;
   public:
   void clear_monster_info();
-  const ::Protocol::NetworkEntityInfo& monster_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_monster_info();
-  ::Protocol::NetworkEntityInfo* mutable_monster_info();
-  void set_allocated_monster_info(::Protocol::NetworkEntityInfo* monster_info);
+  const ::Protocol::EntityInfo& monster_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_monster_info();
+  ::Protocol::EntityInfo* mutable_monster_info();
+  void set_allocated_monster_info(::Protocol::EntityInfo* monster_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_monster_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_monster_info();
+  const ::Protocol::EntityInfo& _internal_monster_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_monster_info();
   public:
   void unsafe_arena_set_allocated_monster_info(
-      ::Protocol::NetworkEntityInfo* monster_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_monster_info();
+      ::Protocol::EntityInfo* monster_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_monster_info();
 
   // uint32 monster_id = 1;
   void clear_monster_id();
@@ -459,7 +463,7 @@ class NetworkMonsterInfo final :
   void _internal_set_monster_id(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Protocol.NetworkMonsterInfo)
+  // @@protoc_insertion_point(class_scope:Protocol.MonsterInfo)
  private:
   class _Internal;
 
@@ -467,8 +471,176 @@ class NetworkMonsterInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* monster_info_;
+    ::Protocol::EntityInfo* monster_info_;
     uint32_t monster_id_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Struct_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ProjectileInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.ProjectileInfo) */ {
+ public:
+  inline ProjectileInfo() : ProjectileInfo(nullptr) {}
+  ~ProjectileInfo() override;
+  explicit PROTOBUF_CONSTEXPR ProjectileInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ProjectileInfo(const ProjectileInfo& from);
+  ProjectileInfo(ProjectileInfo&& from) noexcept
+    : ProjectileInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline ProjectileInfo& operator=(const ProjectileInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ProjectileInfo& operator=(ProjectileInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ProjectileInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ProjectileInfo* internal_default_instance() {
+    return reinterpret_cast<const ProjectileInfo*>(
+               &_ProjectileInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(ProjectileInfo& a, ProjectileInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ProjectileInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ProjectileInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ProjectileInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ProjectileInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ProjectileInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ProjectileInfo& from) {
+    ProjectileInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ProjectileInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.ProjectileInfo";
+  }
+  protected:
+  explicit ProjectileInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEntityInfoFieldNumber = 2,
+    kProjectileIdFieldNumber = 1,
+  };
+  // .Protocol.EntityInfo entity_info = 2;
+  bool has_entity_info() const;
+  private:
+  bool _internal_has_entity_info() const;
+  public:
+  void clear_entity_info();
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
+  private:
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
+  public:
+  void unsafe_arena_set_allocated_entity_info(
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
+
+  // uint32 projectile_id = 1;
+  void clear_projectile_id();
+  uint32_t projectile_id() const;
+  void set_projectile_id(uint32_t value);
+  private:
+  uint32_t _internal_projectile_id() const;
+  void _internal_set_projectile_id(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.ProjectileInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::Protocol::EntityInfo* entity_info_;
+    uint32_t projectile_id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -483,256 +655,256 @@ class NetworkMonsterInfo final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// NetworkEntityInfo
+// EntityInfo
 
 // uint64 entity_id = 1;
-inline void NetworkEntityInfo::clear_entity_id() {
+inline void EntityInfo::clear_entity_id() {
   _impl_.entity_id_ = uint64_t{0u};
 }
-inline uint64_t NetworkEntityInfo::_internal_entity_id() const {
+inline uint64_t EntityInfo::_internal_entity_id() const {
   return _impl_.entity_id_;
 }
-inline uint64_t NetworkEntityInfo::entity_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.entity_id)
+inline uint64_t EntityInfo::entity_id() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.entity_id)
   return _internal_entity_id();
 }
-inline void NetworkEntityInfo::_internal_set_entity_id(uint64_t value) {
+inline void EntityInfo::_internal_set_entity_id(uint64_t value) {
   
   _impl_.entity_id_ = value;
 }
-inline void NetworkEntityInfo::set_entity_id(uint64_t value) {
+inline void EntityInfo::set_entity_id(uint64_t value) {
   _internal_set_entity_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.entity_id)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.entity_id)
 }
 
 // uint32 cell_pos_x = 2;
-inline void NetworkEntityInfo::clear_cell_pos_x() {
+inline void EntityInfo::clear_cell_pos_x() {
   _impl_.cell_pos_x_ = 0u;
 }
-inline uint32_t NetworkEntityInfo::_internal_cell_pos_x() const {
+inline uint32_t EntityInfo::_internal_cell_pos_x() const {
   return _impl_.cell_pos_x_;
 }
-inline uint32_t NetworkEntityInfo::cell_pos_x() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.cell_pos_x)
+inline uint32_t EntityInfo::cell_pos_x() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.cell_pos_x)
   return _internal_cell_pos_x();
 }
-inline void NetworkEntityInfo::_internal_set_cell_pos_x(uint32_t value) {
+inline void EntityInfo::_internal_set_cell_pos_x(uint32_t value) {
   
   _impl_.cell_pos_x_ = value;
 }
-inline void NetworkEntityInfo::set_cell_pos_x(uint32_t value) {
+inline void EntityInfo::set_cell_pos_x(uint32_t value) {
   _internal_set_cell_pos_x(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.cell_pos_x)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.cell_pos_x)
 }
 
 // uint32 cell_pos_y = 3;
-inline void NetworkEntityInfo::clear_cell_pos_y() {
+inline void EntityInfo::clear_cell_pos_y() {
   _impl_.cell_pos_y_ = 0u;
 }
-inline uint32_t NetworkEntityInfo::_internal_cell_pos_y() const {
+inline uint32_t EntityInfo::_internal_cell_pos_y() const {
   return _impl_.cell_pos_y_;
 }
-inline uint32_t NetworkEntityInfo::cell_pos_y() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.cell_pos_y)
+inline uint32_t EntityInfo::cell_pos_y() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.cell_pos_y)
   return _internal_cell_pos_y();
 }
-inline void NetworkEntityInfo::_internal_set_cell_pos_y(uint32_t value) {
+inline void EntityInfo::_internal_set_cell_pos_y(uint32_t value) {
   
   _impl_.cell_pos_y_ = value;
 }
-inline void NetworkEntityInfo::set_cell_pos_y(uint32_t value) {
+inline void EntityInfo::set_cell_pos_y(uint32_t value) {
   _internal_set_cell_pos_y(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.cell_pos_y)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.cell_pos_y)
 }
 
 // int32 max_hp = 4;
-inline void NetworkEntityInfo::clear_max_hp() {
+inline void EntityInfo::clear_max_hp() {
   _impl_.max_hp_ = 0;
 }
-inline int32_t NetworkEntityInfo::_internal_max_hp() const {
+inline int32_t EntityInfo::_internal_max_hp() const {
   return _impl_.max_hp_;
 }
-inline int32_t NetworkEntityInfo::max_hp() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.max_hp)
+inline int32_t EntityInfo::max_hp() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.max_hp)
   return _internal_max_hp();
 }
-inline void NetworkEntityInfo::_internal_set_max_hp(int32_t value) {
+inline void EntityInfo::_internal_set_max_hp(int32_t value) {
   
   _impl_.max_hp_ = value;
 }
-inline void NetworkEntityInfo::set_max_hp(int32_t value) {
+inline void EntityInfo::set_max_hp(int32_t value) {
   _internal_set_max_hp(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.max_hp)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.max_hp)
 }
 
 // int32 hp = 5;
-inline void NetworkEntityInfo::clear_hp() {
+inline void EntityInfo::clear_hp() {
   _impl_.hp_ = 0;
 }
-inline int32_t NetworkEntityInfo::_internal_hp() const {
+inline int32_t EntityInfo::_internal_hp() const {
   return _impl_.hp_;
 }
-inline int32_t NetworkEntityInfo::hp() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.hp)
+inline int32_t EntityInfo::hp() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.hp)
   return _internal_hp();
 }
-inline void NetworkEntityInfo::_internal_set_hp(int32_t value) {
+inline void EntityInfo::_internal_set_hp(int32_t value) {
   
   _impl_.hp_ = value;
 }
-inline void NetworkEntityInfo::set_hp(int32_t value) {
+inline void EntityInfo::set_hp(int32_t value) {
   _internal_set_hp(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.hp)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.hp)
 }
 
 // uint32 attack = 6;
-inline void NetworkEntityInfo::clear_attack() {
+inline void EntityInfo::clear_attack() {
   _impl_.attack_ = 0u;
 }
-inline uint32_t NetworkEntityInfo::_internal_attack() const {
+inline uint32_t EntityInfo::_internal_attack() const {
   return _impl_.attack_;
 }
-inline uint32_t NetworkEntityInfo::attack() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.attack)
+inline uint32_t EntityInfo::attack() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.attack)
   return _internal_attack();
 }
-inline void NetworkEntityInfo::_internal_set_attack(uint32_t value) {
+inline void EntityInfo::_internal_set_attack(uint32_t value) {
   
   _impl_.attack_ = value;
 }
-inline void NetworkEntityInfo::set_attack(uint32_t value) {
+inline void EntityInfo::set_attack(uint32_t value) {
   _internal_set_attack(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.attack)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.attack)
 }
 
 // uint32 defense = 7;
-inline void NetworkEntityInfo::clear_defense() {
+inline void EntityInfo::clear_defense() {
   _impl_.defense_ = 0u;
 }
-inline uint32_t NetworkEntityInfo::_internal_defense() const {
+inline uint32_t EntityInfo::_internal_defense() const {
   return _impl_.defense_;
 }
-inline uint32_t NetworkEntityInfo::defense() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.defense)
+inline uint32_t EntityInfo::defense() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.defense)
   return _internal_defense();
 }
-inline void NetworkEntityInfo::_internal_set_defense(uint32_t value) {
+inline void EntityInfo::_internal_set_defense(uint32_t value) {
   
   _impl_.defense_ = value;
 }
-inline void NetworkEntityInfo::set_defense(uint32_t value) {
+inline void EntityInfo::set_defense(uint32_t value) {
   _internal_set_defense(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.defense)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.defense)
 }
 
-// .Protocol.ENetworkEntityType entity_type = 8;
-inline void NetworkEntityInfo::clear_entity_type() {
+// .Protocol.EEntityType entity_type = 8;
+inline void EntityInfo::clear_entity_type() {
   _impl_.entity_type_ = 0;
 }
-inline ::Protocol::ENetworkEntityType NetworkEntityInfo::_internal_entity_type() const {
-  return static_cast< ::Protocol::ENetworkEntityType >(_impl_.entity_type_);
+inline ::Protocol::EEntityType EntityInfo::_internal_entity_type() const {
+  return static_cast< ::Protocol::EEntityType >(_impl_.entity_type_);
 }
-inline ::Protocol::ENetworkEntityType NetworkEntityInfo::entity_type() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.entity_type)
+inline ::Protocol::EEntityType EntityInfo::entity_type() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.entity_type)
   return _internal_entity_type();
 }
-inline void NetworkEntityInfo::_internal_set_entity_type(::Protocol::ENetworkEntityType value) {
+inline void EntityInfo::_internal_set_entity_type(::Protocol::EEntityType value) {
   
   _impl_.entity_type_ = value;
 }
-inline void NetworkEntityInfo::set_entity_type(::Protocol::ENetworkEntityType value) {
+inline void EntityInfo::set_entity_type(::Protocol::EEntityType value) {
   _internal_set_entity_type(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.entity_type)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.entity_type)
 }
 
-// .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
-inline void NetworkEntityInfo::clear_entitye_look_at_dir() {
-  _impl_.entitye_look_at_dir_ = 0;
+// .Protocol.EEntityLookAtDirection entity_look_at_dir = 9;
+inline void EntityInfo::clear_entity_look_at_dir() {
+  _impl_.entity_look_at_dir_ = 0;
 }
-inline ::Protocol::ENetworkEntityLookAtDirection NetworkEntityInfo::_internal_entitye_look_at_dir() const {
-  return static_cast< ::Protocol::ENetworkEntityLookAtDirection >(_impl_.entitye_look_at_dir_);
+inline ::Protocol::EEntityLookAtDirection EntityInfo::_internal_entity_look_at_dir() const {
+  return static_cast< ::Protocol::EEntityLookAtDirection >(_impl_.entity_look_at_dir_);
 }
-inline ::Protocol::ENetworkEntityLookAtDirection NetworkEntityInfo::entitye_look_at_dir() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.entitye_look_at_dir)
-  return _internal_entitye_look_at_dir();
+inline ::Protocol::EEntityLookAtDirection EntityInfo::entity_look_at_dir() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.entity_look_at_dir)
+  return _internal_entity_look_at_dir();
 }
-inline void NetworkEntityInfo::_internal_set_entitye_look_at_dir(::Protocol::ENetworkEntityLookAtDirection value) {
+inline void EntityInfo::_internal_set_entity_look_at_dir(::Protocol::EEntityLookAtDirection value) {
   
-  _impl_.entitye_look_at_dir_ = value;
+  _impl_.entity_look_at_dir_ = value;
 }
-inline void NetworkEntityInfo::set_entitye_look_at_dir(::Protocol::ENetworkEntityLookAtDirection value) {
-  _internal_set_entitye_look_at_dir(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.entitye_look_at_dir)
+inline void EntityInfo::set_entity_look_at_dir(::Protocol::EEntityLookAtDirection value) {
+  _internal_set_entity_look_at_dir(value);
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.entity_look_at_dir)
 }
 
-// .Protocol.ENetworkEntityState entity_state = 10;
-inline void NetworkEntityInfo::clear_entity_state() {
+// .Protocol.EEntityState entity_state = 10;
+inline void EntityInfo::clear_entity_state() {
   _impl_.entity_state_ = 0;
 }
-inline ::Protocol::ENetworkEntityState NetworkEntityInfo::_internal_entity_state() const {
-  return static_cast< ::Protocol::ENetworkEntityState >(_impl_.entity_state_);
+inline ::Protocol::EEntityState EntityInfo::_internal_entity_state() const {
+  return static_cast< ::Protocol::EEntityState >(_impl_.entity_state_);
 }
-inline ::Protocol::ENetworkEntityState NetworkEntityInfo::entity_state() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkEntityInfo.entity_state)
+inline ::Protocol::EEntityState EntityInfo::entity_state() const {
+  // @@protoc_insertion_point(field_get:Protocol.EntityInfo.entity_state)
   return _internal_entity_state();
 }
-inline void NetworkEntityInfo::_internal_set_entity_state(::Protocol::ENetworkEntityState value) {
+inline void EntityInfo::_internal_set_entity_state(::Protocol::EEntityState value) {
   
   _impl_.entity_state_ = value;
 }
-inline void NetworkEntityInfo::set_entity_state(::Protocol::ENetworkEntityState value) {
+inline void EntityInfo::set_entity_state(::Protocol::EEntityState value) {
   _internal_set_entity_state(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkEntityInfo.entity_state)
+  // @@protoc_insertion_point(field_set:Protocol.EntityInfo.entity_state)
 }
 
 // -------------------------------------------------------------------
 
-// NetworkMonsterInfo
+// MonsterInfo
 
 // uint32 monster_id = 1;
-inline void NetworkMonsterInfo::clear_monster_id() {
+inline void MonsterInfo::clear_monster_id() {
   _impl_.monster_id_ = 0u;
 }
-inline uint32_t NetworkMonsterInfo::_internal_monster_id() const {
+inline uint32_t MonsterInfo::_internal_monster_id() const {
   return _impl_.monster_id_;
 }
-inline uint32_t NetworkMonsterInfo::monster_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkMonsterInfo.monster_id)
+inline uint32_t MonsterInfo::monster_id() const {
+  // @@protoc_insertion_point(field_get:Protocol.MonsterInfo.monster_id)
   return _internal_monster_id();
 }
-inline void NetworkMonsterInfo::_internal_set_monster_id(uint32_t value) {
+inline void MonsterInfo::_internal_set_monster_id(uint32_t value) {
   
   _impl_.monster_id_ = value;
 }
-inline void NetworkMonsterInfo::set_monster_id(uint32_t value) {
+inline void MonsterInfo::set_monster_id(uint32_t value) {
   _internal_set_monster_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.NetworkMonsterInfo.monster_id)
+  // @@protoc_insertion_point(field_set:Protocol.MonsterInfo.monster_id)
 }
 
-// .Protocol.NetworkEntityInfo monster_info = 2;
-inline bool NetworkMonsterInfo::_internal_has_monster_info() const {
+// .Protocol.EntityInfo monster_info = 2;
+inline bool MonsterInfo::_internal_has_monster_info() const {
   return this != internal_default_instance() && _impl_.monster_info_ != nullptr;
 }
-inline bool NetworkMonsterInfo::has_monster_info() const {
+inline bool MonsterInfo::has_monster_info() const {
   return _internal_has_monster_info();
 }
-inline void NetworkMonsterInfo::clear_monster_info() {
+inline void MonsterInfo::clear_monster_info() {
   if (GetArenaForAllocation() == nullptr && _impl_.monster_info_ != nullptr) {
     delete _impl_.monster_info_;
   }
   _impl_.monster_info_ = nullptr;
 }
-inline const ::Protocol::NetworkEntityInfo& NetworkMonsterInfo::_internal_monster_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.monster_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& MonsterInfo::_internal_monster_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.monster_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& NetworkMonsterInfo::monster_info() const {
-  // @@protoc_insertion_point(field_get:Protocol.NetworkMonsterInfo.monster_info)
+inline const ::Protocol::EntityInfo& MonsterInfo::monster_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.MonsterInfo.monster_info)
   return _internal_monster_info();
 }
-inline void NetworkMonsterInfo::unsafe_arena_set_allocated_monster_info(
-    ::Protocol::NetworkEntityInfo* monster_info) {
+inline void MonsterInfo::unsafe_arena_set_allocated_monster_info(
+    ::Protocol::EntityInfo* monster_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.monster_info_);
   }
@@ -742,11 +914,11 @@ inline void NetworkMonsterInfo::unsafe_arena_set_allocated_monster_info(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.NetworkMonsterInfo.monster_info)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.MonsterInfo.monster_info)
 }
-inline ::Protocol::NetworkEntityInfo* NetworkMonsterInfo::release_monster_info() {
+inline ::Protocol::EntityInfo* MonsterInfo::release_monster_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.monster_info_;
+  ::Protocol::EntityInfo* temp = _impl_.monster_info_;
   _impl_.monster_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -759,27 +931,27 @@ inline ::Protocol::NetworkEntityInfo* NetworkMonsterInfo::release_monster_info()
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* NetworkMonsterInfo::unsafe_arena_release_monster_info() {
-  // @@protoc_insertion_point(field_release:Protocol.NetworkMonsterInfo.monster_info)
+inline ::Protocol::EntityInfo* MonsterInfo::unsafe_arena_release_monster_info() {
+  // @@protoc_insertion_point(field_release:Protocol.MonsterInfo.monster_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.monster_info_;
+  ::Protocol::EntityInfo* temp = _impl_.monster_info_;
   _impl_.monster_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* NetworkMonsterInfo::_internal_mutable_monster_info() {
+inline ::Protocol::EntityInfo* MonsterInfo::_internal_mutable_monster_info() {
   
   if (_impl_.monster_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.monster_info_ = p;
   }
   return _impl_.monster_info_;
 }
-inline ::Protocol::NetworkEntityInfo* NetworkMonsterInfo::mutable_monster_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_monster_info();
-  // @@protoc_insertion_point(field_mutable:Protocol.NetworkMonsterInfo.monster_info)
+inline ::Protocol::EntityInfo* MonsterInfo::mutable_monster_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_monster_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.MonsterInfo.monster_info)
   return _msg;
 }
-inline void NetworkMonsterInfo::set_allocated_monster_info(::Protocol::NetworkEntityInfo* monster_info) {
+inline void MonsterInfo::set_allocated_monster_info(::Protocol::EntityInfo* monster_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.monster_info_;
@@ -796,12 +968,128 @@ inline void NetworkMonsterInfo::set_allocated_monster_info(::Protocol::NetworkEn
     
   }
   _impl_.monster_info_ = monster_info;
-  // @@protoc_insertion_point(field_set_allocated:Protocol.NetworkMonsterInfo.monster_info)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.MonsterInfo.monster_info)
+}
+
+// -------------------------------------------------------------------
+
+// ProjectileInfo
+
+// uint32 projectile_id = 1;
+inline void ProjectileInfo::clear_projectile_id() {
+  _impl_.projectile_id_ = 0u;
+}
+inline uint32_t ProjectileInfo::_internal_projectile_id() const {
+  return _impl_.projectile_id_;
+}
+inline uint32_t ProjectileInfo::projectile_id() const {
+  // @@protoc_insertion_point(field_get:Protocol.ProjectileInfo.projectile_id)
+  return _internal_projectile_id();
+}
+inline void ProjectileInfo::_internal_set_projectile_id(uint32_t value) {
+  
+  _impl_.projectile_id_ = value;
+}
+inline void ProjectileInfo::set_projectile_id(uint32_t value) {
+  _internal_set_projectile_id(value);
+  // @@protoc_insertion_point(field_set:Protocol.ProjectileInfo.projectile_id)
+}
+
+// .Protocol.EntityInfo entity_info = 2;
+inline bool ProjectileInfo::_internal_has_entity_info() const {
+  return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
+}
+inline bool ProjectileInfo::has_entity_info() const {
+  return _internal_has_entity_info();
+}
+inline void ProjectileInfo::clear_entity_info() {
+  if (GetArenaForAllocation() == nullptr && _impl_.entity_info_ != nullptr) {
+    delete _impl_.entity_info_;
+  }
+  _impl_.entity_info_ = nullptr;
+}
+inline const ::Protocol::EntityInfo& ProjectileInfo::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
+}
+inline const ::Protocol::EntityInfo& ProjectileInfo::entity_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.ProjectileInfo.entity_info)
+  return _internal_entity_info();
+}
+inline void ProjectileInfo::unsafe_arena_set_allocated_entity_info(
+    ::Protocol::EntityInfo* entity_info) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
+  }
+  _impl_.entity_info_ = entity_info;
+  if (entity_info) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.ProjectileInfo.entity_info)
+}
+inline ::Protocol::EntityInfo* ProjectileInfo::release_entity_info() {
+  
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
+  _impl_.entity_info_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Protocol::EntityInfo* ProjectileInfo::unsafe_arena_release_entity_info() {
+  // @@protoc_insertion_point(field_release:Protocol.ProjectileInfo.entity_info)
+  
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
+  _impl_.entity_info_ = nullptr;
+  return temp;
+}
+inline ::Protocol::EntityInfo* ProjectileInfo::_internal_mutable_entity_info() {
+  
+  if (_impl_.entity_info_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
+    _impl_.entity_info_ = p;
+  }
+  return _impl_.entity_info_;
+}
+inline ::Protocol::EntityInfo* ProjectileInfo::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.ProjectileInfo.entity_info)
+  return _msg;
+}
+inline void ProjectileInfo::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.entity_info_;
+  }
+  if (entity_info) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(entity_info);
+    if (message_arena != submessage_arena) {
+      entity_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, entity_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.entity_info_ = entity_info;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.ProjectileInfo.entity_info)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

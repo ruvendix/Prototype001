@@ -56,15 +56,13 @@ bool WeaponActor::TryCreateProjectile() const
 		return false;
 	}
 
-	ProjectileSpawnInfo projectileSpawnInfo;
-	projectileSpawnInfo.projectileId = m_projectileId;
-	projectileSpawnInfo.projectileSize = Size{ 100, 100 };
-	projectileSpawnInfo.flyingSpeed = 1000.0f;
+	// 이번 패킷은 위치, 방향, 아이디 요거 3개만 서버로 전달
+	const ActionableActorPtr& spWeaponOwner = GetWeaponOwner();
+	const Position2d& spawnCellPos = spWeaponOwner->CalculateForwardCellPosition();
+	const Vector2d& vMoveDir = spWeaponOwner->CalculateMoveDirectionByCellPosition(spawnCellPos);
 
-	const std::shared_ptr<PawnActor>& spWeaponOwner = GetWeaponOwner();
-	projectileSpawnInfo.spawnCellPos = spWeaponOwner->CalculateForwardCellPosition();
-	projectileSpawnInfo.vMoveDir = spWeaponOwner->CalculateMoveDirectionByCellPosition(projectileSpawnInfo.spawnCellPos);
+	const RxSendBufferPtr& spSendCreateProjectilePacket = ClientPacketHandler::I()->MakeCreateProjectilePacket(spawnCellPos, vMoveDir, m_projectileId);
+	NetworkManager::I()->SendPacket(spSendCreateProjectilePacket);
 
-	WeaponFactory::I()->ReserveCreateProjectileActor(projectileSpawnInfo);
 	return true;
 }

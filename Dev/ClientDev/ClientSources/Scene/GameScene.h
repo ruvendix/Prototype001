@@ -20,7 +20,7 @@ public:
 	virtual void Cleanup() override;
 
 public:
-	NetworkEntityActorPtr FindNetworkEntityActor(uint64 networkEntityId) const;
+	CommunicationActorPtr FindEntityActor(uint64 entityId, EActorLayerType actorLayer) const;
 
 public:
 	void ParsingPacket_LeaveGamePacket(const Protocol::S_LeaveGamePacket& leaveGamePacket);
@@ -31,10 +31,11 @@ public:
 	void ParsingPacket_MoveEntityPacket(const Protocol::S_MoveEntityPacket& moveEntityPacket) const;
 	void ParsingPacket_ModifyEntityStatePacket(const Protocol::S_ModifyEntityStatePacket& modifyEntityStatePacket) const;
 	void ParsingPacket_HitDamageToEntityPacket(const Protocol::S_HitDamageToEntityPacket& hitDamageToEntityPacket) const;
-	void ParsingPacket_DiePlayerPacket(const Protocol::S_DiePlayerPacket& diePlayerPacket);
+	void ParsingPacket_DieEntityPacket(const Protocol::S_DieEntityPacket& dieEntityPacket);
+	void ParsingPacket_CreateProjectilePacket(const Protocol::S_CreateProjectilePacket& createProjectilePacket);
 	
 private:
-	std::shared_ptr<LocalPlayerActor> m_spLocalPlayerActor = nullptr;
+	std::shared_ptr<LocalPlayerActor> m_spLocalPlayer = nullptr;
 
 	std::shared_ptr<SnakeActor> m_spSnakeActor = nullptr;
 	std::shared_ptr<EnemyRespawner> m_spEnemyRespawner = nullptr;

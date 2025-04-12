@@ -33,13 +33,22 @@ void GameMonster::Cleanup()
 
 }
 
-void GameMonster::ApplyGameMonsterInfo(const Protocol::NetworkMonsterInfo& srcMonsterInfo)
+void GameMonster::AddToSyncEntitiesPacket(Protocol::S_SyncEntitiesPacket& outSyncEntitiesPacket)
+{
+	Protocol::MonsterInfo* pMonsterInfo = outSyncEntitiesPacket.add_monsters_info();
+	pMonsterInfo->set_monster_id(m_monsterId);
+
+	Protocol::EntityInfo* pEntityInfo = pMonsterInfo->mutable_monster_info();
+	*pEntityInfo = GetGameEntityInfo();
+}
+
+void GameMonster::ApplyGameMonsterInfo(const Protocol::MonsterInfo& srcMonsterInfo)
 {
 	m_monsterId = srcMonsterInfo.monster_id();
 	SetGameEntityInfo(srcMonsterInfo.monster_info());
 }
 
-void GameMonster::CopyGameMonsterInfo(Protocol::NetworkMonsterInfo* pDestMonsterInfo)
+void GameMonster::CopyGameMonsterInfo(Protocol::MonsterInfo* pDestMonsterInfo)
 {
 	pDestMonsterInfo->set_monster_id(m_monsterId);
 	*(pDestMonsterInfo->mutable_monster_info()) = GetGameEntityInfo();

@@ -21,3 +21,9 @@ void GamePlayer::Cleanup()
 {
 
 }
+
+void GamePlayer::AddToSyncEntitiesPacket(Protocol::S_SyncEntitiesPacket& outSyncEntitiesPacket)
+{
+	Protocol::EntityInfo* pPlayerInfo = outSyncEntitiesPacket.add_players_info();
+	*pPlayerInfo = GetGameEntityInfo();
+}

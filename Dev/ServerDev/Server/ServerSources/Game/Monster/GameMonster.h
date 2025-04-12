@@ -13,6 +13,8 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
+	virtual void AddToSyncEntitiesPacket(Protocol::S_SyncEntitiesPacket& outSyncEntitiesPacket) override;
+
 public:
 	template <typename TState>
 	std::shared_ptr<TState> ReserveNextState()
@@ -25,8 +27,8 @@ public:
 	}
 
 public:
-	void ApplyGameMonsterInfo(const Protocol::NetworkMonsterInfo& srcMonsterInfo);
-	void CopyGameMonsterInfo(Protocol::NetworkMonsterInfo* pDestMonsterInfo);
+	void ApplyGameMonsterInfo(const Protocol::MonsterInfo& srcMonsterInfo);
+	void CopyGameMonsterInfo(Protocol::MonsterInfo* pDestMonsterInfo);
 
 	uint32 GetChaseRange() const { return m_chaseRange; }
 	uint32 GetAttackableRange() const { return m_attackableRange; }

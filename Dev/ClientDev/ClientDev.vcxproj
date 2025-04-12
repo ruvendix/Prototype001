@@ -11,6 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClientSources\BaseActor\ActionableActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="ClientSources\BaseActor\CommunicationActor.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="ClientSources\ClientMain.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -36,9 +42,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ClientSources\GameApplication\WindowProcedure.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="ClientSources\Network\NetworkEntityActor.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
@@ -112,6 +115,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientSources\BaseActor\ActionableActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ClientSources\BaseActor\CommunicationActor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="ClientSources\Editor\EditorActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
@@ -140,9 +149,6 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Global\DataTypes.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
-    <ClInclude Include="ClientSources\Network\NetworkEntityActor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ClientSources\Network\NetworkManager.h">

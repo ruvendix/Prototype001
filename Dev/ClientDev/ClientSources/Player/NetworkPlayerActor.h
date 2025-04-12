@@ -13,6 +13,5 @@ public:
 	using Super::Super;
 	virtual ~NetworkPlayerActor();
 
-	virtual void ProcessAttackAction() override;
-	virtual void ProcessWeaponAttack() override;
+	virtual bool IsLocalPlayer() const override { return false; }
 };

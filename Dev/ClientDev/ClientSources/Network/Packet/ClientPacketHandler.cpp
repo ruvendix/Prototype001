@@ -17,7 +17,8 @@ void ClientPacketHandler::Startup()
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::MoveEntity, &ClientPacketHandler::HandlePacket_MoveEntityPacket);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::ModifyEntityState, &ClientPacketHandler::HandlePacket_ModifyEntityStatePacket);
 	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::HitDamageToEntity, &ClientPacketHandler::HandlePacket_HitDamageToEntityPacket);
-	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::DiePlayer, &ClientPacketHandler::HandlePacket_DiePlayerPacket);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::DieEntity, &ClientPacketHandler::HandlePacket_DieEntityPacket);
+	REGISTER_PACKET_HANDLER(Protocol::EProtocolId::CreateProjectile, &ClientPacketHandler::HandlePacket_CreateProjectilePacket);
 }
 
 void ClientPacketHandler::Cleanup()
@@ -42,20 +43,20 @@ void ClientPacketHandler::HandlePacket(BYTE* buffer, int32 numOfBytes)
 	foundIter->second.InvokeFunctions(buffer, numOfBytes);
 }
 
-RxSendBufferPtr ClientPacketHandler::MakeModifyEntityLookAtDirectionPacket(const std::shared_ptr<Protocol::NetworkEntityInfo>& spEntityInfo)
+RxSendBufferPtr ClientPacketHandler::MakeModifyEntityLookAtDirectionPacket(const ProtocolEntityInfoPtr& spEntityInfo)
 {
 	Protocol::C_ModifyEntityLookAtDirectionPacket modifyEntityLookAtDirectionPacket;
-	Protocol::NetworkEntityInfo* pEntityInfo = modifyEntityLookAtDirectionPacket.mutable_entity_info();
+	Protocol::EntityInfo* pEntityInfo = modifyEntityLookAtDirectionPacket.mutable_entity_info();
 	pEntityInfo->set_entity_id(spEntityInfo->entity_id());
-	pEntityInfo->set_entitye_look_at_dir(spEntityInfo->entitye_look_at_dir());
+	pEntityInfo->set_entity_look_at_dir(spEntityInfo->entity_look_at_dir());
 
 	return MakeSendBuffer(modifyEntityLookAtDirectionPacket, Protocol::EProtocolId::ModifyEntityLookAtDir);
 }
 
-RxSendBufferPtr ClientPacketHandler::MakeMoveEntityPacket(const std::shared_ptr<Protocol::NetworkEntityInfo>& spEntityInfo)
+RxSendBufferPtr ClientPacketHandler::MakeMoveEntityPacket(const ProtocolEntityInfoPtr& spEntityInfo)
 {
 	Protocol::C_MoveEntityPacket moveEntityPacket;
-	Protocol::NetworkEntityInfo* pEntityInfo = moveEntityPacket.mutable_entity_info();
+	Protocol::EntityInfo* pEntityInfo = moveEntityPacket.mutable_entity_info();
 	pEntityInfo->set_entity_id(spEntityInfo->entity_id());
 	pEntityInfo->set_entity_state(spEntityInfo->entity_state());
 	pEntityInfo->set_cell_pos_x(spEntityInfo->cell_pos_x());
@@ -64,14 +65,53 @@ RxSendBufferPtr ClientPacketHandler::MakeMoveEntityPacket(const std::shared_ptr<
 	return MakeSendBuffer(moveEntityPacket, Protocol::EProtocolId::MoveEntity);
 }
 
-RxSendBufferPtr ClientPacketHandler::MakeModifyEntityStatePacket(const std::shared_ptr<Protocol::NetworkEntityInfo>& spEntityInfo)
+RxSendBufferPtr ClientPacketHandler::MakeModifyEntityStatePacket(const ProtocolEntityInfoPtr& spEntityInfo)
 {
 	Protocol::C_ModifyEntityStatePacket modifyEntityStatePacket;
-	Protocol::NetworkEntityInfo* pEntityInfo = modifyEntityStatePacket.mutable_entity_info();
+	Protocol::EntityInfo* pEntityInfo = modifyEntityStatePacket.mutable_entity_info();
 	pEntityInfo->set_entity_id(spEntityInfo->entity_id());
 	pEntityInfo->set_entity_state(spEntityInfo->entity_state());
 
 	return MakeSendBuffer(modifyEntityStatePacket, Protocol::EProtocolId::ModifyEntityState);
+}
+
+RxSendBufferPtr ClientPacketHandler::MakeAttckToEntityPacket(const ProtocolEntityInfoPtr& spAttackerInfo, const ProtocolEntityInfoPtr& spVictimInfo)
+{
+	Protocol::C_AttckToEntityPacket attckToEntityPacket;
+	Protocol::EntityInfo* pAttackerInfo = attckToEntityPacket.mutable_attacker_info();
+	pAttackerInfo->set_entity_id(spAttackerInfo->entity_id());
+	pAttackerInfo->set_entity_type(spAttackerInfo->entity_type());
+
+	Protocol::EntityInfo* pVictimInfo = attckToEntityPacket.mutable_victim_info();
+	pVictimInfo->set_entity_id(spVictimInfo->entity_id());
+	pVictimInfo->set_entity_type(spVictimInfo->entity_type());
+
+	return MakeSendBuffer(attckToEntityPacket, Protocol::EProtocolId::AttackToEntity);
+}
+
+RxSendBufferPtr ClientPacketHandler::MakeCreateProjectilePacket(const Position2d& spawnCellPos, const Vector2d& vMoveDir, int32 projectileId)
+{
+	Protocol::C_CreateProjectilePacket createProjectilePacket;
+	Protocol::ProjectileInfo* pProjectileInfo = createProjectilePacket.mutable_projectile_info();
+	pProjectileInfo->set_projectile_id(projectileId);
+
+	Protocol::EntityInfo* pEntityInfo = pProjectileInfo->mutable_entity_info();
+	pEntityInfo->set_cell_pos_x(spawnCellPos.x);
+	pEntityInfo->set_cell_pos_y(spawnCellPos.y);
+
+	Protocol::EEntityLookAtDirection entityLookAtDir = CommunicationActor::JudgeEntityLookAtDirection(vMoveDir);
+	pEntityInfo->set_entity_look_at_dir(entityLookAtDir);
+
+	return MakeSendBuffer(createProjectilePacket, Protocol::EProtocolId::CreateProjectile);
+}
+
+RxSendBufferPtr ClientPacketHandler::MakeDieEntityPacket(const ProtocolEntityInfoPtr& spEntityInfo)
+{
+	Protocol::C_DieEntityPacket dieEntityPacket;
+	Protocol::EntityInfo* pVictimInfo = dieEntityPacket.mutable_victim_info();
+	*pVictimInfo = *spEntityInfo;
+
+	return MakeSendBuffer(dieEntityPacket, Protocol::EProtocolId::DieEntity);
 }
 
 void ClientPacketHandler::HandlePacket_EnterGamePacket(BYTE* buffer, int32 numOfBytes)
@@ -153,11 +193,20 @@ void ClientPacketHandler::HandlePacket_HitDamageToEntityPacket(BYTE* buffer, int
 	pGameScene->ParsingPacket_HitDamageToEntityPacket(packet);
 }
 
-void ClientPacketHandler::HandlePacket_DiePlayerPacket(BYTE* buffer, int32 numOfBytes)
+void ClientPacketHandler::HandlePacket_DieEntityPacket(BYTE* buffer, int32 numOfBytes)
 {
-	START_PACKET_CONTENTS(buffer, Protocol::S_DiePlayerPacket, packet);
+	START_PACKET_CONTENTS(buffer, Protocol::S_DieEntityPacket, packet);
 
 	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
 	ASSERT_LOG(pGameScene != nullptr);
-	pGameScene->ParsingPacket_DiePlayerPacket(packet);
+	pGameScene->ParsingPacket_DieEntityPacket(packet);
+}
+
+void ClientPacketHandler::HandlePacket_CreateProjectilePacket(BYTE* buffer, int32 numOfBytes)
+{
+	START_PACKET_CONTENTS(buffer, Protocol::S_CreateProjectilePacket, packet);
+
+	GameScene* pGameScene = dynamic_cast<GameScene*>(SceneManager::I()->GetCurrentScene());
+	ASSERT_LOG(pGameScene != nullptr);
+	pGameScene->ParsingPacket_CreateProjectilePacket(packet);
 }

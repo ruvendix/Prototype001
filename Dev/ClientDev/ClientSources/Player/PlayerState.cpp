@@ -12,8 +12,8 @@ namespace
 		ASSERT_LOG_RETURN_VALUE(pPlayer != nullptr, false);
 
 		// 무기에서 전부 처리
-		const std::shared_ptr<WeaponActor>& spWeaponActor = pPlayer->GetWeapon(weaponSlot);
-		return spWeaponActor->Update(deltaSeconds);
+		const WeaponActorPtr& spWeapon = pPlayer->GetWeapon(weaponSlot);
+		return spWeapon->Update(deltaSeconds);
 	}
 }
 
@@ -29,7 +29,7 @@ void PlayerAttackState::Startup()
 	ASSERT_LOG(pPlayer != nullptr);
 
 	// 현재 무기에 따라 작동
-	const std::shared_ptr<WeaponActor>& spPrimaryWeapon = pPlayer->GetWeapon(EWeaponSlotType::Primary);
+	const WeaponActorPtr& spPrimaryWeapon = pPlayer->GetWeapon(EWeaponSlotType::Primary);
 	if (spPrimaryWeapon == nullptr)
 	{
 		return;
@@ -55,7 +55,7 @@ void PlayerDefenceState::Startup()
 	ASSERT_LOG(pPlayer != nullptr);
 
 	// 현재 무기에 따라 작동
-	const std::shared_ptr<WeaponActor>& spSecondaryWeapon = pPlayer->GetWeapon(EWeaponSlotType::Secondary);
+	const WeaponActorPtr& spSecondaryWeapon = pPlayer->GetWeapon(EWeaponSlotType::Secondary);
 	if (spSecondaryWeapon == nullptr)
 	{
 		return;

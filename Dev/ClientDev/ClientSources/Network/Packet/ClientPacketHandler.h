@@ -14,9 +14,12 @@ public:
 public:
 	void HandlePacket(BYTE* buffer, int32 numOfBytes);
 
-	RxSendBufferPtr MakeModifyEntityLookAtDirectionPacket(const std::shared_ptr<Protocol::NetworkEntityInfo>& spEntityInfo);
-	RxSendBufferPtr MakeMoveEntityPacket(const std::shared_ptr<Protocol::NetworkEntityInfo>& spEntityInfo);
-	RxSendBufferPtr MakeModifyEntityStatePacket(const std::shared_ptr<Protocol::NetworkEntityInfo>& spEntityInfo);
+	RxSendBufferPtr MakeModifyEntityLookAtDirectionPacket(const ProtocolEntityInfoPtr& spEntityInfo);
+	RxSendBufferPtr MakeMoveEntityPacket(const ProtocolEntityInfoPtr& spEntityInfo);
+	RxSendBufferPtr MakeModifyEntityStatePacket(const ProtocolEntityInfoPtr& spEntityInfo);
+	RxSendBufferPtr MakeAttckToEntityPacket(const ProtocolEntityInfoPtr& spAttackerInfo, const ProtocolEntityInfoPtr& spVictimInfo);
+	RxSendBufferPtr MakeCreateProjectilePacket(const Position2d& spawnCellPos, const Vector2d& vMoveDir, int32 projectileId);
+	RxSendBufferPtr MakeDieEntityPacket(const ProtocolEntityInfoPtr& spEntityInfo);
 
 private:
 	template <typename TPacket>
@@ -46,7 +49,8 @@ private:
 	void HandlePacket_MoveEntityPacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_ModifyEntityStatePacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_HitDamageToEntityPacket(BYTE* buffer, int32 numOfBytes);
-	void HandlePacket_DiePlayerPacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_DieEntityPacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_CreateProjectilePacket(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

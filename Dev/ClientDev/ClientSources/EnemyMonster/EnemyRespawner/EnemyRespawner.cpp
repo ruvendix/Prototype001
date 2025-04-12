@@ -21,16 +21,11 @@ EnemyRespawner::~EnemyRespawner()
 
 void EnemyRespawner::Startup()
 {
-	m_respawnWaitTimer = TimerManager::I()->CreateTimer(5.0f, true, this, &EnemyRespawner::OnRespawn);
+
 }
 
 bool EnemyRespawner::Update(float deltaSeconds)
 {
-	if (m_currentEnemyCount < m_maxEnemyCount)
-	{
-		m_respawnWaitTimer.Update(deltaSeconds);
-	}
-
 	return true;
 }
 
@@ -39,81 +34,29 @@ void EnemyRespawner::Cleanup()
 
 }
 
-void EnemyRespawner::RespawnEnemies(Scene* pCurrentScene)
-{
-	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
-	for (int32 i = m_currentEnemyCount; i < m_maxEnemyCount; ++i)
-	{
-		// 여기가 리스폰 규칙
-		auto foundPrototypeEnemyActorIter = m_mapPrototypeEnemyActors.find(0);
-		ASSERT_LOG(foundPrototypeEnemyActorIter != m_mapPrototypeEnemyActors.cend());
-		const std::shared_ptr<CellActor>& spPrototypeEnemyActor = (foundPrototypeEnemyActorIter->second);
-		ASSERT_LOG(spPrototypeEnemyActor != nullptr);
-
-		// 구분용 이름
-		std::string strNewEnemyActorName;
-		MakeFormatString(strNewEnemyActorName, "%s_%d", spPrototypeEnemyActor->GetActorName().c_str(), g_enemyId);
-		++g_enemyId;
-
-		const std::shared_ptr<CellActor>& spNewEnemyActor = pCurrentScene->CreateCloneActorToScene(spPrototypeEnemyActor);
-		spNewEnemyActor->SetActorName(strNewEnemyActorName);
-
-#if 0
-		const Position2d& randomCellPos{ 6, 10 };
-		spNewEnemyActor->ApplyCellPosition(randomCellPos);
-#else
-		const Position2d& randomCellPos = spNewEnemyActor->ApplyRandomCellPosition();
-		DEFAULT_TRACE_LOG("%s 리스폰 위치(%d, %d)", strNewEnemyActorName.c_str(), randomCellPos.x, randomCellPos.y);
-#endif
-
-		CellActorMoveComponent* pNewEnemyActorMoveComponent = spNewEnemyActor->GetComponent<CellActorMoveComponent>();
-		if (pNewEnemyActorMoveComponent != nullptr)
-		{
-			pNewEnemyActorMoveComponent->SetDestinationCellPosition(randomCellPos);
-		}
-	}
-
-	m_currentEnemyCount = m_maxEnemyCount;
-}
-
-void EnemyRespawner::RespawnEnemy(const Protocol::NetworkMonsterInfo& networkMonsterInfo, Scene* pCurrentScene)
+void EnemyRespawner::RespawnEnemy(const Protocol::MonsterInfo& monsterInfo, Scene* pCurrentScene)
 {
 	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
 
 	// 여기가 리스폰 규칙
-	auto foundPrototypeEnemyActorIter = m_mapPrototypeEnemyActors.find(networkMonsterInfo.monster_id());
+	auto foundPrototypeEnemyActorIter = m_mapPrototypeEnemyActors.find(monsterInfo.monster_id());
 	ASSERT_LOG(foundPrototypeEnemyActorIter != m_mapPrototypeEnemyActors.cend());
 	const std::shared_ptr<EnemyMonsterActor>& spPrototypeEnemyActor = (foundPrototypeEnemyActorIter->second);
 	ASSERT_LOG(spPrototypeEnemyActor != nullptr);
 
-	const Protocol::NetworkEntityInfo& networkEntityInfo = networkMonsterInfo.monster_info();
+	const Protocol::EntityInfo& entityInfo = monsterInfo.monster_info();
 
 	// 구분용 이름
 	std::string strNewEnemyActorName;
-	MakeFormatString(strNewEnemyActorName, "%s_%d", spPrototypeEnemyActor->GetActorName().c_str(), networkEntityInfo.entity_id());
+	MakeFormatString(strNewEnemyActorName, "%s_%d", spPrototypeEnemyActor->GetActorName().c_str(), entityInfo.entity_id());
 
 	const std::shared_ptr<EnemyMonsterActor>& spNewEnemyActor = pCurrentScene->CreateCloneActorToScene(spPrototypeEnemyActor);
 	spNewEnemyActor->SetActorName(strNewEnemyActorName);
 	spNewEnemyActor->InitializeActorStateTable();
 	spNewEnemyActor->RegisterStateOnBidirectional();
-	spNewEnemyActor->SyncFromServer_NetworkEntityInfo(networkEntityInfo);
+	spNewEnemyActor->SyncFromServer_EntityInfo(entityInfo);
 	spNewEnemyActor->ImmediatelyChangeState<PawnActorIdleState>();
-	++m_currentEnemyCount;
 
-	Position2d respawnCellPos = { static_cast<int32>(networkEntityInfo.cell_pos_x()), static_cast<int32>(networkEntityInfo.cell_pos_y()) };
+	Position2d respawnCellPos = { static_cast<int32>(entityInfo.cell_pos_x()), static_cast<int32>(entityInfo.cell_pos_y()) };
 	DEFAULT_TRACE_LOG("%s 리스폰 위치(%d, %d)", strNewEnemyActorName.c_str(), respawnCellPos.x, respawnCellPos.y);
-}
-
-void EnemyRespawner::DecreaseEnemyCount()
-{
-	m_currentEnemyCount = global::Clamp(m_currentEnemyCount - 1, 0, m_maxEnemyCount);
-}
-
-void EnemyRespawner::OnRespawn()
-{
-	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
-
-	RespawnEnemies(pCurrentScene);
-	DEFAULT_TRACE_LOG("적군들 리스폰 개시!");
 }

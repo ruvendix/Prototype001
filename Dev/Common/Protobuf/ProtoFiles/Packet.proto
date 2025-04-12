@@ -14,69 +14,84 @@ message S_LeaveGamePacket
 {
 	bool leave_success = 1;
 	uint64 user_id = 2;
-	NetworkEntityInfo player_info = 3;
+	EntityInfo player_info = 3;
 }
 
 message S_CreateMainPlayerPacket
 {
-	NetworkEntityInfo main_player_info = 1;
+	EntityInfo main_player_info = 1;
 }
 
 // 생성과 갱신 둘 다 가능해서 Sync로 정함
 message S_SyncEntitiesPacket
 {
-	repeated NetworkEntityInfo players_info = 1;
-	repeated NetworkMonsterInfo monsters_info = 2;
+	repeated EntityInfo players_info = 1;
+	repeated MonsterInfo monsters_info = 2;
 }
 
 message C_MoveEntityPacket
 {
-	NetworkEntityInfo entity_info = 1;
+	EntityInfo entity_info = 1;
 }
 
 message S_MoveEntityPacket
 {
-	NetworkEntityInfo entity_info = 1;
+	EntityInfo entity_info = 1;
 }
 
 message S_ModifyPlayerInformationPacket
 {
-	NetworkEntityInfo player_info = 1;
+	EntityInfo player_info = 1;
 }
 
 message C_ModifyEntityLookAtDirectionPacket
 {
-	NetworkEntityInfo entity_info = 1;
+	EntityInfo entity_info = 1;
 }
 
 message S_ModifyEntityLookAtDirectionPacket
 {
-	NetworkEntityInfo entity_info = 1;
+	EntityInfo entity_info = 1;
 }
 
 message C_ModifyEntityStatePacket
 {
-	NetworkEntityInfo entity_info = 1;
+	EntityInfo entity_info = 1;
 }
 
 message S_ModifyEntityStatePacket
 {
-	NetworkEntityInfo entity_info = 1;
+	EntityInfo entity_info = 1;
 }
 
 message C_AttckToEntityPacket
 {
-	NetworkEntityInfo attacker_info = 1;
-	NetworkEntityInfo victim_info = 2;
+	EntityInfo attacker_info = 1;
+	EntityInfo victim_info = 2;
 }
 
 message S_HitDamageToEntityPacket
 {
-	NetworkEntityInfo attacker_info = 1;
-	NetworkEntityInfo victim_info = 2;
+	EntityInfo attacker_info = 1;
+	EntityInfo victim_info = 2;
 }
 
-message S_DiePlayerPacket
+message C_DieEntityPacket
 {
-	NetworkEntityInfo victim_info = 1;
+	EntityInfo victim_info = 1;
+}
+
+message S_DieEntityPacket
+{
+	EntityInfo victim_info = 1;
+}
+
+message C_CreateProjectilePacket
+{
+	ProjectileInfo projectile_info = 1;
+}
+
+message S_CreateProjectilePacket
+{
+	ProjectileInfo projectile_info = 1;
 }

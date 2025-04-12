@@ -2,7 +2,7 @@
 #include "Pch.h"
 #include "GameEntity.h"
 
-const std::array<Position2d, Protocol::ENetworkEntityLookAtDirection_ARRAYSIZE> g_lookAtForwardCellPosTable =
+const std::array<Position2d, Protocol::EEntityLookAtDirection_ARRAYSIZE> g_lookAtForwardCellPosTable =
 {
 	Position2d(-1, +0),
 	Position2d(+0, -1),
@@ -30,25 +30,35 @@ void GameEntity::Cleanup()
 
 }
 
-void GameEntity::ApplyGameEntityLookAtDirection(const Protocol::NetworkEntityInfo& entityInfo)
+void GameEntity::AddToSyncEntitiesPacket(Protocol::S_SyncEntitiesPacket& outSyncEntitiesPacket)
 {
-	m_entityInfo.set_entitye_look_at_dir(entityInfo.entitye_look_at_dir());
+	
 }
 
-void GameEntity::ApplyGameEntityMoveInfo(const Protocol::NetworkEntityInfo& entityInfo)
+void GameEntity::ApplyGameEntityLookAtDirection(const Protocol::EntityInfo& entityInfo)
+{
+	m_entityInfo.set_entity_look_at_dir(entityInfo.entity_look_at_dir());
+}
+
+void GameEntity::ApplyGameEntityMoveInfo(const Protocol::EntityInfo& entityInfo)
 {
 	m_entityInfo.set_entity_state(entityInfo.entity_state());
-	m_entityInfo.set_entitye_look_at_dir(CalculateGameEntityLookAtDirection(entityInfo));
+	m_entityInfo.set_entity_look_at_dir(CalculateGameEntityLookAtDirection(entityInfo));
 	m_entityInfo.set_cell_pos_x(entityInfo.cell_pos_x());
 	m_entityInfo.set_cell_pos_y(entityInfo.cell_pos_y());
 }
 
-void GameEntity::ApplyGameEntityState(const Protocol::NetworkEntityInfo& entityInfo)
+void GameEntity::ApplyGameEntityState(Protocol::EEntityState entityState)
 {
-	m_entityInfo.set_entity_state(entityInfo.entity_state());
+	m_entityInfo.set_entity_state(entityState);
 }
 
-bool GameEntity::CheckGameEntityState(Protocol::ENetworkEntityState entityState) const
+void GameEntity::ApplyGameEntityHp(int32 entityHp)
+{
+	m_entityInfo.set_hp(entityHp);
+}
+
+bool GameEntity::CheckGameEntityState(Protocol::EEntityState entityState) const
 {
 	return (m_entityInfo.entity_state() == entityState);
 }
@@ -61,7 +71,7 @@ bool GameEntity::CheckSameCellPosition(const Position2d& targetCellPos) const
 
 Position2d GameEntity::MakeCurrentCellPosition() const
 {
-	const Protocol::NetworkEntityInfo& entityInfo = GetGameEntityInfo();
+	const Protocol::EntityInfo& entityInfo = GetGameEntityInfo();
 
 	Position2d currentCellPos;
 	currentCellPos.x = static_cast<int32>(entityInfo.cell_pos_x());
@@ -71,38 +81,38 @@ Position2d GameEntity::MakeCurrentCellPosition() const
 
 Position2d GameEntity::MakeForwardCellPosition() const
 {
-	const Protocol::NetworkEntityInfo& entityInfo = GetGameEntityInfo();
-	Position2d forwardCellPos = (MakeCurrentCellPosition() + PawnActor::g_lookAtForwardCellPosTable[TO_NUM(entityInfo.entitye_look_at_dir())]);
+	const Protocol::EntityInfo& entityInfo = GetGameEntityInfo();
+	Position2d forwardCellPos = (MakeCurrentCellPosition() + PawnActor::g_lookAtForwardCellPosTable[TO_NUM(entityInfo.entity_look_at_dir())]);
 	return forwardCellPos;
 }
 
-Protocol::ENetworkEntityLookAtDirection GameEntity::CalculateGameEntityLookAtDirection(const Position2d& destCellPos) const
+Protocol::EEntityLookAtDirection GameEntity::CalculateGameEntityLookAtDirection(const Position2d& destCellPos) const
 {
 	const Position2d& currentCellPos = MakeCurrentCellPosition();
 
-	Protocol::ENetworkEntityLookAtDirection entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Down;
+	Protocol::EEntityLookAtDirection entityLookAtDir = Protocol::EEntityLookAtDirection::Down;
 	const Position2d& diffCellPos = (destCellPos - currentCellPos);
 	if (diffCellPos.x >= 1)
 	{
-		entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Right;
+		entityLookAtDir = Protocol::EEntityLookAtDirection::Right;
 	}
 	else if (diffCellPos.x <= -1)
 	{
-		entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Left;
+		entityLookAtDir = Protocol::EEntityLookAtDirection::Left;
 	}
 	else if (diffCellPos.y >= 1)
 	{
-		entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Down;
+		entityLookAtDir = Protocol::EEntityLookAtDirection::Down;
 	}
 	else if (diffCellPos.y <= -1)
 	{
-		entityLookAtDir = Protocol::ENetworkEntityLookAtDirection::Up;
+		entityLookAtDir = Protocol::EEntityLookAtDirection::Up;
 	}
 
 	return entityLookAtDir;
 }
 
-Protocol::ENetworkEntityLookAtDirection GameEntity::CalculateGameEntityLookAtDirection(const Protocol::NetworkEntityInfo& targetEntityInfo) const
+Protocol::EEntityLookAtDirection GameEntity::CalculateGameEntityLookAtDirection(const Protocol::EntityInfo& targetEntityInfo) const
 {
 	const Position2d& destCellPos =
 	{

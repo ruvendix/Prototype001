@@ -52,6 +52,9 @@
     <ClCompile Include="ServerSources\ErrorHandler\ServerErrorHandler.cpp">
       <Filter>ServerSources\ErrorHandler</Filter>
     </ClCompile>
+    <ClCompile Include="ServerSources\Game\Projectile\GameProjectile.cpp">
+      <Filter>ServerSources\Game\Projectile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerSources\Session\GameSession.h">
@@ -108,6 +111,9 @@
     <ClInclude Include="ServerSources\ErrorHandler\ErrorEnums.h">
       <Filter>ServerSources\ErrorHandler</Filter>
     </ClInclude>
+    <ClInclude Include="ServerSources\Game\Projectile\GameProjectile.h">
+      <Filter>ServerSources\Game\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ServerSources">
@@ -139,6 +145,9 @@
     </Filter>
     <Filter Include="ServerSources\Game\Player">
       <UniqueIdentifier>{b7abef11-44f3-4a2f-90ef-79f0cf2074be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerSources\Game\Projectile">
+      <UniqueIdentifier>{f019b959-202f-4b09-8ea8-544ece8f94ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

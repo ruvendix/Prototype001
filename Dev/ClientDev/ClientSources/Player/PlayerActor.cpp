@@ -17,13 +17,8 @@ void PlayerActor::Startup()
 	LoadAndStartupPlayerSprite();
 
 	// 무기 설정
-	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Primary)] = WeaponFactory::I()->CreateWeaponActor(0);
-	m_arrWeaponActor[TO_NUM(EWeaponSlotType::Secondary)] = WeaponFactory::I()->CreateWeaponActor(1);
-
-	for (const std::shared_ptr<WeaponActor>& spWeaponActor : m_arrWeaponActor)
-	{
-		spWeaponActor->SetWeaponOwner(std::dynamic_pointer_cast<PlayerActor>(shared_from_this()));
-	}
+	CreateAndPossessWeapon(2, EWeaponSlotType::Primary);
+	CreateAndPossessWeapon(1, EWeaponSlotType::Secondary);
 
 #pragma region 플레이어 기본 정보 초기화
 	TransformComponent* pTransformComponent = GetComponent<TransformComponent>();
@@ -71,9 +66,10 @@ void PlayerActor::ProcessDamaged(const std::shared_ptr<PawnActor>& spAttacker)
 	effectSpawnInfo.effectSize = Size(80, 80);
 	pCurrentScene->ReserveCreateEffectActor(effectSpawnInfo);
 
-	if (IsSamePawnActorState<PlayerDefenceState>())
+	if ((spAttacker != nullptr) &&
+		(IsSamePawnActorState<PlayerDefenceState>()))
 	{
-		const std::shared_ptr<WeaponActor>& spSecondaryWeapon = GetWeapon(EWeaponSlotType::Secondary);
+		const WeaponActorPtr& spSecondaryWeapon = GetWeapon(EWeaponSlotType::Secondary);
 		// spSecondaryWeapon 이거의 스탯을 가져와서 이것 저것
 
 		// 넉백이 가능한 상황이라면 넉백 실행
@@ -109,11 +105,11 @@ void PlayerActor::RegisterStateOnBidirectional()
 {
 	Super::RegisterStateOnBidirectional();
 
-	RegisterActorStateMappingTable<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
-	RegisterActorStateMappingTable<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
+	RegisterActorStateMappingTable<PlayerAttackState>(Protocol::EEntityState::Attack);
+	RegisterActorStateMappingTable<PlayerDefenceState>(Protocol::EEntityState::Defense);
 
-	RegisterNetworkEntityStateMappingTable<PlayerAttackState>(Protocol::ENetworkEntityState::Attack);
-	RegisterNetworkEntityStateMappingTable<PlayerDefenceState>(Protocol::ENetworkEntityState::Defense);
+	RegisterEntityStateMappingTable<PlayerAttackState>(Protocol::EEntityState::Attack);
+	RegisterEntityStateMappingTable<PlayerDefenceState>(Protocol::EEntityState::Defense);
 }
 
 void PlayerActor::ProcessMoveDirection(const Vector2d& vMoveDir)

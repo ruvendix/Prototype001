@@ -21,7 +21,7 @@ namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace Protocol {
-PROTOBUF_CONSTEXPR NetworkEntityInfo::NetworkEntityInfo(
+PROTOBUF_CONSTEXPR EntityInfo::EntityInfo(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.entity_id_)*/uint64_t{0u}
   , /*decltype(_impl_.cell_pos_x_)*/0u
@@ -31,95 +31,120 @@ PROTOBUF_CONSTEXPR NetworkEntityInfo::NetworkEntityInfo(
   , /*decltype(_impl_.attack_)*/0u
   , /*decltype(_impl_.defense_)*/0u
   , /*decltype(_impl_.entity_type_)*/0
-  , /*decltype(_impl_.entitye_look_at_dir_)*/0
+  , /*decltype(_impl_.entity_look_at_dir_)*/0
   , /*decltype(_impl_.entity_state_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct NetworkEntityInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR NetworkEntityInfoDefaultTypeInternal()
+struct EntityInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR EntityInfoDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~NetworkEntityInfoDefaultTypeInternal() {}
+  ~EntityInfoDefaultTypeInternal() {}
   union {
-    NetworkEntityInfo _instance;
+    EntityInfo _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NetworkEntityInfoDefaultTypeInternal _NetworkEntityInfo_default_instance_;
-PROTOBUF_CONSTEXPR NetworkMonsterInfo::NetworkMonsterInfo(
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EntityInfoDefaultTypeInternal _EntityInfo_default_instance_;
+PROTOBUF_CONSTEXPR MonsterInfo::MonsterInfo(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.monster_info_)*/nullptr
   , /*decltype(_impl_.monster_id_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct NetworkMonsterInfoDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR NetworkMonsterInfoDefaultTypeInternal()
+struct MonsterInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MonsterInfoDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~NetworkMonsterInfoDefaultTypeInternal() {}
+  ~MonsterInfoDefaultTypeInternal() {}
   union {
-    NetworkMonsterInfo _instance;
+    MonsterInfo _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NetworkMonsterInfoDefaultTypeInternal _NetworkMonsterInfo_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MonsterInfoDefaultTypeInternal _MonsterInfo_default_instance_;
+PROTOBUF_CONSTEXPR ProjectileInfo::ProjectileInfo(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.entity_info_)*/nullptr
+  , /*decltype(_impl_.projectile_id_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ProjectileInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ProjectileInfoDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ProjectileInfoDefaultTypeInternal() {}
+  union {
+    ProjectileInfo _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ProjectileInfoDefaultTypeInternal _ProjectileInfo_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Struct_2eproto[2];
+static ::_pb::Metadata file_level_metadata_Struct_2eproto[3];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Struct_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Struct_2eproto = nullptr;
 
 const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entity_id_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.cell_pos_x_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.cell_pos_y_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.max_hp_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.hp_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.attack_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.defense_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entity_type_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entitye_look_at_dir_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkEntityInfo, _impl_.entity_state_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.entity_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.cell_pos_x_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.cell_pos_y_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.max_hp_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.hp_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.attack_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.defense_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.entity_type_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.entity_look_at_dir_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EntityInfo, _impl_.entity_state_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkMonsterInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::MonsterInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkMonsterInfo, _impl_.monster_id_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::NetworkMonsterInfo, _impl_.monster_info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::MonsterInfo, _impl_.monster_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::MonsterInfo, _impl_.monster_info_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::ProjectileInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::ProjectileInfo, _impl_.projectile_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::ProjectileInfo, _impl_.entity_info_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::Protocol::NetworkEntityInfo)},
-  { 16, -1, -1, sizeof(::Protocol::NetworkMonsterInfo)},
+  { 0, -1, -1, sizeof(::Protocol::EntityInfo)},
+  { 16, -1, -1, sizeof(::Protocol::MonsterInfo)},
+  { 24, -1, -1, sizeof(::Protocol::ProjectileInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::Protocol::_NetworkEntityInfo_default_instance_._instance,
-  &::Protocol::_NetworkMonsterInfo_default_instance_._instance,
+  &::Protocol::_EntityInfo_default_instance_._instance,
+  &::Protocol::_MonsterInfo_default_instance_._instance,
+  &::Protocol::_ProjectileInfo_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\271\002\n"
-  "\021NetworkEntityInfo\022\021\n\tentity_id\030\001 \001(\004\022\022\n"
-  "\ncell_pos_x\030\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022\016\n"
-  "\006max_hp\030\004 \001(\005\022\n\n\002hp\030\005 \001(\005\022\016\n\006attack\030\006 \001("
-  "\r\022\017\n\007defense\030\007 \001(\r\0221\n\013entity_type\030\010 \001(\0162"
-  "\034.Protocol.ENetworkEntityType\022D\n\023entitye"
-  "_look_at_dir\030\t \001(\0162\'.Protocol.ENetworkEn"
-  "tityLookAtDirection\0223\n\014entity_state\030\n \001("
-  "\0162\035.Protocol.ENetworkEntityState\"[\n\022Netw"
-  "orkMonsterInfo\022\022\n\nmonster_id\030\001 \001(\r\0221\n\014mo"
-  "nster_info\030\002 \001(\0132\033.Protocol.NetworkEntit"
-  "yInfob\006proto3"
+  "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\234\002\n"
+  "\nEntityInfo\022\021\n\tentity_id\030\001 \001(\004\022\022\n\ncell_p"
+  "os_x\030\002 \001(\r\022\022\n\ncell_pos_y\030\003 \001(\r\022\016\n\006max_hp"
+  "\030\004 \001(\005\022\n\n\002hp\030\005 \001(\005\022\016\n\006attack\030\006 \001(\r\022\017\n\007de"
+  "fense\030\007 \001(\r\022*\n\013entity_type\030\010 \001(\0162\025.Proto"
+  "col.EEntityType\022<\n\022entity_look_at_dir\030\t "
+  "\001(\0162 .Protocol.EEntityLookAtDirection\022,\n"
+  "\014entity_state\030\n \001(\0162\026.Protocol.EEntitySt"
+  "ate\"M\n\013MonsterInfo\022\022\n\nmonster_id\030\001 \001(\r\022*"
+  "\n\014monster_info\030\002 \001(\0132\024.Protocol.EntityIn"
+  "fo\"R\n\016ProjectileInfo\022\025\n\rprojectile_id\030\001 "
+  "\001(\r\022)\n\013entity_info\030\002 \001(\0132\024.Protocol.Enti"
+  "tyInfob\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 453, descriptor_table_protodef_Struct_2eproto,
+    false, false, 494, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
-    &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 2,
+    &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 3,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
     file_level_metadata_Struct_2eproto, file_level_enum_descriptors_Struct_2eproto,
     file_level_service_descriptors_Struct_2eproto,
@@ -134,19 +159,19 @@ namespace Protocol {
 
 // ===================================================================
 
-class NetworkEntityInfo::_Internal {
+class EntityInfo::_Internal {
  public:
 };
 
-NetworkEntityInfo::NetworkEntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+EntityInfo::EntityInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.NetworkEntityInfo)
+  // @@protoc_insertion_point(arena_constructor:Protocol.EntityInfo)
 }
-NetworkEntityInfo::NetworkEntityInfo(const NetworkEntityInfo& from)
+EntityInfo::EntityInfo(const EntityInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  NetworkEntityInfo* const _this = this; (void)_this;
+  EntityInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.entity_id_){}
     , decltype(_impl_.cell_pos_x_){}
@@ -156,7 +181,7 @@ NetworkEntityInfo::NetworkEntityInfo(const NetworkEntityInfo& from)
     , decltype(_impl_.attack_){}
     , decltype(_impl_.defense_){}
     , decltype(_impl_.entity_type_){}
-    , decltype(_impl_.entitye_look_at_dir_){}
+    , decltype(_impl_.entity_look_at_dir_){}
     , decltype(_impl_.entity_state_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -164,10 +189,10 @@ NetworkEntityInfo::NetworkEntityInfo(const NetworkEntityInfo& from)
   ::memcpy(&_impl_.entity_id_, &from._impl_.entity_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.entity_state_) -
     reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.entity_state_));
-  // @@protoc_insertion_point(copy_constructor:Protocol.NetworkEntityInfo)
+  // @@protoc_insertion_point(copy_constructor:Protocol.EntityInfo)
 }
 
-inline void NetworkEntityInfo::SharedCtor(
+inline void EntityInfo::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -180,14 +205,14 @@ inline void NetworkEntityInfo::SharedCtor(
     , decltype(_impl_.attack_){0u}
     , decltype(_impl_.defense_){0u}
     , decltype(_impl_.entity_type_){0}
-    , decltype(_impl_.entitye_look_at_dir_){0}
+    , decltype(_impl_.entity_look_at_dir_){0}
     , decltype(_impl_.entity_state_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
 
-NetworkEntityInfo::~NetworkEntityInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.NetworkEntityInfo)
+EntityInfo::~EntityInfo() {
+  // @@protoc_insertion_point(destructor:Protocol.EntityInfo)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -195,16 +220,16 @@ NetworkEntityInfo::~NetworkEntityInfo() {
   SharedDtor();
 }
 
-inline void NetworkEntityInfo::SharedDtor() {
+inline void EntityInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
 }
 
-void NetworkEntityInfo::SetCachedSize(int size) const {
+void EntityInfo::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void NetworkEntityInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.NetworkEntityInfo)
+void EntityInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.EntityInfo)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -215,7 +240,7 @@ void NetworkEntityInfo::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* NetworkEntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* EntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -277,30 +302,30 @@ const char* NetworkEntityInfo::_InternalParse(const char* ptr, ::_pbi::ParseCont
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.ENetworkEntityType entity_type = 8;
+      // .Protocol.EEntityType entity_type = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_entity_type(static_cast<::Protocol::ENetworkEntityType>(val));
+          _internal_set_entity_type(static_cast<::Protocol::EEntityType>(val));
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
+      // .Protocol.EEntityLookAtDirection entity_look_at_dir = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_entitye_look_at_dir(static_cast<::Protocol::ENetworkEntityLookAtDirection>(val));
+          _internal_set_entity_look_at_dir(static_cast<::Protocol::EEntityLookAtDirection>(val));
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.ENetworkEntityState entity_state = 10;
+      // .Protocol.EEntityState entity_state = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_entity_state(static_cast<::Protocol::ENetworkEntityState>(val));
+          _internal_set_entity_state(static_cast<::Protocol::EEntityState>(val));
         } else
           goto handle_unusual;
         continue;
@@ -327,9 +352,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* NetworkEntityInfo::_InternalSerialize(
+uint8_t* EntityInfo::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.NetworkEntityInfo)
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.EntityInfo)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -375,21 +400,21 @@ uint8_t* NetworkEntityInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(7, this->_internal_defense(), target);
   }
 
-  // .Protocol.ENetworkEntityType entity_type = 8;
+  // .Protocol.EEntityType entity_type = 8;
   if (this->_internal_entity_type() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
       8, this->_internal_entity_type(), target);
   }
 
-  // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
-  if (this->_internal_entitye_look_at_dir() != 0) {
+  // .Protocol.EEntityLookAtDirection entity_look_at_dir = 9;
+  if (this->_internal_entity_look_at_dir() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      9, this->_internal_entitye_look_at_dir(), target);
+      9, this->_internal_entity_look_at_dir(), target);
   }
 
-  // .Protocol.ENetworkEntityState entity_state = 10;
+  // .Protocol.EEntityState entity_state = 10;
   if (this->_internal_entity_state() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -400,12 +425,12 @@ uint8_t* NetworkEntityInfo::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.NetworkEntityInfo)
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.EntityInfo)
   return target;
 }
 
-size_t NetworkEntityInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.NetworkEntityInfo)
+size_t EntityInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.EntityInfo)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -447,19 +472,19 @@ size_t NetworkEntityInfo::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_defense());
   }
 
-  // .Protocol.ENetworkEntityType entity_type = 8;
+  // .Protocol.EEntityType entity_type = 8;
   if (this->_internal_entity_type() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_type());
   }
 
-  // .Protocol.ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
-  if (this->_internal_entitye_look_at_dir() != 0) {
+  // .Protocol.EEntityLookAtDirection entity_look_at_dir = 9;
+  if (this->_internal_entity_look_at_dir() != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_entitye_look_at_dir());
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_look_at_dir());
   }
 
-  // .Protocol.ENetworkEntityState entity_state = 10;
+  // .Protocol.EEntityState entity_state = 10;
   if (this->_internal_entity_state() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_entity_state());
@@ -468,17 +493,17 @@ size_t NetworkEntityInfo::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData NetworkEntityInfo::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData EntityInfo::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    NetworkEntityInfo::MergeImpl
+    EntityInfo::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*NetworkEntityInfo::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*EntityInfo::GetClassData() const { return &_class_data_; }
 
 
-void NetworkEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<NetworkEntityInfo*>(&to_msg);
-  auto& from = static_cast<const NetworkEntityInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.NetworkEntityInfo)
+void EntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<EntityInfo*>(&to_msg);
+  auto& from = static_cast<const EntityInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.EntityInfo)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -507,8 +532,8 @@ void NetworkEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   if (from._internal_entity_type() != 0) {
     _this->_internal_set_entity_type(from._internal_entity_type());
   }
-  if (from._internal_entitye_look_at_dir() != 0) {
-    _this->_internal_set_entitye_look_at_dir(from._internal_entitye_look_at_dir());
+  if (from._internal_entity_look_at_dir() != 0) {
+    _this->_internal_set_entity_look_at_dir(from._internal_entity_look_at_dir());
   }
   if (from._internal_entity_state() != 0) {
     _this->_internal_set_entity_state(from._internal_entity_state());
@@ -516,29 +541,29 @@ void NetworkEntityInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void NetworkEntityInfo::CopyFrom(const NetworkEntityInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.NetworkEntityInfo)
+void EntityInfo::CopyFrom(const EntityInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.EntityInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool NetworkEntityInfo::IsInitialized() const {
+bool EntityInfo::IsInitialized() const {
   return true;
 }
 
-void NetworkEntityInfo::InternalSwap(NetworkEntityInfo* other) {
+void EntityInfo::InternalSwap(EntityInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(NetworkEntityInfo, _impl_.entity_state_)
-      + sizeof(NetworkEntityInfo::_impl_.entity_state_)
-      - PROTOBUF_FIELD_OFFSET(NetworkEntityInfo, _impl_.entity_id_)>(
+      PROTOBUF_FIELD_OFFSET(EntityInfo, _impl_.entity_state_)
+      + sizeof(EntityInfo::_impl_.entity_state_)
+      - PROTOBUF_FIELD_OFFSET(EntityInfo, _impl_.entity_id_)>(
           reinterpret_cast<char*>(&_impl_.entity_id_),
           reinterpret_cast<char*>(&other->_impl_.entity_id_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata NetworkEntityInfo::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata EntityInfo::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
       file_level_metadata_Struct_2eproto[0]);
@@ -546,24 +571,24 @@ void NetworkEntityInfo::InternalSwap(NetworkEntityInfo* other) {
 
 // ===================================================================
 
-class NetworkMonsterInfo::_Internal {
+class MonsterInfo::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& monster_info(const NetworkMonsterInfo* msg);
+  static const ::Protocol::EntityInfo& monster_info(const MonsterInfo* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
-NetworkMonsterInfo::_Internal::monster_info(const NetworkMonsterInfo* msg) {
+const ::Protocol::EntityInfo&
+MonsterInfo::_Internal::monster_info(const MonsterInfo* msg) {
   return *msg->_impl_.monster_info_;
 }
-NetworkMonsterInfo::NetworkMonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+MonsterInfo::MonsterInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.NetworkMonsterInfo)
+  // @@protoc_insertion_point(arena_constructor:Protocol.MonsterInfo)
 }
-NetworkMonsterInfo::NetworkMonsterInfo(const NetworkMonsterInfo& from)
+MonsterInfo::MonsterInfo(const MonsterInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  NetworkMonsterInfo* const _this = this; (void)_this;
+  MonsterInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.monster_info_){nullptr}
     , decltype(_impl_.monster_id_){}
@@ -571,13 +596,13 @@ NetworkMonsterInfo::NetworkMonsterInfo(const NetworkMonsterInfo& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_monster_info()) {
-    _this->_impl_.monster_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.monster_info_);
+    _this->_impl_.monster_info_ = new ::Protocol::EntityInfo(*from._impl_.monster_info_);
   }
   _this->_impl_.monster_id_ = from._impl_.monster_id_;
-  // @@protoc_insertion_point(copy_constructor:Protocol.NetworkMonsterInfo)
+  // @@protoc_insertion_point(copy_constructor:Protocol.MonsterInfo)
 }
 
-inline void NetworkMonsterInfo::SharedCtor(
+inline void MonsterInfo::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -588,8 +613,8 @@ inline void NetworkMonsterInfo::SharedCtor(
   };
 }
 
-NetworkMonsterInfo::~NetworkMonsterInfo() {
-  // @@protoc_insertion_point(destructor:Protocol.NetworkMonsterInfo)
+MonsterInfo::~MonsterInfo() {
+  // @@protoc_insertion_point(destructor:Protocol.MonsterInfo)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -597,17 +622,17 @@ NetworkMonsterInfo::~NetworkMonsterInfo() {
   SharedDtor();
 }
 
-inline void NetworkMonsterInfo::SharedDtor() {
+inline void MonsterInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   if (this != internal_default_instance()) delete _impl_.monster_info_;
 }
 
-void NetworkMonsterInfo::SetCachedSize(int size) const {
+void MonsterInfo::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void NetworkMonsterInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.NetworkMonsterInfo)
+void MonsterInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.MonsterInfo)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -620,7 +645,7 @@ void NetworkMonsterInfo::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* NetworkMonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* MonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -634,7 +659,7 @@ const char* NetworkMonsterInfo::_InternalParse(const char* ptr, ::_pbi::ParseCon
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.NetworkEntityInfo monster_info = 2;
+      // .Protocol.EntityInfo monster_info = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_monster_info(), ptr);
@@ -665,9 +690,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* NetworkMonsterInfo::_InternalSerialize(
+uint8_t* MonsterInfo::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.NetworkMonsterInfo)
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.MonsterInfo)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -677,7 +702,7 @@ uint8_t* NetworkMonsterInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_monster_id(), target);
   }
 
-  // .Protocol.NetworkEntityInfo monster_info = 2;
+  // .Protocol.EntityInfo monster_info = 2;
   if (this->_internal_has_monster_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(2, _Internal::monster_info(this),
@@ -688,19 +713,19 @@ uint8_t* NetworkMonsterInfo::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.NetworkMonsterInfo)
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.MonsterInfo)
   return target;
 }
 
-size_t NetworkMonsterInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.NetworkMonsterInfo)
+size_t MonsterInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.MonsterInfo)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo monster_info = 2;
+  // .Protocol.EntityInfo monster_info = 2;
   if (this->_internal_has_monster_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -715,23 +740,23 @@ size_t NetworkMonsterInfo::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData NetworkMonsterInfo::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MonsterInfo::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    NetworkMonsterInfo::MergeImpl
+    MonsterInfo::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*NetworkMonsterInfo::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MonsterInfo::GetClassData() const { return &_class_data_; }
 
 
-void NetworkMonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<NetworkMonsterInfo*>(&to_msg);
-  auto& from = static_cast<const NetworkMonsterInfo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.NetworkMonsterInfo)
+void MonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<MonsterInfo*>(&to_msg);
+  auto& from = static_cast<const MonsterInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.MonsterInfo)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from._internal_has_monster_info()) {
-    _this->_internal_mutable_monster_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_monster_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_monster_info());
   }
   if (from._internal_monster_id() != 0) {
@@ -740,44 +765,272 @@ void NetworkMonsterInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, con
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void NetworkMonsterInfo::CopyFrom(const NetworkMonsterInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.NetworkMonsterInfo)
+void MonsterInfo::CopyFrom(const MonsterInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.MonsterInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool NetworkMonsterInfo::IsInitialized() const {
+bool MonsterInfo::IsInitialized() const {
   return true;
 }
 
-void NetworkMonsterInfo::InternalSwap(NetworkMonsterInfo* other) {
+void MonsterInfo::InternalSwap(MonsterInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(NetworkMonsterInfo, _impl_.monster_id_)
-      + sizeof(NetworkMonsterInfo::_impl_.monster_id_)
-      - PROTOBUF_FIELD_OFFSET(NetworkMonsterInfo, _impl_.monster_info_)>(
+      PROTOBUF_FIELD_OFFSET(MonsterInfo, _impl_.monster_id_)
+      + sizeof(MonsterInfo::_impl_.monster_id_)
+      - PROTOBUF_FIELD_OFFSET(MonsterInfo, _impl_.monster_info_)>(
           reinterpret_cast<char*>(&_impl_.monster_info_),
           reinterpret_cast<char*>(&other->_impl_.monster_info_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata NetworkMonsterInfo::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata MonsterInfo::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
       file_level_metadata_Struct_2eproto[1]);
 }
 
+// ===================================================================
+
+class ProjectileInfo::_Internal {
+ public:
+  static const ::Protocol::EntityInfo& entity_info(const ProjectileInfo* msg);
+};
+
+const ::Protocol::EntityInfo&
+ProjectileInfo::_Internal::entity_info(const ProjectileInfo* msg) {
+  return *msg->_impl_.entity_info_;
+}
+ProjectileInfo::ProjectileInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.ProjectileInfo)
+}
+ProjectileInfo::ProjectileInfo(const ProjectileInfo& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ProjectileInfo* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.entity_info_){nullptr}
+    , decltype(_impl_.projectile_id_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_entity_info()) {
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
+  }
+  _this->_impl_.projectile_id_ = from._impl_.projectile_id_;
+  // @@protoc_insertion_point(copy_constructor:Protocol.ProjectileInfo)
+}
+
+inline void ProjectileInfo::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.entity_info_){nullptr}
+    , decltype(_impl_.projectile_id_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+ProjectileInfo::~ProjectileInfo() {
+  // @@protoc_insertion_point(destructor:Protocol.ProjectileInfo)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void ProjectileInfo::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.entity_info_;
+}
+
+void ProjectileInfo::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void ProjectileInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.ProjectileInfo)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.entity_info_ != nullptr) {
+    delete _impl_.entity_info_;
+  }
+  _impl_.entity_info_ = nullptr;
+  _impl_.projectile_id_ = 0u;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ProjectileInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 projectile_id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.projectile_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Protocol.EntityInfo entity_info = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* ProjectileInfo::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.ProjectileInfo)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 projectile_id = 1;
+  if (this->_internal_projectile_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_projectile_id(), target);
+  }
+
+  // .Protocol.EntityInfo entity_info = 2;
+  if (this->_internal_has_entity_info()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::entity_info(this),
+        _Internal::entity_info(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.ProjectileInfo)
+  return target;
+}
+
+size_t ProjectileInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.ProjectileInfo)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.EntityInfo entity_info = 2;
+  if (this->_internal_has_entity_info()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.entity_info_);
+  }
+
+  // uint32 projectile_id = 1;
+  if (this->_internal_projectile_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_projectile_id());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ProjectileInfo::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ProjectileInfo::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ProjectileInfo::GetClassData() const { return &_class_data_; }
+
+
+void ProjectileInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ProjectileInfo*>(&to_msg);
+  auto& from = static_cast<const ProjectileInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.ProjectileInfo)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_entity_info()) {
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
+        from._internal_entity_info());
+  }
+  if (from._internal_projectile_id() != 0) {
+    _this->_internal_set_projectile_id(from._internal_projectile_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ProjectileInfo::CopyFrom(const ProjectileInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.ProjectileInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ProjectileInfo::IsInitialized() const {
+  return true;
+}
+
+void ProjectileInfo::InternalSwap(ProjectileInfo* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ProjectileInfo, _impl_.projectile_id_)
+      + sizeof(ProjectileInfo::_impl_.projectile_id_)
+      - PROTOBUF_FIELD_OFFSET(ProjectileInfo, _impl_.entity_info_)>(
+          reinterpret_cast<char*>(&_impl_.entity_info_),
+          reinterpret_cast<char*>(&other->_impl_.entity_info_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ProjectileInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Struct_2eproto_getter, &descriptor_table_Struct_2eproto_once,
+      file_level_metadata_Struct_2eproto[2]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::Protocol::NetworkEntityInfo*
-Arena::CreateMaybeMessage< ::Protocol::NetworkEntityInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::NetworkEntityInfo >(arena);
+template<> PROTOBUF_NOINLINE ::Protocol::EntityInfo*
+Arena::CreateMaybeMessage< ::Protocol::EntityInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::EntityInfo >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Protocol::NetworkMonsterInfo*
-Arena::CreateMaybeMessage< ::Protocol::NetworkMonsterInfo >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::NetworkMonsterInfo >(arena);
+template<> PROTOBUF_NOINLINE ::Protocol::MonsterInfo*
+Arena::CreateMaybeMessage< ::Protocol::MonsterInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::MonsterInfo >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::ProjectileInfo*
+Arena::CreateMaybeMessage< ::Protocol::ProjectileInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::ProjectileInfo >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

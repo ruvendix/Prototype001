@@ -3,11 +3,10 @@
 #include "EnemyMonsterActor.h"
 
 #include "EngineSources/Actor/PawnActor/PawnActorState.h"
-#include "ClientSources/Player/PlayerActor.h"
 
 EnemyMonsterActor::EnemyMonsterActor(const EnemyMonsterActor& srcActor) : Super(srcActor)
 {
-	m_spEnemyRespawner = srcActor.m_spEnemyRespawner;
+
 }
 
 EnemyMonsterActor::~EnemyMonsterActor()
@@ -47,12 +46,4 @@ void EnemyMonsterActor::ProcessMoveDirection(const Vector2d& vMoveDir)
 bool EnemyMonsterActor::CheckMovingState() const
 {
 	return (IsSamePawnActorState<PawnActorIdleState>());
-}
-
-void EnemyMonsterActor::DecreaseEnemyCountToEnemyRespawner() const
-{
-	if (m_spEnemyRespawner.expired() == false)
-	{
-		m_spEnemyRespawner.lock()->DecreaseEnemyCount();
-	}
 }

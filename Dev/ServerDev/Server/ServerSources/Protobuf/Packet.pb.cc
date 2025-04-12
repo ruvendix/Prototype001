@@ -196,21 +196,60 @@ struct S_HitDamageToEntityPacketDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_HitDamageToEntityPacketDefaultTypeInternal _S_HitDamageToEntityPacket_default_instance_;
-PROTOBUF_CONSTEXPR S_DiePlayerPacket::S_DiePlayerPacket(
+PROTOBUF_CONSTEXPR C_DieEntityPacket::C_DieEntityPacket(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.victim_info_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct S_DiePlayerPacketDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_DiePlayerPacketDefaultTypeInternal()
+struct C_DieEntityPacketDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_DieEntityPacketDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_DiePlayerPacketDefaultTypeInternal() {}
+  ~C_DieEntityPacketDefaultTypeInternal() {}
   union {
-    S_DiePlayerPacket _instance;
+    C_DieEntityPacket _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DiePlayerPacketDefaultTypeInternal _S_DiePlayerPacket_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_DieEntityPacketDefaultTypeInternal _C_DieEntityPacket_default_instance_;
+PROTOBUF_CONSTEXPR S_DieEntityPacket::S_DieEntityPacket(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.victim_info_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_DieEntityPacketDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_DieEntityPacketDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_DieEntityPacketDefaultTypeInternal() {}
+  union {
+    S_DieEntityPacket _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DieEntityPacketDefaultTypeInternal _S_DieEntityPacket_default_instance_;
+PROTOBUF_CONSTEXPR C_CreateProjectilePacket::C_CreateProjectilePacket(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.projectile_info_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct C_CreateProjectilePacketDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_CreateProjectilePacketDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_CreateProjectilePacketDefaultTypeInternal() {}
+  union {
+    C_CreateProjectilePacket _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_CreateProjectilePacketDefaultTypeInternal _C_CreateProjectilePacket_default_instance_;
+PROTOBUF_CONSTEXPR S_CreateProjectilePacket::S_CreateProjectilePacket(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.projectile_info_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_CreateProjectilePacketDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_CreateProjectilePacketDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_CreateProjectilePacketDefaultTypeInternal() {}
+  union {
+    S_CreateProjectilePacket _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_CreateProjectilePacketDefaultTypeInternal _S_CreateProjectilePacket_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Packet_2eproto[14];
+static ::_pb::Metadata file_level_metadata_Packet_2eproto[17];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Packet_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Packet_2eproto = nullptr;
 
@@ -313,12 +352,33 @@ const uint32_t TableStruct_Packet_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::S_HitDamageToEntityPacket, _impl_.attacker_info_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_HitDamageToEntityPacket, _impl_.victim_info_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_DiePlayerPacket, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_DieEntityPacket, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_DiePlayerPacket, _impl_.victim_info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_DieEntityPacket, _impl_.victim_info_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_DieEntityPacket, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_DieEntityPacket, _impl_.victim_info_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_CreateProjectilePacket, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_CreateProjectilePacket, _impl_.projectile_info_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_CreateProjectilePacket, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_CreateProjectilePacket, _impl_.projectile_info_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::S_EnterGamePacket)},
@@ -334,7 +394,10 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 74, -1, -1, sizeof(::Protocol::S_ModifyEntityStatePacket)},
   { 81, -1, -1, sizeof(::Protocol::C_AttckToEntityPacket)},
   { 89, -1, -1, sizeof(::Protocol::S_HitDamageToEntityPacket)},
-  { 97, -1, -1, sizeof(::Protocol::S_DiePlayerPacket)},
+  { 97, -1, -1, sizeof(::Protocol::C_DieEntityPacket)},
+  { 104, -1, -1, sizeof(::Protocol::S_DieEntityPacket)},
+  { 111, -1, -1, sizeof(::Protocol::C_CreateProjectilePacket)},
+  { 118, -1, -1, sizeof(::Protocol::S_CreateProjectilePacket)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -351,44 +414,50 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_ModifyEntityStatePacket_default_instance_._instance,
   &::Protocol::_C_AttckToEntityPacket_default_instance_._instance,
   &::Protocol::_S_HitDamageToEntityPacket_default_instance_._instance,
-  &::Protocol::_S_DiePlayerPacket_default_instance_._instance,
+  &::Protocol::_C_DieEntityPacket_default_instance_._instance,
+  &::Protocol::_S_DieEntityPacket_default_instance_._instance,
+  &::Protocol::_C_CreateProjectilePacket_default_instance_._instance,
+  &::Protocol::_S_CreateProjectilePacket_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Packet_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\014Packet.proto\022\010Protocol\032\nEnum.proto\032\014St"
   "ruct.proto\";\n\021S_EnterGamePacket\022\025\n\renter"
-  "_success\030\001 \001(\010\022\017\n\007user_id\030\002 \001(\004\"m\n\021S_Lea"
+  "_success\030\001 \001(\010\022\017\n\007user_id\030\002 \001(\004\"f\n\021S_Lea"
   "veGamePacket\022\025\n\rleave_success\030\001 \001(\010\022\017\n\007u"
-  "ser_id\030\002 \001(\004\0220\n\013player_info\030\003 \001(\0132\033.Prot"
-  "ocol.NetworkEntityInfo\"Q\n\030S_CreateMainPl"
-  "ayerPacket\0225\n\020main_player_info\030\001 \001(\0132\033.P"
-  "rotocol.NetworkEntityInfo\"~\n\024S_SyncEntit"
-  "iesPacket\0221\n\014players_info\030\001 \003(\0132\033.Protoc"
-  "ol.NetworkEntityInfo\0223\n\rmonsters_info\030\002 "
-  "\003(\0132\034.Protocol.NetworkMonsterInfo\"F\n\022C_M"
-  "oveEntityPacket\0220\n\013entity_info\030\001 \001(\0132\033.P"
-  "rotocol.NetworkEntityInfo\"F\n\022S_MoveEntit"
-  "yPacket\0220\n\013entity_info\030\001 \001(\0132\033.Protocol."
-  "NetworkEntityInfo\"S\n\037S_ModifyPlayerInfor"
-  "mationPacket\0220\n\013player_info\030\001 \001(\0132\033.Prot"
-  "ocol.NetworkEntityInfo\"W\n#C_ModifyEntity"
-  "LookAtDirectionPacket\0220\n\013entity_info\030\001 \001"
-  "(\0132\033.Protocol.NetworkEntityInfo\"W\n#S_Mod"
-  "ifyEntityLookAtDirectionPacket\0220\n\013entity"
-  "_info\030\001 \001(\0132\033.Protocol.NetworkEntityInfo"
-  "\"M\n\031C_ModifyEntityStatePacket\0220\n\013entity_"
-  "info\030\001 \001(\0132\033.Protocol.NetworkEntityInfo\""
-  "M\n\031S_ModifyEntityStatePacket\0220\n\013entity_i"
-  "nfo\030\001 \001(\0132\033.Protocol.NetworkEntityInfo\"}"
-  "\n\025C_AttckToEntityPacket\0222\n\rattacker_info"
-  "\030\001 \001(\0132\033.Protocol.NetworkEntityInfo\0220\n\013v"
-  "ictim_info\030\002 \001(\0132\033.Protocol.NetworkEntit"
-  "yInfo\"\201\001\n\031S_HitDamageToEntityPacket\0222\n\ra"
-  "ttacker_info\030\001 \001(\0132\033.Protocol.NetworkEnt"
-  "ityInfo\0220\n\013victim_info\030\002 \001(\0132\033.Protocol."
-  "NetworkEntityInfo\"E\n\021S_DiePlayerPacket\0220"
-  "\n\013victim_info\030\001 \001(\0132\033.Protocol.NetworkEn"
-  "tityInfob\006proto3"
+  "ser_id\030\002 \001(\004\022)\n\013player_info\030\003 \001(\0132\024.Prot"
+  "ocol.EntityInfo\"J\n\030S_CreateMainPlayerPac"
+  "ket\022.\n\020main_player_info\030\001 \001(\0132\024.Protocol"
+  ".EntityInfo\"p\n\024S_SyncEntitiesPacket\022*\n\014p"
+  "layers_info\030\001 \003(\0132\024.Protocol.EntityInfo\022"
+  ",\n\rmonsters_info\030\002 \003(\0132\025.Protocol.Monste"
+  "rInfo\"\?\n\022C_MoveEntityPacket\022)\n\013entity_in"
+  "fo\030\001 \001(\0132\024.Protocol.EntityInfo\"\?\n\022S_Move"
+  "EntityPacket\022)\n\013entity_info\030\001 \001(\0132\024.Prot"
+  "ocol.EntityInfo\"L\n\037S_ModifyPlayerInforma"
+  "tionPacket\022)\n\013player_info\030\001 \001(\0132\024.Protoc"
+  "ol.EntityInfo\"P\n#C_ModifyEntityLookAtDir"
+  "ectionPacket\022)\n\013entity_info\030\001 \001(\0132\024.Prot"
+  "ocol.EntityInfo\"P\n#S_ModifyEntityLookAtD"
+  "irectionPacket\022)\n\013entity_info\030\001 \001(\0132\024.Pr"
+  "otocol.EntityInfo\"F\n\031C_ModifyEntityState"
+  "Packet\022)\n\013entity_info\030\001 \001(\0132\024.Protocol.E"
+  "ntityInfo\"F\n\031S_ModifyEntityStatePacket\022)"
+  "\n\013entity_info\030\001 \001(\0132\024.Protocol.EntityInf"
+  "o\"o\n\025C_AttckToEntityPacket\022+\n\rattacker_i"
+  "nfo\030\001 \001(\0132\024.Protocol.EntityInfo\022)\n\013victi"
+  "m_info\030\002 \001(\0132\024.Protocol.EntityInfo\"s\n\031S_"
+  "HitDamageToEntityPacket\022+\n\rattacker_info"
+  "\030\001 \001(\0132\024.Protocol.EntityInfo\022)\n\013victim_i"
+  "nfo\030\002 \001(\0132\024.Protocol.EntityInfo\">\n\021C_Die"
+  "EntityPacket\022)\n\013victim_info\030\001 \001(\0132\024.Prot"
+  "ocol.EntityInfo\">\n\021S_DieEntityPacket\022)\n\013"
+  "victim_info\030\001 \001(\0132\024.Protocol.EntityInfo\""
+  "M\n\030C_CreateProjectilePacket\0221\n\017projectil"
+  "e_info\030\001 \001(\0132\030.Protocol.ProjectileInfo\"M"
+  "\n\030S_CreateProjectilePacket\0221\n\017projectile"
+  "_info\030\001 \001(\0132\030.Protocol.ProjectileInfob\006p"
+  "roto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Packet_2eproto_deps[2] = {
   &::descriptor_table_Enum_2eproto,
@@ -396,9 +465,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_Packet_2eproto_deps
 };
 static ::_pbi::once_flag descriptor_table_Packet_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Packet_2eproto = {
-    false, false, 1336, descriptor_table_protodef_Packet_2eproto,
+    false, false, 1445, descriptor_table_protodef_Packet_2eproto,
     "Packet.proto",
-    &descriptor_table_Packet_2eproto_once, descriptor_table_Packet_2eproto_deps, 2, 14,
+    &descriptor_table_Packet_2eproto_once, descriptor_table_Packet_2eproto_deps, 2, 17,
     schemas, file_default_instances, TableStruct_Packet_2eproto::offsets,
     file_level_metadata_Packet_2eproto, file_level_enum_descriptors_Packet_2eproto,
     file_level_service_descriptors_Packet_2eproto,
@@ -626,10 +695,10 @@ void S_EnterGamePacket::InternalSwap(S_EnterGamePacket* other) {
 
 class S_LeaveGamePacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& player_info(const S_LeaveGamePacket* msg);
+  static const ::Protocol::EntityInfo& player_info(const S_LeaveGamePacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_LeaveGamePacket::_Internal::player_info(const S_LeaveGamePacket* msg) {
   return *msg->_impl_.player_info_;
 }
@@ -656,7 +725,7 @@ S_LeaveGamePacket::S_LeaveGamePacket(const S_LeaveGamePacket& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_player_info()) {
-    _this->_impl_.player_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.player_info_);
+    _this->_impl_.player_info_ = new ::Protocol::EntityInfo(*from._impl_.player_info_);
   }
   ::memcpy(&_impl_.user_id_, &from._impl_.user_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.leave_success_) -
@@ -732,7 +801,7 @@ const char* S_LeaveGamePacket::_InternalParse(const char* ptr, ::_pbi::ParseCont
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.NetworkEntityInfo player_info = 3;
+      // .Protocol.EntityInfo player_info = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_player_info(), ptr);
@@ -781,7 +850,7 @@ uint8_t* S_LeaveGamePacket::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_user_id(), target);
   }
 
-  // .Protocol.NetworkEntityInfo player_info = 3;
+  // .Protocol.EntityInfo player_info = 3;
   if (this->_internal_has_player_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(3, _Internal::player_info(this),
@@ -804,7 +873,7 @@ size_t S_LeaveGamePacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo player_info = 3;
+  // .Protocol.EntityInfo player_info = 3;
   if (this->_internal_has_player_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -840,7 +909,7 @@ void S_LeaveGamePacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   (void) cached_has_bits;
 
   if (from._internal_has_player_info()) {
-    _this->_internal_mutable_player_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_player_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_player_info());
   }
   if (from._internal_user_id() != 0) {
@@ -884,10 +953,10 @@ void S_LeaveGamePacket::InternalSwap(S_LeaveGamePacket* other) {
 
 class S_CreateMainPlayerPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& main_player_info(const S_CreateMainPlayerPacket* msg);
+  static const ::Protocol::EntityInfo& main_player_info(const S_CreateMainPlayerPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_CreateMainPlayerPacket::_Internal::main_player_info(const S_CreateMainPlayerPacket* msg) {
   return *msg->_impl_.main_player_info_;
 }
@@ -912,7 +981,7 @@ S_CreateMainPlayerPacket::S_CreateMainPlayerPacket(const S_CreateMainPlayerPacke
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_main_player_info()) {
-    _this->_impl_.main_player_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.main_player_info_);
+    _this->_impl_.main_player_info_ = new ::Protocol::EntityInfo(*from._impl_.main_player_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_CreateMainPlayerPacket)
 }
@@ -964,7 +1033,7 @@ const char* S_CreateMainPlayerPacket::_InternalParse(const char* ptr, ::_pbi::Pa
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo main_player_info = 1;
+      // .Protocol.EntityInfo main_player_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_main_player_info(), ptr);
@@ -1001,7 +1070,7 @@ uint8_t* S_CreateMainPlayerPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo main_player_info = 1;
+  // .Protocol.EntityInfo main_player_info = 1;
   if (this->_internal_has_main_player_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::main_player_info(this),
@@ -1024,7 +1093,7 @@ size_t S_CreateMainPlayerPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo main_player_info = 1;
+  // .Protocol.EntityInfo main_player_info = 1;
   if (this->_internal_has_main_player_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1050,7 +1119,7 @@ void S_CreateMainPlayerPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_ms
   (void) cached_has_bits;
 
   if (from._internal_has_main_player_info()) {
-    _this->_internal_mutable_main_player_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_main_player_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_main_player_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1156,7 +1225,7 @@ const char* S_SyncEntitiesPacket::_InternalParse(const char* ptr, ::_pbi::ParseC
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .Protocol.NetworkEntityInfo players_info = 1;
+      // repeated .Protocol.EntityInfo players_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -1169,7 +1238,7 @@ const char* S_SyncEntitiesPacket::_InternalParse(const char* ptr, ::_pbi::ParseC
         } else
           goto handle_unusual;
         continue;
-      // repeated .Protocol.NetworkMonsterInfo monsters_info = 2;
+      // repeated .Protocol.MonsterInfo monsters_info = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -1211,7 +1280,7 @@ uint8_t* S_SyncEntitiesPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .Protocol.NetworkEntityInfo players_info = 1;
+  // repeated .Protocol.EntityInfo players_info = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_players_info_size()); i < n; i++) {
     const auto& repfield = this->_internal_players_info(i);
@@ -1219,7 +1288,7 @@ uint8_t* S_SyncEntitiesPacket::_InternalSerialize(
         InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .Protocol.NetworkMonsterInfo monsters_info = 2;
+  // repeated .Protocol.MonsterInfo monsters_info = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_monsters_info_size()); i < n; i++) {
     const auto& repfield = this->_internal_monsters_info(i);
@@ -1243,14 +1312,14 @@ size_t S_SyncEntitiesPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Protocol.NetworkEntityInfo players_info = 1;
+  // repeated .Protocol.EntityInfo players_info = 1;
   total_size += 1UL * this->_internal_players_info_size();
   for (const auto& msg : this->_impl_.players_info_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .Protocol.NetworkMonsterInfo monsters_info = 2;
+  // repeated .Protocol.MonsterInfo monsters_info = 2;
   total_size += 1UL * this->_internal_monsters_info_size();
   for (const auto& msg : this->_impl_.monsters_info_) {
     total_size +=
@@ -1308,10 +1377,10 @@ void S_SyncEntitiesPacket::InternalSwap(S_SyncEntitiesPacket* other) {
 
 class C_MoveEntityPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& entity_info(const C_MoveEntityPacket* msg);
+  static const ::Protocol::EntityInfo& entity_info(const C_MoveEntityPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 C_MoveEntityPacket::_Internal::entity_info(const C_MoveEntityPacket* msg) {
   return *msg->_impl_.entity_info_;
 }
@@ -1336,7 +1405,7 @@ C_MoveEntityPacket::C_MoveEntityPacket(const C_MoveEntityPacket& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.entity_info_);
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.C_MoveEntityPacket)
 }
@@ -1388,7 +1457,7 @@ const char* C_MoveEntityPacket::_InternalParse(const char* ptr, ::_pbi::ParseCon
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo entity_info = 1;
+      // .Protocol.EntityInfo entity_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
@@ -1425,7 +1494,7 @@ uint8_t* C_MoveEntityPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::entity_info(this),
@@ -1448,7 +1517,7 @@ size_t C_MoveEntityPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1474,7 +1543,7 @@ void C_MoveEntityPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, con
   (void) cached_has_bits;
 
   if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_entity_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1507,10 +1576,10 @@ void C_MoveEntityPacket::InternalSwap(C_MoveEntityPacket* other) {
 
 class S_MoveEntityPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& entity_info(const S_MoveEntityPacket* msg);
+  static const ::Protocol::EntityInfo& entity_info(const S_MoveEntityPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_MoveEntityPacket::_Internal::entity_info(const S_MoveEntityPacket* msg) {
   return *msg->_impl_.entity_info_;
 }
@@ -1535,7 +1604,7 @@ S_MoveEntityPacket::S_MoveEntityPacket(const S_MoveEntityPacket& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.entity_info_);
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_MoveEntityPacket)
 }
@@ -1587,7 +1656,7 @@ const char* S_MoveEntityPacket::_InternalParse(const char* ptr, ::_pbi::ParseCon
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo entity_info = 1;
+      // .Protocol.EntityInfo entity_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
@@ -1624,7 +1693,7 @@ uint8_t* S_MoveEntityPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::entity_info(this),
@@ -1647,7 +1716,7 @@ size_t S_MoveEntityPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1673,7 +1742,7 @@ void S_MoveEntityPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, con
   (void) cached_has_bits;
 
   if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_entity_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1706,10 +1775,10 @@ void S_MoveEntityPacket::InternalSwap(S_MoveEntityPacket* other) {
 
 class S_ModifyPlayerInformationPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& player_info(const S_ModifyPlayerInformationPacket* msg);
+  static const ::Protocol::EntityInfo& player_info(const S_ModifyPlayerInformationPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_ModifyPlayerInformationPacket::_Internal::player_info(const S_ModifyPlayerInformationPacket* msg) {
   return *msg->_impl_.player_info_;
 }
@@ -1734,7 +1803,7 @@ S_ModifyPlayerInformationPacket::S_ModifyPlayerInformationPacket(const S_ModifyP
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_player_info()) {
-    _this->_impl_.player_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.player_info_);
+    _this->_impl_.player_info_ = new ::Protocol::EntityInfo(*from._impl_.player_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_ModifyPlayerInformationPacket)
 }
@@ -1786,7 +1855,7 @@ const char* S_ModifyPlayerInformationPacket::_InternalParse(const char* ptr, ::_
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo player_info = 1;
+      // .Protocol.EntityInfo player_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_player_info(), ptr);
@@ -1823,7 +1892,7 @@ uint8_t* S_ModifyPlayerInformationPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo player_info = 1;
+  // .Protocol.EntityInfo player_info = 1;
   if (this->_internal_has_player_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::player_info(this),
@@ -1846,7 +1915,7 @@ size_t S_ModifyPlayerInformationPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo player_info = 1;
+  // .Protocol.EntityInfo player_info = 1;
   if (this->_internal_has_player_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1872,7 +1941,7 @@ void S_ModifyPlayerInformationPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message
   (void) cached_has_bits;
 
   if (from._internal_has_player_info()) {
-    _this->_internal_mutable_player_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_player_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_player_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1905,10 +1974,10 @@ void S_ModifyPlayerInformationPacket::InternalSwap(S_ModifyPlayerInformationPack
 
 class C_ModifyEntityLookAtDirectionPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& entity_info(const C_ModifyEntityLookAtDirectionPacket* msg);
+  static const ::Protocol::EntityInfo& entity_info(const C_ModifyEntityLookAtDirectionPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 C_ModifyEntityLookAtDirectionPacket::_Internal::entity_info(const C_ModifyEntityLookAtDirectionPacket* msg) {
   return *msg->_impl_.entity_info_;
 }
@@ -1933,7 +2002,7 @@ C_ModifyEntityLookAtDirectionPacket::C_ModifyEntityLookAtDirectionPacket(const C
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.entity_info_);
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.C_ModifyEntityLookAtDirectionPacket)
 }
@@ -1985,7 +2054,7 @@ const char* C_ModifyEntityLookAtDirectionPacket::_InternalParse(const char* ptr,
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo entity_info = 1;
+      // .Protocol.EntityInfo entity_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
@@ -2022,7 +2091,7 @@ uint8_t* C_ModifyEntityLookAtDirectionPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::entity_info(this),
@@ -2045,7 +2114,7 @@ size_t C_ModifyEntityLookAtDirectionPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -2071,7 +2140,7 @@ void C_ModifyEntityLookAtDirectionPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Mes
   (void) cached_has_bits;
 
   if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_entity_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2104,10 +2173,10 @@ void C_ModifyEntityLookAtDirectionPacket::InternalSwap(C_ModifyEntityLookAtDirec
 
 class S_ModifyEntityLookAtDirectionPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& entity_info(const S_ModifyEntityLookAtDirectionPacket* msg);
+  static const ::Protocol::EntityInfo& entity_info(const S_ModifyEntityLookAtDirectionPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_ModifyEntityLookAtDirectionPacket::_Internal::entity_info(const S_ModifyEntityLookAtDirectionPacket* msg) {
   return *msg->_impl_.entity_info_;
 }
@@ -2132,7 +2201,7 @@ S_ModifyEntityLookAtDirectionPacket::S_ModifyEntityLookAtDirectionPacket(const S
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.entity_info_);
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_ModifyEntityLookAtDirectionPacket)
 }
@@ -2184,7 +2253,7 @@ const char* S_ModifyEntityLookAtDirectionPacket::_InternalParse(const char* ptr,
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo entity_info = 1;
+      // .Protocol.EntityInfo entity_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
@@ -2221,7 +2290,7 @@ uint8_t* S_ModifyEntityLookAtDirectionPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::entity_info(this),
@@ -2244,7 +2313,7 @@ size_t S_ModifyEntityLookAtDirectionPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -2270,7 +2339,7 @@ void S_ModifyEntityLookAtDirectionPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Mes
   (void) cached_has_bits;
 
   if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_entity_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2303,10 +2372,10 @@ void S_ModifyEntityLookAtDirectionPacket::InternalSwap(S_ModifyEntityLookAtDirec
 
 class C_ModifyEntityStatePacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& entity_info(const C_ModifyEntityStatePacket* msg);
+  static const ::Protocol::EntityInfo& entity_info(const C_ModifyEntityStatePacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 C_ModifyEntityStatePacket::_Internal::entity_info(const C_ModifyEntityStatePacket* msg) {
   return *msg->_impl_.entity_info_;
 }
@@ -2331,7 +2400,7 @@ C_ModifyEntityStatePacket::C_ModifyEntityStatePacket(const C_ModifyEntityStatePa
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.entity_info_);
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.C_ModifyEntityStatePacket)
 }
@@ -2383,7 +2452,7 @@ const char* C_ModifyEntityStatePacket::_InternalParse(const char* ptr, ::_pbi::P
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo entity_info = 1;
+      // .Protocol.EntityInfo entity_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
@@ -2420,7 +2489,7 @@ uint8_t* C_ModifyEntityStatePacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::entity_info(this),
@@ -2443,7 +2512,7 @@ size_t C_ModifyEntityStatePacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -2469,7 +2538,7 @@ void C_ModifyEntityStatePacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_m
   (void) cached_has_bits;
 
   if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_entity_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2502,10 +2571,10 @@ void C_ModifyEntityStatePacket::InternalSwap(C_ModifyEntityStatePacket* other) {
 
 class S_ModifyEntityStatePacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& entity_info(const S_ModifyEntityStatePacket* msg);
+  static const ::Protocol::EntityInfo& entity_info(const S_ModifyEntityStatePacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_ModifyEntityStatePacket::_Internal::entity_info(const S_ModifyEntityStatePacket* msg) {
   return *msg->_impl_.entity_info_;
 }
@@ -2530,7 +2599,7 @@ S_ModifyEntityStatePacket::S_ModifyEntityStatePacket(const S_ModifyEntityStatePa
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_entity_info()) {
-    _this->_impl_.entity_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.entity_info_);
+    _this->_impl_.entity_info_ = new ::Protocol::EntityInfo(*from._impl_.entity_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_ModifyEntityStatePacket)
 }
@@ -2582,7 +2651,7 @@ const char* S_ModifyEntityStatePacket::_InternalParse(const char* ptr, ::_pbi::P
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo entity_info = 1;
+      // .Protocol.EntityInfo entity_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_entity_info(), ptr);
@@ -2619,7 +2688,7 @@ uint8_t* S_ModifyEntityStatePacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::entity_info(this),
@@ -2642,7 +2711,7 @@ size_t S_ModifyEntityStatePacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   if (this->_internal_has_entity_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -2668,7 +2737,7 @@ void S_ModifyEntityStatePacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_m
   (void) cached_has_bits;
 
   if (from._internal_has_entity_info()) {
-    _this->_internal_mutable_entity_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_entity_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_entity_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2701,15 +2770,15 @@ void S_ModifyEntityStatePacket::InternalSwap(S_ModifyEntityStatePacket* other) {
 
 class C_AttckToEntityPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& attacker_info(const C_AttckToEntityPacket* msg);
-  static const ::Protocol::NetworkEntityInfo& victim_info(const C_AttckToEntityPacket* msg);
+  static const ::Protocol::EntityInfo& attacker_info(const C_AttckToEntityPacket* msg);
+  static const ::Protocol::EntityInfo& victim_info(const C_AttckToEntityPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 C_AttckToEntityPacket::_Internal::attacker_info(const C_AttckToEntityPacket* msg) {
   return *msg->_impl_.attacker_info_;
 }
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 C_AttckToEntityPacket::_Internal::victim_info(const C_AttckToEntityPacket* msg) {
   return *msg->_impl_.victim_info_;
 }
@@ -2741,10 +2810,10 @@ C_AttckToEntityPacket::C_AttckToEntityPacket(const C_AttckToEntityPacket& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_attacker_info()) {
-    _this->_impl_.attacker_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.attacker_info_);
+    _this->_impl_.attacker_info_ = new ::Protocol::EntityInfo(*from._impl_.attacker_info_);
   }
   if (from._internal_has_victim_info()) {
-    _this->_impl_.victim_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.victim_info_);
+    _this->_impl_.victim_info_ = new ::Protocol::EntityInfo(*from._impl_.victim_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.C_AttckToEntityPacket)
 }
@@ -2802,7 +2871,7 @@ const char* C_AttckToEntityPacket::_InternalParse(const char* ptr, ::_pbi::Parse
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo attacker_info = 1;
+      // .Protocol.EntityInfo attacker_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_attacker_info(), ptr);
@@ -2810,7 +2879,7 @@ const char* C_AttckToEntityPacket::_InternalParse(const char* ptr, ::_pbi::Parse
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.NetworkEntityInfo victim_info = 2;
+      // .Protocol.EntityInfo victim_info = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_victim_info(), ptr);
@@ -2847,14 +2916,14 @@ uint8_t* C_AttckToEntityPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo attacker_info = 1;
+  // .Protocol.EntityInfo attacker_info = 1;
   if (this->_internal_has_attacker_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::attacker_info(this),
         _Internal::attacker_info(this).GetCachedSize(), target, stream);
   }
 
-  // .Protocol.NetworkEntityInfo victim_info = 2;
+  // .Protocol.EntityInfo victim_info = 2;
   if (this->_internal_has_victim_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(2, _Internal::victim_info(this),
@@ -2877,14 +2946,14 @@ size_t C_AttckToEntityPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo attacker_info = 1;
+  // .Protocol.EntityInfo attacker_info = 1;
   if (this->_internal_has_attacker_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.attacker_info_);
   }
 
-  // .Protocol.NetworkEntityInfo victim_info = 2;
+  // .Protocol.EntityInfo victim_info = 2;
   if (this->_internal_has_victim_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -2910,11 +2979,11 @@ void C_AttckToEntityPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, 
   (void) cached_has_bits;
 
   if (from._internal_has_attacker_info()) {
-    _this->_internal_mutable_attacker_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_attacker_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_attacker_info());
   }
   if (from._internal_has_victim_info()) {
-    _this->_internal_mutable_victim_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_victim_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_victim_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2952,15 +3021,15 @@ void C_AttckToEntityPacket::InternalSwap(C_AttckToEntityPacket* other) {
 
 class S_HitDamageToEntityPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& attacker_info(const S_HitDamageToEntityPacket* msg);
-  static const ::Protocol::NetworkEntityInfo& victim_info(const S_HitDamageToEntityPacket* msg);
+  static const ::Protocol::EntityInfo& attacker_info(const S_HitDamageToEntityPacket* msg);
+  static const ::Protocol::EntityInfo& victim_info(const S_HitDamageToEntityPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_HitDamageToEntityPacket::_Internal::attacker_info(const S_HitDamageToEntityPacket* msg) {
   return *msg->_impl_.attacker_info_;
 }
-const ::Protocol::NetworkEntityInfo&
+const ::Protocol::EntityInfo&
 S_HitDamageToEntityPacket::_Internal::victim_info(const S_HitDamageToEntityPacket* msg) {
   return *msg->_impl_.victim_info_;
 }
@@ -2992,10 +3061,10 @@ S_HitDamageToEntityPacket::S_HitDamageToEntityPacket(const S_HitDamageToEntityPa
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_attacker_info()) {
-    _this->_impl_.attacker_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.attacker_info_);
+    _this->_impl_.attacker_info_ = new ::Protocol::EntityInfo(*from._impl_.attacker_info_);
   }
   if (from._internal_has_victim_info()) {
-    _this->_impl_.victim_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.victim_info_);
+    _this->_impl_.victim_info_ = new ::Protocol::EntityInfo(*from._impl_.victim_info_);
   }
   // @@protoc_insertion_point(copy_constructor:Protocol.S_HitDamageToEntityPacket)
 }
@@ -3053,7 +3122,7 @@ const char* S_HitDamageToEntityPacket::_InternalParse(const char* ptr, ::_pbi::P
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo attacker_info = 1;
+      // .Protocol.EntityInfo attacker_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_attacker_info(), ptr);
@@ -3061,7 +3130,7 @@ const char* S_HitDamageToEntityPacket::_InternalParse(const char* ptr, ::_pbi::P
         } else
           goto handle_unusual;
         continue;
-      // .Protocol.NetworkEntityInfo victim_info = 2;
+      // .Protocol.EntityInfo victim_info = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_victim_info(), ptr);
@@ -3098,14 +3167,14 @@ uint8_t* S_HitDamageToEntityPacket::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo attacker_info = 1;
+  // .Protocol.EntityInfo attacker_info = 1;
   if (this->_internal_has_attacker_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::attacker_info(this),
         _Internal::attacker_info(this).GetCachedSize(), target, stream);
   }
 
-  // .Protocol.NetworkEntityInfo victim_info = 2;
+  // .Protocol.EntityInfo victim_info = 2;
   if (this->_internal_has_victim_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(2, _Internal::victim_info(this),
@@ -3128,14 +3197,14 @@ size_t S_HitDamageToEntityPacket::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo attacker_info = 1;
+  // .Protocol.EntityInfo attacker_info = 1;
   if (this->_internal_has_attacker_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.attacker_info_);
   }
 
-  // .Protocol.NetworkEntityInfo victim_info = 2;
+  // .Protocol.EntityInfo victim_info = 2;
   if (this->_internal_has_victim_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -3161,11 +3230,11 @@ void S_HitDamageToEntityPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_m
   (void) cached_has_bits;
 
   if (from._internal_has_attacker_info()) {
-    _this->_internal_mutable_attacker_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_attacker_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_attacker_info());
   }
   if (from._internal_has_victim_info()) {
-    _this->_internal_mutable_victim_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_victim_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_victim_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -3201,42 +3270,42 @@ void S_HitDamageToEntityPacket::InternalSwap(S_HitDamageToEntityPacket* other) {
 
 // ===================================================================
 
-class S_DiePlayerPacket::_Internal {
+class C_DieEntityPacket::_Internal {
  public:
-  static const ::Protocol::NetworkEntityInfo& victim_info(const S_DiePlayerPacket* msg);
+  static const ::Protocol::EntityInfo& victim_info(const C_DieEntityPacket* msg);
 };
 
-const ::Protocol::NetworkEntityInfo&
-S_DiePlayerPacket::_Internal::victim_info(const S_DiePlayerPacket* msg) {
+const ::Protocol::EntityInfo&
+C_DieEntityPacket::_Internal::victim_info(const C_DieEntityPacket* msg) {
   return *msg->_impl_.victim_info_;
 }
-void S_DiePlayerPacket::clear_victim_info() {
+void C_DieEntityPacket::clear_victim_info() {
   if (GetArenaForAllocation() == nullptr && _impl_.victim_info_ != nullptr) {
     delete _impl_.victim_info_;
   }
   _impl_.victim_info_ = nullptr;
 }
-S_DiePlayerPacket::S_DiePlayerPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+C_DieEntityPacket::C_DieEntityPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Protocol.S_DiePlayerPacket)
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_DieEntityPacket)
 }
-S_DiePlayerPacket::S_DiePlayerPacket(const S_DiePlayerPacket& from)
+C_DieEntityPacket::C_DieEntityPacket(const C_DieEntityPacket& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  S_DiePlayerPacket* const _this = this; (void)_this;
+  C_DieEntityPacket* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.victim_info_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_victim_info()) {
-    _this->_impl_.victim_info_ = new ::Protocol::NetworkEntityInfo(*from._impl_.victim_info_);
+    _this->_impl_.victim_info_ = new ::Protocol::EntityInfo(*from._impl_.victim_info_);
   }
-  // @@protoc_insertion_point(copy_constructor:Protocol.S_DiePlayerPacket)
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_DieEntityPacket)
 }
 
-inline void S_DiePlayerPacket::SharedCtor(
+inline void C_DieEntityPacket::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -3246,8 +3315,8 @@ inline void S_DiePlayerPacket::SharedCtor(
   };
 }
 
-S_DiePlayerPacket::~S_DiePlayerPacket() {
-  // @@protoc_insertion_point(destructor:Protocol.S_DiePlayerPacket)
+C_DieEntityPacket::~C_DieEntityPacket() {
+  // @@protoc_insertion_point(destructor:Protocol.C_DieEntityPacket)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -3255,17 +3324,17 @@ S_DiePlayerPacket::~S_DiePlayerPacket() {
   SharedDtor();
 }
 
-inline void S_DiePlayerPacket::SharedDtor() {
+inline void C_DieEntityPacket::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   if (this != internal_default_instance()) delete _impl_.victim_info_;
 }
 
-void S_DiePlayerPacket::SetCachedSize(int size) const {
+void C_DieEntityPacket::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void S_DiePlayerPacket::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.S_DiePlayerPacket)
+void C_DieEntityPacket::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.C_DieEntityPacket)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -3277,13 +3346,13 @@ void S_DiePlayerPacket::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* S_DiePlayerPacket::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* C_DieEntityPacket::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .Protocol.NetworkEntityInfo victim_info = 1;
+      // .Protocol.EntityInfo victim_info = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_victim_info(), ptr);
@@ -3314,13 +3383,13 @@ failure:
 #undef CHK_
 }
 
-uint8_t* S_DiePlayerPacket::_InternalSerialize(
+uint8_t* C_DieEntityPacket::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_DiePlayerPacket)
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_DieEntityPacket)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo victim_info = 1;
+  // .Protocol.EntityInfo victim_info = 1;
   if (this->_internal_has_victim_info()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::victim_info(this),
@@ -3331,19 +3400,19 @@ uint8_t* S_DiePlayerPacket::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_DiePlayerPacket)
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_DieEntityPacket)
   return target;
 }
 
-size_t S_DiePlayerPacket::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Protocol.S_DiePlayerPacket)
+size_t C_DieEntityPacket::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.C_DieEntityPacket)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Protocol.NetworkEntityInfo victim_info = 1;
+  // .Protocol.EntityInfo victim_info = 1;
   if (this->_internal_has_victim_info()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -3353,49 +3422,646 @@ size_t S_DiePlayerPacket::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_DiePlayerPacket::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_DieEntityPacket::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    S_DiePlayerPacket::MergeImpl
+    C_DieEntityPacket::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_DiePlayerPacket::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_DieEntityPacket::GetClassData() const { return &_class_data_; }
 
 
-void S_DiePlayerPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<S_DiePlayerPacket*>(&to_msg);
-  auto& from = static_cast<const S_DiePlayerPacket&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_DiePlayerPacket)
+void C_DieEntityPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<C_DieEntityPacket*>(&to_msg);
+  auto& from = static_cast<const C_DieEntityPacket&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_DieEntityPacket)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from._internal_has_victim_info()) {
-    _this->_internal_mutable_victim_info()->::Protocol::NetworkEntityInfo::MergeFrom(
+    _this->_internal_mutable_victim_info()->::Protocol::EntityInfo::MergeFrom(
         from._internal_victim_info());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void S_DiePlayerPacket::CopyFrom(const S_DiePlayerPacket& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_DiePlayerPacket)
+void C_DieEntityPacket::CopyFrom(const C_DieEntityPacket& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_DieEntityPacket)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool S_DiePlayerPacket::IsInitialized() const {
+bool C_DieEntityPacket::IsInitialized() const {
   return true;
 }
 
-void S_DiePlayerPacket::InternalSwap(S_DiePlayerPacket* other) {
+void C_DieEntityPacket::InternalSwap(C_DieEntityPacket* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_.victim_info_, other->_impl_.victim_info_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata S_DiePlayerPacket::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata C_DieEntityPacket::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Packet_2eproto_getter, &descriptor_table_Packet_2eproto_once,
       file_level_metadata_Packet_2eproto[13]);
+}
+
+// ===================================================================
+
+class S_DieEntityPacket::_Internal {
+ public:
+  static const ::Protocol::EntityInfo& victim_info(const S_DieEntityPacket* msg);
+};
+
+const ::Protocol::EntityInfo&
+S_DieEntityPacket::_Internal::victim_info(const S_DieEntityPacket* msg) {
+  return *msg->_impl_.victim_info_;
+}
+void S_DieEntityPacket::clear_victim_info() {
+  if (GetArenaForAllocation() == nullptr && _impl_.victim_info_ != nullptr) {
+    delete _impl_.victim_info_;
+  }
+  _impl_.victim_info_ = nullptr;
+}
+S_DieEntityPacket::S_DieEntityPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_DieEntityPacket)
+}
+S_DieEntityPacket::S_DieEntityPacket(const S_DieEntityPacket& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_DieEntityPacket* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.victim_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_victim_info()) {
+    _this->_impl_.victim_info_ = new ::Protocol::EntityInfo(*from._impl_.victim_info_);
+  }
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_DieEntityPacket)
+}
+
+inline void S_DieEntityPacket::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.victim_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_DieEntityPacket::~S_DieEntityPacket() {
+  // @@protoc_insertion_point(destructor:Protocol.S_DieEntityPacket)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_DieEntityPacket::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.victim_info_;
+}
+
+void S_DieEntityPacket::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_DieEntityPacket::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_DieEntityPacket)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.victim_info_ != nullptr) {
+    delete _impl_.victim_info_;
+  }
+  _impl_.victim_info_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_DieEntityPacket::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .Protocol.EntityInfo victim_info = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_victim_info(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_DieEntityPacket::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_DieEntityPacket)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .Protocol.EntityInfo victim_info = 1;
+  if (this->_internal_has_victim_info()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::victim_info(this),
+        _Internal::victim_info(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_DieEntityPacket)
+  return target;
+}
+
+size_t S_DieEntityPacket::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_DieEntityPacket)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.EntityInfo victim_info = 1;
+  if (this->_internal_has_victim_info()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.victim_info_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_DieEntityPacket::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_DieEntityPacket::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_DieEntityPacket::GetClassData() const { return &_class_data_; }
+
+
+void S_DieEntityPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_DieEntityPacket*>(&to_msg);
+  auto& from = static_cast<const S_DieEntityPacket&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_DieEntityPacket)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_victim_info()) {
+    _this->_internal_mutable_victim_info()->::Protocol::EntityInfo::MergeFrom(
+        from._internal_victim_info());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_DieEntityPacket::CopyFrom(const S_DieEntityPacket& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_DieEntityPacket)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_DieEntityPacket::IsInitialized() const {
+  return true;
+}
+
+void S_DieEntityPacket::InternalSwap(S_DieEntityPacket* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.victim_info_, other->_impl_.victim_info_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_DieEntityPacket::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_2eproto_getter, &descriptor_table_Packet_2eproto_once,
+      file_level_metadata_Packet_2eproto[14]);
+}
+
+// ===================================================================
+
+class C_CreateProjectilePacket::_Internal {
+ public:
+  static const ::Protocol::ProjectileInfo& projectile_info(const C_CreateProjectilePacket* msg);
+};
+
+const ::Protocol::ProjectileInfo&
+C_CreateProjectilePacket::_Internal::projectile_info(const C_CreateProjectilePacket* msg) {
+  return *msg->_impl_.projectile_info_;
+}
+void C_CreateProjectilePacket::clear_projectile_info() {
+  if (GetArenaForAllocation() == nullptr && _impl_.projectile_info_ != nullptr) {
+    delete _impl_.projectile_info_;
+  }
+  _impl_.projectile_info_ = nullptr;
+}
+C_CreateProjectilePacket::C_CreateProjectilePacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.C_CreateProjectilePacket)
+}
+C_CreateProjectilePacket::C_CreateProjectilePacket(const C_CreateProjectilePacket& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  C_CreateProjectilePacket* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.projectile_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_projectile_info()) {
+    _this->_impl_.projectile_info_ = new ::Protocol::ProjectileInfo(*from._impl_.projectile_info_);
+  }
+  // @@protoc_insertion_point(copy_constructor:Protocol.C_CreateProjectilePacket)
+}
+
+inline void C_CreateProjectilePacket::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.projectile_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+C_CreateProjectilePacket::~C_CreateProjectilePacket() {
+  // @@protoc_insertion_point(destructor:Protocol.C_CreateProjectilePacket)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void C_CreateProjectilePacket::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.projectile_info_;
+}
+
+void C_CreateProjectilePacket::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void C_CreateProjectilePacket::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.C_CreateProjectilePacket)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.projectile_info_ != nullptr) {
+    delete _impl_.projectile_info_;
+  }
+  _impl_.projectile_info_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* C_CreateProjectilePacket::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .Protocol.ProjectileInfo projectile_info = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_projectile_info(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* C_CreateProjectilePacket::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.C_CreateProjectilePacket)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .Protocol.ProjectileInfo projectile_info = 1;
+  if (this->_internal_has_projectile_info()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::projectile_info(this),
+        _Internal::projectile_info(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.C_CreateProjectilePacket)
+  return target;
+}
+
+size_t C_CreateProjectilePacket::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.C_CreateProjectilePacket)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.ProjectileInfo projectile_info = 1;
+  if (this->_internal_has_projectile_info()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.projectile_info_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData C_CreateProjectilePacket::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    C_CreateProjectilePacket::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*C_CreateProjectilePacket::GetClassData() const { return &_class_data_; }
+
+
+void C_CreateProjectilePacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<C_CreateProjectilePacket*>(&to_msg);
+  auto& from = static_cast<const C_CreateProjectilePacket&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.C_CreateProjectilePacket)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_projectile_info()) {
+    _this->_internal_mutable_projectile_info()->::Protocol::ProjectileInfo::MergeFrom(
+        from._internal_projectile_info());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_CreateProjectilePacket::CopyFrom(const C_CreateProjectilePacket& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.C_CreateProjectilePacket)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool C_CreateProjectilePacket::IsInitialized() const {
+  return true;
+}
+
+void C_CreateProjectilePacket::InternalSwap(C_CreateProjectilePacket* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.projectile_info_, other->_impl_.projectile_info_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata C_CreateProjectilePacket::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_2eproto_getter, &descriptor_table_Packet_2eproto_once,
+      file_level_metadata_Packet_2eproto[15]);
+}
+
+// ===================================================================
+
+class S_CreateProjectilePacket::_Internal {
+ public:
+  static const ::Protocol::ProjectileInfo& projectile_info(const S_CreateProjectilePacket* msg);
+};
+
+const ::Protocol::ProjectileInfo&
+S_CreateProjectilePacket::_Internal::projectile_info(const S_CreateProjectilePacket* msg) {
+  return *msg->_impl_.projectile_info_;
+}
+void S_CreateProjectilePacket::clear_projectile_info() {
+  if (GetArenaForAllocation() == nullptr && _impl_.projectile_info_ != nullptr) {
+    delete _impl_.projectile_info_;
+  }
+  _impl_.projectile_info_ = nullptr;
+}
+S_CreateProjectilePacket::S_CreateProjectilePacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_CreateProjectilePacket)
+}
+S_CreateProjectilePacket::S_CreateProjectilePacket(const S_CreateProjectilePacket& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_CreateProjectilePacket* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.projectile_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_projectile_info()) {
+    _this->_impl_.projectile_info_ = new ::Protocol::ProjectileInfo(*from._impl_.projectile_info_);
+  }
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_CreateProjectilePacket)
+}
+
+inline void S_CreateProjectilePacket::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.projectile_info_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_CreateProjectilePacket::~S_CreateProjectilePacket() {
+  // @@protoc_insertion_point(destructor:Protocol.S_CreateProjectilePacket)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_CreateProjectilePacket::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.projectile_info_;
+}
+
+void S_CreateProjectilePacket::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_CreateProjectilePacket::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_CreateProjectilePacket)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.projectile_info_ != nullptr) {
+    delete _impl_.projectile_info_;
+  }
+  _impl_.projectile_info_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_CreateProjectilePacket::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .Protocol.ProjectileInfo projectile_info = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_projectile_info(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_CreateProjectilePacket::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_CreateProjectilePacket)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .Protocol.ProjectileInfo projectile_info = 1;
+  if (this->_internal_has_projectile_info()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::projectile_info(this),
+        _Internal::projectile_info(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_CreateProjectilePacket)
+  return target;
+}
+
+size_t S_CreateProjectilePacket::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_CreateProjectilePacket)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.ProjectileInfo projectile_info = 1;
+  if (this->_internal_has_projectile_info()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.projectile_info_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_CreateProjectilePacket::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_CreateProjectilePacket::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_CreateProjectilePacket::GetClassData() const { return &_class_data_; }
+
+
+void S_CreateProjectilePacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_CreateProjectilePacket*>(&to_msg);
+  auto& from = static_cast<const S_CreateProjectilePacket&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_CreateProjectilePacket)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_projectile_info()) {
+    _this->_internal_mutable_projectile_info()->::Protocol::ProjectileInfo::MergeFrom(
+        from._internal_projectile_info());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_CreateProjectilePacket::CopyFrom(const S_CreateProjectilePacket& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_CreateProjectilePacket)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_CreateProjectilePacket::IsInitialized() const {
+  return true;
+}
+
+void S_CreateProjectilePacket::InternalSwap(S_CreateProjectilePacket* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.projectile_info_, other->_impl_.projectile_info_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_CreateProjectilePacket::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Packet_2eproto_getter, &descriptor_table_Packet_2eproto_once,
+      file_level_metadata_Packet_2eproto[16]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -3453,9 +4119,21 @@ template<> PROTOBUF_NOINLINE ::Protocol::S_HitDamageToEntityPacket*
 Arena::CreateMaybeMessage< ::Protocol::S_HitDamageToEntityPacket >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_HitDamageToEntityPacket >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Protocol::S_DiePlayerPacket*
-Arena::CreateMaybeMessage< ::Protocol::S_DiePlayerPacket >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Protocol::S_DiePlayerPacket >(arena);
+template<> PROTOBUF_NOINLINE ::Protocol::C_DieEntityPacket*
+Arena::CreateMaybeMessage< ::Protocol::C_DieEntityPacket >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_DieEntityPacket >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_DieEntityPacket*
+Arena::CreateMaybeMessage< ::Protocol::S_DieEntityPacket >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_DieEntityPacket >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::C_CreateProjectilePacket*
+Arena::CreateMaybeMessage< ::Protocol::C_CreateProjectilePacket >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::C_CreateProjectilePacket >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_CreateProjectilePacket*
+Arena::CreateMaybeMessage< ::Protocol::S_CreateProjectilePacket >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_CreateProjectilePacket >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

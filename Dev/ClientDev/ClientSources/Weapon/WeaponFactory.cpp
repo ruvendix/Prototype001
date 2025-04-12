@@ -17,10 +17,10 @@ public:
 
 void WeaponFactory::Pimpl::InitializeWeaponPrototypes()
 {
-	std::unordered_map<int32, std::shared_ptr<WeaponActor>>& refMapWeaonPrototype = m_pOwner->m_mapPrototypeWeapon;
+	std::unordered_map<int32, WeaponActorPtr>& refMapWeaonPrototype = m_pOwner->m_mapPrototypeWeapon;
 
 #pragma region 검
-	std::shared_ptr<WeaponActor> spWeaponSword = std::make_shared<WeaponActor>();
+	WeaponActorPtr spWeaponSword = std::make_shared<WeaponActor>();
 	spWeaponSword->Startup();
 	spWeaponSword->AddComponent<WeaponSequenceAttackComponent>();
 
@@ -39,7 +39,7 @@ void WeaponFactory::Pimpl::InitializeWeaponPrototypes()
 #pragma endregion
 
 #pragma region 방패
-	std::shared_ptr<WeaponActor> WeaponShield = std::make_shared<WeaponActor>();
+	WeaponActorPtr WeaponShield = std::make_shared<WeaponActor>();
 	WeaponShield->Startup();
 
 	// 이걸 확실하게 맞추려면 인덱스마다 넣어야함
@@ -57,7 +57,7 @@ void WeaponFactory::Pimpl::InitializeWeaponPrototypes()
 #pragma endregion
 
 #pragma region 활
-	std::shared_ptr<WeaponActor> spWeaponBow = std::make_shared<WeaponActor>();
+	WeaponActorPtr spWeaponBow = std::make_shared<WeaponActor>();
 	spWeaponBow->Startup();
 	spWeaponBow->SetProjectileId(0);
 	spWeaponBow->AddComponent<WeaponSequenceAttackComponent>();
@@ -119,7 +119,7 @@ bool WeaponFactory::Update(float deltaSeconds)
 	return true;
 }
 
-std::shared_ptr<WeaponActor> WeaponFactory::CreateWeaponActor(int32 weaponId) const
+WeaponActorPtr WeaponFactory::CreateWeaponActor(uint32 weaponId) const
 {
 	const WeaponActor* pFoundPrototypeWeaponActor = FindWeaponActorRawPointer(weaponId);
 	if (pFoundPrototypeWeaponActor == nullptr)
@@ -128,12 +128,12 @@ std::shared_ptr<WeaponActor> WeaponFactory::CreateWeaponActor(int32 weaponId) co
 	}
 
 	// 복사 생성자 호출
-	std::shared_ptr<WeaponActor> spNewWeaponActor = std::make_shared<WeaponActor>(*pFoundPrototypeWeaponActor);
+	WeaponActorPtr spNewWeaponActor = std::make_shared<WeaponActor>(*pFoundPrototypeWeaponActor);
 	spNewWeaponActor->InitializeActorStateTable();
 	return spNewWeaponActor;
 }
 
-const WeaponActor* WeaponFactory::FindWeaponActorRawPointer(int32 weaponId) const
+const WeaponActor* WeaponFactory::FindWeaponActorRawPointer(uint32 weaponId) const
 {
 	auto foundIter = m_mapPrototypeWeapon.find(weaponId);
 	if (foundIter == m_mapPrototypeWeapon.cend())
@@ -144,7 +144,7 @@ const WeaponActor* WeaponFactory::FindWeaponActorRawPointer(int32 weaponId) cons
 	return (foundIter->second.get());
 }
 
-std::shared_ptr<ProjectileActor> WeaponFactory::CreateProjectileActor(int32 projectileId) const
+std::shared_ptr<ProjectileActor> WeaponFactory::CreateProjectileActor(uint32 projectileId) const
 {
 	const ProjectileActor* pFoundPrototypeProjectileActor = FindProjectileActorRawPointer(projectileId);
 	if (pFoundPrototypeProjectileActor == nullptr)
@@ -157,7 +157,7 @@ std::shared_ptr<ProjectileActor> WeaponFactory::CreateProjectileActor(int32 proj
 	return spNewProjectileActor;
 }
 
-const ProjectileActor* WeaponFactory::FindProjectileActorRawPointer(int32 projectileId) const
+const ProjectileActor* WeaponFactory::FindProjectileActorRawPointer(uint32 projectileId) const
 {
 	const std::shared_ptr<ProjectileActor>& spFoundProjectileActor = FindProjectileActor(projectileId);
 	if (spFoundProjectileActor == nullptr)
@@ -168,30 +168,9 @@ const ProjectileActor* WeaponFactory::FindProjectileActorRawPointer(int32 projec
 	return (spFoundProjectileActor.get());
 }
 
-const std::shared_ptr<ProjectileActor>& WeaponFactory::FindProjectileActor(int32 projectileId) const
+const std::shared_ptr<ProjectileActor>& WeaponFactory::FindProjectileActor(uint32 projectileId) const
 {
 	auto foundIter = m_mapPrototypeProjectile.find(projectileId);
 	ASSERT_LOG(foundIter != m_mapPrototypeProjectile.cend());
 	return (foundIter->second);
-}
-
-void WeaponFactory::ReserveCreateProjectileActor(const ProjectileSpawnInfo& projectileSpawnInfo)
-{
-	m_createProjectileActorEvent.RegisterEventHandler(this, &WeaponFactory::OnCreateProjectileActor, projectileSpawnInfo);
-}
-
-void WeaponFactory::OnCreateProjectileActor(const ProjectileSpawnInfo& projectileSpawnInfo)
-{
-	Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-	ASSERT_LOG_RETURN(pCurrentScene != nullptr);
-
-	const std::shared_ptr<ProjectileActor>& spFoundProjectile = FindProjectileActor(projectileSpawnInfo.projectileId);
-	if (spFoundProjectile == nullptr)
-	{
-		return;
-	}
-
-	const std::shared_ptr<ProjectileActor>& spCreatedProjectile = pCurrentScene->CreateCloneActorToScene(spFoundProjectile);
-	spCreatedProjectile->SpawnProjectile(projectileSpawnInfo);
-	DEFAULT_TRACE_LOG("투사체 생성!");
 }

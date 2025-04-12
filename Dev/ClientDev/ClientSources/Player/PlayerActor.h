@@ -1,10 +1,10 @@
 // Copyright 2024 Ruvendix, All Rights Reserved.
 #pragma once
 
-class PlayerActor : public NetworkEntityActor
+class PlayerActor : public ActionableActor
 {
 	DECLARE_PIMPL;
-	using Super = NetworkEntityActor;
+	using Super = ActionableActor;
 
 public:
 	using Super::Super;
@@ -21,15 +21,8 @@ public:
 	virtual void InitializeActorStateTable() override;
 	virtual void RegisterStateOnBidirectional() override;
 
-	virtual void ProcessWeaponAttack() = 0;
+	virtual bool IsLocalPlayer() const = 0;
 
 public:
 	void LoadAndStartupPlayerSprite();
-
-	const std::shared_ptr<WeaponActor>& GetWeapon(EWeaponSlotType weaponSlot) const { return m_arrWeaponActor[TO_NUM(weaponSlot)]; }
-	const std::shared_ptr<WeaponActor>& GetCurrentWeapon() const { return m_arrWeaponActor[TO_NUM(m_currentWeaponSlot)]; }
-
-private:
-	EWeaponSlotType m_currentWeaponSlot = EWeaponSlotType::Primary;
-	std::array<std::shared_ptr<WeaponActor>, TO_NUM(EWeaponSlotType::Count)> m_arrWeaponActor;
 };

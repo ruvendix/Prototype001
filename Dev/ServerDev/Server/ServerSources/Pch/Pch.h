@@ -23,6 +23,7 @@
 #include "Game/GameEntity.h"
 #include "Game/Player/GamePlayer.h"
 #include "Game/Monster/GameMonster.h"
+#include "Game/Projectile/GameProjectile.h"
 #include "Game/GameRoom.h"
 
 #ifdef _DEBUG

@@ -18,8 +18,7 @@ public:
 	virtual bool Update(float deltaSeconds) override;
 	virtual void Cleanup() override;
 
-	virtual void ProcessAttackAction() override;
-	virtual void ProcessWeaponAttack() override;
+	virtual bool IsLocalPlayer() const override { return true; }
 
 private:
 	void OnDirectionKeyHandler(const InputActionValue* pInputAction);

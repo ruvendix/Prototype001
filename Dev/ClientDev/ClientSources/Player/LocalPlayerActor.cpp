@@ -144,49 +144,13 @@ bool LocalPlayerActor::Update(float deltaSeconds)
 		return false;
 	}
 
-	SyncToServer_NetworkEntityInfoIfNeed();
+	SyncToServer_EntityInfoIfNeed();
 	return true;
 }
 
 void LocalPlayerActor::Cleanup()
 {
 	Super::Cleanup();
-}
-
-void LocalPlayerActor::ProcessAttackAction()
-{
-	if (IsSamePawnActorState<PawnActorIdleState>() == false)
-	{
-		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
-		return;
-	}
-
-	ImmediatelyChangeState<PlayerAttackState>();
-	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
-}
-
-void LocalPlayerActor::ProcessWeaponAttack()
-{
-	const std::shared_ptr<WeaponActor>& spCurrentWeapon = GetCurrentWeapon();
-	ASSERT_LOG(spCurrentWeapon != nullptr);
-
-	/*
-	공격 애니메이션이 완료되었을 때 투사체가 등록되어있다면 투사체 등록 시도
-	투사체가 없을 때만 무기의 직접 피해가 있는지 확인 */
-	if (spCurrentWeapon->TryCreateProjectile() == false)
-	{
-#pragma region 피해받은 액터가 있는지?
-		const Position2d& forwardCellPos = CalculateForwardCellPosition();
-
-		const Scene* pCurrentScene = SceneManager::I()->GetCurrentScene();
-		ASSERT_LOG(pCurrentScene != nullptr);
-		const PawnActorPtr& spVictim = std::dynamic_pointer_cast<PawnActor>(pCurrentScene->FindCellActor(EActorLayerType::Creature, forwardCellPos, nullptr));
-		if (spVictim != nullptr)
-		{
-			spVictim->ProcessDamaged(SharedFromThisExactType<PawnActor>());
-		}
-#pragma endregion
-	}
 }
 
 void LocalPlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputAction)
@@ -197,7 +161,14 @@ void LocalPlayerActor::OnDirectionKeyHandler(const InputActionValue* pInputActio
 
 void LocalPlayerActor::OnSpaceBarKeyHandler(const InputActionValue* pInputAction)
 {
-	ProcessAttackAction();
+	if (IsSamePawnActorState<PawnActorIdleState>() == false)
+	{
+		DEFAULT_TRACE_LOG("Idle일 때만 행동 가능!");
+		return;
+	}
+
+	ImmediatelyChangeState<PlayerAttackState>();
+	DEFAULT_TRACE_LOG("(기본 -> 공격) 상태로 전환!");
 }
 
 void LocalPlayerActor::OnAKeyHandler(const InputActionValue* pInputAction)

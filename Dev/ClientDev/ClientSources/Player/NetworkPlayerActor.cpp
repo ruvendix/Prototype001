@@ -8,13 +8,3 @@ NetworkPlayerActor::~NetworkPlayerActor()
 {
 
 }
-
-void NetworkPlayerActor::ProcessAttackAction()
-{
-
-}
-
-void NetworkPlayerActor::ProcessWeaponAttack()
-{
-
-}

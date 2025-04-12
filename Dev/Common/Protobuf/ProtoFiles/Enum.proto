@@ -1,7 +1,7 @@
 syntax = "proto3";
 package Protocol;
 
-enum ENetworkEntityLookAtDirection
+enum EEntityLookAtDirection
 {
 	Left = 0;
 	Up = 1;
@@ -9,13 +9,14 @@ enum ENetworkEntityLookAtDirection
 	Down = 3;
 }
 
-enum ENetworkEntityType
+enum EEntityType
 {
 	Player = 0;
 	Monster = 1;
+	Projectile = 2;
 }
 
-enum ENetworkEntityState
+enum EEntityState
 {
 	Idle = 0;
 	Walk = 1;

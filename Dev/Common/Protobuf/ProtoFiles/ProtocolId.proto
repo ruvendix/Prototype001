@@ -13,5 +13,6 @@ enum EProtocolId
 	ModifyEntityState = 7;
 	AttackToEntity = 8;
 	HitDamageToEntity = 9;
-	DiePlayer = 10;
+	DieEntity = 10;
+	CreateProjectile = 11;
 }

@@ -3,7 +3,7 @@ package Protocol;
 
 import "Enum.proto";
 
-message NetworkEntityInfo
+message EntityInfo
 {
 	uint64 entity_id = 1;
 	uint32 cell_pos_x = 2;
@@ -14,13 +14,19 @@ message NetworkEntityInfo
 	uint32 attack = 6;
 	uint32 defense = 7;
 
-	ENetworkEntityType entity_type = 8;
-	ENetworkEntityLookAtDirection entitye_look_at_dir = 9;
-	ENetworkEntityState entity_state = 10;
+	EEntityType entity_type = 8;
+	EEntityLookAtDirection entity_look_at_dir = 9;
+	EEntityState entity_state = 10;
 }
 
-message NetworkMonsterInfo
+message MonsterInfo
 {
 	uint32 monster_id = 1;
-	NetworkEntityInfo monster_info = 2;
+	EntityInfo monster_info = 2;
+}
+
+message ProjectileInfo
+{
+	uint32 projectile_id = 1;
+	EntityInfo entity_info = 2;
 }

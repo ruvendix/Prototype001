@@ -35,7 +35,7 @@ public:
 	std::shared_ptr<TActor> CreateActorToScene(EActorLayerType actorLayer, EActorUpdateOrder actorUpdateOrder = EActorUpdateOrder::Default)
 	{
 		const std::shared_ptr<TActor>& spNewActor = Scene::CreateActor<TActor>(actorLayer, actorUpdateOrder);
-		return CreateActorToSceneImpl(spNewActor, actorLayer);
+		return AddActor(spNewActor, actorLayer);
 	}
 
 	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
@@ -43,11 +43,11 @@ public:
 	{
 		std::shared_ptr<TActor> spCloneActor = std::dynamic_pointer_cast<TActor>(spSrcActor->CreateClone());
 		ASSERT_LOG(spCloneActor != nullptr);
-		return CreateActorToSceneImpl(spCloneActor, spSrcActor->GetActorLayer());
+		return AddActor(spCloneActor, spSrcActor->GetActorLayer());
 	}
 
-	template <typename TActor> // 씬 안에 액터 생성 (호출한 씬에게 자동 소속됨)
-	std::shared_ptr<TActor> CreateActorToSceneImpl(const std::shared_ptr<TActor>& spNewActor, EActorLayerType actorLayer)
+	template <typename TActor> // 씬 안에 액터 넣기 (호출한 씬에게 자동 소속됨)
+	std::shared_ptr<TActor> AddActor(const std::shared_ptr<TActor>& spNewActor, EActorLayerType actorLayer)
 	{
 		// 중복된 액터인지 확인
 		auto foundIter = std::find_if(m_actors.begin(), m_actors.end(),
@@ -90,10 +90,10 @@ public:
 				continue;
 			}
 
-			if (spActor->IsActorFlagBitOn(EActorFlag::Activation) == false)
-			{
-				continue;
-			}
+			//if (spActor->IsActorFlagBitOn(EActorFlag::Activation) == false)
+			//{
+			//	continue;
+			//}
 
 			const std::shared_ptr<TActor>& spExactTypeActor = std::dynamic_pointer_cast<TActor>(spActor);
 			if (spExactTypeActor == nullptr)

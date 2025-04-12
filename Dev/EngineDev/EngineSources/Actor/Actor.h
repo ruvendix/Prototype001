@@ -68,6 +68,18 @@ public:
 		return (std::dynamic_pointer_cast<TActor>(GetChildNoCast(childIdx)));
 	}
 
+	template <typename... TArgs>
+	void SetActorBitsOn(TArgs&&... args)
+	{
+		m_actorBitsetFlag.BitsOn(std::forward<TArgs>(args)...);
+	}
+
+	template <typename... TArgs>
+	void SetActorBitsOff(TArgs&&... args)
+	{
+		m_actorBitsetFlag.BitsOff(std::forward<TArgs>(args)...);
+	}
+
 public:
 	void AddChild(const ActorPtr& spChild);
 	void ApplyScreenCenterPosition();

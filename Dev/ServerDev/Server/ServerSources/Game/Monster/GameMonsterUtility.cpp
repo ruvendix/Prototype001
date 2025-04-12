@@ -45,7 +45,7 @@ namespace GameMonsterUtility
 		{
 			const GamePlayerPtr& spPlayer = iter.second;
 			if ((spPlayer == nullptr) ||
-				(spPlayer->CheckGameEntityState(Protocol::ENetworkEntityState::Death)))
+				(spPlayer->CheckGameEntityState(Protocol::EEntityState::Death)))
 			{
 				continue;
 			}

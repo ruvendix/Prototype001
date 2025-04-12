@@ -14,14 +14,15 @@ public:
 
 	RxSendBufferPtr MakeEnterGamePacket(uint64 gameSessionId);
 	RxSendBufferPtr MakeLeaveGamePacket(uint64 gameSessionId, const std::shared_ptr<GamePlayer>& spLeaveGamePlayer);
-	RxSendBufferPtr MakeCreateMainPlayerPacket(const Protocol::NetworkEntityInfo& mainPlayerInfo);
+	RxSendBufferPtr MakeCreateMainPlayerPacket(const Protocol::EntityInfo& mainPlayerInfo);
 	RxSendBufferPtr MakeSyncEntitiesPacket(const Protocol::S_SyncEntitiesPacket& syncEntitiesPacket);
-	RxSendBufferPtr MakeModifyPlayerInformationPacket(const Protocol::NetworkEntityInfo& playerInfo);
-	RxSendBufferPtr MakeModifyEntityLookAtDirectionPacket(const Protocol::NetworkEntityInfo& entityInfo);
-	RxSendBufferPtr MakeMoveEntityPacket(const Protocol::NetworkEntityInfo& entityInfo);
-	RxSendBufferPtr MakeModifyEntityStatePacket(const Protocol::NetworkEntityInfo& entityInfo);
-	RxSendBufferPtr MakeHitDamageToEntityPacket(const Protocol::NetworkEntityInfo& attackerEntityInfo, const Protocol::NetworkEntityInfo& victimEntityInfo);
-	RxSendBufferPtr MakeDiePlayerPacket(const Protocol::NetworkEntityInfo& victimEntityInfo);
+	RxSendBufferPtr MakeModifyPlayerInformationPacket(const Protocol::EntityInfo& playerInfo);
+	RxSendBufferPtr MakeModifyEntityLookAtDirectionPacket(const Protocol::EntityInfo& entityInfo);
+	RxSendBufferPtr MakeMoveEntityPacket(const Protocol::EntityInfo& entityInfo);
+	RxSendBufferPtr MakeModifyEntityStatePacket(const Protocol::EntityInfo& entityInfo);
+	RxSendBufferPtr MakeHitDamageToEntityPacket(const Protocol::EntityInfo& attackerEntityInfo, const Protocol::EntityInfo& victimEntityInfo);
+	RxSendBufferPtr MakeDieEntityPacket(const Protocol::EntityInfo& victimEntityInfo);
+	RxSendBufferPtr MakeCreateProjectilePacket(const Protocol::ProjectileInfo& projectileInfo);
 
 private:
 	template <typename TPacket>
@@ -45,6 +46,9 @@ private:
 	void HandlePacket_ModifyEntityLookAtDirectionPacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_MoveEntityPacket(BYTE* buffer, int32 numOfBytes);
 	void HandlePacket_ModifyEntityStatePacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_AttackToEntityPacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_CreateProjectilePacket(BYTE* buffer, int32 numOfBytes);
+	void HandlePacket_DieEntityPacket(BYTE* buffer, int32 numOfBytes);
 
 private:
 	std::unordered_map<uint32, PacketHandleDelegator> m_mapPacketHandler;

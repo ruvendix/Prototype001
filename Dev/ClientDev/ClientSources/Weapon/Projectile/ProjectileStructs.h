@@ -3,8 +3,6 @@
 
 struct ProjectileSpawnInfo
 {
-	int32 projectileId = -1;
-	Position2d spawnCellPos;
 	Size projectileSize;
 	Vector2d vMoveDir;
 	float flyingSpeed = 0.0f;

@@ -91,6 +91,9 @@
     <ClCompile Include="ServerSources\Game\Player\GamePlayer.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="ServerSources\Game\Projectile\GameProjectile.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="ServerSources\Packet\ServerPacketHandler.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -145,6 +148,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ServerSources\Game\Player\GamePlayer.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="ServerSources\Game\Projectile\GameProjectile.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="ServerSources\Global\DataTypes.h">

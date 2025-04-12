@@ -47,86 +47,87 @@ PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
-enum ENetworkEntityLookAtDirection : int {
+enum EEntityLookAtDirection : int {
   Left = 0,
   Up = 1,
   Right = 2,
   Down = 3,
-  ENetworkEntityLookAtDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  ENetworkEntityLookAtDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+  EEntityLookAtDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EEntityLookAtDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool ENetworkEntityLookAtDirection_IsValid(int value);
-constexpr ENetworkEntityLookAtDirection ENetworkEntityLookAtDirection_MIN = Left;
-constexpr ENetworkEntityLookAtDirection ENetworkEntityLookAtDirection_MAX = Down;
-constexpr int ENetworkEntityLookAtDirection_ARRAYSIZE = ENetworkEntityLookAtDirection_MAX + 1;
+bool EEntityLookAtDirection_IsValid(int value);
+constexpr EEntityLookAtDirection EEntityLookAtDirection_MIN = Left;
+constexpr EEntityLookAtDirection EEntityLookAtDirection_MAX = Down;
+constexpr int EEntityLookAtDirection_ARRAYSIZE = EEntityLookAtDirection_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityLookAtDirection_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EEntityLookAtDirection_descriptor();
 template<typename T>
-inline const std::string& ENetworkEntityLookAtDirection_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, ENetworkEntityLookAtDirection>::value ||
+inline const std::string& EEntityLookAtDirection_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EEntityLookAtDirection>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function ENetworkEntityLookAtDirection_Name.");
+    "Incorrect type passed to function EEntityLookAtDirection_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    ENetworkEntityLookAtDirection_descriptor(), enum_t_value);
+    EEntityLookAtDirection_descriptor(), enum_t_value);
 }
-inline bool ENetworkEntityLookAtDirection_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ENetworkEntityLookAtDirection* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ENetworkEntityLookAtDirection>(
-    ENetworkEntityLookAtDirection_descriptor(), name, value);
+inline bool EEntityLookAtDirection_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EEntityLookAtDirection* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EEntityLookAtDirection>(
+    EEntityLookAtDirection_descriptor(), name, value);
 }
-enum ENetworkEntityType : int {
+enum EEntityType : int {
   Player = 0,
   Monster = 1,
-  ENetworkEntityType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  ENetworkEntityType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+  Projectile = 2,
+  EEntityType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EEntityType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool ENetworkEntityType_IsValid(int value);
-constexpr ENetworkEntityType ENetworkEntityType_MIN = Player;
-constexpr ENetworkEntityType ENetworkEntityType_MAX = Monster;
-constexpr int ENetworkEntityType_ARRAYSIZE = ENetworkEntityType_MAX + 1;
+bool EEntityType_IsValid(int value);
+constexpr EEntityType EEntityType_MIN = Player;
+constexpr EEntityType EEntityType_MAX = Projectile;
+constexpr int EEntityType_ARRAYSIZE = EEntityType_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EEntityType_descriptor();
 template<typename T>
-inline const std::string& ENetworkEntityType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, ENetworkEntityType>::value ||
+inline const std::string& EEntityType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EEntityType>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function ENetworkEntityType_Name.");
+    "Incorrect type passed to function EEntityType_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    ENetworkEntityType_descriptor(), enum_t_value);
+    EEntityType_descriptor(), enum_t_value);
 }
-inline bool ENetworkEntityType_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ENetworkEntityType* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ENetworkEntityType>(
-    ENetworkEntityType_descriptor(), name, value);
+inline bool EEntityType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EEntityType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EEntityType>(
+    EEntityType_descriptor(), name, value);
 }
-enum ENetworkEntityState : int {
+enum EEntityState : int {
   Idle = 0,
   Walk = 1,
   Attack = 2,
   Defense = 3,
   Chase = 4,
   Death = 5,
-  ENetworkEntityState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  ENetworkEntityState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+  EEntityState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EEntityState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool ENetworkEntityState_IsValid(int value);
-constexpr ENetworkEntityState ENetworkEntityState_MIN = Idle;
-constexpr ENetworkEntityState ENetworkEntityState_MAX = Death;
-constexpr int ENetworkEntityState_ARRAYSIZE = ENetworkEntityState_MAX + 1;
+bool EEntityState_IsValid(int value);
+constexpr EEntityState EEntityState_MIN = Idle;
+constexpr EEntityState EEntityState_MAX = Death;
+constexpr int EEntityState_ARRAYSIZE = EEntityState_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENetworkEntityState_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EEntityState_descriptor();
 template<typename T>
-inline const std::string& ENetworkEntityState_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, ENetworkEntityState>::value ||
+inline const std::string& EEntityState_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EEntityState>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function ENetworkEntityState_Name.");
+    "Incorrect type passed to function EEntityState_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    ENetworkEntityState_descriptor(), enum_t_value);
+    EEntityState_descriptor(), enum_t_value);
 }
-inline bool ENetworkEntityState_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ENetworkEntityState* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ENetworkEntityState>(
-    ENetworkEntityState_descriptor(), name, value);
+inline bool EEntityState_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EEntityState* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EEntityState>(
+    EEntityState_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -150,20 +151,20 @@ inline bool ENetworkEntityState_Parse(
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Protocol::ENetworkEntityLookAtDirection> : ::std::true_type {};
+template <> struct is_proto_enum< ::Protocol::EEntityLookAtDirection> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::ENetworkEntityLookAtDirection>() {
-  return ::Protocol::ENetworkEntityLookAtDirection_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EEntityLookAtDirection>() {
+  return ::Protocol::EEntityLookAtDirection_descriptor();
 }
-template <> struct is_proto_enum< ::Protocol::ENetworkEntityType> : ::std::true_type {};
+template <> struct is_proto_enum< ::Protocol::EEntityType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::ENetworkEntityType>() {
-  return ::Protocol::ENetworkEntityType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EEntityType>() {
+  return ::Protocol::EEntityType_descriptor();
 }
-template <> struct is_proto_enum< ::Protocol::ENetworkEntityState> : ::std::true_type {};
+template <> struct is_proto_enum< ::Protocol::EEntityState> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::ENetworkEntityState>() {
-  return ::Protocol::ENetworkEntityState_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EEntityState>() {
+  return ::Protocol::EEntityState_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

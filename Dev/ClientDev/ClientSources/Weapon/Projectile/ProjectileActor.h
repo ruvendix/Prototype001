@@ -1,10 +1,10 @@
 // Copyright 2025 Ruvendix, All Rights Reserved.
 #pragma once
 
-class ProjectileActor : public PawnActor
+class ProjectileActor : public CommunicationActor
 {
 	DECLARE_PIMPL;
-	using Super = PawnActor;
+	using Super = CommunicationActor;
 
 public:
 	using Super::Super;
@@ -22,10 +22,10 @@ public:
 public:
 	void SpawnProjectile(const ProjectileSpawnInfo& projectileSpawnInfo);
 
-	void SetLinkedWeaponActor(const std::shared_ptr<WeaponActor>& spLinkedWeaponActor) { m_spLinkedWeaponActor = spLinkedWeaponActor; }
+	void SetLinkedWeaponActor(const WeaponActorPtr& spLinkedWeaponActor) { m_spLinkedWeaponActor = spLinkedWeaponActor; }
 	std::shared_ptr<PawnActor> GetLinkedWeaponActor() const { return m_spLinkedWeaponActor; }
 
 private:
 	// 투사체는 월드 소속이므로 생성하게 만든 무기와는 연결만 되었다는 개념
-	std::shared_ptr<WeaponActor> m_spLinkedWeaponActor = nullptr;
+	WeaponActorPtr m_spLinkedWeaponActor = nullptr;
 };

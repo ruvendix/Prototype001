@@ -50,6 +50,12 @@ namespace Protocol {
 class C_AttckToEntityPacket;
 struct C_AttckToEntityPacketDefaultTypeInternal;
 extern C_AttckToEntityPacketDefaultTypeInternal _C_AttckToEntityPacket_default_instance_;
+class C_CreateProjectilePacket;
+struct C_CreateProjectilePacketDefaultTypeInternal;
+extern C_CreateProjectilePacketDefaultTypeInternal _C_CreateProjectilePacket_default_instance_;
+class C_DieEntityPacket;
+struct C_DieEntityPacketDefaultTypeInternal;
+extern C_DieEntityPacketDefaultTypeInternal _C_DieEntityPacket_default_instance_;
 class C_ModifyEntityLookAtDirectionPacket;
 struct C_ModifyEntityLookAtDirectionPacketDefaultTypeInternal;
 extern C_ModifyEntityLookAtDirectionPacketDefaultTypeInternal _C_ModifyEntityLookAtDirectionPacket_default_instance_;
@@ -62,9 +68,12 @@ extern C_MoveEntityPacketDefaultTypeInternal _C_MoveEntityPacket_default_instanc
 class S_CreateMainPlayerPacket;
 struct S_CreateMainPlayerPacketDefaultTypeInternal;
 extern S_CreateMainPlayerPacketDefaultTypeInternal _S_CreateMainPlayerPacket_default_instance_;
-class S_DiePlayerPacket;
-struct S_DiePlayerPacketDefaultTypeInternal;
-extern S_DiePlayerPacketDefaultTypeInternal _S_DiePlayerPacket_default_instance_;
+class S_CreateProjectilePacket;
+struct S_CreateProjectilePacketDefaultTypeInternal;
+extern S_CreateProjectilePacketDefaultTypeInternal _S_CreateProjectilePacket_default_instance_;
+class S_DieEntityPacket;
+struct S_DieEntityPacketDefaultTypeInternal;
+extern S_DieEntityPacketDefaultTypeInternal _S_DieEntityPacket_default_instance_;
 class S_EnterGamePacket;
 struct S_EnterGamePacketDefaultTypeInternal;
 extern S_EnterGamePacketDefaultTypeInternal _S_EnterGamePacket_default_instance_;
@@ -92,11 +101,14 @@ extern S_SyncEntitiesPacketDefaultTypeInternal _S_SyncEntitiesPacket_default_ins
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_AttckToEntityPacket* Arena::CreateMaybeMessage<::Protocol::C_AttckToEntityPacket>(Arena*);
+template<> ::Protocol::C_CreateProjectilePacket* Arena::CreateMaybeMessage<::Protocol::C_CreateProjectilePacket>(Arena*);
+template<> ::Protocol::C_DieEntityPacket* Arena::CreateMaybeMessage<::Protocol::C_DieEntityPacket>(Arena*);
 template<> ::Protocol::C_ModifyEntityLookAtDirectionPacket* Arena::CreateMaybeMessage<::Protocol::C_ModifyEntityLookAtDirectionPacket>(Arena*);
 template<> ::Protocol::C_ModifyEntityStatePacket* Arena::CreateMaybeMessage<::Protocol::C_ModifyEntityStatePacket>(Arena*);
 template<> ::Protocol::C_MoveEntityPacket* Arena::CreateMaybeMessage<::Protocol::C_MoveEntityPacket>(Arena*);
 template<> ::Protocol::S_CreateMainPlayerPacket* Arena::CreateMaybeMessage<::Protocol::S_CreateMainPlayerPacket>(Arena*);
-template<> ::Protocol::S_DiePlayerPacket* Arena::CreateMaybeMessage<::Protocol::S_DiePlayerPacket>(Arena*);
+template<> ::Protocol::S_CreateProjectilePacket* Arena::CreateMaybeMessage<::Protocol::S_CreateProjectilePacket>(Arena*);
+template<> ::Protocol::S_DieEntityPacket* Arena::CreateMaybeMessage<::Protocol::S_DieEntityPacket>(Arena*);
 template<> ::Protocol::S_EnterGamePacket* Arena::CreateMaybeMessage<::Protocol::S_EnterGamePacket>(Arena*);
 template<> ::Protocol::S_HitDamageToEntityPacket* Arena::CreateMaybeMessage<::Protocol::S_HitDamageToEntityPacket>(Arena*);
 template<> ::Protocol::S_LeaveGamePacket* Arena::CreateMaybeMessage<::Protocol::S_LeaveGamePacket>(Arena*);
@@ -394,23 +406,23 @@ class S_LeaveGamePacket final :
     kUserIdFieldNumber = 2,
     kLeaveSuccessFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo player_info = 3;
+  // .Protocol.EntityInfo player_info = 3;
   bool has_player_info() const;
   private:
   bool _internal_has_player_info() const;
   public:
   void clear_player_info();
-  const ::Protocol::NetworkEntityInfo& player_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_player_info();
-  ::Protocol::NetworkEntityInfo* mutable_player_info();
-  void set_allocated_player_info(::Protocol::NetworkEntityInfo* player_info);
+  const ::Protocol::EntityInfo& player_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_player_info();
+  ::Protocol::EntityInfo* mutable_player_info();
+  void set_allocated_player_info(::Protocol::EntityInfo* player_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_player_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_player_info();
+  const ::Protocol::EntityInfo& _internal_player_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_player_info();
   public:
   void unsafe_arena_set_allocated_player_info(
-      ::Protocol::NetworkEntityInfo* player_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_player_info();
+      ::Protocol::EntityInfo* player_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_player_info();
 
   // uint64 user_id = 2;
   void clear_user_id();
@@ -438,7 +450,7 @@ class S_LeaveGamePacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* player_info_;
+    ::Protocol::EntityInfo* player_info_;
     uint64_t user_id_;
     bool leave_success_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -571,23 +583,23 @@ class S_CreateMainPlayerPacket final :
   enum : int {
     kMainPlayerInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo main_player_info = 1;
+  // .Protocol.EntityInfo main_player_info = 1;
   bool has_main_player_info() const;
   private:
   bool _internal_has_main_player_info() const;
   public:
   void clear_main_player_info();
-  const ::Protocol::NetworkEntityInfo& main_player_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_main_player_info();
-  ::Protocol::NetworkEntityInfo* mutable_main_player_info();
-  void set_allocated_main_player_info(::Protocol::NetworkEntityInfo* main_player_info);
+  const ::Protocol::EntityInfo& main_player_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_main_player_info();
+  ::Protocol::EntityInfo* mutable_main_player_info();
+  void set_allocated_main_player_info(::Protocol::EntityInfo* main_player_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_main_player_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_main_player_info();
+  const ::Protocol::EntityInfo& _internal_main_player_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_main_player_info();
   public:
   void unsafe_arena_set_allocated_main_player_info(
-      ::Protocol::NetworkEntityInfo* main_player_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_main_player_info();
+      ::Protocol::EntityInfo* main_player_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_main_player_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_CreateMainPlayerPacket)
  private:
@@ -597,7 +609,7 @@ class S_CreateMainPlayerPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* main_player_info_;
+    ::Protocol::EntityInfo* main_player_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -729,40 +741,40 @@ class S_SyncEntitiesPacket final :
     kPlayersInfoFieldNumber = 1,
     kMonstersInfoFieldNumber = 2,
   };
-  // repeated .Protocol.NetworkEntityInfo players_info = 1;
+  // repeated .Protocol.EntityInfo players_info = 1;
   int players_info_size() const;
   private:
   int _internal_players_info_size() const;
   public:
   void clear_players_info();
-  ::Protocol::NetworkEntityInfo* mutable_players_info(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkEntityInfo >*
+  ::Protocol::EntityInfo* mutable_players_info(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::EntityInfo >*
       mutable_players_info();
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_players_info(int index) const;
-  ::Protocol::NetworkEntityInfo* _internal_add_players_info();
+  const ::Protocol::EntityInfo& _internal_players_info(int index) const;
+  ::Protocol::EntityInfo* _internal_add_players_info();
   public:
-  const ::Protocol::NetworkEntityInfo& players_info(int index) const;
-  ::Protocol::NetworkEntityInfo* add_players_info();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkEntityInfo >&
+  const ::Protocol::EntityInfo& players_info(int index) const;
+  ::Protocol::EntityInfo* add_players_info();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::EntityInfo >&
       players_info() const;
 
-  // repeated .Protocol.NetworkMonsterInfo monsters_info = 2;
+  // repeated .Protocol.MonsterInfo monsters_info = 2;
   int monsters_info_size() const;
   private:
   int _internal_monsters_info_size() const;
   public:
   void clear_monsters_info();
-  ::Protocol::NetworkMonsterInfo* mutable_monsters_info(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkMonsterInfo >*
+  ::Protocol::MonsterInfo* mutable_monsters_info(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::MonsterInfo >*
       mutable_monsters_info();
   private:
-  const ::Protocol::NetworkMonsterInfo& _internal_monsters_info(int index) const;
-  ::Protocol::NetworkMonsterInfo* _internal_add_monsters_info();
+  const ::Protocol::MonsterInfo& _internal_monsters_info(int index) const;
+  ::Protocol::MonsterInfo* _internal_add_monsters_info();
   public:
-  const ::Protocol::NetworkMonsterInfo& monsters_info(int index) const;
-  ::Protocol::NetworkMonsterInfo* add_monsters_info();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkMonsterInfo >&
+  const ::Protocol::MonsterInfo& monsters_info(int index) const;
+  ::Protocol::MonsterInfo* add_monsters_info();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::MonsterInfo >&
       monsters_info() const;
 
   // @@protoc_insertion_point(class_scope:Protocol.S_SyncEntitiesPacket)
@@ -773,8 +785,8 @@ class S_SyncEntitiesPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkEntityInfo > players_info_;
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkMonsterInfo > monsters_info_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::EntityInfo > players_info_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::MonsterInfo > monsters_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -905,23 +917,23 @@ class C_MoveEntityPacket final :
   enum : int {
     kEntityInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   bool has_entity_info() const;
   private:
   bool _internal_has_entity_info() const;
   public:
   void clear_entity_info();
-  const ::Protocol::NetworkEntityInfo& entity_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_entity_info();
-  ::Protocol::NetworkEntityInfo* mutable_entity_info();
-  void set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info);
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_entity_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_entity_info();
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
   public:
   void unsafe_arena_set_allocated_entity_info(
-      ::Protocol::NetworkEntityInfo* entity_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_entity_info();
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.C_MoveEntityPacket)
  private:
@@ -931,7 +943,7 @@ class C_MoveEntityPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* entity_info_;
+    ::Protocol::EntityInfo* entity_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1062,23 +1074,23 @@ class S_MoveEntityPacket final :
   enum : int {
     kEntityInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   bool has_entity_info() const;
   private:
   bool _internal_has_entity_info() const;
   public:
   void clear_entity_info();
-  const ::Protocol::NetworkEntityInfo& entity_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_entity_info();
-  ::Protocol::NetworkEntityInfo* mutable_entity_info();
-  void set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info);
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_entity_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_entity_info();
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
   public:
   void unsafe_arena_set_allocated_entity_info(
-      ::Protocol::NetworkEntityInfo* entity_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_entity_info();
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_MoveEntityPacket)
  private:
@@ -1088,7 +1100,7 @@ class S_MoveEntityPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* entity_info_;
+    ::Protocol::EntityInfo* entity_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1219,23 +1231,23 @@ class S_ModifyPlayerInformationPacket final :
   enum : int {
     kPlayerInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo player_info = 1;
+  // .Protocol.EntityInfo player_info = 1;
   bool has_player_info() const;
   private:
   bool _internal_has_player_info() const;
   public:
   void clear_player_info();
-  const ::Protocol::NetworkEntityInfo& player_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_player_info();
-  ::Protocol::NetworkEntityInfo* mutable_player_info();
-  void set_allocated_player_info(::Protocol::NetworkEntityInfo* player_info);
+  const ::Protocol::EntityInfo& player_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_player_info();
+  ::Protocol::EntityInfo* mutable_player_info();
+  void set_allocated_player_info(::Protocol::EntityInfo* player_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_player_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_player_info();
+  const ::Protocol::EntityInfo& _internal_player_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_player_info();
   public:
   void unsafe_arena_set_allocated_player_info(
-      ::Protocol::NetworkEntityInfo* player_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_player_info();
+      ::Protocol::EntityInfo* player_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_player_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_ModifyPlayerInformationPacket)
  private:
@@ -1245,7 +1257,7 @@ class S_ModifyPlayerInformationPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* player_info_;
+    ::Protocol::EntityInfo* player_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1376,23 +1388,23 @@ class C_ModifyEntityLookAtDirectionPacket final :
   enum : int {
     kEntityInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   bool has_entity_info() const;
   private:
   bool _internal_has_entity_info() const;
   public:
   void clear_entity_info();
-  const ::Protocol::NetworkEntityInfo& entity_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_entity_info();
-  ::Protocol::NetworkEntityInfo* mutable_entity_info();
-  void set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info);
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_entity_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_entity_info();
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
   public:
   void unsafe_arena_set_allocated_entity_info(
-      ::Protocol::NetworkEntityInfo* entity_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_entity_info();
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.C_ModifyEntityLookAtDirectionPacket)
  private:
@@ -1402,7 +1414,7 @@ class C_ModifyEntityLookAtDirectionPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* entity_info_;
+    ::Protocol::EntityInfo* entity_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1533,23 +1545,23 @@ class S_ModifyEntityLookAtDirectionPacket final :
   enum : int {
     kEntityInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   bool has_entity_info() const;
   private:
   bool _internal_has_entity_info() const;
   public:
   void clear_entity_info();
-  const ::Protocol::NetworkEntityInfo& entity_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_entity_info();
-  ::Protocol::NetworkEntityInfo* mutable_entity_info();
-  void set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info);
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_entity_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_entity_info();
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
   public:
   void unsafe_arena_set_allocated_entity_info(
-      ::Protocol::NetworkEntityInfo* entity_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_entity_info();
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_ModifyEntityLookAtDirectionPacket)
  private:
@@ -1559,7 +1571,7 @@ class S_ModifyEntityLookAtDirectionPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* entity_info_;
+    ::Protocol::EntityInfo* entity_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1690,23 +1702,23 @@ class C_ModifyEntityStatePacket final :
   enum : int {
     kEntityInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   bool has_entity_info() const;
   private:
   bool _internal_has_entity_info() const;
   public:
   void clear_entity_info();
-  const ::Protocol::NetworkEntityInfo& entity_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_entity_info();
-  ::Protocol::NetworkEntityInfo* mutable_entity_info();
-  void set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info);
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_entity_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_entity_info();
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
   public:
   void unsafe_arena_set_allocated_entity_info(
-      ::Protocol::NetworkEntityInfo* entity_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_entity_info();
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.C_ModifyEntityStatePacket)
  private:
@@ -1716,7 +1728,7 @@ class C_ModifyEntityStatePacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* entity_info_;
+    ::Protocol::EntityInfo* entity_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1847,23 +1859,23 @@ class S_ModifyEntityStatePacket final :
   enum : int {
     kEntityInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo entity_info = 1;
+  // .Protocol.EntityInfo entity_info = 1;
   bool has_entity_info() const;
   private:
   bool _internal_has_entity_info() const;
   public:
   void clear_entity_info();
-  const ::Protocol::NetworkEntityInfo& entity_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_entity_info();
-  ::Protocol::NetworkEntityInfo* mutable_entity_info();
-  void set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info);
+  const ::Protocol::EntityInfo& entity_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_entity_info();
+  ::Protocol::EntityInfo* mutable_entity_info();
+  void set_allocated_entity_info(::Protocol::EntityInfo* entity_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_entity_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_entity_info();
+  const ::Protocol::EntityInfo& _internal_entity_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_entity_info();
   public:
   void unsafe_arena_set_allocated_entity_info(
-      ::Protocol::NetworkEntityInfo* entity_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_entity_info();
+      ::Protocol::EntityInfo* entity_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_entity_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_ModifyEntityStatePacket)
  private:
@@ -1873,7 +1885,7 @@ class S_ModifyEntityStatePacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* entity_info_;
+    ::Protocol::EntityInfo* entity_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2005,41 +2017,41 @@ class C_AttckToEntityPacket final :
     kAttackerInfoFieldNumber = 1,
     kVictimInfoFieldNumber = 2,
   };
-  // .Protocol.NetworkEntityInfo attacker_info = 1;
+  // .Protocol.EntityInfo attacker_info = 1;
   bool has_attacker_info() const;
   private:
   bool _internal_has_attacker_info() const;
   public:
   void clear_attacker_info();
-  const ::Protocol::NetworkEntityInfo& attacker_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_attacker_info();
-  ::Protocol::NetworkEntityInfo* mutable_attacker_info();
-  void set_allocated_attacker_info(::Protocol::NetworkEntityInfo* attacker_info);
+  const ::Protocol::EntityInfo& attacker_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_attacker_info();
+  ::Protocol::EntityInfo* mutable_attacker_info();
+  void set_allocated_attacker_info(::Protocol::EntityInfo* attacker_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_attacker_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_attacker_info();
+  const ::Protocol::EntityInfo& _internal_attacker_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_attacker_info();
   public:
   void unsafe_arena_set_allocated_attacker_info(
-      ::Protocol::NetworkEntityInfo* attacker_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_attacker_info();
+      ::Protocol::EntityInfo* attacker_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_attacker_info();
 
-  // .Protocol.NetworkEntityInfo victim_info = 2;
+  // .Protocol.EntityInfo victim_info = 2;
   bool has_victim_info() const;
   private:
   bool _internal_has_victim_info() const;
   public:
   void clear_victim_info();
-  const ::Protocol::NetworkEntityInfo& victim_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_victim_info();
-  ::Protocol::NetworkEntityInfo* mutable_victim_info();
-  void set_allocated_victim_info(::Protocol::NetworkEntityInfo* victim_info);
+  const ::Protocol::EntityInfo& victim_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_victim_info();
+  ::Protocol::EntityInfo* mutable_victim_info();
+  void set_allocated_victim_info(::Protocol::EntityInfo* victim_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_victim_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_victim_info();
+  const ::Protocol::EntityInfo& _internal_victim_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_victim_info();
   public:
   void unsafe_arena_set_allocated_victim_info(
-      ::Protocol::NetworkEntityInfo* victim_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_victim_info();
+      ::Protocol::EntityInfo* victim_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_victim_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.C_AttckToEntityPacket)
  private:
@@ -2049,8 +2061,8 @@ class C_AttckToEntityPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* attacker_info_;
-    ::Protocol::NetworkEntityInfo* victim_info_;
+    ::Protocol::EntityInfo* attacker_info_;
+    ::Protocol::EntityInfo* victim_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2182,41 +2194,41 @@ class S_HitDamageToEntityPacket final :
     kAttackerInfoFieldNumber = 1,
     kVictimInfoFieldNumber = 2,
   };
-  // .Protocol.NetworkEntityInfo attacker_info = 1;
+  // .Protocol.EntityInfo attacker_info = 1;
   bool has_attacker_info() const;
   private:
   bool _internal_has_attacker_info() const;
   public:
   void clear_attacker_info();
-  const ::Protocol::NetworkEntityInfo& attacker_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_attacker_info();
-  ::Protocol::NetworkEntityInfo* mutable_attacker_info();
-  void set_allocated_attacker_info(::Protocol::NetworkEntityInfo* attacker_info);
+  const ::Protocol::EntityInfo& attacker_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_attacker_info();
+  ::Protocol::EntityInfo* mutable_attacker_info();
+  void set_allocated_attacker_info(::Protocol::EntityInfo* attacker_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_attacker_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_attacker_info();
+  const ::Protocol::EntityInfo& _internal_attacker_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_attacker_info();
   public:
   void unsafe_arena_set_allocated_attacker_info(
-      ::Protocol::NetworkEntityInfo* attacker_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_attacker_info();
+      ::Protocol::EntityInfo* attacker_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_attacker_info();
 
-  // .Protocol.NetworkEntityInfo victim_info = 2;
+  // .Protocol.EntityInfo victim_info = 2;
   bool has_victim_info() const;
   private:
   bool _internal_has_victim_info() const;
   public:
   void clear_victim_info();
-  const ::Protocol::NetworkEntityInfo& victim_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_victim_info();
-  ::Protocol::NetworkEntityInfo* mutable_victim_info();
-  void set_allocated_victim_info(::Protocol::NetworkEntityInfo* victim_info);
+  const ::Protocol::EntityInfo& victim_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_victim_info();
+  ::Protocol::EntityInfo* mutable_victim_info();
+  void set_allocated_victim_info(::Protocol::EntityInfo* victim_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_victim_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_victim_info();
+  const ::Protocol::EntityInfo& _internal_victim_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_victim_info();
   public:
   void unsafe_arena_set_allocated_victim_info(
-      ::Protocol::NetworkEntityInfo* victim_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_victim_info();
+      ::Protocol::EntityInfo* victim_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_victim_info();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_HitDamageToEntityPacket)
  private:
@@ -2226,8 +2238,8 @@ class S_HitDamageToEntityPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* attacker_info_;
-    ::Protocol::NetworkEntityInfo* victim_info_;
+    ::Protocol::EntityInfo* attacker_info_;
+    ::Protocol::EntityInfo* victim_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2235,24 +2247,24 @@ class S_HitDamageToEntityPacket final :
 };
 // -------------------------------------------------------------------
 
-class S_DiePlayerPacket final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_DiePlayerPacket) */ {
+class C_DieEntityPacket final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_DieEntityPacket) */ {
  public:
-  inline S_DiePlayerPacket() : S_DiePlayerPacket(nullptr) {}
-  ~S_DiePlayerPacket() override;
-  explicit PROTOBUF_CONSTEXPR S_DiePlayerPacket(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline C_DieEntityPacket() : C_DieEntityPacket(nullptr) {}
+  ~C_DieEntityPacket() override;
+  explicit PROTOBUF_CONSTEXPR C_DieEntityPacket(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  S_DiePlayerPacket(const S_DiePlayerPacket& from);
-  S_DiePlayerPacket(S_DiePlayerPacket&& from) noexcept
-    : S_DiePlayerPacket() {
+  C_DieEntityPacket(const C_DieEntityPacket& from);
+  C_DieEntityPacket(C_DieEntityPacket&& from) noexcept
+    : C_DieEntityPacket() {
     *this = ::std::move(from);
   }
 
-  inline S_DiePlayerPacket& operator=(const S_DiePlayerPacket& from) {
+  inline C_DieEntityPacket& operator=(const C_DieEntityPacket& from) {
     CopyFrom(from);
     return *this;
   }
-  inline S_DiePlayerPacket& operator=(S_DiePlayerPacket&& from) noexcept {
+  inline C_DieEntityPacket& operator=(C_DieEntityPacket&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -2275,20 +2287,20 @@ class S_DiePlayerPacket final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const S_DiePlayerPacket& default_instance() {
+  static const C_DieEntityPacket& default_instance() {
     return *internal_default_instance();
   }
-  static inline const S_DiePlayerPacket* internal_default_instance() {
-    return reinterpret_cast<const S_DiePlayerPacket*>(
-               &_S_DiePlayerPacket_default_instance_);
+  static inline const C_DieEntityPacket* internal_default_instance() {
+    return reinterpret_cast<const C_DieEntityPacket*>(
+               &_C_DieEntityPacket_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     13;
 
-  friend void swap(S_DiePlayerPacket& a, S_DiePlayerPacket& b) {
+  friend void swap(C_DieEntityPacket& a, C_DieEntityPacket& b) {
     a.Swap(&b);
   }
-  inline void Swap(S_DiePlayerPacket* other) {
+  inline void Swap(C_DieEntityPacket* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -2301,7 +2313,7 @@ class S_DiePlayerPacket final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(S_DiePlayerPacket* other) {
+  void UnsafeArenaSwap(C_DieEntityPacket* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -2309,14 +2321,14 @@ class S_DiePlayerPacket final :
 
   // implements Message ----------------------------------------------
 
-  S_DiePlayerPacket* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<S_DiePlayerPacket>(arena);
+  C_DieEntityPacket* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_DieEntityPacket>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const S_DiePlayerPacket& from);
+  void CopyFrom(const C_DieEntityPacket& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const S_DiePlayerPacket& from) {
-    S_DiePlayerPacket::MergeImpl(*this, from);
+  void MergeFrom( const C_DieEntityPacket& from) {
+    C_DieEntityPacket::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -2334,15 +2346,15 @@ class S_DiePlayerPacket final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(S_DiePlayerPacket* other);
+  void InternalSwap(C_DieEntityPacket* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.S_DiePlayerPacket";
+    return "Protocol.C_DieEntityPacket";
   }
   protected:
-  explicit S_DiePlayerPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit C_DieEntityPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -2358,25 +2370,25 @@ class S_DiePlayerPacket final :
   enum : int {
     kVictimInfoFieldNumber = 1,
   };
-  // .Protocol.NetworkEntityInfo victim_info = 1;
+  // .Protocol.EntityInfo victim_info = 1;
   bool has_victim_info() const;
   private:
   bool _internal_has_victim_info() const;
   public:
   void clear_victim_info();
-  const ::Protocol::NetworkEntityInfo& victim_info() const;
-  PROTOBUF_NODISCARD ::Protocol::NetworkEntityInfo* release_victim_info();
-  ::Protocol::NetworkEntityInfo* mutable_victim_info();
-  void set_allocated_victim_info(::Protocol::NetworkEntityInfo* victim_info);
+  const ::Protocol::EntityInfo& victim_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_victim_info();
+  ::Protocol::EntityInfo* mutable_victim_info();
+  void set_allocated_victim_info(::Protocol::EntityInfo* victim_info);
   private:
-  const ::Protocol::NetworkEntityInfo& _internal_victim_info() const;
-  ::Protocol::NetworkEntityInfo* _internal_mutable_victim_info();
+  const ::Protocol::EntityInfo& _internal_victim_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_victim_info();
   public:
   void unsafe_arena_set_allocated_victim_info(
-      ::Protocol::NetworkEntityInfo* victim_info);
-  ::Protocol::NetworkEntityInfo* unsafe_arena_release_victim_info();
+      ::Protocol::EntityInfo* victim_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_victim_info();
 
-  // @@protoc_insertion_point(class_scope:Protocol.S_DiePlayerPacket)
+  // @@protoc_insertion_point(class_scope:Protocol.C_DieEntityPacket)
  private:
   class _Internal;
 
@@ -2384,7 +2396,478 @@ class S_DiePlayerPacket final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::Protocol::NetworkEntityInfo* victim_info_;
+    ::Protocol::EntityInfo* victim_info_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_DieEntityPacket final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_DieEntityPacket) */ {
+ public:
+  inline S_DieEntityPacket() : S_DieEntityPacket(nullptr) {}
+  ~S_DieEntityPacket() override;
+  explicit PROTOBUF_CONSTEXPR S_DieEntityPacket(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_DieEntityPacket(const S_DieEntityPacket& from);
+  S_DieEntityPacket(S_DieEntityPacket&& from) noexcept
+    : S_DieEntityPacket() {
+    *this = ::std::move(from);
+  }
+
+  inline S_DieEntityPacket& operator=(const S_DieEntityPacket& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_DieEntityPacket& operator=(S_DieEntityPacket&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_DieEntityPacket& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_DieEntityPacket* internal_default_instance() {
+    return reinterpret_cast<const S_DieEntityPacket*>(
+               &_S_DieEntityPacket_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    14;
+
+  friend void swap(S_DieEntityPacket& a, S_DieEntityPacket& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_DieEntityPacket* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_DieEntityPacket* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_DieEntityPacket* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_DieEntityPacket>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_DieEntityPacket& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_DieEntityPacket& from) {
+    S_DieEntityPacket::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_DieEntityPacket* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_DieEntityPacket";
+  }
+  protected:
+  explicit S_DieEntityPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kVictimInfoFieldNumber = 1,
+  };
+  // .Protocol.EntityInfo victim_info = 1;
+  bool has_victim_info() const;
+  private:
+  bool _internal_has_victim_info() const;
+  public:
+  void clear_victim_info();
+  const ::Protocol::EntityInfo& victim_info() const;
+  PROTOBUF_NODISCARD ::Protocol::EntityInfo* release_victim_info();
+  ::Protocol::EntityInfo* mutable_victim_info();
+  void set_allocated_victim_info(::Protocol::EntityInfo* victim_info);
+  private:
+  const ::Protocol::EntityInfo& _internal_victim_info() const;
+  ::Protocol::EntityInfo* _internal_mutable_victim_info();
+  public:
+  void unsafe_arena_set_allocated_victim_info(
+      ::Protocol::EntityInfo* victim_info);
+  ::Protocol::EntityInfo* unsafe_arena_release_victim_info();
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_DieEntityPacket)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::Protocol::EntityInfo* victim_info_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_CreateProjectilePacket final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_CreateProjectilePacket) */ {
+ public:
+  inline C_CreateProjectilePacket() : C_CreateProjectilePacket(nullptr) {}
+  ~C_CreateProjectilePacket() override;
+  explicit PROTOBUF_CONSTEXPR C_CreateProjectilePacket(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_CreateProjectilePacket(const C_CreateProjectilePacket& from);
+  C_CreateProjectilePacket(C_CreateProjectilePacket&& from) noexcept
+    : C_CreateProjectilePacket() {
+    *this = ::std::move(from);
+  }
+
+  inline C_CreateProjectilePacket& operator=(const C_CreateProjectilePacket& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_CreateProjectilePacket& operator=(C_CreateProjectilePacket&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_CreateProjectilePacket& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_CreateProjectilePacket* internal_default_instance() {
+    return reinterpret_cast<const C_CreateProjectilePacket*>(
+               &_C_CreateProjectilePacket_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  friend void swap(C_CreateProjectilePacket& a, C_CreateProjectilePacket& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_CreateProjectilePacket* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_CreateProjectilePacket* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_CreateProjectilePacket* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_CreateProjectilePacket>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_CreateProjectilePacket& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_CreateProjectilePacket& from) {
+    C_CreateProjectilePacket::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_CreateProjectilePacket* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_CreateProjectilePacket";
+  }
+  protected:
+  explicit C_CreateProjectilePacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProjectileInfoFieldNumber = 1,
+  };
+  // .Protocol.ProjectileInfo projectile_info = 1;
+  bool has_projectile_info() const;
+  private:
+  bool _internal_has_projectile_info() const;
+  public:
+  void clear_projectile_info();
+  const ::Protocol::ProjectileInfo& projectile_info() const;
+  PROTOBUF_NODISCARD ::Protocol::ProjectileInfo* release_projectile_info();
+  ::Protocol::ProjectileInfo* mutable_projectile_info();
+  void set_allocated_projectile_info(::Protocol::ProjectileInfo* projectile_info);
+  private:
+  const ::Protocol::ProjectileInfo& _internal_projectile_info() const;
+  ::Protocol::ProjectileInfo* _internal_mutable_projectile_info();
+  public:
+  void unsafe_arena_set_allocated_projectile_info(
+      ::Protocol::ProjectileInfo* projectile_info);
+  ::Protocol::ProjectileInfo* unsafe_arena_release_projectile_info();
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_CreateProjectilePacket)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::Protocol::ProjectileInfo* projectile_info_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Packet_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_CreateProjectilePacket final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_CreateProjectilePacket) */ {
+ public:
+  inline S_CreateProjectilePacket() : S_CreateProjectilePacket(nullptr) {}
+  ~S_CreateProjectilePacket() override;
+  explicit PROTOBUF_CONSTEXPR S_CreateProjectilePacket(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_CreateProjectilePacket(const S_CreateProjectilePacket& from);
+  S_CreateProjectilePacket(S_CreateProjectilePacket&& from) noexcept
+    : S_CreateProjectilePacket() {
+    *this = ::std::move(from);
+  }
+
+  inline S_CreateProjectilePacket& operator=(const S_CreateProjectilePacket& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_CreateProjectilePacket& operator=(S_CreateProjectilePacket&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_CreateProjectilePacket& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_CreateProjectilePacket* internal_default_instance() {
+    return reinterpret_cast<const S_CreateProjectilePacket*>(
+               &_S_CreateProjectilePacket_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  friend void swap(S_CreateProjectilePacket& a, S_CreateProjectilePacket& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_CreateProjectilePacket* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_CreateProjectilePacket* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_CreateProjectilePacket* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_CreateProjectilePacket>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_CreateProjectilePacket& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_CreateProjectilePacket& from) {
+    S_CreateProjectilePacket::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_CreateProjectilePacket* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_CreateProjectilePacket";
+  }
+  protected:
+  explicit S_CreateProjectilePacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProjectileInfoFieldNumber = 1,
+  };
+  // .Protocol.ProjectileInfo projectile_info = 1;
+  bool has_projectile_info() const;
+  private:
+  bool _internal_has_projectile_info() const;
+  public:
+  void clear_projectile_info();
+  const ::Protocol::ProjectileInfo& projectile_info() const;
+  PROTOBUF_NODISCARD ::Protocol::ProjectileInfo* release_projectile_info();
+  ::Protocol::ProjectileInfo* mutable_projectile_info();
+  void set_allocated_projectile_info(::Protocol::ProjectileInfo* projectile_info);
+  private:
+  const ::Protocol::ProjectileInfo& _internal_projectile_info() const;
+  ::Protocol::ProjectileInfo* _internal_mutable_projectile_info();
+  public:
+  void unsafe_arena_set_allocated_projectile_info(
+      ::Protocol::ProjectileInfo* projectile_info);
+  ::Protocol::ProjectileInfo* unsafe_arena_release_projectile_info();
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_CreateProjectilePacket)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::Protocol::ProjectileInfo* projectile_info_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2485,24 +2968,24 @@ inline void S_LeaveGamePacket::set_user_id(uint64_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_LeaveGamePacket.user_id)
 }
 
-// .Protocol.NetworkEntityInfo player_info = 3;
+// .Protocol.EntityInfo player_info = 3;
 inline bool S_LeaveGamePacket::_internal_has_player_info() const {
   return this != internal_default_instance() && _impl_.player_info_ != nullptr;
 }
 inline bool S_LeaveGamePacket::has_player_info() const {
   return _internal_has_player_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_LeaveGamePacket::_internal_player_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.player_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_LeaveGamePacket::_internal_player_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.player_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_LeaveGamePacket::player_info() const {
+inline const ::Protocol::EntityInfo& S_LeaveGamePacket::player_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_LeaveGamePacket.player_info)
   return _internal_player_info();
 }
 inline void S_LeaveGamePacket::unsafe_arena_set_allocated_player_info(
-    ::Protocol::NetworkEntityInfo* player_info) {
+    ::Protocol::EntityInfo* player_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.player_info_);
   }
@@ -2514,9 +2997,9 @@ inline void S_LeaveGamePacket::unsafe_arena_set_allocated_player_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_LeaveGamePacket.player_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_LeaveGamePacket::release_player_info() {
+inline ::Protocol::EntityInfo* S_LeaveGamePacket::release_player_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.player_info_;
+  ::Protocol::EntityInfo* temp = _impl_.player_info_;
   _impl_.player_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2529,27 +3012,27 @@ inline ::Protocol::NetworkEntityInfo* S_LeaveGamePacket::release_player_info() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_LeaveGamePacket::unsafe_arena_release_player_info() {
+inline ::Protocol::EntityInfo* S_LeaveGamePacket::unsafe_arena_release_player_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_LeaveGamePacket.player_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.player_info_;
+  ::Protocol::EntityInfo* temp = _impl_.player_info_;
   _impl_.player_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_LeaveGamePacket::_internal_mutable_player_info() {
+inline ::Protocol::EntityInfo* S_LeaveGamePacket::_internal_mutable_player_info() {
   
   if (_impl_.player_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.player_info_ = p;
   }
   return _impl_.player_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_LeaveGamePacket::mutable_player_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_player_info();
+inline ::Protocol::EntityInfo* S_LeaveGamePacket::mutable_player_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_player_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_LeaveGamePacket.player_info)
   return _msg;
 }
-inline void S_LeaveGamePacket::set_allocated_player_info(::Protocol::NetworkEntityInfo* player_info) {
+inline void S_LeaveGamePacket::set_allocated_player_info(::Protocol::EntityInfo* player_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.player_info_);
@@ -2574,24 +3057,24 @@ inline void S_LeaveGamePacket::set_allocated_player_info(::Protocol::NetworkEnti
 
 // S_CreateMainPlayerPacket
 
-// .Protocol.NetworkEntityInfo main_player_info = 1;
+// .Protocol.EntityInfo main_player_info = 1;
 inline bool S_CreateMainPlayerPacket::_internal_has_main_player_info() const {
   return this != internal_default_instance() && _impl_.main_player_info_ != nullptr;
 }
 inline bool S_CreateMainPlayerPacket::has_main_player_info() const {
   return _internal_has_main_player_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_CreateMainPlayerPacket::_internal_main_player_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.main_player_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_CreateMainPlayerPacket::_internal_main_player_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.main_player_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_CreateMainPlayerPacket::main_player_info() const {
+inline const ::Protocol::EntityInfo& S_CreateMainPlayerPacket::main_player_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_CreateMainPlayerPacket.main_player_info)
   return _internal_main_player_info();
 }
 inline void S_CreateMainPlayerPacket::unsafe_arena_set_allocated_main_player_info(
-    ::Protocol::NetworkEntityInfo* main_player_info) {
+    ::Protocol::EntityInfo* main_player_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.main_player_info_);
   }
@@ -2603,9 +3086,9 @@ inline void S_CreateMainPlayerPacket::unsafe_arena_set_allocated_main_player_inf
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_CreateMainPlayerPacket.main_player_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_CreateMainPlayerPacket::release_main_player_info() {
+inline ::Protocol::EntityInfo* S_CreateMainPlayerPacket::release_main_player_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.main_player_info_;
+  ::Protocol::EntityInfo* temp = _impl_.main_player_info_;
   _impl_.main_player_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2618,27 +3101,27 @@ inline ::Protocol::NetworkEntityInfo* S_CreateMainPlayerPacket::release_main_pla
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_CreateMainPlayerPacket::unsafe_arena_release_main_player_info() {
+inline ::Protocol::EntityInfo* S_CreateMainPlayerPacket::unsafe_arena_release_main_player_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_CreateMainPlayerPacket.main_player_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.main_player_info_;
+  ::Protocol::EntityInfo* temp = _impl_.main_player_info_;
   _impl_.main_player_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_CreateMainPlayerPacket::_internal_mutable_main_player_info() {
+inline ::Protocol::EntityInfo* S_CreateMainPlayerPacket::_internal_mutable_main_player_info() {
   
   if (_impl_.main_player_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.main_player_info_ = p;
   }
   return _impl_.main_player_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_CreateMainPlayerPacket::mutable_main_player_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_main_player_info();
+inline ::Protocol::EntityInfo* S_CreateMainPlayerPacket::mutable_main_player_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_main_player_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_CreateMainPlayerPacket.main_player_info)
   return _msg;
 }
-inline void S_CreateMainPlayerPacket::set_allocated_main_player_info(::Protocol::NetworkEntityInfo* main_player_info) {
+inline void S_CreateMainPlayerPacket::set_allocated_main_player_info(::Protocol::EntityInfo* main_player_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.main_player_info_);
@@ -2663,75 +3146,75 @@ inline void S_CreateMainPlayerPacket::set_allocated_main_player_info(::Protocol:
 
 // S_SyncEntitiesPacket
 
-// repeated .Protocol.NetworkEntityInfo players_info = 1;
+// repeated .Protocol.EntityInfo players_info = 1;
 inline int S_SyncEntitiesPacket::_internal_players_info_size() const {
   return _impl_.players_info_.size();
 }
 inline int S_SyncEntitiesPacket::players_info_size() const {
   return _internal_players_info_size();
 }
-inline ::Protocol::NetworkEntityInfo* S_SyncEntitiesPacket::mutable_players_info(int index) {
+inline ::Protocol::EntityInfo* S_SyncEntitiesPacket::mutable_players_info(int index) {
   // @@protoc_insertion_point(field_mutable:Protocol.S_SyncEntitiesPacket.players_info)
   return _impl_.players_info_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkEntityInfo >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::EntityInfo >*
 S_SyncEntitiesPacket::mutable_players_info() {
   // @@protoc_insertion_point(field_mutable_list:Protocol.S_SyncEntitiesPacket.players_info)
   return &_impl_.players_info_;
 }
-inline const ::Protocol::NetworkEntityInfo& S_SyncEntitiesPacket::_internal_players_info(int index) const {
+inline const ::Protocol::EntityInfo& S_SyncEntitiesPacket::_internal_players_info(int index) const {
   return _impl_.players_info_.Get(index);
 }
-inline const ::Protocol::NetworkEntityInfo& S_SyncEntitiesPacket::players_info(int index) const {
+inline const ::Protocol::EntityInfo& S_SyncEntitiesPacket::players_info(int index) const {
   // @@protoc_insertion_point(field_get:Protocol.S_SyncEntitiesPacket.players_info)
   return _internal_players_info(index);
 }
-inline ::Protocol::NetworkEntityInfo* S_SyncEntitiesPacket::_internal_add_players_info() {
+inline ::Protocol::EntityInfo* S_SyncEntitiesPacket::_internal_add_players_info() {
   return _impl_.players_info_.Add();
 }
-inline ::Protocol::NetworkEntityInfo* S_SyncEntitiesPacket::add_players_info() {
-  ::Protocol::NetworkEntityInfo* _add = _internal_add_players_info();
+inline ::Protocol::EntityInfo* S_SyncEntitiesPacket::add_players_info() {
+  ::Protocol::EntityInfo* _add = _internal_add_players_info();
   // @@protoc_insertion_point(field_add:Protocol.S_SyncEntitiesPacket.players_info)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkEntityInfo >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::EntityInfo >&
 S_SyncEntitiesPacket::players_info() const {
   // @@protoc_insertion_point(field_list:Protocol.S_SyncEntitiesPacket.players_info)
   return _impl_.players_info_;
 }
 
-// repeated .Protocol.NetworkMonsterInfo monsters_info = 2;
+// repeated .Protocol.MonsterInfo monsters_info = 2;
 inline int S_SyncEntitiesPacket::_internal_monsters_info_size() const {
   return _impl_.monsters_info_.size();
 }
 inline int S_SyncEntitiesPacket::monsters_info_size() const {
   return _internal_monsters_info_size();
 }
-inline ::Protocol::NetworkMonsterInfo* S_SyncEntitiesPacket::mutable_monsters_info(int index) {
+inline ::Protocol::MonsterInfo* S_SyncEntitiesPacket::mutable_monsters_info(int index) {
   // @@protoc_insertion_point(field_mutable:Protocol.S_SyncEntitiesPacket.monsters_info)
   return _impl_.monsters_info_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkMonsterInfo >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::MonsterInfo >*
 S_SyncEntitiesPacket::mutable_monsters_info() {
   // @@protoc_insertion_point(field_mutable_list:Protocol.S_SyncEntitiesPacket.monsters_info)
   return &_impl_.monsters_info_;
 }
-inline const ::Protocol::NetworkMonsterInfo& S_SyncEntitiesPacket::_internal_monsters_info(int index) const {
+inline const ::Protocol::MonsterInfo& S_SyncEntitiesPacket::_internal_monsters_info(int index) const {
   return _impl_.monsters_info_.Get(index);
 }
-inline const ::Protocol::NetworkMonsterInfo& S_SyncEntitiesPacket::monsters_info(int index) const {
+inline const ::Protocol::MonsterInfo& S_SyncEntitiesPacket::monsters_info(int index) const {
   // @@protoc_insertion_point(field_get:Protocol.S_SyncEntitiesPacket.monsters_info)
   return _internal_monsters_info(index);
 }
-inline ::Protocol::NetworkMonsterInfo* S_SyncEntitiesPacket::_internal_add_monsters_info() {
+inline ::Protocol::MonsterInfo* S_SyncEntitiesPacket::_internal_add_monsters_info() {
   return _impl_.monsters_info_.Add();
 }
-inline ::Protocol::NetworkMonsterInfo* S_SyncEntitiesPacket::add_monsters_info() {
-  ::Protocol::NetworkMonsterInfo* _add = _internal_add_monsters_info();
+inline ::Protocol::MonsterInfo* S_SyncEntitiesPacket::add_monsters_info() {
+  ::Protocol::MonsterInfo* _add = _internal_add_monsters_info();
   // @@protoc_insertion_point(field_add:Protocol.S_SyncEntitiesPacket.monsters_info)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::NetworkMonsterInfo >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Protocol::MonsterInfo >&
 S_SyncEntitiesPacket::monsters_info() const {
   // @@protoc_insertion_point(field_list:Protocol.S_SyncEntitiesPacket.monsters_info)
   return _impl_.monsters_info_;
@@ -2741,24 +3224,24 @@ S_SyncEntitiesPacket::monsters_info() const {
 
 // C_MoveEntityPacket
 
-// .Protocol.NetworkEntityInfo entity_info = 1;
+// .Protocol.EntityInfo entity_info = 1;
 inline bool C_MoveEntityPacket::_internal_has_entity_info() const {
   return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
 }
 inline bool C_MoveEntityPacket::has_entity_info() const {
   return _internal_has_entity_info();
 }
-inline const ::Protocol::NetworkEntityInfo& C_MoveEntityPacket::_internal_entity_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.entity_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& C_MoveEntityPacket::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& C_MoveEntityPacket::entity_info() const {
+inline const ::Protocol::EntityInfo& C_MoveEntityPacket::entity_info() const {
   // @@protoc_insertion_point(field_get:Protocol.C_MoveEntityPacket.entity_info)
   return _internal_entity_info();
 }
 inline void C_MoveEntityPacket::unsafe_arena_set_allocated_entity_info(
-    ::Protocol::NetworkEntityInfo* entity_info) {
+    ::Protocol::EntityInfo* entity_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
   }
@@ -2770,9 +3253,9 @@ inline void C_MoveEntityPacket::unsafe_arena_set_allocated_entity_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_MoveEntityPacket.entity_info)
 }
-inline ::Protocol::NetworkEntityInfo* C_MoveEntityPacket::release_entity_info() {
+inline ::Protocol::EntityInfo* C_MoveEntityPacket::release_entity_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2785,27 +3268,27 @@ inline ::Protocol::NetworkEntityInfo* C_MoveEntityPacket::release_entity_info() 
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_MoveEntityPacket::unsafe_arena_release_entity_info() {
+inline ::Protocol::EntityInfo* C_MoveEntityPacket::unsafe_arena_release_entity_info() {
   // @@protoc_insertion_point(field_release:Protocol.C_MoveEntityPacket.entity_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_MoveEntityPacket::_internal_mutable_entity_info() {
+inline ::Protocol::EntityInfo* C_MoveEntityPacket::_internal_mutable_entity_info() {
   
   if (_impl_.entity_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.entity_info_ = p;
   }
   return _impl_.entity_info_;
 }
-inline ::Protocol::NetworkEntityInfo* C_MoveEntityPacket::mutable_entity_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_entity_info();
+inline ::Protocol::EntityInfo* C_MoveEntityPacket::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
   // @@protoc_insertion_point(field_mutable:Protocol.C_MoveEntityPacket.entity_info)
   return _msg;
 }
-inline void C_MoveEntityPacket::set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info) {
+inline void C_MoveEntityPacket::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
@@ -2830,24 +3313,24 @@ inline void C_MoveEntityPacket::set_allocated_entity_info(::Protocol::NetworkEnt
 
 // S_MoveEntityPacket
 
-// .Protocol.NetworkEntityInfo entity_info = 1;
+// .Protocol.EntityInfo entity_info = 1;
 inline bool S_MoveEntityPacket::_internal_has_entity_info() const {
   return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
 }
 inline bool S_MoveEntityPacket::has_entity_info() const {
   return _internal_has_entity_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_MoveEntityPacket::_internal_entity_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.entity_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_MoveEntityPacket::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_MoveEntityPacket::entity_info() const {
+inline const ::Protocol::EntityInfo& S_MoveEntityPacket::entity_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_MoveEntityPacket.entity_info)
   return _internal_entity_info();
 }
 inline void S_MoveEntityPacket::unsafe_arena_set_allocated_entity_info(
-    ::Protocol::NetworkEntityInfo* entity_info) {
+    ::Protocol::EntityInfo* entity_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
   }
@@ -2859,9 +3342,9 @@ inline void S_MoveEntityPacket::unsafe_arena_set_allocated_entity_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_MoveEntityPacket.entity_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_MoveEntityPacket::release_entity_info() {
+inline ::Protocol::EntityInfo* S_MoveEntityPacket::release_entity_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2874,27 +3357,27 @@ inline ::Protocol::NetworkEntityInfo* S_MoveEntityPacket::release_entity_info() 
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_MoveEntityPacket::unsafe_arena_release_entity_info() {
+inline ::Protocol::EntityInfo* S_MoveEntityPacket::unsafe_arena_release_entity_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_MoveEntityPacket.entity_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_MoveEntityPacket::_internal_mutable_entity_info() {
+inline ::Protocol::EntityInfo* S_MoveEntityPacket::_internal_mutable_entity_info() {
   
   if (_impl_.entity_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.entity_info_ = p;
   }
   return _impl_.entity_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_MoveEntityPacket::mutable_entity_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_entity_info();
+inline ::Protocol::EntityInfo* S_MoveEntityPacket::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_MoveEntityPacket.entity_info)
   return _msg;
 }
-inline void S_MoveEntityPacket::set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info) {
+inline void S_MoveEntityPacket::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
@@ -2919,24 +3402,24 @@ inline void S_MoveEntityPacket::set_allocated_entity_info(::Protocol::NetworkEnt
 
 // S_ModifyPlayerInformationPacket
 
-// .Protocol.NetworkEntityInfo player_info = 1;
+// .Protocol.EntityInfo player_info = 1;
 inline bool S_ModifyPlayerInformationPacket::_internal_has_player_info() const {
   return this != internal_default_instance() && _impl_.player_info_ != nullptr;
 }
 inline bool S_ModifyPlayerInformationPacket::has_player_info() const {
   return _internal_has_player_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_ModifyPlayerInformationPacket::_internal_player_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.player_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_ModifyPlayerInformationPacket::_internal_player_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.player_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_ModifyPlayerInformationPacket::player_info() const {
+inline const ::Protocol::EntityInfo& S_ModifyPlayerInformationPacket::player_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_ModifyPlayerInformationPacket.player_info)
   return _internal_player_info();
 }
 inline void S_ModifyPlayerInformationPacket::unsafe_arena_set_allocated_player_info(
-    ::Protocol::NetworkEntityInfo* player_info) {
+    ::Protocol::EntityInfo* player_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.player_info_);
   }
@@ -2948,9 +3431,9 @@ inline void S_ModifyPlayerInformationPacket::unsafe_arena_set_allocated_player_i
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_ModifyPlayerInformationPacket.player_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyPlayerInformationPacket::release_player_info() {
+inline ::Protocol::EntityInfo* S_ModifyPlayerInformationPacket::release_player_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.player_info_;
+  ::Protocol::EntityInfo* temp = _impl_.player_info_;
   _impl_.player_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2963,27 +3446,27 @@ inline ::Protocol::NetworkEntityInfo* S_ModifyPlayerInformationPacket::release_p
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyPlayerInformationPacket::unsafe_arena_release_player_info() {
+inline ::Protocol::EntityInfo* S_ModifyPlayerInformationPacket::unsafe_arena_release_player_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_ModifyPlayerInformationPacket.player_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.player_info_;
+  ::Protocol::EntityInfo* temp = _impl_.player_info_;
   _impl_.player_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyPlayerInformationPacket::_internal_mutable_player_info() {
+inline ::Protocol::EntityInfo* S_ModifyPlayerInformationPacket::_internal_mutable_player_info() {
   
   if (_impl_.player_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.player_info_ = p;
   }
   return _impl_.player_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyPlayerInformationPacket::mutable_player_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_player_info();
+inline ::Protocol::EntityInfo* S_ModifyPlayerInformationPacket::mutable_player_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_player_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_ModifyPlayerInformationPacket.player_info)
   return _msg;
 }
-inline void S_ModifyPlayerInformationPacket::set_allocated_player_info(::Protocol::NetworkEntityInfo* player_info) {
+inline void S_ModifyPlayerInformationPacket::set_allocated_player_info(::Protocol::EntityInfo* player_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.player_info_);
@@ -3008,24 +3491,24 @@ inline void S_ModifyPlayerInformationPacket::set_allocated_player_info(::Protoco
 
 // C_ModifyEntityLookAtDirectionPacket
 
-// .Protocol.NetworkEntityInfo entity_info = 1;
+// .Protocol.EntityInfo entity_info = 1;
 inline bool C_ModifyEntityLookAtDirectionPacket::_internal_has_entity_info() const {
   return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
 }
 inline bool C_ModifyEntityLookAtDirectionPacket::has_entity_info() const {
   return _internal_has_entity_info();
 }
-inline const ::Protocol::NetworkEntityInfo& C_ModifyEntityLookAtDirectionPacket::_internal_entity_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.entity_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& C_ModifyEntityLookAtDirectionPacket::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& C_ModifyEntityLookAtDirectionPacket::entity_info() const {
+inline const ::Protocol::EntityInfo& C_ModifyEntityLookAtDirectionPacket::entity_info() const {
   // @@protoc_insertion_point(field_get:Protocol.C_ModifyEntityLookAtDirectionPacket.entity_info)
   return _internal_entity_info();
 }
 inline void C_ModifyEntityLookAtDirectionPacket::unsafe_arena_set_allocated_entity_info(
-    ::Protocol::NetworkEntityInfo* entity_info) {
+    ::Protocol::EntityInfo* entity_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
   }
@@ -3037,9 +3520,9 @@ inline void C_ModifyEntityLookAtDirectionPacket::unsafe_arena_set_allocated_enti
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_ModifyEntityLookAtDirectionPacket.entity_info)
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityLookAtDirectionPacket::release_entity_info() {
+inline ::Protocol::EntityInfo* C_ModifyEntityLookAtDirectionPacket::release_entity_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3052,27 +3535,27 @@ inline ::Protocol::NetworkEntityInfo* C_ModifyEntityLookAtDirectionPacket::relea
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityLookAtDirectionPacket::unsafe_arena_release_entity_info() {
+inline ::Protocol::EntityInfo* C_ModifyEntityLookAtDirectionPacket::unsafe_arena_release_entity_info() {
   // @@protoc_insertion_point(field_release:Protocol.C_ModifyEntityLookAtDirectionPacket.entity_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityLookAtDirectionPacket::_internal_mutable_entity_info() {
+inline ::Protocol::EntityInfo* C_ModifyEntityLookAtDirectionPacket::_internal_mutable_entity_info() {
   
   if (_impl_.entity_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.entity_info_ = p;
   }
   return _impl_.entity_info_;
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityLookAtDirectionPacket::mutable_entity_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_entity_info();
+inline ::Protocol::EntityInfo* C_ModifyEntityLookAtDirectionPacket::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
   // @@protoc_insertion_point(field_mutable:Protocol.C_ModifyEntityLookAtDirectionPacket.entity_info)
   return _msg;
 }
-inline void C_ModifyEntityLookAtDirectionPacket::set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info) {
+inline void C_ModifyEntityLookAtDirectionPacket::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
@@ -3097,24 +3580,24 @@ inline void C_ModifyEntityLookAtDirectionPacket::set_allocated_entity_info(::Pro
 
 // S_ModifyEntityLookAtDirectionPacket
 
-// .Protocol.NetworkEntityInfo entity_info = 1;
+// .Protocol.EntityInfo entity_info = 1;
 inline bool S_ModifyEntityLookAtDirectionPacket::_internal_has_entity_info() const {
   return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
 }
 inline bool S_ModifyEntityLookAtDirectionPacket::has_entity_info() const {
   return _internal_has_entity_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_ModifyEntityLookAtDirectionPacket::_internal_entity_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.entity_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_ModifyEntityLookAtDirectionPacket::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_ModifyEntityLookAtDirectionPacket::entity_info() const {
+inline const ::Protocol::EntityInfo& S_ModifyEntityLookAtDirectionPacket::entity_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_ModifyEntityLookAtDirectionPacket.entity_info)
   return _internal_entity_info();
 }
 inline void S_ModifyEntityLookAtDirectionPacket::unsafe_arena_set_allocated_entity_info(
-    ::Protocol::NetworkEntityInfo* entity_info) {
+    ::Protocol::EntityInfo* entity_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
   }
@@ -3126,9 +3609,9 @@ inline void S_ModifyEntityLookAtDirectionPacket::unsafe_arena_set_allocated_enti
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_ModifyEntityLookAtDirectionPacket.entity_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityLookAtDirectionPacket::release_entity_info() {
+inline ::Protocol::EntityInfo* S_ModifyEntityLookAtDirectionPacket::release_entity_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3141,27 +3624,27 @@ inline ::Protocol::NetworkEntityInfo* S_ModifyEntityLookAtDirectionPacket::relea
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityLookAtDirectionPacket::unsafe_arena_release_entity_info() {
+inline ::Protocol::EntityInfo* S_ModifyEntityLookAtDirectionPacket::unsafe_arena_release_entity_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_ModifyEntityLookAtDirectionPacket.entity_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityLookAtDirectionPacket::_internal_mutable_entity_info() {
+inline ::Protocol::EntityInfo* S_ModifyEntityLookAtDirectionPacket::_internal_mutable_entity_info() {
   
   if (_impl_.entity_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.entity_info_ = p;
   }
   return _impl_.entity_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityLookAtDirectionPacket::mutable_entity_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_entity_info();
+inline ::Protocol::EntityInfo* S_ModifyEntityLookAtDirectionPacket::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_ModifyEntityLookAtDirectionPacket.entity_info)
   return _msg;
 }
-inline void S_ModifyEntityLookAtDirectionPacket::set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info) {
+inline void S_ModifyEntityLookAtDirectionPacket::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
@@ -3186,24 +3669,24 @@ inline void S_ModifyEntityLookAtDirectionPacket::set_allocated_entity_info(::Pro
 
 // C_ModifyEntityStatePacket
 
-// .Protocol.NetworkEntityInfo entity_info = 1;
+// .Protocol.EntityInfo entity_info = 1;
 inline bool C_ModifyEntityStatePacket::_internal_has_entity_info() const {
   return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
 }
 inline bool C_ModifyEntityStatePacket::has_entity_info() const {
   return _internal_has_entity_info();
 }
-inline const ::Protocol::NetworkEntityInfo& C_ModifyEntityStatePacket::_internal_entity_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.entity_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& C_ModifyEntityStatePacket::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& C_ModifyEntityStatePacket::entity_info() const {
+inline const ::Protocol::EntityInfo& C_ModifyEntityStatePacket::entity_info() const {
   // @@protoc_insertion_point(field_get:Protocol.C_ModifyEntityStatePacket.entity_info)
   return _internal_entity_info();
 }
 inline void C_ModifyEntityStatePacket::unsafe_arena_set_allocated_entity_info(
-    ::Protocol::NetworkEntityInfo* entity_info) {
+    ::Protocol::EntityInfo* entity_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
   }
@@ -3215,9 +3698,9 @@ inline void C_ModifyEntityStatePacket::unsafe_arena_set_allocated_entity_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_ModifyEntityStatePacket.entity_info)
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityStatePacket::release_entity_info() {
+inline ::Protocol::EntityInfo* C_ModifyEntityStatePacket::release_entity_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3230,27 +3713,27 @@ inline ::Protocol::NetworkEntityInfo* C_ModifyEntityStatePacket::release_entity_
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityStatePacket::unsafe_arena_release_entity_info() {
+inline ::Protocol::EntityInfo* C_ModifyEntityStatePacket::unsafe_arena_release_entity_info() {
   // @@protoc_insertion_point(field_release:Protocol.C_ModifyEntityStatePacket.entity_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityStatePacket::_internal_mutable_entity_info() {
+inline ::Protocol::EntityInfo* C_ModifyEntityStatePacket::_internal_mutable_entity_info() {
   
   if (_impl_.entity_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.entity_info_ = p;
   }
   return _impl_.entity_info_;
 }
-inline ::Protocol::NetworkEntityInfo* C_ModifyEntityStatePacket::mutable_entity_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_entity_info();
+inline ::Protocol::EntityInfo* C_ModifyEntityStatePacket::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
   // @@protoc_insertion_point(field_mutable:Protocol.C_ModifyEntityStatePacket.entity_info)
   return _msg;
 }
-inline void C_ModifyEntityStatePacket::set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info) {
+inline void C_ModifyEntityStatePacket::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
@@ -3275,24 +3758,24 @@ inline void C_ModifyEntityStatePacket::set_allocated_entity_info(::Protocol::Net
 
 // S_ModifyEntityStatePacket
 
-// .Protocol.NetworkEntityInfo entity_info = 1;
+// .Protocol.EntityInfo entity_info = 1;
 inline bool S_ModifyEntityStatePacket::_internal_has_entity_info() const {
   return this != internal_default_instance() && _impl_.entity_info_ != nullptr;
 }
 inline bool S_ModifyEntityStatePacket::has_entity_info() const {
   return _internal_has_entity_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_ModifyEntityStatePacket::_internal_entity_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.entity_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_ModifyEntityStatePacket::_internal_entity_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.entity_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_ModifyEntityStatePacket::entity_info() const {
+inline const ::Protocol::EntityInfo& S_ModifyEntityStatePacket::entity_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_ModifyEntityStatePacket.entity_info)
   return _internal_entity_info();
 }
 inline void S_ModifyEntityStatePacket::unsafe_arena_set_allocated_entity_info(
-    ::Protocol::NetworkEntityInfo* entity_info) {
+    ::Protocol::EntityInfo* entity_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
   }
@@ -3304,9 +3787,9 @@ inline void S_ModifyEntityStatePacket::unsafe_arena_set_allocated_entity_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_ModifyEntityStatePacket.entity_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityStatePacket::release_entity_info() {
+inline ::Protocol::EntityInfo* S_ModifyEntityStatePacket::release_entity_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3319,27 +3802,27 @@ inline ::Protocol::NetworkEntityInfo* S_ModifyEntityStatePacket::release_entity_
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityStatePacket::unsafe_arena_release_entity_info() {
+inline ::Protocol::EntityInfo* S_ModifyEntityStatePacket::unsafe_arena_release_entity_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_ModifyEntityStatePacket.entity_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.entity_info_;
+  ::Protocol::EntityInfo* temp = _impl_.entity_info_;
   _impl_.entity_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityStatePacket::_internal_mutable_entity_info() {
+inline ::Protocol::EntityInfo* S_ModifyEntityStatePacket::_internal_mutable_entity_info() {
   
   if (_impl_.entity_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.entity_info_ = p;
   }
   return _impl_.entity_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_ModifyEntityStatePacket::mutable_entity_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_entity_info();
+inline ::Protocol::EntityInfo* S_ModifyEntityStatePacket::mutable_entity_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_entity_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_ModifyEntityStatePacket.entity_info)
   return _msg;
 }
-inline void S_ModifyEntityStatePacket::set_allocated_entity_info(::Protocol::NetworkEntityInfo* entity_info) {
+inline void S_ModifyEntityStatePacket::set_allocated_entity_info(::Protocol::EntityInfo* entity_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.entity_info_);
@@ -3364,24 +3847,24 @@ inline void S_ModifyEntityStatePacket::set_allocated_entity_info(::Protocol::Net
 
 // C_AttckToEntityPacket
 
-// .Protocol.NetworkEntityInfo attacker_info = 1;
+// .Protocol.EntityInfo attacker_info = 1;
 inline bool C_AttckToEntityPacket::_internal_has_attacker_info() const {
   return this != internal_default_instance() && _impl_.attacker_info_ != nullptr;
 }
 inline bool C_AttckToEntityPacket::has_attacker_info() const {
   return _internal_has_attacker_info();
 }
-inline const ::Protocol::NetworkEntityInfo& C_AttckToEntityPacket::_internal_attacker_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.attacker_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& C_AttckToEntityPacket::_internal_attacker_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.attacker_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& C_AttckToEntityPacket::attacker_info() const {
+inline const ::Protocol::EntityInfo& C_AttckToEntityPacket::attacker_info() const {
   // @@protoc_insertion_point(field_get:Protocol.C_AttckToEntityPacket.attacker_info)
   return _internal_attacker_info();
 }
 inline void C_AttckToEntityPacket::unsafe_arena_set_allocated_attacker_info(
-    ::Protocol::NetworkEntityInfo* attacker_info) {
+    ::Protocol::EntityInfo* attacker_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.attacker_info_);
   }
@@ -3393,9 +3876,9 @@ inline void C_AttckToEntityPacket::unsafe_arena_set_allocated_attacker_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_AttckToEntityPacket.attacker_info)
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::release_attacker_info() {
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::release_attacker_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.attacker_info_;
+  ::Protocol::EntityInfo* temp = _impl_.attacker_info_;
   _impl_.attacker_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3408,27 +3891,27 @@ inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::release_attacker_in
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::unsafe_arena_release_attacker_info() {
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::unsafe_arena_release_attacker_info() {
   // @@protoc_insertion_point(field_release:Protocol.C_AttckToEntityPacket.attacker_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.attacker_info_;
+  ::Protocol::EntityInfo* temp = _impl_.attacker_info_;
   _impl_.attacker_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::_internal_mutable_attacker_info() {
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::_internal_mutable_attacker_info() {
   
   if (_impl_.attacker_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.attacker_info_ = p;
   }
   return _impl_.attacker_info_;
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::mutable_attacker_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_attacker_info();
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::mutable_attacker_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_attacker_info();
   // @@protoc_insertion_point(field_mutable:Protocol.C_AttckToEntityPacket.attacker_info)
   return _msg;
 }
-inline void C_AttckToEntityPacket::set_allocated_attacker_info(::Protocol::NetworkEntityInfo* attacker_info) {
+inline void C_AttckToEntityPacket::set_allocated_attacker_info(::Protocol::EntityInfo* attacker_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.attacker_info_);
@@ -3449,24 +3932,24 @@ inline void C_AttckToEntityPacket::set_allocated_attacker_info(::Protocol::Netwo
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_AttckToEntityPacket.attacker_info)
 }
 
-// .Protocol.NetworkEntityInfo victim_info = 2;
+// .Protocol.EntityInfo victim_info = 2;
 inline bool C_AttckToEntityPacket::_internal_has_victim_info() const {
   return this != internal_default_instance() && _impl_.victim_info_ != nullptr;
 }
 inline bool C_AttckToEntityPacket::has_victim_info() const {
   return _internal_has_victim_info();
 }
-inline const ::Protocol::NetworkEntityInfo& C_AttckToEntityPacket::_internal_victim_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.victim_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& C_AttckToEntityPacket::_internal_victim_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.victim_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& C_AttckToEntityPacket::victim_info() const {
+inline const ::Protocol::EntityInfo& C_AttckToEntityPacket::victim_info() const {
   // @@protoc_insertion_point(field_get:Protocol.C_AttckToEntityPacket.victim_info)
   return _internal_victim_info();
 }
 inline void C_AttckToEntityPacket::unsafe_arena_set_allocated_victim_info(
-    ::Protocol::NetworkEntityInfo* victim_info) {
+    ::Protocol::EntityInfo* victim_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
   }
@@ -3478,9 +3961,9 @@ inline void C_AttckToEntityPacket::unsafe_arena_set_allocated_victim_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_AttckToEntityPacket.victim_info)
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::release_victim_info() {
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::release_victim_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.victim_info_;
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
   _impl_.victim_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3493,27 +3976,27 @@ inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::release_victim_info
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::unsafe_arena_release_victim_info() {
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::unsafe_arena_release_victim_info() {
   // @@protoc_insertion_point(field_release:Protocol.C_AttckToEntityPacket.victim_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.victim_info_;
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
   _impl_.victim_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::_internal_mutable_victim_info() {
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::_internal_mutable_victim_info() {
   
   if (_impl_.victim_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.victim_info_ = p;
   }
   return _impl_.victim_info_;
 }
-inline ::Protocol::NetworkEntityInfo* C_AttckToEntityPacket::mutable_victim_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_victim_info();
+inline ::Protocol::EntityInfo* C_AttckToEntityPacket::mutable_victim_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_victim_info();
   // @@protoc_insertion_point(field_mutable:Protocol.C_AttckToEntityPacket.victim_info)
   return _msg;
 }
-inline void C_AttckToEntityPacket::set_allocated_victim_info(::Protocol::NetworkEntityInfo* victim_info) {
+inline void C_AttckToEntityPacket::set_allocated_victim_info(::Protocol::EntityInfo* victim_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
@@ -3538,24 +4021,24 @@ inline void C_AttckToEntityPacket::set_allocated_victim_info(::Protocol::Network
 
 // S_HitDamageToEntityPacket
 
-// .Protocol.NetworkEntityInfo attacker_info = 1;
+// .Protocol.EntityInfo attacker_info = 1;
 inline bool S_HitDamageToEntityPacket::_internal_has_attacker_info() const {
   return this != internal_default_instance() && _impl_.attacker_info_ != nullptr;
 }
 inline bool S_HitDamageToEntityPacket::has_attacker_info() const {
   return _internal_has_attacker_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_HitDamageToEntityPacket::_internal_attacker_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.attacker_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_HitDamageToEntityPacket::_internal_attacker_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.attacker_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_HitDamageToEntityPacket::attacker_info() const {
+inline const ::Protocol::EntityInfo& S_HitDamageToEntityPacket::attacker_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_HitDamageToEntityPacket.attacker_info)
   return _internal_attacker_info();
 }
 inline void S_HitDamageToEntityPacket::unsafe_arena_set_allocated_attacker_info(
-    ::Protocol::NetworkEntityInfo* attacker_info) {
+    ::Protocol::EntityInfo* attacker_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.attacker_info_);
   }
@@ -3567,9 +4050,9 @@ inline void S_HitDamageToEntityPacket::unsafe_arena_set_allocated_attacker_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_HitDamageToEntityPacket.attacker_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::release_attacker_info() {
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::release_attacker_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.attacker_info_;
+  ::Protocol::EntityInfo* temp = _impl_.attacker_info_;
   _impl_.attacker_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3582,27 +4065,27 @@ inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::release_attacke
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::unsafe_arena_release_attacker_info() {
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::unsafe_arena_release_attacker_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_HitDamageToEntityPacket.attacker_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.attacker_info_;
+  ::Protocol::EntityInfo* temp = _impl_.attacker_info_;
   _impl_.attacker_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::_internal_mutable_attacker_info() {
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::_internal_mutable_attacker_info() {
   
   if (_impl_.attacker_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.attacker_info_ = p;
   }
   return _impl_.attacker_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::mutable_attacker_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_attacker_info();
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::mutable_attacker_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_attacker_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_HitDamageToEntityPacket.attacker_info)
   return _msg;
 }
-inline void S_HitDamageToEntityPacket::set_allocated_attacker_info(::Protocol::NetworkEntityInfo* attacker_info) {
+inline void S_HitDamageToEntityPacket::set_allocated_attacker_info(::Protocol::EntityInfo* attacker_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.attacker_info_);
@@ -3623,24 +4106,24 @@ inline void S_HitDamageToEntityPacket::set_allocated_attacker_info(::Protocol::N
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_HitDamageToEntityPacket.attacker_info)
 }
 
-// .Protocol.NetworkEntityInfo victim_info = 2;
+// .Protocol.EntityInfo victim_info = 2;
 inline bool S_HitDamageToEntityPacket::_internal_has_victim_info() const {
   return this != internal_default_instance() && _impl_.victim_info_ != nullptr;
 }
 inline bool S_HitDamageToEntityPacket::has_victim_info() const {
   return _internal_has_victim_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_HitDamageToEntityPacket::_internal_victim_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.victim_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& S_HitDamageToEntityPacket::_internal_victim_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.victim_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_HitDamageToEntityPacket::victim_info() const {
+inline const ::Protocol::EntityInfo& S_HitDamageToEntityPacket::victim_info() const {
   // @@protoc_insertion_point(field_get:Protocol.S_HitDamageToEntityPacket.victim_info)
   return _internal_victim_info();
 }
 inline void S_HitDamageToEntityPacket::unsafe_arena_set_allocated_victim_info(
-    ::Protocol::NetworkEntityInfo* victim_info) {
+    ::Protocol::EntityInfo* victim_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
   }
@@ -3652,9 +4135,9 @@ inline void S_HitDamageToEntityPacket::unsafe_arena_set_allocated_victim_info(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_HitDamageToEntityPacket.victim_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::release_victim_info() {
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::release_victim_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.victim_info_;
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
   _impl_.victim_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3667,27 +4150,27 @@ inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::release_victim_
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::unsafe_arena_release_victim_info() {
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::unsafe_arena_release_victim_info() {
   // @@protoc_insertion_point(field_release:Protocol.S_HitDamageToEntityPacket.victim_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.victim_info_;
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
   _impl_.victim_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::_internal_mutable_victim_info() {
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::_internal_mutable_victim_info() {
   
   if (_impl_.victim_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.victim_info_ = p;
   }
   return _impl_.victim_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_HitDamageToEntityPacket::mutable_victim_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_victim_info();
+inline ::Protocol::EntityInfo* S_HitDamageToEntityPacket::mutable_victim_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_victim_info();
   // @@protoc_insertion_point(field_mutable:Protocol.S_HitDamageToEntityPacket.victim_info)
   return _msg;
 }
-inline void S_HitDamageToEntityPacket::set_allocated_victim_info(::Protocol::NetworkEntityInfo* victim_info) {
+inline void S_HitDamageToEntityPacket::set_allocated_victim_info(::Protocol::EntityInfo* victim_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
@@ -3710,26 +4193,26 @@ inline void S_HitDamageToEntityPacket::set_allocated_victim_info(::Protocol::Net
 
 // -------------------------------------------------------------------
 
-// S_DiePlayerPacket
+// C_DieEntityPacket
 
-// .Protocol.NetworkEntityInfo victim_info = 1;
-inline bool S_DiePlayerPacket::_internal_has_victim_info() const {
+// .Protocol.EntityInfo victim_info = 1;
+inline bool C_DieEntityPacket::_internal_has_victim_info() const {
   return this != internal_default_instance() && _impl_.victim_info_ != nullptr;
 }
-inline bool S_DiePlayerPacket::has_victim_info() const {
+inline bool C_DieEntityPacket::has_victim_info() const {
   return _internal_has_victim_info();
 }
-inline const ::Protocol::NetworkEntityInfo& S_DiePlayerPacket::_internal_victim_info() const {
-  const ::Protocol::NetworkEntityInfo* p = _impl_.victim_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::NetworkEntityInfo&>(
-      ::Protocol::_NetworkEntityInfo_default_instance_);
+inline const ::Protocol::EntityInfo& C_DieEntityPacket::_internal_victim_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.victim_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
 }
-inline const ::Protocol::NetworkEntityInfo& S_DiePlayerPacket::victim_info() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_DiePlayerPacket.victim_info)
+inline const ::Protocol::EntityInfo& C_DieEntityPacket::victim_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_DieEntityPacket.victim_info)
   return _internal_victim_info();
 }
-inline void S_DiePlayerPacket::unsafe_arena_set_allocated_victim_info(
-    ::Protocol::NetworkEntityInfo* victim_info) {
+inline void C_DieEntityPacket::unsafe_arena_set_allocated_victim_info(
+    ::Protocol::EntityInfo* victim_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
   }
@@ -3739,11 +4222,11 @@ inline void S_DiePlayerPacket::unsafe_arena_set_allocated_victim_info(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_DiePlayerPacket.victim_info)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_DieEntityPacket.victim_info)
 }
-inline ::Protocol::NetworkEntityInfo* S_DiePlayerPacket::release_victim_info() {
+inline ::Protocol::EntityInfo* C_DieEntityPacket::release_victim_info() {
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.victim_info_;
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
   _impl_.victim_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -3756,27 +4239,27 @@ inline ::Protocol::NetworkEntityInfo* S_DiePlayerPacket::release_victim_info() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_DiePlayerPacket::unsafe_arena_release_victim_info() {
-  // @@protoc_insertion_point(field_release:Protocol.S_DiePlayerPacket.victim_info)
+inline ::Protocol::EntityInfo* C_DieEntityPacket::unsafe_arena_release_victim_info() {
+  // @@protoc_insertion_point(field_release:Protocol.C_DieEntityPacket.victim_info)
   
-  ::Protocol::NetworkEntityInfo* temp = _impl_.victim_info_;
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
   _impl_.victim_info_ = nullptr;
   return temp;
 }
-inline ::Protocol::NetworkEntityInfo* S_DiePlayerPacket::_internal_mutable_victim_info() {
+inline ::Protocol::EntityInfo* C_DieEntityPacket::_internal_mutable_victim_info() {
   
   if (_impl_.victim_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::NetworkEntityInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
     _impl_.victim_info_ = p;
   }
   return _impl_.victim_info_;
 }
-inline ::Protocol::NetworkEntityInfo* S_DiePlayerPacket::mutable_victim_info() {
-  ::Protocol::NetworkEntityInfo* _msg = _internal_mutable_victim_info();
-  // @@protoc_insertion_point(field_mutable:Protocol.S_DiePlayerPacket.victim_info)
+inline ::Protocol::EntityInfo* C_DieEntityPacket::mutable_victim_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_victim_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_DieEntityPacket.victim_info)
   return _msg;
 }
-inline void S_DiePlayerPacket::set_allocated_victim_info(::Protocol::NetworkEntityInfo* victim_info) {
+inline void C_DieEntityPacket::set_allocated_victim_info(::Protocol::EntityInfo* victim_info) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
@@ -3794,12 +4277,285 @@ inline void S_DiePlayerPacket::set_allocated_victim_info(::Protocol::NetworkEnti
     
   }
   _impl_.victim_info_ = victim_info;
-  // @@protoc_insertion_point(field_set_allocated:Protocol.S_DiePlayerPacket.victim_info)
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_DieEntityPacket.victim_info)
+}
+
+// -------------------------------------------------------------------
+
+// S_DieEntityPacket
+
+// .Protocol.EntityInfo victim_info = 1;
+inline bool S_DieEntityPacket::_internal_has_victim_info() const {
+  return this != internal_default_instance() && _impl_.victim_info_ != nullptr;
+}
+inline bool S_DieEntityPacket::has_victim_info() const {
+  return _internal_has_victim_info();
+}
+inline const ::Protocol::EntityInfo& S_DieEntityPacket::_internal_victim_info() const {
+  const ::Protocol::EntityInfo* p = _impl_.victim_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EntityInfo&>(
+      ::Protocol::_EntityInfo_default_instance_);
+}
+inline const ::Protocol::EntityInfo& S_DieEntityPacket::victim_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_DieEntityPacket.victim_info)
+  return _internal_victim_info();
+}
+inline void S_DieEntityPacket::unsafe_arena_set_allocated_victim_info(
+    ::Protocol::EntityInfo* victim_info) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
+  }
+  _impl_.victim_info_ = victim_info;
+  if (victim_info) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_DieEntityPacket.victim_info)
+}
+inline ::Protocol::EntityInfo* S_DieEntityPacket::release_victim_info() {
+  
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
+  _impl_.victim_info_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Protocol::EntityInfo* S_DieEntityPacket::unsafe_arena_release_victim_info() {
+  // @@protoc_insertion_point(field_release:Protocol.S_DieEntityPacket.victim_info)
+  
+  ::Protocol::EntityInfo* temp = _impl_.victim_info_;
+  _impl_.victim_info_ = nullptr;
+  return temp;
+}
+inline ::Protocol::EntityInfo* S_DieEntityPacket::_internal_mutable_victim_info() {
+  
+  if (_impl_.victim_info_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::EntityInfo>(GetArenaForAllocation());
+    _impl_.victim_info_ = p;
+  }
+  return _impl_.victim_info_;
+}
+inline ::Protocol::EntityInfo* S_DieEntityPacket::mutable_victim_info() {
+  ::Protocol::EntityInfo* _msg = _internal_mutable_victim_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_DieEntityPacket.victim_info)
+  return _msg;
+}
+inline void S_DieEntityPacket::set_allocated_victim_info(::Protocol::EntityInfo* victim_info) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.victim_info_);
+  }
+  if (victim_info) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(victim_info));
+    if (message_arena != submessage_arena) {
+      victim_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, victim_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.victim_info_ = victim_info;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_DieEntityPacket.victim_info)
+}
+
+// -------------------------------------------------------------------
+
+// C_CreateProjectilePacket
+
+// .Protocol.ProjectileInfo projectile_info = 1;
+inline bool C_CreateProjectilePacket::_internal_has_projectile_info() const {
+  return this != internal_default_instance() && _impl_.projectile_info_ != nullptr;
+}
+inline bool C_CreateProjectilePacket::has_projectile_info() const {
+  return _internal_has_projectile_info();
+}
+inline const ::Protocol::ProjectileInfo& C_CreateProjectilePacket::_internal_projectile_info() const {
+  const ::Protocol::ProjectileInfo* p = _impl_.projectile_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::ProjectileInfo&>(
+      ::Protocol::_ProjectileInfo_default_instance_);
+}
+inline const ::Protocol::ProjectileInfo& C_CreateProjectilePacket::projectile_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_CreateProjectilePacket.projectile_info)
+  return _internal_projectile_info();
+}
+inline void C_CreateProjectilePacket::unsafe_arena_set_allocated_projectile_info(
+    ::Protocol::ProjectileInfo* projectile_info) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.projectile_info_);
+  }
+  _impl_.projectile_info_ = projectile_info;
+  if (projectile_info) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_CreateProjectilePacket.projectile_info)
+}
+inline ::Protocol::ProjectileInfo* C_CreateProjectilePacket::release_projectile_info() {
+  
+  ::Protocol::ProjectileInfo* temp = _impl_.projectile_info_;
+  _impl_.projectile_info_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Protocol::ProjectileInfo* C_CreateProjectilePacket::unsafe_arena_release_projectile_info() {
+  // @@protoc_insertion_point(field_release:Protocol.C_CreateProjectilePacket.projectile_info)
+  
+  ::Protocol::ProjectileInfo* temp = _impl_.projectile_info_;
+  _impl_.projectile_info_ = nullptr;
+  return temp;
+}
+inline ::Protocol::ProjectileInfo* C_CreateProjectilePacket::_internal_mutable_projectile_info() {
+  
+  if (_impl_.projectile_info_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::ProjectileInfo>(GetArenaForAllocation());
+    _impl_.projectile_info_ = p;
+  }
+  return _impl_.projectile_info_;
+}
+inline ::Protocol::ProjectileInfo* C_CreateProjectilePacket::mutable_projectile_info() {
+  ::Protocol::ProjectileInfo* _msg = _internal_mutable_projectile_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_CreateProjectilePacket.projectile_info)
+  return _msg;
+}
+inline void C_CreateProjectilePacket::set_allocated_projectile_info(::Protocol::ProjectileInfo* projectile_info) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.projectile_info_);
+  }
+  if (projectile_info) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(projectile_info));
+    if (message_arena != submessage_arena) {
+      projectile_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, projectile_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.projectile_info_ = projectile_info;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_CreateProjectilePacket.projectile_info)
+}
+
+// -------------------------------------------------------------------
+
+// S_CreateProjectilePacket
+
+// .Protocol.ProjectileInfo projectile_info = 1;
+inline bool S_CreateProjectilePacket::_internal_has_projectile_info() const {
+  return this != internal_default_instance() && _impl_.projectile_info_ != nullptr;
+}
+inline bool S_CreateProjectilePacket::has_projectile_info() const {
+  return _internal_has_projectile_info();
+}
+inline const ::Protocol::ProjectileInfo& S_CreateProjectilePacket::_internal_projectile_info() const {
+  const ::Protocol::ProjectileInfo* p = _impl_.projectile_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::ProjectileInfo&>(
+      ::Protocol::_ProjectileInfo_default_instance_);
+}
+inline const ::Protocol::ProjectileInfo& S_CreateProjectilePacket::projectile_info() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_CreateProjectilePacket.projectile_info)
+  return _internal_projectile_info();
+}
+inline void S_CreateProjectilePacket::unsafe_arena_set_allocated_projectile_info(
+    ::Protocol::ProjectileInfo* projectile_info) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.projectile_info_);
+  }
+  _impl_.projectile_info_ = projectile_info;
+  if (projectile_info) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_CreateProjectilePacket.projectile_info)
+}
+inline ::Protocol::ProjectileInfo* S_CreateProjectilePacket::release_projectile_info() {
+  
+  ::Protocol::ProjectileInfo* temp = _impl_.projectile_info_;
+  _impl_.projectile_info_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Protocol::ProjectileInfo* S_CreateProjectilePacket::unsafe_arena_release_projectile_info() {
+  // @@protoc_insertion_point(field_release:Protocol.S_CreateProjectilePacket.projectile_info)
+  
+  ::Protocol::ProjectileInfo* temp = _impl_.projectile_info_;
+  _impl_.projectile_info_ = nullptr;
+  return temp;
+}
+inline ::Protocol::ProjectileInfo* S_CreateProjectilePacket::_internal_mutable_projectile_info() {
+  
+  if (_impl_.projectile_info_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::ProjectileInfo>(GetArenaForAllocation());
+    _impl_.projectile_info_ = p;
+  }
+  return _impl_.projectile_info_;
+}
+inline ::Protocol::ProjectileInfo* S_CreateProjectilePacket::mutable_projectile_info() {
+  ::Protocol::ProjectileInfo* _msg = _internal_mutable_projectile_info();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_CreateProjectilePacket.projectile_info)
+  return _msg;
+}
+inline void S_CreateProjectilePacket::set_allocated_projectile_info(::Protocol::ProjectileInfo* projectile_info) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.projectile_info_);
+  }
+  if (projectile_info) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(projectile_info));
+    if (message_arena != submessage_arena) {
+      projectile_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, projectile_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.projectile_info_ = projectile_info;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_CreateProjectilePacket.projectile_info)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

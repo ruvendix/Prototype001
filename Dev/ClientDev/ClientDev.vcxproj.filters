@@ -58,6 +58,9 @@
     <Filter Include="ClientSources\ErrorHandler">
       <UniqueIdentifier>{f90981ac-69bb-484b-a54f-083030014794}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ClientSources\BaseActor">
+      <UniqueIdentifier>{30a22fcf-9930-47ca-9572-c5dcc8394894}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientSources\ClientMain.cpp">
@@ -117,9 +120,6 @@
     <ClCompile Include="ClientSources\EnemyMonster\EnemyMonsterActor\SnakeActor.cpp">
       <Filter>ClientSources\EnemyMonster\EnemyMonsterActor</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
-      <Filter>ClientSources\Network</Filter>
-    </ClCompile>
     <ClCompile Include="ClientSources\Network\Session\ServerSession.cpp">
       <Filter>ClientSources\Network\Session</Filter>
     </ClCompile>
@@ -147,11 +147,17 @@
     <ClCompile Include="ClientSources\ErrorHandler\ClientErrorHandler.cpp">
       <Filter>ClientSources\ErrorHandler</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSources\Network\NetworkEntityActor.cpp">
-      <Filter>ClientSources\Network</Filter>
-    </ClCompile>
     <ClCompile Include="ClientSources\Player\NetworkPlayerActor.cpp">
       <Filter>ClientSources\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\BaseActor\CommunicationActor.cpp">
+      <Filter>ClientSources\BaseActor</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\BaseActor\ActionableActor.cpp">
+      <Filter>ClientSources\BaseActor</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSources\Network\NetworkManager.cpp">
+      <Filter>ClientSources\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +257,14 @@
     <ClInclude Include="ClientSources\ErrorHandler\ErrorEnums.h">
       <Filter>ClientSources\ErrorHandler</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSources\Network\NetworkEntityActor.h">
-      <Filter>ClientSources\Network</Filter>
-    </ClInclude>
     <ClInclude Include="ClientSources\Player\NetworkPlayerActor.h">
       <Filter>ClientSources\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\BaseActor\CommunicationActor.h">
+      <Filter>ClientSources\BaseActor</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSources\BaseActor\ActionableActor.h">
+      <Filter>ClientSources\BaseActor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

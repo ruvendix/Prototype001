@@ -114,7 +114,7 @@ bool PawnActor::ApplyLookAtDirectionSpriteOnDefaultState()
 	DynamicSpriteComponent* pDynamicSpriteComponent = GetComponent<DynamicSpriteComponent>();
 	ASSERT_LOG(pDynamicSpriteComponent != nullptr);
 
-	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[0];
+	const ActorLookAtDynamicSpriteTable& actorLookAtDynmaicSpriteTable = m_vecActorStateDynamicSpriteTable[PawnActorIdleState::s_id];
 	DynamicSpritePtr spChangeActorStateDynamicSprite = actorLookAtDynmaicSpriteTable[TO_NUM(m_lookAtDir)];
 	if (spChangeActorStateDynamicSprite != nullptr)
 	{

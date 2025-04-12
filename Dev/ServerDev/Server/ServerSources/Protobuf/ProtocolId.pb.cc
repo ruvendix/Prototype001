@@ -29,17 +29,18 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_ProtocolId_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020ProtocolId.proto\022\010Protocol*\354\001\n\013EProtoc"
+  "\n\020ProtocolId.proto\022\010Protocol*\202\002\n\013EProtoc"
   "olId\022\r\n\tEnterGame\020\000\022\r\n\tLeaveGame\020\001\022\024\n\020Cr"
   "eateMainPlayer\020\002\022\020\n\014SyncEntities\020\003\022\016\n\nMo"
   "veEntity\020\004\022\033\n\027ModifyPlayerInformation\020\005\022"
   "\031\n\025ModifyEntityLookAtDir\020\006\022\025\n\021ModifyEnti"
   "tyState\020\007\022\022\n\016AttackToEntity\020\010\022\025\n\021HitDama"
-  "geToEntity\020\t\022\r\n\tDiePlayer\020\nb\006proto3"
+  "geToEntity\020\t\022\r\n\tDieEntity\020\n\022\024\n\020CreatePro"
+  "jectile\020\013b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProtocolId_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProtocolId_2eproto = {
-    false, false, 275, descriptor_table_protodef_ProtocolId_2eproto,
+    false, false, 297, descriptor_table_protodef_ProtocolId_2eproto,
     "ProtocolId.proto",
     &descriptor_table_ProtocolId_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_ProtocolId_2eproto::offsets,
@@ -70,6 +71,7 @@ bool EProtocolId_IsValid(int value) {
     case 8:
     case 9:
     case 10:
+    case 11:
       return true;
     default:
       return false;
